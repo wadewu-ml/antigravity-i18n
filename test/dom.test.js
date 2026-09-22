@@ -243,6 +243,9 @@ check('leaves skippable containers untouched', () => {
         ['div', { contenteditable: 'plaintext-only' }],
         ['div', { class: 'monaco-editor' }],
         ['div', { class: 'xterm' }],
+        ['div', { class: 'file-viewer-root' }],
+        ['div', { 'data-testid': 'user-input-step' }],
+        ['div', { 'data-testid': 'planner-response-text' }],
         ['script', {}],
         ['style', {}],
     ];
@@ -325,6 +328,31 @@ check('characterData mutations are translated', () => {
     textNode.nodeValue = sampleKey;
     engine.observer.trigger([{ type: 'characterData', target: textNode }]);
     assert.strictEqual(textNode.nodeValue, sampleValue);
+});
+
+check('streaming conversation text and file contents remain unchanged', () => {
+    const root = el('html');
+    const containers = [
+        el('div', { 'data-testid': 'planner-response-text' }),
+        el('div', { 'data-testid': 'user-input-step' }),
+        el('div', { class: 'file-viewer-root' }),
+    ];
+    for (const container of containers) root.append(container);
+    const engine = loadEngine(root);
+    for (const container of containers) {
+        const p = el('p');
+        const content = txt(unknown);
+        p.append(content);
+        container.append(p);
+        content.nodeValue = sampleKey;
+        engine.observer.trigger([{ type: 'characterData', target: content }]);
+        assert.strictEqual(content.nodeValue, sampleKey);
+        const added = el('span');
+        added.append(txt(sampleKey));
+        container.append(added);
+        engine.observer.trigger([{ type: 'childList', addedNodes: [added] }]);
+        assert.strictEqual(added.childNodes[0].nodeValue, sampleKey);
+    }
 });
 
 check('attribute mutations are translated', () => {

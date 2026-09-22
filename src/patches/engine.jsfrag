@@ -105,6 +105,11 @@ const agSkipSelector = [
     '[role="terminal"]',
     '.monaco-editor',
     '.xterm',
+    // Antigravity 2.15 uses its own file viewer and message containers rather
+    // than Monaco or role=log for these surfaces. Their text is user content.
+    '.file-viewer-root',
+    '[data-testid="user-input-step"]',
+    '[data-testid="planner-response-text"]',
 ].join(',');
 
 /**

@@ -25,6 +25,8 @@ Install a UI language pack into the [Google Antigravity](https://antigravity.goo
 
 Requires Node.js (≥16).
 
+Simplified Chinese includes UI strings from Antigravity 2.15.1. Other language packs have pending translations; run `node scripts/locale-report.js <locale> --list` to inspect them. Coverage measures the collected dictionary, not every screen in the app.
+
 ### Quick start
 
 ```bash

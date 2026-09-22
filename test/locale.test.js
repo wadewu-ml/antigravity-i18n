@@ -6,6 +6,8 @@
  */
 
 const assert = require('assert');
+const { createHash } = require('crypto');
+const backlog = require('./fixtures/translation-backlog.json');
 const { buildMenuFragment, buildPreloadFragment, buildDialogFragment, listLocales, loadLocale, validateLocale, diffLocale } = require('../src/locale');
 
 let failures = 0;
@@ -69,9 +71,22 @@ for (const code of locales) {
         assert.ok(preload.includes('installLocalePatch'), 'preload missing install entry point');
     });
 
-    check(`${code}: covers every source text, menu, dialog and dynamic rule`, () => {
-        const report = diffLocale(code);
+    check(`${code}: coverage matches the declared translation backlog`, () => {
+        const report = diffLocale(code, backlog.reference);
         for (const [kind, missing] of Object.entries(report.missing)) {
+            // Other packs may deliberately trail the reference pack. Pin the
+            // exact outstanding keys, not just their count, so deleting an
+            // existing translation cannot pass unnoticed. locale-report still
+            // lists every missing key and exits nonzero for incomplete packs.
+            if (kind === 'text' && backlog.locales.includes(code)) {
+                assert.strictEqual(missing.length, backlog.text.count, 'translation backlog changed');
+                assert.strictEqual(
+                    createHash('sha256').update(JSON.stringify(missing)).digest('hex'),
+                    backlog.text.sha256,
+                    'missing text keys differ from the declared backlog'
+                );
+                continue;
+            }
             assert.deepStrictEqual(missing, [], `missing ${kind}: ${missing.join(', ')}`);
         }
         assert.deepStrictEqual(report.untranslated, [], 'undeclared untranslated placeholders');
@@ -101,6 +116,15 @@ for (const code of locales) {
         }
     });
 }
+
+check('reference pack translates every static source and keeps its output stable', () => {
+    const locale = loadLocale(backlog.reference);
+    const engine = loadEngine(buildPreloadFragment(locale));
+    for (const [source, translated] of Object.entries(locale.text)) {
+        assert.strictEqual(engine.translateString(source), translated, source);
+        assert.strictEqual(engine.translateString(translated), translated, `translated output changed: ${source}`);
+    }
+});
 
 console.log('Locale aliases:');
 check('zh and zh-Hans resolve onto the Simplified Chinese pack', () => {

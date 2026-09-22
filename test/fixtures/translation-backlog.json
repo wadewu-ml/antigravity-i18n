@@ -1,0 +1,17 @@
+{
+  "reference": "zh-CN",
+  "locales": [
+    "de",
+    "es",
+    "fr",
+    "ja",
+    "ko",
+    "pt-BR",
+    "ru",
+    "zh-Hant"
+  ],
+  "text": {
+    "count": 1762,
+    "sha256": "a7302d4f1d8b3eb219a0a941ceb1bacc8f8552216537478f88aeb9615289223b"
+  }
+}

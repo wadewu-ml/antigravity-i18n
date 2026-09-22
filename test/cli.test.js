@@ -108,11 +108,16 @@ check('the reference pack is its own complete inventory', () => {
     assert.strictEqual(report.coverage, 1);
 });
 
-check('the source inventory is pure English, usable for a new language', () => {
+check('the source inventory uses English text while preserving upstream punctuation', () => {
     const source = collectSourceStrings();
     assert.ok(source.text.length > 100);
-    const nonAscii = source.text.filter((key) => /[^\x00-\x7F]/.test(key));
-    assert.deepStrictEqual(nonAscii, [], 'source keys must not contain translated text');
+    // Upstream uses curly apostrophes, ellipses, arrows and emoji. These are
+    // valid English UI text; reject translated scripts rather than all Unicode.
+    const translatedKeys = source.text.filter((key) => [...key].some(
+        (char) => /\p{Letter}/u.test(char) && !/\p{Script=Latin}/u.test(char)
+    ));
+    assert.deepStrictEqual(translatedKeys, [], 'source keys must not contain translated text');
+    assert.ok(source.text.includes('Searching…'), 'upstream Unicode punctuation was lost');
 });
 
 check('coverage gaps and copied placeholders are reported', () => {
