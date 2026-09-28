@@ -12,7 +12,7 @@ Install a UI language pack into the [Google Antigravity](https://antigravity.goo
 
 ## Features
 
-- **Zero-install**: Run directly with a single `npx` command. Finds the installation path and restarts the app for you.
+- **Run from source**: Extract the code package, install dependencies, and run the local CLI. Installation-path detection and app restart are automatic.
 - **Any language**: Language data lives entirely in JSON packs under `src/locales/`. The translation engine holds no language of its own, so adding a language means adding a file. Simplified Chinese, Traditional Chinese, Japanese, Korean, Spanish, German, French, Brazilian Portuguese, and Russian ship in the box.
 - **Non-invasive**: Translates only the shell UI and native menus and the native quit confirmation dialog. Code editors (Monaco), terminals (xterm), and conversation areas are left alone.
 - **Byte-exact restore**: Backs up the original `app.asar` on first run. `restore` puts the official archive back unchanged.
@@ -29,26 +29,30 @@ Simplified Chinese includes UI strings from Antigravity 2.15.1. Other language p
 
 ### Quick start
 
+
+> Download and extract this repository’s source archive, then run the commands below from its root directory. Distribution uses code archives and local packages only; this project is not published to npm. See [packaging instructions](PACKAGING.md).
+
 ```bash
+npm ci
 # Install a language pack (Simplified Chinese is the default)
-npx antigravity-i18n apply --locale zh-CN
-# 繁體中文: npx antigravity-i18n apply --locale zh-Hant
-# 日本語: npx antigravity-i18n apply --locale ja
-# 한국어: npx antigravity-i18n apply --locale ko
-# Español: npx antigravity-i18n apply --locale es
-# Deutsch: npx antigravity-i18n apply --locale de
-# Français: npx antigravity-i18n apply --locale fr
-# Português do Brasil: npx antigravity-i18n apply --locale pt-BR
-# Русский: npx antigravity-i18n apply --locale ru
+node bin/cli.js apply --locale zh-CN
+# 繁體中文: node bin/cli.js apply --locale zh-Hant
+# 日本語: node bin/cli.js apply --locale ja
+# 한국어: node bin/cli.js apply --locale ko
+# Español: node bin/cli.js apply --locale es
+# Deutsch: node bin/cli.js apply --locale de
+# Français: node bin/cli.js apply --locale fr
+# Português do Brasil: node bin/cli.js apply --locale pt-BR
+# Русский: node bin/cli.js apply --locale ru
 
 # Restore the official build
-npx antigravity-i18n restore
+node bin/cli.js restore
 
 # Check the active language and backups
-npx antigravity-i18n status
+node bin/cli.js status
 
 # See what language packs are bundled
-npx antigravity-i18n locales
+node bin/cli.js locales
 ```
 
 `zh` is shorthand for `apply --locale zh-CN`, and `en` is shorthand for `restore`.
@@ -58,7 +62,7 @@ npx antigravity-i18n locales
 ```bash
 git clone https://github.com/wadewu-ml/antigravity-i18n.git
 cd antigravity-i18n
-npm install
+npm ci
 node bin/cli.js apply --locale zh-CN
 ```
 

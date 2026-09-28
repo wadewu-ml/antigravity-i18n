@@ -12,7 +12,7 @@
 
 ## 주요 기능
 
-- **별도 설치 불필요**: 하나의 `npx` 명령으로 바로 실행하며, 설치 경로 감지와 앱 재시작도 자동으로 처리합니다.
+- **소스에서 실행**: 코드 패키지를 풀고 의존성을 설치한 뒤 로컬 CLI를 실행합니다. 설치 경로 탐지와 앱 재시작은 자동입니다.
 - **다국어 지원**: 언어 데이터는 모두 `src/locales/` 아래의 JSON 팩으로 분리되어 있습니다. 번역 엔진 자체는 특정 언어에 의존하지 않습니다. 중국어 간체, 중국어 번체, 일본어, 한국어, 스페인어, 독일어, 프랑스어, 브라질 포르투갈어, 러시아어가 기본 제공됩니다.
 - **비침습적**: 셸 UI, 네이티브 메뉴와 네이티브 종료 확인 대화상자만 번역합니다. 코드 편집기(Monaco), 터미널(xterm), 대화 영역은 변경하지 않습니다.
 - **바이트 단위 복원**: 처음 실행할 때 원본 `app.asar`를 백업하며, `restore`로 공식 아카이브를 변경 전 상태 그대로 되돌립니다.
@@ -27,27 +27,31 @@ Node.js 16 이상이 필요합니다.
 
 ### 빠른 시작
 
-```bash
-# 한국어 적용
-npx antigravity-i18n apply --locale ko
 
-# 简体中文: npx antigravity-i18n apply --locale zh-CN
-# 繁體中文: npx antigravity-i18n apply --locale zh-Hant
-# 日本語: npx antigravity-i18n apply --locale ja
-# Español: npx antigravity-i18n apply --locale es
-# Deutsch: npx antigravity-i18n apply --locale de
-# Français: npx antigravity-i18n apply --locale fr
-# Português do Brasil: npx antigravity-i18n apply --locale pt-BR
-# Русский: npx antigravity-i18n apply --locale ru
+> Download and extract this repository’s source archive, then run the commands below from its root directory. Distribution uses code archives and local packages only; this project is not published to npm. See [packaging instructions](PACKAGING.md).
+
+```bash
+npm ci
+# 한국어 적용
+node bin/cli.js apply --locale ko
+
+# 简体中文: node bin/cli.js apply --locale zh-CN
+# 繁體中文: node bin/cli.js apply --locale zh-Hant
+# 日本語: node bin/cli.js apply --locale ja
+# Español: node bin/cli.js apply --locale es
+# Deutsch: node bin/cli.js apply --locale de
+# Français: node bin/cli.js apply --locale fr
+# Português do Brasil: node bin/cli.js apply --locale pt-BR
+# Русский: node bin/cli.js apply --locale ru
 
 # 공식 버전으로 복원
-npx antigravity-i18n restore
+node bin/cli.js restore
 
 # 현재 언어와 백업 상태 확인
-npx antigravity-i18n status
+node bin/cli.js status
 
 # 기본 제공 언어 팩 목록 표시
-npx antigravity-i18n locales
+node bin/cli.js locales
 ```
 
 `zh`는 `apply --locale zh-CN`의 단축 명령이고, `en`은 `restore`의 단축 명령입니다.
@@ -57,7 +61,7 @@ npx antigravity-i18n locales
 ```bash
 git clone https://github.com/wadewu-ml/antigravity-i18n.git
 cd antigravity-i18n
-npm install
+npm ci
 node bin/cli.js apply --locale ko
 ```
 

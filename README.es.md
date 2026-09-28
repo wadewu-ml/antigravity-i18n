@@ -12,7 +12,7 @@ Instala un paquete de idioma para la interfaz de la aplicación de escritorio [G
 
 ## Características
 
-- **Sin instalación permanente**: ejecútalo directamente con un único comando `npx`. Detecta la ruta de instalación y reinicia la aplicación automáticamente.
+- **Ejecución local**: extrae el paquete de código, instala las dependencias y ejecuta la CLI local. La ruta de instalación y el reinicio se gestionan automáticamente.
 - **Multilingüe**: los datos de cada idioma viven en paquetes JSON bajo `src/locales/`. El motor de traducción no contiene datos específicos de ningún idioma. Incluye chino simplificado, chino tradicional, japonés, coreano, español, alemán, francés, portugués de Brasil y ruso.
 - **No invasivo**: traduce únicamente la interfaz general, los menús nativos y el diálogo nativo de confirmación de salida. No modifica el editor de código (Monaco), la terminal (xterm) ni las áreas de conversación.
 - **Restauración exacta**: guarda una copia del `app.asar` original durante la primera ejecución. `restore` recupera el archivo oficial byte por byte.
@@ -27,27 +27,31 @@ Requiere Node.js 16 o posterior.
 
 ### Inicio rápido
 
-```bash
-# Aplicar español
-npx antigravity-i18n apply --locale es
 
-# 简体中文: npx antigravity-i18n apply --locale zh-CN
-# 繁體中文: npx antigravity-i18n apply --locale zh-Hant
-# 日本語: npx antigravity-i18n apply --locale ja
-# 한국어: npx antigravity-i18n apply --locale ko
-# Deutsch: npx antigravity-i18n apply --locale de
-# Français: npx antigravity-i18n apply --locale fr
-# Português do Brasil: npx antigravity-i18n apply --locale pt-BR
-# Русский: npx antigravity-i18n apply --locale ru
+> Download and extract this repository’s source archive, then run the commands below from its root directory. Distribution uses code archives and local packages only; this project is not published to npm. See [packaging instructions](PACKAGING.md).
+
+```bash
+npm ci
+# Aplicar español
+node bin/cli.js apply --locale es
+
+# 简体中文: node bin/cli.js apply --locale zh-CN
+# 繁體中文: node bin/cli.js apply --locale zh-Hant
+# 日本語: node bin/cli.js apply --locale ja
+# 한국어: node bin/cli.js apply --locale ko
+# Deutsch: node bin/cli.js apply --locale de
+# Français: node bin/cli.js apply --locale fr
+# Português do Brasil: node bin/cli.js apply --locale pt-BR
+# Русский: node bin/cli.js apply --locale ru
 
 # Restaurar la versión oficial
-npx antigravity-i18n restore
+node bin/cli.js restore
 
 # Consultar el idioma activo y las copias de seguridad
-npx antigravity-i18n status
+node bin/cli.js status
 
 # Ver los paquetes de idioma incluidos
-npx antigravity-i18n locales
+node bin/cli.js locales
 ```
 
 `zh` es una abreviatura de `apply --locale zh-CN` y `en` es una abreviatura de `restore`.
@@ -57,7 +61,7 @@ npx antigravity-i18n locales
 ```bash
 git clone https://github.com/wadewu-ml/antigravity-i18n.git
 cd antigravity-i18n
-npm install
+npm ci
 node bin/cli.js apply --locale es
 ```
 

@@ -12,7 +12,7 @@
 
 ## 特長
 
-- **インストール不要**：1つの `npx` コマンドで直接実行でき、インストール先の検出とアプリの再起動も自動で行います。
+- **ソースから実行**：コードを展開し、依存関係をインストールしてローカル CLI を実行します。インストール先の検出とアプリの再起動は自動です。
 - **多言語対応**：言語データはすべて `src/locales/` のJSONパックに分離されています。翻訳エンジン自体は特定の言語に依存しません。簡体字中国語、繁体字中国語、日本語、韓国語、スペイン語、ドイツ語、フランス語、ブラジルポルトガル語、ロシア語を内蔵しています。
 - **非侵襲的**：シェルUI、ネイティブメニュー、ネイティブの終了確認ダイアログだけを翻訳します。コードエディター（Monaco）、ターミナル（xterm）、会話領域には触れません。
 - **バイト単位の復元**：初回実行時に元の `app.asar` をバックアップし、`restore` で公式アーカイブを変更前の状態へ戻します。
@@ -27,27 +27,31 @@ Node.js 16以上が必要です。
 
 ### クイックスタート
 
-```bash
-# 日本語を適用
-npx antigravity-i18n apply --locale ja
 
-# 簡体字中国語: npx antigravity-i18n apply --locale zh-CN
-# 繁體中文: npx antigravity-i18n apply --locale zh-Hant
-# 한국어: npx antigravity-i18n apply --locale ko
-# Español: npx antigravity-i18n apply --locale es
-# Deutsch: npx antigravity-i18n apply --locale de
-# Français: npx antigravity-i18n apply --locale fr
-# Português do Brasil: npx antigravity-i18n apply --locale pt-BR
-# Русский: npx antigravity-i18n apply --locale ru
+> Download and extract this repository’s source archive, then run the commands below from its root directory. Distribution uses code archives and local packages only; this project is not published to npm. See [packaging instructions](PACKAGING.md).
+
+```bash
+npm ci
+# 日本語を適用
+node bin/cli.js apply --locale ja
+
+# 簡体字中国語: node bin/cli.js apply --locale zh-CN
+# 繁體中文: node bin/cli.js apply --locale zh-Hant
+# 한국어: node bin/cli.js apply --locale ko
+# Español: node bin/cli.js apply --locale es
+# Deutsch: node bin/cli.js apply --locale de
+# Français: node bin/cli.js apply --locale fr
+# Português do Brasil: node bin/cli.js apply --locale pt-BR
+# Русский: node bin/cli.js apply --locale ru
 
 # 公式版へ復元
-npx antigravity-i18n restore
+node bin/cli.js restore
 
 # 現在の言語とバックアップ状態を確認
-npx antigravity-i18n status
+node bin/cli.js status
 
 # 内蔵言語パックを一覧表示
-npx antigravity-i18n locales
+node bin/cli.js locales
 ```
 
 `zh` は `apply --locale zh-CN`、`en` は `restore` の短縮形です。
@@ -57,7 +61,7 @@ npx antigravity-i18n locales
 ```bash
 git clone https://github.com/wadewu-ml/antigravity-i18n.git
 cd antigravity-i18n
-npm install
+npm ci
 node bin/cli.js apply --locale ja
 ```
 

@@ -12,7 +12,7 @@
 
 ## 特性
 
-- **免安装**：一条 `npx` 命令直接运行，自动识别安装路径并重启应用。
+- **源码运行**：解压代码包并安装依赖后，运行本地 CLI，自动识别安装路径并重启应用。
 - **多语言**：语言数据全部位于 `src/locales/` 下的 JSON 语言包中，翻译引擎本身不含任何语言内容，新增语言即新增一个文件。简体中文、繁體中文、日本語、한국어、Español、Deutsch、Français、Português do Brasil、Русский 已内置。
 - **非侵入**：仅翻译外壳界面、原生菜单与原生退出确认框，代码编辑器（Monaco）、终端（xterm）与对话区域完全不动。
 - **字节级还原**：首次运行会备份原始 `app.asar`，`restore` 可将官方归档原样放回。
@@ -29,26 +29,30 @@
 
 ### 快速开始
 
+
+> 下载并解压仓库源码包，在项目根目录执行下面的命令。本项目仅分发代码包和本地安装包，不发布到 npm。详见[打包说明](PACKAGING.md)。
+
 ```bash
+npm ci
 # 安装语言包（默认简体中文）
-npx antigravity-i18n apply --locale zh-CN
-# 繁體中文: npx antigravity-i18n apply --locale zh-Hant
-# 日本語: npx antigravity-i18n apply --locale ja
-# 한국어: npx antigravity-i18n apply --locale ko
-# Español: npx antigravity-i18n apply --locale es
-# Deutsch: npx antigravity-i18n apply --locale de
-# Français: npx antigravity-i18n apply --locale fr
-# Português do Brasil: npx antigravity-i18n apply --locale pt-BR
-# Русский: npx antigravity-i18n apply --locale ru
+node bin/cli.js apply --locale zh-CN
+# 繁體中文: node bin/cli.js apply --locale zh-Hant
+# 日本語: node bin/cli.js apply --locale ja
+# 한국어: node bin/cli.js apply --locale ko
+# Español: node bin/cli.js apply --locale es
+# Deutsch: node bin/cli.js apply --locale de
+# Français: node bin/cli.js apply --locale fr
+# Português do Brasil: node bin/cli.js apply --locale pt-BR
+# Русский: node bin/cli.js apply --locale ru
 
 # 还原官方版本
-npx antigravity-i18n restore
+node bin/cli.js restore
 
 # 查看当前语言与备份状态
-npx antigravity-i18n status
+node bin/cli.js status
 
 # 查看内置的语言包
-npx antigravity-i18n locales
+node bin/cli.js locales
 ```
 
 `zh` 是 `apply --locale zh-CN` 的简写，`en` 是 `restore` 的简写。
@@ -58,7 +62,7 @@ npx antigravity-i18n locales
 ```bash
 git clone https://github.com/wadewu-ml/antigravity-i18n.git
 cd antigravity-i18n
-npm install
+npm ci
 node bin/cli.js apply --locale zh-CN
 ```
 

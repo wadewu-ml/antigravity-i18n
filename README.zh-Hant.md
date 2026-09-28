@@ -12,7 +12,7 @@
 
 ## 功能
 
-- **免安裝**：直接使用一行 `npx` 指令執行，自動尋找安裝路徑並重新啟動應用程式。
+- **從原始碼執行**：解壓縮程式碼套件並安裝依賴後，執行本機 CLI，自動尋找安裝路徑並重新啟動應用程式。
 - **多語言**：語言資料皆位於 `src/locales/` 的 JSON 語言包，翻譯引擎本身不含特定語言的內容。內建簡體中文、繁體中文、日本語、한국어、Español、Deutsch、Français、Português do Brasil、Русский。
 - **非侵入式**：翻譯外層介面、原生選單及原生退出確認視窗，保留程式碼編輯器（Monaco）、終端機（xterm）與對話區域的內容。
 - **逐位元組還原**：首次執行會備份原始 `app.asar`，`restore` 可將官方封存檔原樣還原。
@@ -27,26 +27,30 @@
 
 ### 快速開始
 
+
+> Download and extract this repository’s source archive, then run the commands below from its root directory. Distribution uses code archives and local packages only; this project is not published to npm. See [packaging instructions](PACKAGING.md).
+
 ```bash
+npm ci
 # 安裝繁體中文語言包
-npx antigravity-i18n apply --locale zh-Hant
-# 简体中文: npx antigravity-i18n apply --locale zh-CN
-# 日本語: npx antigravity-i18n apply --locale ja
-# 한국어: npx antigravity-i18n apply --locale ko
-# Español: npx antigravity-i18n apply --locale es
-# Deutsch: npx antigravity-i18n apply --locale de
-# Français: npx antigravity-i18n apply --locale fr
-# Português do Brasil: npx antigravity-i18n apply --locale pt-BR
-# Русский: npx antigravity-i18n apply --locale ru
+node bin/cli.js apply --locale zh-Hant
+# 简体中文: node bin/cli.js apply --locale zh-CN
+# 日本語: node bin/cli.js apply --locale ja
+# 한국어: node bin/cli.js apply --locale ko
+# Español: node bin/cli.js apply --locale es
+# Deutsch: node bin/cli.js apply --locale de
+# Français: node bin/cli.js apply --locale fr
+# Português do Brasil: node bin/cli.js apply --locale pt-BR
+# Русский: node bin/cli.js apply --locale ru
 
 # 還原官方版本
-npx antigravity-i18n restore
+node bin/cli.js restore
 
 # 查看目前語言與備份狀態
-npx antigravity-i18n status
+node bin/cli.js status
 
 # 列出內建語言包
-npx antigravity-i18n locales
+node bin/cli.js locales
 ```
 
 未指定 `--locale` 時預設使用簡體中文。`zh` 是 `apply --locale zh-CN` 的簡寫，`en` 是 `restore` 的簡寫。
@@ -56,7 +60,7 @@ npx antigravity-i18n locales
 ```bash
 git clone https://github.com/wadewu-ml/antigravity-i18n.git
 cd antigravity-i18n
-npm install
+npm ci
 node bin/cli.js apply --locale zh-Hant
 ```
 
