@@ -1,0 +1,14 @@
+# Build output
+build/bin/
+
+# Binaries
+*.exe
+*.exe~
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+
+# Go
+*.test
+*.out
