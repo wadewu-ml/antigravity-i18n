@@ -58,11 +58,17 @@ func isCapturingGroup(s string) bool {
 		// A plain group captures.
 		return true
 	}
-	// Every construct that begins with (? is non-capturing except a named group.
-	if len(rest) >= 2 && (rest[1] == '=' || rest[1] == '!') {
+	if len(rest) < 2 {
+		// "(?" cannot open a group on its own.
 		return false
 	}
-	if strings.HasPrefix(rest, "<=") || strings.HasPrefix(rest, "<!") {
+	if rest[1] != '<' {
+		// (?:...), (?=...) and (?!...) never capture. Only the (?<name>...)
+		// form does, so anything else after "(?" is non-capturing.
+		return false
+	}
+	if len(rest) >= 3 && (rest[2] == '=' || rest[2] == '!') {
+		// (?<=... and (?<!...) are lookbehinds, which do not capture.
 		return false
 	}
 	// (?<name>...) is a named capturing group in JavaScript.

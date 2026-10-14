@@ -255,15 +255,21 @@ func ensureCleanBackupForPatch(s *Service, p *paths, cleanBackupPath string, cur
 	if !currentPatched {
 		// An official update can leave an older clean backup beside a new
 		// app.asar. Refreshing from the verified-unpatched archive keeps a later
-		// restore on the same Antigravity release.
-		if err := copyFileExclusive(p.AsarPath, cleanBackupPath); err != nil {
-			// A backup that is already valid for this release is fine to keep.
-			if fileExists(cleanBackupPath) && inspectCleanBackup(cleanBackupPath, expectedIdentity) == cleanBackupValid {
-				return nil
-			}
+		// restore on the same release. A backup that is not valid for the
+		// installed release is replaced rather than kept: a surviving one would
+		// make a later restore downgrade app.asar out of step with
+		// app.asar.unpacked.
+		state := inspectCleanBackup(cleanBackupPath, expectedIdentity)
+		if state == cleanBackupValid {
+			return nil
+		}
+		if state != cleanBackupMissing {
+			s.notes = append(s.notes, fmt.Sprintf(
+				"Replaced the previous clean backup (%s); it did not match the installed release.", state))
+		}
+		if err := replaceFileAtomically(p.AsarPath, cleanBackupPath); err != nil {
 			return err
 		}
-		return nil
 	}
 
 	if inspectCleanBackup(cleanBackupPath, expectedIdentity) == cleanBackupValid {
@@ -280,11 +286,20 @@ func ensureCleanBackupForPatch(s *Service, p *paths, cleanBackupPath string, cur
 				"English build cannot be preserved. Reinstall or update Antigravity to restore a clean " +
 				"app.asar, then run this tool again")
 	}
-	if err := copyFileExclusive(pristine, cleanBackupPath); err != nil {
+	// The destination already exists in this branch, so an exclusive copy would
+	// fail and leave the unusable backup in place. Replace it instead.
+	if err := replaceFileAtomically(pristine, cleanBackupPath); err != nil {
 		return err
 	}
 	s.notes = append(s.notes, fmt.Sprintf("Recovered a pristine archive from %s", filepath.Base(pristine)))
 	return nil
+}
+
+// replaceFileAtomically moves src over dst, leaving dst fully written or
+// untouched. Unlike copyFileExclusive it overwrites an existing dst, which is
+// what a backup refresh needs.
+func replaceFileAtomically(src, dst string) error {
+	return atomicReplaceFile(src, dst, nil)
 }
 
 // RestoreOfficial restores the official untranslated archive.
@@ -343,6 +358,14 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 		return nil, txn.failWithRollback("locating a clean English archive", err)
 	}
 
+	// The backup is about to become app.asar, so it is re-verified here rather
+	// than trusting that the step above left a usable archive in place. A patch
+	// that reports success without restoring would be worse than failing.
+	if state := inspectCleanBackup(p.CleanBackupPath, expectedIdentity); state != cleanBackupValid {
+		return nil, txn.failWithRollback("locating a clean English archive",
+			fmt.Errorf("the clean backup is %s and could not be validated: %s", state, p.CleanBackupPath))
+	}
+
 	backupHash, err := hashArchive(p.CleanBackupPath)
 	if err != nil {
 		return nil, txn.failWithRollback("reading the clean backup", err)
@@ -397,9 +420,22 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 
 // ensureRestorableCleanBackup makes sure a verified pristine archive is
 // available at the clean backup path.
+//
+// When the live archive is unpatched it is itself the verified pristine source,
+// so an unusable backup is rebuilt from it rather than searched for elsewhere.
 func ensureRestorableCleanBackup(s *Service, p *paths, expectedIdentity *Identity) error {
 	if inspectCleanBackup(p.CleanBackupPath, expectedIdentity) == cleanBackupValid {
 		return nil
+	}
+	// On a pristine archive the backup is rebuilt from the archive itself. This
+	// is the normal state after an official update, when a backup from the
+	// previous release is left behind but nothing needs restoring.
+	if patched := detectPatchState(p.AsarPath); patched != nil && !*patched {
+		if state := inspectCleanBackup(p.CleanBackupPath, expectedIdentity); state != cleanBackupMissing {
+			s.notes = append(s.notes, fmt.Sprintf(
+				"Rebuilt the clean backup (%s) from the current unpatched archive.", state))
+		}
+		return replaceFileAtomically(p.AsarPath, p.CleanBackupPath)
 	}
 	pristine, err := findPristineArchive(p.ResourcesDir, expectedIdentity)
 	if err != nil {
@@ -410,7 +446,9 @@ func ensureRestorableCleanBackup(s *Service, p *paths, expectedIdentity *Identit
 			"no verified pristine English app.asar was found. Reinstall or update Antigravity to " +
 				"restore the official build, then run this tool again")
 	}
-	if err := copyFileExclusive(pristine, p.CleanBackupPath); err != nil && !fileExists(p.CleanBackupPath) {
+	// An existing but unusable backup is replaced. Keeping it would let the
+	// caller copy a still-patched archive over app.asar while reporting success.
+	if err := replaceFileAtomically(pristine, p.CleanBackupPath); err != nil {
 		return err
 	}
 	s.notes = append(s.notes, fmt.Sprintf("Using verified original backup: %s", filepath.Base(pristine)))
