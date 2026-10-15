@@ -9,7 +9,7 @@
 - **只动三个文件**：`dist/main.js`、`dist/menu.js`、`dist/preload.js`，其余 700 多个文件从原 asar 逐字节拷贝，偏移与 integrity 全部重算。
 - **离线**：没有任何网络请求，不读取 token、会话或凭据。
 
-界面语言包取自原项目 `D:\WS\Selene-WS\projects\antigravity-zh`，中文覆盖 100%，其余语言沿用其词条集合。原项目保持只读参考。
+语言包词条源自最初的 Node/asar 实现，该实现已归档在本仓库的 `legacy-node` 分支（只读参考）；中文覆盖 100%，其余语言沿用其词条集合。
 
 ---
 
