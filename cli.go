@@ -36,6 +36,18 @@ func runCLI(svc *core.Service, args []string) int {
 	cmd := args[0]
 	rest := args[1:]
 
+	// -v and -h are handled here as well as in the loop below so that
+	// "antigravity-i18n -v" works without a subcommand; otherwise the flag is
+	// mistaken for a command name and reported as unknown.
+	switch cmd {
+	case "-v", "--version":
+		fmt.Println("antigravity-i18n " + core.Version)
+		return 0
+	case "-h", "--help":
+		fmt.Print(usage)
+		return 0
+	}
+
 	opts := core.Options{
 		Restart: true,
 	}

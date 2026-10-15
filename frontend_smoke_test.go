@@ -102,7 +102,7 @@ function setTimeout(fn, ms) { __timers.push(fn); return __timers.length; }
 function clearTimeout() {}
 
 var __App = {
-  GetVersion: function () { return Promise.resolve('0.1.0'); },
+  GetVersion: function () { return Promise.resolve('1.2.3'); },
   GetStatus: function () { return Promise.resolve(__status); },
   GetLocales: function () { return Promise.resolve(__locales); },
   ApplyLocale: function (code, confirmed) {
@@ -322,5 +322,17 @@ func TestFrontendOffersApplyWhenUnpatched(t *testing.T) {
 	}
 	if got := elementText(t, vm, "statusLabel"); !strings.Contains(got, "英文") {
 		t.Errorf("the status should read as English, got %q", got)
+	}
+}
+
+// The version badge has to come from the backend. A number baked into the
+// markup would keep showing a release that no longer matches the binary.
+func TestFrontendVersionBadgeComesFromBackend(t *testing.T) {
+	vm := runFrontend(t, testStatusPatched, testLocales)
+	fireReady(t, vm)
+
+	got := elementText(t, vm, "appVersionBadge")
+	if !strings.Contains(got, "1.2.3") {
+		t.Errorf("the badge should show the version reported by the backend, got %q", got)
 	}
 }

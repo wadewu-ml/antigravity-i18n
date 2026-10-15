@@ -80,9 +80,23 @@ Go 版改为**直接改 asar 头部再拷贝字节**：
 $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 
-# 构建带界面的版本
-wails build -clean
+# 构建（版本号取自 VERSION，同时产出 GUI 与 CLI）
+.\build.ps1
+
+# 只构建其中一个
+.\build.ps1 -Target cli
+.\build.ps1 -Target gui
 ```
+
+版本号只有一处来源：仓库根目录的 `VERSION`。`build.ps1` 把它注入 Go 二进制
+（`-ldflags -X antigravity-i18n/internal/core.Version=...`），并同步写入
+`wails.json` 的 `productVersion`（Wails 用它填 PE 资源里的文件版本）。因此
+CLI 的 `--version`、窗口标题栏的版本徽章、以及状态文件里记录的 `toolVersion`
+始终是同一个数字。直接 `go build` 而不经脚本时不注入版本，运行时报告为
+`dev`，不会冒充一个正式版本号。
+
+GUI 与 CLI 是同一个 EXE 的两种形态：双击 = 图形界面，带子命令 = 命令行
+（`apply` / `restore` / `status` / `locales` / `gui`）。
 
 代码结构：
 

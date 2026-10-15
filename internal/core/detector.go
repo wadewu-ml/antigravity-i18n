@@ -185,11 +185,10 @@ func writeState(p *paths, language string) {
 	}
 }
 
-// Version is the tool version reported by status output. It is overridden
-// at build time so a release reports its own number instead of "dev".
-var Version = "0.1.0"
-
-func SetToolVersion(v string) { Version = v }
+// Version is the tool version reported by the CLI and the window. Release
+// builds stamp the real number in with -ldflags (see build.ps1); an unstamped
+// local build keeps "dev" rather than claiming a release number it is not.
+var Version = "dev"
 
 // isAntigravityRunning reports whether any Antigravity process is alive.
 //
