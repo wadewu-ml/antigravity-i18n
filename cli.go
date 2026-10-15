@@ -99,7 +99,11 @@ func runCLI(svc *core.Service, args []string) int {
 		}
 	}
 
-	opts.Progress = func(stage, detail string) {
+	// One progress sink drives both the console and the window: the CLI prints
+	// stages, the GUI emits them as events. Wiring it into the service rather
+	// than Options is what makes the GUI advance instead of sitting on a
+	// hardcoded sentence while a 4 MB archive is rewritten.
+	svc.Progress = func(stage, detail string) {
 		if detail != "" {
 			fmt.Printf("  %s: %s\n", stage, detail)
 			return

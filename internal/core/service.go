@@ -7,10 +7,11 @@ type Options struct {
 	Restart   bool
 	Force     bool
 	TimeoutMs int
-
-	// Progress receives stage updates for a GUI.
-	Progress func(stage, detail string)
 }
+
+// EnglishLocale is the official untranslated build. It is not a language pack:
+// it is the state apply leaves behind, reached through restore.
+const EnglishLocale = "en"
 
 // Service is the entry point the CLI and the GUI both drive.
 type Service struct {
@@ -31,8 +32,22 @@ func NewService(store *LocaleStore) *Service {
 func (s *Service) Notes() []string { return s.notes }
 
 // DescribeLocales lists the bundled language packs with their coverage.
+//
+// The official English build is listed as well, because choosing it from the
+// GUI means restore rather than apply. Without it the picker cannot express the
+// only language every installation actually ships with.
 func (s *Service) DescribeLocales() ([]LocaleInfo, error) {
-	return s.store.Describe()
+	locales, err := s.store.Describe()
+	if err != nil {
+		return nil, err
+	}
+	return append([]LocaleInfo{{
+		Code:         EnglishLocale,
+		Name:         "English",
+		EnglishName:  "English",
+		Translations: 0,
+		Coverage:     100,
+	}}, locales...), nil
 }
 
 // clearNotes drops warnings from previous operations.

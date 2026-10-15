@@ -34,14 +34,15 @@ func NewApp(svc *core.Service, initialDir string) *App {
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 	a.progress = func(stage, detail string) {
-		if ctx == nil {
-			return
-		}
 		wailsRuntime.EventsEmit(ctx, "progress", map[string]string{
 			"stage":  stage,
 			"detail": detail,
 		})
 	}
+	// The sink is installed once here rather than at each call site, so an
+	// action taken before startup has already been set cannot go silent.
+	a.svc.Progress = a.progress
+	a.svc.Progress("就绪", "正在检测 Antigravity")
 }
 
 func (a *App) appendLog(msg string) {
@@ -64,7 +65,6 @@ func (a *App) GetVersion() string { return core.Version }
 
 // GetStatus reports the localization state of the selected installation.
 func (a *App) GetStatus() (*core.Status, error) {
-	a.svc.Progress = a.progress
 	st, err := a.svc.GetStatus(a.currentDir())
 	if err != nil {
 		return nil, err
@@ -109,7 +109,6 @@ func (a *App) SetAppDir(path string) (*core.Status, error) {
 
 // ApplyLocale installs a language pack, replacing whatever patch is present.
 func (a *App) ApplyLocale(locale string) (*core.ApplyResult, error) {
-	a.svc.Progress = a.progress
 	result, err := a.svc.ApplyLocale(core.Options{
 		AppDir:    a.currentDir(),
 		Locale:    locale,
@@ -129,7 +128,6 @@ func (a *App) ApplyLocale(locale string) (*core.ApplyResult, error) {
 
 // RestoreLocale puts the official English build back.
 func (a *App) RestoreLocale() (*core.RestoreResult, error) {
-	a.svc.Progress = a.progress
 	result, err := a.svc.RestoreOfficial(core.Options{
 		AppDir:    a.currentDir(),
 		Restart:   true,
