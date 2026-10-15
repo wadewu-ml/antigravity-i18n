@@ -67,14 +67,14 @@ All language packs are embedded directly into the executable:
 | Code | Language | Coverage | Notes |
 | :--- | :--- | :--- | :--- |
 | `zh-CN` | Simplified Chinese (简体中文) | 100% | Full coverage of shell UI, native menus, and dialogs |
-| `zh-Hant` | Traditional Chinese (繁體中文) | 26% | Core menus and common phrases |
-| `ja` | Japanese (日本語) | 26% | Core menus and common phrases |
-| `ko` | Korean (한국어) | 26% | Core menus and common phrases |
-| `de` | German (Deutsch) | 26% | Core menus and common phrases |
-| `es` | Spanish (Español) | 26% | Core menus and common phrases |
-| `fr` | French (Français) | 26% | Core menus and common phrases |
-| `pt-BR` | Portuguese (Brasil) | 26% | Core menus and common phrases |
-| `ru` | Russian (Русский) | 26% | Core menus and common phrases |
+| `zh-Hant` | Traditional Chinese (繁體中文) | 100% | Full coverage with traditional terminology |
+| `ja` | Japanese (日本語) | 100% | Full coverage with verified technical terminology |
+| `ko` | Korean (한국어) | 100% | Full coverage with verified technical terminology |
+| `de` | German (Deutsch) | 100% | Full coverage with verified technical terminology |
+| `es` | Spanish (Español) | 100% | Full coverage with verified technical terminology |
+| `fr` | French (Français) | 100% | Full coverage with verified technical terminology |
+| `pt-BR` | Portuguese (Brasil) | 100% | Full coverage with verified technical terminology |
+| `ru` | Russian (Русский) | 100% | Full coverage with verified technical terminology |
 | `en` | English | - | Official untouched build (select to restore) |
 
 ---
