@@ -14,6 +14,13 @@ import (
 	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
+// shutdownWarning is what the confirmation dialog tells the user before either
+// operation closes Antigravity. It is defined once because both apply and
+// restore reach the same forced kill, so the warning cannot drift between them.
+const shutdownWarning = "需要先关闭 Antigravity。\n\n" +
+	"工具会请求正常退出并等待 30 秒，超时将强制结束进程。" +
+	"未保存的编辑器内容、正在进行的会话或撤销历史可能丢失。\n\n是否继续？"
+
 // App binds the Go core to the Wails frontend. The GUI only reaches the core
 // through this type, so a window click and a CLI command perform the same work.
 type App struct {
@@ -108,7 +115,14 @@ func (a *App) SetAppDir(path string) (*core.Status, error) {
 }
 
 // ApplyLocale installs a language pack, replacing whatever patch is present.
-func (a *App) ApplyLocale(locale string) (*core.ApplyResult, error) {
+//
+// confirmed must be true only after the user accepted shutdownWarning. The
+// window used to close Antigravity with no prompt at all, which is how unsaved
+// work got discarded, so the refusal is enforced here rather than in the UI.
+func (a *App) ApplyLocale(locale string, confirmed bool) (*core.ApplyResult, error) {
+	if !confirmed {
+		return nil, errors.New(shutdownWarning)
+	}
 	result, err := a.svc.ApplyLocale(core.Options{
 		AppDir:    a.currentDir(),
 		Locale:    locale,
@@ -126,8 +140,12 @@ func (a *App) ApplyLocale(locale string) (*core.ApplyResult, error) {
 	return result, nil
 }
 
-// RestoreLocale puts the official English build back.
-func (a *App) RestoreLocale() (*core.RestoreResult, error) {
+// RestoreLocale puts the official English build back. Restore stops the process
+// exactly like apply does, so it demands the same confirmation.
+func (a *App) RestoreLocale(confirmed bool) (*core.RestoreResult, error) {
+	if !confirmed {
+		return nil, errors.New(shutdownWarning)
+	}
 	result, err := a.svc.RestoreOfficial(core.Options{
 		AppDir:    a.currentDir(),
 		Restart:   true,

@@ -95,18 +95,16 @@
     </div>
   </div>
 
-  <div class="modal-backdrop hidden" id="restoreConfirmModal">
+  <div class="modal-backdrop hidden" id="applyConfirmModal">
     <div class="modal-box">
-      <h3>确认还原为英文？</h3>
-      <p class="modal-desc">
-        还原操作会用干净的官方备份替换 <code>app.asar</code>，移除全部本地化补丁并重算校验值。
+      <h3 id="applyConfirmTitle">确认切换语言？</h3>
+      <p class="modal-desc" id="applyConfirmBody">
+        Antigravity 需要先关闭。工具会请求正常退出并等待 30 秒，超时将强制结束进程。
       </p>
-      <p class="modal-sub">
-        Antigravity 需要先退出。还原后界面回到官方英文，其余文件不会被改动。
-      </p>
+      <p class="modal-sub">未保存的编辑器内容、正在进行的会话或撤销历史可能丢失。</p>
       <div class="modal-actions">
-        <button class="btn btn-secondary" id="btnCancelRestore">取消</button>
-        <button class="btn btn-danger" id="btnConfirmRestore">确认还原</button>
+        <button class="btn btn-secondary" id="btnCancelApply">取消</button>
+        <button class="btn btn-primary" id="btnConfirmApply">确认继续</button>
       </div>
     </div>
   </div>

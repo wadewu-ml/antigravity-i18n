@@ -6,6 +6,9 @@
 (function () {
   'use strict';
 
+  document.title = 'JS-EXECUTED';
+  try { document.body.setAttribute('data-js', 'yes'); } catch (e) {}
+
   var currentStatus = null;
   var locales = [];
   var selectedLocale = '';
@@ -35,9 +38,11 @@
   var elBtnCloseLogs = document.getElementById('btnCloseLogs');
   var elAboutModal = document.getElementById('aboutModal');
   var elBtnCloseAbout = document.getElementById('btnCloseAbout');
-  var elRestoreConfirmModal = document.getElementById('restoreConfirmModal');
-  var elBtnCancelRestore = document.getElementById('btnCancelRestore');
-  var elBtnConfirmRestore = document.getElementById('btnConfirmRestore');
+  var elApplyConfirmModal = document.getElementById('applyConfirmModal');
+  var elApplyConfirmTitle = document.getElementById('applyConfirmTitle');
+  var elApplyConfirmBody = document.getElementById('applyConfirmBody');
+  var elBtnCancelApply = document.getElementById('btnCancelApply');
+  var elBtnConfirmApply = document.getElementById('btnConfirmApply');
   var elMsgModal = document.getElementById('msgModal');
   var elMsgTitle = document.getElementById('msgTitle');
   var elMsgBody = document.getElementById('msgBody');
@@ -147,6 +152,33 @@
       elStatusDesc.textContent += ' 状态文件与实际内容不一致，以 app.asar 的实际内容为准。';
     }
   }
+  // The button names the locale the click will install, not the one already
+  // installed. Saying "应用中文" while the selection is Japanese misreports what
+  // the next click does.
+  function selectedLabel() {
+    for (var i = 0; i < locales.length; i++) {
+      if (locales[i].code === selectedLocale) return locales[i].name;
+    }
+    return selectedLocale;
+  }
+
+  function localeLabel(code) {
+    for (var i = 0; i < locales.length; i++) {
+      if (locales[i].code === code) return locales[i].name + ' (' + code + ')';
+    }
+    return code;
+  }
+
+  function renderPrimaryLabel() {
+    var label = selectedLocale === 'en' ? 'English' : selectedLabel();
+    if (isPatched(currentStatus)) {
+      elBtnPrimaryAction.textContent = currentStatus.CurrentLanguage === selectedLocale
+        ? '重新应用 ' + label
+        : '切换到 ' + label;
+      return;
+    }
+    elBtnPrimaryAction.textContent = selectedLocale === 'en' ? '保持英文' : '应用 ' + label;
+  }
 
   function renderChips() {
     elLocaleChips.innerHTML = '';
@@ -161,6 +193,7 @@
       chip.className = 'chip' + (loc.coverage < 100 ? ' partial' : '');
       chip.setAttribute('aria-pressed', String(loc.code === selectedLocale));
       chip.disabled = isOperating;
+      chip.title = loc.englishName;
 
       var name = document.createElement('span');
       name.textContent = loc.name;
@@ -178,7 +211,8 @@
     });
     elLocaleNote.textContent = patched
       ? '点击其他语言可直接切换'
-      : '共 ' + locales.length + ' 种语言，中文覆盖最完整';
+      : '共 ' + locales.length + ' 个选项，选中 English 即保持官方英文';
+    renderPrimaryLabel();
   }
 
   function loadLocales() {
@@ -187,9 +221,11 @@
     return app.GetLocales().then(function (list) {
       locales = list || [];
       if (!selectedLocale) {
+        // English leads the list, so the fallback must name a real language pack
+        // rather than whichever entry happens to be first.
         selectedLocale = isPatched(currentStatus)
           ? currentStatus.CurrentLanguage
-          : (locales.length ? locales[0].code : 'zh-CN');
+          : 'zh-CN';
       }
       renderChips();
     }).catch(function (err) {
@@ -204,10 +240,39 @@
     if (!app) return;
     var code = selectedLocale || 'zh-CN';
 
+    // English is not a language pack: it is the untranslated build that restore
+    // reinstalls. Routing it through apply could only fail on an unknown locale.
+    if (code === 'en') {
+      confirmAction('保持官方英文', code, function () {
+        elApplyConfirmModal.classList.add('hidden');
+        doRestore();
+      });
+      return;
+    }
+
+    confirmAction('切换到 ' + selectedLabel() + '?' , code, function () {
+      elApplyConfirmModal.classList.add('hidden');
+      runApply(app, code);
+    });
+  }
+
+  // Both apply and restore stop Antigravity, and the process is killed outright
+  // once the graceful window expires, so the user is asked before anything is
+  // touched. The backend refuses to run without confirmation as well.
+  function confirmAction(title, code, onConfirm) {
+    elApplyConfirmTitle.textContent = title;
+    elApplyConfirmBody.textContent = code === 'en'
+      ? '将用官方英文版 app.asar 替换当前文件，并移除全部本地化补丁。'
+      : '将改写 app.asar 中的界面语言资源，Antigravity 需要先关闭。';
+    elBtnConfirmApply.onclick = onConfirm;
+    elApplyConfirmModal.classList.remove('hidden');
+  }
+
+  function runApply(app, code) {
     setOperatingState(true, '正在改写 app.asar', '正在准备语言包与翻译资源...');
     appendLog('[操作] 应用语言包: ' + code);
 
-    app.ApplyLocale(code).then(function (res) {
+    app.ApplyLocale(code, true).then(function (res) {
       var name = res && res.LocaleName ? res.LocaleName : code;
       appendLog('[完成] 已切换为 ' + name);
       showMessage('已应用', '界面语言已切换为 ' + name + '。Antigravity 已重新启动，若窗口没有出现请手动打开。');
@@ -225,12 +290,11 @@
     if (isOperating) return;
     var app = backend();
     if (!app) return;
-    elRestoreConfirmModal.classList.add('hidden');
 
     setOperatingState(true, '正在还原官方版本', '正在恢复干净备份并重算校验...');
     appendLog('[操作] 还原为官方英文');
 
-    app.RestoreLocale().then(function () {
+    app.RestoreLocale(true).then(function () {
       appendLog('[完成] 已还原为官方英文');
       showMessage('已还原', 'app.asar 已恢复为官方英文版本，其余文件未被改动。');
     }).catch(function (err) {
@@ -289,13 +353,18 @@
   elBtnPrimaryAction.addEventListener('click', handlePrimaryAction);
   elBtnSecondaryAction.addEventListener('click', launchApp);
   elBtnChangePath.addEventListener('click', handleChangePath);
+  // The trailing "restore" link and the primary button now ask the same
+  // question through the same dialog, so there is one wording for a shutdown.
   elBtnRestore.addEventListener('click', function () {
-    elRestoreConfirmModal.classList.remove('hidden');
+    confirmAction('还原为官方英文？', 'en', function () {
+      elApplyConfirmModal.classList.add('hidden');
+      doRestore();
+    });
   });
-  elBtnCancelRestore.addEventListener('click', function () {
-    elRestoreConfirmModal.classList.add('hidden');
+  elBtnCancelApply.addEventListener('click', function () {
+    elApplyConfirmModal.classList.add('hidden');
+    elBtnConfirmApply.onclick = null;
   });
-  elBtnConfirmRestore.addEventListener('click', doRestore);
 
   elBtnAbout.addEventListener('click', function () {
     elAboutModal.classList.remove('hidden');
