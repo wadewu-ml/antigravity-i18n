@@ -9,7 +9,7 @@ import (
 // binary. That is what removes the runtime dependency on Node: nothing is read
 // from the project directory at run time.
 //
-//go:embed all:assets
+//go:embed all:assets/locales all:assets/patches
 var assetsFS embed.FS
 
 // frontendFS holds the hand-written static window: HTML, CSS and JS only. Wails

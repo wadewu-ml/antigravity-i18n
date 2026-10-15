@@ -66,17 +66,9 @@ body {
 .logo-badge {
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(150deg, var(--primary), #036b4e);
-}
-
-.logo-glyph {
-  font-size: 17px;
-  font-weight: 700;
-  color: #fff;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .title-group {
