@@ -1,119 +1,127 @@
 # antigravity-i18n
 
-给 [Antigravity](https://antigravity.google/) 桌面客户端换一套中文界面，想还原的时候按字节还原回官方原版。
+适用于 [Google Antigravity](https://antigravity.google/) 桌面客户端的多语言本地化工具。
 
-一个 EXE 装下所有东西：界面、9 种语言包、读写 asar 的引擎。不装 Node、不装 npm、运行时不联网。
+简体中文 | [English](./README.en.md)
 
-同一个 EXE 既开图形窗口，也认 `apply / restore / status / locales` 子命令。
+---
 
-## 为什么是 Go
+单个可执行文件集成现代化图形界面、纯 Go 实现的 asar 读写引擎与完整语言包；无需安装 Node.js 或任何运行库，解压即用，并支持随时按字节原样还原为官方原版。
 
-最早这工具是 Node 写的，跑起来得带着一个 Node 运行时，打出来的包体积也大。这一版整个用 Go 重写，语言包和前端全部 `//go:embed` 进二进制，编译出来就是单个可执行文件，约 12 MB。
+---
 
-顺带把最费事的那一步也换掉了。原先是调 `@electron/asar` 的 `extractAll`：把整个 asar 解出来，改完再整个打回去，一次动几万个文件。Go 版直接改 asar 头部——读 header 拿到每个文件的 offset 和 size，按偏移把原来的字节整段拷过去，只替换需要改的三个文件。
+## 核心特性
 
-## 用法
+- **单文件免安装**：约 12 MB 独立绿色程序，无需配置 Node.js、npm 或 Python 环境，开箱即用。
+- **图形与命令行双支持**：默认启动直观易用的图形界面，同时内嵌完整命令行子命令（`apply` / `restore` / `status` / `locales`），兼顾日常使用与脚本自动化。
+- **字节级原样还原**：首次修改前自动保存官方原始归档（`app.asar.clean-backup`）；执行还原后，`app.asar` 与官方发布的初始文件 SHA-256 哈希完全一致。
+- **非侵入式设计**：仅本地化外壳 UI、原生系统菜单与退出确认框；代码编辑器（Monaco）、集成终端（xterm）与 AI 对话区域完全保持原生，不触碰任何用户数据。
+- **离线与高可靠**：全流程零网络请求、零数据上传；内置脚本语法合法性门禁与全流程事务控制，遇到异常自动安全回滚。
 
-### 图形界面
+---
 
-双击 `antigravity-i18n.exe`。选语言，点按钮，剩下的事它自己做：先请 Antigravity 关闭（会先弹确认框），改写 app.asar，再把它启动回来。
+## 下载与使用
 
-语言列表里第一个 English 不是语言包，是官方原版。选中它点按钮就是还原。
+### 下载运行
 
-### 命令行
+前往项目的 [Releases](../../releases) 页面，下载最新版本的 `antigravity-i18n.exe` 即可直接使用。
+
+### 1. 图形界面（推荐）
+
+双击运行 `antigravity-i18n.exe`：
+1. 程序会自动检测 Antigravity 的安装目录（若未检测到，可点击“更改位置”手动选择）。
+2. 在语言列表中点击选中目标语言（选中 **English** 即为还原官方原版）。
+3. 点击“应用”按钮；工具在确认关闭程序后自动改写资源并重启 Antigravity。
+
+### 2. 命令行模式
+
+同一可执行文件也可直接在终端中调用：
 
 ```powershell
-# 看当前状态，不需要关 Antigravity
+# 查看当前本地化状态与备份信息
 antigravity-i18n.exe status
 
-# 装简体中文（默认语言）
+# 安装指定语言包（默认简体中文）
 antigravity-i18n.exe apply --locale zh-CN
 
-# 还原成官方英文
+# 随时还原为官方英文原版
 antigravity-i18n.exe restore
 
-# 列出所有语言
+# 查看所有内置语言包及其覆盖率
 antigravity-i18n.exe locales
 ```
 
-| 选项 | 说明 |
-| --- | --- |
-| `--app-dir <path>` | 指定 Antigravity 安装目录，也可用环境变量 `ANTIGRAVITY_APP_DIR` |
-| `--locale <code>` | 语言代码，`zh-CN`、`zh-Hant`、`ja`、`de` 等 |
-| `--no-restart` | 改完不自动重启 Antigravity |
-| `--force` | 跳过等待，直接结束进程 |
-| `--timeout <ms>` | 等待正常退出的毫秒数，默认 30000 |
-| `--yes` | 不再询问"是否关闭 Antigravity" |
+常用参数：
+- `--app-dir <path>`：手动指定 Antigravity 安装路径（亦可通过环境变量 `ANTIGRAVITY_APP_DIR` 设置）。
+- `--locale <code>`：指定语言代码，如 `zh-CN`、`zh-Hant`、`ja`、`ko`、`de`、`es`、`fr` 等。
+- `--no-restart`：完成改写后不自动重启客户端。
+- `--force`：跳过 30 秒优雅退出等待，直接结束 Antigravity 进程。
+- `--yes`：静默确认进程关闭提示。
 
-找不到安装位置时，按 `ANTIGRAVITY_APP_DIR`、`%LOCALAPPDATA%\Programs\antigravity`、`Program Files`、`Program Files (x86)` 的顺序找。
+---
 
-## 改了什么
+## 内置语言支持
 
-只替换三个文件：`dist/main.js`、`dist/menu.js`、`dist/preload.js`。其余 700 多个文件从原 asar 逐字节拷贝，偏移和 integrity 全部重算。
+所有语言包均已内嵌于二进制中，无需额外下载：
 
-翻译范围是界面外壳、原生菜单、退出确认框。编辑器（Monaco）、终端、对话正文一律不碰——那些地方是你自己的内容，不该被词典改写。
+| 语言代码 | 语言名称 | 翻译覆盖度 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `zh-CN` | 简体中文 | 100% | 完整覆盖界面外壳、原生菜单与退出弹窗 |
+| `zh-Hant` | 繁體中文 | 26% | 基础菜单与通用词条 |
+| `ja` | 日本語 | 26% | 基础菜单与通用词条 |
+| `ko` | 한국어 | 26% | 基础菜单与通用词条 |
+| `de` | Deutsch | 26% | 基础菜单与通用词条 |
+| `es` | Español | 26% | 基础菜单与通用词条 |
+| `fr` | Français | 26% | 基础菜单与通用词条 |
+| `pt-BR` | Português (Brasil) | 26% | 基础菜单与通用词条 |
+| `ru` | Русский | 26% | 基础菜单与通用词条 |
+| `en` | English | - | 官方原版英文（选中即执行还原） |
 
-`app.asar.unpacked/` 里的原生模块不参与 offset 计算，一个字节都不动。
+---
 
-写入时有个细节值得说：header 的 JSON 不重新序列化。Go 的 `encoding/json` 会按自己的规则排 key，和 Electron 写出来的对不上。这里是在原始 header 字节上做定位修改，key 顺序、缩进、转义都保持原样。
+## 机制与常见问题
 
-## 还原和备份
+### 1. Antigravity 官方更新后失效？
+Antigravity 自动更新会覆盖 `app.asar`。官方更新完成后，重新打开本工具点击一次“应用”即可重新生效；工具会自动基于新版文件刷新干净备份。
 
-第一次 apply 之前，先存一份干净的 `app.asar.clean-backup`。`restore` 就是把它放回去，放回去之后 app.asar 的 SHA-256 和备份完全一致。
+### 2. 语言切换与还原
+不同语言之间可以直接点击切换，工具会自动替换现有补丁，无需先手动执行还原。任何时候点击“还原为官方英文”均可恢复至纯净状态。
 
-每次 apply/restore 还会在旁边留一个带时间戳的快照（`app.asar.bak-<时间>`，还原时叫 `app.asar.bak-before-restore-<时间>`）。这些会越积越多，装好确认没问题之后可以自己删——restore 真正需要的是 `app.asar.clean-backup` 那一个。
+### 3. 备份文件说明
+- `app.asar.clean-backup`：官方纯净归档备份，是执行“还原”的核心依赖，**请勿手动删除**。
+- `app.asar.bak-*`：每次操作留下的时间戳快照。当确认当前软件运行无误后，可手动清理这些时间戳文件以释放磁盘空间。
 
-Antigravity 自己更新后会把 app.asar 覆盖掉，旧的 clean backup 就和新版对不上了。这种情况再跑一次 apply 就行：工具会拿当前这个未打补丁的 asar 重新生成干净备份。apply/restore 期间会比对哈希，发现 asar 中途被改动（比如自动更新插进来）就停下，不硬写。
+---
 
-备份是否可用由 `status` 判断，校验的是 package.json 的身份（name/version）、有没有被动过补丁、每个文件的 offset/size 有没有越界、integrity 对不对。不合格的备份不会被当成可还原的来源。
+## 源码构建
 
-## 注意
+如需自行编译：
 
-1. 动手前先存盘。工具会请 Antigravity 正常退出并最多等 30 秒，超时强制结束——没保存的编辑器内容、会话、撤销历史会丢。CLI 的 `--yes` 和 GUI 的确认框都挡在这一步前面。
-2. 语言之间可以直接切换，不需要先 restore。
-3. 不做自动更新：没有版本检查，也没有下载。
-
-## 开发
-
-### 构建
-
-版本号只有一处来源：仓库根目录的 `VERSION`。`build.ps1` 读它，用 `-ldflags` 注入 Go 二进制，同时写进 `wails.json` 的 `productVersion`（Wails 拿它填 PE 资源里的文件版本）。CLI 的 `--version`、窗口里的版本徽章、状态文件记的 `toolVersion` 因此始终一致。
-
-```powershell
-.\build.ps1              # GUI + CLI
-.\build.ps1 -Target cli  # 只要 CLI
-```
-
-不经脚本直接 `go build` 不会注入版本，运行时报告 `dev`。
-
-### 测试
-
-e2e 用本机真实的 asar 跑完整 apply → restore 闭环，所以要指一份干净的 asar：
+**依赖环境**：
+- Go 1.26+
+- [Wails v2](https://wails.io/) CLI
 
 ```powershell
+# 克隆仓库
+git clone https://github.com/wadewu-ml/antigravity-i18n.git
+cd antigravity-i18n
+
+# 完整构建（同时产出 GUI 与 CLI）
+.\build.ps1
+
+# 运行自动化测试（包含真实 asar 还原闭环验证）
 $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 
-### 代码结构
+---
 
-| 路径 | 作用 |
-| --- | --- |
-| `internal/core/asar.go` | asar 读写：header 解析、字节拷贝、offset 与 integrity 重算 |
-| `internal/core/patch.go` | 三个 JS 文件的注入逻辑（哨兵块、锚点、去重） |
-| `internal/core/locale.go` | 语言包加载与结构校验 |
-| `internal/core/installer.go` | 备份链、clean backup 校验、状态判定 |
-| `internal/core/apply.go` | apply / restore 主流程 |
-| `internal/core/txn.go` | 事务与回滚 |
-| `frontend/dist/` | 手写静态界面（HTML/CSS/JS，没有构建步骤） |
-| `app.go` | Wails 绑定，GUI 和 CLI 共用同一套 core |
+## 免责声明
 
-注入的 JS 会先用 goja 解析器过一遍语法，不合格就整个操作失败，不会留下打不开的界面。
+1. 本项目为开源社区维护的非官方本地化工具，与 Google 或 Antigravity 官方无关。
+2. Antigravity 及相关商标版权归原权利人所有。
+3. 本工具仅供学习交流及个人使用，请在遵循相关软件使用协议的前提下合理使用。
 
-## 版本
+## 开源协议
 
-Go 线从 `3.0.0` 起。`v1.0.0` 到 `v2.1.0` 这几个 tag 属于归档的 Node 实现，版本号不重用，所以不冲突。语言包词条同样来自那份实现；要参考它，可以直接检出这些 tag。
-
-## 许可证
-
-MIT（沿用原项目）。社区维护的非官方本地化工具，与 Antigravity 官方无关。
+[MIT License](./LICENSE)
