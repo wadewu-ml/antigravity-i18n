@@ -13,7 +13,7 @@
   "info": {
     "companyName": "antigravity-i18n",
     "productName": "antigravity-i18n",
-    "productVersion": "1.0.0",
+    "productVersion": "3.0.0",
     "copyright": "Copyright © 2026",
     "comments": "Antigravity 界面中文本地化（纯 Go 重写）"
   }
