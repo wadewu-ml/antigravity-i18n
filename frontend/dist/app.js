@@ -6,9 +6,6 @@
 (function () {
   'use strict';
 
-  document.title = 'JS-EXECUTED';
-  try { document.body.setAttribute('data-js', 'yes'); } catch (e) {}
-
   var currentStatus = null;
   var locales = [];
   var selectedLocale = '';
