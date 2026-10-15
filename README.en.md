@@ -2,7 +2,7 @@
 
 UI localization tool for the [Google Antigravity](https://antigravity.google/) desktop client.
 
-[简体中文](./README.md) | English
+[简体中文](./README.md) | English | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português (Brasil)](./README.pt-BR.md) | [Русский](./README.ru.md)
 
 ---
 
