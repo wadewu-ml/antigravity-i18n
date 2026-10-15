@@ -236,8 +236,9 @@ func stopAntigravity(force bool, timeoutMs int) (wasRunning, stopped, forced boo
 	wasRunning = true
 
 	if !force {
-		// No /F: this posts a close request to the window.
-		tryExec("taskkill.exe", "/IM", "Antigravity.exe")
+		// No /F: this posts a close request to the window. /T reaches the app's
+		// own helper processes as well, so the app leaves as one unit.
+		tryExec("taskkill.exe", "/T", "/IM", "Antigravity.exe")
 
 		deadline := time.Now().Add(time.Duration(timeoutMs) * time.Millisecond)
 		for time.Now().Before(deadline) {
@@ -254,7 +255,13 @@ func stopAntigravity(force bool, timeoutMs int) (wasRunning, stopped, forced boo
 
 	// The app ignored the close request, so force it. Without this the in-place
 	// app.asar rewrite would fail on a locked file.
-	tryExec("taskkill.exe", "/F", "/IM", "Antigravity.exe")
+	//
+	// /T is required, not cosmetic: Antigravity keeps its scheduler helpers alive
+	// as children (language_server.exe, ~112 MB each on this machine, launched
+	// with "multicall schedule"). Killing only the Antigravity.exe images orphans
+	// those children, and they then pile up across restarts until the machine
+	// runs out of memory.
+	tryExec("taskkill.exe", "/F", "/T", "/IM", "Antigravity.exe")
 
 	stillRunning, err := isAntigravityRunning()
 	if err != nil {
