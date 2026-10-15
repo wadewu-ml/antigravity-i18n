@@ -122,6 +122,10 @@ func ReadArchive(path string) (*Archive, error) {
 		return nil, err
 	}
 	defer f.Close()
+	info, err := f.Stat()
+	if err != nil {
+		return nil, err
+	}
 
 	// On-disk layout:
 	//   [uint32 payloadSize][uint32 headerSize][header pickle][file bodies]
@@ -134,6 +138,9 @@ func ReadArchive(path string) (*Archive, error) {
 	headerSize := binary.LittleEndian.Uint32(lead[4:8])
 	if headerSize < 16 || int64(headerSize) > 64<<20 {
 		return nil, fmt.Errorf("unreasonable asar header size: %d", headerSize)
+	}
+	if int64(headerSize) > info.Size()-8 {
+		return nil, errors.New("asar header extends beyond the archive")
 	}
 
 	hdr := make([]byte, headerSize)
@@ -157,14 +164,49 @@ func ReadArchive(path string) (*Archive, error) {
 		return nil, errors.New("asar header has no files map")
 	}
 
-	return &Archive{
+	arc := &Archive{
 		Path:       path,
 		HeaderSize: headerSize,
 		Base:       int64(8 + headerSize),
 		Root:       &root,
 		rawHeader:  raw,
 		spans:      indexNodes(raw),
-	}, nil
+	}
+	var validate func(*asarNode, string) error
+	validate = func(node *asarNode, rel string) error {
+		if node == nil {
+			return fmt.Errorf("asar entry is null: %s", rel)
+		}
+		if node.Files != nil {
+			for name, child := range node.Files {
+				if err := validate(child, rel+"/"+name); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+		if node.Link != nil || (node.Unpacked != nil && *node.Unpacked) {
+			return nil
+		}
+		_, err := packedOffset(node, rel, info.Size()-arc.Base)
+		return err
+	}
+	if err := validate(&root, ""); err != nil {
+		return nil, err
+	}
+	return arc, nil
+}
+
+// packedOffset checks lengths before allocation or arithmetic on archive data.
+func packedOffset(node *asarNode, rel string, payloadSize int64) (int64, error) {
+	if node.Size == nil || node.Offset == nil {
+		return 0, fmt.Errorf("asar entry is incomplete: %s", rel)
+	}
+	off, err := strconv.ParseInt(*node.Offset, 10, 64)
+	if err != nil || off < 0 || *node.Size < 0 || off > payloadSize || *node.Size > payloadSize-off {
+		return 0, fmt.Errorf("asar entry lies outside the archive: %s", rel)
+	}
+	return off, nil
 }
 
 func toSlash(p string) string { return strings.ReplaceAll(p, string(os.PathSeparator), "/") }
@@ -198,18 +240,19 @@ func (a *Archive) ReadFile(rel string) ([]byte, error) {
 	if node.Unpacked != nil && *node.Unpacked {
 		return nil, fmt.Errorf("asar entry is unpacked, read it from app.asar.unpacked: %s", rel)
 	}
-	if node.Size == nil || node.Offset == nil {
-		return nil, fmt.Errorf("asar entry is incomplete: %s", rel)
-	}
-	off, err := strconv.ParseInt(*node.Offset, 10, 64)
-	if err != nil {
-		return nil, fmt.Errorf("asar entry has a non-numeric offset %q: %w", *node.Offset, err)
-	}
 	f, err := os.Open(a.Path)
 	if err != nil {
 		return nil, err
 	}
 	defer f.Close()
+	info, err := f.Stat()
+	if err != nil {
+		return nil, err
+	}
+	off, err := packedOffset(node, rel, info.Size()-a.Base)
+	if err != nil {
+		return nil, err
+	}
 	if _, err := f.Seek(a.Base+off, io.SeekStart); err != nil {
 		return nil, err
 	}
@@ -320,11 +363,12 @@ type Patch struct {
 
 // plannedBody is one file's place in the archive about to be written.
 type plannedBody struct {
-	rel     string
-	data    []byte
-	newOff  int64
-	newSize int64
-	changed bool
+	rel       string
+	data      []byte
+	sourceOff int64
+	newOff    int64
+	newSize   int64
+	changed   bool
 }
 
 // WritePatched writes an archive to destPath that is identical to srcPath apart
@@ -342,6 +386,10 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 
 	repl := make(map[string][]byte, len(patches))
 	for _, p := range patches {
+		node := arc.lookup(p.Path)
+		if node == nil || node.Offset == nil || (node.Unpacked != nil && *node.Unpacked) {
+			return fmt.Errorf("cannot patch missing or unpacked asar entry: %s", p.Path)
+		}
 		repl[toSlash(p.Path)] = p.Data
 	}
 
@@ -353,24 +401,23 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 			return fmt.Errorf("asar entry disappeared while patching: %s", rel)
 		}
 		var data []byte
+		size := *node.Size
+		sourceOff, _ := strconv.ParseInt(*node.Offset, 10, 64)
 		changed := false
 		if d, ok := repl[rel]; ok {
 			data = d
+			size = int64(len(d))
 			changed = true
-		} else {
-			data, err = arc.ReadFile(rel)
-			if err != nil {
-				return err
-			}
 		}
 		bodies = append(bodies, plannedBody{
-			rel:     rel,
-			data:    data,
-			newOff:  offset,
-			newSize: int64(len(data)),
-			changed: changed,
+			rel:       rel,
+			data:      data,
+			sourceOff: sourceOff,
+			newOff:    offset,
+			newSize:   size,
+			changed:   changed,
 		})
-		offset += int64(len(data))
+		offset += size
 	}
 
 	newHeader, err := arc.spliceHeader(bodies)
@@ -378,6 +425,18 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 		return err
 	}
 
+	in, err := os.Open(srcPath)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+	srcInfo, err := in.Stat()
+	if err != nil {
+		return err
+	}
+	if dstInfo, err := os.Stat(destPath); err == nil && os.SameFile(srcInfo, dstInfo) {
+		return errors.New("source and destination archives must be different files")
+	}
 	out, err := os.Create(destPath)
 	if err != nil {
 		return err
@@ -396,11 +455,24 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 		return err
 	}
 	for _, b := range bodies {
-		if _, err := out.Write(b.data); err != nil {
-			return err
+		if b.changed {
+			if _, err := out.Write(b.data); err != nil {
+				return err
+			}
+		} else {
+			n, err := io.Copy(out, io.NewSectionReader(in, arc.Base+b.sourceOff, b.newSize))
+			if err != nil {
+				return err
+			}
+			if n != b.newSize {
+				return fmt.Errorf("short read while copying asar entry: %s", b.rel)
+			}
 		}
 	}
-	return out.Sync()
+	if err := out.Sync(); err != nil {
+		return err
+	}
+	return out.Close()
 }
 
 // spliceHeader rewrites the offset, size and integrity members of the raw

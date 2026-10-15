@@ -21,11 +21,15 @@ type Service struct {
 	// notes carries warnings that should be shown to the user but must not fail
 	// an otherwise successful operation.
 	notes []string
+	// Process hooks keep fixture tests independent of the installed application.
+	stopApp    func(bool, int) (bool, bool, bool, error)
+	appRunning func() (bool, error)
+	launchApp  func(*paths) error
 }
 
 // NewService builds the service around the embedded locale pack.
 func NewService(store *LocaleStore) *Service {
-	return &Service{store: store}
+	return &Service{store: store, stopApp: stopAntigravity, appRunning: isAntigravityRunning, launchApp: launchAntigravity}
 }
 
 // Notes returns warnings accumulated by the last operation.

@@ -270,15 +270,17 @@ func stopAntigravity(force bool, timeoutMs int) (wasRunning, stopped, forced boo
 }
 
 // launchAntigravity starts the app again after a patch.
-func launchAntigravity(p *paths) {
+func launchAntigravity(p *paths) error {
 	exe := filepath.Join(p.AppDir, "Antigravity.exe")
 	if !fileExists(exe) {
-		return
+		return fmt.Errorf("Antigravity.exe was not found in %s", p.AppDir)
 	}
 	cmd := exec.Command(exe)
-	_ = cmd.Start()
+	if err := cmd.Start(); err != nil {
+		return err
+	}
 	if cmd.Process != nil {
 		_ = cmd.Process.Release()
 	}
-	// A launch failure is not worth failing the patch over.
+	return nil
 }

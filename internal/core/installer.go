@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -28,16 +29,17 @@ func hashArchive(path string) (string, error) {
 	}
 	defer f.Close()
 
+	sum, err := hashReader(f)
+	if err != nil {
+		return "", fmt.Errorf("could not hash archive %s: %w", path, err)
+	}
+	return sum, nil
+}
+
+func hashReader(r io.Reader) (string, error) {
 	h := sha256.New()
-	buf := make([]byte, 1<<20)
-	for {
-		n, err := f.Read(buf)
-		if n > 0 {
-			h.Write(buf[:n])
-		}
-		if err != nil {
-			break
-		}
+	if _, err := io.Copy(h, r); err != nil {
+		return "", err
 	}
 	return hex.EncodeToString(h.Sum(nil)), nil
 }

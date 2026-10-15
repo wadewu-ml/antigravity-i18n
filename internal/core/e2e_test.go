@@ -35,7 +35,13 @@ func newTestService(t *testing.T) *Service {
 	if err != nil {
 		t.Fatal(err)
 	}
-	return NewService(store)
+	svc := NewService(store)
+	// Fixtures live in temporary installations; tests must never close or query
+	// the user's real Antigravity processes.
+	svc.stopApp = func(bool, int) (bool, bool, bool, error) { return false, true, false, nil }
+	svc.appRunning = func() (bool, error) { return false, nil }
+	svc.launchApp = func(*paths) error { return nil }
+	return svc
 }
 
 // installLayout copies the fixture into a fake installation directory that

@@ -73,7 +73,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if timeout <= 0 {
 		timeout = gracefulTimeoutMs
 	}
-	wasRunning, stopped, forced, err := stopAntigravity(opts.Force, timeout)
+	wasRunning, stopped, forced, err := s.stopApp(opts.Force, timeout)
 	if err != nil {
 		return nil, err
 	}
@@ -91,8 +91,9 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	}
 
 	txn := newFileTxn()
+	// The live archive is replaced atomically as the last fallible step. Do not
+	// snapshot it: rollback must preserve any concurrent official update.
 	for _, path := range []string{
-		p.AsarPath,
 		p.CleanBackupPath,
 		p.StatePath,
 	} {
@@ -126,7 +127,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, txn.failWithRollback("verifying the patched archive", err)
 	}
-	if detectPatchState(staged) == nil || !*detectPatchState(staged) {
+	if patched := detectPatchState(staged); patched == nil || !*patched {
 		return nil, txn.failWithRollback("verifying the patched archive",
 			fmt.Errorf("localization markers were not found in the patched archive"))
 	}
@@ -156,7 +157,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	s.progress("正在写回 app.asar", p.AsarPath)
 
 	if err := atomicReplaceFile(staged, p.AsarPath, func(candidate string) error {
-		running, err := isAntigravityRunning()
+		running, err := s.appRunning()
 		if err != nil {
 			return err
 		}
@@ -183,7 +184,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	}
 
 	if opts.Restart {
-		launchAntigravity(p)
+		result.Relaunched = s.relaunch(p)
 	}
 	return result, nil
 }
@@ -356,7 +357,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	}
 
 	txn := newFileTxn()
-	for _, path := range []string{p.AsarPath, p.CleanBackupPath, p.StatePath} {
+	for _, path := range []string{p.CleanBackupPath, p.StatePath} {
 		if err := txn.track(path); err != nil {
 			return nil, err
 		}
@@ -381,7 +382,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	}
 	s.progress("正在关闭 Antigravity", "")
 
-	wasRunning, stopped, forced, err := stopAntigravity(opts.Force, timeout)
+	wasRunning, stopped, forced, err := s.stopApp(opts.Force, timeout)
 	if err != nil {
 		return nil, err
 	}
@@ -402,7 +403,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 
 	s.progress("正在写回 app.asar", p.AsarPath)
 	if err := atomicReplaceFile(p.CleanBackupPath, p.AsarPath, func(candidate string) error {
-		running, err := isAntigravityRunning()
+		running, err := s.appRunning()
 		if err != nil {
 			return err
 		}
@@ -425,9 +426,19 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 		Forced:     forced,
 	}
 	if opts.Restart {
-		launchAntigravity(p)
+		result.Relaunched = s.relaunch(p)
 	}
 	return result, nil
+}
+
+// A launch error does not undo a completed patch, but must not be reported as
+// a successful restart either.
+func (s *Service) relaunch(p *paths) bool {
+	if err := s.launchApp(p); err != nil {
+		s.notes = append(s.notes, fmt.Sprintf("Could not relaunch Antigravity: %v. Open it manually.", err))
+		return false
+	}
+	return true
 }
 
 // ensureRestorableCleanBackup makes sure a verified pristine archive is

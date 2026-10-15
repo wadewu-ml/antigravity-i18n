@@ -7,6 +7,7 @@ export namespace core {
 	    CleanBackup: string;
 	    WasRunning: boolean;
 	    Forced: boolean;
+	    Relaunched: boolean;
 	
 	    static createFrom(source: any = {}) {
 	        return new ApplyResult(source);
@@ -20,6 +21,7 @@ export namespace core {
 	        this.CleanBackup = source["CleanBackup"];
 	        this.WasRunning = source["WasRunning"];
 	        this.Forced = source["Forced"];
+	        this.Relaunched = source["Relaunched"];
 	    }
 	}
 	export class LocaleInfo {
@@ -47,6 +49,7 @@ export namespace core {
 	    BackupPath: string;
 	    WasRunning: boolean;
 	    Forced: boolean;
+	    Relaunched: boolean;
 	
 	    static createFrom(source: any = {}) {
 	        return new RestoreResult(source);
@@ -58,6 +61,7 @@ export namespace core {
 	        this.BackupPath = source["BackupPath"];
 	        this.WasRunning = source["WasRunning"];
 	        this.Forced = source["Forced"];
+	        this.Relaunched = source["Relaunched"];
 	    }
 	}
 	export class Status {

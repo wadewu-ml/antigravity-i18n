@@ -101,6 +101,7 @@
       renderStatus(st);
       renderChips();
     }).catch(function (err) {
+      currentStatus = null;
       elStatusPill.className = 'status-pill danger';
       elStatusLabel.textContent = '读取失败';
       elStatusDesc.textContent = errorText(err);
@@ -121,7 +122,7 @@
 
     if (isPatched(st)) {
       elStatusPill.classList.add('success');
-      elStatusLabel.textContent = '已汉化 · ' + st.CurrentLanguage;
+      elStatusLabel.textContent = '已本地化 · ' + st.CurrentLanguage;
       elStatusDesc.textContent = '当前界面语言为 ' + (st.LocaleName || st.CurrentLanguage) +
         '，可随时还原为官方英文版。';
       elBtnPrimaryAction.textContent = '重新应用';
@@ -130,14 +131,14 @@
       elBtnRestore.classList.remove('hidden');
     } else if (st.HasCleanBackup) {
       elStatusPill.classList.add('default');
-      elStatusLabel.textContent = '未汉化（官方英文）';
-      elStatusDesc.textContent = '当前是官方原始版本，干净备份可用，可以安全应用中文界面。';
+      elStatusLabel.textContent = '官方英文';
+      elStatusDesc.textContent = '当前是官方原始版本，干净备份可用，可以选择并应用界面语言。';
       elBtnPrimaryAction.textContent = '应用中文';
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
     } else {
       elStatusPill.classList.add('warning');
-      elStatusLabel.textContent = '未汉化';
+      elStatusLabel.textContent = '官方英文';
       elStatusDesc.textContent = '当前是官方原始版本；应用时会先创建一份干净备份供还原使用。';
       elBtnPrimaryAction.textContent = '应用中文';
     }
@@ -272,7 +273,8 @@
     app.ApplyLocale(code, true).then(function (res) {
       var name = res && res.LocaleName ? res.LocaleName : code;
       appendLog('[完成] 已切换为 ' + name);
-      showMessage('已应用', '界面语言已切换为 ' + name + '。Antigravity 已重新启动，若窗口没有出现请手动打开。');
+      showMessage('已应用', '界面语言已切换为 ' + name + '。' +
+        (res && res.Relaunched ? 'Antigravity 已重新启动。' : '未能自动打开 Antigravity，请手动启动。'));
     }).catch(function (err) {
       var msg = errorText(err);
       appendLog('[错误] ' + msg);
@@ -291,9 +293,11 @@
     setOperatingState(true, '正在还原官方版本', '正在恢复干净备份并重算校验...');
     appendLog('[操作] 还原为官方英文');
 
-    app.RestoreLocale(true).then(function () {
+    app.RestoreLocale(true).then(function (res) {
       appendLog('[完成] 已还原为官方英文');
-      showMessage('已还原', 'app.asar 已恢复为官方英文版本，其余文件未被改动。');
+      var message = res && res.AlreadyEnglish ? '当前已是官方英文版本。' : 'app.asar 已恢复为官方英文版本。';
+      if (res && !res.AlreadyEnglish && !res.Relaunched) message += '未能自动打开 Antigravity，请手动启动。';
+      showMessage('已还原', message);
     }).catch(function (err) {
       var msg = errorText(err);
       appendLog('[错误] ' + msg);

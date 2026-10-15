@@ -108,10 +108,14 @@ func (a *App) SetAppDir(path string) (*core.Status, error) {
 	if path == "" {
 		return nil, errors.New("no directory selected")
 	}
+	st, err := a.svc.GetStatus(filepath.Clean(path))
+	if err != nil {
+		return nil, err
+	}
 	a.mu.Lock()
-	a.appDir = filepath.Clean(path)
+	a.appDir = st.AppDir
 	a.mu.Unlock()
-	return a.GetStatus()
+	return st, nil
 }
 
 // ApplyLocale installs a language pack, replacing whatever patch is present.
@@ -176,6 +180,7 @@ func (a *App) LaunchAntigravity() error {
 	if err := cmd.Start(); err != nil {
 		return err
 	}
+	_ = cmd.Process.Release()
 	return nil
 }
 

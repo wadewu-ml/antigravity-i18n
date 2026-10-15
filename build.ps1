@@ -49,6 +49,10 @@ if ($Target -in @('all', 'gui')) {
     & wails build -clean -ldflags $ldflags
     if ($LASTEXITCODE -ne 0) { throw "wails build failed with exit code $LASTEXITCODE" }
     $gui = Join-Path $PSScriptRoot 'build\bin\antigravity-i18n.exe'
+    $resourceVersion = (Get-Item -LiteralPath $gui).VersionInfo
+    if ($resourceVersion.FileVersion -ne $version -or $resourceVersion.ProductVersion -ne $version) {
+        throw "Windows file/product version does not match VERSION ($version). Check build/windows/info.json."
+    }
     Write-Host ("     {0}  {1:N2} MB" -f $gui, ((Get-Item -LiteralPath $gui).Length / 1MB))
 }
 

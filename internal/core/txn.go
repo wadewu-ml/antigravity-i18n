@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 )
 
-// fileTxn snapshots the files an operation may touch so a failure part way
-// through can be undone. A patch rewrites app.asar in place, which is not
-// something the user can recover from by hand.
+// fileTxn snapshots auxiliary files an operation may touch. The live archive
+// is committed separately with atomicReplaceFile, so rollback cannot overwrite
+// an official update made by another process.
 type fileTxn struct {
 	baseDir string
 	entries []txnEntry
@@ -134,12 +134,17 @@ func atomicReplaceFile(tempPath, destPath string, verify func(staged string) err
 	stagedPath := staged.Name()
 	defer os.Remove(stagedPath)
 
-	data, err := os.ReadFile(tempPath)
+	in, err := os.Open(tempPath)
 	if err != nil {
 		staged.Close()
 		return err
 	}
-	if _, err := staged.Write(data); err != nil {
+	defer in.Close()
+	if _, err := io.Copy(staged, in); err != nil {
+		staged.Close()
+		return err
+	}
+	if err := staged.Sync(); err != nil {
 		staged.Close()
 		return err
 	}
@@ -156,9 +161,7 @@ func atomicReplaceFile(tempPath, destPath string, verify func(staged string) err
 		}
 	}
 
-	// Renaming over the destination is the atomic step; a failure here is the
-	// only path that can lose the original, and the caller's hash check makes
-	// that visible rather than silent.
+	// All writes and verification finish before replacing the destination.
 	return os.Rename(stagedPath, destPath)
 }
 

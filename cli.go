@@ -156,7 +156,11 @@ func cliApply(svc *core.Service, opts core.Options, confirmed bool) int {
 	fmt.Printf("Successfully switched to %s (%s)\n", result.LocaleName, result.Locale)
 	fmt.Printf("  Backup saved at: %s\n", result.BackupPath)
 	if opts.Restart {
-		fmt.Println("  Antigravity has been relaunched.")
+		if result.Relaunched {
+			fmt.Println("  Antigravity has been relaunched.")
+		} else {
+			fmt.Println("  Could not relaunch Antigravity. Open it manually.")
+		}
 	}
 	return 0
 }
@@ -183,7 +187,11 @@ func cliRestore(svc *core.Service, opts core.Options, confirmed bool) int {
 		fmt.Printf("  A copy of the localized build was saved at: %s\n", result.BackupPath)
 	}
 	if opts.Restart {
-		fmt.Println("  Antigravity has been relaunched.")
+		if result.Relaunched {
+			fmt.Println("  Antigravity has been relaunched.")
+		} else {
+			fmt.Println("  Could not relaunch Antigravity. Open it manually.")
+		}
 	}
 	return 0
 }

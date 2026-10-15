@@ -45,6 +45,7 @@ type ApplyResult struct {
 	CleanBackup string
 	WasRunning  bool
 	Forced      bool
+	Relaunched  bool
 }
 
 // RestoreResult describes what a restore run did.
@@ -53,6 +54,7 @@ type RestoreResult struct {
 	BackupPath     string
 	WasRunning     bool
 	Forced         bool
+	Relaunched     bool
 }
 
 // LocaleInfo is one language pack the tool can install.

@@ -25,7 +25,7 @@ func runWails(svc *core.Service) {
 
 	app := NewApp(svc, "")
 	if err := wails.Run(&options.App{
-		Title:     "Antigravity 中文界面",
+		Title:     "Antigravity 多语言工具",
 		Width:     860,
 		Height:    760,
 		MinWidth:  640,
