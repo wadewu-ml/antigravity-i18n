@@ -4,7 +4,7 @@
 Ferramenta de localização de IU para o cliente de desktop Google Antigravity.
 
 
-[简体中文](./README.md) | [English](./README.en.md) | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | **Português (Brasil)** | [Русский](./README.ru.md)
+[简体中文](./README.zh-CN.md) | [English](./README.md) | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | **Português (Brasil)** | [Русский](./README.ru.md)
 
 ---
 
