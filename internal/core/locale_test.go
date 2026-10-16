@@ -71,3 +71,43 @@ func TestFragmentsBuild(t *testing.T) {
 		t.Logf("OK %-8s engine=%d menu=%d dialog=%d", code, len(engine), len(menu), len(dialog))
 	}
 }
+
+// TestLocaleSpellingsResolve covers the spellings people actually type. A
+// rejected code is not a safety problem, but it is the first thing a new user
+// hits, and the aliases the Node CLI accepted must keep working.
+func TestLocaleSpellingsResolve(t *testing.T) {
+	assets := os.DirFS("../..")
+	store, err := NewLocaleStore(assets, assets, "assets/locales", "assets/patches")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, tc := range []struct{ input, want string }{
+		{"zh-CN", "zh-CN"},
+		{"zh", "zh-CN"},
+		{"ZH", "zh-CN"},
+		{"zh-Hans", "zh-CN"},
+		{"zh_CN", "zh-CN"},
+		{"zh_CN.UTF-8", "zh-CN"},
+		{"zh-Hant", "zh-Hant"},
+		{"zh-TW", "zh-Hant"},
+		{"zh_HK", "zh-Hant"},
+		{"pt", "pt-BR"},
+		{"pt-br", "pt-BR"},
+		{"jp", "ja"},
+		{"kr", "ko"},
+		{"  ja  ", "ja"},
+	} {
+		loc, err := store.LoadLocale(tc.input)
+		if err != nil {
+			t.Errorf("LoadLocale(%q): %v", tc.input, err)
+			continue
+		}
+		if loc.Language != tc.want {
+			t.Errorf("LoadLocale(%q) resolved to %q, want %q", tc.input, loc.Language, tc.want)
+		}
+	}
+	// A genuinely unknown code must still fail rather than fall back silently.
+	if _, err := store.LoadLocale("not-a-locale"); err == nil {
+		t.Fatal("accepted an unknown locale")
+	}
+}

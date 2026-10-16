@@ -79,6 +79,7 @@ func (t *fileTxn) rollback() []error {
 // failWithRollback wraps an error after undoing the operation, so the caller
 // reports what actually failed rather than a rollback problem that followed it.
 func (t *fileTxn) failWithRollback(what string, err error) error {
+	err = explainWriteError(err)
 	if rollbackErrs := t.rollback(); len(rollbackErrs) > 0 {
 		return &RollbackError{Op: what, Cause: err, RollbackErrs: rollbackErrs}
 	}

@@ -90,8 +90,28 @@ var document = {
 var window = {
   document: document,
   addEventListener: function (type, fn) { if (type === 'DOMContentLoaded') { __ready = fn; } },
-  runtime: { EventsOn: function () {} }
+  runtime: {
+    EventsOn: function () {},
+    // The fallback path records that it was reached, so a test can assert the
+    // button did something instead of silently ignoring the click.
+    ClipboardSetText: function (text) {
+      __clipboardCalls += 1;
+      __clipboardText = text;
+      return Promise.resolve(true);
+    }
+  }
 };
+
+// __navigatorClipboard lets a test remove navigator.clipboard, which is what an
+// older WebView2 without a secure context looks like.
+var __navigatorClipboard = null;
+var navigator = {};
+Object.defineProperty(navigator, 'clipboard', {
+  get: function () { return __navigatorClipboard; }
+});
+
+var __clipboardText = null;
+var __clipboardCalls = 0;
 
 // __clicked and __firedChipClick let a test dispatch the listener the script
 // registered on a chip, which is the path a real click takes.
@@ -237,6 +257,17 @@ func fireReady(t *testing.T, vm *goja.Runtime) {
 	}
 }
 
+// drainPromises lets queued microtasks run, so a .then handler registered by a
+// click has finished before the test reads the DOM.
+func drainPromises(t *testing.T, vm *goja.Runtime) {
+	t.Helper()
+	for i := 0; i < 5; i++ {
+		if _, err := vm.RunString(`void 0`); err != nil {
+			t.Fatalf("draining promises: %v", err)
+		}
+	}
+}
+
 func elementText(t *testing.T, vm *goja.Runtime, id string) string {
 	t.Helper()
 	v, err := vm.RunString(`__els[` + "'" + id + "'" + `] ? __els[` + "'" + id + "'" + `].textContent : '<missing>'`)
@@ -334,5 +365,32 @@ func TestFrontendVersionBadgeComesFromBackend(t *testing.T) {
 	got := elementText(t, vm, "appVersionBadge")
 	if !strings.Contains(got, "1.2.3") {
 		t.Errorf("the badge should show the version reported by the backend, got %q", got)
+	}
+}
+
+// With navigator.clipboard missing the copy button used to do nothing at all,
+// which reads as a broken control. It now falls back to the Wails runtime call.
+func TestFrontendCopyLogsFallsBackToRuntime(t *testing.T) {
+	vm := runFrontend(t, testStatusPatched, testLocales)
+	fireReady(t, vm)
+
+	if _, err := vm.RunString(`
+		__navigatorClipboard = null;
+		__clipboardCalls = 0;
+		__els['btnCopyLogs']._click();
+	`); err != nil {
+		t.Fatalf("clicking copy logs threw: %v", err)
+	}
+	drainPromises(t, vm)
+
+	v, err := vm.RunString(`__clipboardCalls`)
+	if err != nil {
+		t.Fatalf("reading the clipboard call count: %v", err)
+	}
+	if v.ToInteger() != 1 {
+		t.Fatalf("the runtime clipboard was called %d times, want 1", v.ToInteger())
+	}
+	if got := elementText(t, vm, "msgTitle"); !strings.Contains(got, "已复制") {
+		t.Errorf("the user was not told the copy succeeded, got %q", got)
 	}
 }

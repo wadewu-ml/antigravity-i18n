@@ -1,9 +1,41 @@
 package core
 
 import (
+	"errors"
 	"io"
+	"io/fs"
 	"os"
 )
+
+// explainWriteError turns the one failure users cannot diagnose from the raw
+// text into an actionable message. Windows reports a write into a protected
+// directory as the bare string "Access is denied.", which says nothing about
+// what to do; an Antigravity installed under Program Files needs an elevated
+// run, and the default %LOCALAPPDATA% install never does.
+func explainWriteError(err error) error {
+	if err == nil {
+		return nil
+	}
+	if !errors.Is(err, fs.ErrPermission) {
+		return err
+	}
+	return &permissionError{Cause: err}
+}
+
+// permissionError adds guidance without discarding the original text, so the
+// real path and Win32 wording stay available for a bug report.
+type permissionError struct {
+	Cause error
+}
+
+func (e *permissionError) Error() string {
+	return e.Cause.Error() + "\n\n" +
+		"Windows refused the write. Antigravity is installed in a protected location " +
+		"(for example Program Files), so run this tool as administrator and try again. " +
+		"An installation under %LOCALAPPDATA% does not need this."
+}
+
+func (e *permissionError) Unwrap() error { return e.Cause }
 
 func openFile(path string) (*os.File, error) {
 	return os.Open(path)

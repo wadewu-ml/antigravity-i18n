@@ -344,7 +344,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 		// backup may still belong to the previous release. Refresh the backup and
 		// avoid needlessly stopping or rewriting the running application.
 		if err := ensureRestorableCleanBackup(s, p, expectedIdentity); err != nil {
-			return nil, err
+			return nil, explainWriteError(err)
 		}
 		writeState(p, "en")
 		s.progress("已经是官方英文版本", "")

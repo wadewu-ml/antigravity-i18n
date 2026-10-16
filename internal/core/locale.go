@@ -39,9 +39,40 @@ var rtlLanguages = map[string]bool{
 // a file of their own: 'zh' and 'zh-Hans' (any casing) both mean the Simplified
 // Chinese pack shipped as zh-CN. Matching itself is case-insensitive, so
 // 'zh-hant' resolves onto the zh-Hant file without a separate alias.
+//
+// The extra entries cover the spellings people actually type: region subtags
+// for the two Chinese scripts, the bare language for a pack shipped with a
+// region (pt -> pt-BR), and the two codes that are commonly mistaken for their
+// ISO 639-1 form (jp -> ja, kr -> ko). Rejecting these would be technically
+// correct and practically annoying.
 var localeAliases = map[string]string{
 	"zh":      DefaultLocale,
 	"zh-hans": DefaultLocale,
+	"zh-tw":   "zh-Hant",
+	"zh-hk":   "zh-Hant",
+	"zh-mo":   "zh-Hant",
+	"pt":      "pt-BR",
+	"jp":      "ja",
+	"kr":      "ko",
+}
+
+// CanonicalLocale folds a locale spelling onto the code it names, so 'ZH',
+// 'zh_CN' and 'zh-CN' all compare equal. An unrecognized spelling is returned
+// normalized rather than empty, which keeps it distinguishable from a real code
+// without pretending it resolved to one.
+//
+// The alias table is applied here and not only in loadResolved, because the CLI
+// compares two spellings to decide whether they conflict.
+func CanonicalLocale(code string) string {
+	normalized := strings.TrimSpace(code)
+	if i := strings.IndexAny(normalized, ".@"); i >= 0 {
+		normalized = normalized[:i]
+	}
+	normalized = strings.ToLower(strings.ReplaceAll(normalized, "_", "-"))
+	if alias, ok := localeAliases[normalized]; ok {
+		return strings.ToLower(alias)
+	}
+	return normalized
 }
 
 // PlaceholderToken names replaced in a fragment when it is built.
@@ -196,21 +227,14 @@ func (s *LocaleStore) LoadLocale(code string) (*Locale, error) {
 // loadResolved applies aliases and case folding, then reads and validates.
 func (s *LocaleStore) loadResolved(code string) (*Locale, error) {
 	available := s.ListLocales()
-	requested := ""
-	if LocaleCodeRe.MatchString(code) {
-		requested = strings.ToLower(code)
-	}
+	// CanonicalLocale folds 'ZH', 'zh_CN.UTF-8' and 'zh' onto 'zh-cn', so the
+	// comparison below only has to match one spelling per pack.
 	resolved := ""
-	if requested != "" {
+	if requested := CanonicalLocale(code); LocaleCodeRe.MatchString(requested) {
 		for _, name := range available {
-			if strings.ToLower(name) == requested {
+			if strings.EqualFold(name, requested) {
 				resolved = name
 				break
-			}
-		}
-		if resolved == "" {
-			if alias, ok := localeAliases[requested]; ok {
-				resolved = alias
 			}
 		}
 	}

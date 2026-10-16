@@ -386,14 +386,42 @@
   });
   elBtnCopyLogs.addEventListener('click', function () {
     var text = operationLogs.join('\n');
-    if (navigator.clipboard) {
+    // navigator.clipboard is only exposed in a secure context and can be
+    // absent in older WebView2 builds. Wails ships its own clipboard call, so
+    // fall back to it instead of leaving the button doing nothing.
+    if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function () {
         showMessage('已复制', '运行日志已复制到剪贴板。');
       }).catch(function () {
-        showMessage('复制失败', '无法访问剪贴板，请手动选择日志内容。');
+        copyLogsWithRuntime(text);
       });
+      return;
     }
+    copyLogsWithRuntime(text);
   });
+
+  function copyLogsWithRuntime(text) {
+    var rt = window.runtime;
+    if (rt && typeof rt.ClipboardSetText === 'function') {
+      try {
+        var result = rt.ClipboardSetText(text);
+        if (result && typeof result.then === 'function') {
+          result.then(function (ok) {
+            showMessage(ok === false ? '复制失败' : '已复制',
+              ok === false ? '无法访问剪贴板，请手动选择日志内容。' : '运行日志已复制到剪贴板。');
+          }).catch(function () {
+            showMessage('复制失败', '无法访问剪贴板，请手动选择日志内容。');
+          });
+          return;
+        }
+        showMessage('已复制', '运行日志已复制到剪贴板。');
+        return;
+      } catch (err) {
+        // Fall through to the manual-selection hint below.
+      }
+    }
+    showMessage('复制失败', '无法访问剪贴板，请手动选择日志内容。');
+  }
 
   function setupWailsEvents() {
     if (window.runtime && window.runtime.EventsOn) {
