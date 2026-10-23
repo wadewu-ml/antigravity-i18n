@@ -69,6 +69,35 @@ func TestWritePatchedStreamsFixture(t *testing.T) {
 	}
 }
 
+func TestWritePatchedWithSharedEmptyOffsets(t *testing.T) {
+	header := pickleWrapJSON([]byte(`{"files":{"body":{"size":1,"offset":"0"},"empty-a":{"size":0,"offset":"0"},"empty-z":{"size":0,"offset":"0"}}}`))
+	var lead [8]byte
+	binary.LittleEndian.PutUint32(lead[:4], 4)
+	binary.LittleEndian.PutUint32(lead[4:], uint32(len(header)))
+	data := append(lead[:], header...)
+	data = append(data, 'x')
+	src := filepath.Join(t.TempDir(), "shared-offsets.asar")
+	if err := os.WriteFile(src, data, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	arc, err := ReadArchive(src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Empty entries must precede the body at the same offset, or a rewrite
+	// moves their offsets and changes the header even when no patch is applied.
+	if got := strings.Join(arc.FileEntries(), ","); got != "empty-a,empty-z,body" {
+		t.Errorf("unstable shared-offset ordering: %s", got)
+	}
+	dst := filepath.Join(t.TempDir(), "rewritten.asar")
+	if err := WritePatched(src, dst, nil); err != nil {
+		t.Fatal(err)
+	}
+	if fileHash(t, src) != fileHash(t, dst) {
+		t.Fatal("unchanged rewrite moved empty-file offsets")
+	}
+}
+
 func TestWritePatchedRejectsSameFile(t *testing.T) {
 	appDir := installLayout(t, fixtureAsar(t))
 	path := asarOf(appDir)

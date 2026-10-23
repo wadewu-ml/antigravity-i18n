@@ -272,8 +272,9 @@ func (a *Archive) ReadFile(rel string) ([]byte, error) {
 // archive.
 func (a *Archive) FileEntries() []string {
 	type entry struct {
-		rel string
-		off int64
+		rel   string
+		off   int64
+		empty bool
 	}
 	var entries []entry
 	var walk func(n *asarNode, prefix string)
@@ -297,12 +298,22 @@ func (a *Archive) FileEntries() []string {
 			if err != nil {
 				continue
 			}
-			entries = append(entries, entry{rel: p, off: off})
+			entries = append(entries, entry{rel: p, off: off, empty: c.Size != nil && *c.Size == 0})
 		}
 	}
 	walk(a.Root, "")
 
-	sort.Slice(entries, func(i, j int) bool { return entries[i].off < entries[j].off })
+	sort.Slice(entries, func(i, j int) bool {
+		if entries[i].off != entries[j].off {
+			return entries[i].off < entries[j].off
+		}
+		// Empty files share the next body's offset. Keep them before that
+		// body so rewriting does not move their offsets past its contents.
+		if entries[i].empty != entries[j].empty {
+			return entries[i].empty
+		}
+		return entries[i].rel < entries[j].rel
+	})
 
 	out := make([]string, 0, len(entries))
 	for _, e := range entries {

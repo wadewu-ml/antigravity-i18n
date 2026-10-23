@@ -30,7 +30,7 @@ Options:
   --locale <code>    Language pack to install (default: zh-CN)
   --no-restart       Do not relaunch Antigravity afterwards
   --force            Skip the graceful shutdown and force Antigravity to close
-  --timeout <ms>     How long to wait for a graceful shutdown (default: 30000)
+  --timeout <ms>     Positive milliseconds to wait for a graceful shutdown (default: 30000)
   --yes              Assume yes for the shutdown confirmation
   -h, --help         Show this help
   -v, --version      Show the tool version
@@ -148,8 +148,8 @@ func parseArgs(args []string) (*parsedArgs, error) {
 			}
 			i++
 			ms, err := strconv.Atoi(rest[i])
-			if err != nil {
-				return nil, errors.New("--timeout needs a number of milliseconds")
+			if err != nil || ms <= 0 {
+				return nil, errors.New("--timeout needs a positive integer number of milliseconds within the supported integer range")
 			}
 			out.opts.TimeoutMs = ms
 		case strings.HasPrefix(arg, "--app-dir="):
@@ -158,8 +158,8 @@ func parseArgs(args []string) (*parsedArgs, error) {
 			out.opts.Locale = strings.TrimPrefix(arg, "--locale=")
 		case strings.HasPrefix(arg, "--timeout="):
 			ms, err := strconv.Atoi(strings.TrimPrefix(arg, "--timeout="))
-			if err != nil {
-				return nil, errors.New("--timeout needs a number of milliseconds")
+			if err != nil || ms <= 0 {
+				return nil, errors.New("--timeout needs a positive integer number of milliseconds within the supported integer range")
 			}
 			out.opts.TimeoutMs = ms
 		case strings.HasPrefix(arg, "-"):

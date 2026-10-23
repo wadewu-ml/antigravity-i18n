@@ -2,8 +2,33 @@ package core
 
 import (
 	"os"
+	"strings"
 	"testing"
 )
+
+func TestLocaleRegexFlags(t *testing.T) {
+	for _, kind := range []string{"value rule", "pattern"} {
+		for _, flags := range []string{"", "g", "y", "gi", "dimsu", "v", "x", "gg", "ii", "uv", "I", "i "} {
+			t.Run(kind+"/"+flags, func(t *testing.T) {
+				loc := &Locale{Language: "ja", Name: "Japanese", Text: map[string]string{"Hello": "こんにちは"}}
+				valid := flags == "" || flags == "g" || flags == "y" || flags == "gi" || flags == "dimsu" || flags == "v"
+				if kind == "value rule" {
+					loc.ValueRules = map[string][]ValueRule{"duration": {{Pattern: `(\d+)d`, Template: "{1}日", Flags: flags}}}
+				} else {
+					loc.Patterns = []PatternRule{{Pattern: `^(\d+)d$`, Template: "{1}日", Sample: "2d", Flags: flags}}
+					valid = valid && !strings.ContainsAny(flags, "gy")
+				}
+				err := validateLocale("ja", loc)
+				if valid && err != nil {
+					t.Fatalf("valid flags %q rejected: %v", flags, err)
+				}
+				if !valid && (err == nil || !strings.Contains(err.Error(), kind) || !strings.Contains(err.Error(), "flag")) {
+					t.Fatalf("invalid flags %q: expected a contextual error, got %v", flags, err)
+				}
+			})
+		}
+	}
+}
 
 // TestAllLocalesValidate loads and validates every shipped locale through the
 // same path the installer uses, so a malformed pack fails the build rather than

@@ -185,7 +185,6 @@ func (s *LocaleStore) Describe() ([]LocaleInfo, error) {
 	if err != nil {
 		return nil, err
 	}
-	refCount := len(reference.Text)
 	for _, code := range s.ListLocales() {
 		loc, err := s.LoadLocale(code)
 		if err != nil {
@@ -203,7 +202,6 @@ func (s *LocaleStore) Describe() ([]LocaleInfo, error) {
 		if entries > 0 {
 			coverage = covered * 100 / entries
 		}
-		_ = refCount
 		out = append(out, LocaleInfo{
 			Code:         code,
 			Name:         loc.Name,
@@ -380,6 +378,28 @@ func validatePluralTemplates(code, label string, rule *PatternRule, groupCount i
 	return templates, nil
 }
 
+// validateRegexFlags checks JavaScript flags separately from Go's regex parser.
+// Value rules perform replacements and may use g/y; whole-string patterns may not.
+func validateRegexFlags(code, label, flags string, allowStateful bool) error {
+	seen := map[rune]bool{}
+	for _, flag := range flags {
+		if !strings.ContainsRune("dgimsuvy", flag) {
+			return fmt.Errorf("locale '%s': %s has an invalid regex flag %q", code, label, flag)
+		}
+		if seen[flag] {
+			return fmt.Errorf("locale '%s': %s has a duplicate regex flag %q", code, label, flag)
+		}
+		if !allowStateful && (flag == 'g' || flag == 'y') {
+			return fmt.Errorf("locale '%s': %s cannot use stateful 'g' or 'y' flags", code, label)
+		}
+		seen[flag] = true
+	}
+	if seen['u'] && seen['v'] {
+		return fmt.Errorf("locale '%s': %s cannot combine regex flags 'u' and 'v'", code, label)
+	}
+	return nil
+}
+
 // validateLocale rejects malformed locale data before it is injected into the
 // app.
 //
@@ -490,11 +510,6 @@ func validateLocale(code string, loc *Locale) error {
 			return err
 		}
 	}
-	if loc.PunctuationSkipSuffixes != nil {
-		for _, item := range loc.PunctuationSkipSuffixes {
-			_ = item
-		}
-	}
 	if loc.ValueMaps != nil {
 		for _, name := range sortedMapKeys(loc.ValueMaps) {
 			if err := validateStringMapOpts(code, "valueMaps."+name, loc.ValueMaps[name], mapOptions{allowEmptyKey: true, allowEmptyValue: true}); err != nil {
@@ -511,20 +526,16 @@ func validateLocale(code string, loc *Locale) error {
 				if rule.Pattern == "" || rule.Template == "" {
 					return fmt.Errorf("locale '%s': %s needs both 'pattern' and 'template' strings", code, label)
 				}
-				flags := rule.Flags
-				if flags == "" {
-					flags = "g"
+				if err := validateRegexFlags(code, label, rule.Flags, true); err != nil {
+					return err
 				}
-				compiled, err := regexp.Compile(rule.Pattern)
-				if err != nil {
+				if _, err := regexp.Compile(rule.Pattern); err != nil {
 					return fmt.Errorf("locale '%s': %s has an invalid regex: %v", code, label, err)
 				}
 				groupCount, err := countCaptureGroups(rule.Pattern)
 				if err != nil {
 					return fmt.Errorf("locale '%s': %s has an invalid regex: %v", code, label, err)
 				}
-				_ = flags
-				_ = compiled
 				if err := validateTemplateGroups(code, label, rule.Template, groupCount); err != nil {
 					return err
 				}
@@ -557,10 +568,8 @@ func validateLocale(code string, loc *Locale) error {
 		if !strings.HasPrefix(rule.Pattern, "^") || !strings.HasSuffix(rule.Pattern, "$") {
 			return fmt.Errorf("locale '%s': %s must be anchored with ^ and $", code, label)
 		}
-		if rule.Flags != "" {
-			if strings.ContainsAny(rule.Flags, "gy") {
-				return fmt.Errorf("locale '%s': %s cannot use stateful 'g' or 'y' flags", code, label)
-			}
+		if err := validateRegexFlags(code, label, rule.Flags, false); err != nil {
+			return err
 		}
 		if rule.ID != "" {
 			if seenIDs[rule.ID] {

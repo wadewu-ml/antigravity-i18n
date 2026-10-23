@@ -89,6 +89,27 @@ func TestParseArgsBasics(t *testing.T) {
 	}
 }
 
+func TestParseArgsTimeout(t *testing.T) {
+	for _, command := range []string{"apply", "restore"} {
+		for _, value := range []string{"-5000", "0", "invalid", "999999999999999999999999", "1", "5000"} {
+			for _, equals := range []bool{false, true} {
+				args := []string{command, "--timeout", value}
+				if equals {
+					args = []string{command, "--timeout=" + value}
+				}
+				parsed, err := parseArgs(args)
+				if value == "1" || value == "5000" {
+					if err != nil || parsed.opts.TimeoutMs <= 0 {
+						t.Errorf("%v: got %+v, %v", args, parsed, err)
+					}
+				} else if err == nil || !strings.Contains(err.Error(), "--timeout") {
+					t.Errorf("%v: expected a timeout error, got %v", args, err)
+				}
+			}
+		}
+	}
+}
+
 // The help text is the only place the shorthands are documented, so it has to
 // mention them.
 func TestUsageDocumentsShorthands(t *testing.T) {
