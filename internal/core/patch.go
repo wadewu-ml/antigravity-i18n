@@ -163,8 +163,9 @@ func trimLeadingSpace(s string) string {
 // hasSwitch guard keeps an explicit command-line --lang from the user winning.
 var langSwitchRe = regexp.MustCompile(`if \(!electron_1\.app\.commandLine\.hasSwitch\('lang'\)\) \{\s*electron_1\.app\.commandLine\.appendSwitch\('lang', '[^']*'\);\s*\}`)
 
-// debugPortRe matches the remote debugging port block, which is the anchor the
-// language switch is inserted after when it is absent entirely.
+// debugPortRe matches the remote debugging port block. Antigravity 2.28 no
+// longer ships its own language switch, so this stable block is where the
+// switch is inserted when the older language block is absent.
 var debugPortRe = regexp.MustCompile(`if\s*\(!electron_1\.app\.commandLine\.hasSwitch\('remote-debugging-port'\)\)\s*\{\s*electron_1\.app\.commandLine\.appendSwitch\('remote-debugging-port',\s*'0'\);\s*\}`)
 
 // applyLanguageSwitch points Chromium's --lang switch at the locale being
@@ -191,10 +192,8 @@ func applyLanguageSwitch(source string, locale *Locale) (string, error) {
 	if langSwitchRe.MatchString(source) {
 		return langSwitchRe.ReplaceAllStringFunc(source, func(string) string { return block }), nil
 	}
-	if debugPortRe.MatchString(source) {
-		return debugPortRe.ReplaceAllStringFunc(source, func(matched string) string {
-			return matched + "\n" + block
-		}), nil
+	if loc := debugPortRe.FindStringIndex(source); loc != nil {
+		return source[:loc[1]] + "\n" + block + source[loc[1]:], nil
 	}
 	return source, nil
 }
