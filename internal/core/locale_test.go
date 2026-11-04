@@ -136,3 +136,70 @@ func TestLocaleSpellingsResolve(t *testing.T) {
 		t.Fatal("accepted an unknown locale")
 	}
 }
+
+// Surfaces added or reworded in Antigravity 2.29.0. Every pack must carry the
+// same English keys so coverage stays aligned with the reference dictionary.
+func TestLocalesCoverAntigravity229Surfaces(t *testing.T) {
+	assets := os.DirFS("../..")
+	store, err := NewLocaleStore(assets, assets, "assets/locales", "assets/patches")
+	if err != nil {
+		t.Fatal(err)
+	}
+	reference, err := store.LoadLocale(DefaultLocale)
+	if err != nil {
+		t.Fatal(err)
+	}
+	required := []string{
+		"Voice mode",
+		"Start Voice mode",
+		"Screen Reader Mode",
+		"Always on",
+		"Paused",
+		"Next run",
+		"Last run",
+		"Browsing History",
+		"Download Location",
+		"Loading Notebook View...",
+		"Executed notebook",
+		"Search branches",
+		"Close Tabs to the Left",
+		"Remote agents are busy",
+		"Enter to Send",
+		"System UI",
+		"Google Sans",
+	}
+	for _, key := range required {
+		if _, ok := reference.Text[key]; !ok {
+			t.Errorf("reference pack is missing 2.29 surface %q", key)
+		}
+	}
+	if _, ok := reference.Menu["Connect to WSL"]; !ok {
+		t.Error("native menu is missing Connect to WSL")
+	}
+	if _, ok := reference.Menu["Reopen Locally"]; !ok {
+		t.Error("native menu is missing Reopen Locally")
+	}
+	ids := map[string]bool{}
+	for _, rule := range reference.Patterns {
+		ids[rule.ID] = true
+	}
+	for _, id := range []string{"audioAttachments", "browserSteps", "nextRunAround", "startedVoiceChat", "xHours", "relativeDayAt"} {
+		if !ids[id] {
+			t.Errorf("reference pack is missing pattern %s", id)
+		}
+	}
+	for _, code := range store.ListLocales() {
+		loc, err := store.LoadLocale(code)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(loc.Text) != len(reference.Text) {
+			t.Errorf("%s has %d text entries, reference has %d", code, len(loc.Text), len(reference.Text))
+		}
+		for key := range reference.Text {
+			if _, ok := loc.Text[key]; !ok || loc.Text[key] == "" {
+				t.Errorf("%s is missing text %q", code, key)
+			}
+		}
+	}
+}
