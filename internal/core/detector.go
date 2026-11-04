@@ -7,7 +7,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
-	"syscall"
 	"time"
 )
 
@@ -203,11 +202,6 @@ func isAntigravityRunning() (bool, error) {
 			"could not query Antigravity processes (tasklist): %v; cannot confirm the app is stopped", err)
 	}
 	return strings.Contains(strings.ToLower(string(out)), "antigravity.exe"), nil
-}
-
-// hideWindow keeps helper commands from flashing a console window.
-func hideWindow(cmd *exec.Cmd) {
-	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true, CreationFlags: 0x08000000}
 }
 
 func tryExec(file string, args ...string) {

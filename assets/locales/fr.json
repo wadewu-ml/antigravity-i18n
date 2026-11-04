@@ -18,7 +18,31 @@
     "Navigation",
     "Notifications",
     "Plugins",
-    "Top P"
+    "Top P",
+    "Antigravity",
+    "Google Sans",
+    "Inter",
+    "Machine",
+    "Message",
+    "Extension (Antigravity IDE)",
+    "Google Chat",
+    "Zoom",
+    "Extension",
+    "Drive",
+    "Enterprise",
+    "Extension (Eclipse)",
+    "Extension (Visual Studio)",
+    "Extension (VS Code)",
+    "Flash",
+    "Pro",
+    "GitHub",
+    "Linux",
+    "Windows",
+    "Chromium",
+    "Turbo",
+    "MCP",
+    "Cache",
+    "UTC"
   ],
   "dialogs": {
     "Confirm Quit": "Confirmer la fermeture",
@@ -2935,7 +2959,403 @@
     "Google Drive": "Google Drive",
     "Google Chrome": "Google Chrome",
     "Gemini Enterprise": "Gemini Enterprise",
-    "Enterprise Gateway": "Enterprise Gateway"
+    "Enterprise Gateway": "Enterprise Gateway",
+    "Start Voice mode": "Démarrer le mode vocal",
+    "End Voice mode": "Arrêter le mode vocal",
+    "Voice mode": "Mode vocal",
+    "Voice speed": "Vitesse de la voix",
+    "Voice transcript": "Transcription vocale",
+    "Voice volume": "Volume de la voix",
+    "Voices": "Voix",
+    "Copy transcript": "Copier la transcription",
+    "Copied transcript": "Transcription copiée",
+    "Listening": "Écoute",
+    "Listening. Ask anything.": "Écoute. Posez une question.",
+    "Microphone blocked. Allow mic access.": "Micro bloqué. Autorisez l’accès.",
+    "Couldn't connect": "Connexion impossible",
+    "Disconnected": "Déconnecté",
+    "Switch mic": "Changer de micro",
+    "Unmute mic": "Réactiver le micro",
+    "Mute mic": "Couper le micro",
+    "System default": "Valeur par défaut du système",
+    "Using system default microphone": "Utilisation du micro par défaut du système",
+    "No mic audio detected": "Aucun son de micro détecté",
+    "End": "Terminer",
+    "You": "Vous",
+    "Antigravity": "Antigravity",
+    "Mute Voice Mic": "Couper le micro vocal",
+    "Mute Voice Speaker": "Couper le haut-parleur vocal",
+    "Save audio recordings": "Enregistrer les enregistrements audio",
+    "Delete all recordings?": "Supprimer tous les enregistrements ?",
+    "Input device for voice mode and dictation.": "Périphérique d’entrée pour le mode vocal et la dictée.",
+    "The voice used in Voice mode. Powered by Gemini Live.": "La voix du mode vocal. Propulsée par Gemini Live.",
+    "The voice Jetski speaks with.": "La voix avec laquelle Jetski parle.",
+    "How loud Antigravity's voice is.": "Volume de la voix d’Antigravity.",
+    "How loud Jetski's voice is.": "Volume de la voix de Jetski.",
+    "Voice mode in progress": "Mode vocal en cours",
+    "Voice preview failed to play:": "Échec de la lecture de l’aperçu vocal :",
+    "Voice engine": "Moteur vocal",
+    "Voice engine address": "Adresse du moteur vocal",
+    "Dismiss microphone warning": "Ignorer l’avertissement du micro",
+    "Type a voice variant name, such as rev27.": "Saisissez un nom de variante vocale, par exemple rev27.",
+    "Nothing said yet": "Rien n’a encore été dit",
+    "Only stored on your machine.": "Stocké uniquement sur votre ordinateur.",
+    "Next voice": "Voix suivante",
+    "Previous voice": "Voix précédente",
+    "Live transcript": "Transcription en direct",
+    "Microphone": "Micro",
+    "Microphone open timed out": "Délai dépassé à l’ouverture du micro",
+    "Error checking microphone availability:": "Erreur lors de la vérification du micro :",
+    "Voice": "Voix",
+    "Screen Reader Mode": "Mode lecteur d’écran",
+    "Optimize the interface and terminal output for screen readers.": "Optimise l’interface et la sortie du terminal pour les lecteurs d’écran.",
+    "Chat Width": "Largeur du chat",
+    "Chat Input": "Saisie du chat",
+    "Enter to Send": "Entrée pour envoyer",
+    "Terminal Placement": "Emplacement du terminal",
+    "Accessibility": "Accessibilité",
+    "Announcements and tips": "Annonces et conseils",
+    "System UI": "Interface système",
+    "Google Sans": "Google Sans",
+    "Inter": "Inter",
+    "Font": "Police",
+    "Send messages with the keyboard's Enter key instead of starting a new line.": "Envoie les messages avec la touche Entrée au lieu de passer à la ligne.",
+    "Choose how much detail is shown during a conversation.": "Choisissez le niveau de détail affiché pendant une conversation.",
+    "Choose where terminal sessions appear.": "Choisissez où s’affichent les sessions de terminal.",
+    "Show how full the context window is next to the send button. Click it for a breakdown and to see your model quota.": "Affiche, à côté du bouton d’envoi, le remplissage de la fenêtre de contexte. Cliquez pour le détail et le quota du modèle.",
+    "Which workspace the New Conversation button and keyboard shortcut start you in.": "Espace de travail dans lequel le bouton Nouvelle conversation et le raccourci démarrent.",
+    "Create a new workspace from your first message.": "Crée un espace de travail à partir de votre premier message.",
+    "Reuse your last workspace.": "Réutiliser le dernier espace de travail.",
+    "Start without a workspace, for general questions.": "Commencer sans espace de travail, pour des questions générales.",
+    "Last Workspace": "Dernier espace de travail",
+    "This Computer": "Cet ordinateur",
+    "New Conversation Button": "Bouton Nouvelle conversation",
+    "Always on": "Toujours actif",
+    "Paused": "En pause",
+    "Next run": "Prochaine exécution",
+    "Last run": "Dernière exécution",
+    "No runs yet": "Aucune exécution pour l’instant",
+    "Loading runs…": "Chargement des exécutions…",
+    "Custom schedule": "Planification personnalisée",
+    "Every day": "Tous les jours",
+    "Every hour": "Toutes les heures",
+    "Every week": "Chaque semaine",
+    "Every weekday": "Chaque jour de semaine",
+    "On a schedule": "Selon une planification",
+    "When something happens": "Quand quelque chose se produit",
+    "What should the agent do on each run?": "Que doit faire l’agent à chaque exécution ?",
+    "What should it do?": "Que doit-il faire ?",
+    "How often": "Fréquence",
+    "Day of the week": "Jour de la semaine",
+    "Day of the month": "Jour du mois",
+    "Number of hours": "Nombre d’heures",
+    "Repeat unit": "Unité de répétition",
+    "When": "Quand",
+    "Where": "Où",
+    "Where it runs": "Où il s’exécute",
+    "Runs as": "S’exécute en tant que",
+    "Runs remotely": "S’exécute à distance",
+    "From": "De",
+    "Time": "Heure",
+    "Members": "Membres",
+    "Machine": "Machine",
+    "For example: Morning bug summary": "Par exemple : résumé matinal des bogues",
+    "For example: every morning, summarize new bugs assigned to me and anything that changed overnight.": "Par exemple : chaque matin, résumer les nouveaux bogues qui me sont assignés et ce qui a changé pendant la nuit.",
+    "What should the agent do on each run? For example: summarize new bugs assigned to me and anything that changed overnight.": "Que doit faire l’agent à chaque exécution ? Par exemple : résumer les nouveaux bogues qui me sont assignés et ce qui a changé pendant la nuit.",
+    "No instructions.": "Aucune instruction.",
+    "Change schedule": "Modifier la planification",
+    "Change model": "Changer de modèle",
+    "Edit schedule and model": "Modifier la planification et le modèle",
+    "Add schedule": "Ajouter une planification",
+    "No": "Non",
+    "Downloads": "Téléchargements",
+    "Download Location": "Emplacement des téléchargements",
+    "Cancel download": "Annuler le téléchargement",
+    "Close downloads": "Fermer les téléchargements",
+    "Show in folder": "Afficher dans le dossier",
+    "Browsing History": "Historique de navigation",
+    "Clear visited URLs and autocomplete suggestions from the built-in browser.": "Efface les URL visitées et les suggestions de saisie du navigateur intégré.",
+    "Folder where files downloaded in the built-in browser are saved.": "Dossier où sont enregistrés les fichiers téléchargés dans le navigateur intégré.",
+    "Configure link opening and built-in browser preferences.": "Configure l’ouverture des liens et les préférences du navigateur intégré.",
+    "Authentication required": "Authentification requise",
+    "Not secure": "Non sécurisé",
+    "Search Google": "Rechercher avec Google",
+    "Close Tabs to the Left": "Fermer les onglets à gauche",
+    "Open Links In": "Ouvrir les liens dans",
+    "Choose where links open by default when clicked.": "Choisissez où les liens s’ouvrent par défaut.",
+    "Search branches": "Rechercher des branches",
+    "Search connectors": "Rechercher des connecteurs",
+    "Search filters…": "Rechercher des filtres…",
+    "Search Remote…": "Rechercher à distance…",
+    "Search triggers…": "Rechercher des déclencheurs…",
+    "Search Google Drive": "Rechercher dans Google Drive",
+    "Remote": "Distant",
+    "Remote only": "Distant uniquement",
+    "Remote branch": "Branche distante",
+    "Remote agents are busy": "Les agents distants sont occupés",
+    "Failed to create remote project": "Échec de la création du projet distant",
+    "Error: Artifacts from remote conversations are not available here.": "Erreur : les artefacts des conversations distantes ne sont pas disponibles ici.",
+    "Create a project whose conversations run remotely.": "Crée un projet dont les conversations s’exécutent à distance.",
+    "Controls permissions for remote conversations.": "Contrôle les autorisations des conversations distantes.",
+    "Configure what the agent can do in local and remote conversations.": "Configure ce que l’agent peut faire dans les conversations locales et distantes.",
+    "More cloud environments": "Plus d’environnements cloud",
+    "Too many environments running": "Trop d’environnements en cours d’exécution",
+    "Turned off by your admin": "Désactivé par votre administrateur",
+    "Base branch for new worktree": "Branche de base du nouveau worktree",
+    "Worktree branch": "Branche du worktree",
+    "Unknown Worktree": "Worktree inconnu",
+    "Work in a New Worktree": "Travailler dans un nouveau worktree",
+    "Worktree Branches": "Branches de worktree",
+    "Workspace + Worktree": "Espace de travail + worktree",
+    "Worktrees are available for Git repositories": "Les worktrees sont disponibles pour les dépôts Git",
+    "Worktrees are not available for this project": "Les worktrees ne sont pas disponibles pour ce projet",
+    "Creating worktree for the forked conversation...": "Création d’un worktree pour la conversation dupliquée...",
+    "Create a JJ worktree": "Créer un worktree JJ",
+    "Sync JJ Worktrees to Head": "Synchroniser les worktrees JJ avec HEAD",
+    "Sync newly created JJ worktrees to head when starting a conversation.": "Synchronise les worktrees JJ nouvellement créés avec HEAD au démarrage d’une conversation.",
+    "Use full VCS clones for Best of N": "Utiliser des clones VCS complets pour Best of N",
+    "VCS used when creating a new workspace, including workspaces generated based off your initial prompt.": "VCS utilisé pour créer un espace de travail, y compris ceux générés à partir de votre invite initiale.",
+    "Keeps working in this workspace. Nothing is copied.": "Continue dans cet espace de travail. Rien n’est copié.",
+    "A copy of the workspace snapshot recorded at this step.": "Une copie de l’instantané de l’espace de travail enregistré à cette étape.",
+    "A full copy of this workspace, uncommitted changes included.": "Une copie complète de cet espace de travail, modifications non validées comprises.",
+    "Error editing notebook": "Erreur lors de la modification du notebook",
+    "Error reading notebook": "Erreur lors de la lecture du notebook",
+    "No notebook cells were found.": "Aucune cellule de notebook n’a été trouvée.",
+    "This notebook has no renderable cells.": "Ce notebook n’a aucune cellule affichable.",
+    "Invalid notebook JSON.": "JSON de notebook non valide.",
+    "Failed to execute notebook": "Échec de l’exécution du notebook",
+    "Executing notebook": "Exécution du notebook",
+    "Executed notebook": "Notebook exécuté",
+    "Failed to execute notebook cells": "Échec de l’exécution des cellules du notebook",
+    "Executing notebook cells": "Exécution des cellules du notebook",
+    "Executed notebook cells": "Cellules du notebook exécutées",
+    "Notebook execution not implemented": "L’exécution du notebook n’est pas implémentée",
+    "Connect GitHub": "Connecter GitHub",
+    "Connect GitHub with the GitHub plugin": "Connecter GitHub avec le plug-in GitHub",
+    "Connect GitHub: Run gh auth login in a terminal": "Connecter GitHub : exécutez gh auth login dans un terminal",
+    "Grant repository access": "Accorder l’accès au dépôt",
+    "Repository not accessible": "Dépôt inaccessible",
+    "Repository not accessible: grant the GitHub app access to this repository": "Dépôt inaccessible : accordez à l’application GitHub l’accès à ce dépôt",
+    "GitHub API rate limit exceeded. Try again shortly.": "Limite de débit de l’API GitHub dépassée. Réessayez sous peu.",
+    "Could not determine the GitHub username for this token.": "Impossible de déterminer le nom d’utilisateur GitHub de ce jeton.",
+    "Could not reach GitHub to validate the token. Check your connection.": "Impossible de joindre GitHub pour valider le jeton. Vérifiez la connexion.",
+    "Pull Requests": "Demandes de tirage",
+    "Toggle Side Panel": "Basculer le panneau latéral",
+    "Toggle Maximize Side Panel": "Agrandir ou réduire le panneau latéral",
+    "Next Side Panel Tab": "Onglet suivant du panneau latéral",
+    "Previous Side Panel Tab": "Onglet précédent du panneau latéral",
+    "Reopen Closed Tab": "Rouvrir l’onglet fermé",
+    "Move Conversation Up": "Déplacer la conversation vers le haut",
+    "Move Conversation Down": "Déplacer la conversation vers le bas",
+    "Remove from history (Shift+Delete)": "Retirer de l’historique (Maj+Suppr)",
+    "Remove from list": "Retirer de la liste",
+    "Unarchive": "Désarchiver",
+    "Conversation Unarchived": "Conversation désarchivée",
+    "Couldn't edit queued message": "Impossible de modifier le message en file d’attente",
+    "Cannot start best-of-N mode while the agent is running": "Impossible de démarrer le mode best-of-N pendant que l’agent s’exécute",
+    "Cannot start best-of-N mode: background tasks are still running.": "Impossible de démarrer le mode best-of-N : des tâches en arrière-plan sont encore en cours.",
+    "Cannot start best-of-N mode: some subagents are still running.": "Impossible de démarrer le mode best-of-N : certains sous-agents sont encore en cours d’exécution.",
+    "Background tasks and terminals agents left running, across all conversations.": "Tâches en arrière-plan et terminaux laissés en cours d’exécution par les agents, dans toutes les conversations.",
+    "Daily conversation limit reached": "Limite quotidienne de conversations atteinte",
+    "Conversation limit reached": "Limite de conversations atteinte",
+    "Daily environment time used": "Temps d’environnement quotidien utilisé",
+    "Context and Quota Indicator": "Indicateur de contexte et de quota",
+    "Conversation Steps": "Étapes de la conversation",
+    "Bottom Panel": "Panneau inférieur",
+    "Side Panel": "Panneau latéral",
+    "Needs sign-in": "Connexion requise",
+    "Not connected": "Non connecté",
+    "Not responding": "Ne répond pas",
+    "Not signed in": "Non connecté",
+    "Rate limited": "Limite de débit atteinte",
+    "Request failed": "Échec de la requête",
+    "Interrupted": "Interrompu",
+    "Canceled": "Annulé",
+    "Free": "Gratuit",
+    "Subscription": "Abonnement",
+    "Explore other marketplace customizations": "Explorer d’autres personnalisations de la place de marché",
+    "More Plugins": "Plus de plug-ins",
+    "Connectors": "Connecteurs",
+    "Instructions and tools": "Instructions et outils",
+    "Group Chat": "Discussion de groupe",
+    "Message": "Message",
+    "Thread": "Fil de discussion",
+    "Space": "Espace",
+    "Chat": "Discussion",
+    "Bot": "Robot",
+    "DM": "Message privé",
+    "Sent": "Envoyé",
+    "Reads": "Lectures",
+    "Recordings": "Enregistrements",
+    "Author": "Auteur",
+    "Task": "Tâche",
+    "Extension (Antigravity IDE)": "Extension (Antigravity IDE)",
+    "2x playback speed": "Vitesse de lecture 2x",
+    "Browser Use": "Utilisation du navigateur",
+    "Failed to send side question": "Échec de l’envoi de la question latérale",
+    "Failed to start side question": "Échec du démarrage de la question latérale",
+    "Google Chat": "Google Chat",
+    "Open In": "Ouvrir dans",
+    "Untitled": "Sans titre",
+    "Files and resources in cloud workspaces": "Fichiers et ressources dans les espaces de travail cloud",
+    "Files, folders, and repositories you connect are accessible to your agent in this project, including during background or scheduled runs.": "Les fichiers, dossiers et dépôts que vous connectez sont accessibles à l’agent dans ce projet, y compris pendant les exécutions en arrière-plan ou planifiées.",
+    "Permanently delete your remote conversations, projects, scheduled tasks, connected plugins and settings. Data in the desktop app and your Google account are not affected.": "Supprime définitivement vos conversations distantes, projets, tâches planifiées, plug-ins connectés et paramètres. Les données de l’application et de votre compte Google ne sont pas affectées.",
+    "Remove individual uploaded files or connected resources in Project Settings, or delete a project or conversation to remove its stored files.": "Retirez des fichiers importés ou des ressources connectées dans les paramètres du projet, ou supprimez un projet ou une conversation pour retirer ses fichiers stockés.",
+    "Uploaded project files and in-chat attachments are stored on Google servers and mounted into your cloud sandbox so your agent can read and work with them.": "Les fichiers du projet et les pièces jointes sont stockés sur les serveurs Google et montés dans votre bac à sable cloud afin que l’agent puisse les utiliser.",
+    "Stored and mounted in your cloud environment": "Stocké et monté dans votre environnement cloud",
+    "Delete All Remote Agents Data": "Supprimer toutes les données des agents distants",
+    "Delete All Remote Agents Data?": "Supprimer toutes les données des agents distants ?",
+    "Get started with Remote Control": "Commencer avec Remote Control",
+    "Your Remote setting": "Votre paramètre distant",
+    "Remote Agents Data": "Données des agents distants",
+    "Attackers might be able to see the images you're looking at on this site and trick you by modifying them.": "Des attaquants pourraient voir les images que vous consultez sur ce site et vous tromper en les modifiant.",
+    "You should not enter any sensitive information on this site (for example, passwords or credit cards), because it could be stolen by attackers.": "N’entrez aucune information sensible sur ce site (mots de passe ou cartes bancaires, par exemple), car elle pourrait être volée.",
+    "Your information (for example, passwords or credit card numbers) is private when it is sent to this site.": "Vos informations (mots de passe ou numéros de carte, par exemple) restent privées lorsqu’elles sont envoyées à ce site.",
+    "Sign in to finish setting up this plugin.": "Connectez-vous pour terminer la configuration de ce plug-in.",
+    "Disabled. Open Details to finish setup or enable.": "Désactivé. Ouvrez Détails pour terminer la configuration ou l’activer.",
+    "Enter the configuration values this MCP server needs. Saving restarts the server with them.": "Saisissez les valeurs de configuration requises par ce serveur MCP. L’enregistrement redémarre le serveur avec ces valeurs.",
+    "Disk is full. Search will no longer match in conversation bodies until you clear up space and restart.": "Le disque est plein. La recherche ne trouvera plus de correspondances dans les conversations tant que vous n’aurez pas libéré de l’espace et redémarré.",
+    "Reset All to Defaults": "Tout réinitialiser",
+    "Reset to Default": "Rétablir la valeur par défaut",
+    "Remove Shortcut": "Supprimer le raccourci",
+    "Add Shortcut": "Ajouter un raccourci",
+    "Edit Shortcut": "Modifier le raccourci",
+    "Accounts tab": "Onglet Comptes",
+    "Add screenshot to conversation": "Ajouter une capture à la conversation",
+    "Copy Image Address": "Copier l’adresse de l’image",
+    "Copy Link Address": "Copier l’adresse du lien",
+    "Copy Message": "Copier le message",
+    "Open Conversation in New Tab": "Ouvrir la conversation dans un nouvel onglet",
+    "Open Image in New Tab": "Ouvrir l’image dans un nouvel onglet",
+    "Open in side pane": "Ouvrir dans le volet latéral",
+    "Open in Side Panel": "Ouvrir dans le panneau latéral",
+    "Open Link in External Browser": "Ouvrir le lien dans le navigateur externe",
+    "Open Link in New Tab": "Ouvrir le lien dans un nouvel onglet",
+    "View site information": "Afficher les informations du site",
+    "Resume it to load this file.": "Reprenez-le pour charger ce fichier.",
+    "Resume it to open a new terminal. Anything that was running in this one has stopped.": "Reprenez-le pour ouvrir un nouveau terminal. Tout ce qui s’exécutait dans celui-ci s’est arrêté.",
+    "Kill Terminal": "Arrêter le terminal",
+    "Stop Editing": "Arrêter la modification",
+    "Stop Recording and Send": "Arrêter l’enregistrement et envoyer",
+    "Install or enable the Google Drive plugin in Customizations to search files with @drive: or paste Drive links": "Installez ou activez le plug-in Google Drive dans Personnalisations pour rechercher avec @drive: ou coller des liens Drive",
+    "Filter resources...": "Filtrer les ressources...",
+    "Could not load": "Impossible de charger",
+    "Couldn't mark conversations as read": "Impossible de marquer les conversations comme lues",
+    "Couldn't switch accounts:": "Impossible de changer de compte :",
+    "Failed to revert conversation": "Échec du rétablissement de la conversation",
+    "No extensions available": "Aucune extension disponible",
+    "No plugin loads from this folder.": "Aucun plug-in n’est chargé depuis ce dossier.",
+    "Select or enter a workspace URI": "Sélectionnez ou saisissez un URI d’espace de travail",
+    "Manage and delete your data anytime": "Gérez et supprimez vos données à tout moment",
+    "Themes": "Thèmes",
+    "Time Zone": "Fuseau horaire",
+    "Offline": "Hors ligne",
+    "Online": "En ligne",
+    "Zoom": "Zoom",
+    "Forward": "Avancer",
+    "Seek": "Atteindre",
+    "Replace with": "Remplacer par",
+    "Repository": "Dépôt",
+    "Scope": "Portée",
+    "Owner": "Propriétaire",
+    "Website": "Site Web",
+    "Extension": "Extension",
+    "Local only": "Local uniquement",
+    "Local Checkout": "Extraction locale",
+    "New Remote Project": "Nouveau projet distant",
+    "Fork in New Workspace": "Dupliquer dans un nouvel espace de travail",
+    "Fork in Shared Workspace": "Dupliquer dans un espace de travail partagé",
+    "Fork Environment Notice": "Avis d’environnement de duplication",
+    "Currently installed": "Actuellement installé",
+    "Auto-assignment not configured": "L’attribution automatique n’est pas configurée",
+    "Agent data is not available": "Les données de l’agent ne sont pas disponibles",
+    "Conversation is not open in this Hub window": "La conversation n’est pas ouverte dans cette fenêtre Hub",
+    "Error while analyzing directory": "Erreur lors de l’analyse du répertoire",
+    "Error while running MCP tool": "Erreur lors de l’exécution de l’outil MCP",
+    "Error while searching filesystem": "Erreur lors de la recherche dans le système de fichiers",
+    "Error while searching the web": "Erreur lors de la recherche sur le Web",
+    "Error while semantic searching": "Erreur lors de la recherche sémantique",
+    "Invalid tool call": "Appel d’outil non valide",
+    "No method available to open MCP config file": "Aucune méthode disponible pour ouvrir le fichier de configuration MCP",
+    "Could not determine MCP config file path": "Impossible de déterminer le chemin du fichier de configuration MCP",
+    "Failed to determine plugin ID": "Impossible de déterminer l’ID du plug-in",
+    "MCP Restart Error:": "Erreur de redémarrage MCP :",
+    "Errored": "En erreur",
+    "Exploring": "Exploration",
+    "Event fired": "Événement déclenché",
+    "Going back": "Retour en arrière",
+    "Going forward": "Avance",
+    "Reading page": "Lecture de la page",
+    "Reloading page": "Rechargement de la page",
+    "Switching tabs": "Changement d’onglet",
+    "Clicking": "Clic en cours",
+    "Double-clicking": "Double-clic en cours",
+    "Hovering": "Survol",
+    "Typing": "Saisie",
+    "Clicked in Browser": "Cliqué dans le navigateur",
+    "Clicking in Browser": "Clic dans le navigateur",
+    "Dragged in Browser": "Glissé dans le navigateur",
+    "Dragging in Browser": "Glissement dans le navigateur",
+    "Typed into Browser": "Saisi dans le navigateur",
+    "Typing into Browser": "Saisie dans le navigateur",
+    "Using browser": "Utilisation du navigateur",
+    "Failed to approve browser interaction": "Échec de l’approbation de l’interaction du navigateur",
+    "Failed to reject browser interaction": "Échec du refus de l’interaction du navigateur",
+    "Failed to skip browser subagent:": "Échec de l’omission du sous-agent du navigateur :",
+    "Browser is currently being operated by this conversation in another Hub window": "Le navigateur est utilisé par cette conversation dans une autre fenêtre Hub",
+    "Browser tools are disabled in the Antigravity Android desktop app.": "Les outils de navigateur sont désactivés dans l’application de bureau Android d’Antigravity.",
+    "Browser tools are not available in the Antigravity Android desktop app.": "Les outils de navigateur ne sont pas disponibles dans l’application de bureau Android d’Antigravity.",
+    "Use my conversation history to tell me which skills and plugins would be helpful for me.": "Utilisez mon historique de conversations pour m’indiquer les compétences et plug-ins qui me seraient utiles.",
+    "Back 5s (←)": "Reculer de 5 s (←)",
+    "Forward 5s (→)": "Avancer de 5 s (→)",
+    "Browser Subagent": "Sous-agent du navigateur",
+    "Cancel Generation": "Annuler la génération",
+    "Connect": "Connecter",
+    "Connected Google Drive and GitHub resources": "Ressources Google Drive et GitHub connectées",
+    "Custom…": "Personnalisé…",
+    "Disconnect": "Déconnecter",
+    "Drive": "Drive",
+    "Enterprise": "Enterprise",
+    "Extension (Eclipse)": "Extension (Eclipse)",
+    "Extension (Visual Studio)": "Extension (Visual Studio)",
+    "Extension (VS Code)": "Extension (VS Code)",
+    "External": "Externe",
+    "Flash": "Flash",
+    "Pro": "Pro",
+    "GitHub": "GitHub",
+    "Linux": "Linux",
+    "MacOS": "macOS",
+    "Windows": "Windows",
+    "Chromium": "Chromium",
+    "Loading apps...": "Chargement des applications...",
+    "Telemetry": "Télémétrie",
+    "Telemetry is disabled in Settings": "La télémétrie est désactivée dans Paramètres",
+    "Thumbnails": "Miniatures",
+    "Toggle Between Light/Dark Themes": "Basculer entre les thèmes clair et sombre",
+    "Turbo": "Turbo",
+    "Unauthenticated": "Non authentifié",
+    "Uploading to Google Drive…": "Importation vers Google Drive…",
+    "Not configured": "Non configuré",
+    "Terminal sandbox is not supported in this environment": "Le bac à sable du terminal n’est pas pris en charge dans cet environnement",
+    "Managed by Enterprise Gateway": "Géré par Enterprise Gateway",
+    "Mermaid diagram": "Diagramme Mermaid",
+    "Generated image preview": "Aperçu de l’image générée",
+    "User uploaded image": "Image importée par l’utilisateur",
+    "Dark preview": "Aperçu sombre",
+    "Light preview": "Aperçu clair",
+    "Drag to move": "Faire glisser pour déplacer",
+    "Goal Verification": "Vérification de l’objectif",
+    "Running command": "Exécution de la commande",
+    "Waiting": "En attente",
+    "Unknown Environment": "Environnement inconnu",
+    "To switch accounts, sign out in the": "Pour changer de compte, déconnectez-vous dans",
+    "MCP": "MCP",
+    "MCP App": "Application MCP",
+    "Auto": "Automatique",
+    "Cache": "Cache",
+    "UTC": "UTC",
+    "Default Workspace VCS": "VCS par défaut de l’espace de travail",
+    "Context Providers": "Fournisseurs de contexte"
   },
   "patterns": [
     {
@@ -3148,6 +3568,268 @@
       "flags": "i",
       "template": "Modèle indisponible, nouvelle tentative{1}{2}",
       "sample": "Model unavailable, retrying in 5s (attempt 1/3)"
+    },
+    {
+      "id": "audioAttachments",
+      "pattern": "^(\\d+) audio attachments?$",
+      "flags": "i",
+      "sample": "2 audio attachments",
+      "templates": {
+        "one": "{1} pièce audio jointe",
+        "other": "{1} pièces audio jointes"
+      }
+    },
+    {
+      "id": "videoAttachments",
+      "pattern": "^(\\d+) video attachments?$",
+      "flags": "i",
+      "sample": "2 video attachments",
+      "templates": {
+        "one": "{1} vidéo jointe",
+        "other": "{1} vidéos jointes"
+      }
+    },
+    {
+      "id": "imageAttachments",
+      "pattern": "^(\\d+) image attachments?$",
+      "flags": "i",
+      "sample": "2 image attachments",
+      "templates": {
+        "one": "{1} image jointe",
+        "other": "{1} images jointes"
+      }
+    },
+    {
+      "id": "browserSteps",
+      "pattern": "^(\\d+) browser steps?$",
+      "flags": "i",
+      "sample": "2 browser steps",
+      "templates": {
+        "one": "{1} étape de navigateur",
+        "other": "{1} étapes de navigateur"
+      }
+    },
+    {
+      "id": "lessThanMinute",
+      "pattern": "^less than a minute$",
+      "flags": "i",
+      "sample": "less than a minute",
+      "template": "moins d’une minute"
+    },
+    {
+      "id": "lessThanSecond",
+      "pattern": "^less than a second$",
+      "flags": "i",
+      "sample": "less than a second",
+      "template": "moins d’une seconde"
+    },
+    {
+      "id": "halfAMinute",
+      "pattern": "^half a minute$",
+      "flags": "i",
+      "sample": "half a minute",
+      "template": "une demi-minute"
+    },
+    {
+      "id": "aboutHours",
+      "pattern": "^about (\\d+) hours?$",
+      "flags": "i",
+      "sample": "about 2 hours",
+      "templates": {
+        "one": "environ {1} heure",
+        "other": "environ {1} heures"
+      }
+    },
+    {
+      "id": "aboutMinutes",
+      "pattern": "^about (\\d+) minutes?$",
+      "flags": "i",
+      "sample": "about 2 minutes",
+      "templates": {
+        "one": "environ {1} minute",
+        "other": "environ {1} minutes"
+      }
+    },
+    {
+      "id": "aboutWeeks",
+      "pattern": "^about (\\d+) weeks?$",
+      "flags": "i",
+      "sample": "about 2 weeks",
+      "templates": {
+        "one": "environ {1} semaine",
+        "other": "environ {1} semaines"
+      }
+    },
+    {
+      "id": "aboutMonths",
+      "pattern": "^about (\\d+) months?$",
+      "flags": "i",
+      "sample": "about 2 months",
+      "templates": {
+        "one": "environ {1} mois",
+        "other": "environ {1} mois"
+      }
+    },
+    {
+      "id": "aboutYears",
+      "pattern": "^about (\\d+) years?$",
+      "flags": "i",
+      "sample": "about 2 years",
+      "templates": {
+        "one": "environ {1} an",
+        "other": "environ {1} ans"
+      }
+    },
+    {
+      "id": "overYears",
+      "pattern": "^over (\\d+) years?$",
+      "flags": "i",
+      "sample": "over 2 years",
+      "templates": {
+        "one": "plus de {1} an",
+        "other": "plus de {1} ans"
+      }
+    },
+    {
+      "id": "almostYears",
+      "pattern": "^almost (\\d+) years?$",
+      "flags": "i",
+      "sample": "almost 2 years",
+      "templates": {
+        "one": "presque {1} an",
+        "other": "presque {1} ans"
+      }
+    },
+    {
+      "id": "xSeconds",
+      "pattern": "^(\\d+) seconds?$",
+      "flags": "i",
+      "sample": "2 seconds",
+      "templates": {
+        "one": "{1} seconde",
+        "other": "{1} secondes"
+      }
+    },
+    {
+      "id": "xMinutes",
+      "pattern": "^(\\d+) minutes?$",
+      "flags": "i",
+      "sample": "2 minutes",
+      "templates": {
+        "one": "{1} minute",
+        "other": "{1} minutes"
+      }
+    },
+    {
+      "id": "xHours",
+      "pattern": "^(\\d+) hours?$",
+      "flags": "i",
+      "sample": "2 hours",
+      "templates": {
+        "one": "{1} heure",
+        "other": "{1} heures"
+      }
+    },
+    {
+      "id": "xDays",
+      "pattern": "^(\\d+) days?$",
+      "flags": "i",
+      "sample": "2 days",
+      "templates": {
+        "one": "{1} jour",
+        "other": "{1} jours"
+      }
+    },
+    {
+      "id": "xWeeks",
+      "pattern": "^(\\d+) weeks?$",
+      "flags": "i",
+      "sample": "2 weeks",
+      "templates": {
+        "one": "{1} semaine",
+        "other": "{1} semaines"
+      }
+    },
+    {
+      "id": "xMonths",
+      "pattern": "^(\\d+) months?$",
+      "flags": "i",
+      "sample": "2 months",
+      "templates": {
+        "one": "{1} mois",
+        "other": "{1} mois"
+      }
+    },
+    {
+      "id": "xYears",
+      "pattern": "^(\\d+) years?$",
+      "flags": "i",
+      "sample": "2 years",
+      "templates": {
+        "one": "{1} an",
+        "other": "{1} ans"
+      }
+    },
+    {
+      "id": "nextRunAround",
+      "pattern": "^Next run (.+) around (.+)$",
+      "flags": "i",
+      "sample": "Next run tomorrow around 9:00 AM",
+      "template": "Prochaine exécution : {1} vers {2}",
+      "replace": {
+        "1": "nextRunWhen"
+      }
+    },
+    {
+      "id": "startedVoiceChat",
+      "pattern": "^Started voice chat · (.+)$",
+      "flags": "i",
+      "sample": "Started voice chat · 3:00 PM",
+      "template": "Discussion vocale démarrée · {1}"
+    },
+    {
+      "id": "stoppedVoiceChat",
+      "pattern": "^Stopped voice chat · (.+)$",
+      "flags": "i",
+      "sample": "Stopped voice chat · 5m",
+      "template": "Discussion vocale arrêtée · {1}"
+    },
+    {
+      "id": "voiceChatSpan",
+      "pattern": "^Voice chat · (.+) · (.+)$",
+      "flags": "i",
+      "sample": "Voice chat · 3:00 PM · 5m",
+      "template": "Discussion vocale · {1} · {2}"
+    },
+    {
+      "id": "relativeDayAt",
+      "pattern": "^(yesterday|today|tomorrow) at (.+)$",
+      "flags": "i",
+      "sample": "yesterday at 3:00 PM",
+      "template": "{1} à {2}",
+      "replace": {
+        "1": "relativeDay"
+      }
+    },
+    {
+      "id": "weekdayAt",
+      "pattern": "^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday) at (.+)$",
+      "flags": "i",
+      "sample": "Monday at 3:00 PM",
+      "template": "{1} à {2}",
+      "replace": {
+        "1": "weekday"
+      }
+    },
+    {
+      "id": "lastWeekdayAt",
+      "pattern": "^last (Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday) at (.+)$",
+      "flags": "i",
+      "sample": "last Monday at 3:00 PM",
+      "template": "{1} dernier à {2}",
+      "replace": {
+        "1": "weekday"
+      }
     }
   ],
   "menu": {
@@ -3178,7 +3860,9 @@
     "Cut": "Couper",
     "Copy": "Copier",
     "Paste": "Coller",
-    "Select All": "Tout sélectionner"
+    "Select All": "Tout sélectionner",
+    "Connect to WSL": "Se connecter à WSL",
+    "Reopen Locally": "Rouvrir localement"
   },
   "valueMaps": {
     "durationUnit": {
@@ -3205,6 +3889,20 @@
       "Rules": "Règles",
       "Skills": "Compétences",
       "Mcp Tools": "Outils MCP"
+    },
+    "relativeDay": {
+      "yesterday": "hier",
+      "today": "aujourd’hui",
+      "tomorrow": "demain"
+    },
+    "weekday": {
+      "Sunday": "dimanche",
+      "Monday": "lundi",
+      "Tuesday": "mardi",
+      "Wednesday": "mercredi",
+      "Thursday": "jeudi",
+      "Friday": "vendredi",
+      "Saturday": "samedi"
     }
   },
   "valueRules": {
@@ -3270,6 +3968,92 @@
         "pattern": "<1m",
         "flags": "g",
         "template": "moins d'1 min"
+      }
+    ],
+    "nextRunWhen": [
+      {
+        "pattern": "^today$",
+        "template": "aujourd’hui"
+      },
+      {
+        "pattern": "^tomorrow$",
+        "template": "demain"
+      },
+      {
+        "pattern": "^on Sunday$",
+        "template": "dimanche"
+      },
+      {
+        "pattern": "^on Monday$",
+        "template": "lundi"
+      },
+      {
+        "pattern": "^on Tuesday$",
+        "template": "mardi"
+      },
+      {
+        "pattern": "^on Wednesday$",
+        "template": "mercredi"
+      },
+      {
+        "pattern": "^on Thursday$",
+        "template": "jeudi"
+      },
+      {
+        "pattern": "^on Friday$",
+        "template": "vendredi"
+      },
+      {
+        "pattern": "^on Saturday$",
+        "template": "samedi"
+      },
+      {
+        "pattern": "^on January (\\d+)$",
+        "template": "le {1} janvier"
+      },
+      {
+        "pattern": "^on February (\\d+)$",
+        "template": "le {1} février"
+      },
+      {
+        "pattern": "^on March (\\d+)$",
+        "template": "le {1} mars"
+      },
+      {
+        "pattern": "^on April (\\d+)$",
+        "template": "le {1} avril"
+      },
+      {
+        "pattern": "^on May (\\d+)$",
+        "template": "le {1} mai"
+      },
+      {
+        "pattern": "^on June (\\d+)$",
+        "template": "le {1} juin"
+      },
+      {
+        "pattern": "^on July (\\d+)$",
+        "template": "le {1} juillet"
+      },
+      {
+        "pattern": "^on August (\\d+)$",
+        "template": "le {1} août"
+      },
+      {
+        "pattern": "^on September (\\d+)$",
+        "template": "le {1} septembre"
+      },
+      {
+        "pattern": "^on October (\\d+)$",
+        "template": "le {1} octobre"
+      },
+      {
+        "pattern": "^on November (\\d+)$",
+        "template": "le {1} novembre"
+      },
+      {
+        "pattern": "^on December (\\d+)$",
+        "template": "le {1} décembre"
       }
     ]
   }

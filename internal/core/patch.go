@@ -163,9 +163,9 @@ func trimLeadingSpace(s string) string {
 // hasSwitch guard keeps an explicit command-line --lang from the user winning.
 var langSwitchRe = regexp.MustCompile(`if \(!electron_1\.app\.commandLine\.hasSwitch\('lang'\)\) \{\s*electron_1\.app\.commandLine\.appendSwitch\('lang', '[^']*'\);\s*\}`)
 
-// debugPortRe matches the remote debugging port block. Antigravity 2.28 no
-// longer ships its own language switch, so this stable block is where the
-// switch is inserted when the older language block is absent.
+// debugPortRe matches the remote debugging port block. Antigravity 2.28 dropped
+// its own language switch, and 2.29.0 still inserts nothing in its place, so
+// this block remains the anchor used when the older language switch is absent.
 var debugPortRe = regexp.MustCompile(`if\s*\(!electron_1\.app\.commandLine\.hasSwitch\('remote-debugging-port'\)\)\s*\{\s*electron_1\.app\.commandLine\.appendSwitch\('remote-debugging-port',\s*'0'\);\s*\}`)
 
 // applyLanguageSwitch points Chromium's --lang switch at the locale being
