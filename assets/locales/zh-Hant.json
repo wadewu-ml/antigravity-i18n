@@ -5,6 +5,9 @@
   "englishName": "Traditional Chinese",
   "htmlLang": "zh-Hant",
   "dir": "ltr",
+  "allowSourceEqual": [
+    "Turbo"
+  ],
   "punctuation": {
     ":": "：",
     "?": "？",
@@ -3919,7 +3922,7 @@
     "Telemetry is disabled in Settings": "已在設定中停用遙測",
     "Thumbnails": "縮圖",
     "Toggle Between Light/Dark Themes": "在淺色/深色主題之間切換",
-    "Turbo": "極速",
+    "Turbo": "Turbo",
     "Unauthenticated": "未驗證",
     "Uploading to Google Drive…": "正在上傳到 Google 雲端硬碟…",
     "Not configured": "未設定",

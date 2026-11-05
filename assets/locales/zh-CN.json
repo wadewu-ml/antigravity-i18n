@@ -5,6 +5,9 @@
   "englishName": "Simplified Chinese",
   "htmlLang": "zh-CN",
   "dir": "ltr",
+  "allowSourceEqual": [
+    "Turbo"
+  ],
   "punctuation": {
     ":": "：",
     "?": "？",
@@ -3919,7 +3922,7 @@
     "Telemetry is disabled in Settings": "已在设置中停用遥测",
     "Thumbnails": "缩略图",
     "Toggle Between Light/Dark Themes": "在浅色/深色主题之间切换",
-    "Turbo": "极速",
+    "Turbo": "Turbo",
     "Unauthenticated": "未认证",
     "Uploading to Google Drive…": "正在上传到 Google 云端硬盘…",
     "Not configured": "未配置",

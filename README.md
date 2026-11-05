@@ -72,6 +72,8 @@ Common options:
 
 All language packs are embedded directly into the executable:
 
+Coverage below measures entry parity with the bundled reference dictionary, not every English string in the client. Spoken content, user content, and sentence fragments without a complete match are kept in their original language.
+
 | Code | Language | Coverage | Notes |
 | :--- | :--- | :--- | :--- |
 | `zh-CN` | Simplified Chinese (简体中文) | 100% | Full coverage of shell UI, native menus, and dialogs |
@@ -99,6 +101,11 @@ You can switch directly between any language; the tool seamlessly replaces activ
 - `app.asar.clean-backup`: The pristine official backup required for restoration. **Do not delete manually.**
 - `app.asar.bak-*`: Historical timestamped snapshots left beside the archive. Once your current installation is verified stable, you may safely delete these files to free up disk space.
 
+### 4. Why do some words or sentences remain in English?
+Translation matches complete text rather than individual words in an unknown sentence. Fragments split by inline markup are also left intact to avoid partially translated sentences. Independent buttons, menu items, and accessibility labels can still be translated.
+
+Voice mode preserves user speech, word-highlighted replies, and transcript text, while translating voice controls and work status. The Chinese packs retain the permission preset name `Turbo`, whose behavior concerns automatic execution and access permissions rather than speed alone.
+
 ---
 
 ## Building from Source
@@ -121,6 +128,8 @@ cd antigravity-i18n
 $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
+
+DOM regression tests use an isolated headless Chrome or Edge instance to check voice content, sentence fragments, UI labels, and live updates. Set `ANTIGRAVITY_TEST_BROWSER` to choose another Chromium executable. These tests are skipped when no browser is available.
 
 ---
 
