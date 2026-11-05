@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><!-- ENGINE --></head>
+<body>
+  <button id="run">Run</button>
+  <button id="icon-button"><span aria-hidden="true">play_arrow</span><span id="icon-label">Run</span></button>
+  <div style="display:flex"><span id="flex-label">Run</span><span>Unknown label</span></div>
+  <div style="display:grid"><span id="grid-label">Open</span><span>Unknown label</span></div>
+  <div><button id="separate-button">Open</button><button>Run</button></div>
+  <div><span style="display:block" id="block-label">Open</span><span>Other text</span></div>
+  <button id="turbo">Turbo</button>
+  <button id="turbo-mode">Turbo mode</button>
+  <p id="plain-sentence">Run these commands in order.</p>
+  <p id="split-sentence"><span>Run</span> these commands in order.</p>
+  <div id="split-words"><span>Open</span><span> </span><span>the folder</span></div>
+  <p id="nested-sentence">Please <span><strong>Open</strong></span> the folder.</p>
+  <p id="link-sentence">Go to <a href="#">Settings</a> to continue.</p>
+  <div id="fragment-label"><span>Run</span><span> </span><span>Open</span></div>
+  <p id="contents-sentence">Please <span style="display:contents"><b>Open</b></span> it.</p>
+  <p id="punctuation-label"><span>Open</span><span>:</span></p>
+  <div data-testid="live-user-turn"><p id="user-turn">Run</p></div>
+  <div data-testid="live-agent-turn"><p id="agent-turn"><span>Run</span><span> </span><span>Open</span></p></div>
+  <p data-testid="live-lead" id="live-lead"><span>Open</span></p>
+  <p data-testid="live-body" id="live-body"><span>Run</span></p>
+  <p data-testid="transcript-line-text" id="transcript">Open</p>
+  <div data-testid="live-transcript-pane"><ol data-testid="live-transcript">
+    <li><p data-testid="transcript-line-text" id="transcript-in-pane">Run</p></li>
+    <li data-testid="transcript-work-line" id="work-status">Worked for 5s</li>
+  </ol></div>
+  <button data-testid="voice-start-button" id="voice-start">Start Voice mode</button>
+  <div contenteditable="plaintext-only" id="editor" aria-label="Open">Run</div>
+  <pre id="code">Open</pre>
+  <div data-testid="planner-response-text" id="response">Run</div>
+  <div translate="no"><span id="opt-out" title="Open">Run</span></div>
+  <div class="notranslate"><span id="class-opt-out" aria-label="Run">Open</span></div>
+  <input id="input" value="Run" placeholder="Open">
+  <button id="attrs" title="Run" aria-label="Open">Unknown label</button>
+  <script>
+    let checks = 0;
+    const failures = [];
+    function check(id, expected, attribute) {
+      checks++;
+      const el = document.getElementById(id);
+      const actual = attribute ? el.getAttribute(attribute) : el.textContent;
+      if (actual !== expected) failures.push(id + ': ' + JSON.stringify(actual) + ' != ' + JSON.stringify(expected));
+    }
+    const settle = () => new Promise(resolve => setTimeout(resolve, 0));
+    function finish() {
+      const json = JSON.stringify({checks, failures});
+      document.documentElement.setAttribute('data-ag-test-result', btoa(unescape(encodeURIComponent(json))));
+    }
+    addEventListener('load', async () => {
+      try {
+        await settle();
+        check('run', '运行');
+        check('icon-label', '运行');
+        check('flex-label', '运行');
+        check('grid-label', '打开');
+        check('separate-button', '打开');
+        check('block-label', '打开');
+        check('turbo', 'Turbo');
+        check('turbo-mode', 'Turbo 模式');
+        check('plain-sentence', 'Run these commands in order.');
+        check('split-sentence', 'Run these commands in order.');
+        check('split-words', 'Open the folder');
+        check('nested-sentence', 'Please Open the folder.');
+        check('link-sentence', 'Go to Settings to continue.');
+        check('fragment-label', 'Run Open');
+        check('contents-sentence', 'Please Open it.');
+        check('punctuation-label', '打开:');
+        check('user-turn', 'Run');
+        check('agent-turn', 'Run Open');
+        check('live-lead', 'Open');
+        check('live-body', 'Run');
+        check('transcript', 'Open');
+        check('transcript-in-pane', 'Run');
+        check('work-status', '运行了 5秒');
+        check('voice-start', '开始语音模式');
+        check('editor', 'Run');
+        check('editor', '打开', 'aria-label');
+        check('code', 'Open');
+        check('response', 'Run');
+        check('opt-out', 'Run');
+        check('opt-out', 'Open', 'title');
+        check('class-opt-out', 'Open');
+        check('class-opt-out', 'Run', 'aria-label');
+        check('input', 'Run', 'value');
+        check('input', '打开', 'placeholder');
+        check('attrs', '运行', 'title');
+        check('attrs', '打开', 'aria-label');
+
+        // Inserted subtrees, directly inserted text nodes, and streaming updates
+        // all arrive through different branches of the installed observer.
+        const dynamic = document.createElement('div');
+        dynamic.innerHTML = '<div data-testid="live-agent-turn"><p id="dynamic-voice"><span>Open</span></p></div>' +
+          '<p id="dynamic-sentence"><span>Run</span> the next command.</p>' +
+          '<button id="dynamic-control">Run</button>';
+        document.body.append(dynamic);
+        await settle();
+        check('dynamic-voice', 'Open');
+        check('dynamic-sentence', 'Run the next command.');
+        check('dynamic-control', '运行');
+
+        document.getElementById('dynamic-voice').firstChild.firstChild.nodeValue = 'Run';
+        document.getElementById('transcript').firstChild.nodeValue = 'Run';
+        document.getElementById('dynamic-control').firstChild.nodeValue = 'Open';
+        document.getElementById('attrs').setAttribute('title', 'Open');
+        document.getElementById('opt-out').setAttribute('title', 'Run');
+        document.getElementById('split-sentence').firstChild.firstChild.nodeValue = 'Open';
+        await settle();
+        check('dynamic-voice', 'Run');
+        check('transcript', 'Run');
+        check('dynamic-control', '打开');
+        check('attrs', '打开', 'title');
+        check('opt-out', 'Run', 'title');
+        check('split-sentence', 'Open these commands in order.');
+
+        const node = document.createTextNode('Open');
+        document.getElementById('live-body').replaceChildren(node);
+        await settle();
+        check('live-body', 'Open');
+      } catch (error) {
+        failures.push(String(error.stack || error));
+      }
+      finish();
+    });
+  </script>
+</body>
+</html>

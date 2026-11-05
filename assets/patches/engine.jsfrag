@@ -110,7 +110,68 @@ const agSkipSelector = [
     '.file-viewer-root',
     '[data-testid="user-input-step"]',
     '[data-testid="planner-response-text"]',
+    // Antigravity 2.29 renders spoken replies one word per <span> for live
+    // highlighting. These are conversation content, even when a word or a
+    // complete utterance happens to equal a UI label such as "Run".
+    '[data-testid="transcript-line-text"]',
+    '[data-testid="live-user-turn"]',
+    '[data-testid="live-agent-turn"]',
+    '[data-testid="live-lead"]',
+    '[data-testid="live-body"]',
+    '[translate="no"]',
+    '.notranslate',
 ].join(',');
+
+const agControlSelector = 'button, input, textarea, select, [role="button"], [role="menuitem"], [role="option"], [role="tab"]';
+
+// A text-node match is not necessarily a complete label. React and inline
+// markup can split an untranslated sentence into nodes like "Open" +
+// " the folder". Keep such runs in English instead of replacing a fragment.
+// Separate controls and flex/grid items remain independent UI labels.
+function hasInlineSiblingText(node, direction) {
+    for (let sibling = node[direction]; sibling; sibling = sibling[direction]) {
+        if (sibling.nodeType === Node.TEXT_NODE) {
+            if (/[A-Za-z]/.test(sibling.nodeValue || '')) {
+                return true;
+            }
+            continue;
+        }
+        if (sibling.nodeType !== Node.ELEMENT_NODE) {
+            continue;
+        }
+        if (sibling.matches('[aria-hidden="true"], svg')) {
+            continue;
+        }
+        const display = getComputedStyle(sibling).display;
+        if (display === 'none') {
+            continue;
+        }
+        if ((display !== 'inline' && display !== 'contents') || sibling.matches(agControlSelector)) {
+            break;
+        }
+        if (/[A-Za-z]/.test(sibling.textContent || '')) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function isSentenceFragment(node) {
+    for (let current = node; current.parentElement; current = current.parentElement) {
+        const parent = current.parentElement;
+        const display = getComputedStyle(parent).display;
+        if (display.includes('flex') || display.includes('grid')) {
+            return false;
+        }
+        if (hasInlineSiblingText(current, 'previousSibling') || hasInlineSiblingText(current, 'nextSibling')) {
+            return true;
+        }
+        if ((display !== 'inline' && display !== 'contents') || parent.matches(agControlSelector)) {
+            return false;
+        }
+    }
+    return false;
+}
 
 /**
  * Expand {n} placeholders in a template using regex capture groups.
@@ -264,7 +325,7 @@ function shouldTranslateTextNode(node) {
     if (!trimmed || !hasTranslation(trimmed)) {
         return false;
     }
-    return true;
+    return !isSentenceFragment(node);
 }
 function translateAttributes(root) {
     if (root.nodeType !== Node.ELEMENT_NODE) {
@@ -273,7 +334,7 @@ function translateAttributes(root) {
     const element = root;
     // Editable/code content is intentionally skipped for text nodes, but its
     // accessibility labels are UI chrome and can still be translated safely.
-    if (element.matches('script, style')) {
+    if (element.matches('script, style') || element.closest('[translate="no"], .notranslate')) {
         return;
     }
     for (const attr of agAttributeNames) {
