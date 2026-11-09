@@ -12,7 +12,7 @@ A standalone executable bundling a modern graphical interface, a pure Go asar en
 
 ## Compatibility
 
-Version 3.0.5 targets Antigravity App 2.29.0. Backup, restore, and language-pack injection are unchanged. The packs add the new shell copy for voice mode, the Automations page, Jupyter notebook status, built-in browser downloads and history, appearance and shortcut settings, and remote agents.
+Version 3.0.6 targets Antigravity App 2.29.0. It keeps the 3.0.5 shell coverage and leaves spoken transcripts and word-highlighted replies untranslated, while voice controls still translate. The Chinese packs keep the permission preset name Turbo. Backup, restore, and language-pack injection are unchanged.
 
 Checked against the 2.29.0 renderer: about 97% of public settings labels, titles, and descriptions are translated, including the new public strings from this release. Text that stays English is the Monaco and VS Code color catalog, editor and layout-library messages, KaTeX help, and Google-internal screens (ABFS, CitC, Cog, Chief of Staff, and the developer host simulator).
 
