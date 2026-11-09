@@ -1,6 +1,7 @@
 package core
 
 import (
+	"bytes"
 	"context"
 	"encoding/base64"
 	"encoding/json"
@@ -42,6 +43,46 @@ func engineTestBrowser(t *testing.T) string {
 	return ""
 }
 
+// dumpBrowserDOM returns Chrome's dumped DOM. Some headless builds print the
+// document and then never exit, so the dump is collected until the test result
+// is present or the process ends.
+func dumpBrowserDOM(ctx context.Context, cmd *exec.Cmd) ([]byte, error) {
+	var buf bytes.Buffer
+	cmd.Stdout = &buf
+	cmd.Stderr = &buf
+	if err := cmd.Start(); err != nil {
+		return nil, err
+	}
+	done := make(chan error, 1)
+	go func() { done <- cmd.Wait() }()
+	result := regexp.MustCompile(`data-ag-test-result="[A-Za-z0-9+/=]+"`)
+	ticker := time.NewTicker(100 * time.Millisecond)
+	defer ticker.Stop()
+	for {
+		if result.Match(buf.Bytes()) {
+			if cmd.Process != nil {
+				_ = cmd.Process.Kill()
+			}
+			<-done
+			return buf.Bytes(), nil
+		}
+		select {
+		case err := <-done:
+			if err != nil {
+				return buf.Bytes(), err
+			}
+			return buf.Bytes(), nil
+		case <-ctx.Done():
+			if cmd.Process != nil {
+				_ = cmd.Process.Kill()
+			}
+			<-done
+			return buf.Bytes(), ctx.Err()
+		case <-ticker.C:
+		}
+	}
+}
+
 func TestEnginePreservesContentAndSentenceFragments(t *testing.T) {
 	browser := engineTestBrowser(t)
 	assets := os.DirFS("../..")
@@ -67,18 +108,22 @@ func TestEnginePreservesContentAndSentenceFragments(t *testing.T) {
 	if err := os.WriteFile(page, []byte(source), 0o600); err != nil {
 		t.Fatal(err)
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second)
 	defer cancel()
 	path := filepath.ToSlash(page)
 	if !strings.HasPrefix(path, "/") {
 		path = "/" + path
 	}
 	pageURL := (&url.URL{Scheme: "file", Path: path}).String()
-	cmd := exec.CommandContext(ctx, browser, "--headless", "--disable-gpu", "--no-first-run",
-		"--no-default-browser-check", "--user-data-dir="+filepath.Join(dir, "profile"),
-		"--virtual-time-budget=1000", "--dump-dom", pageURL)
+	// Chrome in this kind of container prints the DOM and then stays up on a
+	// missing system bus, so the result is read from stdout instead of waiting
+	// for the process to exit. --no-sandbox is required for that container.
+	cmd := exec.CommandContext(ctx, browser, "--headless=new", "--disable-gpu", "--no-sandbox",
+		"--disable-dev-shm-usage", "--no-first-run", "--no-default-browser-check",
+		"--user-data-dir="+filepath.Join(dir, "profile"),
+		"--virtual-time-budget=3000", "--dump-dom", pageURL)
 	hideWindow(cmd)
-	output, err := cmd.CombinedOutput()
+	output, err := dumpBrowserDOM(ctx, cmd)
 	if err != nil {
 		t.Fatalf("headless browser: %v\n%s", err, output)
 	}
