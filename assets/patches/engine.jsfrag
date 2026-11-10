@@ -110,6 +110,8 @@ const agSkipSelector = [
     '.file-viewer-root',
     '[data-testid="user-input-step"]',
     '[data-testid="planner-response-text"]',
+    // Side-question follow-ups are the user's own text, same as the main composer.
+    '[data-testid="side-question-followup-user"]',
     // Antigravity 2.29 renders spoken replies one word per <span> for live
     // highlighting. These are conversation content, even when a word or a
     // complete utterance happens to equal a UI label such as "Run".

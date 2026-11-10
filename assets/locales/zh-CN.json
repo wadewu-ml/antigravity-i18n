@@ -427,6 +427,95 @@
       "replace": {
         "1": "weekday"
       }
+    },
+    {
+      "id": "mcpServersFailed",
+      "pattern": "^(\\d+) MCP servers? failed to start$",
+      "flags": "i",
+      "sample": "2 MCP servers failed to start",
+      "template": "{1} 个 MCP 服务器启动失败"
+    },
+    {
+      "id": "knowledgeSteps",
+      "pattern": "^\\((\\d+) steps?\\)$",
+      "flags": "i",
+      "sample": "(2 steps)",
+      "template": "（{1} 个步骤）"
+    },
+    {
+      "id": "greetHi",
+      "pattern": "^Hi (.+)\\.$",
+      "flags": "i",
+      "sample": "Hi Ada.",
+      "template": "嗨，{1}。"
+    },
+    {
+      "id": "greetHello",
+      "pattern": "^Hello, (.+)\\.$",
+      "flags": "i",
+      "sample": "Hello, Ada.",
+      "template": "你好，{1}。"
+    },
+    {
+      "id": "greetWelcome",
+      "pattern": "^Welcome back, (.+)\\.$",
+      "flags": "i",
+      "sample": "Welcome back, Ada.",
+      "template": "欢迎回来，{1}。"
+    },
+    {
+      "id": "greetGood",
+      "pattern": "^Good to see you, (.+)\\.$",
+      "flags": "i",
+      "sample": "Good to see you, Ada.",
+      "template": "很高兴见到你，{1}。"
+    },
+    {
+      "id": "greetHey",
+      "pattern": "^Hey (.+)!$",
+      "flags": "i",
+      "sample": "Hey Ada!",
+      "template": "嘿，{1}！"
+    },
+    {
+      "id": "embeddedPageAtDevice",
+      "pattern": "^An embedded page at (.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page at example.com wants to connect to a USB device",
+      "template": "{1} 上的嵌入页面想要连接到{2}",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageHereDevice",
+      "pattern": "^An embedded page on this page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page on this page wants to connect to a serial port",
+      "template": "此页面上的嵌入页面想要连接到{1}",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "thisPageWantsDevice",
+      "pattern": "^This page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "This page wants to connect to a HID device",
+      "template": "此页面想要连接到{1}",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "pageWantsDevice",
+      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "example.com wants to connect to a USB device",
+      "template": "{1} 想要连接到{2}",
+      "replace": {
+        "2": "deviceKind"
+      }
     }
   ],
   "valueMaps": {
@@ -468,6 +557,11 @@
       "Thursday": "周四",
       "Friday": "周五",
       "Saturday": "周六"
+    },
+    "deviceKind": {
+      "a HID device": "HID 设备",
+      "a USB device": "USB 设备",
+      "a serial port": "串行端口"
     }
   },
   "valueRules": {
@@ -3945,6 +4039,98 @@
     "Cache": "缓存",
     "UTC": "UTC",
     "Default Workspace VCS": "默认工作区版本控制",
-    "Context Providers": "上下文提供方"
+    "Context Providers": "上下文提供方",
+    "One last thing before getting started…": "开始之前还有最后一件事…",
+    "A few things to know, and a couple settings to review.": "有几件事需要了解，以及几项设置需要确认。",
+    "Optimized for you": "为你优化",
+    "Built to help, not hurt": "为了帮忙，而不是添乱",
+    "You are in control": "决定权在你",
+    "Automated safeguards help to protect your conversations from insecure or unsafe content. That being said, users should be aware of potential agentic risks, including data exfiltration.": "自动防护有助于保护对话免受不安全内容影响。即便如此，仍请注意智能体可能带来的风险，包括数据外泄。",
+    "Let's tailor the experience for you. What best describes your work?": "我们来按你的工作调整体验。哪一项最符合你的工作？",
+    "Chat Layout": "对话布局",
+    "Interface Layout": "界面布局",
+    "Cookies and site data": "Cookie 和网站数据",
+    "Browser downloads": "浏览器下载",
+    "Download files": "下载文件",
+    "Configure built-in browser, link opening, and browser subagent preferences.": "配置内置浏览器、链接打开方式和浏览器子智能体偏好。",
+    "Allow/deny agent browser file downloads from specific sites.": "允许或拒绝智能体从特定网站下载文件。",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "配置浏览器子智能体（通过 /browser 调用）允许和拒绝的网址。需要",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "配置浏览器子智能体允许和拒绝的网址。它在内置浏览器中运行，因此无需另外安装浏览器。",
+    "Link Settings": "链接设置",
+    "Developer-only tools. These settings do not affect other users.": "仅供开发者使用的工具。这些设置不会影响其他用户。",
+    "Developer: Reset NUX": "开发者：重置新手引导",
+    "Developer: Reset Onboarding": "开发者：重置初始设置",
+    "Stay up to date.": "保持最新。",
+    "Google One Referral": "Google One 推荐",
+    "Share your referral link with friends": "把推荐链接分享给朋友",
+    "Invite a Friend": "邀请朋友",
+    "Invite now": "立即邀请",
+    "Security": "安全",
+    "Added": "已添加",
+    "Untracked": "未跟踪",
+    "Keep Open": "保持打开",
+    "Your connection is not private": "你的连接不是专用连接",
+    "Hide advanced": "隐藏高级选项",
+    "Back to safety": "返回安全页面",
+    "Clear cookies and site data": "清除 Cookie 和网站数据",
+    "No compatible devices found.": "未找到兼容的设备。",
+    "No microphone found. Connect one.": "未找到麦克风。请连接一个。",
+    "Allow microphone access to start Voice": "允许麦克风访问以开始语音",
+    "Your sign-in needs an update.": "你的登录需要更新。",
+    "Your sign-in needs an update. Sign in again to use Voice.": "你的登录需要更新。请重新登录以使用语音。",
+    "Finish signing in in your browser.": "请在浏览器中完成登录。",
+    "Copied sign-in link to clipboard": "已将登录链接复制到剪贴板",
+    "No sign-in needed": "无需登录",
+    "Paste a code instead": "改为粘贴代码",
+    "Checking availability…": "正在检查可用性…",
+    "Side Question": "侧问",
+    "Side Questions": "侧问",
+    "New Side Question": "新建侧问",
+    "Delete Side Question": "删除侧问",
+    "Failed to delete side question": "删除侧问失败",
+    "Send a message in the main conversation first to start a side question": "请先在主对话中发送消息，再开始侧问",
+    "Reply to /help": "回复 /help",
+    "Reply to /help... (Esc to minimize)": "回复 /help...（按 Esc 最小化）",
+    "Waiting for response... (Esc to minimize)": "正在等待回复...（按 Esc 最小化）",
+    "Open in full conversation": "在完整对话中打开",
+    "Open in tab": "在标签页中打开",
+    "Send reply": "发送回复",
+    "Filter files...": "筛选文件...",
+    "Filter rows...": "筛选行...",
+    "Clear file filter": "清除文件筛选",
+    "Clear row filter": "清除行筛选",
+    "No matching files": "没有匹配的文件",
+    "Empty table": "空表格",
+    "Enable Word Wrap (Alt+Z)": "启用自动换行 (Alt+Z)",
+    "Toggle Word Wrap (Alt+Z)": "切换自动换行 (Alt+Z)",
+    "Toggle checkerboard background": "切换棋盘背景",
+    "Find References": "查找引用",
+    "Close references": "关闭引用",
+    "Inspect element to comment": "检查元素以添加评论",
+    "Exit inspect element mode (Esc)": "退出检查元素模式 (Esc)",
+    "Native PDF viewer not supported": "不支持原生 PDF 查看器",
+    "Selected element preview": "所选元素预览",
+    "Failed to save changes.": "保存更改失败。",
+    "Committing...": "正在提交...",
+    "Dismiss suggestion": "关闭建议",
+    "Open Appearance": "打开外观设置",
+    "Privacy Settings": "隐私设置",
+    "System Settings": "系统设置",
+    "The remote workspace is not running": "远程工作区未在运行",
+    "TAR.GZ file uploads are not currently supported in remote mode": "远程模式目前不支持上传 TAR.GZ 文件",
+    "You are logged in using environment credentials and cannot sign out from the application.": "你正在使用环境凭据登录，无法从应用中退出登录。",
+    "Jetski Updated. Reload to use Live": "Jetski 已更新。重新加载以使用 Live",
+    "Help me self-troubleshoot an issue, configure Jetski, or file a bug or feature request from this conversation.": "帮我在这个对话里自行排查问题、配置 Jetski，或提交缺陷和功能请求。",
+    "We'll keep waiting, or you can open it directly in a new tab.": "我们会继续等待，你也可以直接在新标签页中打开。",
+    "This page is taking longer than expected to load, or it may be blocking embedded views (via X-Frame-Options or CSP).": "此页面加载时间超出预期，或可能通过 X-Frame-Options 或 CSP 阻止了嵌入视图。",
+    "Browser: you took over": "浏览器：你已接管",
+    "Inspecting documentation, config, or issues...": "正在查看文档、配置或问题...",
+    "Waiting for tool permission approval — click Open in full conversation (↗) to approve": "正在等待工具权限批准 — 点击“在完整对话中打开 (↗)”以批准",
+    "Hi there.": "你好。",
+    "Hello.": "你好。",
+    "Welcome back.": "欢迎回来。",
+    "Good to see you.": "很高兴见到你。",
+    "Ignore events triggered by the automation owner to avoid self-trigger loops.": "忽略由自动化所有者触发的事件，以避免自我触发循环。",
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "忽略自动审查或机器人账号（groupagent-*）发出的事件。"
   }
 }

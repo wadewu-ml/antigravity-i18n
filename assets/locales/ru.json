@@ -3331,7 +3331,99 @@
     "Cache": "Кэш",
     "UTC": "UTC",
     "Default Workspace VCS": "VCS рабочего пространства по умолчанию",
-    "Context Providers": "Поставщики контекста"
+    "Context Providers": "Поставщики контекста",
+    "One last thing before getting started…": "Ещё кое-что перед началом…",
+    "A few things to know, and a couple settings to review.": "Несколько вещей, которые стоит знать, и пара настроек для проверки.",
+    "Optimized for you": "Оптимизировано для вас",
+    "Built to help, not hurt": "Создано помогать, а не вредить",
+    "You are in control": "Решение за вами",
+    "Automated safeguards help to protect your conversations from insecure or unsafe content. That being said, users should be aware of potential agentic risks, including data exfiltration.": "Автоматические меры защиты помогают оградить разговоры от небезопасного содержимого. При этом учитывайте риски агента, включая утечку данных.",
+    "Let's tailor the experience for you. What best describes your work?": "Настроим интерфейс под вашу работу. Что описывает её лучше всего?",
+    "Chat Layout": "Макет чата",
+    "Interface Layout": "Макет интерфейса",
+    "Cookies and site data": "Файлы cookie и данные сайтов",
+    "Browser downloads": "Загрузки браузера",
+    "Download files": "Скачать файлы",
+    "Configure built-in browser, link opening, and browser subagent preferences.": "Настройте встроенный браузер, открытие ссылок и субагента браузера.",
+    "Allow/deny agent browser file downloads from specific sites.": "Разрешите или запретите агенту скачивать файлы с указанных сайтов.",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "Настройте разрешенные и запрещенные адреса субагента браузера (вызов через /browser). Требуется",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "Настройте разрешенные и запрещенные адреса субагента браузера. Он работает во встроенном браузере, отдельная установка не нужна.",
+    "Link Settings": "Настройки ссылок",
+    "Developer-only tools. These settings do not affect other users.": "Инструменты только для разработчиков. Эти настройки не влияют на других пользователей.",
+    "Developer: Reset NUX": "Разработчик: сбросить знакомство",
+    "Developer: Reset Onboarding": "Разработчик: сбросить начальную настройку",
+    "Stay up to date.": "Будьте в курсе обновлений.",
+    "Google One Referral": "Реферальная программа Google One",
+    "Share your referral link with friends": "Поделитесь реферальной ссылкой с друзьями",
+    "Invite a Friend": "Пригласить друга",
+    "Invite now": "Пригласить сейчас",
+    "Security": "Безопасность",
+    "Added": "Добавлено",
+    "Untracked": "Не отслеживается",
+    "Keep Open": "Оставить открытым",
+    "Your connection is not private": "Ваше соединение не защищено",
+    "Hide advanced": "Скрыть дополнительные",
+    "Back to safety": "Вернуться к безопасной странице",
+    "Clear cookies and site data": "Удалить файлы cookie и данные сайта",
+    "No compatible devices found.": "Совместимые устройства не найдены.",
+    "No microphone found. Connect one.": "Микрофон не найден. Подключите его.",
+    "Allow microphone access to start Voice": "Разрешите доступ к микрофону, чтобы начать голос",
+    "Your sign-in needs an update.": "Требуется обновить вход.",
+    "Your sign-in needs an update. Sign in again to use Voice.": "Требуется обновить вход. Войдите снова, чтобы пользоваться голосом.",
+    "Finish signing in in your browser.": "Завершите вход в браузере.",
+    "Copied sign-in link to clipboard": "Ссылка для входа скопирована",
+    "No sign-in needed": "Вход не требуется",
+    "Paste a code instead": "Вставить код",
+    "Checking availability…": "Проверка доступности…",
+    "Side Question": "Побочный вопрос",
+    "Side Questions": "Побочные вопросы",
+    "New Side Question": "Новый побочный вопрос",
+    "Delete Side Question": "Удалить побочный вопрос",
+    "Failed to delete side question": "Не удалось удалить побочный вопрос",
+    "Send a message in the main conversation first to start a side question": "Сначала отправьте сообщение в основном разговоре, чтобы начать побочный вопрос",
+    "Reply to /help": "Ответить на /help",
+    "Reply to /help... (Esc to minimize)": "Ответ на /help... (Esc — свернуть)",
+    "Waiting for response... (Esc to minimize)": "Ожидание ответа... (Esc — свернуть)",
+    "Open in full conversation": "Открыть в полном разговоре",
+    "Open in tab": "Открыть во вкладке",
+    "Send reply": "Отправить ответ",
+    "Filter files...": "Фильтровать файлы...",
+    "Filter rows...": "Фильтровать строки...",
+    "Clear file filter": "Сбросить фильтр файлов",
+    "Clear row filter": "Сбросить фильтр строк",
+    "No matching files": "Нет подходящих файлов",
+    "Empty table": "Пустая таблица",
+    "Enable Word Wrap (Alt+Z)": "Включить перенос строк (Alt+Z)",
+    "Toggle Word Wrap (Alt+Z)": "Переключить перенос строк (Alt+Z)",
+    "Toggle checkerboard background": "Переключить шахматный фон",
+    "Find References": "Найти ссылки",
+    "Close references": "Закрыть ссылки",
+    "Inspect element to comment": "Проверить элемент, чтобы комментировать",
+    "Exit inspect element mode (Esc)": "Выйти из режима проверки (Esc)",
+    "Native PDF viewer not supported": "Встроенный просмотр PDF не поддерживается",
+    "Selected element preview": "Предпросмотр выбранного элемента",
+    "Failed to save changes.": "Не удалось сохранить изменения.",
+    "Committing...": "Фиксация...",
+    "Dismiss suggestion": "Скрыть предложение",
+    "Open Appearance": "Открыть оформление",
+    "Privacy Settings": "Настройки конфиденциальности",
+    "System Settings": "Системные настройки",
+    "The remote workspace is not running": "Удаленное рабочее пространство не запущено",
+    "TAR.GZ file uploads are not currently supported in remote mode": "Загрузка файлов TAR.GZ в удаленном режиме пока не поддерживается",
+    "You are logged in using environment credentials and cannot sign out from the application.": "Вы вошли с учетными данными среды и не можете выйти из приложения.",
+    "Jetski Updated. Reload to use Live": "Jetski обновлен. Перезагрузите, чтобы использовать Live",
+    "Help me self-troubleshoot an issue, configure Jetski, or file a bug or feature request from this conversation.": "Помогите в этом разговоре разобраться с проблемой, настроить Jetski или отправить ошибку или запрос функции.",
+    "We'll keep waiting, or you can open it directly in a new tab.": "Мы продолжим ждать, или вы можете открыть это в новой вкладке.",
+    "This page is taking longer than expected to load, or it may be blocking embedded views (via X-Frame-Options or CSP).": "Страница загружается дольше обычного или блокирует встроенные представления (через X-Frame-Options или CSP).",
+    "Browser: you took over": "Браузер: вы перехватили управление",
+    "Inspecting documentation, config, or issues...": "Просмотр документации, конфигурации или задач...",
+    "Waiting for tool permission approval — click Open in full conversation (↗) to approve": "Ожидание разрешения инструмента — нажмите «Открыть в полном разговоре (↗)», чтобы разрешить",
+    "Hi there.": "Здравствуйте.",
+    "Hello.": "Здравствуйте.",
+    "Welcome back.": "С возвращением.",
+    "Good to see you.": "Рад вас видеть.",
+    "Ignore events triggered by the automation owner to avoid self-trigger loops.": "Игнорировать события владельца автоматизации, чтобы избежать циклов самозапуска.",
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "Игнорировать события автоматических проверок и учетных записей роботов (groupagent-*)."
   },
   "patterns": [
     {
@@ -3850,6 +3942,105 @@
       "replace": {
         "1": "weekday"
       }
+    },
+    {
+      "id": "mcpServersFailed",
+      "pattern": "^(\\d+) MCP servers? failed to start$",
+      "flags": "i",
+      "sample": "2 MCP servers failed to start",
+      "templates": {
+        "one": "Не удалось запустить {1} сервер MCP",
+        "few": "Не удалось запустить {1} серверов MCP",
+        "many": "Не удалось запустить {1} сервера MCP",
+        "other": "Не удалось запустить {1} сервера MCP"
+      }
+    },
+    {
+      "id": "knowledgeSteps",
+      "pattern": "^\\((\\d+) steps?\\)$",
+      "flags": "i",
+      "sample": "(2 steps)",
+      "templates": {
+        "one": "({1} шаг)",
+        "few": "({1} шагов)",
+        "many": "({1} шага)",
+        "other": "({1} шага)"
+      }
+    },
+    {
+      "id": "greetHi",
+      "pattern": "^Hi (.+)\\.$",
+      "flags": "i",
+      "sample": "Hi Ada.",
+      "template": "Здравствуйте, {1}."
+    },
+    {
+      "id": "greetHello",
+      "pattern": "^Hello, (.+)\\.$",
+      "flags": "i",
+      "sample": "Hello, Ada.",
+      "template": "Здравствуйте, {1}."
+    },
+    {
+      "id": "greetWelcome",
+      "pattern": "^Welcome back, (.+)\\.$",
+      "flags": "i",
+      "sample": "Welcome back, Ada.",
+      "template": "С возвращением, {1}."
+    },
+    {
+      "id": "greetGood",
+      "pattern": "^Good to see you, (.+)\\.$",
+      "flags": "i",
+      "sample": "Good to see you, Ada.",
+      "template": "Рад вас видеть, {1}."
+    },
+    {
+      "id": "greetHey",
+      "pattern": "^Hey (.+)!$",
+      "flags": "i",
+      "sample": "Hey Ada!",
+      "template": "Привет, {1}!"
+    },
+    {
+      "id": "embeddedPageAtDevice",
+      "pattern": "^An embedded page at (.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page at example.com wants to connect to a USB device",
+      "template": "Встроенная страница на {1} запрашивает подключение к {2}",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageHereDevice",
+      "pattern": "^An embedded page on this page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page on this page wants to connect to a serial port",
+      "template": "Встроенная страница на этой странице запрашивает подключение к {1}",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "thisPageWantsDevice",
+      "pattern": "^This page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "This page wants to connect to a HID device",
+      "template": "Эта страница запрашивает подключение к {1}",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "pageWantsDevice",
+      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "example.com wants to connect to a USB device",
+      "template": "{1} запрашивает подключение к {2}",
+      "replace": {
+        "2": "deviceKind"
+      }
     }
   ],
   "menu": {
@@ -3923,6 +4114,11 @@
       "Thursday": "четверг",
       "Friday": "пятницу",
       "Saturday": "субботу"
+    },
+    "deviceKind": {
+      "a HID device": "HID-устройству",
+      "a USB device": "USB-устройству",
+      "a serial port": "последовательному порту"
     }
   },
   "valueRules": {
