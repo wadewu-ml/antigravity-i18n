@@ -3328,7 +3328,99 @@
     "Cache": "캐시",
     "UTC": "UTC",
     "Default Workspace VCS": "기본 작업 영역 VCS",
-    "Context Providers": "컨텍스트 제공자"
+    "Context Providers": "컨텍스트 제공자",
+    "One last thing before getting started…": "시작하기 전에 마지막으로…",
+    "A few things to know, and a couple settings to review.": "알아둘 사항과 확인할 설정이 몇 가지 있습니다.",
+    "Optimized for you": "사용자에게 최적화",
+    "Built to help, not hurt": "돕기 위한 것이지, 해를 끼치기 위한 것이 아님",
+    "You are in control": "결정은 사용자가 합니다",
+    "Automated safeguards help to protect your conversations from insecure or unsafe content. That being said, users should be aware of potential agentic risks, including data exfiltration.": "자동 보호 장치는 안전하지 않은 콘텐츠로부터 대화를 보호합니다. 그래도 데이터 유출을 포함한 에이전트 위험을 알아 두세요.",
+    "Let's tailor the experience for you. What best describes your work?": "업무에 맞게 환경을 조정합니다. 어떤 설명이 가장 가깝나요?",
+    "Chat Layout": "채팅 레이아웃",
+    "Interface Layout": "인터페이스 레이아웃",
+    "Cookies and site data": "쿠키 및 사이트 데이터",
+    "Browser downloads": "브라우저 다운로드",
+    "Download files": "파일 다운로드",
+    "Configure built-in browser, link opening, and browser subagent preferences.": "내장 브라우저, 링크 열기, 브라우저 하위 에이전트 환경설정을 구성합니다.",
+    "Allow/deny agent browser file downloads from specific sites.": "특정 사이트에서 에이전트의 파일 다운로드를 허용하거나 거부합니다.",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "브라우저 하위 에이전트(/browser로 호출)의 허용 및 거부 URL을 구성합니다. 필요:",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "브라우저 하위 에이전트의 허용 및 거부 URL을 구성합니다. 내장 브라우저에서 실행되므로 별도 설치가 필요 없습니다.",
+    "Link Settings": "링크 설정",
+    "Developer-only tools. These settings do not affect other users.": "개발자 전용 도구입니다. 이 설정은 다른 사용자에게 영향을 주지 않습니다.",
+    "Developer: Reset NUX": "개발자: 첫 실행 안내 재설정",
+    "Developer: Reset Onboarding": "개발자: 온보딩 재설정",
+    "Stay up to date.": "최신 상태를 유지합니다.",
+    "Google One Referral": "Google One 추천",
+    "Share your referral link with friends": "추천 링크를 친구와 공유합니다",
+    "Invite a Friend": "친구 초대",
+    "Invite now": "지금 초대",
+    "Security": "보안",
+    "Added": "추가됨",
+    "Untracked": "추적되지 않음",
+    "Keep Open": "열린 상태 유지",
+    "Your connection is not private": "연결이 비공개가 아닙니다",
+    "Hide advanced": "고급 옵션 숨기기",
+    "Back to safety": "안전 페이지로 돌아가기",
+    "Clear cookies and site data": "쿠키 및 사이트 데이터 삭제",
+    "No compatible devices found.": "호환되는 기기를 찾을 수 없습니다.",
+    "No microphone found. Connect one.": "마이크를 찾을 수 없습니다. 연결하세요.",
+    "Allow microphone access to start Voice": "마이크 접근을 허용하여 음성 시작",
+    "Your sign-in needs an update.": "로그인을 업데이트해야 합니다.",
+    "Your sign-in needs an update. Sign in again to use Voice.": "로그인을 업데이트해야 합니다. 음성을 사용하려면 다시 로그인하세요.",
+    "Finish signing in in your browser.": "브라우저에서 로그인을 완료하세요.",
+    "Copied sign-in link to clipboard": "로그인 링크를 클립보드에 복사했습니다",
+    "No sign-in needed": "로그인 불필요",
+    "Paste a code instead": "대신 코드 붙여넣기",
+    "Checking availability…": "사용 가능 여부 확인 중…",
+    "Side Question": "사이드 질문",
+    "Side Questions": "사이드 질문",
+    "New Side Question": "새 사이드 질문",
+    "Delete Side Question": "사이드 질문 삭제",
+    "Failed to delete side question": "사이드 질문을 삭제하지 못했습니다",
+    "Send a message in the main conversation first to start a side question": "사이드 질문을 시작하려면 먼저 기본 대화에서 메시지를 보내세요",
+    "Reply to /help": "/help에 답장",
+    "Reply to /help... (Esc to minimize)": "/help에 답장... (Esc로 최소화)",
+    "Waiting for response... (Esc to minimize)": "응답을 기다리는 중... (Esc로 최소화)",
+    "Open in full conversation": "전체 대화에서 열기",
+    "Open in tab": "탭에서 열기",
+    "Send reply": "답장 보내기",
+    "Filter files...": "파일 필터링...",
+    "Filter rows...": "행 필터링...",
+    "Clear file filter": "파일 필터 지우기",
+    "Clear row filter": "행 필터 지우기",
+    "No matching files": "일치하는 파일 없음",
+    "Empty table": "빈 표",
+    "Enable Word Wrap (Alt+Z)": "자동 줄바꿈 사용 (Alt+Z)",
+    "Toggle Word Wrap (Alt+Z)": "자동 줄바꿈 전환 (Alt+Z)",
+    "Toggle checkerboard background": "바둑판 배경 전환",
+    "Find References": "참조 찾기",
+    "Close references": "참조 닫기",
+    "Inspect element to comment": "요소를 검사하여 댓글 달기",
+    "Exit inspect element mode (Esc)": "요소 검사 모드 종료 (Esc)",
+    "Native PDF viewer not supported": "기본 PDF 뷰어가 지원되지 않습니다",
+    "Selected element preview": "선택한 요소 미리보기",
+    "Failed to save changes.": "변경 내용을 저장하지 못했습니다.",
+    "Committing...": "커밋하는 중...",
+    "Dismiss suggestion": "제안 닫기",
+    "Open Appearance": "모양 열기",
+    "Privacy Settings": "개인정보 설정",
+    "System Settings": "시스템 설정",
+    "The remote workspace is not running": "원격 작업 영역이 실행되고 있지 않습니다",
+    "TAR.GZ file uploads are not currently supported in remote mode": "원격 모드에서는 현재 TAR.GZ 파일 업로드가 지원되지 않습니다",
+    "You are logged in using environment credentials and cannot sign out from the application.": "환경 자격 증명으로 로그인되어 있어 앱에서 로그아웃할 수 없습니다.",
+    "Jetski Updated. Reload to use Live": "Jetski가 업데이트되었습니다. Live를 사용하려면 다시 로드하세요",
+    "Help me self-troubleshoot an issue, configure Jetski, or file a bug or feature request from this conversation.": "이 대화에서 문제를 직접 해결하고, Jetski를 구성하거나 버그 또는 기능 요청을 제출하도록 도와주세요.",
+    "We'll keep waiting, or you can open it directly in a new tab.": "계속 기다리거나 새 탭에서 직접 열 수 있습니다.",
+    "This page is taking longer than expected to load, or it may be blocking embedded views (via X-Frame-Options or CSP).": "이 페이지를 불러오는 데 예상보다 오래 걸리거나, X-Frame-Options 또는 CSP로 삽입 보기가 차단되었을 수 있습니다.",
+    "Browser: you took over": "브라우저: 사용자가 이어받음",
+    "Inspecting documentation, config, or issues...": "문서, 구성 또는 문제를 살펴보는 중...",
+    "Waiting for tool permission approval — click Open in full conversation (↗) to approve": "도구 권한 승인을 기다리는 중 — 전체 대화에서 열기(↗)를 클릭하여 승인",
+    "Hi there.": "안녕하세요.",
+    "Hello.": "안녕하세요.",
+    "Welcome back.": "다시 오신 것을 환영합니다.",
+    "Good to see you.": "만나서 반갑습니다.",
+    "Ignore events triggered by the automation owner to avoid self-trigger loops.": "자동화 소유자가 발생시킨 이벤트를 무시하여 자기 트리거 루프를 피합니다.",
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "자동 검토 또는 로봇 계정(groupagent-*)이 발생시킨 이벤트를 무시합니다."
   },
   "patterns": [
     {
@@ -3737,6 +3829,95 @@
       "replace": {
         "1": "weekday"
       }
+    },
+    {
+      "id": "mcpServersFailed",
+      "pattern": "^(\\d+) MCP servers? failed to start$",
+      "flags": "i",
+      "sample": "2 MCP servers failed to start",
+      "template": "MCP 서버 {1}개를 시작하지 못했습니다"
+    },
+    {
+      "id": "knowledgeSteps",
+      "pattern": "^\\((\\d+) steps?\\)$",
+      "flags": "i",
+      "sample": "(2 steps)",
+      "template": "({1}단계)"
+    },
+    {
+      "id": "greetHi",
+      "pattern": "^Hi (.+)\\.$",
+      "flags": "i",
+      "sample": "Hi Ada.",
+      "template": "안녕하세요, {1}님."
+    },
+    {
+      "id": "greetHello",
+      "pattern": "^Hello, (.+)\\.$",
+      "flags": "i",
+      "sample": "Hello, Ada.",
+      "template": "안녕하세요, {1}님."
+    },
+    {
+      "id": "greetWelcome",
+      "pattern": "^Welcome back, (.+)\\.$",
+      "flags": "i",
+      "sample": "Welcome back, Ada.",
+      "template": "다시 오신 것을 환영합니다, {1}님."
+    },
+    {
+      "id": "greetGood",
+      "pattern": "^Good to see you, (.+)\\.$",
+      "flags": "i",
+      "sample": "Good to see you, Ada.",
+      "template": "만나서 반갑습니다, {1}님."
+    },
+    {
+      "id": "greetHey",
+      "pattern": "^Hey (.+)!$",
+      "flags": "i",
+      "sample": "Hey Ada!",
+      "template": "안녕하세요, {1}님!"
+    },
+    {
+      "id": "pageWantsDevice",
+      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "example.com wants to connect to a USB device",
+      "template": "{1}이(가) {2}에 연결하려고 합니다",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageAtDevice",
+      "pattern": "^An embedded page at (.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page at example.com wants to connect to a USB device",
+      "template": "{1}의 삽입된 페이지가 {2}에 연결하려고 합니다",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageHereDevice",
+      "pattern": "^An embedded page on this page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page on this page wants to connect to a serial port",
+      "template": "이 페이지의 삽입된 페이지가 {1}에 연결하려고 합니다",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "thisPageWantsDevice",
+      "pattern": "^This page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "This page wants to connect to a HID device",
+      "template": "이 페이지가 {1}에 연결하려고 합니다",
+      "replace": {
+        "1": "deviceKind"
+      }
     }
   ],
   "menu": {
@@ -3810,6 +3991,11 @@
       "Thursday": "목요일",
       "Friday": "금요일",
       "Saturday": "토요일"
+    },
+    "deviceKind": {
+      "a HID device": "HID 기기",
+      "a USB device": "USB 기기",
+      "a serial port": "직렬 포트"
     }
   },
   "valueRules": {

@@ -427,6 +427,95 @@
       "replace": {
         "1": "weekday"
       }
+    },
+    {
+      "id": "mcpServersFailed",
+      "pattern": "^(\\d+) MCP servers? failed to start$",
+      "flags": "i",
+      "sample": "2 MCP servers failed to start",
+      "template": "{1} 個 MCP 伺服器啟動失敗"
+    },
+    {
+      "id": "knowledgeSteps",
+      "pattern": "^\\((\\d+) steps?\\)$",
+      "flags": "i",
+      "sample": "(2 steps)",
+      "template": "（{1} 個步驟）"
+    },
+    {
+      "id": "greetHi",
+      "pattern": "^Hi (.+)\\.$",
+      "flags": "i",
+      "sample": "Hi Ada.",
+      "template": "嗨，{1}。"
+    },
+    {
+      "id": "greetHello",
+      "pattern": "^Hello, (.+)\\.$",
+      "flags": "i",
+      "sample": "Hello, Ada.",
+      "template": "你好，{1}。"
+    },
+    {
+      "id": "greetWelcome",
+      "pattern": "^Welcome back, (.+)\\.$",
+      "flags": "i",
+      "sample": "Welcome back, Ada.",
+      "template": "歡迎回來，{1}。"
+    },
+    {
+      "id": "greetGood",
+      "pattern": "^Good to see you, (.+)\\.$",
+      "flags": "i",
+      "sample": "Good to see you, Ada.",
+      "template": "很高興見到你，{1}。"
+    },
+    {
+      "id": "greetHey",
+      "pattern": "^Hey (.+)!$",
+      "flags": "i",
+      "sample": "Hey Ada!",
+      "template": "嘿，{1}！"
+    },
+    {
+      "id": "pageWantsDevice",
+      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "example.com wants to connect to a USB device",
+      "template": "{1} 想要連線到{2}",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageAtDevice",
+      "pattern": "^An embedded page at (.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page at example.com wants to connect to a USB device",
+      "template": "{1} 上的嵌入頁面想要連線到{2}",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageHereDevice",
+      "pattern": "^An embedded page on this page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page on this page wants to connect to a serial port",
+      "template": "此頁面上的嵌入頁面想要連線到{1}",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "thisPageWantsDevice",
+      "pattern": "^This page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "This page wants to connect to a HID device",
+      "template": "此頁面想要連線到{1}",
+      "replace": {
+        "1": "deviceKind"
+      }
     }
   ],
   "valueMaps": {
@@ -468,6 +557,11 @@
       "Thursday": "週四",
       "Friday": "週五",
       "Saturday": "週六"
+    },
+    "deviceKind": {
+      "a HID device": "HID 裝置",
+      "a USB device": "USB 裝置",
+      "a serial port": "序列埠"
     }
   },
   "valueRules": {
@@ -3945,6 +4039,98 @@
     "Cache": "快取",
     "UTC": "UTC",
     "Default Workspace VCS": "預設工作區版本控制",
-    "Context Providers": "上下文提供者"
+    "Context Providers": "上下文提供者",
+    "One last thing before getting started…": "開始之前還有最後一件事…",
+    "A few things to know, and a couple settings to review.": "有幾件事需要了解，以及幾項設定需要確認。",
+    "Optimized for you": "為你最佳化",
+    "Built to help, not hurt": "為了幫忙，而不是添亂",
+    "You are in control": "決定權在你",
+    "Automated safeguards help to protect your conversations from insecure or unsafe content. That being said, users should be aware of potential agentic risks, including data exfiltration.": "自動防護有助於保護對話免受不安全內容影響。即便如此，仍請注意智能體可能帶來的風險，包括資料外洩。",
+    "Let's tailor the experience for you. What best describes your work?": "我們來按你的工作調整體驗。哪一項最符合你的工作？",
+    "Chat Layout": "對話版面",
+    "Interface Layout": "介面版面",
+    "Cookies and site data": "Cookie 和網站資料",
+    "Browser downloads": "瀏覽器下載",
+    "Download files": "下載檔案",
+    "Configure built-in browser, link opening, and browser subagent preferences.": "設定內建瀏覽器、連結開啟方式和瀏覽器子智能體偏好。",
+    "Allow/deny agent browser file downloads from specific sites.": "允許或拒絕智能體從特定網站下載檔案。",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "設定瀏覽器子智能體（透過 /browser 呼叫）允許和拒絕的網址。需要",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "設定瀏覽器子智能體允許和拒絕的網址。它在內建瀏覽器中執行，因此無需另外安裝瀏覽器。",
+    "Link Settings": "連結設定",
+    "Developer-only tools. These settings do not affect other users.": "僅供開發人員使用的工具。這些設定不會影響其他使用者。",
+    "Developer: Reset NUX": "開發人員：重設新手引導",
+    "Developer: Reset Onboarding": "開發人員：重設初始設定",
+    "Stay up to date.": "保持最新。",
+    "Google One Referral": "Google One 推薦",
+    "Share your referral link with friends": "把推薦連結分享給朋友",
+    "Invite a Friend": "邀請朋友",
+    "Invite now": "立即邀請",
+    "Security": "安全性",
+    "Added": "已新增",
+    "Untracked": "未追蹤",
+    "Keep Open": "保持開啟",
+    "Your connection is not private": "你的連線不是私人連線",
+    "Hide advanced": "隱藏進階選項",
+    "Back to safety": "返回安全頁面",
+    "Clear cookies and site data": "清除 Cookie 和網站資料",
+    "No compatible devices found.": "未找到相容的裝置。",
+    "No microphone found. Connect one.": "未找到麥克風。請連接一個。",
+    "Allow microphone access to start Voice": "允許麥克風存取以開始語音",
+    "Your sign-in needs an update.": "你的登入需要更新。",
+    "Your sign-in needs an update. Sign in again to use Voice.": "你的登入需要更新。請重新登入以使用語音。",
+    "Finish signing in in your browser.": "請在瀏覽器中完成登入。",
+    "Copied sign-in link to clipboard": "已將登入連結複製到剪貼簿",
+    "No sign-in needed": "無需登入",
+    "Paste a code instead": "改為貼上程式碼",
+    "Checking availability…": "正在檢查可用性…",
+    "Side Question": "側問",
+    "Side Questions": "側問",
+    "New Side Question": "新增側問",
+    "Delete Side Question": "刪除側問",
+    "Failed to delete side question": "刪除側問失敗",
+    "Send a message in the main conversation first to start a side question": "請先在主對話中傳送訊息，再開始側問",
+    "Reply to /help": "回覆 /help",
+    "Reply to /help... (Esc to minimize)": "回覆 /help...（按 Esc 最小化）",
+    "Waiting for response... (Esc to minimize)": "正在等待回覆...（按 Esc 最小化）",
+    "Open in full conversation": "在完整對話中開啟",
+    "Open in tab": "在索引標籤中開啟",
+    "Send reply": "傳送回覆",
+    "Filter files...": "篩選檔案...",
+    "Filter rows...": "篩選列...",
+    "Clear file filter": "清除檔案篩選",
+    "Clear row filter": "清除列篩選",
+    "No matching files": "沒有相符的檔案",
+    "Empty table": "空表格",
+    "Enable Word Wrap (Alt+Z)": "啟用自動換行 (Alt+Z)",
+    "Toggle Word Wrap (Alt+Z)": "切換自動換行 (Alt+Z)",
+    "Toggle checkerboard background": "切換棋盤背景",
+    "Find References": "尋找參考",
+    "Close references": "關閉參考",
+    "Inspect element to comment": "檢查元素以新增註解",
+    "Exit inspect element mode (Esc)": "結束檢查元素模式 (Esc)",
+    "Native PDF viewer not supported": "不支援原生 PDF 檢視器",
+    "Selected element preview": "所選元素預覽",
+    "Failed to save changes.": "儲存變更失敗。",
+    "Committing...": "正在提交...",
+    "Dismiss suggestion": "關閉建議",
+    "Open Appearance": "開啟外觀設定",
+    "Privacy Settings": "隱私設定",
+    "System Settings": "系統設定",
+    "The remote workspace is not running": "遠端工作區未在執行",
+    "TAR.GZ file uploads are not currently supported in remote mode": "遠端模式目前不支援上傳 TAR.GZ 檔案",
+    "You are logged in using environment credentials and cannot sign out from the application.": "你正在使用環境憑證登入，無法從應用程式中登出。",
+    "Jetski Updated. Reload to use Live": "Jetski 已更新。重新載入以使用 Live",
+    "Help me self-troubleshoot an issue, configure Jetski, or file a bug or feature request from this conversation.": "幫我在這個對話裡自行排查問題、設定 Jetski，或提交缺陷和功能請求。",
+    "We'll keep waiting, or you can open it directly in a new tab.": "我們會繼續等待，你也可以直接在新索引標籤中開啟。",
+    "This page is taking longer than expected to load, or it may be blocking embedded views (via X-Frame-Options or CSP).": "此頁面載入時間超出預期，或可能透過 X-Frame-Options 或 CSP 阻止了嵌入檢視。",
+    "Browser: you took over": "瀏覽器：你已接管",
+    "Inspecting documentation, config, or issues...": "正在查看文件、設定或問題...",
+    "Waiting for tool permission approval — click Open in full conversation (↗) to approve": "正在等待工具權限核准 — 點擊「在完整對話中開啟 (↗)」以核准",
+    "Hi there.": "你好。",
+    "Hello.": "你好。",
+    "Welcome back.": "歡迎回來。",
+    "Good to see you.": "很高興見到你。",
+    "Ignore events triggered by the automation owner to avoid self-trigger loops.": "忽略由自動化擁有者觸發的事件，以避免自我觸發循環。",
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "忽略自動審查或機器人帳號（groupagent-*）發出的事件。"
   }
 }

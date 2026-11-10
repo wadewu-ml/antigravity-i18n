@@ -3341,7 +3341,99 @@
     "Cache": "Caché",
     "UTC": "UTC",
     "Default Workspace VCS": "VCS predeterminado del área de trabajo",
-    "Context Providers": "Proveedores de contexto"
+    "Context Providers": "Proveedores de contexto",
+    "One last thing before getting started…": "Una última cosa antes de empezar…",
+    "A few things to know, and a couple settings to review.": "Algunas cosas que conviene saber y un par de ajustes para revisar.",
+    "Optimized for you": "Optimizado para ti",
+    "Built to help, not hurt": "Hecho para ayudar, no para perjudicar",
+    "You are in control": "Tú tienes el control",
+    "Automated safeguards help to protect your conversations from insecure or unsafe content. That being said, users should be aware of potential agentic risks, including data exfiltration.": "Las protecciones automáticas ayudan a proteger las conversaciones de contenido inseguro. Aun así, ten en cuenta los riesgos del agente, incluida la filtración de datos.",
+    "Let's tailor the experience for you. What best describes your work?": "Ajustemos la experiencia a tu trabajo. ¿Qué lo describe mejor?",
+    "Chat Layout": "Diseño del chat",
+    "Interface Layout": "Diseño de la interfaz",
+    "Cookies and site data": "Cookies y datos del sitio",
+    "Browser downloads": "Descargas del navegador",
+    "Download files": "Descargar archivos",
+    "Configure built-in browser, link opening, and browser subagent preferences.": "Configura el navegador integrado, la apertura de enlaces y el subagente del navegador.",
+    "Allow/deny agent browser file downloads from specific sites.": "Permite o deniega que el agente descargue archivos de sitios concretos.",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "Configura las URL permitidas y denegadas del subagente del navegador (se invoca con /browser). Requiere",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "Configura las URL permitidas y denegadas del subagente del navegador. Se ejecuta en el navegador integrado, así que no hace falta instalar otro.",
+    "Link Settings": "Ajustes de enlaces",
+    "Developer-only tools. These settings do not affect other users.": "Herramientas solo para desarrolladores. Estos ajustes no afectan a otros usuarios.",
+    "Developer: Reset NUX": "Desarrollador: restablecer la guía inicial",
+    "Developer: Reset Onboarding": "Desarrollador: restablecer la configuración inicial",
+    "Stay up to date.": "Mantente al día.",
+    "Google One Referral": "Recomendación de Google One",
+    "Share your referral link with friends": "Comparte tu enlace de recomendación con amigos",
+    "Invite a Friend": "Invitar a un amigo",
+    "Invite now": "Invitar ahora",
+    "Security": "Seguridad",
+    "Added": "Añadido",
+    "Untracked": "Sin seguimiento",
+    "Keep Open": "Mantener abierto",
+    "Your connection is not private": "Tu conexión no es privada",
+    "Hide advanced": "Ocultar avanzado",
+    "Back to safety": "Volver a un sitio seguro",
+    "Clear cookies and site data": "Borrar cookies y datos del sitio",
+    "No compatible devices found.": "No se encontraron dispositivos compatibles.",
+    "No microphone found. Connect one.": "No se encontró un micrófono. Conecta uno.",
+    "Allow microphone access to start Voice": "Permite el acceso al micrófono para iniciar la voz",
+    "Your sign-in needs an update.": "Tu inicio de sesión necesita una actualización.",
+    "Your sign-in needs an update. Sign in again to use Voice.": "Tu inicio de sesión necesita una actualización. Vuelve a iniciar sesión para usar la voz.",
+    "Finish signing in in your browser.": "Termina de iniciar sesión en el navegador.",
+    "Copied sign-in link to clipboard": "Enlace de inicio de sesión copiado al portapapeles",
+    "No sign-in needed": "No hace falta iniciar sesión",
+    "Paste a code instead": "Pegar un código en su lugar",
+    "Checking availability…": "Comprobando disponibilidad…",
+    "Side Question": "Pregunta secundaria",
+    "Side Questions": "Preguntas secundarias",
+    "New Side Question": "Nueva pregunta secundaria",
+    "Delete Side Question": "Eliminar pregunta secundaria",
+    "Failed to delete side question": "No se pudo eliminar la pregunta secundaria",
+    "Send a message in the main conversation first to start a side question": "Envía primero un mensaje en la conversación principal para iniciar una pregunta secundaria",
+    "Reply to /help": "Responder a /help",
+    "Reply to /help... (Esc to minimize)": "Responder a /help... (Esc para minimizar)",
+    "Waiting for response... (Esc to minimize)": "Esperando respuesta... (Esc para minimizar)",
+    "Open in full conversation": "Abrir en la conversación completa",
+    "Open in tab": "Abrir en una pestaña",
+    "Send reply": "Enviar respuesta",
+    "Filter files...": "Filtrar archivos...",
+    "Filter rows...": "Filtrar filas...",
+    "Clear file filter": "Borrar filtro de archivos",
+    "Clear row filter": "Borrar filtro de filas",
+    "No matching files": "No hay archivos coincidentes",
+    "Empty table": "Tabla vacía",
+    "Enable Word Wrap (Alt+Z)": "Activar ajuste de línea (Alt+Z)",
+    "Toggle Word Wrap (Alt+Z)": "Alternar ajuste de línea (Alt+Z)",
+    "Toggle checkerboard background": "Alternar fondo de tablero",
+    "Find References": "Buscar referencias",
+    "Close references": "Cerrar referencias",
+    "Inspect element to comment": "Inspeccionar elemento para comentar",
+    "Exit inspect element mode (Esc)": "Salir del modo de inspección (Esc)",
+    "Native PDF viewer not supported": "El visor de PDF nativo no es compatible",
+    "Selected element preview": "Vista previa del elemento seleccionado",
+    "Failed to save changes.": "No se pudieron guardar los cambios.",
+    "Committing...": "Confirmando...",
+    "Dismiss suggestion": "Descartar sugerencia",
+    "Open Appearance": "Abrir Apariencia",
+    "Privacy Settings": "Ajustes de privacidad",
+    "System Settings": "Ajustes del sistema",
+    "The remote workspace is not running": "El área de trabajo remota no está en ejecución",
+    "TAR.GZ file uploads are not currently supported in remote mode": "Las cargas de archivos TAR.GZ no se admiten actualmente en el modo remoto",
+    "You are logged in using environment credentials and cannot sign out from the application.": "Has iniciado sesión con credenciales del entorno y no puedes cerrar sesión desde la aplicación.",
+    "Jetski Updated. Reload to use Live": "Jetski se actualizó. Vuelve a cargar para usar Live",
+    "Help me self-troubleshoot an issue, configure Jetski, or file a bug or feature request from this conversation.": "Ayúdame a resolver un problema, configurar Jetski o enviar un error o solicitud de función desde esta conversación.",
+    "We'll keep waiting, or you can open it directly in a new tab.": "Seguiremos esperando, o puedes abrirlo directamente en una pestaña nueva.",
+    "This page is taking longer than expected to load, or it may be blocking embedded views (via X-Frame-Options or CSP).": "Esta página tarda más de lo esperado en cargar, o puede estar bloqueando las vistas incrustadas (mediante X-Frame-Options o CSP).",
+    "Browser: you took over": "Navegador: tomaste el control",
+    "Inspecting documentation, config, or issues...": "Revisando documentación, configuración o problemas...",
+    "Waiting for tool permission approval — click Open in full conversation (↗) to approve": "Esperando la aprobación del permiso de la herramienta: haz clic en Abrir en la conversación completa (↗) para aprobar",
+    "Hi there.": "Hola.",
+    "Hello.": "Hola.",
+    "Welcome back.": "Bienvenido de nuevo.",
+    "Good to see you.": "Me alegra verte.",
+    "Ignore events triggered by the automation owner to avoid self-trigger loops.": "Ignora los eventos activados por el propietario de la automatización para evitar bucles de autodisparo.",
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "Ignora los eventos emitidos por revisiones automáticas o cuentas de robot (groupagent-*)."
   },
   "patterns": [
     {
@@ -3816,6 +3908,101 @@
       "replace": {
         "1": "weekday"
       }
+    },
+    {
+      "id": "mcpServersFailed",
+      "pattern": "^(\\d+) MCP servers? failed to start$",
+      "flags": "i",
+      "sample": "2 MCP servers failed to start",
+      "templates": {
+        "one": "No se pudo iniciar {1} servidor MCP",
+        "other": "No se pudieron iniciar {1} servidores MCP"
+      }
+    },
+    {
+      "id": "knowledgeSteps",
+      "pattern": "^\\((\\d+) steps?\\)$",
+      "flags": "i",
+      "sample": "(2 steps)",
+      "templates": {
+        "one": "({1} paso)",
+        "other": "({1} pasos)"
+      }
+    },
+    {
+      "id": "greetHi",
+      "pattern": "^Hi (.+)\\.$",
+      "flags": "i",
+      "sample": "Hi Ada.",
+      "template": "Hola, {1}."
+    },
+    {
+      "id": "greetHello",
+      "pattern": "^Hello, (.+)\\.$",
+      "flags": "i",
+      "sample": "Hello, Ada.",
+      "template": "Hola, {1}."
+    },
+    {
+      "id": "greetWelcome",
+      "pattern": "^Welcome back, (.+)\\.$",
+      "flags": "i",
+      "sample": "Welcome back, Ada.",
+      "template": "Bienvenido de nuevo, {1}."
+    },
+    {
+      "id": "greetGood",
+      "pattern": "^Good to see you, (.+)\\.$",
+      "flags": "i",
+      "sample": "Good to see you, Ada.",
+      "template": "Me alegra verte, {1}."
+    },
+    {
+      "id": "greetHey",
+      "pattern": "^Hey (.+)!$",
+      "flags": "i",
+      "sample": "Hey Ada!",
+      "template": "¡Hola, {1}!"
+    },
+    {
+      "id": "pageWantsDevice",
+      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "example.com wants to connect to a USB device",
+      "template": "{1} quiere conectarse a {2}",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageAtDevice",
+      "pattern": "^An embedded page at (.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page at example.com wants to connect to a USB device",
+      "template": "Una página incrustada en {1} quiere conectarse a {2}",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageHereDevice",
+      "pattern": "^An embedded page on this page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page on this page wants to connect to a serial port",
+      "template": "Una página incrustada en esta página quiere conectarse a {1}",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "thisPageWantsDevice",
+      "pattern": "^This page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "This page wants to connect to a HID device",
+      "template": "Esta página quiere conectarse a {1}",
+      "replace": {
+        "1": "deviceKind"
+      }
     }
   ],
   "menu": {
@@ -3889,6 +4076,11 @@
       "Thursday": "jueves",
       "Friday": "viernes",
       "Saturday": "sábado"
+    },
+    "deviceKind": {
+      "a HID device": "un dispositivo HID",
+      "a USB device": "un dispositivo USB",
+      "a serial port": "un puerto serie"
     }
   },
   "valueRules": {

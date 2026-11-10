@@ -19,6 +19,7 @@
   <p id="contents-sentence">Please <span style="display:contents"><b>Open</b></span> it.</p>
   <p id="punctuation-label"><span>Open</span><span>:</span></p>
   <div data-testid="live-user-turn"><p id="user-turn">Run</p></div>
+  <div data-testid="side-question-followup-user" id="side-user">Run</div>
   <div data-testid="live-agent-turn"><p id="agent-turn"><span>Run</span><span> </span><span>Open</span></p></div>
   <p data-testid="live-lead" id="live-lead"><span>Open</span></p>
   <p data-testid="live-body" id="live-body"><span>Run</span></p>
@@ -69,6 +70,7 @@
         check('contents-sentence', 'Please Open it.');
         check('punctuation-label', '打开:');
         check('user-turn', 'Run');
+        check('side-user', 'Run');
         check('agent-turn', 'Run Open');
         check('live-lead', 'Open');
         check('live-body', 'Run');

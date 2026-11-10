@@ -3328,7 +3328,99 @@
     "Cache": "キャッシュ",
     "UTC": "UTC",
     "Default Workspace VCS": "既定のワークスペース VCS",
-    "Context Providers": "コンテキストプロバイダ"
+    "Context Providers": "コンテキストプロバイダ",
+    "One last thing before getting started…": "始める前にもう一つ…",
+    "A few things to know, and a couple settings to review.": "知っておくことと、確認しておく設定がいくつかあります。",
+    "Optimized for you": "あなた向けに最適化",
+    "Built to help, not hurt": "助けるためであり、害するためではない",
+    "You are in control": "操作するのはあなたです",
+    "Automated safeguards help to protect your conversations from insecure or unsafe content. That being said, users should be aware of potential agentic risks, including data exfiltration.": "自動的な保護機能は、安全でない内容から会話を守ります。それでも、データ流出を含むエージェントのリスクには注意してください。",
+    "Let's tailor the experience for you. What best describes your work?": "体験を仕事に合わせます。どれが一番近いですか？",
+    "Chat Layout": "チャットのレイアウト",
+    "Interface Layout": "インターフェースのレイアウト",
+    "Cookies and site data": "Cookie とサイトデータ",
+    "Browser downloads": "ブラウザのダウンロード",
+    "Download files": "ファイルをダウンロード",
+    "Configure built-in browser, link opening, and browser subagent preferences.": "内蔵ブラウザ、リンクの開き方、ブラウザサブエージェントを設定します。",
+    "Allow/deny agent browser file downloads from specific sites.": "特定のサイトからのエージェントによるファイルダウンロードを許可または拒否します。",
+    "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "ブラウザサブエージェント（/browser で呼び出し）の許可および拒否 URL を設定します。次が必要です",
+    "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "ブラウザサブエージェントの許可および拒否 URL を設定します。内蔵ブラウザで動くため、別のブラウザは不要です。",
+    "Link Settings": "リンク設定",
+    "Developer-only tools. These settings do not affect other users.": "開発者専用のツールです。これらの設定は他のユーザーに影響しません。",
+    "Developer: Reset NUX": "開発者: 初回案内をリセット",
+    "Developer: Reset Onboarding": "開発者: 初期設定をリセット",
+    "Stay up to date.": "最新の状態を保ちます。",
+    "Google One Referral": "Google One 紹介",
+    "Share your referral link with friends": "紹介リンクを友だちに共有します",
+    "Invite a Friend": "友だちを招待",
+    "Invite now": "今すぐ招待",
+    "Security": "セキュリティ",
+    "Added": "追加済み",
+    "Untracked": "未追跡",
+    "Keep Open": "開いたままにする",
+    "Your connection is not private": "この接続はプライベートではありません",
+    "Hide advanced": "詳細を隠す",
+    "Back to safety": "安全なページに戻る",
+    "Clear cookies and site data": "Cookie とサイトデータを消去",
+    "No compatible devices found.": "互換性のあるデバイスが見つかりません。",
+    "No microphone found. Connect one.": "マイクが見つかりません。接続してください。",
+    "Allow microphone access to start Voice": "マイクへのアクセスを許可して音声を開始",
+    "Your sign-in needs an update.": "ログイン情報の更新が必要です。",
+    "Your sign-in needs an update. Sign in again to use Voice.": "ログイン情報の更新が必要です。音声を使うには再度ログインしてください。",
+    "Finish signing in in your browser.": "ブラウザでログインを完了してください。",
+    "Copied sign-in link to clipboard": "ログインリンクをクリップボードにコピーしました",
+    "No sign-in needed": "ログインは不要です",
+    "Paste a code instead": "代わりにコードを貼り付け",
+    "Checking availability…": "利用可能か確認しています…",
+    "Side Question": "サイド質問",
+    "Side Questions": "サイド質問",
+    "New Side Question": "新しいサイド質問",
+    "Delete Side Question": "サイド質問を削除",
+    "Failed to delete side question": "サイド質問を削除できませんでした",
+    "Send a message in the main conversation first to start a side question": "サイド質問を始める前に、メインの会話でメッセージを送ってください",
+    "Reply to /help": "/help に返信",
+    "Reply to /help... (Esc to minimize)": "/help に返信...（Esc で最小化）",
+    "Waiting for response... (Esc to minimize)": "応答を待っています...（Esc で最小化）",
+    "Open in full conversation": "完全な会話で開く",
+    "Open in tab": "タブで開く",
+    "Send reply": "返信を送信",
+    "Filter files...": "ファイルを絞り込み...",
+    "Filter rows...": "行を絞り込み...",
+    "Clear file filter": "ファイルの絞り込みを解除",
+    "Clear row filter": "行の絞り込みを解除",
+    "No matching files": "一致するファイルはありません",
+    "Empty table": "空のテーブル",
+    "Enable Word Wrap (Alt+Z)": "折り返しを有効にする (Alt+Z)",
+    "Toggle Word Wrap (Alt+Z)": "折り返しを切り替える (Alt+Z)",
+    "Toggle checkerboard background": "チェッカーボード背景を切り替える",
+    "Find References": "参照を検索",
+    "Close references": "参照を閉じる",
+    "Inspect element to comment": "要素を検査してコメント",
+    "Exit inspect element mode (Esc)": "要素検査モードを終了 (Esc)",
+    "Native PDF viewer not supported": "ネイティブ PDF ビューアーは未対応です",
+    "Selected element preview": "選択した要素のプレビュー",
+    "Failed to save changes.": "変更を保存できませんでした。",
+    "Committing...": "コミットしています...",
+    "Dismiss suggestion": "候補を閉じる",
+    "Open Appearance": "外観を開く",
+    "Privacy Settings": "プライバシー設定",
+    "System Settings": "システム設定",
+    "The remote workspace is not running": "リモートワークスペースは実行されていません",
+    "TAR.GZ file uploads are not currently supported in remote mode": "リモートモードでは TAR.GZ ファイルのアップロードは現在未対応です",
+    "You are logged in using environment credentials and cannot sign out from the application.": "環境の認証情報でログインしているため、アプリからログアウトできません。",
+    "Jetski Updated. Reload to use Live": "Jetski が更新されました。Live を使うには再読み込みしてください",
+    "Help me self-troubleshoot an issue, configure Jetski, or file a bug or feature request from this conversation.": "この会話から問題の自己解決、Jetski の設定、バグや機能リクエストの送信を手伝ってください。",
+    "We'll keep waiting, or you can open it directly in a new tab.": "待ち続けます。新しいタブで直接開くこともできます。",
+    "This page is taking longer than expected to load, or it may be blocking embedded views (via X-Frame-Options or CSP).": "このページの読み込みに予想より時間がかかっているか、X-Frame-Options または CSP で埋め込み表示がブロックされています。",
+    "Browser: you took over": "ブラウザ: 操作を引き継ぎました",
+    "Inspecting documentation, config, or issues...": "ドキュメント、設定、問題を確認しています...",
+    "Waiting for tool permission approval — click Open in full conversation (↗) to approve": "ツール権限の承認を待っています — 「完全な会話で開く (↗)」をクリックして承認",
+    "Hi there.": "こんにちは。",
+    "Hello.": "こんにちは。",
+    "Welcome back.": "おかえりなさい。",
+    "Good to see you.": "お会いできてうれしいです。",
+    "Ignore events triggered by the automation owner to avoid self-trigger loops.": "自動化の所有者によって発生したイベントを無視し、自己トリガーのループを防ぎます。",
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "自動レビューまたはロボットアカウント（groupagent-*）が発したイベントを無視します。"
   },
   "patterns": [
     {
@@ -3737,6 +3829,95 @@
       "replace": {
         "1": "weekday"
       }
+    },
+    {
+      "id": "mcpServersFailed",
+      "pattern": "^(\\d+) MCP servers? failed to start$",
+      "flags": "i",
+      "sample": "2 MCP servers failed to start",
+      "template": "{1} 個の MCP サーバーを起動できませんでした"
+    },
+    {
+      "id": "knowledgeSteps",
+      "pattern": "^\\((\\d+) steps?\\)$",
+      "flags": "i",
+      "sample": "(2 steps)",
+      "template": "（{1} ステップ）"
+    },
+    {
+      "id": "greetHi",
+      "pattern": "^Hi (.+)\\.$",
+      "flags": "i",
+      "sample": "Hi Ada.",
+      "template": "こんにちは、{1}さん。"
+    },
+    {
+      "id": "greetHello",
+      "pattern": "^Hello, (.+)\\.$",
+      "flags": "i",
+      "sample": "Hello, Ada.",
+      "template": "こんにちは、{1}さん。"
+    },
+    {
+      "id": "greetWelcome",
+      "pattern": "^Welcome back, (.+)\\.$",
+      "flags": "i",
+      "sample": "Welcome back, Ada.",
+      "template": "おかえりなさい、{1}さん。"
+    },
+    {
+      "id": "greetGood",
+      "pattern": "^Good to see you, (.+)\\.$",
+      "flags": "i",
+      "sample": "Good to see you, Ada.",
+      "template": "お会いできてうれしいです、{1}さん。"
+    },
+    {
+      "id": "greetHey",
+      "pattern": "^Hey (.+)!$",
+      "flags": "i",
+      "sample": "Hey Ada!",
+      "template": "こんにちは、{1}さん！"
+    },
+    {
+      "id": "pageWantsDevice",
+      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "example.com wants to connect to a USB device",
+      "template": "{1} が{2}への接続を求めています",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageAtDevice",
+      "pattern": "^An embedded page at (.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page at example.com wants to connect to a USB device",
+      "template": "{1} の埋め込みページが{2}への接続を求めています",
+      "replace": {
+        "2": "deviceKind"
+      }
+    },
+    {
+      "id": "embeddedPageHereDevice",
+      "pattern": "^An embedded page on this page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "An embedded page on this page wants to connect to a serial port",
+      "template": "このページ上の埋め込みページが{1}への接続を求めています",
+      "replace": {
+        "1": "deviceKind"
+      }
+    },
+    {
+      "id": "thisPageWantsDevice",
+      "pattern": "^This page wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "This page wants to connect to a HID device",
+      "template": "このページが{1}への接続を求めています",
+      "replace": {
+        "1": "deviceKind"
+      }
     }
   ],
   "menu": {
@@ -3810,6 +3991,11 @@
       "Thursday": "木曜日",
       "Friday": "金曜日",
       "Saturday": "土曜日"
+    },
+    "deviceKind": {
+      "a HID device": "HID デバイス",
+      "a USB device": "USB デバイス",
+      "a serial port": "シリアルポート"
     }
   },
   "valueRules": {
