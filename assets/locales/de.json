@@ -3984,16 +3984,6 @@
       "template": "Hallo {1}!"
     },
     {
-      "id": "pageWantsDevice",
-      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
-      "flags": "i",
-      "sample": "example.com wants to connect to a USB device",
-      "template": "{1} möchte eine Verbindung zu {2} herstellen",
-      "replace": {
-        "2": "deviceKind"
-      }
-    },
-    {
       "id": "embeddedPageAtDevice",
       "pattern": "^An embedded page at (.+) wants to connect to (a HID device|a USB device|a serial port)$",
       "flags": "i",
@@ -4021,6 +4011,16 @@
       "template": "Diese Seite möchte eine Verbindung zu {1} herstellen",
       "replace": {
         "1": "deviceKind"
+      }
+    },
+    {
+      "id": "pageWantsDevice",
+      "pattern": "^(.+) wants to connect to (a HID device|a USB device|a serial port)$",
+      "flags": "i",
+      "sample": "example.com wants to connect to a USB device",
+      "template": "{1} möchte eine Verbindung zu {2} herstellen",
+      "replace": {
+        "2": "deviceKind"
       }
     }
   ],
