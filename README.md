@@ -39,32 +39,37 @@ Download the latest `antigravity-i18n.exe` from the [Releases](../../releases) p
 Double-click `antigravity-i18n.exe`:
 1. The app automatically detects the Antigravity installation folder (or click "Change Location" to specify manually).
 2. Click on your preferred language (selecting **English** restores the official build).
-3. Click "Apply"; the tool confirms process termination, updates the resources, and relaunches Antigravity.
+3. Click “Apply” and confirm. Once Antigravity has closed, the tool updates the resources and relaunches it.
+
+When apply or restore needs to close Antigravity, the tool asks the selected installation to exit normally. The operation stops if it is still running after 30 seconds. Select the force-quit option in the confirmation dialog to close it immediately.
 
 ### 2. Command Line Interface
 
-The same binary can be invoked from the terminal:
+Open PowerShell in the folder containing `antigravity-i18n.exe`.
 
 ```powershell
 # Check current localization status and backups
-antigravity-i18n.exe status
+.\antigravity-i18n.exe status
 
 # Install a language pack (Simplified Chinese by default)
-antigravity-i18n.exe apply --locale zh-CN
+.\antigravity-i18n.exe apply --locale zh-CN
 
 # Restore the official untranslated English version
-antigravity-i18n.exe restore
+.\antigravity-i18n.exe restore
 
 # List all bundled language packs with coverage
-antigravity-i18n.exe locales
+.\antigravity-i18n.exe locales
 ```
 
 Common options:
 - `--app-dir <path>`: Manually specify the Antigravity installation directory (or set via `ANTIGRAVITY_APP_DIR`).
 - `--locale <code>`: Target language code (e.g., `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
 - `--no-restart`: Do not relaunch Antigravity after patching.
-- `--force`: Skip the 30-second graceful shutdown wait and terminate processes immediately.
+- `--force` immediately closes the selected installation. Unsaved work may be lost.
+- `--timeout <ms>` sets how long to wait for Antigravity to exit before stopping the operation. The default is `30000`.
 - `--yes`: Suppress the shutdown confirmation prompt.
+
+Apply and restore allow one operation at a time per installation. If the tool reports that another operation is running, retry after it finishes. Use `status` to check the selected installation and its backup. An unreadable archive or invalid application identity produces an error.
 
 ---
 
@@ -98,8 +103,8 @@ Official updates will overwrite `app.asar`. Simply re-open this tool and click "
 You can switch directly between any language; the tool seamlessly replaces active patches without requiring a manual restore first. Clicking "Restore Official English" returns the client to an untouched state at any time.
 
 ### 3. Backup file management
-- `app.asar.clean-backup`: The pristine official backup required for restoration. **Do not delete manually.**
-- `app.asar.bak-*`: Historical timestamped snapshots left beside the archive. Once your current installation is verified stable, you may safely delete these files to free up disk space.
+- `app.asar.clean-backup` stores the original archive used for restoration. When you apply or restore an unpatched installation, the tool checks the backup against the installed archive by SHA-256 and refreshes it if the hashes differ, including after a same-version reinstall. **Keep this file.**
+- `app.asar.bak-*` contains timestamped copies that can help recover a missing or unusable clean backup. Once the client works and `status` shows a valid clean backup, you can remove older snapshots to free disk space.
 
 ### 4. Why do some words or sentences remain in English?
 Translation matches complete text rather than individual words in an unknown sentence. Fragments split by inline markup are also left intact to avoid partially translated sentences. Independent buttons, menu items, and accessibility labels can still be translated.
@@ -113,8 +118,9 @@ Voice mode preserves user speech, word-highlighted replies, and transcript text,
 To compile from source:
 
 **Prerequisites**:
-- Go 1.26+
+- Go 1.26.3+
 - [Wails v2](https://wails.io/) CLI
+- PowerShell 7
 
 ```powershell
 # Clone the repository
@@ -124,12 +130,12 @@ cd antigravity-i18n
 # Build both GUI and CLI binaries
 .\build.ps1
 
-# Run tests (including end-to-end asar verification)
-$env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
+# Uncomment the next line to include an official-archive round trip.
+# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 
-DOM regression tests use an isolated headless Chrome or Edge instance to check voice content, sentence fragments, UI labels, and live updates. Set `ANTIGRAVITY_TEST_BROWSER` to choose another Chromium executable. These tests are skipped when no browser is available.
+The DOM tests use a separate headless Chrome or Edge instance. Set `ANTIGRAVITY_TEST_BROWSER` to specify another Chromium executable. If no browser is found, the DOM tests are skipped.
 
 ---
 

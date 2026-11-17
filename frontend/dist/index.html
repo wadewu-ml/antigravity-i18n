@@ -98,10 +98,12 @@
   <div class="modal-backdrop hidden" id="applyConfirmModal">
     <div class="modal-box">
       <h3 id="applyConfirmTitle">确认切换语言？</h3>
-      <p class="modal-desc" id="applyConfirmBody">
-        Antigravity 需要先关闭。工具会请求正常退出并等待 30 秒，超时将强制结束进程。
-      </p>
-      <p class="modal-sub">未保存的编辑器内容、正在进行的会话或撤销历史可能丢失。</p>
+      <p class="modal-desc" id="applyConfirmBody"></p>
+      <p class="modal-sub">如需关闭 Antigravity，默认请求正常退出，等待 30 秒后若仍在运行则取消操作。</p>
+      <label class="modal-force">
+        <input type="checkbox" id="forceShutdown">
+        <span>强制退出 Antigravity，未保存的编辑和正在进行的会话可能丢失</span>
+      </label>
       <div class="modal-actions">
         <button class="btn btn-secondary" id="btnCancelApply">取消</button>
         <button class="btn btn-primary" id="btnConfirmApply">确认继续</button>

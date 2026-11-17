@@ -33,32 +33,37 @@ Laden Sie die neueste „antigravity-i18n.exe“ von der Seite „Releases“ he
 Doppelklicken Sie auf „antigravity-i18n.exe“:
 1. Die App erkennt den Antigravity-Installationsordner automatisch (oder klicken Sie auf „Speicherort ändern“, um ihn manuell anzugeben).
 2. Klicken Sie auf Ihre bevorzugte Sprache (durch Auswahl von Englisch wird die offizielle Version wiederhergestellt).
-3. Klicken Sie auf „Übernehmen“; Das Tool bestätigt die Beendigung des Prozesses, aktualisiert die Ressourcen und startet Antigravity neu.
+3. Klicken Sie auf „Übernehmen“ und bestätigen Sie den Vorgang. Sobald Antigravity beendet ist, aktualisiert das Tool die Ressourcen und startet Antigravity neu.
+
+Wenn Antigravity für das Anwenden oder Wiederherstellen geschlossen werden muss, fordert das Tool die ausgewählte Installation zum regulären Beenden auf. Läuft sie nach 30 Sekunden noch, wird der Vorgang abgebrochen. Im Bestätigungsdialog können Sie das sofortige Beenden ausdrücklich auswählen.
 
 ### 2. Befehlszeilenschnittstelle
 
-Die gleiche Binärdatei kann vom Terminal aus aufgerufen werden:
+Öffnen Sie PowerShell im Ordner mit `antigravity-i18n.exe`.
 
 ```powershell
 # Check current localization status and backups
-antigravity-i18n.exe status
+.\antigravity-i18n.exe status
 
 # Install a language pack (Simplified Chinese by default)
-antigravity-i18n.exe apply --locale zh-CN
+.\antigravity-i18n.exe apply --locale zh-CN
 
 # Restore the official untranslated English version
-antigravity-i18n.exe restore
+.\antigravity-i18n.exe restore
 
 # List all bundled language packs with coverage
-antigravity-i18n.exe locales
+.\antigravity-i18n.exe locales
 ```
 
 Häufige Optionen:
 - `--app-dir <Pfad>`: Geben Sie das Antigravity-Installationsverzeichnis manuell an (oder legen Sie es über `ANTIGRAVITY_APP_DIR` fest).
 - `--locale <code>`: Zielsprachencode (z. B. `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
 - „--no-restart“: Antigravity nach dem Patchen nicht neu starten.
-- „--force“: Überspringen Sie die 30-sekündige Wartezeit beim ordnungsgemäßen Herunterfahren und beenden Sie Prozesse sofort.
+- `--force` beendet die ausgewählte Installation sofort. Ungespeicherte Änderungen können verloren gehen.
+- `--timeout <ms>` legt die Wartezeit bis zum Abbruch in Millisekunden fest. Der Standardwert ist `30000`.
 - „--yes“: Unterdrückt die Bestätigungsaufforderung zum Herunterfahren.
+
+Pro Installation ist jeweils nur ein Vorgang zum Anwenden oder Wiederherstellen möglich. Falls bereits ein Vorgang läuft, warten Sie auf dessen Abschluss und versuchen Sie es erneut. Mit `status` prüfen Sie die ausgewählte Installation und ihre Sicherung. Ein unlesbares Archiv oder eine nicht überprüfbare Anwendungsidentität führt zu einer Fehlermeldung.
 
 ---
 
@@ -90,16 +95,17 @@ Offizielle Updates überschreiben „app.asar“. Öffnen Sie einfach dieses Too
 Sie können direkt zwischen jeder Sprache wechseln; Das Tool ersetzt aktive Patches nahtlos, ohne dass zunächst eine manuelle Wiederherstellung erforderlich ist. Durch Klicken auf „Offizielles Englisch wiederherstellen“ kann der Client jederzeit in einen unberührten Zustand zurückversetzt werden.
 
 ### 3. Verwaltung der Sicherungsdateien
-- „app.asar.clean-backup“: Das makellose offizielle Backup, das für die Wiederherstellung erforderlich ist. Nicht manuell löschen.
-- `app.asar.bak-*`: Historische Snapshots mit Zeitstempel links neben dem Archiv. Sobald Ihre aktuelle Installation als stabil bestätigt wurde, können Sie diese Dateien bedenkenlos löschen, um Speicherplatz freizugeben.
+- `app.asar.clean-backup` enthält das Originalarchiv für die Wiederherstellung. Beim Anwenden oder Wiederherstellen einer ungepatchten Installation vergleicht das Tool die SHA-256-Prüfsummen und aktualisiert die Sicherung bei Abweichungen, auch nach einer Neuinstallation derselben Version. **Bewahren Sie diese Datei auf.**
+- `app.asar.bak-*` sind Kopien mit Zeitstempel, aus denen das Tool eine fehlende oder ungültige Sicherung wiederherstellen kann. Sobald der Client funktioniert und `status` eine gültige Sicherung meldet, können Sie ältere Kopien löschen, um Speicherplatz freizugeben.
 
 ---
 
 ## Bauen aus der Quelle
 
 **Voraussetzungen**:
-- Gehen Sie 1,26+
+- Go 1.26.3+
 - [Wails v2](https://wails.io/) CLI
+- PowerShell 7
 
 ```powershell
 # Clone the repository
@@ -109,8 +115,8 @@ cd antigravity-i18n
 # Build both GUI and CLI binaries
 .\build.ps1
 
-# Run tests (including end-to-end asar verification)
-$env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
+# Entfernen Sie das Kommentarzeichen der nächsten Zeile, um ein offizielles Archiv zu testen.
+# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 

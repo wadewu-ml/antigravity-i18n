@@ -539,6 +539,14 @@ body {
   border-radius: 4px;
 }
 
+.modal-force {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
 .about-features {
   font-size: 12px;
   color: var(--text-muted);

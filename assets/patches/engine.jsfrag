@@ -5,7 +5,7 @@
  * This file contains no language data. Everything locale specific -- the
  * dictionary, the dynamic patterns, punctuation mapping, plural rules, writing
  * direction and <html lang> -- is injected as LOCALE_DATA when the fragment is
- * built, so adding a language means adding a JSON file under src/locales/
+ * built, so adding a language means adding a JSON file under assets/locales/
  * rather than editing this logic.
  *
  * The antigravity-i18n:begin/end sentinels delimit this whole block so a re-run
@@ -29,6 +29,7 @@ const agPunctuationSkip = AG_LOCALE.punctuationSkipSuffixes || [];
 const agValueMaps = AG_LOCALE.valueMaps || {};
 const agInlineMessages = AG_LOCALE.inlineMessages || [];
 const agTextState = new WeakMap();
+const agAttributeState = new WeakMap();
 const agInlineTextNodes = new WeakSet();
 const agInlineSlots = new WeakSet();
 const agInlineLiteralSlots = new WeakSet();
@@ -532,6 +533,13 @@ function shouldTranslateTextNode(node) {
     if (agInlineTextNodes.has(node) || agInlineSlots.has(node)) {
         return false;
     }
+    const state = agTextState.get(node);
+    if (state) {
+        if (node.nodeValue === state.output) {
+            return false;
+        }
+        agTextState.delete(node);
+    }
     const parent = node.parentElement;
     if (!parent || isSkippableElement(parent)) {
         return false;
@@ -556,14 +564,25 @@ function translateAttributes(root) {
     if (element.matches('script, style') || element.closest(agContentSelector) || agHasInlineSlotAncestor(element, true)) {
         return;
     }
+    let outputs = agAttributeState.get(element);
     for (const attr of agAttributeNames) {
-        if (element.hasAttribute(attr)) {
-            const current = element.getAttribute(attr);
-            const next = translateString(current);
-            if (next !== current) {
-                element.setAttribute(attr, next);
-            }
+        const current = element.getAttribute(attr);
+        // A translation can itself be an English lookup key, as with the
+        // German Quota -> Quote. Keep the engine's own output on this element.
+        if (outputs?.get(attr) === current) {
+            continue;
         }
+        const next = translateString(current);
+        if (next === current) {
+            outputs?.delete(attr);
+            continue;
+        }
+        if (!outputs) {
+            outputs = new Map();
+            agAttributeState.set(element, outputs);
+        }
+        outputs.set(attr, next);
+        element.setAttribute(attr, next);
     }
 }
 function translateNode(root) {

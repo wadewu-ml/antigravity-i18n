@@ -1,16 +1,37 @@
 package core
 
 import (
+	"errors"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 )
 
+var errInstallBusy = errors.New("another language operation is already running for this Antigravity installation")
+
+func lockInstallation(resourcesDir string) (func(), error) {
+	path := filepath.Join(resourcesDir, ".antigravity-i18n.lock")
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0o600)
+	if err != nil {
+		return nil, explainWriteError(err)
+	}
+	unlock, err := tryLockFile(file)
+	if err != nil {
+		_ = file.Close()
+		return nil, explainWriteError(fmt.Errorf("locking installation: %w", err))
+	}
+	// Leave the lock file in place so every process locks the same file.
+	return func() {
+		unlock()
+		_ = file.Close()
+	}, nil
+}
+
 // fileTxn snapshots auxiliary files an operation may touch. The live archive
 // is committed separately with atomicReplaceFile, so rollback cannot overwrite
 // an official update made by another process.
 type fileTxn struct {
-	baseDir string
 	entries []txnEntry
 }
 
@@ -21,8 +42,16 @@ type txnEntry struct {
 	mode    os.FileMode
 }
 
-func newFileTxn() *fileTxn {
-	return &fileTxn{}
+// replace records only replacements that committed before a later failure.
+func (t *fileTxn) replace(src, dst string, verify func(string) error) error {
+	if err := t.track(dst); err != nil {
+		return err
+	}
+	if err := atomicReplaceFile(src, dst, verify); err != nil {
+		t.entries = t.entries[:len(t.entries)-1]
+		return err
+	}
+	return nil
 }
 
 // track records a file's current contents before it is modified. A file that

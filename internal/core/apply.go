@@ -16,6 +16,11 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, err
 	}
+	unlock, err := lockInstallation(p.ResourcesDir)
+	if err != nil {
+		return nil, err
+	}
+	defer unlock()
 
 	localeCode := opts.Locale
 	if localeCode == "" {
@@ -58,54 +63,26 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	if detectPatchState(p.AsarPath) == nil {
-		return nil, fmt.Errorf("could not read Antigravity archive: %s", p.AsarPath)
-	}
 	expectedIdentity, err := readArchiveIdentity(p.AsarPath)
-	if err != nil {
-		return nil, fmt.Errorf("could not verify Antigravity archive identity: %s", p.AsarPath)
-	}
-	if expectedIdentity.Name != "antigravity" {
-		return nil, fmt.Errorf("could not verify Antigravity archive identity: %s", p.AsarPath)
-	}
-	s.progress("正在读取 app.asar 身份", p.AsarPath)
-
-	timeout := opts.TimeoutMs
-	if timeout <= 0 {
-		timeout = gracefulTimeoutMs
-	}
-	wasRunning, stopped, forced, err := s.stopApp(opts.Force, timeout)
 	if err != nil {
 		return nil, err
 	}
-	if !stopped {
-		return nil, fmt.Errorf("Antigravity is still running; close it and re-run")
+	currentPatched, err := detectPatchInArchive(p.AsarPath)
+	if err != nil {
+		return nil, err
+	}
+	s.progress("正在读取 app.asar 身份", p.AsarPath)
+
+	wasRunning, err := s.closeApp(p, opts)
+	if err != nil {
+		return nil, err
 	}
 	if err := assertArchiveUnchanged(p.AsarPath, initialHash); err != nil {
 		return nil, err
 	}
-	s.progress("正在关闭 Antigravity", "")
 
-	currentPatched := detectPatchState(p.AsarPath)
-	if currentPatched == nil {
-		return nil, fmt.Errorf("could not read Antigravity archive after shutdown: %s", p.AsarPath)
-	}
-
-	txn := newFileTxn()
-	// The live archive is replaced atomically as the last fallible step. Do not
-	// snapshot it: rollback must preserve any concurrent official update.
-	for _, path := range []string{
-		p.CleanBackupPath,
-		p.StatePath,
-	} {
-		if err := txn.track(path); err != nil {
-			return nil, err
-		}
-	}
-
-	// The clean backup is what restore needs, so it has to be a verified
-	// unpatched archive from the current release before anything is rewritten.
-	if err := ensureCleanBackupForPatch(s, p, p.CleanBackupPath, *currentPatched, expectedIdentity, txn); err != nil {
+	txn := &fileTxn{}
+	if err := s.ensureCleanBackup(p, currentPatched, expectedIdentity, initialHash, txn); err != nil {
 		return nil, txn.failWithRollback("preparing the clean backup", err)
 	}
 	s.progress("正在准备干净备份", p.CleanBackupPath)
@@ -158,7 +135,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	s.progress("正在写回 app.asar", p.AsarPath)
 
 	if err := atomicReplaceFile(staged, p.AsarPath, func(candidate string) error {
-		running, err := s.appRunning()
+		running, err := s.appRunning(p)
 		if err != nil {
 			return err
 		}
@@ -181,7 +158,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 		BackupPath:  backupPath,
 		CleanBackup: p.CleanBackupPath,
 		WasRunning:  wasRunning,
-		Forced:      forced,
+		Forced:      opts.Force && wasRunning,
 	}
 
 	if opts.Restart {
@@ -190,15 +167,15 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	return result, nil
 }
 
-// readArchiveIdentity reads the package.json identity out of an archive.
+// readArchiveIdentity verifies the Antigravity identity in package.json.
 func readArchiveIdentity(asarPath string) (*Identity, error) {
 	arc, err := ReadArchive(asarPath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not read Antigravity archive %s: %w", asarPath, err)
 	}
 	id := arc.Identity()
-	if id == nil {
-		return nil, fmt.Errorf("archive has no readable identity")
+	if id == nil || id.Name != "antigravity" {
+		return nil, fmt.Errorf("could not verify Antigravity archive identity: %s", asarPath)
 	}
 	return id, nil
 }
@@ -293,59 +270,6 @@ func buildPatchedArchive(srcPath string, locale *Locale, preloadFragment, menuFr
 	return staged, nil
 }
 
-// ensureCleanBackupForPatch makes sure a verified unpatched archive from the
-// current release exists at cleanBackupPath.
-func ensureCleanBackupForPatch(s *Service, p *paths, cleanBackupPath string, currentPatched bool, expectedIdentity *Identity, txn *fileTxn) error {
-	if !currentPatched {
-		// An official update can leave an older clean backup beside a new
-		// app.asar. Refreshing from the verified-unpatched archive keeps a later
-		// restore on the same release. A backup that is not valid for the
-		// installed release is replaced rather than kept: a surviving one would
-		// make a later restore downgrade app.asar out of step with
-		// app.asar.unpacked.
-		state := inspectCleanBackup(cleanBackupPath, expectedIdentity)
-		if state == cleanBackupValid {
-			return nil
-		}
-		if state != cleanBackupMissing {
-			s.notes = append(s.notes, fmt.Sprintf(
-				"Replaced the previous clean backup (%s); it did not match the installed release.", state))
-		}
-		if err := replaceFileAtomically(p.AsarPath, cleanBackupPath); err != nil {
-			return err
-		}
-	}
-
-	if inspectCleanBackup(cleanBackupPath, expectedIdentity) == cleanBackupValid {
-		return nil
-	}
-
-	pristine, err := findPristineArchive(p.ResourcesDir, expectedIdentity)
-	if err != nil {
-		return err
-	}
-	if pristine == "" {
-		return fmt.Errorf(
-			"app.asar is already patched and no verified pristine copy was found, so the original " +
-				"English build cannot be preserved. Reinstall or update Antigravity to restore a clean " +
-				"app.asar, then run this tool again")
-	}
-	// The destination already exists in this branch, so an exclusive copy would
-	// fail and leave the unusable backup in place. Replace it instead.
-	if err := replaceFileAtomically(pristine, cleanBackupPath); err != nil {
-		return err
-	}
-	s.notes = append(s.notes, fmt.Sprintf("Recovered a pristine archive from %s", filepath.Base(pristine)))
-	return nil
-}
-
-// replaceFileAtomically moves src over dst, leaving dst fully written or
-// untouched. Unlike copyFileExclusive it overwrites an existing dst, which is
-// what a backup refresh needs.
-func replaceFileAtomically(src, dst string) error {
-	return atomicReplaceFile(src, dst, nil)
-}
-
 // RestoreOfficial restores the official untranslated archive.
 func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	s.clearNotes()
@@ -354,79 +278,51 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	if err != nil {
 		return nil, err
 	}
+	unlock, err := lockInstallation(p.ResourcesDir)
+	if err != nil {
+		return nil, err
+	}
+	defer unlock()
 
 	initialHash, err := hashArchive(p.AsarPath)
 	if err != nil {
 		return nil, err
 	}
-	currentPatched := detectPatchState(p.AsarPath)
-	if currentPatched == nil {
-		return nil, fmt.Errorf("could not read Antigravity archive: %s", p.AsarPath)
-	}
-
-	// Verify the archive before refreshing or restoring a clean backup. Without
-	// this guard, a mistaken --app-dir pointing at an unrelated app.asar could
-	// overwrite a known-good backup even though the live archive is untouched.
 	expectedIdentity, err := readArchiveIdentity(p.AsarPath)
 	if err != nil {
-		return nil, fmt.Errorf("could not verify Antigravity archive identity: %s", p.AsarPath)
+		return nil, err
 	}
-	if expectedIdentity.Name != "antigravity" {
-		return nil, fmt.Errorf("could not verify Antigravity archive identity: %s", p.AsarPath)
-	}
-
-	if !*currentPatched {
-		// After an official update the app is already English, while the clean
-		// backup may still belong to the previous release. Refresh the backup and
-		// avoid needlessly stopping or rewriting the running application.
-		if err := ensureRestorableCleanBackup(s, p, expectedIdentity); err != nil {
-			return nil, explainWriteError(err)
-		}
-		writeState(p, "en")
-		s.progress("已经是官方英文版本", "")
-		return &RestoreResult{AlreadyEnglish: true}, nil
+	currentPatched, err := detectPatchInArchive(p.AsarPath)
+	if err != nil {
+		return nil, err
 	}
 
-	timeout := opts.TimeoutMs
-	if timeout <= 0 {
-		timeout = gracefulTimeoutMs
+	if currentPatched {
+		s.progress("正在定位干净备份", p.CleanBackupPath)
 	}
-
-	txn := newFileTxn()
-	for _, path := range []string{p.CleanBackupPath, p.StatePath} {
-		if err := txn.track(path); err != nil {
-			return nil, err
-		}
-	}
-
-	if err := ensureRestorableCleanBackup(s, p, expectedIdentity); err != nil {
+	txn := &fileTxn{}
+	if err := s.ensureCleanBackup(p, currentPatched, expectedIdentity, initialHash, txn); err != nil {
 		return nil, txn.failWithRollback("locating a clean English archive", err)
 	}
-	s.progress("正在定位干净备份", p.CleanBackupPath)
-
-	// The backup is about to become app.asar, so it is re-verified here rather
-	// than trusting that the step above left a usable archive in place. A patch
-	// that reports success without restoring would be worse than failing.
-	if state := inspectCleanBackup(p.CleanBackupPath, expectedIdentity); state != cleanBackupValid {
-		return nil, txn.failWithRollback("locating a clean English archive",
-			fmt.Errorf("the clean backup is %s and could not be validated: %s", state, p.CleanBackupPath))
+	if !currentPatched {
+		if err := assertArchiveUnchanged(p.AsarPath, initialHash); err != nil {
+			return nil, txn.failWithRollback("refreshing the clean backup", err)
+		}
+		writeState(p, EnglishLocale)
+		s.progress("已经是官方英文版本", "")
+		return &RestoreResult{AlreadyEnglish: true}, nil
 	}
 
 	backupHash, err := hashArchive(p.CleanBackupPath)
 	if err != nil {
 		return nil, txn.failWithRollback("reading the clean backup", err)
 	}
-	s.progress("正在关闭 Antigravity", "")
-
-	wasRunning, stopped, forced, err := s.stopApp(opts.Force, timeout)
+	wasRunning, err := s.closeApp(p, opts)
 	if err != nil {
-		return nil, err
-	}
-	if !stopped {
-		return nil, fmt.Errorf("Antigravity is still running; close it and re-run")
+		return nil, txn.failWithRollback("closing Antigravity", err)
 	}
 	if err := assertArchiveUnchanged(p.AsarPath, initialHash); err != nil {
-		return nil, err
+		return nil, txn.failWithRollback("checking the installed archive", err)
 	}
 
 	backupPath := createUniqueBackupPath(p.ResourcesDir,
@@ -439,7 +335,7 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 
 	s.progress("正在写回 app.asar", p.AsarPath)
 	if err := atomicReplaceFile(p.CleanBackupPath, p.AsarPath, func(candidate string) error {
-		running, err := s.appRunning()
+		running, err := s.appRunning(p)
 		if err != nil {
 			return err
 		}
@@ -454,12 +350,12 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 		return nil, txn.failWithRollback("restoring the clean archive", err)
 	}
 
-	writeState(p, "en")
+	writeState(p, EnglishLocale)
 
 	result := &RestoreResult{
 		BackupPath: backupPath,
 		WasRunning: wasRunning,
-		Forced:     forced,
+		Forced:     opts.Force && wasRunning,
 	}
 	if opts.Restart {
 		result.Relaunched = s.relaunch(p)
@@ -477,39 +373,46 @@ func (s *Service) relaunch(p *paths) bool {
 	return true
 }
 
-// ensureRestorableCleanBackup makes sure a verified pristine archive is
-// available at the clean backup path.
-//
-// When the live archive is unpatched it is itself the verified pristine source,
-// so an unusable backup is rebuilt from it rather than searched for elsewhere.
-func ensureRestorableCleanBackup(s *Service, p *paths, expectedIdentity *Identity) error {
-	if inspectCleanBackup(p.CleanBackupPath, expectedIdentity) == cleanBackupValid {
-		return nil
-	}
-	// On a pristine archive the backup is rebuilt from the archive itself. This
-	// is the normal state after an official update, when a backup from the
-	// previous release is left behind but nothing needs restoring.
-	if patched := detectPatchState(p.AsarPath); patched != nil && !*patched {
-		if state := inspectCleanBackup(p.CleanBackupPath, expectedIdentity); state != cleanBackupMissing {
-			s.notes = append(s.notes, fmt.Sprintf(
-				"Rebuilt the clean backup (%s) from the current unpatched archive.", state))
+// An unpatched installation supplies the exact archive to restore, even if a
+// different clean build declares the same version.
+func (s *Service) ensureCleanBackup(p *paths, patched bool, identity *Identity, initialHash string, txn *fileTxn) error {
+	state := inspectCleanBackup(p.CleanBackupPath, identity)
+	source := p.AsarPath
+	if patched {
+		if state == cleanBackupValid {
+			return nil
 		}
-		return replaceFileAtomically(p.AsarPath, p.CleanBackupPath)
+		var err error
+		source, err = findPristineArchive(p.ResourcesDir, identity)
+		if err != nil {
+			return err
+		}
+		if source == "" {
+			return fmt.Errorf("no verified pristine English app.asar was found. Reinstall or update Antigravity, then try again")
+		}
+	} else if state == cleanBackupValid {
+		if hash, err := hashArchive(p.CleanBackupPath); err == nil && hash == initialHash {
+			return nil
+		}
 	}
-	pristine, err := findPristineArchive(p.ResourcesDir, expectedIdentity)
-	if err != nil {
+
+	if err := txn.replace(source, p.CleanBackupPath, func(staged string) error {
+		if !patched {
+			if err := assertArchiveUnchanged(staged, initialHash); err != nil {
+				return err
+			}
+		}
+		if status := inspectCleanBackup(staged, identity); status != cleanBackupValid {
+			return fmt.Errorf("the candidate clean archive is %s: %s", status, source)
+		}
+		return nil
+	}); err != nil {
 		return err
 	}
-	if pristine == "" {
-		return fmt.Errorf(
-			"no verified pristine English app.asar was found. Reinstall or update Antigravity to " +
-				"restore the official build, then run this tool again")
+	if patched {
+		s.notes = append(s.notes, fmt.Sprintf("Recovered a pristine archive from %s", filepath.Base(source)))
+	} else if state != cleanBackupMissing {
+		s.notes = append(s.notes, "Refreshed the clean backup from the current unpatched archive.")
 	}
-	// An existing but unusable backup is replaced. Keeping it would let the
-	// caller copy a still-patched archive over app.asar while reporting success.
-	if err := replaceFileAtomically(pristine, p.CleanBackupPath); err != nil {
-		return err
-	}
-	s.notes = append(s.notes, fmt.Sprintf("Using verified original backup: %s", filepath.Base(pristine)))
 	return nil
 }

@@ -26,9 +26,14 @@ func fail(msg string) int {
 // confirmShutdown asks before the tool closes a running application. Patching
 // app.asar requires the app to be closed, and doing that without asking would
 // discard unsaved work.
-func confirmShutdown(what string) bool {
+func confirmShutdown(what string, force bool) bool {
 	fmt.Println(what)
-	fmt.Print("Antigravity may need to be closed. Continue? [y/N] ")
+	if force {
+		fmt.Println("If Antigravity is running, it will be force-closed. Unsaved work may be lost.")
+	} else {
+		fmt.Println("If Antigravity is running, it will be asked to close. The operation stops if it stays open.")
+	}
+	fmt.Print("Continue? [y/N] ")
 	reader := bufio.NewReader(os.Stdin)
 	line, err := reader.ReadString('\n')
 	if err != nil && line == "" {

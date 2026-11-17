@@ -38,6 +38,7 @@
   var elApplyConfirmModal = document.getElementById('applyConfirmModal');
   var elApplyConfirmTitle = document.getElementById('applyConfirmTitle');
   var elApplyConfirmBody = document.getElementById('applyConfirmBody');
+  var elForceShutdown = document.getElementById('forceShutdown');
   var elBtnCancelApply = document.getElementById('btnCancelApply');
   var elBtnConfirmApply = document.getElementById('btnConfirmApply');
   var elMsgModal = document.getElementById('msgModal');
@@ -241,36 +242,33 @@
     // English is not a language pack: it is the untranslated build that restore
     // reinstalls. Routing it through apply could only fail on an unknown locale.
     if (code === 'en') {
-      confirmAction('保持官方英文', code, function () {
-        elApplyConfirmModal.classList.add('hidden');
-        doRestore();
-      });
+      confirmAction('保持官方英文', code, doRestore);
       return;
     }
 
-    confirmAction('切换到 ' + selectedLabel() + '?' , code, function () {
-      elApplyConfirmModal.classList.add('hidden');
-      runApply(app, code);
+    confirmAction('切换到 ' + selectedLabel() + '?' , code, function (force) {
+      runApply(app, code, force);
     });
   }
 
-  // Both apply and restore stop Antigravity, and the process is killed outright
-  // once the graceful window expires, so the user is asked before anything is
-  // touched. The backend refuses to run without confirmation as well.
   function confirmAction(title, code, onConfirm) {
     elApplyConfirmTitle.textContent = title;
     elApplyConfirmBody.textContent = code === 'en'
       ? '将用官方英文版 app.asar 替换当前文件，并移除全部本地化补丁。'
       : '将改写 app.asar 中的界面语言资源，Antigravity 需要先关闭。';
-    elBtnConfirmApply.onclick = onConfirm;
+    elForceShutdown.checked = false;
+    elBtnConfirmApply.onclick = function () {
+      elApplyConfirmModal.classList.add('hidden');
+      onConfirm(elForceShutdown.checked);
+    };
     elApplyConfirmModal.classList.remove('hidden');
   }
 
-  function runApply(app, code) {
+  function runApply(app, code, force) {
     setOperatingState(true, '正在改写 app.asar', '正在准备语言包与翻译资源...');
     appendLog('[操作] 应用语言包: ' + code);
 
-    app.ApplyLocale(code, true).then(function (res) {
+    app.ApplyLocale(code, true, force).then(function (res) {
       var name = res && res.LocaleName ? res.LocaleName : code;
       appendLog('[完成] 已切换为 ' + name);
       showMessage('已应用', '界面语言已切换为 ' + name + '。' +
@@ -285,7 +283,7 @@
     });
   }
 
-  function doRestore() {
+  function doRestore(force) {
     if (isOperating) return;
     var app = backend();
     if (!app) return;
@@ -293,7 +291,7 @@
     setOperatingState(true, '正在还原官方版本', '正在恢复干净备份并重算校验...');
     appendLog('[操作] 还原为官方英文');
 
-    app.RestoreLocale(true).then(function (res) {
+    app.RestoreLocale(true, force).then(function (res) {
       appendLog('[完成] 已还原为官方英文');
       var message = res && res.AlreadyEnglish ? '当前已是官方英文版本。' : 'app.asar 已恢复为官方英文版本。';
       if (res && !res.AlreadyEnglish && !res.Relaunched) message += '未能自动打开 Antigravity，请手动启动。';
@@ -354,13 +352,8 @@
   elBtnPrimaryAction.addEventListener('click', handlePrimaryAction);
   elBtnSecondaryAction.addEventListener('click', launchApp);
   elBtnChangePath.addEventListener('click', handleChangePath);
-  // The trailing "restore" link and the primary button now ask the same
-  // question through the same dialog, so there is one wording for a shutdown.
   elBtnRestore.addEventListener('click', function () {
-    confirmAction('还原为官方英文？', 'en', function () {
-      elApplyConfirmModal.classList.add('hidden');
-      doRestore();
-    });
+    confirmAction('还原为官方英文？', 'en', doRestore);
   });
   elBtnCancelApply.addEventListener('click', function () {
     elApplyConfirmModal.classList.add('hidden');

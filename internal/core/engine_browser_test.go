@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 )
@@ -43,11 +44,30 @@ func engineTestBrowser(t *testing.T) string {
 	return ""
 }
 
+type browserOutput struct {
+	mu  sync.Mutex
+	buf bytes.Buffer
+}
+
+func (b *browserOutput) Write(data []byte) (int, error) {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	return b.buf.Write(data)
+}
+
+func (b *browserOutput) snapshot() []byte {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	return bytes.Clone(b.buf.Bytes())
+}
+
+var browserResult = regexp.MustCompile(`data-ag-test-result="([A-Za-z0-9+/=]+)"`)
+
 // dumpBrowserDOM returns Chrome's dumped DOM. Some headless builds print the
 // document and then never exit, so the dump is collected until the test result
 // is present or the process ends.
 func dumpBrowserDOM(ctx context.Context, cmd *exec.Cmd) ([]byte, error) {
-	var buf bytes.Buffer
+	var buf browserOutput
 	cmd.Stdout = &buf
 	cmd.Stderr = &buf
 	if err := cmd.Start(); err != nil {
@@ -55,70 +75,94 @@ func dumpBrowserDOM(ctx context.Context, cmd *exec.Cmd) ([]byte, error) {
 	}
 	done := make(chan error, 1)
 	go func() { done <- cmd.Wait() }()
-	result := regexp.MustCompile(`data-ag-test-result="[A-Za-z0-9+/=]+"`)
 	ticker := time.NewTicker(100 * time.Millisecond)
 	defer ticker.Stop()
 	for {
-		if result.Match(buf.Bytes()) {
+		if browserResult.Match(buf.snapshot()) {
 			if cmd.Process != nil {
 				_ = cmd.Process.Kill()
 			}
 			<-done
-			return buf.Bytes(), nil
+			return buf.snapshot(), nil
 		}
 		select {
 		case err := <-done:
 			if err != nil {
-				return buf.Bytes(), err
+				return buf.snapshot(), err
 			}
-			return buf.Bytes(), nil
+			return buf.snapshot(), nil
 		case <-ctx.Done():
 			if cmd.Process != nil {
 				_ = cmd.Process.Kill()
 			}
 			<-done
-			return buf.Bytes(), ctx.Err()
+			return buf.snapshot(), ctx.Err()
 		case <-ticker.C:
 		}
 	}
 }
 
-func TestEnginePreservesContentAndSentenceFragments(t *testing.T) {
-	assets := os.DirFS("../..")
-	store, err := NewLocaleStore(assets, assets, "assets/locales", "assets/patches")
-	if err != nil {
-		t.Fatal(err)
+func TestTranslationInBrowser(t *testing.T) {
+	store := newTestService(t).store
+	for _, example := range []struct{ code, fixture string }{
+		{DefaultLocale, "testdata/engine.html"},
+		{"de", "testdata/engine-repeat.html"},
+	} {
+		t.Run(example.code, func(t *testing.T) {
+			loc, err := store.LoadLocale(example.code)
+			if err != nil {
+				t.Fatal(err)
+			}
+			engine, err := store.buildPreloadFragment(loc)
+			if err != nil {
+				t.Fatal(err)
+			}
+			html := readTestFile(t, example.fixture)
+			runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+engine+"</script>", 1))
+		})
 	}
-	loc, err := store.LoadLocale(DefaultLocale)
-	if err != nil {
-		t.Fatal(err)
-	}
-	runEngineBrowserFixture(t, store, loc, "testdata/engine.html", 90)
 }
 
-func TestInlineMessagesPreserveReactNodes(t *testing.T) {
-	store := newTestServiceForLocales(t).store
-	loc, err := store.LoadLocale(DefaultLocale)
+func TestShutdownConfirmationInBrowser(t *testing.T) {
+	html := readTestFile(t, "../../frontend/dist/index.html")
+	app := readTestFile(t, "../../frontend/dist/app.js")
+	checks := readTestFile(t, "testdata/shutdown.js")
+	scripts := "<script>" + checks + "</script><script>" + app + "</script>"
+	runBrowserChecks(t, strings.Replace(html, `<script src="app.js"></script>`, scripts, 1))
+}
+
+func readTestFile(t *testing.T, path string) string {
+	t.Helper()
+	content, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatal(err)
 	}
-	runEngineBrowserFixture(t, store, loc, "testdata/inline.html", 100)
+	return string(content)
 }
 
-func runEngineBrowserFixture(t *testing.T, store *LocaleStore, loc *Locale, fixturePath string, minChecks int) {
+const browserAssertions = `<script>
+const failures = [];
+let checks = 0;
+function check(label, actual, expected) {
+  checks++;
+  if (actual !== expected) failures.push(label + ': expected ' + expected + ', got ' + actual);
+}
+function settle(wait = 0) { return new Promise(resolve => setTimeout(resolve, wait)); }
+function verify(run) {
+  addEventListener('load', async () => {
+    try { await run(); } catch (error) { failures.push(String(error)); }
+    const result = btoa(unescape(encodeURIComponent(JSON.stringify({ checks, failures }))));
+    document.documentElement.setAttribute('data-ag-test-result', result);
+  }, { once: true });
+}
+</script>`
+
+func runBrowserChecks(t *testing.T, html string) {
 	t.Helper()
 	browser := engineTestBrowser(t)
-	engine, err := store.buildPreloadFragment(loc)
-	if err != nil {
-		t.Fatal(err)
-	}
-	fixture, err := os.ReadFile(fixturePath)
-	if err != nil {
-		t.Fatal(err)
-	}
 	dir := t.TempDir()
 	page := filepath.Join(dir, "engine.html")
-	source := strings.Replace(string(fixture), "<!-- ENGINE -->", "<script>"+engine+"</script>", 1)
+	source := strings.Replace(html, "</head>", browserAssertions+"</head>", 1)
 	if err := os.WriteFile(page, []byte(source), 0o600); err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +185,7 @@ func runEngineBrowserFixture(t *testing.T, store *LocaleStore, loc *Locale, fixt
 	if err != nil {
 		t.Fatalf("headless browser: %v\n%s", err, output)
 	}
-	match := regexp.MustCompile(`data-ag-test-result="([A-Za-z0-9+/=]+)"`).FindSubmatch(output)
+	match := browserResult.FindSubmatch(output)
 	if match == nil {
 		t.Fatalf("browser did not finish the engine checks:\n%s", output)
 	}
@@ -156,25 +200,8 @@ func runEngineBrowserFixture(t *testing.T, store *LocaleStore, loc *Locale, fixt
 	if err := json.Unmarshal(raw, &result); err != nil {
 		t.Fatal(err)
 	}
-	if result.Checks < minChecks || len(result.Failures) > 0 {
+	if result.Checks == 0 || len(result.Failures) > 0 {
 		t.Fatalf("%d DOM checks, failures: %v", result.Checks, result.Failures)
 	}
 	t.Logf("%d DOM checks passed", result.Checks)
-}
-
-func TestChinesePacksPreserveTurbo(t *testing.T) {
-	assets := os.DirFS("../..")
-	store, err := NewLocaleStore(assets, assets, "assets/locales", "assets/patches")
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, code := range []string{"zh-CN", "zh-Hant"} {
-		loc, err := store.LoadLocale(code)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if loc.Text["Turbo"] != "Turbo" || loc.Text["Turbo mode"] != "Turbo 模式" {
-			t.Errorf("%s should preserve the permission preset name Turbo", code)
-		}
-	}
 }

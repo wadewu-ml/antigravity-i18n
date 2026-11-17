@@ -2,234 +2,70 @@
 <html lang="en">
 <head><meta charset="utf-8"><!-- ENGINE --></head>
 <body>
-  <button id="run">Run</button>
-  <button id="icon-button"><span aria-hidden="true">play_arrow</span><span id="icon-label">Run</span></button>
-  <div style="display:flex"><span id="flex-label">Run</span><span>Unknown label</span></div>
-  <div style="display:grid"><span id="grid-label">Open</span><span>Unknown label</span></div>
-  <div><button id="separate-button">Open</button><button>Run</button></div>
-  <div><span style="display:block" id="block-label">Open</span><span>Other text</span></div>
-  <button id="turbo">Turbo</button>
-  <button id="turbo-mode">Turbo mode</button>
-  <p id="plain-sentence">Run these commands in order.</p>
-  <p id="split-sentence"><span>Run</span> these commands in order.</p>
-  <div id="split-words"><span>Open</span><span> </span><span>the folder</span></div>
-  <p id="nested-sentence">Please <span><strong>Open</strong></span> the folder.</p>
-  <p id="link-sentence">Go to <a href="#">Settings</a> to continue.</p>
-  <p><span id="permissions-description">Configure global allowed and denied resource permissions. <a id="permissions-learn" href="https://antigravity.google/docs/permissions">Learn more</a>.</span></p>
-  <p id="unknown-help-sentence">Unknown resources description. <a href="#">Learn more</a>.</p>
-  <p id="fragment-help-sentence">Open <a href="#">Settings</a>.</p>
-  <div data-testid="delete-skill-permanent-warning"><span id="delete-warning"><strong id="delete-warning-emphasis">This cannot be undone.</strong> Copy the folder elsewhere first if you might want it back.</span></div>
-  <p id="unknown-emphasis-sentence"><strong>This cannot be undone.</strong> unless you save it.</p>
-  <div role="tooltip"><div class="text-sm"><span id="back-tooltip-label">Go Back</span><span class="ml-1 opacity-50" id="back-tooltip-shortcut">Ctrl+[</span></div></div>
-  <div role="tooltip"><span id="sidebar-tooltip-label">Toggle Sidebar</span><span class="ml-1 text-muted-foreground" id="sidebar-tooltip-shortcut">⌘⇧B</span></div>
-  <div role="tooltip" id="unknown-tooltip-sentence"><span>Go Back</span><span class="ml-1 opacity-50">to the folder</span></div>
-  <div id="shortcut-outside-tooltip"><span>Go Back</span><span>Ctrl+[</span></div>
-  <div role="tooltip" id="tooltip-middle-sentence">Go to <span>Settings</span><span>Ctrl+[</span> to continue.</div>
-  <div data-testid="planner-response-text"><span id="response-with-link">Configure global allowed and denied resource permissions. <a href="#">Learn more</a>.</span></div>
-  <div data-testid="user-input-step"><span id="user-with-link">Configure global allowed and denied resource permissions. <a href="#">Learn more</a>.</span></div>
-  <div data-testid="planner-response-text" id="protected-attributes" title="Open"><a id="protected-link" title="Run" href="#">Open</a><img id="protected-image" alt="Open"></div>
-  <div data-testid="user-input-step"><span id="protected-user-title" title="Run">Open</span></div>
-  <div data-testid="planner-response-text"><span id="protected-warning"><strong>This cannot be undone.</strong> Copy the folder elsewhere first if you might want it back.</span></div>
-  <div role="radiogroup" style="display:grid">
-    <button type="button" role="radio" data-testid="mode-option-non-technical" id="knowledge-mode" aria-label="Knowledge Work">
-      <div id="knowledge-title">Knowledge Work</div>
-      <div id="knowledge-description">Simplified interface for research, writing, and everyday tasks.</div>
-    </button>
-    <button type="button" role="radio" data-testid="mode-option-developer" id="developer-mode" aria-label="Software Engineering">
-      <div id="developer-title">Software Engineering</div>
-      <div id="developer-description">Full interface for coding, developer tools, and managing agents.</div>
-    </button>
-  </div>
-  <button id="give-feedback">Give Feedback</button>
-  <div id="fragment-label"><span>Run</span><span> </span><span>Open</span></div>
-  <p id="contents-sentence">Please <span style="display:contents"><b>Open</b></span> it.</p>
-  <p id="punctuation-label"><span>Open</span><span>:</span></p>
-  <div data-testid="live-user-turn"><p id="user-turn">Run</p></div>
-  <div data-testid="side-question-followup-user" id="side-user">Run</div>
-  <div data-testid="side-question-question" style="display:flex"><span id="side-heading">Help</span><span class="truncate" id="side-question-original">Open</span></div>
-  <div data-testid="live-agent-turn"><p id="agent-turn"><span>Run</span><span> </span><span>Open</span></p></div>
-  <p data-testid="live-lead" id="live-lead"><span>Open</span></p>
-  <p data-testid="live-body" id="live-body"><span>Run</span></p>
-  <p data-testid="transcript-line-text" id="transcript">Open</p>
-  <div data-testid="live-transcript-pane"><ol data-testid="live-transcript">
-    <li><p data-testid="transcript-line-text" id="transcript-in-pane">Run</p></li>
-    <li data-testid="transcript-work-line" id="work-status">Worked for 5s</li>
-  </ol></div>
-  <button data-testid="voice-start-button" id="voice-start">Start Voice mode</button>
-  <div contenteditable="plaintext-only" id="editor" aria-label="Open">Run</div>
-  <pre id="code">Open</pre>
-  <div data-testid="planner-response-text" id="response">Run</div>
-  <div data-testid="progress-update-response-text" id="progress-response">Run</div>
-  <span data-testid="voice-transcript-summary-lead" id="voice-summary-lead">Open</span>
-  <span data-testid="voice-transcript-summary-point"><span id="voice-summary-point">Run</span></span>
-  <div translate="no"><span id="opt-out" title="Open">Run</span></div>
-  <div class="notranslate"><span id="class-opt-out" aria-label="Run">Open</span></div>
+  <button id="control" title="Run">Open</button>
+  <p id="fragment">Please <span><strong>Open</strong></span> the folder.</p>
+  <div style="display:flex"><span id="independent">Run</span><span>Unknown label</span></div>
+  <div role="tooltip"><span id="tooltip">Go Back</span><span id="shortcut">Ctrl+[</span></div>
+  <p id="permission">Configure global allowed and denied resource permissions. <a href="#">Learn more</a>.</p>
+  <button id="knowledge" aria-label="Knowledge Work">Knowledge Work</button>
+  <div data-testid="live-agent-turn" id="voice"><span>Run</span> <span>Open</span></div>
+  <div data-testid="planner-response-text"><img id="attachment" alt="Open"></div>
+  <div data-testid="side-question-question" style="display:flex"><span id="side-label">Help</span><span id="side-content" class="truncate">Open</span></div>
+  <div id="editor" contenteditable="plaintext-only" aria-label="Open">Run</div>
+  <div translate="no"><button id="remote" title="Open">Run</button></div>
   <input id="input" value="Run" placeholder="Open">
-  <button id="attrs" title="Run" aria-label="Open">Unknown label</button>
+  <div id="timer">Worked for 5s</div>
+  <div id="terms" class="text-sm text-muted-foreground mt-auto pt-4">By using this app, you agree to its <a href="https://antigravity.google/terms">Terms of Service</a></div>
+  <div class="text-sm text-muted-foreground leading-relaxed"><span id="project">Also includes <span class="text-link">Global Permissions</span> when working in this project.</span></div>
+  <div data-testid="mcp-server-browser-sign-in"><span id="provider" role="status"></span></div>
   <script>
-    let checks = 0;
-    const failures = [];
-    const warningEmphasis = document.getElementById('delete-warning-emphasis');
-    function check(id, expected, attribute) {
-      checks++;
-      const el = document.getElementById(id);
-      const actual = attribute ? el.getAttribute(attribute) : el.textContent;
-      if (actual !== expected) failures.push(id + ': ' + JSON.stringify(actual) + ' != ' + JSON.stringify(expected));
-    }
-    const settle = () => new Promise(resolve => setTimeout(resolve, 0));
-    function finish() {
-      const json = JSON.stringify({checks, failures});
-      document.documentElement.setAttribute('data-ag-test-result', btoa(unescape(encodeURIComponent(json))));
-    }
-    addEventListener('load', async () => {
-      try {
-        await settle();
-        check('run', '运行');
-        check('icon-label', '运行');
-        check('flex-label', '运行');
-        check('grid-label', '打开');
-        check('separate-button', '打开');
-        check('block-label', '打开');
-        check('turbo', 'Turbo');
-        check('turbo-mode', 'Turbo 模式');
-        check('plain-sentence', 'Run these commands in order.');
-        check('split-sentence', 'Run these commands in order.');
-        check('split-words', 'Open the folder');
-        check('nested-sentence', 'Please Open the folder.');
-        check('link-sentence', 'Go to Settings to continue.');
-        check('permissions-description', '配置全局允许和拒绝的资源权限。 了解更多.');
-        check('permissions-learn', '了解更多');
-        check('permissions-learn', 'https://antigravity.google/docs/permissions', 'href');
-        check('unknown-help-sentence', 'Unknown resources description. Learn more.');
-        check('fragment-help-sentence', 'Open Settings.');
-        check('delete-warning', '此操作无法撤销。 如需保留，请先将文件夹复制到其他位置。');
-        checks++;
-        if (document.getElementById('delete-warning-emphasis') !== warningEmphasis || warningEmphasis.tagName !== 'STRONG') failures.push('warning emphasis node was replaced');
-        check('unknown-emphasis-sentence', 'This cannot be undone. unless you save it.');
-        check('back-tooltip-label', '后退');
-        check('back-tooltip-shortcut', 'Ctrl+[');
-        check('sidebar-tooltip-label', '切换侧边栏');
-        check('sidebar-tooltip-shortcut', '⌘⇧B');
-        check('unknown-tooltip-sentence', 'Go Backto the folder');
-        check('shortcut-outside-tooltip', 'Go BackCtrl+[');
-        check('tooltip-middle-sentence', 'Go to SettingsCtrl+[ to continue.');
-        check('response-with-link', 'Configure global allowed and denied resource permissions. Learn more.');
-        check('user-with-link', 'Configure global allowed and denied resource permissions. Learn more.');
-        check('protected-attributes', 'Open', 'title');
-        check('protected-link', 'Run', 'title');
-        check('protected-image', 'Open', 'alt');
-        check('protected-user-title', 'Run', 'title');
-        check('protected-warning', 'This cannot be undone. Copy the folder elsewhere first if you might want it back.');
-        check('knowledge-title', '知识工作');
-        check('knowledge-description', '适用于研究、写作和日常任务的简洁界面。');
-        check('knowledge-mode', '知识工作', 'aria-label');
-        check('developer-title', '软件工程');
-        check('developer-description', '提供编码、开发工具和代理管理功能的完整界面。');
-        check('developer-mode', '软件工程', 'aria-label');
-        check('give-feedback', '提供反馈');
-        check('fragment-label', 'Run Open');
-        check('contents-sentence', 'Please Open it.');
-        check('punctuation-label', '打开:');
-        check('user-turn', 'Run');
-        check('side-user', 'Run');
-        check('side-heading', '帮助');
-        check('side-question-original', 'Open');
-        check('agent-turn', 'Run Open');
-        check('live-lead', 'Open');
-        check('live-body', 'Run');
-        check('transcript', 'Open');
-        check('transcript-in-pane', 'Run');
-        check('work-status', '运行了 5秒');
-        check('voice-start', '开始语音模式');
-        check('editor', 'Run');
-        check('editor', '打开', 'aria-label');
-        check('code', 'Open');
-        check('response', 'Run');
-        check('progress-response', 'Run');
-        check('voice-summary-lead', 'Open');
-        check('voice-summary-point', 'Run');
-        check('opt-out', 'Run');
-        check('opt-out', 'Open', 'title');
-        check('class-opt-out', 'Open');
-        check('class-opt-out', 'Run', 'aria-label');
-        check('input', 'Run', 'value');
-        check('input', '打开', 'placeholder');
-        check('attrs', '运行', 'title');
-        check('attrs', '打开', 'aria-label');
+    const byId = id => document.getElementById(id);
+    const text = id => byId(id).textContent;
+    const terms = byId('terms');
+    const termsCopy = terms.firstChild;
+    const link = terms.lastChild;
+    let clicks = 0;
+    link.addEventListener('click', event => { event.preventDefault(); clicks++; });
 
-        // Inserted subtrees, directly inserted text nodes, and streaming updates
-        // all arrive through different branches of the installed observer.
-        const dynamic = document.createElement('div');
-        dynamic.innerHTML = '<div data-testid="live-agent-turn"><p id="dynamic-voice"><span>Open</span></p></div>' +
-          '<p id="dynamic-sentence"><span>Run</span> the next command.</p>' +
-          '<button id="dynamic-control">Run</button>' +
-          '<div role="tooltip"><span id="dynamic-tooltip-label">Go Back</span><span id="dynamic-tooltip-shortcut">Ctrl+[</span></div>' +
-          '<p id="dynamic-warning"><strong>This cannot be undone.</strong> Copy the folder elsewhere first if you might want it back.</p>' +
-          '<p><span id="dynamic-permissions">Configure global allowed and denied resource permissions. <a id="dynamic-permissions-learn" href="#permissions">Learn more</a>.</span></p>';
-        document.body.append(dynamic);
-        const protectedImage = document.createElement('img');
-        protectedImage.id = 'dynamic-protected-image';
-        protectedImage.alt = 'Run';
-        document.getElementById('protected-attributes').append(protectedImage);
-        const reactSentence = document.createElement('p');
-        reactSentence.id = 'react-split-whitespace';
-        const reactLink = document.createElement('a');
-        reactLink.href = '#react';
-        reactLink.textContent = 'Learn more';
-        reactSentence.append(document.createTextNode('Configure global allowed and denied resource permissions.'), document.createTextNode(' '), reactLink, document.createTextNode('.'));
-        dynamic.append(reactSentence);
-        await settle();
-        check('dynamic-voice', 'Open');
-        check('dynamic-sentence', 'Run the next command.');
-        check('dynamic-control', '运行');
-        check('dynamic-tooltip-label', '后退');
-        check('dynamic-tooltip-shortcut', 'Ctrl+[');
-        check('dynamic-warning', '此操作无法撤销。 如需保留，请先将文件夹复制到其他位置。');
-        check('dynamic-protected-image', 'Run', 'alt');
-        check('react-split-whitespace', '配置全局允许和拒绝的资源权限。 了解更多.');
-        check('dynamic-permissions', '配置全局允许和拒绝的资源权限。 了解更多.');
+    const project = byId('project');
+    const automation = document.createTextNode('This project was created for an automation. ');
+    project.prepend(automation);
+    const providerName = document.createTextNode('Run');
+    byId('provider').append('Finish signing in to ', providerName, ' in your browser.');
 
-        document.getElementById('dynamic-voice').firstChild.firstChild.nodeValue = 'Run';
-        document.getElementById('transcript').firstChild.nodeValue = 'Run';
-        document.getElementById('dynamic-control').firstChild.nodeValue = 'Open';
-        document.getElementById('attrs').setAttribute('title', 'Open');
-        document.getElementById('opt-out').setAttribute('title', 'Run');
-        document.getElementById('split-sentence').firstChild.firstChild.nodeValue = 'Open';
-        document.getElementById('voice-summary-point').firstChild.nodeValue = 'Open';
-        document.getElementById('side-question-original').firstChild.nodeValue = 'Run';
-        document.getElementById('dynamic-permissions').firstChild.nodeValue = 'Configure global allowed and denied resource permissions. ';
-        document.getElementById('dynamic-tooltip-label').firstChild.nodeValue = 'Go Back';
-        document.getElementById('protected-link').setAttribute('title', 'Open');
-        document.getElementById('protected-image').setAttribute('alt', 'Run');
-        document.getElementById('protected-user-title').setAttribute('title', 'Open');
-        await settle();
-        check('dynamic-voice', 'Run');
-        check('transcript', 'Run');
-        check('dynamic-control', '打开');
-        check('attrs', '打开', 'title');
-        check('opt-out', 'Run', 'title');
-        check('split-sentence', 'Open these commands in order.');
-        check('voice-summary-point', 'Open');
-        check('side-question-original', 'Run');
-        check('dynamic-permissions', '配置全局允许和拒绝的资源权限。 了解更多.');
-        check('dynamic-tooltip-label', '后退');
-        check('protected-link', 'Open', 'title');
-        check('protected-image', 'Run', 'alt');
-        check('protected-user-title', 'Open', 'title');
+    verify(async () => {
+      for (const [id, expected] of Object.entries({
+        control: '打开', fragment: 'Please Open the folder.', independent: '运行',
+        tooltip: '后退', shortcut: 'Ctrl+[', permission: '配置全局允许和拒绝的资源权限。 了解更多.',
+        knowledge: '知识工作', voice: 'Run Open', 'side-label': '帮助', 'side-content': 'Open',
+        editor: 'Run', remote: 'Run', timer: '运行了 5秒',
+        terms: '使用此应用即表示你同意其服务条款',
+        project: '此项目为自动化创建。在此项目中工作时，也会包含全局权限。',
+        provider: '请在浏览器中完成 Run 的登录。'
+      })) check(id, text(id), expected);
+      check('UI tooltip', byId('control').title, '运行');
+      check('editor label', byId('editor').getAttribute('aria-label'), '打开');
+      check('remote tooltip', byId('remote').title, 'Open');
+      check('input value', byId('input').value, 'Run');
+      check('input placeholder', byId('input').placeholder, '打开');
+      check('terms nodes', terms.firstChild === termsCopy && terms.lastChild === link, true);
+      check('link destination', link.href, 'https://antigravity.google/terms');
+      link.click();
+      check('original link handler', clicks, 1);
 
-        document.getElementById('dynamic-permissions-learn').firstChild.nodeValue = 'Learn more';
-        await settle();
-        check('dynamic-permissions', '配置全局允许和拒绝的资源权限。 了解更多.');
-        check('dynamic-permissions-learn', '#permissions', 'href');
-
-        const node = document.createTextNode('Open');
-        document.getElementById('live-body').replaceChildren(node);
-        await settle();
-        check('live-body', 'Open');
-      } catch (error) {
-        failures.push(String(error.stack || error));
-      }
-      finish();
+      automation.remove();
+      providerName.nodeValue = 'Open';
+      termsCopy.nodeValue = 'Unknown terms before ';
+      byId('control').firstChild.nodeValue = 'Close';
+      byId('attachment').alt = 'Run';
+      byId('voice').firstChild.firstChild.nodeValue = 'Open';
+      await settle();
+      check('React-only deletion', text('project'), '在此项目中工作时，也会包含全局权限。');
+      check('updated provider name', text('provider'), '请在浏览器中完成 Open 的登录。');
+      check('unmatched inline sentence', terms.textContent, 'Unknown terms before Terms of Service');
+      check('updated UI label', text('control'), '关闭');
+      check('updated user attachment alt', byId('attachment').alt, 'Run');
+      check('updated voice content', text('voice'), 'Open Open');
     });
   </script>
 </body>

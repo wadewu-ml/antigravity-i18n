@@ -20,6 +20,7 @@ const stateMarkerName = "antigravity-i18n-state.json"
 var legacyStateMarkerNames = []string{"polygravity-state.json", "antigravity-zh-state.json"}
 
 const (
+	antigravityExe         = "Antigravity.exe"
 	gracefulTimeoutMs      = 30_000
 	gracefulPollIntervalMs = 500
 )
@@ -91,6 +92,10 @@ func resolveAppPaths(customAppDir string) (*paths, error) {
 		alt := filepath.Join(appDir, "app.asar")
 		if fileExists(alt) {
 			asarPath = alt
+			parent := filepath.Dir(filepath.Clean(appDir))
+			if strings.EqualFold(filepath.Base(appDir), "resources") && fileExists(filepath.Join(parent, antigravityExe)) {
+				appDir = parent
+			}
 		}
 	}
 	if !fileExists(asarPath) {
@@ -189,83 +194,9 @@ func writeState(p *paths, language string) {
 // local build keeps "dev" rather than claiming a release number it is not.
 var Version = "dev"
 
-// isAntigravityRunning reports whether any Antigravity process is alive.
-//
-// The image name is matched exactly, so the query never sees this tool's own
-// command line, which contains the string "antigravity" via the archive name.
-func isAntigravityRunning() (bool, error) {
-	cmd := exec.Command("tasklist.exe", "/FI", "IMAGENAME eq Antigravity.exe", "/NH")
-	hideWindow(cmd)
-	out, err := cmd.Output()
-	if err != nil {
-		return false, fmt.Errorf(
-			"could not query Antigravity processes (tasklist): %v; cannot confirm the app is stopped", err)
-	}
-	return strings.Contains(strings.ToLower(string(out)), "antigravity.exe"), nil
-}
-
-func tryExec(file string, args ...string) {
-	cmd := exec.Command(file, args...)
-	hideWindow(cmd)
-	_ = cmd.Run()
-	// The process may already have exited; the follow-up probe decides.
-}
-
-// stopAntigravity asks the app to close, then waits for it to exit before
-// escalating.
-//
-// Patching rewrites app.asar in place, so the app genuinely must not be running.
-// But an unconditional force-kill discards unsaved editor state and in-flight
-// agent work, so a graceful request is always attempted first and a forced kill
-// only happens if the app is still alive after the timeout.
-func stopAntigravity(force bool, timeoutMs int) (wasRunning, stopped, forced bool, err error) {
-	running, err := isAntigravityRunning()
-	if err != nil {
-		return false, false, false, err
-	}
-	if !running {
-		return false, true, false, nil
-	}
-	wasRunning = true
-
-	if !force {
-		// No /F: this posts a close request to the window. /T reaches the app's
-		// own helper processes as well, so the app leaves as one unit.
-		tryExec("taskkill.exe", "/T", "/IM", "Antigravity.exe")
-
-		deadline := time.Now().Add(time.Duration(timeoutMs) * time.Millisecond)
-		for time.Now().Before(deadline) {
-			stillRunning, err := isAntigravityRunning()
-			if err != nil {
-				return wasRunning, false, false, err
-			}
-			if !stillRunning {
-				return wasRunning, true, false, nil
-			}
-			time.Sleep(gracefulPollIntervalMs * time.Millisecond)
-		}
-	}
-
-	// The app ignored the close request, so force it. Without this the in-place
-	// app.asar rewrite would fail on a locked file.
-	//
-	// /T is required, not cosmetic: Antigravity keeps its scheduler helpers alive
-	// as children (language_server.exe, ~112 MB each on this machine, launched
-	// with "multicall schedule"). Killing only the Antigravity.exe images orphans
-	// those children, and they then pile up across restarts until the machine
-	// runs out of memory.
-	tryExec("taskkill.exe", "/F", "/T", "/IM", "Antigravity.exe")
-
-	stillRunning, err := isAntigravityRunning()
-	if err != nil {
-		return wasRunning, false, false, err
-	}
-	return wasRunning, !stillRunning, true, nil
-}
-
 // launchAntigravity starts the app again after a patch.
 func launchAntigravity(p *paths) error {
-	exe := filepath.Join(p.AppDir, "Antigravity.exe")
+	exe := filepath.Join(p.AppDir, antigravityExe)
 	if !fileExists(exe) {
 		return fmt.Errorf("Antigravity.exe was not found in %s", p.AppDir)
 	}

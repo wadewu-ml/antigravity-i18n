@@ -39,32 +39,37 @@
 双击运行 `antigravity-i18n.exe`：
 1. 程序会自动检测 Antigravity 的安装目录（若未检测到，可点击“更改位置”手动选择）。
 2. 在语言列表中点击选中目标语言（选中 **English** 即为还原官方原版）。
-3. 点击“应用”按钮；工具在确认关闭程序后自动改写资源并重启 Antigravity。
+3. 点击“应用”并确认。Antigravity 退出后，工具会改写资源并重启客户端。
+
+应用和还原需要关停客户端时，工具会请求选定安装的 Antigravity 正常退出。等待 30 秒后仍在运行，本次操作取消。需要立即关闭时，可在确认窗口勾选“强制退出”。
 
 ### 2. 命令行模式
 
-同一可执行文件也可直接在终端中调用：
+在 `antigravity-i18n.exe` 所在目录打开 PowerShell。
 
 ```powershell
 # 查看当前本地化状态与备份信息
-antigravity-i18n.exe status
+.\antigravity-i18n.exe status
 
 # 安装指定语言包（默认简体中文）
-antigravity-i18n.exe apply --locale zh-CN
+.\antigravity-i18n.exe apply --locale zh-CN
 
 # 随时还原为官方英文原版
-antigravity-i18n.exe restore
+.\antigravity-i18n.exe restore
 
 # 查看所有内置语言包及其覆盖率
-antigravity-i18n.exe locales
+.\antigravity-i18n.exe locales
 ```
 
 常用参数：
 - `--app-dir <path>`：手动指定 Antigravity 安装路径（亦可通过环境变量 `ANTIGRAVITY_APP_DIR` 设置）。
 - `--locale <code>`：指定语言代码，如 `zh-CN`、`zh-Hant`、`ja`、`ko`、`de`、`es`、`fr` 等。
 - `--no-restart`：完成改写后不自动重启客户端。
-- `--force`：跳过 30 秒优雅退出等待，直接结束 Antigravity 进程。
+- 使用 `--force` 立即结束选定安装的 Antigravity 进程。未保存的工作可能丢失。
+- 使用 `--timeout <ms>` 设置退出等待时长，单位为毫秒，默认 `30000`。
 - `--yes`：静默确认进程关闭提示。
+
+同一安装同一时间只能执行一次应用或还原。收到另一项操作正在运行的提示时，等它结束后再试。用 `status` 检查所选安装及备份。归档无法读取或应用身份无法验证时，命令会报错。
 
 ---
 
@@ -98,8 +103,8 @@ Antigravity 自动更新会覆盖 `app.asar`。官方更新完成后，重新打
 不同语言之间可以直接点击切换，工具会自动替换现有补丁，无需先手动执行还原。任何时候点击“还原为官方英文”均可恢复至纯净状态。
 
 ### 3. 备份文件说明
-- `app.asar.clean-backup`：官方纯净归档备份，是执行“还原”的核心依赖，**请勿手动删除**。
-- `app.asar.bak-*`：每次操作留下的时间戳快照。当确认当前软件运行无误后，可手动清理这些时间戳文件以释放磁盘空间。
+- `app.asar.clean-backup` 保存用于还原的原始归档。对未打补丁的安装执行应用或还原时，工具会比对它与当前归档的 SHA-256。即使版本号相同，哈希不一致时也会刷新备份。**请保留此文件。**
+- `app.asar.bak-*` 是带时间戳的归档快照。干净备份缺失或无效时，工具会从这些快照查找可用原档。确认客户端运行正常且 `status` 显示干净备份有效后，可清理旧快照释放空间。
 
 ### 4. 为什么部分词语或句子保持英文？
 翻译按完整文本匹配，不对未知英文句子逐词替换。句子被内联标签拆分时，也会跳过片段，避免局部中文混入英文。独立按钮、菜单项和无障碍标签仍可正常翻译。
@@ -113,8 +118,9 @@ Antigravity 自动更新会覆盖 `app.asar`。官方更新完成后，重新打
 如需自行编译：
 
 **依赖环境**：
-- Go 1.26+
+- Go 1.26.3+
 - [Wails v2](https://wails.io/) CLI
+- PowerShell 7
 
 ```powershell
 # 克隆仓库
@@ -124,12 +130,12 @@ cd antigravity-i18n
 # 完整构建（同时产出 GUI 与 CLI）
 .\build.ps1
 
-# 运行自动化测试（包含真实 asar 还原闭环验证）
-$env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
+# 取消下一行注释可一并验证官方归档的逐字节还原
+# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 
-DOM 回归测试会自动使用本机 Chrome 或 Edge 的独立无头实例，验证语音正文保护、句子片段、界面标签和动态更新；也可通过 `ANTIGRAVITY_TEST_BROWSER` 指定 Chromium 可执行文件。未找到浏览器时会跳过该项测试。
+DOM 回归使用独立的无头 Chrome 或 Edge 实例。可用 `ANTIGRAVITY_TEST_BROWSER` 指定 Chromium 可执行文件。未找到浏览器时会跳过 DOM 用例。
 
 ---
 

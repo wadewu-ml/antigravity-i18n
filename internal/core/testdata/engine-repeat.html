@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><!-- ENGINE --></head>
+<body>
+  <script>
+    verify(async () => {
+      const label = document.createElement('button');
+      label.textContent = 'Quota';
+      label.title = 'Quota';
+      document.body.append(label);
+      await settle();
+      check('dynamic quota text', label.textContent, 'Quote');
+      check('dynamic quota title', label.title, 'Quote');
+
+      label.firstChild.nodeValue = 'Run';
+      label.title = 'Run';
+      await settle();
+      check('new text from the app', label.textContent, 'Ausführen');
+      check('new attribute from the app', label.title, 'Ausführen');
+      label.firstChild.nodeValue = 'Quote';
+      label.title = 'Quote';
+      await settle();
+      check('literal English Quote text', label.textContent, 'Zitat');
+      check('literal English Quote title', label.title, 'Zitat');
+    });
+  </script>
+</body>
+</html>

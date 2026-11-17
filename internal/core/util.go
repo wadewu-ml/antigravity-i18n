@@ -37,10 +37,6 @@ func (e *permissionError) Error() string {
 
 func (e *permissionError) Unwrap() error { return e.Cause }
 
-func openFile(path string) (*os.File, error) {
-	return os.Open(path)
-}
-
 func containsAny(haystack []byte, needles []string) bool {
 	if len(haystack) == 0 {
 		return false

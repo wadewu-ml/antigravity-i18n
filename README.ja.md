@@ -33,32 +33,37 @@
 `antigravity-i18n.exe` をダブルクリックします:
 1. Antigravity のインストール先フォルダーを自動検出します (未検出時は「場所の変更」をクリック)。
 2. 言語一覧から希望の言語を選択します (**English** を選択すると公式原版に復元)。
-3.「適用」をクリックすると、プロセスの安全な終了を確認した上でファイルを更新し、Antigravity を再起動します。
+3. 「適用」をクリックして確認します。Antigravity が終了すると、リソースが更新され、アプリが再起動します。
+
+適用や復元で Antigravity を閉じる必要がある場合、選択したインストール先のアプリに通常終了を要求します。30 秒経っても終了しない場合は、操作を中止します。すぐに終了するには、確認ダイアログで強制終了を選択してください。
 
 ### 2. コマンドライン モード
 
-同一のバイナリをターミナルから直接実行することも可能です:
+`antigravity-i18n.exe` のあるフォルダーで PowerShell を開きます。
 
 ```powershell
 # Check current localization status and backups
-antigravity-i18n.exe status
+.\antigravity-i18n.exe status
 
 # Install a language pack (Simplified Chinese by default)
-antigravity-i18n.exe apply --locale zh-CN
+.\antigravity-i18n.exe apply --locale zh-CN
 
 # Restore the official untranslated English version
-antigravity-i18n.exe restore
+.\antigravity-i18n.exe restore
 
 # List all bundled language packs with coverage
-antigravity-i18n.exe locales
+.\antigravity-i18n.exe locales
 ```
 
 一般的なオプション:
 - `--app-dir <path>`: Antigravity のインストール ディレクトリを手動指定 (環境変数 `ANTIGRAVITY_APP_DIR` も利用可能)。
 - `--locale <code>`: 対象言語コード (`zh-CN`、`zh-Hant`、`ja`、`ko`、`de`、`es`、`fr` 等)。
 - `--no-restart`: 適用後に Antigravity を自動再起動しない。
-- `--force`: 30 秒の正常終了待機をスキップし、プロセスを強制終了。
+- `--force` を指定すると、選択したインストール先の Antigravity を直ちに強制終了します。未保存の作業が失われることがあります。
+- `--timeout <ms>` で操作を中止するまでの待ち時間をミリ秒単位で指定できます。既定値は `30000` です。
 - `--yes`: 終了確認プロンプトに自動同意。
+
+同じインストール先では、適用または復元を一度に一つだけ実行できます。別の操作が進行中の場合は、完了を待ってから再試行してください。`status` でインストール先とバックアップを確認できます。アーカイブを読み込めない場合や Antigravity のものと確認できない場合は、エラーが表示されます。
 
 ---
 
@@ -90,16 +95,17 @@ antigravity-i18n.exe locales
 異なる言語間は事前の復元なしに直接切り替え可能です。いつでも「公式英語に戻す」を選択して初期状態へ復元できます。
 
 ### 3. バックアップ ファイルの管理
-- `app.asar.clean-backup`: 復元に不可欠な公式クリーン バックアップです。**手動で削除しないでください**。
-- `app.asar.bak-*`: 操作のたびに作成されるタイムスタンプ付きスナップショット。動作確認後は削除してディスク容量を解放して構いません。
+- `app.asar.clean-backup` は復元に使う元のアーカイブです。パッチが未適用の状態で適用または復元を行うと、インストール済みアーカイブとの SHA-256 を照合します。同じバージョンを再インストールした場合でも、ハッシュが異なればバックアップを更新します。**このファイルを保持してください。**
+- `app.asar.bak-*` はタイムスタンプ付きのコピーです。元のバックアップがない場合や無効な場合に復旧に使えます。アプリの動作を確認し、`status` でバックアップが有効と確認できたら、古いコピーを削除して容量を確保できます。
 
 ---
 
 ## ソースからのビルド
 
 **必要な環境**:
-- Go 1.26+
+- Go 1.26.3+
 - [Wails v2](https://wails.io/) CLI
+- PowerShell 7
 
 ```powershell
 # Clone the repository
@@ -109,8 +115,8 @@ cd antigravity-i18n
 # Build both GUI and CLI binaries
 .\build.ps1
 
-# Run tests (including end-to-end asar verification)
-$env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
+# 公式アーカイブの復元テストを含める場合は次の行のコメントを外す
+# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 

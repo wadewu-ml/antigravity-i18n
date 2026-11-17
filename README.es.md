@@ -33,32 +33,37 @@ Descargue la última versión `antigravity-i18n.exe` de la página de Versiones 
 Haga doble clic en `antigravity-i18n.exe`:
 1. La aplicación detecta automáticamente la carpeta de instalación de Antigravity (o haga clic en "Cambiar ubicación" para especificarla manualmente).
 2. Haga clic en su idioma preferido (al seleccionar inglés se restaura la versión oficial).
-3. Haga clic en 'Aplicar'; la herramienta confirma la finalización del proceso, actualiza los recursos y reinicia Antigravity.
+3. Haga clic en «Aplicar» y confirme. Una vez cerrado Antigravity, la herramienta actualiza los recursos y lo vuelve a iniciar.
+
+Si es necesario cerrar Antigravity para aplicar o restaurar, la herramienta solicita el cierre normal de la instalación seleccionada. La operación se cancela si sigue abierta tras 30 segundos. Para cerrarla inmediatamente, seleccione la opción de cierre forzado en el cuadro de confirmación.
 
 ### 2. Interfaz de línea de comando
 
-El mismo binario se puede invocar desde la terminal:
+Abra PowerShell en la carpeta que contiene `antigravity-i18n.exe`.
 
 ```powershell
 # Check current localization status and backups
-antigravity-i18n.exe status
+.\antigravity-i18n.exe status
 
 # Install a language pack (Simplified Chinese by default)
-antigravity-i18n.exe apply --locale zh-CN
+.\antigravity-i18n.exe apply --locale zh-CN
 
 # Restore the official untranslated English version
-antigravity-i18n.exe restore
+.\antigravity-i18n.exe restore
 
 # List all bundled language packs with coverage
-antigravity-i18n.exe locales
+.\antigravity-i18n.exe locales
 ```
 
 Opciones comunes:
 - `--app-dir <ruta>`: especifique manualmente el directorio de instalación de Antigravity (o configúrelo mediante `ANTIGRAVITY_APP_DIR`).
 - `--locale <código>`: código del idioma de destino (por ejemplo, `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
 - `--no-restart`: No reinicie Antigravity después de aplicar el parche.
-- `--force`: omita la espera de apagado elegante de 30 segundos y finalice los procesos inmediatamente.
+- `--force` cierra de inmediato la instalación seleccionada. Puede perder los cambios sin guardar.
+- `--timeout <ms>` fija el tiempo de espera en milisegundos antes de cancelar la operación. El valor predeterminado es `30000`.
 - `--yes`: suprime el mensaje de confirmación de apagado.
+
+Cada instalación admite una sola operación de aplicación o restauración a la vez. Si ya hay una operación en curso, espere a que termine y vuelva a intentarlo. Consulte la instalación seleccionada y su copia de seguridad con `status`. Si el archivo no se puede leer o no se puede verificar como archivo de Antigravity, el comando devuelve un error.
 
 ---
 
@@ -90,16 +95,17 @@ Las actualizaciones oficiales sobrescribirán `app.asar`. Simplemente vuelva a a
 Puedes cambiar directamente entre cualquier idioma; la herramienta reemplaza perfectamente los parches activos sin necesidad de una restauración manual primero. Al hacer clic en 'Restaurar inglés oficial', el cliente vuelve a un estado intacto en cualquier momento.
 
 ### 3. Gestión de archivos de respaldo
-- `app.asar.clean-backup`: la copia de seguridad oficial impecable necesaria para la restauración. No eliminar manualmente.
-- `app.asar.bak-*`: instantáneas históricas con marca de tiempo dejadas al lado del archivo. Una vez que se verifique que su instalación actual es estable, puede eliminar estos archivos de manera segura para liberar espacio en el disco.
+- `app.asar.clean-backup` guarda el archivo original para la restauración. Al aplicar o restaurar una instalación sin parches, la herramienta compara los valores SHA-256 y actualiza la copia si difieren, incluso tras reinstalar la misma versión. **Conserve este archivo.**
+- `app.asar.bak-*` son copias con marca de tiempo que permiten recuperar una copia de seguridad ausente o no válida. Si el cliente funciona y `status` indica que la copia es válida, puede eliminar las copias antiguas para liberar espacio.
 
 ---
 
 ## Construyendo desde la fuente
 
 **Requisitos previos**:
-- Ir 1.26+
-- CLI de lamentos v2
+- Go 1.26.3+
+- [Wails v2](https://wails.io/) CLI
+- PowerShell 7
 
 ```powershell
 # Clone the repository
@@ -109,8 +115,8 @@ cd antigravity-i18n
 # Build both GUI and CLI binaries
 .\build.ps1
 
-# Run tests (including end-to-end asar verification)
-$env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
+# Quite el comentario de la línea siguiente para incluir una prueba con un archivo oficial.
+# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 
@@ -124,4 +130,4 @@ go test ./...
 
 ## Licencia
 
-[Licencia MIT](./LICENCIA)
+[Licencia MIT](./LICENSE)

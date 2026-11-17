@@ -2,6 +2,8 @@ package core
 
 import (
 	"fmt"
+	"io"
+	"os"
 	"regexp"
 	"strings"
 )
@@ -260,8 +262,7 @@ func patchPreload(source string, engineFragment string) string {
 	return injectFragment(source, engineFragment, legacy, updaterAnchor)
 }
 
-// detectPatchInArchive reports whether the archive carries a localization
-// patch, or nil when the archive cannot be read.
+// detectPatchInArchive reports whether a readable archive carries a patch.
 //
 // Reading a fixed prefix of app.asar is unreliable because asar does not
 // guarantee where a given file lands inside the archive, so the injected
@@ -276,31 +277,28 @@ func detectPatchInArchive(path string) (bool, error) {
 		}
 	}
 
-	f, err := openFile(path)
+	f, err := os.Open(path)
 	if err != nil {
-		return false, nil
+		return false, err
 	}
 	defer f.Close()
 
-	buf := make([]byte, chunkSize)
-	carry := make([]byte, 0, longest)
+	buf := make([]byte, chunkSize+longest)
+	carry := 0
 	for {
-		n, err := f.Read(buf)
-		if n <= 0 {
-			break
+		n, err := f.Read(buf[carry:])
+		if err != nil && err != io.EOF {
+			return false, fmt.Errorf("reading %s: %w", path, err)
 		}
-		window := append(append([]byte{}, carry...), buf[:n]...)
-		if containsAny(window, patchMarkers) {
-			return true, nil
+		if n > 0 {
+			window := buf[:carry+n]
+			if containsAny(window, patchMarkers) {
+				return true, nil
+			}
+			carry = copy(buf, window[max(0, len(window)-longest):])
 		}
-		if len(window) > longest {
-			carry = append(carry[:0], window[len(window)-longest:]...)
-		} else {
-			carry = append(carry[:0], window...)
-		}
-		if err != nil {
-			break
+		if err == io.EOF {
+			return false, nil
 		}
 	}
-	return false, nil
 }

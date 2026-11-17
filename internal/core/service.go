@@ -22,8 +22,8 @@ type Service struct {
 	// an otherwise successful operation.
 	notes []string
 	// Process hooks keep fixture tests independent of the installed application.
-	stopApp    func(bool, int) (bool, bool, bool, error)
-	appRunning func() (bool, error)
+	stopApp    func(*paths, bool, int) (bool, error)
+	appRunning func(*paths) (bool, error)
 	launchApp  func(*paths) error
 }
 
@@ -56,6 +56,15 @@ func (s *Service) DescribeLocales() ([]LocaleInfo, error) {
 
 // clearNotes drops warnings from previous operations.
 func (s *Service) clearNotes() { s.notes = nil }
+
+func (s *Service) closeApp(p *paths, opts Options) (bool, error) {
+	timeout := opts.TimeoutMs
+	if timeout <= 0 {
+		timeout = gracefulTimeoutMs
+	}
+	s.progress("正在关闭 Antigravity", p.AppDir)
+	return s.stopApp(p, opts.Force, timeout)
+}
 
 // progress reports a stage update when a sink is configured.
 func (s *Service) progress(stage, detail string) {

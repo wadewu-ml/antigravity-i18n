@@ -33,32 +33,37 @@
 `antigravity-i18n.exe`를 더블 클릭하여 실행합니다:
 1. 프로그램이 Antigravity 설치 경로를 자동으로 감지합니다(미감지 시 '위치 변경'을 클릭하여 직접 지정).
 2. 언어 목록에서 원하는 언어를 선택합니다(**English** 선택 시 공식 원본으로 복원).
-3. '적용' 버튼을 클릭합니다. 안전한 프로세스 종료를 확인한 후 리소스를 갱신하고 Antigravity를 재실행합니다.
+3. ‘적용’을 누르고 확인합니다. Antigravity가 종료되면 리소스를 갱신하고 앱을 다시 실행합니다.
+
+적용 또는 복원을 위해 Antigravity를 닫아야 하면 선택한 설치의 앱에 정상 종료를 요청합니다. 30초 후에도 실행 중이면 작업을 취소합니다. 즉시 종료하려면 확인 창에서 강제 종료 옵션을 선택하세요.
 
 ### 2. 명령줄(CLI) 모드
 
-동일한 실행 파일을 터미널에서 직접 호출할 수도 있습니다:
+`antigravity-i18n.exe`가 있는 폴더에서 PowerShell을 엽니다.
 
 ```powershell
 # Check current localization status and backups
-antigravity-i18n.exe status
+.\antigravity-i18n.exe status
 
 # Install a language pack (Simplified Chinese by default)
-antigravity-i18n.exe apply --locale zh-CN
+.\antigravity-i18n.exe apply --locale zh-CN
 
 # Restore the official untranslated English version
-antigravity-i18n.exe restore
+.\antigravity-i18n.exe restore
 
 # List all bundled language packs with coverage
-antigravity-i18n.exe locales
+.\antigravity-i18n.exe locales
 ```
 
 자주 사용하는 옵션:
 - `--app-dir <path>`: Antigravity 설치 디렉터리 수동 지정(환경 변수 `ANTIGRAVITY_APP_DIR` 사용 가능).
 - `--locale <code>`: 대상 언어 코드(`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr` 등).
 - `--no-restart`: 적용 완료 후 Antigravity를 자동으로 재실행하지 않음.
-- `--force`: 30초 정상 종료 대기를 건너뛰고 프로세스를 즉시 강제 종료.
+- `--force`를 지정하면 선택한 설치의 Antigravity를 즉시 강제 종료합니다. 저장하지 않은 작업이 손실될 수 있습니다.
+- `--timeout <ms>`로 작업을 취소하기까지 기다리는 시간을 밀리초 단위로 설정합니다. 기본값은 `30000`입니다.
 - `--yes`: 프로세스 종료 확인 메시지 자동 승인.
+
+설치 하나에서는 적용 또는 복원 작업을 한 번에 하나만 실행할 수 있습니다. 다른 작업이 진행 중이면 완료될 때까지 기다린 후 다시 시도하세요. `status`로 선택한 설치와 백업을 확인할 수 있습니다. 아카이브를 읽을 수 없거나 Antigravity 아카이브임을 확인할 수 없으면 오류가 표시됩니다.
 
 ---
 
@@ -90,16 +95,17 @@ antigravity-i18n.exe locales
 언어 간 전환 시 사전 복원 없이 바로 다른 언어를 선택하여 적용할 수 있습니다. 언제든 '공식 영문으로 복원'을 선택하면 순정 상태로 돌아갑니다.
 
 ### 3. 백업 파일 관리 안내
-- `app.asar.clean-backup`: 복원에 반드시 필요한 공식 순정 백업입니다. **수동으로 삭제하지 마세요**.
-- `app.asar.bak-*`: 작업할 때마다 남는 타임스탬프 스냅샷입니다. 정상 작동을 확인한 후 디스크 공간 확보를 위해 삭제하셔도 무방합니다.
+- `app.asar.clean-backup`은 복원에 사용하는 원본 아카이브입니다. 패치되지 않은 설치에 적용하거나 복원할 때 설치된 아카이브와 SHA-256 해시를 비교합니다. 같은 버전을 다시 설치했더라도 해시가 다르면 백업을 갱신합니다. **이 파일을 보관하세요.**
+- `app.asar.bak-*`는 타임스탬프가 붙은 복사본입니다. 원본 백업이 없거나 유효하지 않을 때 복구에 사용할 수 있습니다. 앱이 정상 작동하고 `status`에서 백업이 유효하다고 표시되면 오래된 복사본을 삭제해 공간을 확보할 수 있습니다.
 
 ---
 
 ## 소스 빌드
 
 **사전 요구 사항**:
-- Go 1.26+
+- Go 1.26.3+
 - [Wails v2](https://wails.io/) CLI
+- PowerShell 7
 
 ```powershell
 # Clone the repository
@@ -109,8 +115,8 @@ cd antigravity-i18n
 # Build both GUI and CLI binaries
 .\build.ps1
 
-# Run tests (including end-to-end asar verification)
-$env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
+# 공식 아카이브 복원 테스트를 포함하려면 다음 줄의 주석을 해제합니다.
+# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 

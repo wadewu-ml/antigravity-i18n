@@ -29,8 +29,8 @@ Options:
   --app-dir <path>   Antigravity installation directory
   --locale <code>    Language pack to install (default: zh-CN)
   --no-restart       Do not relaunch Antigravity afterwards
-  --force            Skip the graceful shutdown and force Antigravity to close
-  --timeout <ms>     Positive milliseconds to wait for a graceful shutdown (default: 30000)
+  --force            Force the selected Antigravity installation to close
+  --timeout <ms>     Milliseconds to wait for it to exit before aborting (default: 30000)
   --yes              Assume yes for the shutdown confirmation
   -h, --help         Show this help
   -v, --version      Show the tool version
@@ -232,7 +232,7 @@ func runCLI(svc *core.Service, args []string) int {
 
 func cliApply(svc *core.Service, opts core.Options, confirmed bool) int {
 	if !confirmed {
-		if !confirmShutdown("Applying a language pack rewrites app.asar and Antigravity must not be running.") {
+		if !confirmShutdown("Apply the language pack to the selected installation?", opts.Force) {
 			return 1
 		}
 	}
@@ -257,7 +257,7 @@ func cliApply(svc *core.Service, opts core.Options, confirmed bool) int {
 
 func cliRestore(svc *core.Service, opts core.Options, confirmed bool) int {
 	if !confirmed {
-		if !confirmShutdown("Restoring the English version rewrites app.asar and Antigravity must not be running.") {
+		if !confirmShutdown("Restore English in the selected installation?", opts.Force) {
 			return 1
 		}
 	}

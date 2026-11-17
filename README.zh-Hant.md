@@ -31,26 +31,28 @@
 雙擊運行 `antigravity-i18n.exe`：
 1. 程序會自動檢測 Antigravity 的安裝目錄（若未檢測到，可點擊“更改位置”手動選擇）。
 2. 在語言列表中點擊選中目標語言（選中 **English** 即為還原官方原版）。
-3. 點擊“應用”按鈕；工具在確認關閉程序后自動改寫資源並重啟 Antigravity。
+3. 按一下「應用」並確認。Antigravity 結束後，工具會更新資源並重新啟動用戶端。
+
+套用或還原需要關閉用戶端時，工具會要求所選安裝的 Antigravity 正常結束。等待 30 秒後若仍在執行，本次操作會取消。若要立即關閉，可在確認視窗勾選強制結束選項。
 
 ### 2. 命令行模式
 
-同一可執行檔案也可直接在終端機中調用：
+在 `antigravity-i18n.exe` 所在資料夾開啟 PowerShell。
 
 
 
 ```powershell
 # 查看当前本地化状态与备份信息
-antigravity-i18n.exe status
+.\antigravity-i18n.exe status
 
 # 安装指定语言包（默认简体中文）
-antigravity-i18n.exe apply --locale zh-CN
+.\antigravity-i18n.exe apply --locale zh-CN
 
 # 随时还原为官方英文原版
-antigravity-i18n.exe restore
+.\antigravity-i18n.exe restore
 
 # 查看所有内置语言包及其覆盖率
-antigravity-i18n.exe locales
+.\antigravity-i18n.exe locales
 ```
 
 
@@ -59,8 +61,11 @@ antigravity-i18n.exe locales
 - `--app-dir <path>`：手動指定 Antigravity 安裝路徑（亦可通過環境變量 `ANTIGRAVITY_APP_DIR` 設定）。
 - `--locale <code>`：指定語言代碼，如 `zh-CN`、`zh-Hant`、`ja`、`ko`、`de`、`es`、`fr` 等。
 - `--no-restart`：完成改寫后不自動重啟客戶端。
-- `--force`：跳過 30 秒優雅退出等待，直接結束 Antigravity 進程。
+- 使用 `--force` 可立即結束所選安裝的 Antigravity 程序。未儲存的工作可能遺失。
+- 使用 `--timeout <ms>` 設定等待結束的時間，單位為毫秒，預設為 `30000`。
 - `--yes`：靜默確認進程關閉提示。
+
+同一安裝同時只能執行一次套用或還原。若出現另一項操作正在執行的提示，請等候操作完成後再試。使用 `status` 檢查所選安裝與備份。歸檔無法讀取或無法驗證為 Antigravity 時，命令會回報錯誤。
 
 ---
 
@@ -92,8 +97,8 @@ Antigravity 自動更新會覆蓋 `app.asar`。官方更新完成后，重新打
 不同語言之間可以直接點擊切換，工具會自動替換現有補丁，無需先手動執行還原。任何時候點擊“還原為官方英文”均可恢復至純凈狀態。
 
 ### 3. 備份檔案說明
-- `app.asar.clean-backup`：官方純凈歸檔備份，是執行“還原”的核心依賴，**請勿手動刪除**。
-- `app.asar.bak-*`：每次操作留下的時間戳快照。當確認當前軟體運行無誤后，可手動清理這些時間戳檔案以釋放磁盤空間。
+- `app.asar.clean-backup` 保存還原所需的原始歸檔。對未套用補丁的安裝執行套用或還原時，工具會比對備份與目前歸檔的 SHA-256 雜湊。即使版本相同，雜湊不同時也會更新備份。**請保留此檔案。**
+- `app.asar.bak-*` 是有時間戳記的歸檔快照。乾淨備份遺失或無效時，工具會從這些快照尋找可用的原始歸檔。確認用戶端運作正常且 `status` 顯示備份有效後，可清除舊快照以釋放空間。
 
 ---
 
@@ -102,8 +107,9 @@ Antigravity 自動更新會覆蓋 `app.asar`。官方更新完成后，重新打
 如需自行編譯：
 
 **依賴環境**：
-- Go 1.26+
+- Go 1.26.3+
 - [Wails v2](https://wails.io/) CLI
+- PowerShell 7
 
 
 
@@ -115,8 +121,8 @@ cd antigravity-i18n
 # 完整构建（同时产出 GUI 与 CLI）
 .\build.ps1
 
-# 运行自动化测试（包含真实 asar 还原闭环验证）
-$env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
+# 取消下一行註解可一併驗證官方歸檔的逐位元組還原
+# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
 go test ./...
 ```
 

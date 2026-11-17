@@ -122,20 +122,19 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 		return nil, err
 	}
 
-	var expectedIdentity *Identity
-	if arc, err := ReadArchive(p.AsarPath); err == nil {
-		expectedIdentity = arc.Identity()
+	expectedIdentity, err := readArchiveIdentity(p.AsarPath)
+	if err != nil {
+		return nil, err
+	}
+	detected, err := detectPatchInArchive(p.AsarPath)
+	if err != nil {
+		return nil, err
 	}
 	backupState := inspectCleanBackup(p.CleanBackupPath, expectedIdentity)
 
 	state := readState(p)
-	detected := detectPatchState(p.AsarPath)
-	if detected == nil {
-		return nil, fmt.Errorf("could not read Antigravity archive: %s", p.AsarPath)
-	}
-
 	var currentLanguage, localeName string
-	if *detected {
+	if detected {
 		// A patched archive names its own locale. Archives written by a release
 		// that predated locale files carry no header, and those were zh-CN only.
 		if code, name, ok := readArchiveLocale(p.AsarPath); ok {
@@ -145,17 +144,12 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 			currentLanguage = DefaultLocale
 		}
 	} else {
-		currentLanguage = "en"
+		currentLanguage = EnglishLocale
 	}
 
 	stale := false
 	if state != nil && normalizeLanguage(state.Language) != currentLanguage {
 		stale = true
-	}
-
-	appVersion := ""
-	if expectedIdentity != nil {
-		appVersion = expectedIdentity.Version
 	}
 
 	return &Status{
@@ -164,7 +158,7 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 		AsarPath:          p.AsarPath,
 		CleanBackupPath:   p.CleanBackupPath,
 		StatePath:         p.StatePath,
-		AppVersion:        appVersion,
+		AppVersion:        expectedIdentity.Version,
 		CurrentLanguage:   currentLanguage,
 		LocaleName:        localeName,
 		HasCleanBackup:    backupState == cleanBackupValid,
@@ -278,7 +272,7 @@ func backupStamp(name string) string {
 func findPristineArchive(resourcesDir string, expectedIdentity *Identity) (string, error) {
 	entries, err := os.ReadDir(resourcesDir)
 	if err != nil {
-		return "", nil
+		return "", err
 	}
 	var names []string
 	for _, e := range entries {
