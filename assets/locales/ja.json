@@ -3349,7 +3349,7 @@
     "Developer-only tools. These settings do not affect other users.": "開発者専用のツールです。これらの設定は他のユーザーに影響しません。",
     "Developer: Reset NUX": "開発者: 初回案内をリセット",
     "Developer: Reset Onboarding": "開発者: 初期設定をリセット",
-    "Stay up to date.": "最新の状態を保ちます。",
+    "Stay up to date.": "最新情報を受け取る。",
     "Google One Referral": "Google One 紹介",
     "Share your referral link with friends": "紹介リンクを友だちに共有します",
     "Invite a Friend": "友だちを招待",
@@ -3420,7 +3420,482 @@
     "Welcome back.": "おかえりなさい。",
     "Good to see you.": "お会いできてうれしいです。",
     "Ignore events triggered by the automation owner to avoid self-trigger loops.": "自動化の所有者によって発生したイベントを無視し、自己トリガーのループを防ぎます。",
-    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "自動レビューまたはロボットアカウント（groupagent-*）が発したイベントを無視します。"
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "自動レビューまたはロボットアカウント（groupagent-*）が発したイベントを無視します。",
+    "Account connection was not completed.": "アカウントの接続が完了しませんでした。",
+    "Add files": "ファイルを追加",
+    "Address bar suggestions": "アドレスバーの候補",
+    "Attach terminal output": "ターミナル出力を添付",
+    "Browse MCP resources": "MCP リソースを参照",
+    "Browse rules": "ルールを参照",
+    "Browser steps": "ブラウザの操作手順",
+    "Cannot parse folder URI.": "フォルダー URI を解析できません。",
+    "Choose icon and color": "アイコンと色を選択",
+    "Click to learn more about sources": "クリックしてソースの詳細を見る",
+    "Close Panel": "パネルを閉じる",
+    "Color": "色",
+    "Connect an account so the agent can use this app.": "エージェントがこのアプリを使えるようにアカウントを接続してください。",
+    "Connect to SSH Host…": "SSH ホストに接続…",
+    "Connections": "接続",
+    "Conversation turns": "会話のターン",
+    "Coordinator goal": "コーディネーターの目標",
+    "Coordinator name": "コーディネーター名",
+    "Coordinator settings": "コーディネーターの設定",
+    "Coordinators": "コーディネーター",
+    "Copy gh auth login command": "gh auth login コマンドをコピー",
+    "Customize Sections": "セクションをカスタマイズ",
+    "Days": "日",
+    "Discard comment draft": "コメントの下書きを破棄",
+    "Dismiss artifact update notice": "アーティファクト更新の通知を閉じる",
+    "Docs, Sheets, Slides, and folders": "ドキュメント、スプレッドシート、スライド、フォルダー",
+    "Enter always submits. This adds a second shortcut.": "Enter キーでは常に送信されます。ここで追加のショートカットを設定できます。",
+    "Environments": "環境",
+    "Failed to clone project locally": "プロジェクトをローカルにクローンできませんでした",
+    "Failed to export artifact": "アーティファクトをエクスポートできませんでした",
+    "Failed to read file": "ファイルを読み込めませんでした",
+    "Failed to unarchive local project": "ローカルプロジェクトのアーカイブを解除できませんでした",
+    "Filter agents": "エージェントを絞り込む",
+    "Filter files": "ファイルを絞り込む",
+    "Filter rows": "行を絞り込む",
+    "Font Size": "フォントサイズ",
+    "Hidden hosts": "非表示のホスト",
+    "Icon": "アイコン",
+    "It was already sent or couldn't be removed from the queue.": "すでに送信済みか、キューから削除できませんでした。",
+    "Jump to Next Prompt": "次のプロンプトに移動",
+    "Jump to Previous Prompt": "前のプロンプトに移動",
+    "Layout": "レイアウト",
+    "Main Agent": "メインエージェント",
+    "Markdown view mode": "Markdown の表示モード",
+    "Marketplace notice": "マーケットプレイスのお知らせ",
+    "MCP server error": "MCP サーバーエラー",
+    "Message this chat": "このチャットにメッセージを送信",
+    "New coordinator": "新しいコーディネーター",
+    "New Coordinator": "新しいコーディネーター",
+    "Next card": "次のカード",
+    "No coordinators": "コーディネーターはありません",
+    "Open on another device": "別のデバイスで開く",
+    "Open on phone": "スマートフォンで開く",
+    "Paste authorization code": "認証コードを貼り付け",
+    "Pause this agent; it keeps its place and streams. Resume to continue.": "このエージェントを一時停止します。現在の位置とストリームは保持されます。続けるには再開してください。",
+    "Pick up this remote conversation on your phone or in any browser. Scan the QR code or open the link below.": "このリモート会話をスマートフォンやブラウザで続けられます。QR コードをスキャンするか、下のリンクを開いてください。",
+    "Pin / Unpin Conversation": "会話を固定 / 固定解除",
+    "Plan upgrade required": "プランのアップグレードが必要です",
+    "Playback speed (< / >)": "再生速度 (< / >)",
+    "Plugin metadata": "プラグインのメタデータ",
+    "Previous card": "前のカード",
+    "Project location": "プロジェクトの場所",
+    "Promote to conversation": "会話に昇格",
+    "Recent": "最近",
+    "References": "参照",
+    "Remove from history": "履歴から削除",
+    "Remove from Recent": "最近使った項目から削除",
+    "Remove resource": "リソースを削除",
+    "Remove trigger": "トリガーを削除",
+    "Reset all shortcuts to defaults": "すべてのショートカットをデフォルトに戻す",
+    "Resume": "再開",
+    "Resume 1 comment draft": "コメントの下書き 1 件を再開",
+    "Resume comment draft": "コメントの下書きを再開",
+    "Search shortcuts": "ショートカットを検索",
+    "Send": "送信",
+    "Show Details": "詳細を表示",
+    "Show or Hide Extensions": "拡張機能の表示 / 非表示",
+    "SSH Config": "SSH 設定",
+    "SSH host": "SSH ホスト",
+    "SSH Host": "SSH ホスト",
+    "SSH Host…": "SSH ホスト…",
+    "Starting the conversation…": "会話を開始しています…",
+    "Stop side question": "サイド質問を停止",
+    "Stop SSH Server…": "SSH サーバーを停止…",
+    "Stop this agent": "このエージェントを停止",
+    "Submit Prompt (Alternate to Enter)": "プロンプトを送信（Enter キーの代替）",
+    "Switch to This Computer": "このコンピューターに切り替え",
+    "The Hub sent an unexpected response.": "Hub から予期しない応答が返されました。",
+    "Toggle Google Cloud projects": "Google Cloud プロジェクトを表示 / 非表示",
+    "Toggle Terminal Panel": "ターミナルパネルを表示 / 非表示",
+    "Toggle Word Wrap": "折り返し表示を切り替え",
+    "Untrusted sidecar": "信頼されていないサイドカー",
+    "View MCP servers": "MCP サーバーを表示",
+    "When it runs": "実行タイミング",
+    "A bash script run in your cloud environment after cloning repositories (or configure interactively in chat with /env-setup).": "リポジトリのクローン後にクラウド環境で実行する bash スクリプトです（チャットで /env-setup を使って対話形式で設定することもできます）。",
+    "Add filter": "フィルターを追加",
+    "Add trigger": "トリガーを追加",
+    "Agent ID:": "エージェント ID:",
+    "Agent said": "エージェントの発言",
+    "Agent working": "エージェントが作業中",
+    "All agents": "すべてのエージェント",
+    "All runs": "すべての実行",
+    "Analyzed content": "コンテンツを分析しました",
+    "Analyzed Task Log": "タスクログを分析しました",
+    "Analyzing content": "コンテンツを分析中",
+    "Analyzing Task Log": "タスクログを分析中",
+    "Appears larger on mobile": "モバイルでは大きく表示されます",
+    "Approximate; may start a few minutes later": "目安です。開始が数分遅れる場合があります",
+    "Apps connected to your account": "アカウントに接続されたアプリ",
+    "Archived Only": "アーカイブ済みのみ",
+    "Are you sure you want to delete this side question? This action cannot be undone.": "このサイド質問を削除しますか？この操作は元に戻せません。",
+    "Artifact image": "アーティファクトの画像",
+    "Artifact updated by agent": "エージェントがアーティファクトを更新しました",
+    "Ask a side question without interrupting the main conversation": "メインの会話を中断せずにサイド質問をする",
+    "Audio File": "音声ファイル",
+    "Authorization code": "認証コード",
+    "Branch actions": "ブランチの操作",
+    "Branch names": "ブランチ名",
+    "Browse Connectors": "コネクターを参照",
+    "Cancel Questionnaire and Stop the Agent": "質問票をキャンセルしてエージェントを停止",
+    "Canvas page · display only": "キャンバスページ · 表示のみ",
+    "Certificate is valid": "証明書は有効です",
+    "Clear visited URLs and autocomplete suggestions from side panel preview.": "サイドパネルのプレビューから、閲覧した URL と自動補完の候補を消去します。",
+    "Clones this repo in a cloud environment": "このリポジトリをクラウド環境にクローンします",
+    "Close message": "メッセージを閉じる",
+    "Code Preview": "コードプレビュー",
+    "Collapse Questionnaire": "質問票を折りたたむ",
+    "Collapse questionnaire": "質問票を折りたたむ",
+    "Command is required": "コマンドは必須です",
+    "Connect an account so the agent can run automations.": "エージェントが自動化を実行できるようにアカウントを接続してください。",
+    "Connect to SSH Host": "SSH ホストに接続",
+    "Connecting to terminal...": "ターミナルに接続中...",
+    "Continue Task →": "タスクを続行 →",
+    "Conversation link": "会話のリンク",
+    "Could not start.": "開始できませんでした。",
+    "Couldn't delete your data. Try again.": "データを削除できませんでした。もう一度お試しください。",
+    "Couldn't load message": "メッセージを読み込めませんでした",
+    "Couldn't load the suggested plugin.": "提案されたプラグインを読み込めませんでした。",
+    "Couldn't load your SSH hosts": "SSH ホストを読み込めませんでした",
+    "Couldn't load your SSH hosts. You can still type one.": "SSH ホストを読み込めませんでした。ホストを直接入力することもできます。",
+    "Couldn't search files": "ファイルを検索できませんでした",
+    "Create a project first.": "先にプロジェクトを作成してください。",
+    "Create a project on a machine you reach over SSH. It opens in that host's own window.": "SSH で接続するマシン上にプロジェクトを作成します。そのホスト専用のウィンドウで開きます。",
+    "Create Coordinator": "コーディネーターを作成",
+    "Create Group": "グループを作成",
+    "Created outline": "アウトラインを作成しました",
+    "Creates a local automation that runs on this computer": "このコンピューターで実行するローカル自動化を作成します",
+    "Delete agent": "エージェントを削除",
+    "Delete all": "すべて削除",
+    "Delete All Data": "すべてのデータを削除",
+    "Drop to attach": "ドロップして添付",
+    "Duplicate project name": "プロジェクト名が重複しています",
+    "Enable macOS Permissions": "macOS の権限を有効にする",
+    "Enable the plugin to sign in.": "ログインするにはプラグインを有効にしてください。",
+    "Enable this plugin to manage its accounts.": "アカウントを管理するにはこのプラグインを有効にしてください。",
+    "Environment Setup Script": "環境セットアップスクリプト",
+    "Error editing file": "ファイルの編集中にエラーが発生しました",
+    "Error viewing file": "ファイルの表示中にエラーが発生しました",
+    "Execution Identity": "実行主体",
+    "Expand questionnaire": "質問票を展開",
+    "Expand Questionnaire": "質問票を展開",
+    "Fork in Current Workspace": "現在のワークスペースでフォーク",
+    "Full Logs": "すべてのログ",
+    "Generated media": "生成されたメディア",
+    "Get API key": "API キーを取得",
+    "GitHub Repositories": "GitHub リポジトリ",
+    "GitHub: not signed in": "GitHub: 未ログイン",
+    "Google Antigravity Terms of Service": "Google Antigravity 利用規約",
+    "Here's how uploaded files, attachments, and connected resources work in your cloud environment": "アップロードしたファイル、添付ファイル、接続されたリソースをクラウド環境で利用する方法",
+    "Hey there, what should we build today?": "こんにちは。今日は何を作りましょうか？",
+    "Hidden by policy": "ポリシーにより非表示",
+    "Host Endpoint": "ホストのエンドポイント",
+    "Idle Guard Warning": "アイドルガードの警告",
+    "If you add multiple accounts, MCP servers use the one marked Default.": "複数のアカウントを追加した場合、MCP サーバーは「デフォルト」に設定されたアカウントを使用します。",
+    "Issue actions": "Issue の操作",
+    "Issue numbers": "Issue 番号",
+    "Issued by": "発行者",
+    "Issued to": "発行先",
+    "Keeps your checkout untouched": "チェックアウトには変更を加えません",
+    "Live chat in progress": "ライブチャット中",
+    "Loading hosts…": "ホストを読み込み中…",
+    "Loading Hosts…": "ホストを読み込み中…",
+    "Loading Repositories…": "リポジトリを読み込み中…",
+    "Loading resources...": "リソースを読み込み中...",
+    "Log in": "ログイン",
+    "Marked 1 conversation as read": "会話 1 件を既読にしました",
+    "MCP error": "MCP エラー",
+    "Middle Click": "中ボタンでクリック",
+    "Moved Mouse in Browser": "ブラウザ内でマウスを移動しました",
+    "Moving Mouse in Browser": "ブラウザ内でマウスを移動中",
+    "No agent is working right now.": "現在作業中のエージェントはいません。",
+    "No artifacts generated": "生成されたアーティファクトはありません",
+    "No commits yet": "コミットはまだありません",
+    "No connectors available in this project": "このプロジェクトで使用できるコネクターはありません",
+    "No conversation": "会話はありません",
+    "No events recorded": "記録されたイベントはありません",
+    "No hosts in ~/.ssh/config yet": "~/.ssh/config にホストがまだありません",
+    "No instances yet.": "インスタンスはまだありません。",
+    "No keyboard shortcuts found matching your filter.": "フィルターに一致するキーボードショートカットがありません。",
+    "No matching hosts": "一致するホストはありません",
+    "No matching repositories": "一致するリポジトリはありません",
+    "No matching resources found.": "一致するリソースが見つかりませんでした。",
+    "No message text": "メッセージ本文がありません",
+    "No pinned conversations": "固定された会話はありません",
+    "No recent downloads": "最近のダウンロードはありません",
+    "No recordings": "録画・録音はありません",
+    "No repositories found": "リポジトリが見つかりません",
+    "No resources added yet.": "リソースはまだ追加されていません。",
+    "Not set": "未設定",
+    "Nothing is running right now": "現在実行中のものはありません",
+    "Only Automations": "自動化のみ",
+    "Only Scheduled": "スケジュール済みのみ",
+    "Open image preview": "画像プレビューを開く",
+    "Open in Side Pane": "サイドペインで開く",
+    "Open skill page": "スキルのページを開く",
+    "Open SSH Host": "SSH ホストを開く",
+    "Open video preview": "動画プレビューを開く",
+    "Opened URL in Browser": "ブラウザで URL を開きました",
+    "Opening URL in Browser": "ブラウザで URL を開いています",
+    "Other conversation": "別の会話",
+    "Other Customizations": "その他のカスタマイズ",
+    "Paste new key": "新しいキーを貼り付け",
+    "Pay only for the tokens you use, billed through Gemini platform.": "使用したトークンの分だけ、Gemini プラットフォーム経由で請求されます。",
+    "Pick a model to change it.": "変更するモデルを選択してください。",
+    "Pin Tab": "タブを固定",
+    "Press keys...": "キーを押してください...",
+    "Process Error": "プロセスエラー",
+    "Process exited with an error": "プロセスがエラーで終了しました",
+    "Prohibited Use Policy": "禁止される使用に関するポリシー",
+    "Pull request actions": "プルリクエストの操作",
+    "Pull request numbers": "プルリクエスト番号",
+    "Read Browser Page in Browser": "ブラウザでページを読み取りました",
+    "Read page": "ページを読み取りました",
+    "Reading Browser Page in Browser": "ブラウザでページを読み取り中",
+    "Recent Conversations": "最近の会話",
+    "Recent Events": "最近のイベント",
+    "Refreshed Browser page": "ブラウザのページを再読み込みしました",
+    "Refreshing Browser page": "ブラウザのページを再読み込み中",
+    "Refreshing credentials...": "認証情報を更新中...",
+    "Relaunch the app once to activate Screen Recording.": "画面収録を有効にするには、アプリを一度再起動してください。",
+    "Remote Control Instances": "リモートコントロールのインスタンス",
+    "Remote Projects": "リモートプロジェクト",
+    "Removing the bundle removes all of its plugins.": "バンドルを削除すると、その中のプラグインもすべて削除されます。",
+    "Repeat every": "繰り返し間隔",
+    "Replacing removes the currently installed plugin and installs the new one in its place.": "置き換えると、現在インストールされているプラグインが削除され、新しいプラグインがインストールされます。",
+    "Repo default": "リポジトリのデフォルト",
+    "Resized Browser window": "ブラウザのウィンドウサイズを変更しました",
+    "Resizing Browser window": "ブラウザのウィンドウサイズを変更中",
+    "Resume environment": "環境を再開",
+    "Resume this agent where it paused": "このエージェントを停止位置から再開",
+    "Resuming environment…": "環境を再開中…",
+    "Retrieved Browser Pages": "ブラウザのページ一覧を取得しました",
+    "Retrieved Console Logs from Browser": "ブラウザのコンソールログを取得しました",
+    "Retrieving Browser Pages": "ブラウザのページ一覧を取得中",
+    "Retrieving Console Logs from Browser": "ブラウザのコンソールログを取得中",
+    "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.": "昨日の変更を朝に要約するなど、スケジュールに従ってプロンプトを実行します。実行結果はここに表示されます。",
+    "Running processes are killed. This cannot be undone.": "実行中のプロセスは強制終了されます。この操作は元に戻せません。",
+    "Runs in a cloud environment": "クラウド環境で実行します",
+    "Schedule type": "スケジュールの種類",
+    "Scroll turns down": "会話のターンを下にスクロール",
+    "Scroll turns up": "会話のターンを上にスクロール",
+    "Scrollable table": "スクロール可能な表",
+    "Scrolled down in Browser": "ブラウザ内で下にスクロールしました",
+    "Scrolled in Browser": "ブラウザ内でスクロールしました",
+    "Scrolled up in Browser": "ブラウザ内で上にスクロールしました",
+    "Scrolling down in Browser": "ブラウザ内で下にスクロール中",
+    "Scrolling in Browser": "ブラウザ内でスクロール中",
+    "Scrolling up in Browser": "ブラウザ内で上にスクロール中",
+    "Search conversations, commands, and code...": "会話、コマンド、コードを検索...",
+    "Search failed": "検索できませんでした",
+    "Search Hosts…": "ホストを検索…",
+    "Search or enter a URL": "検索または URL を入力",
+    "Search shortcuts...": "ショートカットを検索...",
+    "Search tabs, files and more": "タブ、ファイルなどを検索",
+    "Selected Option in Browser": "ブラウザ内で選択肢を選びました",
+    "Selected region": "選択した領域",
+    "Selecting Option in Browser": "ブラウザ内で選択肢を選択中",
+    "Semantic searched": "セマンティック検索を行いました",
+    "Semantic searching": "セマンティック検索中",
+    "Send command input?": "コマンドに入力を送信しますか？",
+    "Services this plugin connects to on your behalf.": "このプラグインがユーザーに代わって接続するサービスです。",
+    "Set up": "セットアップ",
+    "Shares this repository, with a working copy of its own. Uncommitted changes stay behind.": "このリポジトリを共有し、専用の作業コピーを使用します。未コミットの変更は引き継がれません。",
+    "Show in Sidebar": "サイドバーに表示",
+    "Side Pane UI Available": "サイドペイン UI を利用できます",
+    "Side Panel Preview": "サイドパネルのプレビュー",
+    "Sign in in your browser, then paste the authorization code shown on the callback page.": "ブラウザでログインし、コールバックページに表示された認証コードを貼り付けてください。",
+    "Sign in needed": "ログインが必要です",
+    "Sign in to an app once and your agent can use it on any device. Open an app to see the account it uses or to disconnect it.": "アプリに一度ログインすれば、どのデバイスでもエージェントが利用できます。使用するアカウントの確認や接続の解除は、アプリを開いて行ってください。",
+    "Sort and filter conversations": "会話の並べ替えと絞り込み",
+    "SSH config:": "SSH 設定:",
+    "Starting preview…": "プレビューを開始中…",
+    "Still running": "実行中",
+    "Stop all agents": "すべてのエージェントを停止",
+    "Stop Side Question": "サイド質問を停止",
+    "Stream and control": "ストリーミングと操作",
+    "Submit code": "コードを送信",
+    "Summarizing call…": "通話を要約中…",
+    "Switch To": "切り替え先",
+    "System Prompt": "システムプロンプト",
+    "Taking Screenshot": "スクリーンショットを撮影中",
+    "Task Log": "タスクログ",
+    "The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.": "以下の内訳は、ルール、スキル、MCP などのカスタマイズによるトークン使用量を示します。予算を超えた場合、大きなルールはパス参照に置き換えられ、大きなカスタマイズは自動的に除外されます。",
+    "The suggested plugin isn't in the marketplace.": "提案されたプラグインはマーケットプレイスにありません。",
+    "Then create the project in its window.": "その後、そのウィンドウでプロジェクトを作成してください。",
+    "This automation is currently stopped. Events and stdout streams will appear here once started.": "この自動化は現在停止しています。開始すると、イベントと標準出力のストリームがここに表示されます。",
+    "This chat's environment is paused": "このチャットの環境は一時停止しています",
+    "This conversation is in a different workspace.": "この会話は別のワークスペースにあります。",
+    "This link wants to open an app on your device.": "このリンクはデバイス上のアプリを開こうとしています。",
+    "This page is going away soon": "このページはまもなく廃止されます",
+    "This permanently deletes all of your Remote Agents conversations, projects, scheduled tasks, connected plugins and settings, and stops any running remote agents. It can't be undone. Data in the desktop app and your Google account are not affected, and you can keep using Remote Agents afterwards.": "Remote Agents の会話、プロジェクト、スケジュールされたタスク、接続されたプラグイン、設定をすべて完全に削除し、実行中のリモートエージェントも停止します。この操作は元に戻せません。デスクトップアプリと Google アカウントのデータには影響せず、削除後も Remote Agents を利用できます。",
+    "This plugin was force disabled.": "このプラグインは強制的に無効にされました。",
+    "This project is associated with a different workspace.": "このプロジェクトは別のワークスペースに関連付けられています。",
+    "Took Screenshot": "スクリーンショットを撮影しました",
+    "Type to search file contents": "入力してファイルの内容を検索",
+    "Unknown Server": "不明なサーバー",
+    "Unnamed resource": "名前のないリソース",
+    "Unnamed Theme": "名前のないテーマ",
+    "Unpin Tab": "タブの固定を解除",
+    "Uploaded files and connected resources are mounted in your cloud environment.": "アップロードしたファイルと接続されたリソースは、クラウド環境にマウントされます。",
+    "Use Advanced SSO Config": "高度な SSO 設定を使用",
+    "Use Antigravity through your Gemini subscription.": "Gemini サブスクリプションを通じて Antigravity を利用できます。",
+    "Use the default color.": "デフォルトの色を使用します。",
+    "Use this if your admin gave you a WIF config. Paste it below to sign in.": "管理者から WIF 設定を受け取った場合に使用します。ログインするには下に貼り付けてください。",
+    "Valid until": "有効期限",
+    "View archived in the sidebar": "アーカイブ済みの項目をサイドバーに表示",
+    "View archived in the sidebar (Display options menu).": "アーカイブ済みの項目はサイドバーで確認できます（表示オプションメニュー）。",
+    "View Branches": "ブランチを表示",
+    "Waiting for the agents’ windows…": "エージェントのウィンドウを待機中…",
+    "Waiting for the SSH connection to finish": "SSH 接続の完了を待機中",
+    "Waiting for you to finish signing in…": "ログインの完了を待機中…",
+    "When should it run?": "いつ実行しますか？",
+    "Where should it run?": "どこで実行しますか？",
+    "Workflows are changing on October 19th—stay tuned for updates. You can use the agent to migrate your workflows.": "ワークフローは 10 月 19 日に変更されます。続報をお待ちください。エージェントを使ってワークフローを移行できます。",
+    "You said": "あなたの発言",
+    "Your Antigravity use will be associated with provided project. Make sure you trust the project ID before proceeding. Account activity and data may be logged by your organization.": "Antigravity の利用は指定されたプロジェクトに関連付けられます。続行する前に、プロジェクト ID が信頼できることを確認してください。アカウントのアクティビティやデータは組織によって記録される場合があります。",
+    "Your Plan": "ご利用のプラン",
+    "Your This Computer setting": "「このコンピューター」の設定",
+    "Allow the browser agent to download a file?": "ブラウザエージェントにファイルのダウンロードを許可しますか？",
+    "Blocked: file type not allowed": "ブロック済み: 許可されていないファイル形式",
+    "Yes, allow this download": "はい、このダウンロードを許可",
+    "Yes, allow this time": "はい、今回のみ許可",
+    "Yes, and always allow": "はい、今後も常に許可",
+    "Yes, and always allow in this conversation": "はい、この会話では常に許可",
+    "Yes, save rule globally": "はい、ルールをグローバルに保存",
+    "Yes, save rule in this conversation": "はい、この会話にルールを保存",
+    "Authorization code sign-in is unavailable in this version.": "このバージョンでは認証コードによるログインを利用できません。",
+    "Authorization code was rejected. Paste a fresh code and try again.": "認証コードが拒否されました。新しいコードを貼り付けて、もう一度お試しください。",
+    "Trouble signing in? Enter authorization code": "ログインできませんか？認証コードを入力",
+    "A high-risk mode that disables all safety barriers. The agent operates with full system access, auto-executes all terminal commands, and reads or writes to all local files without review prompts.": "すべての安全対策を無効にする高リスクのモードです。エージェントはシステムへの完全なアクセス権を持ち、すべてのターミナルコマンドを自動実行し、確認を求めずにすべてのローカルファイルを読み書きします。",
+    "Useful for tasks that require file access across your full machine. The agent has full read and write access to all local files, but all proposed terminal commands require manual review and approval before running.": "コンピューター全体のファイルにアクセスするタスクに適しています。エージェントはすべてのローカルファイルを読み書きできますが、提案されたターミナルコマンドはすべて実行前に手動で確認し、承認する必要があります。",
+    "Useful for typical development with an emphasis on security. It prioritizes safety over speed by requiring manual approval for all terminal commands and files outside the project directory.": "安全性を重視する一般的な開発に適しています。速度より安全性を優先し、すべてのターミナルコマンドとプロジェクトディレクトリ外のファイルへのアクセスに手動承認を求めます。",
+    "This shortcut is reserved by browser tabs and may not trigger in Web mode. It works in the Desktop Hub or installed PWA.": "このショートカットはブラウザのタブ用に予約されているため、Web モードでは機能しない場合があります。Desktop Hub またはインストール済みの PWA では利用できます。",
+    "What should this coordinator accomplish?": "このコーディネーターにどのような目標を達成させますか？",
+    "1. Accessibility": "1. アクセシビリティ",
+    "2. Screen Recording": "2. 画面収録",
+    "Could not apply the selected permissions.": "選択した権限を適用できませんでした。",
+    "Cloud Permissions": "クラウドの権限",
+    "This Conversation": "この会話",
+    "A customization failed to load": "カスタマイズを読み込めませんでした",
+    "A host can't contain spaces.": "ホストにスペースは使用できません。",
+    "Add label": "ラベルを追加",
+    "Add Resource": "リソースを追加",
+    "An error occurred while checking the port. Please try again.": "ポートの確認中にエラーが発生しました。もう一度お試しください。",
+    "Are you sure you want to delete this handler?": "このハンドラーを削除しますか？",
+    "Are you sure you want to delete this hook card?": "このフックカードを削除しますか？",
+    "Artifact not found": "アーティファクトが見つかりません",
+    "Ask anything, @ to mention": "何でも質問できます。@ でメンション",
+    "Audio clip": "音声クリップ",
+    "Back to all agents": "すべてのエージェントに戻る",
+    "Back to chat": "チャットに戻る",
+    "Back to reference": "参照に戻る",
+    "This extension is currently stopped. Events and stdout streams will appear here once started.": "この拡張機能は現在停止しています。開始すると、イベントと標準出力のストリームがここに表示されます。",
+    "This file type is not currently supported in remote mode": "このファイル形式は現在リモートモードでサポートされていません",
+    "This MCP server can no longer be configured.": "この MCP サーバーは設定を変更できなくなりました。",
+    "This site cannot provide a secure connection.": "このサイトは安全な接続を提供できません。",
+    "This site uses an unsupported TLS protocol or cipher suite.": "このサイトではサポートされていない TLS プロトコルまたは暗号スイートを使用しています。",
+    "To continue using this model now, enable AI Credit overages.": "このモデルを今すぐ使い続けるには、AI クレジットの超過利用を有効にしてください。",
+    "Unknown error.": "不明なエラーです。",
+    "Unknown execution error": "不明な実行エラー",
+    "Unknown search error": "不明な検索エラー",
+    "Unnamed rule": "名前のないルール",
+    "Upload to Google Drive": "Google ドライブにアップロード",
+    "Uploading to Drive…": "ドライブにアップロード中…",
+    "Use Default": "デフォルトを使用",
+    "Uses your local files and tools. Schedules only.": "ローカルのファイルとツールを使用します。スケジュール実行のみ。",
+    "Validation failed. Please verify requirements and try again.": "検証できませんでした。要件を確認して、もう一度お試しください。",
+    "VCS state is not available": "VCS の状態を取得できません",
+    "View File": "ファイルを表示",
+    "Waiting for video…": "動画を待機中…",
+    "Waiting for your answer": "回答を待機中",
+    "Waiting for your approval": "承認を待機中",
+    "Welcome back. Where should we pick up?": "おかえりなさい。どこから再開しましょうか？",
+    "Why did you choose this response?": "この回答を選んだ理由を教えてください",
+    "Working copy": "作業コピー",
+    "Workspace URI not found": "ワークスペースの URI が見つかりません",
+    "You're viewing a blank page": "空白のページを表示しています",
+    "You're viewing a local or shared file": "ローカルファイルまたは共有ファイルを表示しています",
+    "Your connection to this site is not fully secure": "このサイトへの接続は完全には保護されていません",
+    "Your connection to this site is not secure": "このサイトへの接続は保護されていません",
+    "Asked again: your last answer may not have worked.": "もう一度確認しています。前回の回答が受け付けられなかった可能性があります。",
+    "That's too long.": "入力が長すぎます。",
+    "Welcome to the new Antigravity!": "新しい Antigravity へようこそ！",
+    "Setting up…": "セットアップ中…",
+    "Download the Antigravity IDE": "Antigravity IDE をダウンロード",
+    "Explore the new Antigravity": "新しい Antigravity を試す",
+    "Antigravity Icon": "Antigravity アイコン",
+    "Knowledge Work": "ナレッジワーク",
+    "Software Engineering": "ソフトウェアエンジニアリング",
+    "Simplified interface for research, writing, and everyday tasks.": "調査、執筆、日常的な作業向けのシンプルなインターフェース。",
+    "Full interface for coding, developer tools, and managing agents.": "コーディング、開発者ツール、エージェント管理に対応するフル機能のインターフェース。",
+    "Give Feedback": "フィードバックを送信",
+    "Built-in Browser": "内蔵ブラウザ",
+    "External Browser": "外部ブラウザ",
+    "Verbose": "詳細",
+    "Choose a Subscription": "サブスクリプションを選択",
+    "The agent never asks for confirmation before executing terminal commands (except those in the Deny list). This provides the agent with the maximum ability to operate over long periods without intervention, but also has the highest risk of the agent executing an unsafe terminal command.": "エージェントはターミナルコマンドの実行前に確認を求めません（拒否リストにあるコマンドを除く）。これにより、介入なしで長時間動作する能力が最大限に高まりますが、安全でないターミナルコマンドを実行するリスクも最も高くなります。",
+    "Terminal commands automatically proceed inside the sandbox. A command that needs to leave the sandbox proceeds only if an agent judges it reversible, and otherwise requests review.": "ターミナルコマンドはサンドボックス内で自動的に実行されます。サンドボックス外での実行が必要なコマンドは、エージェントが元に戻せると判断した場合にのみ実行され、それ以外は確認を求めます。",
+    "Microphone blocked": "マイクがブロックされています",
+    "Microphone is in use or unavailable.": "マイクが使用中か、利用できません。",
+    "Microphone didn't respond.": "マイクが応答しませんでした。",
+    "For any feedback that does not fit into the above categories.": "上記のカテゴリーに当てはまらないご意見はこちら。",
+    "Antigravity can review code, trace errors, and ship across your stack.": "Antigravity は、コードレビュー、エラーの追跡から、技術スタック全体にわたる実装・リリースまで支援できます。",
+    "Build me a web app": "Web アプリを作成する",
+    "Add a Gemini feature to my app": "アプリに Gemini の機能を追加する",
+    "Bring over my setup from other Agentic Developer Tools": "他のエージェント型開発ツールから設定を移行する",
+    "Antigravity can turn notes and docs into plans, decks, and action items.": "Antigravity は、メモやドキュメントを計画、スライド資料、実行項目にまとめられます。",
+    "Brief me on my meetings every morning": "毎朝、会議の予定をまとめてもらう",
+    "Catch up on my recent meeting notes": "最近の会議メモを確認する",
+    "Turn a doc into a slide deck": "ドキュメントからスライド資料を作成する",
+    "Data & Analytics": "データと分析",
+    "Antigravity can query tables, clean spreadsheets, and chart trends.": "Antigravity は、テーブルへのクエリ、スプレッドシートの整理、傾向のグラフ化を支援できます。",
+    "Check a BigQuery table for anomalies": "BigQuery テーブルの異常を確認する",
+    "Build a dashboard from my sheet": "スプレッドシートからダッシュボードを作成する",
+    "Analyze user trends and retention cohorts": "ユーザー動向とリテンションコホートを分析する",
+    "Science": "科学",
+    "Antigravity can review literature, design experiments, and analyze results.": "Antigravity は、文献のレビュー、実験の設計、結果の分析を支援できます。",
+    "Synthesize recent preprints and papers on a topic": "特定のトピックに関する最近のプレプリントや論文をまとめる",
+    "Visualize a protein's 3D structure": "タンパク質の 3D 構造を可視化する",
+    "Prioritize genetic targets and pathways for a disease": "疾患に関連する遺伝子標的と経路に優先順位を付ける",
+    "Analyze small-molecule bioactivity and drug-likeness": "低分子化合物の生物活性とドラッグライクネスを分析する",
+    "Design": "デザイン",
+    "Antigravity can turn your designs into live code, briefs, and assets.": "Antigravity は、デザインから動作するコード、制作ブリーフ、素材を作成できます。",
+    "Build a page from my Figma design": "Figma のデザインからページを作成する",
+    "Turn a screenshot into a web page": "スクリーンショットから Web ページを作成する",
+    "Write a design brief from my research": "調査内容からデザインブリーフを作成する",
+    "Move Up": "上に移動",
+    "Move Down": "下に移動",
+    "Delete Group": "グループを削除",
+    "Dismiss conversation open elsewhere warning": "別の場所で会話が開かれているという警告を閉じる",
+    "Open plugin page": "プラグインのページを開く",
+    "Search Projects…": "プロジェクトを検索…",
+    "Search Workspaces…": "ワークスペースを検索…",
+    "Browser Task": "ブラウザのタスク",
+    "Subagent Conversation": "サブエージェントの会話",
+    "Virtual File": "仮想ファイル",
+    "Voice Speed": "音声の速度",
+    "Mouse button pressed": "マウスボタンを押しました",
+    "Mouse button released": "マウスボタンを離しました",
+    "Unknown edit": "不明な編集",
+    "Unknown file edit": "不明なファイル編集",
+    "Events and stdout streams will appear here as they occur.": "イベントと標準出力のストリームが発生すると、ここに表示されます。",
+    "Using browser · Thinking…": "ブラウザを使用中 · 思考中…",
+    "Something else (optional)": "その他（任意）",
+    "Credentials stay on this machine and are only sent to the domains listed.": "認証情報はこのマシンに保存され、一覧にあるドメインにのみ送信されます。",
+    "Other credentials stay on this machine.": "その他の認証情報はこのマシンに保存されます。",
+    "Credentials are only sent to the domains listed.": "認証情報は一覧にあるドメインにのみ送信されます。",
+    "DevTools port is still closed. Please make sure Chrome is running with remote debugging enabled.": "DevTools ポートがまだ開いていません。Chrome がリモートデバッグを有効にして起動していることを確認してください。",
+    "AI coding agents are known to have certain security risks, including autonomous code execution, data exfiltration, prompt injection and supply chain risks. Ensure that you monitor and verify all actions taken by the agent.": "AI コーディングエージェントには、自律的なコード実行、データの外部流出、プロンプトインジェクション、サプライチェーンに関するリスクなど、一定のセキュリティリスクがあることが知られています。エージェントが行うすべての操作を必ず監視し、検証してください。",
+    "Enter [user@]host[:port], or pick a host from your SSH config.": "[user@]host[:port] を入力するか、SSH 設定からホストを選択してください。",
+    "hours": "時間",
+    "week": "週",
+    "month": "月",
+    "Legal Help": "法律に関するヘルプ",
+    "Help us improve Antigravity.": "Antigravity の改善にご協力ください。"
   },
   "patterns": [
     {
@@ -3918,6 +4393,141 @@
       "replace": {
         "2": "deviceKind"
       }
+    },
+    {
+      "id": "authorizationCodeFor",
+      "pattern": "^(?:Authorization code|Auth code) for (.+)$",
+      "sample": "Authorization code for Example $& Account",
+      "template": "{1} の認証コード"
+    },
+    {
+      "id": "recordShortcutFor",
+      "pattern": "^Recording shortcut for (.+)\\. Press keys to bind, Enter to save, Escape to cancel\\.$",
+      "sample": "Recording shortcut for Submit Prompt. Press keys to bind, Enter to save, Escape to cancel.",
+      "template": "{1} のショートカットを記録中。キーを押して割り当て、Enter で保存、Escape でキャンセルします。"
+    },
+    {
+      "id": "shortcutFor",
+      "pattern": "^Shortcut (.+?) for (.+)$",
+      "sample": "Shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "{2} のショートカット: {1}"
+    },
+    {
+      "id": "removeShortcutFor",
+      "pattern": "^Remove shortcut (.+?) for (.+)$",
+      "sample": "Remove shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "{2} のショートカット {1} を削除"
+    },
+    {
+      "id": "addShortcutFor",
+      "pattern": "^Add shortcut for (.+)$",
+      "sample": "Add shortcut for Submit Prompt",
+      "template": "{1} のショートカットを追加"
+    },
+    {
+      "id": "resetShortcutToDefault",
+      "pattern": "^Reset (.+) to default$",
+      "sample": "Reset Submit Prompt to default",
+      "template": "{1} を既定値にリセット"
+    },
+    {
+      "id": "downloadProgress",
+      "pattern": "^(.+) download progress$",
+      "sample": "report $&.pdf download progress",
+      "template": "{1} のダウンロード進行状況"
+    },
+    {
+      "id": "showDownloadInFolder",
+      "pattern": "^Show (.+) in folder$",
+      "sample": "Show report $&.pdf in folder",
+      "template": "{1} をフォルダーに表示"
+    },
+    {
+      "id": "removeDownloadFromList",
+      "pattern": "^Remove (.+) from list$",
+      "sample": "Remove report $&.pdf from list",
+      "template": "{1} を一覧から削除"
+    },
+    {
+      "id": "permissionModesSandboxUnavailable",
+      "pattern": "^(Default|Auto|Default and Auto|Auto and Default) (?:need|needs) the terminal sandbox, which isn't available on this host\\.$",
+      "sample": "Default and Auto need the terminal sandbox, which isn't available on this host.",
+      "template": "{1} モードにはターミナルサンドボックスが必要ですが、このホストでは利用できません。",
+      "replace": {
+        "1": "sandboxPermissionModes"
+      }
+    },
+    {
+      "id": "goToTurn",
+      "pattern": "^Go to turn (\\d+) of (\\d+)$",
+      "sample": "Go to turn 2 of 12",
+      "template": "{2} ターン中の {1} ターン目に移動"
+    },
+    {
+      "id": "voiceSpeed",
+      "pattern": "^Voice [Ss]peed, (\\d+(?:\\.\\d+)?x)$",
+      "sample": "Voice speed, 1.5x",
+      "template": "音声速度、{1}"
+    },
+    {
+      "id": "moreActionsFor",
+      "pattern": "^More actions for (.+)$",
+      "sample": "More actions for Example $& Project",
+      "template": "{1} のその他の操作"
+    },
+    {
+      "id": "searchMarketplaceFor",
+      "pattern": "^Search for \"(.+)\" in the Marketplace$",
+      "sample": "Search for \"Example $& Plugin\" in the Marketplace",
+      "template": "マーケットプレイスで「{1}」を検索"
+    },
+    {
+      "id": "noPluginsFoundFor",
+      "pattern": "^No plugins found for \"(.+)\"\\.$",
+      "sample": "No plugins found for \"Example $& Plugin\".",
+      "template": "「{1}」に一致するプラグインが見つかりません。"
+    },
+    {
+      "id": "noMcpServersFoundFor",
+      "pattern": "^No MCP servers found for \"(.+)\"$",
+      "sample": "No MCP servers found for \"Example $& Server\"",
+      "template": "「{1}」に一致する MCP サーバーが見つかりません"
+    },
+    {
+      "id": "switchEnvironment",
+      "pattern": "^Switch environment \\((.+)\\)$",
+      "sample": "Switch environment (Example $& Host)",
+      "template": "環境を切り替え（{1}）"
+    },
+    {
+      "id": "openSubagent",
+      "pattern": "^Open Subagent: (.+)$",
+      "sample": "Open Subagent: Example $& Agent",
+      "template": "サブエージェントを開く: {1}"
+    },
+    {
+      "id": "searchGoogleFor",
+      "pattern": "^Search Google for \"(.+)\"$",
+      "sample": "Search Google for \"Example $& Query\"",
+      "template": "Google で「{1}」を検索"
+    },
+    {
+      "id": "sshHostAsks",
+      "pattern": "^(.+) asks:$",
+      "sample": "user@example.com asks:",
+      "template": "{1} からの要求:"
+    },
+    {
+      "id": "cloudCredentialsOnly",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Credentials are only sent to the domains listed.",
+      "template": "{1} へのログイン情報は、ご利用のアカウントに紐づけてクラウドに保存されます。認証情報は一覧にあるドメインにのみ送信されます。"
+    },
+    {
+      "id": "cloudCredentialsAndLocal",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
+      "template": "{1} へのログイン情報は、ご利用のアカウントに紐づけてクラウドに保存されます。その他の認証情報はこのマシンに保存されます。認証情報は一覧にあるドメインにのみ送信されます。"
     }
   ],
   "menu": {
@@ -3996,6 +4606,12 @@
       "a HID device": "HID デバイス",
       "a USB device": "USB デバイス",
       "a serial port": "シリアルポート"
+    },
+    "sandboxPermissionModes": {
+      "Default": "デフォルト",
+      "Auto": "自動",
+      "Default and Auto": "デフォルトと自動",
+      "Auto and Default": "自動とデフォルト"
     }
   },
   "valueRules": {
@@ -4129,5 +4745,350 @@
         "template": "12月{1}日"
       }
     ]
-  }
+  },
+  "inlineMessages": [
+    {
+      "id": "applicationTerms",
+      "selector": "div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://antigravity.google/terms\"]), div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://cloud.google.com/terms\"])",
+      "source": "By using this app, you agree to its {1}",
+      "template": "このアプリを利用することで、次の規約に同意したことになります：{1}",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Terms of Service"
+        }
+      ]
+    },
+    {
+      "id": "browserChromeRequirement",
+      "selector": "span.text-sm.text-muted-foreground.whitespace-pre-wrap:has(>a[href=\"https://www.google.com/chrome/\"])",
+      "source": "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires {1}.",
+      "template": "ブラウザサブエージェント（/browser で起動）で許可または拒否する URL を設定します。{1}が必要です。",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Google Chrome"
+        }
+      ]
+    },
+    {
+      "id": "modelsBusinessDocs",
+      "selector": "div.text-secondary-foreground.py-2.px-3:has(>a[href=\"https://antigravity.google/docs/enterprise\"])",
+      "source": "For Antigravity Business consumption options, see {1}.",
+      "template": "Antigravity Business の利用オプションについては、{1}をご覧ください。",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "documentation"
+        }
+      ]
+    },
+    {
+      "id": "feedbackLegalHelp",
+      "selector": "p.opacity-70:has(>a[href=\"https://support.google.com/legal/troubleshooter/1114905?hl=en#ts=1115658\"])",
+      "source": "Visit {1} to ask for content changes for legal reasons.",
+      "template": "法的な理由によるコンテンツの変更を依頼するには、{1}にアクセスしてください。",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Legal Help"
+        }
+      ]
+    },
+    {
+      "id": "voicePrivacySettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "マイクがブロックされています。{1}で許可してください。",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "Privacy Settings"
+        }
+      ]
+    },
+    {
+      "id": "voiceSystemSettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "マイクがブロックされています。{1}で許可してください。",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "System Settings"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project.",
+      "template": "このプロジェクトで作業するときは、{1}も適用されます。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project. {2}.",
+      "template": "このプロジェクトで作業するときは、{1}も適用されます。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations.",
+      "template": "これらの会話で作業するときは、{1}も適用されます。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations. {2}.",
+      "template": "これらの会話で作業するときは、{1}も適用されます。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project.",
+      "template": "このプロジェクトは自動化のために作成されました。このプロジェクトで作業するときは、{1}も適用されます。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project. {2}.",
+      "template": "このプロジェクトは自動化のために作成されました。このプロジェクトで作業するときは、{1}も適用されます。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations.",
+      "template": "このプロジェクトは自動化のために作成されました。これらの会話で作業するときは、{1}も適用されます。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations. {2}.",
+      "template": "このプロジェクトは自動化のために作成されました。これらの会話で作業するときは、{1}も適用されます。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project.",
+      "template": "このプロジェクトは自動化「{1}」のために作成されました。このプロジェクトで作業するときは、{2}も適用されます。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project. {3}.",
+      "template": "このプロジェクトは自動化「{1}」のために作成されました。このプロジェクトで作業するときは、{2}も適用されます。{3}。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations.",
+      "template": "このプロジェクトは自動化「{1}」のために作成されました。これらの会話で作業するときは、{2}も適用されます。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations. {3}.",
+      "template": "このプロジェクトは自動化「{1}」のために作成されました。これらの会話で作業するときは、{2}も適用されます。{3}。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "mcpServerBrowserSignIn",
+      "selector": "[data-testid=\"mcp-server-browser-sign-in\"] > span[role=\"status\"]",
+      "source": "Finish signing in to {1} in your browser.",
+      "template": "ブラウザで {1} へのログインを完了してください。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "cloudResourceConnect",
+      "selector": "div.flex.flex-col.items-center.gap-2.py-2.text-center > span.text-sm.text-muted-foreground",
+      "source": "Connect your account to browse {1}.",
+      "template": "アカウントを接続すると、{1}を参照できます。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "ideWizardDescription",
+      "selector": "#step-ask > p",
+      "source": "Antigravity has been redesigned to put agents first with new capabilities. If you'd still like a code editor, you can download it as a separate app named {1}.",
+      "template": "Antigravity はエージェントを中心とした設計に刷新され、新しい機能が追加されました。引き続きコードエディターが必要な場合は、{1} という名前の別アプリとしてダウンロードできます。",
+      "slots": [
+        {
+          "selector": "b",
+          "text": "Antigravity IDE"
+        }
+      ]
+    },
+    {
+      "id": "onboardingPersonalization",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "Customize your experience across the agent, plugins, and product from the settings and marketplace. We won’t show you ads or let advertisers influence what {1} says.",
+      "template": "設定とマーケットプレイスから、エージェント、プラグイン、製品の利用体験をカスタマイズできます。広告を表示したり、広告主が {1} の回答に影響を与えたりすることはありません。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "onboardingAgentControl",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "{1}’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.",
+      "template": "{1} のエージェントは強力で、これまでより多くの作業を迅速かつ的確に進めるのに役立ちますが、エージェントが実行した操作は必ず確認してください。",
+      "slots": [
+        {
+          "textIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "onboardingDataConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>a[href=\"https://antigravity.google/terms\"]):has(>a[href=\"https://policies.google.com/privacy\"])",
+      "source": "{1} Allow Google to collect and use your Interactions data, subject to the {2} and {3}. You can control this from your settings at any point.",
+      "template": "{1} {2}および{3}に従って、Google がインタラクションデータを収集・利用することを許可します。設定画面からいつでも変更できます。",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Help us improve Antigravity."
+        },
+        {
+          "selector": "a[href=\"https://antigravity.google/terms\"]",
+          "text": "Google Antigravity Terms of Service"
+        },
+        {
+          "selector": "a[href=\"https://policies.google.com/privacy\"]",
+          "text": "Google Privacy Policy"
+        }
+      ]
+    },
+    {
+      "id": "onboardingMarketingConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>span.font-medium.text-secondary-foreground)",
+      "source": "{1} Sign up for newsletters, tips and tricks, and other notifications about {2}.",
+      "template": "{1} ニュースレター、活用のヒント、その他の {2} に関する通知を受け取ります。",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Stay up to date."
+        },
+        {
+          "textIndex": 3
+        }
+      ]
+    }
+  ]
 }

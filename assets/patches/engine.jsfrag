@@ -14,9 +14,47 @@
  */
 const AG_LOCALE = LOCALE_DATA_PLACEHOLDER;
 const agText = new Map(Object.entries(AG_LOCALE.text || {}));
+const agTranslatedLabels = new Set(agText.values());
+const agCompleteSentences = new Set();
+for (const [source, target] of agText) {
+    if (/[.!?。！？]$/.test(source.trim())) {
+        agCompleteSentences.add(source.trim().replace(/\s+/g, ' '));
+        if (/[.!?。！？]$/.test(target.trim())) {
+            agCompleteSentences.add(target.trim().replace(/\s+/g, ' '));
+        }
+    }
+}
 const agPunctuation = AG_LOCALE.punctuation || {};
 const agPunctuationSkip = AG_LOCALE.punctuationSkipSuffixes || [];
 const agValueMaps = AG_LOCALE.valueMaps || {};
+const agInlineMessages = AG_LOCALE.inlineMessages || [];
+const agTextState = new WeakMap();
+const agInlineTextNodes = new WeakSet();
+const agInlineSlots = new WeakSet();
+const agInlineLiteralSlots = new WeakSet();
+const agInlineContainers = new WeakMap();
+
+function agSourceText(node) {
+    const state = agTextState.get(node);
+    return state && node.nodeValue === state.output ? state.source : node.nodeValue;
+}
+
+function agWriteText(node, source, output) {
+    agTextState.set(node, { source, output });
+    if (node.nodeValue !== output) {
+        node.nodeValue = output;
+    }
+}
+
+function agHasInlineSlotAncestor(element, literalOnly = false) {
+    const slots = literalOnly ? agInlineLiteralSlots : agInlineSlots;
+    for (let current = element; current; current = current.parentElement) {
+        if (slots.has(current)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 // Replacement text is inserted literally. String.prototype.replace still
 // interprets $&, $\u0060, $', $n and $$ inside the replacement even when the
@@ -92,6 +130,29 @@ const agValueRules = Object.fromEntries(
 );
 
 const agAttributeNames = ['aria-label', 'title', 'placeholder', 'data-tooltip', 'alt'];
+const agContentSelector = [
+    // Antigravity 2.15 uses its own file viewer and message containers rather
+    // than Monaco or role=log for these surfaces. Their text is user content.
+    '.file-viewer-root',
+    '[data-testid="user-input-step"]',
+    '[data-testid="planner-response-text"]',
+    '[data-testid="progress-update-response-text"]',
+    // Side-question follow-ups are the user's own text, same as the main composer.
+    '[data-testid="side-question-followup-user"]',
+    '[data-testid="side-question-question"] > .truncate',
+    // Antigravity 2.29 renders spoken replies one word per <span> for live
+    // highlighting. These are conversation content, even when a word or a
+    // complete utterance happens to equal a UI label such as "Run".
+    '[data-testid="transcript-line-text"]',
+    '[data-testid="live-user-turn"]',
+    '[data-testid="live-agent-turn"]',
+    '[data-testid="live-lead"]',
+    '[data-testid="live-body"]',
+    '[data-testid="voice-transcript-summary-lead"]',
+    '[data-testid="voice-transcript-summary-point"]',
+    '[translate="no"]',
+    '.notranslate',
+].join(',');
 const agSkipSelector = [
     'script',
     'style',
@@ -105,33 +166,185 @@ const agSkipSelector = [
     '[role="terminal"]',
     '.monaco-editor',
     '.xterm',
-    // Antigravity 2.15 uses its own file viewer and message containers rather
-    // than Monaco or role=log for these surfaces. Their text is user content.
-    '.file-viewer-root',
-    '[data-testid="user-input-step"]',
-    '[data-testid="planner-response-text"]',
-    // Side-question follow-ups are the user's own text, same as the main composer.
-    '[data-testid="side-question-followup-user"]',
-    // Antigravity 2.29 renders spoken replies one word per <span> for live
-    // highlighting. These are conversation content, even when a word or a
-    // complete utterance happens to equal a UI label such as "Run".
-    '[data-testid="transcript-line-text"]',
-    '[data-testid="live-user-turn"]',
-    '[data-testid="live-agent-turn"]',
-    '[data-testid="live-lead"]',
-    '[data-testid="live-body"]',
-    '[translate="no"]',
-    '.notranslate',
+    agContentSelector,
 ].join(',');
 
 const agControlSelector = 'button, input, textarea, select, [role="button"], [role="menuitem"], [role="option"], [role="tab"]';
+
+function agNormalizeInline(value) {
+    return String(value).trim().replace(/\s+/g, ' ');
+}
+
+// Match only an explicitly named UI container and its complete source. Slots
+// retain existing inline elements or provider-name text nodes. Every other
+// element makes the shape ineligible, including arbitrary nested content.
+function agMatchInlineMessage(element, rule) {
+    const groups = [[]];
+    const slots = [];
+    let source = '';
+    const children = Array.from(element.childNodes);
+    for (let index = 0; index < children.length; index++) {
+        const node = children[index];
+        const spec = rule.slots[slots.length];
+        const slotMatches = spec && (spec.selector
+            ? node.nodeType === Node.ELEMENT_NODE && node.matches(spec.selector)
+            : index === spec.textIndex && node.nodeType === Node.TEXT_NODE);
+        if (slotMatches) {
+            if (node.nodeType === Node.ELEMENT_NODE && node.childElementCount !== 0) {
+                return null;
+            }
+            const texts = node.nodeType === Node.TEXT_NODE ? [] : Array.from(node.childNodes).filter(child => child.nodeType === Node.TEXT_NODE);
+            if (spec.text) {
+                const original = texts.map(agSourceText).join('');
+                if (agNormalizeInline(original) !== agNormalizeInline(spec.text) &&
+                    agNormalizeInline(node.textContent) !== agNormalizeInline(translateString(spec.text))) {
+                    return null;
+                }
+            }
+            slots.push({ node, spec, texts: texts.map(child => ({ node: child, source: agSourceText(child) })) });
+            source += '{' + slots.length + '}';
+            groups.push([]);
+        } else if (node.nodeType === Node.TEXT_NODE) {
+            const original = agSourceText(node) || '';
+            groups[groups.length - 1].push({ node, source: original });
+            source += original;
+        } else if (node.nodeType !== Node.COMMENT_NODE) {
+            return null;
+        }
+    }
+    if (slots.length !== rule.slots.length || agNormalizeInline(source) !== agNormalizeInline(rule.source)) {
+        return null;
+    }
+    const segments = rule.template.split(/\{\d+\}/);
+    if (segments.some((segment, index) => segment !== '' && groups[index].length === 0)) {
+        return null;
+    }
+    return { groups, slots, segments };
+}
+
+function agReleaseInlineMessage(element, restore) {
+    const state = agInlineContainers.get(element);
+    if (!state) {
+        return;
+    }
+    for (const node of state.texts) {
+        const prior = agTextState.get(node);
+        if (restore && prior && node.nodeValue === prior.output) {
+            node.nodeValue = prior.source;
+        }
+        agTextState.delete(node);
+        agInlineTextNodes.delete(node);
+    }
+    for (const node of state.slots) {
+        agInlineSlots.delete(node);
+        agInlineLiteralSlots.delete(node);
+    }
+    agInlineContainers.delete(element);
+}
+
+function agTranslateInlineMessage(element) {
+    if (!agInlineMessages.length || isSkippableElement(element)) {
+        return false;
+    }
+    for (const rule of agInlineMessages) {
+        if (!element.matches(rule.selector)) {
+            continue;
+        }
+        const match = agMatchInlineMessage(element, rule);
+        if (!match) {
+            continue;
+        }
+        agReleaseInlineMessage(element, false);
+        const texts = [];
+        const slots = [];
+        match.groups.forEach((group, index) => group.forEach((entry, part) => {
+            agWriteText(entry.node, entry.source, part === 0 ? match.segments[index] : '');
+            agInlineTextNodes.add(entry.node);
+            texts.push(entry.node);
+        }));
+        for (const slot of match.slots) {
+            slots.push(slot.node);
+            agInlineSlots.add(slot.node);
+            if (slot.spec.text) {
+                const translated = translateString(slot.spec.text);
+                slot.texts.forEach((entry, index) => {
+                    agWriteText(entry.node, entry.source, index === 0 ? translated : '');
+                    texts.push(entry.node);
+                });
+            } else {
+                agInlineLiteralSlots.add(slot.node);
+            }
+        }
+        agInlineContainers.set(element, { texts, slots });
+        return true;
+    }
+    // If React changes a previously handled UI into an unknown sentence,
+    // restore unchanged source nodes rather than mixing old translated pieces
+    // with the new text. Nodes actually updated by React are left as supplied.
+    agReleaseInlineMessage(element, true);
+    return false;
+}
+
+function agTranslateInlineAncestors(element) {
+    if (!agInlineMessages.length || element?.closest(agContentSelector) || element?.isContentEditable) {
+        return;
+    }
+    for (let current = element; current; current = current.parentElement) {
+        agTranslateInlineMessage(current);
+    }
+}
 
 // A text-node match is not necessarily a complete label. React and inline
 // markup can split an untranslated sentence into nodes like "Open" +
 // " the folder". Keep such runs in English instead of replacing a fragment.
 // Separate controls and flex/grid items remain independent UI labels.
+function isSentenceWithIndependentLink(before, after) {
+    if (before.nodeType !== Node.TEXT_NODE || after.nodeType !== Node.ELEMENT_NODE || after.tagName !== 'A') {
+        return false;
+    }
+    const sentence = (before.nodeValue || '').trim().replace(/\s+/g, ' ');
+    const label = (after.textContent || '').trim().replace(/\s+/g, ' ');
+    return agCompleteSentences.has(sentence) && Boolean(agLookup(label) || agTranslatedLabels.has(label));
+}
+
+function isKnownCompleteSentence(node) {
+    if (node.nodeType !== Node.TEXT_NODE &&
+        !(node.nodeType === Node.ELEMENT_NODE && node.matches('strong, b') && node.childElementCount === 0)) {
+        return false;
+    }
+    const original = node.nodeType === Node.TEXT_NODE ? agSourceText(node) : node.textContent;
+    const text = (original || '').trim().replace(/\s+/g, ' ');
+    return agCompleteSentences.has(text) || (/[.!?。！？]$/.test(text) && hasTranslation(text));
+}
+
+const agTooltipShortcutRe = /^(?:(?:(?:Ctrl|Alt|Shift|Cmd|Control|Option|Command|Meta)\+)+|[⌃⌥⇧⌘]+)(?:[A-Z0-9\[\]\\;',./`=+\-←→↑↓↵⌫⌦⎋⇥]|F(?:[1-9]|1\d|2[0-4])|Enter|Return|Escape|Esc|Tab|Space|Backspace|Delete|Home|End|PageUp|PageDown|Arrow(?:Up|Down|Left|Right))$/;
+function isTooltipShortcutSpan(element) {
+    return element?.nodeType === Node.ELEMENT_NODE && element.tagName === 'SPAN' &&
+        element.childElementCount === 0 && element.closest('[role="tooltip"]') &&
+        agTooltipShortcutRe.test((element.textContent || '').trim());
+}
+
+function isTooltipLabelWithShortcut(before, after) {
+    if (!isTooltipShortcutSpan(after) ||
+        !(before.nodeType === Node.TEXT_NODE || (before.nodeType === Node.ELEMENT_NODE && before.tagName === 'SPAN' && before.childElementCount === 0))) {
+        return false;
+    }
+    const label = (before.textContent || '').trim().replace(/\s+/g, ' ');
+    return Boolean(agLookup(label) || agTranslatedLabels.has(label));
+}
+
 function hasInlineSiblingText(node, direction) {
     for (let sibling = node[direction]; sibling; sibling = sibling[direction]) {
+        // A complete, known settings sentence can be followed by a separate
+        // help link. Recognize both source and translated text so either side
+        // can update after the other has already been localized.
+        const before = direction === 'previousSibling' ? sibling : node;
+        const after = direction === 'previousSibling' ? node : sibling;
+        if (isSentenceWithIndependentLink(before, after) ||
+            (isKnownCompleteSentence(before) && isKnownCompleteSentence(after)) ||
+            isTooltipLabelWithShortcut(before, after)) {
+            continue;
+        }
         if (sibling.nodeType === Node.TEXT_NODE) {
             if (/[A-Za-z]/.test(sibling.nodeValue || '')) {
                 return true;
@@ -313,9 +526,12 @@ function isSkippableElement(element) {
     // isContentEditable covers inherited editability plus values such as an
     // empty attribute or "plaintext-only". Matching only
     // [contenteditable="true"] can rewrite text the user is actively editing.
-    return Boolean(element?.isContentEditable || element?.closest?.(agSkipSelector));
+    return Boolean(element?.isContentEditable || element?.closest?.(agSkipSelector) || agHasInlineSlotAncestor(element) || isTooltipShortcutSpan(element));
 }
 function shouldTranslateTextNode(node) {
+    if (agInlineTextNodes.has(node) || agInlineSlots.has(node)) {
+        return false;
+    }
     const parent = node.parentElement;
     if (!parent || isSkippableElement(parent)) {
         return false;
@@ -334,9 +550,10 @@ function translateAttributes(root) {
         return;
     }
     const element = root;
-    // Editable/code content is intentionally skipped for text nodes, but its
-    // accessibility labels are UI chrome and can still be translated safely.
-    if (element.matches('script, style') || element.closest('[translate="no"], .notranslate')) {
+    // Editors can expose UI labels, while conversation/file content may carry
+    // user-supplied Markdown titles or image alt text. Preserve those too,
+    // including when a nested node is inserted or its attributes change later.
+    if (element.matches('script, style') || element.closest(agContentSelector) || agHasInlineSlotAncestor(element, true)) {
         return;
     }
     for (const attr of agAttributeNames) {
@@ -354,10 +571,11 @@ function translateNode(root) {
         return;
     }
     if (root.nodeType === Node.TEXT_NODE) {
+        agTranslateInlineAncestors(root.parentElement);
         if (shouldTranslateTextNode(root)) {
             const next = translateString(root.nodeValue);
             if (next !== root.nodeValue) {
-                root.nodeValue = next;
+                agWriteText(root, root.nodeValue, next);
             }
         }
         return;
@@ -365,12 +583,14 @@ function translateNode(root) {
     if (root.nodeType !== Node.ELEMENT_NODE) {
         return;
     }
+    agTranslateInlineAncestors(root.parentElement);
     if (isSkippableElement(root)) {
         // Preserve user-editable/code text, while still localizing its own
         // labels when the element is inserted with attributes already set.
         translateAttributes(root);
         return;
     }
+    agTranslateInlineMessage(root);
     translateAttributes(root);
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
         acceptNode(node) {
@@ -389,11 +609,12 @@ function translateNode(root) {
             if (shouldTranslateTextNode(node)) {
                 const next = translateString(node.nodeValue);
                 if (next !== node.nodeValue) {
-                    node.nodeValue = next;
+                    agWriteText(node, node.nodeValue, next);
                 }
             }
         }
         else {
+            agTranslateInlineMessage(node);
             translateAttributes(node);
         }
         node = walker.nextNode();
@@ -416,6 +637,11 @@ function installLocalePatch() {
                 translateAttributes(mutation.target);
             }
             else {
+                // React can remove a conditional fragment without adding any
+                // nodes. Re-match the surviving inline container in that case.
+                if (mutation.removedNodes.length) {
+                    agTranslateInlineAncestors(mutation.target);
+                }
                 mutation.addedNodes.forEach(translateNode);
             }
         }

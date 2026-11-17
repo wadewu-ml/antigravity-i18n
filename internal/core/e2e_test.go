@@ -162,6 +162,66 @@ func TestApplyThenRestoreIsByteExact(t *testing.T) {
 	}
 }
 
+// Run the complete injection path against an official archive, using only a
+// temporary installation and mocked process control. ASAR read/write tests alone
+// do not establish that a new release still has the required injection anchors.
+func TestApplyThenRestoreRealArchive(t *testing.T) {
+	src := envAsar(t)
+	id, err := readArchiveIdentity(src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if patched, err := detectPatchInArchive(src); err != nil {
+		t.Fatal(err)
+	} else if patched {
+		t.Skip("ANTIGRAVITY_ASAR must point to an unpatched official archive")
+	}
+	appDir := installLayout(t, src)
+	asarPath := filepath.Join(appDir, "resources", "app.asar")
+	want := fileHash(t, asarPath)
+	svc := newTestService(t)
+	opts := Options{AppDir: appDir, Locale: DefaultLocale, Restart: false}
+	if _, err := svc.ApplyLocale(opts); err != nil {
+		t.Fatalf("apply to official archive: %v", err)
+	}
+	if code, _, ok := readArchiveLocale(asarPath); !ok || code != DefaultLocale {
+		t.Fatalf("patched official archive locale = %q (ok=%v)", code, ok)
+	}
+	original, err := ReadArchive(src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, rel := range []string{"dist/ideInstall/wizardPreload.js", "dist/remote/sshPromptPreload.js"} {
+		if original.lookup(rel) == nil {
+			continue
+		}
+		preload := string(mustReadFile(t, asarPath, rel))
+		if strings.Count(preload, "/* antigravity-i18n:begin */") != 1 {
+			t.Errorf("%s does not contain exactly one translation engine", rel)
+		}
+		if err := checkJavaScriptSyntax(rel, preload); err != nil {
+			t.Fatal(err)
+		}
+		if rel == "dist/remote/sshPromptPreload.js" && !strings.Contains(string(mustReadFile(t, asarPath, "dist/remote/sshPrompts.js")), `<div id="message" translate="no"></div>`) {
+			t.Error("remote SSH prompt text is not protected from translation")
+		}
+	}
+	afterFirst := fileHash(t, asarPath)
+	if _, err := svc.ApplyLocale(opts); err != nil {
+		t.Fatalf("reapply to official archive: %v", err)
+	}
+	if fileHash(t, asarPath) != afterFirst {
+		t.Fatal("reapplying the official archive changed the localized bytes")
+	}
+	if _, err := svc.RestoreOfficial(opts); err != nil {
+		t.Fatalf("restore official archive: %v", err)
+	}
+	if got := fileHash(t, asarPath); got != want {
+		t.Fatal("restoring the official archive changed its original bytes")
+	}
+	t.Logf("official Antigravity %s applies and restores byte-exactly", id.Version)
+}
+
 // TestApplyIsIdempotent re-applies the same locale and requires the archive to be
 // unchanged: a patch that grows on every run would keep changing app.asar for no
 // reason.

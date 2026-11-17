@@ -3352,7 +3352,7 @@
     "Developer-only tools. These settings do not affect other users.": "Инструменты только для разработчиков. Эти настройки не влияют на других пользователей.",
     "Developer: Reset NUX": "Разработчик: сбросить знакомство",
     "Developer: Reset Onboarding": "Разработчик: сбросить начальную настройку",
-    "Stay up to date.": "Будьте в курсе обновлений.",
+    "Stay up to date.": "Будьте в курсе новостей.",
     "Google One Referral": "Реферальная программа Google One",
     "Share your referral link with friends": "Поделитесь реферальной ссылкой с друзьями",
     "Invite a Friend": "Пригласить друга",
@@ -3423,7 +3423,482 @@
     "Welcome back.": "С возвращением.",
     "Good to see you.": "Рад вас видеть.",
     "Ignore events triggered by the automation owner to avoid self-trigger loops.": "Игнорировать события владельца автоматизации, чтобы избежать циклов самозапуска.",
-    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "Игнорировать события автоматических проверок и учетных записей роботов (groupagent-*)."
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "Игнорировать события автоматических проверок и учетных записей роботов (groupagent-*).",
+    "Account connection was not completed.": "Подключение аккаунта не завершено.",
+    "Add files": "Добавить файлы",
+    "Address bar suggestions": "Подсказки адресной строки",
+    "Attach terminal output": "Прикрепить вывод терминала",
+    "Browse MCP resources": "Просмотреть ресурсы MCP",
+    "Browse rules": "Просмотреть правила",
+    "Browser steps": "Действия в браузере",
+    "Cannot parse folder URI.": "Не удалось разобрать URI папки.",
+    "Choose icon and color": "Выбрать значок и цвет",
+    "Click to learn more about sources": "Нажмите, чтобы узнать больше об источниках",
+    "Close Panel": "Закрыть панель",
+    "Color": "Цвет",
+    "Connect an account so the agent can use this app.": "Подключите аккаунт, чтобы агент мог использовать это приложение.",
+    "Connect to SSH Host…": "Подключиться к узлу SSH…",
+    "Connections": "Подключения",
+    "Conversation turns": "Ходы разговора",
+    "Coordinator goal": "Цель координатора",
+    "Coordinator name": "Имя координатора",
+    "Coordinator settings": "Настройки координатора",
+    "Coordinators": "Координаторы",
+    "Copy gh auth login command": "Копировать команду gh auth login",
+    "Customize Sections": "Настроить разделы",
+    "Days": "Дни",
+    "Discard comment draft": "Удалить черновик комментария",
+    "Dismiss artifact update notice": "Скрыть уведомление об обновлении артефакта",
+    "Docs, Sheets, Slides, and folders": "Документы, таблицы, презентации и папки",
+    "Enter always submits. This adds a second shortcut.": "Enter всегда отправляет запрос. Здесь можно задать дополнительное сочетание клавиш.",
+    "Environments": "Среды",
+    "Failed to clone project locally": "Не удалось клонировать проект на этот компьютер",
+    "Failed to export artifact": "Не удалось экспортировать артефакт",
+    "Failed to read file": "Не удалось прочитать файл",
+    "Failed to unarchive local project": "Не удалось восстановить локальный проект из архива",
+    "Filter agents": "Фильтровать агентов",
+    "Filter files": "Фильтровать файлы",
+    "Filter rows": "Фильтровать строки",
+    "Font Size": "Размер шрифта",
+    "Hidden hosts": "Скрытые узлы",
+    "Icon": "Значок",
+    "It was already sent or couldn't be removed from the queue.": "Сообщение уже отправлено или его не удалось удалить из очереди.",
+    "Jump to Next Prompt": "Перейти к следующему запросу",
+    "Jump to Previous Prompt": "Перейти к предыдущему запросу",
+    "Layout": "Расположение",
+    "Main Agent": "Основной агент",
+    "Markdown view mode": "Режим просмотра Markdown",
+    "Marketplace notice": "Уведомление торговой площадки",
+    "MCP server error": "Ошибка сервера MCP",
+    "Message this chat": "Написать в этот чат",
+    "New coordinator": "Новый координатор",
+    "New Coordinator": "Новый координатор",
+    "Next card": "Следующая карточка",
+    "No coordinators": "Нет координаторов",
+    "Open on another device": "Открыть на другом устройстве",
+    "Open on phone": "Открыть на телефоне",
+    "Paste authorization code": "Вставьте код авторизации",
+    "Pause this agent; it keeps its place and streams. Resume to continue.": "Приостановить агента с сохранением текущего состояния и потоков. Возобновите, чтобы продолжить.",
+    "Pick up this remote conversation on your phone or in any browser. Scan the QR code or open the link below.": "Продолжите этот удалённый разговор на телефоне или в любом браузере. Отсканируйте QR-код или откройте ссылку ниже.",
+    "Pin / Unpin Conversation": "Закрепить / открепить разговор",
+    "Plan upgrade required": "Требуется перейти на более высокий тариф",
+    "Playback speed (< / >)": "Скорость воспроизведения (< / >)",
+    "Plugin metadata": "Метаданные плагина",
+    "Previous card": "Предыдущая карточка",
+    "Project location": "Расположение проекта",
+    "Promote to conversation": "Преобразовать в разговор",
+    "Recent": "Недавние",
+    "References": "Ссылки",
+    "Remove from history": "Удалить из истории",
+    "Remove from Recent": "Удалить из недавних",
+    "Remove resource": "Удалить ресурс",
+    "Remove trigger": "Удалить триггер",
+    "Reset all shortcuts to defaults": "Восстановить все сочетания клавиш по умолчанию",
+    "Resume": "Возобновить",
+    "Resume 1 comment draft": "Продолжить 1 черновик комментария",
+    "Resume comment draft": "Продолжить черновик комментария",
+    "Search shortcuts": "Поиск сочетаний клавиш",
+    "Send": "Отправить",
+    "Show Details": "Показать подробности",
+    "Show or Hide Extensions": "Показать или скрыть расширения",
+    "SSH Config": "Конфигурация SSH",
+    "SSH host": "Узел SSH",
+    "SSH Host": "Узел SSH",
+    "SSH Host…": "Узел SSH…",
+    "Starting the conversation…": "Запуск разговора…",
+    "Stop side question": "Остановить побочный вопрос",
+    "Stop SSH Server…": "Остановить сервер SSH…",
+    "Stop this agent": "Остановить этого агента",
+    "Submit Prompt (Alternate to Enter)": "Отправить запрос (альтернатива Enter)",
+    "Switch to This Computer": "Переключиться на этот компьютер",
+    "The Hub sent an unexpected response.": "Hub вернул неожиданный ответ.",
+    "Toggle Google Cloud projects": "Показать или скрыть проекты Google Cloud",
+    "Toggle Terminal Panel": "Показать или скрыть панель терминала",
+    "Toggle Word Wrap": "Включить или выключить перенос строк",
+    "Untrusted sidecar": "Недоверенный вспомогательный компонент",
+    "View MCP servers": "Просмотреть серверы MCP",
+    "When it runs": "Когда запускается",
+    "A bash script run in your cloud environment after cloning repositories (or configure interactively in chat with /env-setup).": "Скрипт bash, выполняемый в облачной среде после клонирования репозиториев (также можно настроить интерактивно в чате командой /env-setup).",
+    "Add filter": "Добавить фильтр",
+    "Add trigger": "Добавить триггер",
+    "Agent ID:": "ID агента:",
+    "Agent said": "Агент ответил",
+    "Agent working": "Агент работает",
+    "All agents": "Все агенты",
+    "All runs": "Все запуски",
+    "Analyzed content": "Содержимое проанализировано",
+    "Analyzed Task Log": "Журнал задачи проанализирован",
+    "Analyzing content": "Анализ содержимого",
+    "Analyzing Task Log": "Анализ журнала задачи",
+    "Appears larger on mobile": "На мобильных устройствах отображается крупнее",
+    "Approximate; may start a few minutes later": "Приблизительно; запуск может произойти на несколько минут позже",
+    "Apps connected to your account": "Приложения, подключённые к вашему аккаунту",
+    "Archived Only": "Только архивные",
+    "Are you sure you want to delete this side question? This action cannot be undone.": "Удалить этот побочный вопрос? Это действие нельзя отменить.",
+    "Artifact image": "Изображение артефакта",
+    "Artifact updated by agent": "Артефакт обновлён агентом",
+    "Ask a side question without interrupting the main conversation": "Задать побочный вопрос, не прерывая основной разговор",
+    "Audio File": "Аудиофайл",
+    "Authorization code": "Код авторизации",
+    "Branch actions": "Действия с веткой",
+    "Branch names": "Имена веток",
+    "Browse Connectors": "Просмотреть подключения",
+    "Cancel Questionnaire and Stop the Agent": "Отменить опрос и остановить агента",
+    "Canvas page · display only": "Страница холста · только просмотр",
+    "Certificate is valid": "Сертификат действителен",
+    "Clear visited URLs and autocomplete suggestions from side panel preview.": "Очистить посещённые URL и подсказки автозаполнения в предварительном просмотре боковой панели.",
+    "Clones this repo in a cloud environment": "Клонирует этот репозиторий в облачной среде",
+    "Close message": "Закрыть сообщение",
+    "Code Preview": "Предварительный просмотр кода",
+    "Collapse Questionnaire": "Свернуть опрос",
+    "Collapse questionnaire": "Свернуть опрос",
+    "Command is required": "Необходимо указать команду",
+    "Connect an account so the agent can run automations.": "Подключите аккаунт, чтобы агент мог запускать автоматизацию.",
+    "Connect to SSH Host": "Подключиться к узлу SSH",
+    "Connecting to terminal...": "Подключение к терминалу...",
+    "Continue Task →": "Продолжить задачу →",
+    "Conversation link": "Ссылка на разговор",
+    "Could not start.": "Не удалось запустить.",
+    "Couldn't delete your data. Try again.": "Не удалось удалить ваши данные. Повторите попытку.",
+    "Couldn't load message": "Не удалось загрузить сообщение",
+    "Couldn't load the suggested plugin.": "Не удалось загрузить предложенный плагин.",
+    "Couldn't load your SSH hosts": "Не удалось загрузить ваши узлы SSH",
+    "Couldn't load your SSH hosts. You can still type one.": "Не удалось загрузить ваши узлы SSH. Вы можете ввести адрес вручную.",
+    "Couldn't search files": "Не удалось выполнить поиск файлов",
+    "Create a project first.": "Сначала создайте проект.",
+    "Create a project on a machine you reach over SSH. It opens in that host's own window.": "Создайте проект на компьютере, доступном по SSH. Он откроется в отдельном окне этого узла.",
+    "Create Coordinator": "Создать координатора",
+    "Create Group": "Создать группу",
+    "Created outline": "Структура создана",
+    "Creates a local automation that runs on this computer": "Создаёт локальную автоматизацию, выполняемую на этом компьютере",
+    "Delete agent": "Удалить агента",
+    "Delete all": "Удалить всё",
+    "Delete All Data": "Удалить все данные",
+    "Drop to attach": "Отпустите, чтобы прикрепить",
+    "Duplicate project name": "Имя проекта уже используется",
+    "Enable macOS Permissions": "Предоставить разрешения macOS",
+    "Enable the plugin to sign in.": "Включите плагин, чтобы войти в аккаунт.",
+    "Enable this plugin to manage its accounts.": "Включите этот плагин для управления его аккаунтами.",
+    "Environment Setup Script": "Скрипт настройки среды",
+    "Error editing file": "Ошибка редактирования файла",
+    "Error viewing file": "Ошибка просмотра файла",
+    "Execution Identity": "Аккаунт для выполнения",
+    "Expand questionnaire": "Развернуть опрос",
+    "Expand Questionnaire": "Развернуть опрос",
+    "Fork in Current Workspace": "Создать ответвление в текущей рабочей области",
+    "Full Logs": "Полные журналы",
+    "Generated media": "Созданные медиафайлы",
+    "Get API key": "Получить ключ API",
+    "GitHub Repositories": "Репозитории GitHub",
+    "GitHub: not signed in": "GitHub: вход не выполнен",
+    "Google Antigravity Terms of Service": "Условия использования Google Antigravity",
+    "Here's how uploaded files, attachments, and connected resources work in your cloud environment": "Как работают загруженные файлы, вложения и подключённые ресурсы в вашей облачной среде",
+    "Hey there, what should we build today?": "Привет! Что создадим сегодня?",
+    "Hidden by policy": "Скрыто политикой",
+    "Host Endpoint": "Адрес сервиса узла",
+    "Idle Guard Warning": "Предупреждение защиты от простоя",
+    "If you add multiple accounts, MCP servers use the one marked Default.": "Если вы добавите несколько аккаунтов, серверы MCP будут использовать аккаунт, отмеченный как используемый по умолчанию.",
+    "Issue actions": "Действия с задачей",
+    "Issue numbers": "Номера задач",
+    "Issued by": "Кем выдан",
+    "Issued to": "Кому выдан",
+    "Keeps your checkout untouched": "Сохраняет вашу рабочую копию без изменений",
+    "Live chat in progress": "Идёт разговор в реальном времени",
+    "Loading hosts…": "Загрузка узлов…",
+    "Loading Hosts…": "Загрузка узлов…",
+    "Loading Repositories…": "Загрузка репозиториев…",
+    "Loading resources...": "Загрузка ресурсов...",
+    "Log in": "Войти",
+    "Marked 1 conversation as read": "1 разговор отмечен как прочитанный",
+    "MCP error": "Ошибка MCP",
+    "Middle Click": "Нажатие средней кнопки мыши",
+    "Moved Mouse in Browser": "Указатель мыши перемещён в браузере",
+    "Moving Mouse in Browser": "Перемещение указателя мыши в браузере",
+    "No agent is working right now.": "Сейчас ни один агент не работает.",
+    "No artifacts generated": "Артефакты не созданы",
+    "No commits yet": "Пока нет коммитов",
+    "No connectors available in this project": "В этом проекте нет доступных подключений",
+    "No conversation": "Нет разговора",
+    "No events recorded": "Нет записанных событий",
+    "No hosts in ~/.ssh/config yet": "В ~/.ssh/config пока нет узлов",
+    "No instances yet.": "Пока нет экземпляров.",
+    "No keyboard shortcuts found matching your filter.": "Нет сочетаний клавиш, соответствующих фильтру.",
+    "No matching hosts": "Подходящие узлы не найдены",
+    "No matching repositories": "Подходящие репозитории не найдены",
+    "No matching resources found.": "Подходящие ресурсы не найдены.",
+    "No message text": "Нет текста сообщения",
+    "No pinned conversations": "Нет закреплённых разговоров",
+    "No recent downloads": "Нет недавних загрузок",
+    "No recordings": "Нет записей",
+    "No repositories found": "Репозитории не найдены",
+    "No resources added yet.": "Ресурсы пока не добавлены.",
+    "Not set": "Не задано",
+    "Nothing is running right now": "Сейчас ничего не выполняется",
+    "Only Automations": "Только автоматизация",
+    "Only Scheduled": "Только по расписанию",
+    "Open image preview": "Открыть предварительный просмотр изображения",
+    "Open in Side Pane": "Открыть в боковой панели",
+    "Open skill page": "Открыть страницу навыка",
+    "Open SSH Host": "Открыть узел SSH",
+    "Open video preview": "Открыть предварительный просмотр видео",
+    "Opened URL in Browser": "URL открыт в браузере",
+    "Opening URL in Browser": "Открытие URL в браузере",
+    "Other conversation": "Другой разговор",
+    "Other Customizations": "Другие настройки",
+    "Paste new key": "Вставьте новый ключ",
+    "Pay only for the tokens you use, billed through Gemini platform.": "Платите только за использованные токены через платформу Gemini.",
+    "Pick a model to change it.": "Выберите модель, чтобы изменить её.",
+    "Pin Tab": "Закрепить вкладку",
+    "Press keys...": "Нажмите клавиши...",
+    "Process Error": "Ошибка процесса",
+    "Process exited with an error": "Процесс завершился с ошибкой",
+    "Prohibited Use Policy": "Политика запрещённого использования",
+    "Pull request actions": "Действия с запросом на слияние",
+    "Pull request numbers": "Номера запросов на слияние",
+    "Read Browser Page in Browser": "Страница в браузере прочитана",
+    "Read page": "Прочитать страницу",
+    "Reading Browser Page in Browser": "Чтение страницы в браузере",
+    "Recent Conversations": "Недавние разговоры",
+    "Recent Events": "Недавние события",
+    "Refreshed Browser page": "Страница браузера обновлена",
+    "Refreshing Browser page": "Обновление страницы браузера",
+    "Refreshing credentials...": "Обновление учётных данных...",
+    "Relaunch the app once to activate Screen Recording.": "Перезапустите приложение, чтобы активировать запись экрана.",
+    "Remote Control Instances": "Экземпляры удалённого управления",
+    "Remote Projects": "Удалённые проекты",
+    "Removing the bundle removes all of its plugins.": "При удалении набора удаляются все входящие в него плагины.",
+    "Repeat every": "Повторять каждые",
+    "Replacing removes the currently installed plugin and installs the new one in its place.": "При замене текущий плагин удаляется, а на его место устанавливается новый.",
+    "Repo default": "По умолчанию для репозитория",
+    "Resized Browser window": "Размер окна браузера изменён",
+    "Resizing Browser window": "Изменение размера окна браузера",
+    "Resume environment": "Возобновить работу среды",
+    "Resume this agent where it paused": "Продолжить работу агента с места остановки",
+    "Resuming environment…": "Возобновление работы среды…",
+    "Retrieved Browser Pages": "Страницы браузера получены",
+    "Retrieved Console Logs from Browser": "Журналы консоли браузера получены",
+    "Retrieving Browser Pages": "Получение страниц браузера",
+    "Retrieving Console Logs from Browser": "Получение журналов консоли браузера",
+    "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.": "Запускайте запрос по расписанию — например, утреннюю сводку вчерашних изменений. Запуски появятся здесь.",
+    "Running processes are killed. This cannot be undone.": "Запущенные процессы будут завершены. Это действие нельзя отменить.",
+    "Runs in a cloud environment": "Выполняется в облачной среде",
+    "Schedule type": "Тип расписания",
+    "Scroll turns down": "Прокрутить ходы вниз",
+    "Scroll turns up": "Прокрутить ходы вверх",
+    "Scrollable table": "Прокручиваемая таблица",
+    "Scrolled down in Browser": "Страница в браузере прокручена вниз",
+    "Scrolled in Browser": "Страница в браузере прокручена",
+    "Scrolled up in Browser": "Страница в браузере прокручена вверх",
+    "Scrolling down in Browser": "Прокрутка страницы в браузере вниз",
+    "Scrolling in Browser": "Прокрутка страницы в браузере",
+    "Scrolling up in Browser": "Прокрутка страницы в браузере вверх",
+    "Search conversations, commands, and code...": "Поиск разговоров, команд и кода...",
+    "Search failed": "Не удалось выполнить поиск",
+    "Search Hosts…": "Поиск узлов…",
+    "Search or enter a URL": "Поиск или ввод URL",
+    "Search shortcuts...": "Поиск сочетаний клавиш...",
+    "Search tabs, files and more": "Поиск вкладок, файлов и других элементов",
+    "Selected Option in Browser": "Вариант в браузере выбран",
+    "Selected region": "Выделенная область",
+    "Selecting Option in Browser": "Выбор варианта в браузере",
+    "Semantic searched": "Семантический поиск выполнен",
+    "Semantic searching": "Семантический поиск",
+    "Send command input?": "Отправить ввод команде?",
+    "Services this plugin connects to on your behalf.": "Сервисы, к которым этот плагин подключается от вашего имени.",
+    "Set up": "Настроить",
+    "Shares this repository, with a working copy of its own. Uncommitted changes stay behind.": "Использует тот же репозиторий, но отдельную рабочую копию. Незакоммиченные изменения остаются в исходной копии.",
+    "Show in Sidebar": "Показать в боковой панели",
+    "Side Pane UI Available": "Доступен интерфейс в боковой панели",
+    "Side Panel Preview": "Предварительный просмотр в боковой панели",
+    "Sign in in your browser, then paste the authorization code shown on the callback page.": "Войдите в аккаунт в браузере, затем вставьте код авторизации со страницы обратного перенаправления.",
+    "Sign in needed": "Требуется вход",
+    "Sign in to an app once and your agent can use it on any device. Open an app to see the account it uses or to disconnect it.": "Войдите в приложение один раз, и агент сможет использовать его на любом устройстве. Откройте приложение, чтобы увидеть используемый аккаунт или отключить его.",
+    "Sort and filter conversations": "Сортировка и фильтрация разговоров",
+    "SSH config:": "Конфигурация SSH:",
+    "Starting preview…": "Запуск предварительного просмотра…",
+    "Still running": "Всё ещё выполняется",
+    "Stop all agents": "Остановить всех агентов",
+    "Stop Side Question": "Остановить побочный вопрос",
+    "Stream and control": "Трансляция и управление",
+    "Submit code": "Отправить код",
+    "Summarizing call…": "Подведение итогов звонка…",
+    "Switch To": "Переключиться на",
+    "System Prompt": "Системный запрос",
+    "Taking Screenshot": "Создание снимка экрана",
+    "Task Log": "Журнал задачи",
+    "The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.": "Ниже показано использование токенов настройками, такими как правила, навыки и MCP. При превышении бюджета объёмные правила заменяются ссылками на файлы, а объёмные настройки автоматически исключаются.",
+    "The suggested plugin isn't in the marketplace.": "Предложенного плагина нет на торговой площадке.",
+    "Then create the project in its window.": "Затем создайте проект в его окне.",
+    "This automation is currently stopped. Events and stdout streams will appear here once started.": "Эта автоматизация остановлена. После запуска здесь появятся события и потоки стандартного вывода.",
+    "This chat's environment is paused": "Среда этого чата приостановлена",
+    "This conversation is in a different workspace.": "Этот разговор находится в другой рабочей области.",
+    "This link wants to open an app on your device.": "Эта ссылка запрашивает открытие приложения на вашем устройстве.",
+    "This page is going away soon": "Эта страница скоро будет удалена",
+    "This permanently deletes all of your Remote Agents conversations, projects, scheduled tasks, connected plugins and settings, and stops any running remote agents. It can't be undone. Data in the desktop app and your Google account are not affected, and you can keep using Remote Agents afterwards.": "Все ваши разговоры, проекты, задачи по расписанию, подключённые плагины и настройки удалённых агентов будут безвозвратно удалены, а запущенные удалённые агенты остановлены. Это действие нельзя отменить. Данные настольного приложения и аккаунта Google не затрагиваются. После удаления вы сможете продолжать использовать удалённых агентов.",
+    "This plugin was force disabled.": "Этот плагин принудительно отключён.",
+    "This project is associated with a different workspace.": "Этот проект связан с другой рабочей областью.",
+    "Took Screenshot": "Снимок экрана создан",
+    "Type to search file contents": "Введите текст для поиска в содержимом файлов",
+    "Unknown Server": "Неизвестный сервер",
+    "Unnamed resource": "Ресурс без имени",
+    "Unnamed Theme": "Тема без имени",
+    "Unpin Tab": "Открепить вкладку",
+    "Uploaded files and connected resources are mounted in your cloud environment.": "Загруженные файлы и подключённые ресурсы монтируются в вашей облачной среде.",
+    "Use Advanced SSO Config": "Использовать расширенную конфигурацию SSO",
+    "Use Antigravity through your Gemini subscription.": "Используйте Antigravity по подписке Gemini.",
+    "Use the default color.": "Использовать цвет по умолчанию.",
+    "Use this if your admin gave you a WIF config. Paste it below to sign in.": "Используйте этот вариант, если администратор предоставил конфигурацию WIF. Вставьте её ниже, чтобы войти.",
+    "Valid until": "Действителен до",
+    "View archived in the sidebar": "Просмотреть архив в боковой панели",
+    "View archived in the sidebar (Display options menu).": "Просмотрите архив в боковой панели (меню параметров отображения).",
+    "View Branches": "Просмотреть ветки",
+    "Waiting for the agents’ windows…": "Ожидание окон агентов…",
+    "Waiting for the SSH connection to finish": "Ожидание завершения подключения по SSH",
+    "Waiting for you to finish signing in…": "Ожидание завершения входа…",
+    "When should it run?": "Когда запускать?",
+    "Where should it run?": "Где выполнять?",
+    "Workflows are changing on October 19th—stay tuned for updates. You can use the agent to migrate your workflows.": "Рабочие процессы изменятся 19 октября — следите за обновлениями. Вы можете поручить агенту перенести ваши рабочие процессы.",
+    "You said": "Вы сказали",
+    "Your Antigravity use will be associated with provided project. Make sure you trust the project ID before proceeding. Account activity and data may be logged by your organization.": "Использование Antigravity будет связано с указанным проектом. Прежде чем продолжить, убедитесь, что доверяете этому ID проекта. Ваша организация может вести журнал действий аккаунта и данных.",
+    "Your Plan": "Ваш тариф",
+    "Your This Computer setting": "Ваша настройка для этого компьютера",
+    "Allow the browser agent to download a file?": "Разрешить агенту браузера скачать файл?",
+    "Blocked: file type not allowed": "Заблокировано: недопустимый тип файла",
+    "Yes, allow this download": "Да, разрешить эту загрузку",
+    "Yes, allow this time": "Да, разрешить на этот раз",
+    "Yes, and always allow": "Да, и всегда разрешать",
+    "Yes, and always allow in this conversation": "Да, и всегда разрешать в этом разговоре",
+    "Yes, save rule globally": "Да, сохранить правило для всех разговоров",
+    "Yes, save rule in this conversation": "Да, сохранить правило в этом разговоре",
+    "Authorization code sign-in is unavailable in this version.": "В этой версии вход по коду авторизации недоступен.",
+    "Authorization code was rejected. Paste a fresh code and try again.": "Код авторизации отклонён. Вставьте новый код и повторите попытку.",
+    "Trouble signing in? Enter authorization code": "Не удаётся войти? Введите код авторизации",
+    "A high-risk mode that disables all safety barriers. The agent operates with full system access, auto-executes all terminal commands, and reads or writes to all local files without review prompts.": "Режим повышенного риска, отключающий все защитные ограничения. Агент получает полный доступ к системе, автоматически выполняет все команды терминала и читает или изменяет любые локальные файлы без запросов на проверку.",
+    "Useful for tasks that require file access across your full machine. The agent has full read and write access to all local files, but all proposed terminal commands require manual review and approval before running.": "Подходит для задач, требующих доступа к файлам на всём компьютере. Агент может читать и изменять любые локальные файлы, но все предложенные команды терминала требуют ручной проверки и одобрения перед выполнением.",
+    "Useful for typical development with an emphasis on security. It prioritizes safety over speed by requiring manual approval for all terminal commands and files outside the project directory.": "Подходит для повседневной разработки с упором на безопасность. Безопасность важнее скорости: все команды терминала и доступ к файлам вне папки проекта требуют ручного одобрения.",
+    "This shortcut is reserved by browser tabs and may not trigger in Web mode. It works in the Desktop Hub or installed PWA.": "Это сочетание клавиш зарезервировано вкладками браузера и может не работать в веб-режиме. Оно работает в настольном Hub или установленном PWA.",
+    "What should this coordinator accomplish?": "Какую задачу должен выполнить этот координатор?",
+    "1. Accessibility": "1. Универсальный доступ",
+    "2. Screen Recording": "2. Запись экрана",
+    "Could not apply the selected permissions.": "Не удалось применить выбранные разрешения.",
+    "Cloud Permissions": "Разрешения облачной среды",
+    "This Conversation": "Этот разговор",
+    "A customization failed to load": "Не удалось загрузить настройку",
+    "A host can't contain spaces.": "Имя узла не может содержать пробелы.",
+    "Add label": "Добавить метку",
+    "Add Resource": "Добавить ресурс",
+    "An error occurred while checking the port. Please try again.": "При проверке порта произошла ошибка. Повторите попытку.",
+    "Are you sure you want to delete this handler?": "Удалить этот обработчик?",
+    "Are you sure you want to delete this hook card?": "Удалить эту карточку хука?",
+    "Artifact not found": "Артефакт не найден",
+    "Ask anything, @ to mention": "Задайте вопрос; используйте @ для упоминания",
+    "Audio clip": "Аудиозапись",
+    "Back to all agents": "Назад ко всем агентам",
+    "Back to chat": "Назад к чату",
+    "Back to reference": "Назад к ссылке",
+    "This extension is currently stopped. Events and stdout streams will appear here once started.": "Это расширение остановлено. После запуска здесь появятся события и потоки стандартного вывода.",
+    "This file type is not currently supported in remote mode": "Этот тип файла пока не поддерживается в удалённом режиме",
+    "This MCP server can no longer be configured.": "Этот сервер MCP больше нельзя настроить.",
+    "This site cannot provide a secure connection.": "Этот сайт не может установить защищённое соединение.",
+    "This site uses an unsupported TLS protocol or cipher suite.": "Этот сайт использует неподдерживаемый протокол TLS или набор шифров.",
+    "To continue using this model now, enable AI Credit overages.": "Чтобы продолжить использование этой модели сейчас, разрешите расход сверх лимита AI-кредитов.",
+    "Unknown error.": "Неизвестная ошибка.",
+    "Unknown execution error": "Неизвестная ошибка выполнения",
+    "Unknown search error": "Неизвестная ошибка поиска",
+    "Unnamed rule": "Правило без имени",
+    "Upload to Google Drive": "Загрузить на Google Drive",
+    "Uploading to Drive…": "Загрузка на Drive…",
+    "Use Default": "Использовать значение по умолчанию",
+    "Uses your local files and tools. Schedules only.": "Использует ваши локальные файлы и инструменты. Только по расписанию.",
+    "Validation failed. Please verify requirements and try again.": "Проверка не пройдена. Проверьте требования и повторите попытку.",
+    "VCS state is not available": "Состояние системы контроля версий недоступно",
+    "View File": "Просмотреть файл",
+    "Waiting for video…": "Ожидание видео…",
+    "Waiting for your answer": "Ожидание вашего ответа",
+    "Waiting for your approval": "Ожидание вашего одобрения",
+    "Welcome back. Where should we pick up?": "С возвращением! На чём продолжим?",
+    "Why did you choose this response?": "Почему вы выбрали этот ответ?",
+    "Working copy": "Рабочая копия",
+    "Workspace URI not found": "URI рабочей области не найден",
+    "You're viewing a blank page": "Вы просматриваете пустую страницу",
+    "You're viewing a local or shared file": "Вы просматриваете локальный или общий файл",
+    "Your connection to this site is not fully secure": "Ваше соединение с этим сайтом защищено не полностью",
+    "Your connection to this site is not secure": "Ваше соединение с этим сайтом не защищено",
+    "Asked again: your last answer may not have worked.": "Повторный запрос: возможно, ваш предыдущий ответ не сработал.",
+    "That's too long.": "Слишком длинный ответ.",
+    "Welcome to the new Antigravity!": "Добро пожаловать в новый Antigravity!",
+    "Setting up…": "Настройка…",
+    "Download the Antigravity IDE": "Скачать Antigravity IDE",
+    "Explore the new Antigravity": "Познакомиться с новым Antigravity",
+    "Antigravity Icon": "Значок Antigravity",
+    "Knowledge Work": "Интеллектуальная работа",
+    "Software Engineering": "Разработка ПО",
+    "Simplified interface for research, writing, and everyday tasks.": "Упрощённый интерфейс для исследований, работы с текстом и повседневных задач.",
+    "Full interface for coding, developer tools, and managing agents.": "Полнофункциональный интерфейс для программирования, инструментов разработки и управления агентами.",
+    "Give Feedback": "Оставить отзыв",
+    "Built-in Browser": "Встроенный браузер",
+    "External Browser": "Внешний браузер",
+    "Verbose": "Подробный",
+    "Choose a Subscription": "Выберите подписку",
+    "The agent never asks for confirmation before executing terminal commands (except those in the Deny list). This provides the agent with the maximum ability to operate over long periods without intervention, but also has the highest risk of the agent executing an unsafe terminal command.": "Агент никогда не запрашивает подтверждение перед выполнением команд терминала (кроме команд из списка запретов). Это позволяет ему максимально долго работать без вмешательства, но также создаёт наибольший риск выполнения небезопасной команды терминала.",
+    "Terminal commands automatically proceed inside the sandbox. A command that needs to leave the sandbox proceeds only if an agent judges it reversible, and otherwise requests review.": "Команды терминала автоматически выполняются внутри песочницы. Команда, требующая выхода из песочницы, выполняется только в том случае, если агент сочтёт её обратимой; иначе запрашивается проверка.",
+    "Microphone blocked": "Микрофон заблокирован",
+    "Microphone is in use or unavailable.": "Микрофон используется или недоступен.",
+    "Microphone didn't respond.": "Микрофон не ответил.",
+    "For any feedback that does not fit into the above categories.": "Для отзывов, которые не относятся к указанным выше категориям.",
+    "Antigravity can review code, trace errors, and ship across your stack.": "Antigravity может проверять код, находить причины ошибок и выпускать изменения во всём вашем технологическом стеке.",
+    "Build me a web app": "Создай для меня веб-приложение",
+    "Add a Gemini feature to my app": "Добавь функцию Gemini в моё приложение",
+    "Bring over my setup from other Agentic Developer Tools": "Перенеси мои настройки из других агентных инструментов разработки",
+    "Antigravity can turn notes and docs into plans, decks, and action items.": "Antigravity может превращать заметки и документы в планы, презентации и конкретные задачи.",
+    "Brief me on my meetings every morning": "Каждое утро готовь для меня сводку встреч",
+    "Catch up on my recent meeting notes": "Помоги мне ознакомиться с последними заметками со встреч",
+    "Turn a doc into a slide deck": "Преврати документ в презентацию",
+    "Data & Analytics": "Данные и аналитика",
+    "Antigravity can query tables, clean spreadsheets, and chart trends.": "Antigravity может выполнять запросы к таблицам, очищать электронные таблицы и строить графики тенденций.",
+    "Check a BigQuery table for anomalies": "Проверь таблицу BigQuery на аномалии",
+    "Build a dashboard from my sheet": "Создай дашборд на основе моей электронной таблицы",
+    "Analyze user trends and retention cohorts": "Проанализируй пользовательские тенденции и когорты удержания",
+    "Science": "Наука",
+    "Antigravity can review literature, design experiments, and analyze results.": "Antigravity может изучать научную литературу, планировать эксперименты и анализировать результаты.",
+    "Synthesize recent preprints and papers on a topic": "Подготовь обзор свежих препринтов и статей по теме",
+    "Visualize a protein's 3D structure": "Визуализируй трёхмерную структуру белка",
+    "Prioritize genetic targets and pathways for a disease": "Определи приоритетные генетические мишени и биологические пути для заболевания",
+    "Analyze small-molecule bioactivity and drug-likeness": "Проанализируй биологическую активность и лекарственное подобие малых молекул",
+    "Design": "Дизайн",
+    "Antigravity can turn your designs into live code, briefs, and assets.": "Antigravity может превращать ваши макеты в работающий код, технические задания и графические материалы.",
+    "Build a page from my Figma design": "Создай страницу по моему макету Figma",
+    "Turn a screenshot into a web page": "Преврати скриншот в веб-страницу",
+    "Write a design brief from my research": "Подготовь техническое задание на дизайн на основе моего исследования",
+    "Move Up": "Переместить вверх",
+    "Move Down": "Переместить вниз",
+    "Delete Group": "Удалить группу",
+    "Dismiss conversation open elsewhere warning": "Закрыть предупреждение о разговоре, открытом в другом месте",
+    "Open plugin page": "Открыть страницу плагина",
+    "Search Projects…": "Поиск проектов…",
+    "Search Workspaces…": "Поиск рабочих пространств…",
+    "Browser Task": "Задача браузера",
+    "Subagent Conversation": "Разговор с субагентом",
+    "Virtual File": "Виртуальный файл",
+    "Voice Speed": "Скорость речи",
+    "Mouse button pressed": "Кнопка мыши нажата",
+    "Mouse button released": "Кнопка мыши отпущена",
+    "Unknown edit": "Неизвестное изменение",
+    "Unknown file edit": "Неизвестное изменение файла",
+    "Events and stdout streams will appear here as they occur.": "События и потоки stdout будут появляться здесь по мере поступления.",
+    "Using browser · Thinking…": "Использование браузера · Размышление…",
+    "Something else (optional)": "Другое (необязательно)",
+    "Credentials stay on this machine and are only sent to the domains listed.": "Учётные данные остаются на этом компьютере и передаются только указанным доменам.",
+    "Other credentials stay on this machine.": "Другие учётные данные остаются на этом компьютере.",
+    "Credentials are only sent to the domains listed.": "Учётные данные передаются только указанным доменам.",
+    "DevTools port is still closed. Please make sure Chrome is running with remote debugging enabled.": "Порт DevTools по-прежнему закрыт. Убедитесь, что Chrome запущен с включённой удалённой отладкой.",
+    "AI coding agents are known to have certain security risks, including autonomous code execution, data exfiltration, prompt injection and supply chain risks. Ensure that you monitor and verify all actions taken by the agent.": "Известно, что ИИ-агенты для программирования несут определённые риски безопасности, включая автономное выполнение кода, утечку данных, внедрение инструкций и риски цепочки поставок ПО. Обязательно отслеживайте и проверяйте все действия агента.",
+    "Enter [user@]host[:port], or pick a host from your SSH config.": "Введите [user@]host[:port] или выберите хост из конфигурации SSH.",
+    "hours": "часы",
+    "week": "неделя",
+    "month": "месяц",
+    "Legal Help": "Юридическая справка",
+    "Help us improve Antigravity.": "Помогите нам улучшить Antigravity."
   },
   "patterns": [
     {
@@ -4041,6 +4516,141 @@
       "replace": {
         "2": "deviceKind"
       }
+    },
+    {
+      "id": "authorizationCodeFor",
+      "pattern": "^(?:Authorization code|Auth code) for (.+)$",
+      "sample": "Authorization code for Example $& Account",
+      "template": "Код авторизации для {1}"
+    },
+    {
+      "id": "recordShortcutFor",
+      "pattern": "^Recording shortcut for (.+)\\. Press keys to bind, Enter to save, Escape to cancel\\.$",
+      "sample": "Recording shortcut for Submit Prompt. Press keys to bind, Enter to save, Escape to cancel.",
+      "template": "Запись сочетания клавиш для «{1}». Нажмите клавиши для назначения, Enter для сохранения, Escape для отмены."
+    },
+    {
+      "id": "shortcutFor",
+      "pattern": "^Shortcut (.+?) for (.+)$",
+      "sample": "Shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "Сочетание клавиш {1} для «{2}»"
+    },
+    {
+      "id": "removeShortcutFor",
+      "pattern": "^Remove shortcut (.+?) for (.+)$",
+      "sample": "Remove shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "Удалить сочетание клавиш {1} для «{2}»"
+    },
+    {
+      "id": "addShortcutFor",
+      "pattern": "^Add shortcut for (.+)$",
+      "sample": "Add shortcut for Submit Prompt",
+      "template": "Добавить сочетание клавиш для «{1}»"
+    },
+    {
+      "id": "resetShortcutToDefault",
+      "pattern": "^Reset (.+) to default$",
+      "sample": "Reset Submit Prompt to default",
+      "template": "Сбросить «{1}» к значению по умолчанию"
+    },
+    {
+      "id": "downloadProgress",
+      "pattern": "^(.+) download progress$",
+      "sample": "report $&.pdf download progress",
+      "template": "Ход загрузки {1}"
+    },
+    {
+      "id": "showDownloadInFolder",
+      "pattern": "^Show (.+) in folder$",
+      "sample": "Show report $&.pdf in folder",
+      "template": "Показать {1} в папке"
+    },
+    {
+      "id": "removeDownloadFromList",
+      "pattern": "^Remove (.+) from list$",
+      "sample": "Remove report $&.pdf from list",
+      "template": "Удалить {1} из списка"
+    },
+    {
+      "id": "permissionModesSandboxUnavailable",
+      "pattern": "^(Default|Auto|Default and Auto|Auto and Default) (?:need|needs) the terminal sandbox, which isn't available on this host\\.$",
+      "sample": "Default and Auto need the terminal sandbox, which isn't available on this host.",
+      "template": "Для {1} требуется песочница терминала, недоступная на этом хосте.",
+      "replace": {
+        "1": "sandboxPermissionModes"
+      }
+    },
+    {
+      "id": "goToTurn",
+      "pattern": "^Go to turn (\\d+) of (\\d+)$",
+      "sample": "Go to turn 2 of 12",
+      "template": "Перейти к ходу {1} из {2}"
+    },
+    {
+      "id": "voiceSpeed",
+      "pattern": "^Voice [Ss]peed, (\\d+(?:\\.\\d+)?x)$",
+      "sample": "Voice speed, 1.5x",
+      "template": "Скорость голоса, {1}"
+    },
+    {
+      "id": "moreActionsFor",
+      "pattern": "^More actions for (.+)$",
+      "sample": "More actions for Example $& Project",
+      "template": "Другие действия для {1}"
+    },
+    {
+      "id": "searchMarketplaceFor",
+      "pattern": "^Search for \"(.+)\" in the Marketplace$",
+      "sample": "Search for \"Example $& Plugin\" in the Marketplace",
+      "template": "Найти «{1}» в Marketplace"
+    },
+    {
+      "id": "noPluginsFoundFor",
+      "pattern": "^No plugins found for \"(.+)\"\\.$",
+      "sample": "No plugins found for \"Example $& Plugin\".",
+      "template": "Плагины по запросу «{1}» не найдены."
+    },
+    {
+      "id": "noMcpServersFoundFor",
+      "pattern": "^No MCP servers found for \"(.+)\"$",
+      "sample": "No MCP servers found for \"Example $& Server\"",
+      "template": "Серверы MCP по запросу «{1}» не найдены"
+    },
+    {
+      "id": "switchEnvironment",
+      "pattern": "^Switch environment \\((.+)\\)$",
+      "sample": "Switch environment (Example $& Host)",
+      "template": "Переключить среду ({1})"
+    },
+    {
+      "id": "openSubagent",
+      "pattern": "^Open Subagent: (.+)$",
+      "sample": "Open Subagent: Example $& Agent",
+      "template": "Открыть субагента: {1}"
+    },
+    {
+      "id": "searchGoogleFor",
+      "pattern": "^Search Google for \"(.+)\"$",
+      "sample": "Search Google for \"Example $& Query\"",
+      "template": "Найти «{1}» в Google"
+    },
+    {
+      "id": "sshHostAsks",
+      "pattern": "^(.+) asks:$",
+      "sample": "user@example.com asks:",
+      "template": "{1} запрашивает:"
+    },
+    {
+      "id": "cloudCredentialsOnly",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Credentials are only sent to the domains listed.",
+      "template": "Данные входа в {1} хранятся в облаке вместе с вашим аккаунтом. Учётные данные передаются только указанным доменам."
+    },
+    {
+      "id": "cloudCredentialsAndLocal",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
+      "template": "Данные входа в {1} хранятся в облаке вместе с вашим аккаунтом. Другие учётные данные остаются на этом компьютере. Учётные данные передаются только указанным доменам."
     }
   ],
   "menu": {
@@ -4119,6 +4729,12 @@
       "a HID device": "HID-устройству",
       "a USB device": "USB-устройству",
       "a serial port": "последовательному порту"
+    },
+    "sandboxPermissionModes": {
+      "Default": "По умолчанию",
+      "Auto": "Авто",
+      "Default and Auto": "По умолчанию и Авто",
+      "Auto and Default": "Авто и По умолчанию"
     }
   },
   "valueRules": {
@@ -4312,5 +4928,350 @@
         "template": "{1} декабря"
       }
     ]
-  }
+  },
+  "inlineMessages": [
+    {
+      "id": "applicationTerms",
+      "selector": "div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://antigravity.google/terms\"]), div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://cloud.google.com/terms\"])",
+      "source": "By using this app, you agree to its {1}",
+      "template": "Используя это приложение, вы принимаете его {1}",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Terms of Service"
+        }
+      ]
+    },
+    {
+      "id": "browserChromeRequirement",
+      "selector": "span.text-sm.text-muted-foreground.whitespace-pre-wrap:has(>a[href=\"https://www.google.com/chrome/\"])",
+      "source": "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires {1}.",
+      "template": "Настройте разрешённые и запрещённые URL для субагента браузера (вызывается командой /browser). Для работы требуется {1}.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Google Chrome"
+        }
+      ]
+    },
+    {
+      "id": "modelsBusinessDocs",
+      "selector": "div.text-secondary-foreground.py-2.px-3:has(>a[href=\"https://antigravity.google/docs/enterprise\"])",
+      "source": "For Antigravity Business consumption options, see {1}.",
+      "template": "Варианты использования Antigravity Business описаны здесь: {1}.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "documentation"
+        }
+      ]
+    },
+    {
+      "id": "feedbackLegalHelp",
+      "selector": "p.opacity-70:has(>a[href=\"https://support.google.com/legal/troubleshooter/1114905?hl=en#ts=1115658\"])",
+      "source": "Visit {1} to ask for content changes for legal reasons.",
+      "template": "Для запроса изменения контента по юридическим основаниям откройте раздел «{1}».",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Legal Help"
+        }
+      ]
+    },
+    {
+      "id": "voicePrivacySettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "Микрофон заблокирован. Разрешите доступ в разделе «{1}».",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "Privacy Settings"
+        }
+      ]
+    },
+    {
+      "id": "voiceSystemSettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "Микрофон заблокирован. Разрешите доступ в разделе «{1}».",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "System Settings"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project.",
+      "template": "При работе в этом проекте также применяются {1}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project. {2}.",
+      "template": "При работе в этом проекте также применяются {1}. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations.",
+      "template": "При работе в этих разговорах также применяются {1}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations. {2}.",
+      "template": "При работе в этих разговорах также применяются {1}. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project.",
+      "template": "Этот проект создан для автоматизации. При работе в этом проекте также применяются {1}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project. {2}.",
+      "template": "Этот проект создан для автоматизации. При работе в этом проекте также применяются {1}. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations.",
+      "template": "Этот проект создан для автоматизации. При работе в этих разговорах также применяются {1}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations. {2}.",
+      "template": "Этот проект создан для автоматизации. При работе в этих разговорах также применяются {1}. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project.",
+      "template": "Этот проект создан для автоматизации «{1}». При работе в этом проекте также применяются {2}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project. {3}.",
+      "template": "Этот проект создан для автоматизации «{1}». При работе в этом проекте также применяются {2}. {3}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations.",
+      "template": "Этот проект создан для автоматизации «{1}». При работе в этих разговорах также применяются {2}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations. {3}.",
+      "template": "Этот проект создан для автоматизации «{1}». При работе в этих разговорах также применяются {2}. {3}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "mcpServerBrowserSignIn",
+      "selector": "[data-testid=\"mcp-server-browser-sign-in\"] > span[role=\"status\"]",
+      "source": "Finish signing in to {1} in your browser.",
+      "template": "Завершите в браузере вход в сервис {1}.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "cloudResourceConnect",
+      "selector": "div.flex.flex-col.items-center.gap-2.py-2.text-center > span.text-sm.text-muted-foreground",
+      "source": "Connect your account to browse {1}.",
+      "template": "Подключите свой аккаунт, чтобы просматривать {1}.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "ideWizardDescription",
+      "selector": "#step-ask > p",
+      "source": "Antigravity has been redesigned to put agents first with new capabilities. If you'd still like a code editor, you can download it as a separate app named {1}.",
+      "template": "Antigravity был переработан с упором на агентов и получил новые возможности. Если вам по-прежнему нужен редактор кода, его можно скачать как отдельное приложение под названием {1}.",
+      "slots": [
+        {
+          "selector": "b",
+          "text": "Antigravity IDE"
+        }
+      ]
+    },
+    {
+      "id": "onboardingPersonalization",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "Customize your experience across the agent, plugins, and product from the settings and marketplace. We won’t show you ads or let advertisers influence what {1} says.",
+      "template": "Настройте работу с агентом, плагинами и продуктом в настройках и магазине. Мы не будем показывать вам рекламу или позволять рекламодателям влиять на ответы {1}.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "onboardingAgentControl",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "{1}’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.",
+      "template": "{1} предлагает мощных агентов, которые помогают выполнять больше задач лучше и быстрее. Однако обязательно проверяйте действия, выполненные агентом.",
+      "slots": [
+        {
+          "textIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "onboardingDataConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>a[href=\"https://antigravity.google/terms\"]):has(>a[href=\"https://policies.google.com/privacy\"])",
+      "source": "{1} Allow Google to collect and use your Interactions data, subject to the {2} and {3}. You can control this from your settings at any point.",
+      "template": "{1} Разрешите Google собирать и использовать данные о ваших взаимодействиях в соответствии со следующими документами: {2} и {3}. Этот выбор можно в любой момент изменить в настройках.",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Help us improve Antigravity."
+        },
+        {
+          "selector": "a[href=\"https://antigravity.google/terms\"]",
+          "text": "Google Antigravity Terms of Service"
+        },
+        {
+          "selector": "a[href=\"https://policies.google.com/privacy\"]",
+          "text": "Google Privacy Policy"
+        }
+      ]
+    },
+    {
+      "id": "onboardingMarketingConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>span.font-medium.text-secondary-foreground)",
+      "source": "{1} Sign up for newsletters, tips and tricks, and other notifications about {2}.",
+      "template": "{1} Подпишитесь на рассылки, советы и рекомендации, а также другие уведомления о {2}.",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Stay up to date."
+        },
+        {
+          "textIndex": 3
+        }
+      ]
+    }
+  ]
 }

@@ -30,7 +30,9 @@
     "Turbo",
     "MCP",
     "Cache",
-    "UTC"
+    "UTC",
+    "Layout",
+    "Design"
   ],
   "dialogs": {
     "Confirm Quit": "Confirmar saída",
@@ -3364,7 +3366,7 @@
     "Developer-only tools. These settings do not affect other users.": "Ferramentas só para desenvolvedores. Estas configurações não afetam outros usuários.",
     "Developer: Reset NUX": "Desenvolvedor: redefinir a introdução",
     "Developer: Reset Onboarding": "Desenvolvedor: redefinir a configuração inicial",
-    "Stay up to date.": "Mantenha-se atualizado.",
+    "Stay up to date.": "Receba as últimas novidades.",
     "Google One Referral": "Indicação do Google One",
     "Share your referral link with friends": "Compartilhe seu link de indicação com amigos",
     "Invite a Friend": "Convidar um amigo",
@@ -3435,7 +3437,482 @@
     "Welcome back.": "Bem-vindo de volta.",
     "Good to see you.": "Que bom ver você.",
     "Ignore events triggered by the automation owner to avoid self-trigger loops.": "Ignorar eventos acionados pelo dono da automação para evitar ciclos de autoacionamento.",
-    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "Ignorar eventos emitidos por revisões automáticas ou contas de robô (groupagent-*)."
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "Ignorar eventos emitidos por revisões automáticas ou contas de robô (groupagent-*).",
+    "Account connection was not completed.": "A conexão da conta não foi concluída.",
+    "Add files": "Adicionar arquivos",
+    "Address bar suggestions": "Sugestões da barra de endereços",
+    "Attach terminal output": "Anexar saída do terminal",
+    "Browse MCP resources": "Explorar recursos MCP",
+    "Browse rules": "Explorar regras",
+    "Browser steps": "Etapas do navegador",
+    "Cannot parse folder URI.": "Não foi possível interpretar o URI da pasta.",
+    "Choose icon and color": "Escolher ícone e cor",
+    "Click to learn more about sources": "Clique para saber mais sobre as fontes",
+    "Close Panel": "Fechar painel",
+    "Color": "Cor",
+    "Connect an account so the agent can use this app.": "Conecte uma conta para que o agente possa usar este app.",
+    "Connect to SSH Host…": "Conectar a um anfitrião SSH…",
+    "Connections": "Conexões",
+    "Conversation turns": "Turnos da conversa",
+    "Coordinator goal": "Objetivo do coordenador",
+    "Coordinator name": "Nome do coordenador",
+    "Coordinator settings": "Configurações do coordenador",
+    "Coordinators": "Coordenadores",
+    "Copy gh auth login command": "Copiar comando gh auth login",
+    "Customize Sections": "Personalizar seções",
+    "Days": "Dias",
+    "Discard comment draft": "Descartar rascunho do comentário",
+    "Dismiss artifact update notice": "Dispensar aviso de atualização do artefato",
+    "Docs, Sheets, Slides, and folders": "Docs, Sheets, Slides e pastas",
+    "Enter always submits. This adds a second shortcut.": "Enter sempre envia. Isto adiciona um segundo atalho.",
+    "Environments": "Ambientes",
+    "Failed to clone project locally": "Não foi possível clonar o projeto localmente",
+    "Failed to export artifact": "Não foi possível exportar o artefato",
+    "Failed to read file": "Não foi possível ler o arquivo",
+    "Failed to unarchive local project": "Não foi possível desarquivar o projeto local",
+    "Filter agents": "Filtrar agentes",
+    "Filter files": "Filtrar arquivos",
+    "Filter rows": "Filtrar linhas",
+    "Font Size": "Tamanho da fonte",
+    "Hidden hosts": "Anfitriões ocultos",
+    "Icon": "Ícone",
+    "It was already sent or couldn't be removed from the queue.": "Já foi enviada ou não pôde ser removida da fila.",
+    "Jump to Next Prompt": "Ir para o próximo prompt",
+    "Jump to Previous Prompt": "Ir para o prompt anterior",
+    "Layout": "Layout",
+    "Main Agent": "Agente principal",
+    "Markdown view mode": "Modo de visualização Markdown",
+    "Marketplace notice": "Aviso do Marketplace",
+    "MCP server error": "Erro do servidor MCP",
+    "Message this chat": "Enviar mensagem para este chat",
+    "New coordinator": "Novo coordenador",
+    "New Coordinator": "Novo coordenador",
+    "Next card": "Próximo cartão",
+    "No coordinators": "Nenhum coordenador",
+    "Open on another device": "Abrir em outro dispositivo",
+    "Open on phone": "Abrir no celular",
+    "Paste authorization code": "Colar código de autorização",
+    "Pause this agent; it keeps its place and streams. Resume to continue.": "Pausar este agente; ele mantém sua posição e seus fluxos. Retome para continuar.",
+    "Pick up this remote conversation on your phone or in any browser. Scan the QR code or open the link below.": "Continue esta conversa remota no celular ou em qualquer navegador. Leia o código QR ou abra o link abaixo.",
+    "Pin / Unpin Conversation": "Fixar / Desafixar conversa",
+    "Plan upgrade required": "É necessário atualizar o plano",
+    "Playback speed (< / >)": "Velocidade de reprodução (< / >)",
+    "Plugin metadata": "Metadados do plug-in",
+    "Previous card": "Cartão anterior",
+    "Project location": "Localização do projeto",
+    "Promote to conversation": "Transformar em conversa",
+    "Recent": "Recentes",
+    "References": "Referências",
+    "Remove from history": "Remover do histórico",
+    "Remove from Recent": "Remover de Recentes",
+    "Remove resource": "Remover recurso",
+    "Remove trigger": "Remover gatilho",
+    "Reset all shortcuts to defaults": "Restaurar todos os atalhos padrão",
+    "Resume": "Retomar",
+    "Resume 1 comment draft": "Retomar 1 rascunho de comentário",
+    "Resume comment draft": "Retomar rascunho de comentário",
+    "Search shortcuts": "Pesquisar atalhos",
+    "Send": "Enviar",
+    "Show Details": "Mostrar detalhes",
+    "Show or Hide Extensions": "Mostrar ou ocultar extensões",
+    "SSH Config": "Configuração SSH",
+    "SSH host": "Anfitrião SSH",
+    "SSH Host": "Anfitrião SSH",
+    "SSH Host…": "Anfitrião SSH…",
+    "Starting the conversation…": "Iniciando a conversa…",
+    "Stop side question": "Parar pergunta lateral",
+    "Stop SSH Server…": "Parar servidor SSH…",
+    "Stop this agent": "Parar este agente",
+    "Submit Prompt (Alternate to Enter)": "Enviar prompt (alternativa a Enter)",
+    "Switch to This Computer": "Mudar para este computador",
+    "The Hub sent an unexpected response.": "O Hub enviou uma resposta inesperada.",
+    "Toggle Google Cloud projects": "Mostrar ou ocultar projetos do Google Cloud",
+    "Toggle Terminal Panel": "Mostrar ou ocultar painel do terminal",
+    "Toggle Word Wrap": "Ativar ou desativar quebra de linha",
+    "Untrusted sidecar": "Sidecar não confiável",
+    "View MCP servers": "Ver servidores MCP",
+    "When it runs": "Quando é executado",
+    "A bash script run in your cloud environment after cloning repositories (or configure interactively in chat with /env-setup).": "Um script bash executado no seu ambiente na nuvem após clonar os repositórios (ou configure interativamente no chat com /env-setup).",
+    "Add filter": "Adicionar filtro",
+    "Add trigger": "Adicionar gatilho",
+    "Agent ID:": "ID do agente:",
+    "Agent said": "O agente disse",
+    "Agent working": "Agente trabalhando",
+    "All agents": "Todos os agentes",
+    "All runs": "Todas as execuções",
+    "Analyzed content": "Conteúdo analisado",
+    "Analyzed Task Log": "Registro de tarefas analisado",
+    "Analyzing content": "Analisando conteúdo",
+    "Analyzing Task Log": "Analisando registro de tarefas",
+    "Appears larger on mobile": "Aparece maior em dispositivos móveis",
+    "Approximate; may start a few minutes later": "Aproximado; pode começar alguns minutos depois",
+    "Apps connected to your account": "Apps conectados à sua conta",
+    "Archived Only": "Somente arquivadas",
+    "Are you sure you want to delete this side question? This action cannot be undone.": "Tem certeza de que deseja excluir esta pergunta lateral? Esta ação não pode ser desfeita.",
+    "Artifact image": "Imagem do artefato",
+    "Artifact updated by agent": "Artefato atualizado pelo agente",
+    "Ask a side question without interrupting the main conversation": "Faça uma pergunta lateral sem interromper a conversa principal",
+    "Audio File": "Arquivo de áudio",
+    "Authorization code": "Código de autorização",
+    "Branch actions": "Ações de branch",
+    "Branch names": "Nomes de branches",
+    "Browse Connectors": "Explorar conectores",
+    "Cancel Questionnaire and Stop the Agent": "Cancelar questionário e parar o agente",
+    "Canvas page · display only": "Página da tela · somente exibição",
+    "Certificate is valid": "O certificado é válido",
+    "Clear visited URLs and autocomplete suggestions from side panel preview.": "Limpar os URLs visitados e as sugestões de preenchimento automático da prévia do painel lateral.",
+    "Clones this repo in a cloud environment": "Clona este repositório em um ambiente na nuvem",
+    "Close message": "Fechar mensagem",
+    "Code Preview": "Prévia do código",
+    "Collapse Questionnaire": "Recolher questionário",
+    "Collapse questionnaire": "Recolher questionário",
+    "Command is required": "O comando é obrigatório",
+    "Connect an account so the agent can run automations.": "Conecte uma conta para que o agente possa executar automações.",
+    "Connect to SSH Host": "Conectar a um anfitrião SSH",
+    "Connecting to terminal...": "Conectando ao terminal...",
+    "Continue Task →": "Continuar tarefa →",
+    "Conversation link": "Link da conversa",
+    "Could not start.": "Não foi possível iniciar.",
+    "Couldn't delete your data. Try again.": "Não foi possível excluir seus dados. Tente novamente.",
+    "Couldn't load message": "Não foi possível carregar a mensagem",
+    "Couldn't load the suggested plugin.": "Não foi possível carregar o plug-in sugerido.",
+    "Couldn't load your SSH hosts": "Não foi possível carregar seus anfitriões SSH",
+    "Couldn't load your SSH hosts. You can still type one.": "Não foi possível carregar seus anfitriões SSH. Você ainda pode digitar um.",
+    "Couldn't search files": "Não foi possível pesquisar arquivos",
+    "Create a project first.": "Crie um projeto primeiro.",
+    "Create a project on a machine you reach over SSH. It opens in that host's own window.": "Crie um projeto em uma máquina acessível por SSH. Ele será aberto na janela desse anfitrião.",
+    "Create Coordinator": "Criar coordenador",
+    "Create Group": "Criar grupo",
+    "Created outline": "Estrutura criada",
+    "Creates a local automation that runs on this computer": "Cria uma automação local executada neste computador",
+    "Delete agent": "Excluir agente",
+    "Delete all": "Excluir tudo",
+    "Delete All Data": "Excluir todos os dados",
+    "Drop to attach": "Solte para anexar",
+    "Duplicate project name": "Nome de projeto duplicado",
+    "Enable macOS Permissions": "Ativar permissões do macOS",
+    "Enable the plugin to sign in.": "Ative o plug-in para fazer login.",
+    "Enable this plugin to manage its accounts.": "Ative este plug-in para gerenciar suas contas.",
+    "Environment Setup Script": "Script de configuração do ambiente",
+    "Error editing file": "Erro ao editar o arquivo",
+    "Error viewing file": "Erro ao visualizar o arquivo",
+    "Execution Identity": "Identidade de execução",
+    "Expand questionnaire": "Expandir questionário",
+    "Expand Questionnaire": "Expandir questionário",
+    "Fork in Current Workspace": "Ramificar no espaço de trabalho atual",
+    "Full Logs": "Registros completos",
+    "Generated media": "Mídia gerada",
+    "Get API key": "Obter chave de API",
+    "GitHub Repositories": "Repositórios do GitHub",
+    "GitHub: not signed in": "GitHub: login não realizado",
+    "Google Antigravity Terms of Service": "Termos de Serviço do Google Antigravity",
+    "Here's how uploaded files, attachments, and connected resources work in your cloud environment": "Veja como os arquivos enviados, os anexos e os recursos conectados funcionam no seu ambiente na nuvem",
+    "Hey there, what should we build today?": "Olá, o que vamos criar hoje?",
+    "Hidden by policy": "Oculto por política",
+    "Host Endpoint": "Endpoint do anfitrião",
+    "Idle Guard Warning": "Aviso de proteção contra inatividade",
+    "If you add multiple accounts, MCP servers use the one marked Default.": "Se você adicionar várias contas, os servidores MCP usarão a marcada como Padrão.",
+    "Issue actions": "Ações de issue",
+    "Issue numbers": "Números de issues",
+    "Issued by": "Emitido por",
+    "Issued to": "Emitido para",
+    "Keeps your checkout untouched": "Mantém sua cópia de trabalho intacta",
+    "Live chat in progress": "Chat ao vivo em andamento",
+    "Loading hosts…": "Carregando anfitriões…",
+    "Loading Hosts…": "Carregando anfitriões…",
+    "Loading Repositories…": "Carregando repositórios…",
+    "Loading resources...": "Carregando recursos...",
+    "Log in": "Fazer login",
+    "Marked 1 conversation as read": "1 conversa marcada como lida",
+    "MCP error": "Erro de MCP",
+    "Middle Click": "Clique do meio",
+    "Moved Mouse in Browser": "Mouse movido no navegador",
+    "Moving Mouse in Browser": "Movendo o mouse no navegador",
+    "No agent is working right now.": "Nenhum agente está trabalhando agora.",
+    "No artifacts generated": "Nenhum artefato gerado",
+    "No commits yet": "Nenhum commit ainda",
+    "No connectors available in this project": "Nenhum conector disponível neste projeto",
+    "No conversation": "Nenhuma conversa",
+    "No events recorded": "Nenhum evento registrado",
+    "No hosts in ~/.ssh/config yet": "Ainda não há anfitriões em ~/.ssh/config",
+    "No instances yet.": "Nenhuma instância ainda.",
+    "No keyboard shortcuts found matching your filter.": "Nenhum atalho de teclado corresponde ao seu filtro.",
+    "No matching hosts": "Nenhum anfitrião correspondente",
+    "No matching repositories": "Nenhum repositório correspondente",
+    "No matching resources found.": "Nenhum recurso correspondente encontrado.",
+    "No message text": "Nenhum texto na mensagem",
+    "No pinned conversations": "Nenhuma conversa fixada",
+    "No recent downloads": "Nenhum download recente",
+    "No recordings": "Nenhuma gravação",
+    "No repositories found": "Nenhum repositório encontrado",
+    "No resources added yet.": "Nenhum recurso adicionado ainda.",
+    "Not set": "Não definido",
+    "Nothing is running right now": "Nada está em execução agora",
+    "Only Automations": "Somente automações",
+    "Only Scheduled": "Somente agendadas",
+    "Open image preview": "Abrir prévia da imagem",
+    "Open in Side Pane": "Abrir no painel lateral",
+    "Open skill page": "Abrir página da habilidade",
+    "Open SSH Host": "Abrir anfitrião SSH",
+    "Open video preview": "Abrir prévia do vídeo",
+    "Opened URL in Browser": "URL aberto no navegador",
+    "Opening URL in Browser": "Abrindo URL no navegador",
+    "Other conversation": "Outra conversa",
+    "Other Customizations": "Outras personalizações",
+    "Paste new key": "Colar nova chave",
+    "Pay only for the tokens you use, billed through Gemini platform.": "Pague apenas pelos tokens usados, com cobrança pela plataforma Gemini.",
+    "Pick a model to change it.": "Escolha um modelo para alterá-lo.",
+    "Pin Tab": "Fixar aba",
+    "Press keys...": "Pressione as teclas...",
+    "Process Error": "Erro do processo",
+    "Process exited with an error": "O processo foi encerrado com erro",
+    "Prohibited Use Policy": "Política de Uso Proibido",
+    "Pull request actions": "Ações de pull request",
+    "Pull request numbers": "Números de pull requests",
+    "Read Browser Page in Browser": "Página lida no navegador",
+    "Read page": "Página lida",
+    "Reading Browser Page in Browser": "Lendo página no navegador",
+    "Recent Conversations": "Conversas recentes",
+    "Recent Events": "Eventos recentes",
+    "Refreshed Browser page": "Página do navegador atualizada",
+    "Refreshing Browser page": "Atualizando página do navegador",
+    "Refreshing credentials...": "Atualizando credenciais...",
+    "Relaunch the app once to activate Screen Recording.": "Reinicie o app uma vez para ativar a gravação de tela.",
+    "Remote Control Instances": "Instâncias de controle remoto",
+    "Remote Projects": "Projetos remotos",
+    "Removing the bundle removes all of its plugins.": "Remover o pacote remove todos os seus plug-ins.",
+    "Repeat every": "Repetir a cada",
+    "Replacing removes the currently installed plugin and installs the new one in its place.": "A substituição remove o plug-in instalado atualmente e instala o novo em seu lugar.",
+    "Repo default": "Padrão do repositório",
+    "Resized Browser window": "Janela do navegador redimensionada",
+    "Resizing Browser window": "Redimensionando janela do navegador",
+    "Resume environment": "Retomar ambiente",
+    "Resume this agent where it paused": "Retomar este agente de onde foi pausado",
+    "Resuming environment…": "Retomando ambiente…",
+    "Retrieved Browser Pages": "Páginas do navegador obtidas",
+    "Retrieved Console Logs from Browser": "Registros do console do navegador obtidos",
+    "Retrieving Browser Pages": "Obtendo páginas do navegador",
+    "Retrieving Console Logs from Browser": "Obtendo registros do console do navegador",
+    "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.": "Execute um prompt de acordo com uma programação, como um resumo matinal das alterações de ontem. As execuções aparecem aqui.",
+    "Running processes are killed. This cannot be undone.": "Os processos em execução serão encerrados. Isso não pode ser desfeito.",
+    "Runs in a cloud environment": "Executa em um ambiente na nuvem",
+    "Schedule type": "Tipo de agendamento",
+    "Scroll turns down": "Rolar turnos para baixo",
+    "Scroll turns up": "Rolar turnos para cima",
+    "Scrollable table": "Tabela rolável",
+    "Scrolled down in Browser": "Rolagem para baixo no navegador concluída",
+    "Scrolled in Browser": "Rolagem no navegador concluída",
+    "Scrolled up in Browser": "Rolagem para cima no navegador concluída",
+    "Scrolling down in Browser": "Rolando para baixo no navegador",
+    "Scrolling in Browser": "Rolando no navegador",
+    "Scrolling up in Browser": "Rolando para cima no navegador",
+    "Search conversations, commands, and code...": "Pesquisar conversas, comandos e código...",
+    "Search failed": "Falha na pesquisa",
+    "Search Hosts…": "Pesquisar anfitriões…",
+    "Search or enter a URL": "Pesquisar ou digitar um URL",
+    "Search shortcuts...": "Pesquisar atalhos...",
+    "Search tabs, files and more": "Pesquisar abas, arquivos e mais",
+    "Selected Option in Browser": "Opção selecionada no navegador",
+    "Selected region": "Região selecionada",
+    "Selecting Option in Browser": "Selecionando opção no navegador",
+    "Semantic searched": "Pesquisa semântica concluída",
+    "Semantic searching": "Realizando pesquisa semântica",
+    "Send command input?": "Enviar entrada ao comando?",
+    "Services this plugin connects to on your behalf.": "Serviços aos quais este plug-in se conecta em seu nome.",
+    "Set up": "Configurar",
+    "Shares this repository, with a working copy of its own. Uncommitted changes stay behind.": "Compartilha este repositório com uma cópia de trabalho própria. As alterações não commitadas ficam de fora.",
+    "Show in Sidebar": "Mostrar na barra lateral",
+    "Side Pane UI Available": "Interface disponível no painel lateral",
+    "Side Panel Preview": "Prévia do painel lateral",
+    "Sign in in your browser, then paste the authorization code shown on the callback page.": "Faça login no navegador e cole o código de autorização mostrado na página de retorno.",
+    "Sign in needed": "É necessário fazer login",
+    "Sign in to an app once and your agent can use it on any device. Open an app to see the account it uses or to disconnect it.": "Faça login em um app uma vez e seu agente poderá usá-lo em qualquer dispositivo. Abra um app para ver a conta que ele usa ou para desconectá-lo.",
+    "Sort and filter conversations": "Ordenar e filtrar conversas",
+    "SSH config:": "Configuração SSH:",
+    "Starting preview…": "Iniciando prévia…",
+    "Still running": "Ainda em execução",
+    "Stop all agents": "Parar todos os agentes",
+    "Stop Side Question": "Parar pergunta lateral",
+    "Stream and control": "Transmitir e controlar",
+    "Submit code": "Enviar código",
+    "Summarizing call…": "Resumindo chamada…",
+    "Switch To": "Mudar para",
+    "System Prompt": "Prompt do sistema",
+    "Taking Screenshot": "Capturando tela",
+    "Task Log": "Registro de tarefas",
+    "The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.": "O detalhamento abaixo mostra o uso de tokens por personalizações como regras, habilidades e MCP. Se um orçamento for excedido, regras grandes serão substituídas por referências aos seus caminhos e personalizações grandes serão excluídas automaticamente.",
+    "The suggested plugin isn't in the marketplace.": "O plug-in sugerido não está no Marketplace.",
+    "Then create the project in its window.": "Depois, crie o projeto na janela dele.",
+    "This automation is currently stopped. Events and stdout streams will appear here once started.": "Esta automação está parada. Os eventos e os fluxos de stdout aparecerão aqui quando ela for iniciada.",
+    "This chat's environment is paused": "O ambiente deste chat está pausado",
+    "This conversation is in a different workspace.": "Esta conversa está em outro espaço de trabalho.",
+    "This link wants to open an app on your device.": "Este link quer abrir um app no seu dispositivo.",
+    "This page is going away soon": "Esta página será descontinuada em breve",
+    "This permanently deletes all of your Remote Agents conversations, projects, scheduled tasks, connected plugins and settings, and stops any running remote agents. It can't be undone. Data in the desktop app and your Google account are not affected, and you can keep using Remote Agents afterwards.": "Isto exclui permanentemente todas as suas conversas, projetos, tarefas agendadas, plug-ins conectados e configurações do Remote Agents e para todos os agentes remotos em execução. Não pode ser desfeito. Os dados do app para desktop e da sua Conta do Google não são afetados, e você poderá continuar usando o Remote Agents depois.",
+    "This plugin was force disabled.": "Este plug-in foi desativado de forma obrigatória.",
+    "This project is associated with a different workspace.": "Este projeto está associado a outro espaço de trabalho.",
+    "Took Screenshot": "Tela capturada",
+    "Type to search file contents": "Digite para pesquisar no conteúdo dos arquivos",
+    "Unknown Server": "Servidor desconhecido",
+    "Unnamed resource": "Recurso sem nome",
+    "Unnamed Theme": "Tema sem nome",
+    "Unpin Tab": "Desafixar aba",
+    "Uploaded files and connected resources are mounted in your cloud environment.": "Os arquivos enviados e os recursos conectados são montados no seu ambiente na nuvem.",
+    "Use Advanced SSO Config": "Usar configuração avançada de SSO",
+    "Use Antigravity through your Gemini subscription.": "Use o Antigravity com sua assinatura do Gemini.",
+    "Use the default color.": "Usar a cor padrão.",
+    "Use this if your admin gave you a WIF config. Paste it below to sign in.": "Use esta opção se seu administrador forneceu uma configuração WIF. Cole-a abaixo para fazer login.",
+    "Valid until": "Válido até",
+    "View archived in the sidebar": "Ver arquivadas na barra lateral",
+    "View archived in the sidebar (Display options menu).": "Ver arquivadas na barra lateral (menu de opções de exibição).",
+    "View Branches": "Ver branches",
+    "Waiting for the agents’ windows…": "Aguardando as janelas dos agentes…",
+    "Waiting for the SSH connection to finish": "Aguardando a conexão SSH ser concluída",
+    "Waiting for you to finish signing in…": "Aguardando você concluir o login…",
+    "When should it run?": "Quando deve ser executado?",
+    "Where should it run?": "Onde deve ser executado?",
+    "Workflows are changing on October 19th—stay tuned for updates. You can use the agent to migrate your workflows.": "Os fluxos de trabalho mudarão em 19 de outubro; acompanhe as novidades. Você pode usar o agente para migrar seus fluxos de trabalho.",
+    "You said": "Você disse",
+    "Your Antigravity use will be associated with provided project. Make sure you trust the project ID before proceeding. Account activity and data may be logged by your organization.": "Seu uso do Antigravity será associado ao projeto fornecido. Certifique-se de confiar no ID do projeto antes de continuar. Sua organização pode registrar atividades e dados da conta.",
+    "Your Plan": "Seu plano",
+    "Your This Computer setting": "Sua configuração de Este computador",
+    "Allow the browser agent to download a file?": "Permitir que o agente do navegador baixe um arquivo?",
+    "Blocked: file type not allowed": "Bloqueado: tipo de arquivo não permitido",
+    "Yes, allow this download": "Sim, permitir este download",
+    "Yes, allow this time": "Sim, permitir desta vez",
+    "Yes, and always allow": "Sim, e permitir sempre",
+    "Yes, and always allow in this conversation": "Sim, e permitir sempre nesta conversa",
+    "Yes, save rule globally": "Sim, salvar regra globalmente",
+    "Yes, save rule in this conversation": "Sim, salvar regra nesta conversa",
+    "Authorization code sign-in is unavailable in this version.": "O login com código de autorização não está disponível nesta versão.",
+    "Authorization code was rejected. Paste a fresh code and try again.": "O código de autorização foi rejeitado. Cole um novo código e tente novamente.",
+    "Trouble signing in? Enter authorization code": "Problemas para fazer login? Digite o código de autorização",
+    "A high-risk mode that disables all safety barriers. The agent operates with full system access, auto-executes all terminal commands, and reads or writes to all local files without review prompts.": "Um modo de alto risco que desativa todas as barreiras de segurança. O agente tem acesso total ao sistema, executa automaticamente todos os comandos do terminal e lê ou grava em todos os arquivos locais sem solicitar revisão.",
+    "Useful for tasks that require file access across your full machine. The agent has full read and write access to all local files, but all proposed terminal commands require manual review and approval before running.": "Útil para tarefas que exigem acesso a arquivos em toda a máquina. O agente tem acesso total de leitura e gravação a todos os arquivos locais, mas todos os comandos do terminal propostos exigem revisão e aprovação manual antes de serem executados.",
+    "Useful for typical development with an emphasis on security. It prioritizes safety over speed by requiring manual approval for all terminal commands and files outside the project directory.": "Útil para o desenvolvimento cotidiano com foco na segurança. Prioriza a segurança em relação à velocidade, exigindo aprovação manual para todos os comandos do terminal e arquivos fora do diretório do projeto.",
+    "This shortcut is reserved by browser tabs and may not trigger in Web mode. It works in the Desktop Hub or installed PWA.": "Este atalho é reservado pelas abas do navegador e pode não ser acionado no modo Web. Funciona no Hub para desktop ou na PWA instalada.",
+    "What should this coordinator accomplish?": "O que este coordenador deve realizar?",
+    "1. Accessibility": "1. Acessibilidade",
+    "2. Screen Recording": "2. Gravação de tela",
+    "Could not apply the selected permissions.": "Não foi possível aplicar as permissões selecionadas.",
+    "Cloud Permissions": "Permissões da nuvem",
+    "This Conversation": "Esta conversa",
+    "A customization failed to load": "Falha ao carregar uma personalização",
+    "A host can't contain spaces.": "Um anfitrião não pode conter espaços.",
+    "Add label": "Adicionar rótulo",
+    "Add Resource": "Adicionar recurso",
+    "An error occurred while checking the port. Please try again.": "Ocorreu um erro ao verificar a porta. Tente novamente.",
+    "Are you sure you want to delete this handler?": "Tem certeza de que deseja excluir este manipulador?",
+    "Are you sure you want to delete this hook card?": "Tem certeza de que deseja excluir este cartão de hook?",
+    "Artifact not found": "Artefato não encontrado",
+    "Ask anything, @ to mention": "Pergunte qualquer coisa, @ para mencionar",
+    "Audio clip": "Clipe de áudio",
+    "Back to all agents": "Voltar para todos os agentes",
+    "Back to chat": "Voltar para o chat",
+    "Back to reference": "Voltar para a referência",
+    "This extension is currently stopped. Events and stdout streams will appear here once started.": "Esta extensão está parada. Os eventos e os fluxos de stdout aparecerão aqui quando ela for iniciada.",
+    "This file type is not currently supported in remote mode": "Este tipo de arquivo não é compatível atualmente com o modo remoto",
+    "This MCP server can no longer be configured.": "Este servidor MCP não pode mais ser configurado.",
+    "This site cannot provide a secure connection.": "Este site não pode fornecer uma conexão segura.",
+    "This site uses an unsupported TLS protocol or cipher suite.": "Este site usa um protocolo TLS ou um conjunto de cifras não compatível.",
+    "To continue using this model now, enable AI Credit overages.": "Para continuar usando este modelo agora, habilite os excedentes de crédito de IA.",
+    "Unknown error.": "Erro desconhecido.",
+    "Unknown execution error": "Erro de execução desconhecido",
+    "Unknown search error": "Erro de pesquisa desconhecido",
+    "Unnamed rule": "Regra sem nome",
+    "Upload to Google Drive": "Enviar para o Google Drive",
+    "Uploading to Drive…": "Enviando para o Drive…",
+    "Use Default": "Usar padrão",
+    "Uses your local files and tools. Schedules only.": "Usa seus arquivos e ferramentas locais. Somente agendamentos.",
+    "Validation failed. Please verify requirements and try again.": "Falha na validação. Verifique os requisitos e tente novamente.",
+    "VCS state is not available": "O estado do VCS não está disponível",
+    "View File": "Ver arquivo",
+    "Waiting for video…": "Aguardando vídeo…",
+    "Waiting for your answer": "Aguardando sua resposta",
+    "Waiting for your approval": "Aguardando sua aprovação",
+    "Welcome back. Where should we pick up?": "Bem-vindo de volta. De onde continuamos?",
+    "Why did you choose this response?": "Por que você escolheu esta resposta?",
+    "Working copy": "Cópia de trabalho",
+    "Workspace URI not found": "URI do espaço de trabalho não encontrado",
+    "You're viewing a blank page": "Você está visualizando uma página em branco",
+    "You're viewing a local or shared file": "Você está visualizando um arquivo local ou compartilhado",
+    "Your connection to this site is not fully secure": "Sua conexão com este site não é totalmente segura",
+    "Your connection to this site is not secure": "Sua conexão com este site não é segura",
+    "Asked again: your last answer may not have worked.": "Solicitado novamente: sua última resposta pode não ter funcionado.",
+    "That's too long.": "O texto é longo demais.",
+    "Welcome to the new Antigravity!": "Boas-vindas ao novo Antigravity!",
+    "Setting up…": "Configurando…",
+    "Download the Antigravity IDE": "Baixar o Antigravity IDE",
+    "Explore the new Antigravity": "Conhecer o novo Antigravity",
+    "Antigravity Icon": "Ícone do Antigravity",
+    "Knowledge Work": "Trabalho intelectual",
+    "Software Engineering": "Engenharia de software",
+    "Simplified interface for research, writing, and everyday tasks.": "Interface simplificada para pesquisa, escrita e tarefas do dia a dia.",
+    "Full interface for coding, developer tools, and managing agents.": "Interface completa para programação, ferramentas de desenvolvimento e gerenciamento de agentes.",
+    "Give Feedback": "Enviar feedback",
+    "Built-in Browser": "Navegador integrado",
+    "External Browser": "Navegador externo",
+    "Verbose": "Detalhado",
+    "Choose a Subscription": "Escolher uma assinatura",
+    "The agent never asks for confirmation before executing terminal commands (except those in the Deny list). This provides the agent with the maximum ability to operate over long periods without intervention, but also has the highest risk of the agent executing an unsafe terminal command.": "O agente nunca pede confirmação antes de executar comandos do terminal (exceto os que estão na lista de bloqueio). Isso dá ao agente a capacidade máxima de operar por longos períodos sem intervenção, mas também apresenta o maior risco de ele executar um comando de terminal inseguro.",
+    "Terminal commands automatically proceed inside the sandbox. A command that needs to leave the sandbox proceeds only if an agent judges it reversible, and otherwise requests review.": "Os comandos do terminal são executados automaticamente dentro do ambiente isolado. Um comando que precise sair dele só é executado se um agente o considerar reversível; caso contrário, solicita revisão.",
+    "Microphone blocked": "Microfone bloqueado",
+    "Microphone is in use or unavailable.": "O microfone está em uso ou indisponível.",
+    "Microphone didn't respond.": "O microfone não respondeu.",
+    "For any feedback that does not fit into the above categories.": "Para qualquer feedback que não se encaixe nas categorias acima.",
+    "Antigravity can review code, trace errors, and ship across your stack.": "O Antigravity pode revisar código, rastrear erros e entregar alterações em toda a sua stack.",
+    "Build me a web app": "Crie um app web para mim",
+    "Add a Gemini feature to my app": "Adicione um recurso do Gemini ao meu app",
+    "Bring over my setup from other Agentic Developer Tools": "Importe minha configuração de outras ferramentas de desenvolvimento com agentes",
+    "Antigravity can turn notes and docs into plans, decks, and action items.": "O Antigravity pode transformar notas e documentos em planos, apresentações e ações a realizar.",
+    "Brief me on my meetings every morning": "Resuma minhas reuniões todas as manhãs",
+    "Catch up on my recent meeting notes": "Atualize-me sobre minhas notas de reuniões recentes",
+    "Turn a doc into a slide deck": "Transforme um documento em uma apresentação",
+    "Data & Analytics": "Dados e análise",
+    "Antigravity can query tables, clean spreadsheets, and chart trends.": "O Antigravity pode consultar tabelas, limpar planilhas e criar gráficos de tendências.",
+    "Check a BigQuery table for anomalies": "Verifique anomalias em uma tabela do BigQuery",
+    "Build a dashboard from my sheet": "Crie um painel a partir da minha planilha",
+    "Analyze user trends and retention cohorts": "Analise tendências de usuários e coortes de retenção",
+    "Science": "Ciência",
+    "Antigravity can review literature, design experiments, and analyze results.": "O Antigravity pode revisar a literatura, planejar experimentos e analisar resultados.",
+    "Synthesize recent preprints and papers on a topic": "Sintetize preprints e artigos recentes sobre um tema",
+    "Visualize a protein's 3D structure": "Visualize a estrutura 3D de uma proteína",
+    "Prioritize genetic targets and pathways for a disease": "Priorize alvos genéticos e vias biológicas de uma doença",
+    "Analyze small-molecule bioactivity and drug-likeness": "Analise a bioatividade e a semelhança com fármacos de pequenas moléculas",
+    "Design": "Design",
+    "Antigravity can turn your designs into live code, briefs, and assets.": "O Antigravity pode transformar seus designs em código funcional, briefings e recursos.",
+    "Build a page from my Figma design": "Crie uma página a partir do meu design no Figma",
+    "Turn a screenshot into a web page": "Transforme uma captura de tela em uma página web",
+    "Write a design brief from my research": "Escreva um briefing de design a partir da minha pesquisa",
+    "Move Up": "Mover para cima",
+    "Move Down": "Mover para baixo",
+    "Delete Group": "Excluir grupo",
+    "Dismiss conversation open elsewhere warning": "Dispensar aviso de conversa aberta em outro lugar",
+    "Open plugin page": "Abrir página do plug-in",
+    "Search Projects…": "Pesquisar projetos…",
+    "Search Workspaces…": "Pesquisar espaços de trabalho…",
+    "Browser Task": "Tarefa do navegador",
+    "Subagent Conversation": "Conversa do subagente",
+    "Virtual File": "Arquivo virtual",
+    "Voice Speed": "Velocidade da voz",
+    "Mouse button pressed": "Botão do mouse pressionado",
+    "Mouse button released": "Botão do mouse solto",
+    "Unknown edit": "Edição desconhecida",
+    "Unknown file edit": "Edição de arquivo desconhecida",
+    "Events and stdout streams will appear here as they occur.": "Os eventos e os fluxos de stdout aparecerão aqui conforme ocorrerem.",
+    "Using browser · Thinking…": "Usando o navegador · Pensando…",
+    "Something else (optional)": "Outra coisa (opcional)",
+    "Credentials stay on this machine and are only sent to the domains listed.": "As credenciais permanecem nesta máquina e só são enviadas aos domínios listados.",
+    "Other credentials stay on this machine.": "As outras credenciais permanecem nesta máquina.",
+    "Credentials are only sent to the domains listed.": "As credenciais só são enviadas aos domínios listados.",
+    "DevTools port is still closed. Please make sure Chrome is running with remote debugging enabled.": "A porta do DevTools ainda está fechada. Verifique se o Chrome está em execução com a depuração remota ativada.",
+    "AI coding agents are known to have certain security risks, including autonomous code execution, data exfiltration, prompt injection and supply chain risks. Ensure that you monitor and verify all actions taken by the agent.": "Agentes de programação com IA apresentam certos riscos de segurança conhecidos, incluindo execução autônoma de código, exfiltração de dados, injeção de prompt e riscos da cadeia de suprimentos. Monitore e verifique todas as ações realizadas pelo agente.",
+    "Enter [user@]host[:port], or pick a host from your SSH config.": "Digite [user@]host[:port] ou escolha um anfitrião na sua configuração SSH.",
+    "hours": "horas",
+    "week": "semana",
+    "month": "mês",
+    "Legal Help": "Ajuda jurídica",
+    "Help us improve Antigravity.": "Ajude-nos a melhorar o Antigravity."
   },
   "patterns": [
     {
@@ -4005,6 +4482,141 @@
       "replace": {
         "2": "deviceKind"
       }
+    },
+    {
+      "id": "authorizationCodeFor",
+      "pattern": "^(?:Authorization code|Auth code) for (.+)$",
+      "sample": "Authorization code for Example $& Account",
+      "template": "Código de autorização de {1}"
+    },
+    {
+      "id": "recordShortcutFor",
+      "pattern": "^Recording shortcut for (.+)\\. Press keys to bind, Enter to save, Escape to cancel\\.$",
+      "sample": "Recording shortcut for Submit Prompt. Press keys to bind, Enter to save, Escape to cancel.",
+      "template": "Gravando atalho para {1}. Pressione as teclas para atribuir, Enter para salvar e Escape para cancelar."
+    },
+    {
+      "id": "shortcutFor",
+      "pattern": "^Shortcut (.+?) for (.+)$",
+      "sample": "Shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "Atalho {1} para {2}"
+    },
+    {
+      "id": "removeShortcutFor",
+      "pattern": "^Remove shortcut (.+?) for (.+)$",
+      "sample": "Remove shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "Remover atalho {1} de {2}"
+    },
+    {
+      "id": "addShortcutFor",
+      "pattern": "^Add shortcut for (.+)$",
+      "sample": "Add shortcut for Submit Prompt",
+      "template": "Adicionar atalho para {1}"
+    },
+    {
+      "id": "resetShortcutToDefault",
+      "pattern": "^Reset (.+) to default$",
+      "sample": "Reset Submit Prompt to default",
+      "template": "Redefinir {1} para o padrão"
+    },
+    {
+      "id": "downloadProgress",
+      "pattern": "^(.+) download progress$",
+      "sample": "report $&.pdf download progress",
+      "template": "Progresso do download de {1}"
+    },
+    {
+      "id": "showDownloadInFolder",
+      "pattern": "^Show (.+) in folder$",
+      "sample": "Show report $&.pdf in folder",
+      "template": "Mostrar {1} na pasta"
+    },
+    {
+      "id": "removeDownloadFromList",
+      "pattern": "^Remove (.+) from list$",
+      "sample": "Remove report $&.pdf from list",
+      "template": "Remover {1} da lista"
+    },
+    {
+      "id": "permissionModesSandboxUnavailable",
+      "pattern": "^(Default|Auto|Default and Auto|Auto and Default) (?:need|needs) the terminal sandbox, which isn't available on this host\\.$",
+      "sample": "Default and Auto need the terminal sandbox, which isn't available on this host.",
+      "template": "O sandbox do terminal é necessário para {1}, mas não está disponível neste host.",
+      "replace": {
+        "1": "sandboxPermissionModes"
+      }
+    },
+    {
+      "id": "goToTurn",
+      "pattern": "^Go to turn (\\d+) of (\\d+)$",
+      "sample": "Go to turn 2 of 12",
+      "template": "Ir para o turno {1} de {2}"
+    },
+    {
+      "id": "voiceSpeed",
+      "pattern": "^Voice [Ss]peed, (\\d+(?:\\.\\d+)?x)$",
+      "sample": "Voice speed, 1.5x",
+      "template": "Velocidade da voz, {1}"
+    },
+    {
+      "id": "moreActionsFor",
+      "pattern": "^More actions for (.+)$",
+      "sample": "More actions for Example $& Project",
+      "template": "Mais ações para {1}"
+    },
+    {
+      "id": "searchMarketplaceFor",
+      "pattern": "^Search for \"(.+)\" in the Marketplace$",
+      "sample": "Search for \"Example $& Plugin\" in the Marketplace",
+      "template": "Pesquisar “{1}” no Marketplace"
+    },
+    {
+      "id": "noPluginsFoundFor",
+      "pattern": "^No plugins found for \"(.+)\"\\.$",
+      "sample": "No plugins found for \"Example $& Plugin\".",
+      "template": "Nenhum plugin encontrado para “{1}”."
+    },
+    {
+      "id": "noMcpServersFoundFor",
+      "pattern": "^No MCP servers found for \"(.+)\"$",
+      "sample": "No MCP servers found for \"Example $& Server\"",
+      "template": "Nenhum servidor MCP encontrado para “{1}”"
+    },
+    {
+      "id": "switchEnvironment",
+      "pattern": "^Switch environment \\((.+)\\)$",
+      "sample": "Switch environment (Example $& Host)",
+      "template": "Alternar ambiente ({1})"
+    },
+    {
+      "id": "openSubagent",
+      "pattern": "^Open Subagent: (.+)$",
+      "sample": "Open Subagent: Example $& Agent",
+      "template": "Abrir subagente: {1}"
+    },
+    {
+      "id": "searchGoogleFor",
+      "pattern": "^Search Google for \"(.+)\"$",
+      "sample": "Search Google for \"Example $& Query\"",
+      "template": "Pesquisar “{1}” no Google"
+    },
+    {
+      "id": "sshHostAsks",
+      "pattern": "^(.+) asks:$",
+      "sample": "user@example.com asks:",
+      "template": "{1} solicita:"
+    },
+    {
+      "id": "cloudCredentialsOnly",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Credentials are only sent to the domains listed.",
+      "template": "Os logins em {1} são mantidos na nuvem junto com sua conta. As credenciais só são enviadas aos domínios listados."
+    },
+    {
+      "id": "cloudCredentialsAndLocal",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
+      "template": "Os logins em {1} são mantidos na nuvem junto com sua conta. As outras credenciais permanecem nesta máquina. As credenciais só são enviadas aos domínios listados."
     }
   ],
   "menu": {
@@ -4083,6 +4695,12 @@
       "a HID device": "um dispositivo HID",
       "a USB device": "um dispositivo USB",
       "a serial port": "uma porta serial"
+    },
+    "sandboxPermissionModes": {
+      "Default": "Padrão",
+      "Auto": "Automático",
+      "Default and Auto": "Padrão e Automático",
+      "Auto and Default": "Automático e Padrão"
     }
   },
   "valueRules": {
@@ -4236,5 +4854,350 @@
         "template": "{1} de dezembro"
       }
     ]
-  }
+  },
+  "inlineMessages": [
+    {
+      "id": "applicationTerms",
+      "selector": "div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://antigravity.google/terms\"]), div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://cloud.google.com/terms\"])",
+      "source": "By using this app, you agree to its {1}",
+      "template": "Ao usar este app, você concorda com os {1}",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Terms of Service"
+        }
+      ]
+    },
+    {
+      "id": "browserChromeRequirement",
+      "selector": "span.text-sm.text-muted-foreground.whitespace-pre-wrap:has(>a[href=\"https://www.google.com/chrome/\"])",
+      "source": "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires {1}.",
+      "template": "Configure os URLs permitidos e bloqueados para o subagente do navegador (invocado com /browser). Requer {1}.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Google Chrome"
+        }
+      ]
+    },
+    {
+      "id": "modelsBusinessDocs",
+      "selector": "div.text-secondary-foreground.py-2.px-3:has(>a[href=\"https://antigravity.google/docs/enterprise\"])",
+      "source": "For Antigravity Business consumption options, see {1}.",
+      "template": "Para conhecer as opções de consumo do Antigravity Business, consulte a {1}.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "documentation"
+        }
+      ]
+    },
+    {
+      "id": "feedbackLegalHelp",
+      "selector": "p.opacity-70:has(>a[href=\"https://support.google.com/legal/troubleshooter/1114905?hl=en#ts=1115658\"])",
+      "source": "Visit {1} to ask for content changes for legal reasons.",
+      "template": "Acesse {1} para solicitar alterações de conteúdo por motivos legais.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Legal Help"
+        }
+      ]
+    },
+    {
+      "id": "voicePrivacySettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "Microfone bloqueado. Permita o acesso em {1}.",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "Privacy Settings"
+        }
+      ]
+    },
+    {
+      "id": "voiceSystemSettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "Microfone bloqueado. Permita o acesso em {1}.",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "System Settings"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project.",
+      "template": "As {1} também se aplicam ao trabalhar neste projeto.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project. {2}.",
+      "template": "As {1} também se aplicam ao trabalhar neste projeto. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations.",
+      "template": "As {1} também se aplicam ao trabalhar nestas conversas.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations. {2}.",
+      "template": "As {1} também se aplicam ao trabalhar nestas conversas. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project.",
+      "template": "Este projeto foi criado para uma automação. As {1} também se aplicam ao trabalhar neste projeto.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project. {2}.",
+      "template": "Este projeto foi criado para uma automação. As {1} também se aplicam ao trabalhar neste projeto. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations.",
+      "template": "Este projeto foi criado para uma automação. As {1} também se aplicam ao trabalhar nestas conversas.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations. {2}.",
+      "template": "Este projeto foi criado para uma automação. As {1} também se aplicam ao trabalhar nestas conversas. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project.",
+      "template": "Este projeto foi criado para a automação {1}. As {2} também se aplicam ao trabalhar neste projeto.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project. {3}.",
+      "template": "Este projeto foi criado para a automação {1}. As {2} também se aplicam ao trabalhar neste projeto. {3}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations.",
+      "template": "Este projeto foi criado para a automação {1}. As {2} também se aplicam ao trabalhar nestas conversas.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations. {3}.",
+      "template": "Este projeto foi criado para a automação {1}. As {2} também se aplicam ao trabalhar nestas conversas. {3}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "mcpServerBrowserSignIn",
+      "selector": "[data-testid=\"mcp-server-browser-sign-in\"] > span[role=\"status\"]",
+      "source": "Finish signing in to {1} in your browser.",
+      "template": "Conclua o login em {1} no seu navegador.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "cloudResourceConnect",
+      "selector": "div.flex.flex-col.items-center.gap-2.py-2.text-center > span.text-sm.text-muted-foreground",
+      "source": "Connect your account to browse {1}.",
+      "template": "Conecte sua conta para explorar {1}.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "ideWizardDescription",
+      "selector": "#step-ask > p",
+      "source": "Antigravity has been redesigned to put agents first with new capabilities. If you'd still like a code editor, you can download it as a separate app named {1}.",
+      "template": "O Antigravity foi reformulado para colocar os agentes em primeiro lugar e oferecer novos recursos. Se você ainda quiser um editor de código, pode baixá-lo como um aplicativo separado chamado {1}.",
+      "slots": [
+        {
+          "selector": "b",
+          "text": "Antigravity IDE"
+        }
+      ]
+    },
+    {
+      "id": "onboardingPersonalization",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "Customize your experience across the agent, plugins, and product from the settings and marketplace. We won’t show you ads or let advertisers influence what {1} says.",
+      "template": "Personalize sua experiência com o agente, os plugins e o produto nas configurações e no marketplace. Não mostraremos anúncios nem permitiremos que anunciantes influenciem as respostas do {1}.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "onboardingAgentControl",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "{1}’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.",
+      "template": "{1} oferece agentes poderosos que ajudam você a realizar mais tarefas, melhor e mais rápido. Ainda assim, verifique sempre as ações realizadas pelo agente.",
+      "slots": [
+        {
+          "textIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "onboardingDataConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>a[href=\"https://antigravity.google/terms\"]):has(>a[href=\"https://policies.google.com/privacy\"])",
+      "source": "{1} Allow Google to collect and use your Interactions data, subject to the {2} and {3}. You can control this from your settings at any point.",
+      "template": "{1} Permita que o Google colete e use seus dados de interação de acordo com os seguintes documentos: {2} e {3}. Você pode alterar essa opção nas configurações a qualquer momento.",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Help us improve Antigravity."
+        },
+        {
+          "selector": "a[href=\"https://antigravity.google/terms\"]",
+          "text": "Google Antigravity Terms of Service"
+        },
+        {
+          "selector": "a[href=\"https://policies.google.com/privacy\"]",
+          "text": "Google Privacy Policy"
+        }
+      ]
+    },
+    {
+      "id": "onboardingMarketingConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>span.font-medium.text-secondary-foreground)",
+      "source": "{1} Sign up for newsletters, tips and tricks, and other notifications about {2}.",
+      "template": "{1} Inscreva-se para receber newsletters, dicas e truques e outras notificações sobre o {2}.",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Stay up to date."
+        },
+        {
+          "textIndex": 3
+        }
+      ]
+    }
+  ]
 }

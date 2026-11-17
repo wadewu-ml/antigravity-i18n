@@ -84,7 +84,6 @@ func dumpBrowserDOM(ctx context.Context, cmd *exec.Cmd) ([]byte, error) {
 }
 
 func TestEnginePreservesContentAndSentenceFragments(t *testing.T) {
-	browser := engineTestBrowser(t)
 	assets := os.DirFS("../..")
 	store, err := NewLocaleStore(assets, assets, "assets/locales", "assets/patches")
 	if err != nil {
@@ -94,11 +93,26 @@ func TestEnginePreservesContentAndSentenceFragments(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	runEngineBrowserFixture(t, store, loc, "testdata/engine.html", 90)
+}
+
+func TestInlineMessagesPreserveReactNodes(t *testing.T) {
+	store := newTestServiceForLocales(t).store
+	loc, err := store.LoadLocale(DefaultLocale)
+	if err != nil {
+		t.Fatal(err)
+	}
+	runEngineBrowserFixture(t, store, loc, "testdata/inline.html", 100)
+}
+
+func runEngineBrowserFixture(t *testing.T, store *LocaleStore, loc *Locale, fixturePath string, minChecks int) {
+	t.Helper()
+	browser := engineTestBrowser(t)
 	engine, err := store.buildPreloadFragment(loc)
 	if err != nil {
 		t.Fatal(err)
 	}
-	fixture, err := os.ReadFile("testdata/engine.html")
+	fixture, err := os.ReadFile(fixturePath)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +156,7 @@ func TestEnginePreservesContentAndSentenceFragments(t *testing.T) {
 	if err := json.Unmarshal(raw, &result); err != nil {
 		t.Fatal(err)
 	}
-	if result.Checks < 30 || len(result.Failures) > 0 {
+	if result.Checks < minChecks || len(result.Failures) > 0 {
 		t.Fatalf("%d DOM checks, failures: %v", result.Checks, result.Failures)
 	}
 	t.Logf("%d DOM checks passed", result.Checks)

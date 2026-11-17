@@ -102,6 +102,7 @@ type Locale struct {
 	ValueMaps               map[string]map[string]string `json:"valueMaps"`
 	ValueRules              map[string][]ValueRule       `json:"valueRules"`
 	Patterns                []PatternRule                `json:"patterns"`
+	InlineMessages          []InlineMessage              `json:"inlineMessages"`
 
 	AllowSourceEqual []string `json:"allowSourceEqual"`
 }
@@ -124,6 +125,24 @@ type PatternRule struct {
 	PluralGroup *int              `json:"pluralGroup"`
 	Replace     map[string]string `json:"replace"`
 	TrimGroups  []int             `json:"trimGroups"`
+}
+
+// InlineMessage translates known UI text around existing links, controls and
+// user-provided names without replacing or moving those DOM nodes.
+type InlineMessage struct {
+	ID       string       `json:"id"`
+	Selector string       `json:"selector"`
+	Source   string       `json:"source"`
+	Template string       `json:"template"`
+	Slots    []InlineSlot `json:"slots"`
+}
+
+// InlineSlot identifies one preserved child node. Text checks an element's
+// static label; an omitted Text preserves arbitrary content such as a name.
+type InlineSlot struct {
+	Selector  string `json:"selector,omitempty"`
+	Text      string `json:"text,omitempty"`
+	TextIndex *int   `json:"textIndex,omitempty"`
 }
 
 // LocaleStore loads the language packs embedded in the binary.
@@ -400,6 +419,66 @@ func validateRegexFlags(code, label, flags string, allowStateful bool) error {
 	return nil
 }
 
+// Inline placeholders retain existing DOM nodes in their original order. A
+// translation cannot repeat or reorder one, or create text where no source
+// text node exists to hold it.
+func validateInlineMessages(code string, messages []InlineMessage) error {
+	seen := map[string]bool{}
+	for index, message := range messages {
+		label := fmt.Sprintf("inline message #%d", index+1)
+		if strings.TrimSpace(message.ID) == "" {
+			return fmt.Errorf("locale '%s': %s needs a non-empty 'id'", code, label)
+		}
+		label = fmt.Sprintf("inline message '%s'", message.ID)
+		if seen[message.ID] {
+			return fmt.Errorf("locale '%s': duplicate inline message id '%s'", code, message.ID)
+		}
+		seen[message.ID] = true
+		if strings.TrimSpace(message.Selector) == "" || strings.TrimSpace(message.Source) == "" || strings.TrimSpace(message.Template) == "" {
+			return fmt.Errorf("locale '%s': %s needs non-empty 'selector', 'source' and 'template' strings", code, label)
+		}
+		if len(message.Slots) == 0 {
+			return fmt.Errorf("locale '%s': %s needs at least one slot", code, label)
+		}
+		for i, slot := range message.Slots {
+			hasSelector := slot.Selector != ""
+			if hasSelector == (slot.TextIndex != nil) {
+				return fmt.Errorf("locale '%s': %s slot #%d needs exactly one of 'selector' or 'textIndex'", code, label, i+1)
+			}
+			if hasSelector && strings.TrimSpace(slot.Selector) == "" {
+				return fmt.Errorf("locale '%s': %s slot #%d needs a non-empty 'selector'", code, label, i+1)
+			}
+			if slot.TextIndex != nil && *slot.TextIndex < 0 {
+				return fmt.Errorf("locale '%s': %s slot #%d has a negative 'textIndex'", code, label, i+1)
+			}
+			if slot.Text != "" && !hasSelector {
+				return fmt.Errorf("locale '%s': %s slot #%d can use 'text' only with 'selector'", code, label, i+1)
+			}
+		}
+		for _, field := range []struct{ name, value string }{{"source", message.Source}, {"template", message.Template}} {
+			rest := field.value
+			for i := range message.Slots {
+				before, after, found := strings.Cut(rest, fmt.Sprintf("{%d}", i+1))
+				if !found || strings.ContainsAny(before, "{}") {
+					return fmt.Errorf("locale '%s': %s '%s' must contain {1} through {%d} exactly once in slot order, without other braces", code, label, field.name, len(message.Slots))
+				}
+				rest = after
+			}
+			if strings.ContainsAny(rest, "{}") {
+				return fmt.Errorf("locale '%s': %s '%s' must contain {1} through {%d} exactly once in slot order, without other braces", code, label, field.name, len(message.Slots))
+			}
+		}
+		if strings.HasPrefix(message.Source, "{1}") && !strings.HasPrefix(message.Template, "{1}") {
+			return fmt.Errorf("locale '%s': %s template cannot add a prefix without a source text node", code, label)
+		}
+		last := fmt.Sprintf("{%d}", len(message.Slots))
+		if strings.HasSuffix(message.Source, last) && !strings.HasSuffix(message.Template, last) {
+			return fmt.Errorf("locale '%s': %s template cannot add a suffix without a source text node", code, label)
+		}
+	}
+	return nil
+}
+
 // validateLocale rejects malformed locale data before it is injected into the
 // app.
 //
@@ -448,6 +527,9 @@ func validateLocale(code string, loc *Locale) error {
 	}
 
 	if err := validateStringMap(code, "text", loc.Text); err != nil {
+		return err
+	}
+	if err := validateInlineMessages(code, loc.InlineMessages); err != nil {
 		return err
 	}
 	// The engine re-processes text it just wrote, so a translation that equals
@@ -656,6 +738,7 @@ func (s *LocaleStore) buildPreloadFragment(loc *Locale) (string, error) {
 		ValueMaps               map[string]map[string]string `json:"valueMaps,omitempty"`
 		ValueRules              map[string][]ValueRule       `json:"valueRules,omitempty"`
 		Patterns                []PatternRule                `json:"patterns,omitempty"`
+		InlineMessages          []InlineMessage              `json:"inlineMessages,omitempty"`
 	}{
 		Language:                loc.Language,
 		Name:                    loc.Name,
@@ -670,6 +753,7 @@ func (s *LocaleStore) buildPreloadFragment(loc *Locale) (string, error) {
 		ValueMaps:               loc.ValueMaps,
 		ValueRules:              loc.ValueRules,
 		Patterns:                loc.Patterns,
+		InlineMessages:          loc.InlineMessages,
 	}
 	data, err := json.Marshal(renderer)
 	if err != nil {

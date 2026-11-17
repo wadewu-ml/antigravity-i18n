@@ -516,6 +516,141 @@
       "replace": {
         "2": "deviceKind"
       }
+    },
+    {
+      "id": "authorizationCodeFor",
+      "pattern": "^(?:Authorization code|Auth code) for (.+)$",
+      "sample": "Authorization code for Example $& Account",
+      "template": "{1} 的授權碼"
+    },
+    {
+      "id": "recordShortcutFor",
+      "pattern": "^Recording shortcut for (.+)\\. Press keys to bind, Enter to save, Escape to cancel\\.$",
+      "sample": "Recording shortcut for Submit Prompt. Press keys to bind, Enter to save, Escape to cancel.",
+      "template": "正在錄製 {1} 的快捷鍵。按鍵以繫結，Enter 儲存，Escape 取消。"
+    },
+    {
+      "id": "shortcutFor",
+      "pattern": "^Shortcut (.+?) for (.+)$",
+      "sample": "Shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "{2} 的快捷鍵：{1}"
+    },
+    {
+      "id": "removeShortcutFor",
+      "pattern": "^Remove shortcut (.+?) for (.+)$",
+      "sample": "Remove shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "移除 {2} 的快捷鍵 {1}"
+    },
+    {
+      "id": "addShortcutFor",
+      "pattern": "^Add shortcut for (.+)$",
+      "sample": "Add shortcut for Submit Prompt",
+      "template": "為 {1} 新增快捷鍵"
+    },
+    {
+      "id": "resetShortcutToDefault",
+      "pattern": "^Reset (.+) to default$",
+      "sample": "Reset Submit Prompt to default",
+      "template": "將 {1} 重設為默認值"
+    },
+    {
+      "id": "downloadProgress",
+      "pattern": "^(.+) download progress$",
+      "sample": "report $&.pdf download progress",
+      "template": "{1} 下載進度"
+    },
+    {
+      "id": "showDownloadInFolder",
+      "pattern": "^Show (.+) in folder$",
+      "sample": "Show report $&.pdf in folder",
+      "template": "在資料夾中顯示 {1}"
+    },
+    {
+      "id": "removeDownloadFromList",
+      "pattern": "^Remove (.+) from list$",
+      "sample": "Remove report $&.pdf from list",
+      "template": "從清單中移除 {1}"
+    },
+    {
+      "id": "permissionModesSandboxUnavailable",
+      "pattern": "^(Default|Auto|Default and Auto|Auto and Default) (?:need|needs) the terminal sandbox, which isn't available on this host\\.$",
+      "sample": "Default and Auto need the terminal sandbox, which isn't available on this host.",
+      "template": "{1}模式需要終端沙箱，但這台主機無法提供終端沙箱。",
+      "replace": {
+        "1": "sandboxPermissionModes"
+      }
+    },
+    {
+      "id": "goToTurn",
+      "pattern": "^Go to turn (\\d+) of (\\d+)$",
+      "sample": "Go to turn 2 of 12",
+      "template": "跳至第 {1} 輪，共 {2} 輪"
+    },
+    {
+      "id": "voiceSpeed",
+      "pattern": "^Voice [Ss]peed, (\\d+(?:\\.\\d+)?x)$",
+      "sample": "Voice speed, 1.5x",
+      "template": "語音速度，{1}"
+    },
+    {
+      "id": "moreActionsFor",
+      "pattern": "^More actions for (.+)$",
+      "sample": "More actions for Example $& Project",
+      "template": "{1} 的更多操作"
+    },
+    {
+      "id": "searchMarketplaceFor",
+      "pattern": "^Search for \"(.+)\" in the Marketplace$",
+      "sample": "Search for \"Example $& Plugin\" in the Marketplace",
+      "template": "在市集中搜尋「{1}」"
+    },
+    {
+      "id": "noPluginsFoundFor",
+      "pattern": "^No plugins found for \"(.+)\"\\.$",
+      "sample": "No plugins found for \"Example $& Plugin\".",
+      "template": "找不到符合「{1}」的外掛程式。"
+    },
+    {
+      "id": "noMcpServersFoundFor",
+      "pattern": "^No MCP servers found for \"(.+)\"$",
+      "sample": "No MCP servers found for \"Example $& Server\"",
+      "template": "找不到符合「{1}」的 MCP 伺服器"
+    },
+    {
+      "id": "switchEnvironment",
+      "pattern": "^Switch environment \\((.+)\\)$",
+      "sample": "Switch environment (Example $& Host)",
+      "template": "切換環境（{1}）"
+    },
+    {
+      "id": "openSubagent",
+      "pattern": "^Open Subagent: (.+)$",
+      "sample": "Open Subagent: Example $& Agent",
+      "template": "開啟子代理：{1}"
+    },
+    {
+      "id": "searchGoogleFor",
+      "pattern": "^Search Google for \"(.+)\"$",
+      "sample": "Search Google for \"Example $& Query\"",
+      "template": "在 Google 中搜尋「{1}」"
+    },
+    {
+      "id": "sshHostAsks",
+      "pattern": "^(.+) asks:$",
+      "sample": "user@example.com asks:",
+      "template": "{1} 請求："
+    },
+    {
+      "id": "cloudCredentialsOnly",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Credentials are only sent to the domains listed.",
+      "template": "{1} 的登入資訊隨帳號保存在雲端。認證資料只會傳送至列出的網域。"
+    },
+    {
+      "id": "cloudCredentialsAndLocal",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
+      "template": "{1} 的登入資訊隨帳號保存在雲端。其他認證資料保存在這台電腦上。認證資料只會傳送至列出的網域。"
     }
   ],
   "valueMaps": {
@@ -562,6 +697,12 @@
       "a HID device": "HID 裝置",
       "a USB device": "USB 裝置",
       "a serial port": "序列埠"
+    },
+    "sandboxPermissionModes": {
+      "Default": "默認",
+      "Auto": "自動",
+      "Default and Auto": "默認和自動",
+      "Auto and Default": "自動和默認"
     }
   },
   "valueRules": {
@@ -4060,7 +4201,7 @@
     "Developer-only tools. These settings do not affect other users.": "僅供開發人員使用的工具。這些設定不會影響其他使用者。",
     "Developer: Reset NUX": "開發人員：重設新手引導",
     "Developer: Reset Onboarding": "開發人員：重設初始設定",
-    "Stay up to date.": "保持最新。",
+    "Stay up to date.": "取得最新消息。",
     "Google One Referral": "Google One 推薦",
     "Share your referral link with friends": "把推薦連結分享給朋友",
     "Invite a Friend": "邀請朋友",
@@ -4131,6 +4272,826 @@
     "Welcome back.": "歡迎回來。",
     "Good to see you.": "很高興見到你。",
     "Ignore events triggered by the automation owner to avoid self-trigger loops.": "忽略由自動化擁有者觸發的事件，以避免自我觸發循環。",
-    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "忽略自動審查或機器人帳號（groupagent-*）發出的事件。"
-  }
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "忽略自動審查或機器人帳號（groupagent-*）發出的事件。",
+    "Account connection was not completed.": "帳號連線未完成。",
+    "Add files": "新增檔案",
+    "Address bar suggestions": "網址列建議",
+    "Attach terminal output": "附加終端輸出",
+    "Browse MCP resources": "瀏覽 MCP 資源",
+    "Browse rules": "瀏覽規則",
+    "Browser steps": "瀏覽器步驟",
+    "Cannot parse folder URI.": "無法解析資料夾 URI。",
+    "Choose icon and color": "選擇圖示與色彩",
+    "Click to learn more about sources": "點擊瞭解來源詳情",
+    "Close Panel": "關閉面板",
+    "Color": "色彩",
+    "Connect an account so the agent can use this app.": "連線帳號，讓代理使用此應用程式。",
+    "Connect to SSH Host…": "連線至 SSH 主機…",
+    "Connections": "連線",
+    "Conversation turns": "對話輪次",
+    "Coordinator goal": "協調器目標",
+    "Coordinator name": "協調器名稱",
+    "Coordinator settings": "協調器設定",
+    "Coordinators": "協調器",
+    "Copy gh auth login command": "複製 gh auth login 指令",
+    "Customize Sections": "自訂區段",
+    "Days": "天",
+    "Discard comment draft": "捨棄評論草稿",
+    "Dismiss artifact update notice": "關閉產物更新通知",
+    "Docs, Sheets, Slides, and folders": "文件、試算表、簡報與資料夾",
+    "Enter always submits. This adds a second shortcut.": "Enter 鍵一律用於提交。此處可新增另一個快捷鍵。",
+    "Environments": "環境",
+    "Failed to clone project locally": "無法將項目複製到本機",
+    "Failed to export artifact": "匯出產物失敗",
+    "Failed to read file": "讀取檔案失敗",
+    "Failed to unarchive local project": "取消封存本機項目失敗",
+    "Filter agents": "篩選代理",
+    "Filter files": "篩選檔案",
+    "Filter rows": "篩選列",
+    "Font Size": "字型大小",
+    "Hidden hosts": "隱藏的主機",
+    "Icon": "圖示",
+    "It was already sent or couldn't be removed from the queue.": "該訊息已傳送，或無法從佇列中移除。",
+    "Jump to Next Prompt": "跳至下一則提示",
+    "Jump to Previous Prompt": "跳至上一則提示",
+    "Layout": "版面配置",
+    "Main Agent": "主代理",
+    "Markdown view mode": "Markdown 檢視模式",
+    "Marketplace notice": "市場公告",
+    "MCP server error": "MCP 伺服器錯誤",
+    "Message this chat": "向此聊天傳送訊息",
+    "New coordinator": "新增協調器",
+    "New Coordinator": "新增協調器",
+    "Next card": "下一張卡片",
+    "No coordinators": "沒有協調器",
+    "Open on another device": "在其他裝置上開啟",
+    "Open on phone": "在手機上開啟",
+    "Paste authorization code": "貼上授權碼",
+    "Pause this agent; it keeps its place and streams. Resume to continue.": "暫停此代理，保留目前進度與資料串流。恢復後繼續。",
+    "Pick up this remote conversation on your phone or in any browser. Scan the QR code or open the link below.": "在手機或任意瀏覽器中繼續此遠端對話。掃描 QR 碼或開啟下方連結。",
+    "Pin / Unpin Conversation": "釘選 / 取消釘選對話",
+    "Plan upgrade required": "需要升級套餐",
+    "Playback speed (< / >)": "播放速度 (< / >)",
+    "Plugin metadata": "插件中繼資料",
+    "Previous card": "上一張卡片",
+    "Project location": "項目位置",
+    "Promote to conversation": "提升為對話",
+    "Recent": "最近",
+    "References": "參考資料",
+    "Remove from history": "從歷史記錄中移除",
+    "Remove from Recent": "從最近使用中移除",
+    "Remove resource": "移除資源",
+    "Remove trigger": "移除觸發器",
+    "Reset all shortcuts to defaults": "將所有快捷鍵重設為默認值",
+    "Resume": "恢復",
+    "Resume 1 comment draft": "恢復 1 則評論草稿",
+    "Resume comment draft": "恢復評論草稿",
+    "Search shortcuts": "搜尋快捷鍵",
+    "Send": "傳送",
+    "Show Details": "顯示詳細資訊",
+    "Show or Hide Extensions": "顯示或隱藏擴充功能",
+    "SSH Config": "SSH 設定",
+    "SSH host": "SSH 主機",
+    "SSH Host": "SSH 主機",
+    "SSH Host…": "SSH 主機…",
+    "Starting the conversation…": "正在啟動對話…",
+    "Stop side question": "停止側問",
+    "Stop SSH Server…": "停止 SSH 伺服器…",
+    "Stop this agent": "停止此代理",
+    "Submit Prompt (Alternate to Enter)": "提交提示（Enter 以外的快捷鍵）",
+    "Switch to This Computer": "切換至這台電腦",
+    "The Hub sent an unexpected response.": "Hub 傳回了非預期的回應。",
+    "Toggle Google Cloud projects": "展開或收合 Google Cloud 項目",
+    "Toggle Terminal Panel": "切換終端面板",
+    "Toggle Word Wrap": "切換自動換行",
+    "Untrusted sidecar": "不受信任的 sidecar",
+    "View MCP servers": "檢視 MCP 伺服器",
+    "When it runs": "執行時間",
+    "A bash script run in your cloud environment after cloning repositories (or configure interactively in chat with /env-setup).": "複製存放庫後在雲端環境中執行的 bash 指令碼（也可在聊天中使用 /env-setup 互動式設定）。",
+    "Add filter": "新增篩選條件",
+    "Add trigger": "新增觸發器",
+    "Agent ID:": "代理 ID：",
+    "Agent said": "代理說",
+    "Agent working": "代理正在工作",
+    "All agents": "所有代理",
+    "All runs": "所有執行記錄",
+    "Analyzed content": "已分析內容",
+    "Analyzed Task Log": "已分析任務記錄",
+    "Analyzing content": "正在分析內容",
+    "Analyzing Task Log": "正在分析任務記錄",
+    "Appears larger on mobile": "在行動裝置上顯示較大",
+    "Approximate; may start a few minutes later": "預估時間，可能晚幾分鐘開始",
+    "Apps connected to your account": "已連線至你帳號的應用程式",
+    "Archived Only": "僅已封存",
+    "Are you sure you want to delete this side question? This action cannot be undone.": "確定要刪除此側問嗎？此操作無法復原。",
+    "Artifact image": "產物圖片",
+    "Artifact updated by agent": "產物已由代理更新",
+    "Ask a side question without interrupting the main conversation": "提出側問，不中斷主對話",
+    "Audio File": "音訊檔案",
+    "Authorization code": "授權碼",
+    "Branch actions": "分支操作",
+    "Branch names": "分支名稱",
+    "Browse Connectors": "瀏覽連接器",
+    "Cancel Questionnaire and Stop the Agent": "取消問卷並停止代理",
+    "Canvas page · display only": "畫布頁面 · 僅顯示",
+    "Certificate is valid": "憑證有效",
+    "Clear visited URLs and autocomplete suggestions from side panel preview.": "清除側面板預覽中的已造訪網址與自動完成建議。",
+    "Clones this repo in a cloud environment": "在雲端環境中複製此存放庫",
+    "Close message": "關閉訊息",
+    "Code Preview": "程式碼預覽",
+    "Collapse Questionnaire": "收合問卷",
+    "Collapse questionnaire": "收合問卷",
+    "Command is required": "指令不能為空",
+    "Connect an account so the agent can run automations.": "連線帳號，讓代理執行自動化。",
+    "Connect to SSH Host": "連線至 SSH 主機",
+    "Connecting to terminal...": "正在連線至終端...",
+    "Continue Task →": "繼續任務 →",
+    "Conversation link": "對話連結",
+    "Could not start.": "無法啟動。",
+    "Couldn't delete your data. Try again.": "無法刪除你的資料，請重試。",
+    "Couldn't load message": "無法載入訊息",
+    "Couldn't load the suggested plugin.": "無法載入建議的插件。",
+    "Couldn't load your SSH hosts": "無法載入你的 SSH 主機",
+    "Couldn't load your SSH hosts. You can still type one.": "無法載入你的 SSH 主機，你仍可手動輸入。",
+    "Couldn't search files": "無法搜尋檔案",
+    "Create a project first.": "請先建立項目。",
+    "Create a project on a machine you reach over SSH. It opens in that host's own window.": "在透過 SSH 存取的機器上建立項目。項目將在該主機的獨立視窗中開啟。",
+    "Create Coordinator": "建立協調器",
+    "Create Group": "建立分組",
+    "Created outline": "已建立大綱",
+    "Creates a local automation that runs on this computer": "建立在這台電腦上執行的本機自動化",
+    "Delete agent": "刪除代理",
+    "Delete all": "全部刪除",
+    "Delete All Data": "刪除所有資料",
+    "Drop to attach": "放開以附加",
+    "Duplicate project name": "項目名稱重複",
+    "Enable macOS Permissions": "啟用 macOS 權限",
+    "Enable the plugin to sign in.": "啟用插件以登入。",
+    "Enable this plugin to manage its accounts.": "啟用此插件以管理其帳號。",
+    "Environment Setup Script": "環境設定指令碼",
+    "Error editing file": "編輯檔案時發生錯誤",
+    "Error viewing file": "檢視檔案時發生錯誤",
+    "Execution Identity": "執行身分",
+    "Expand questionnaire": "展開問卷",
+    "Expand Questionnaire": "展開問卷",
+    "Fork in Current Workspace": "在目前工作區中分支",
+    "Full Logs": "完整記錄",
+    "Generated media": "產生的媒體",
+    "Get API key": "取得 API 金鑰",
+    "GitHub Repositories": "GitHub 存放庫",
+    "GitHub: not signed in": "GitHub：尚未登入",
+    "Google Antigravity Terms of Service": "Google Antigravity 服務條款",
+    "Here's how uploaded files, attachments, and connected resources work in your cloud environment": "瞭解上傳檔案、附件與已連線資源在雲端環境中的使用方式",
+    "Hey there, what should we build today?": "你好，今天想建構什麼？",
+    "Hidden by policy": "已被原則隱藏",
+    "Host Endpoint": "主機端點",
+    "Idle Guard Warning": "閒置防護警告",
+    "If you add multiple accounts, MCP servers use the one marked Default.": "若新增多個帳號，MCP 伺服器會使用標記為默認的帳號。",
+    "Issue actions": "議題操作",
+    "Issue numbers": "議題編號",
+    "Issued by": "簽發者",
+    "Issued to": "簽發給",
+    "Keeps your checkout untouched": "保留目前簽出目錄的狀態",
+    "Live chat in progress": "即時聊天進行中",
+    "Loading hosts…": "正在載入主機…",
+    "Loading Hosts…": "正在載入主機…",
+    "Loading Repositories…": "正在載入存放庫…",
+    "Loading resources...": "正在載入資源...",
+    "Log in": "登入",
+    "Marked 1 conversation as read": "已將 1 個對話標記為已讀",
+    "MCP error": "MCP 錯誤",
+    "Middle Click": "滑鼠中鍵點擊",
+    "Moved Mouse in Browser": "已在瀏覽器中移動滑鼠",
+    "Moving Mouse in Browser": "正在瀏覽器中移動滑鼠",
+    "No agent is working right now.": "目前沒有代理正在工作。",
+    "No artifacts generated": "尚未產生產物",
+    "No commits yet": "尚無提交",
+    "No connectors available in this project": "此項目中沒有可用的連接器",
+    "No conversation": "沒有對話",
+    "No events recorded": "沒有記錄的事件",
+    "No hosts in ~/.ssh/config yet": "~/.ssh/config 中尚無主機",
+    "No instances yet.": "尚無執行個體。",
+    "No keyboard shortcuts found matching your filter.": "找不到符合篩選條件的快捷鍵。",
+    "No matching hosts": "沒有相符的主機",
+    "No matching repositories": "沒有相符的存放庫",
+    "No matching resources found.": "找不到相符的資源。",
+    "No message text": "沒有訊息文字",
+    "No pinned conversations": "沒有釘選的對話",
+    "No recent downloads": "最近沒有下載",
+    "No recordings": "沒有錄製內容",
+    "No repositories found": "找不到存放庫",
+    "No resources added yet.": "尚未新增資源。",
+    "Not set": "未設定",
+    "Nothing is running right now": "目前沒有正在執行的任務",
+    "Only Automations": "僅自動化",
+    "Only Scheduled": "僅已排程的任務",
+    "Open image preview": "開啟圖片預覽",
+    "Open in Side Pane": "在側面板中開啟",
+    "Open skill page": "開啟技能頁面",
+    "Open SSH Host": "開啟 SSH 主機",
+    "Open video preview": "開啟影片預覽",
+    "Opened URL in Browser": "已在瀏覽器中開啟網址",
+    "Opening URL in Browser": "正在瀏覽器中開啟網址",
+    "Other conversation": "其他對話",
+    "Other Customizations": "其他自訂項目",
+    "Paste new key": "貼上新金鑰",
+    "Pay only for the tokens you use, billed through Gemini platform.": "僅為使用的 token 付費，透過 Gemini 平台計費。",
+    "Pick a model to change it.": "選擇要變更的模型。",
+    "Pin Tab": "釘選分頁",
+    "Press keys...": "請按下按鍵...",
+    "Process Error": "處理程序錯誤",
+    "Process exited with an error": "處理程序因錯誤結束",
+    "Prohibited Use Policy": "禁止用途政策",
+    "Pull request actions": "提取要求操作",
+    "Pull request numbers": "提取要求編號",
+    "Read Browser Page in Browser": "已在瀏覽器中讀取頁面",
+    "Read page": "已讀取頁面",
+    "Reading Browser Page in Browser": "正在瀏覽器中讀取頁面",
+    "Recent Conversations": "最近的對話",
+    "Recent Events": "最近的事件",
+    "Refreshed Browser page": "已重新整理瀏覽器頁面",
+    "Refreshing Browser page": "正在重新整理瀏覽器頁面",
+    "Refreshing credentials...": "正在更新認證資料...",
+    "Relaunch the app once to activate Screen Recording.": "請重新啟動一次應用程式以啟用螢幕錄製。",
+    "Remote Control Instances": "遠端控制執行個體",
+    "Remote Projects": "遠端項目",
+    "Removing the bundle removes all of its plugins.": "移除插件套件會一併移除其中所有插件。",
+    "Repeat every": "重複間隔",
+    "Replacing removes the currently installed plugin and installs the new one in its place.": "取代會移除目前已安裝的插件，並在原處安裝新的插件。",
+    "Repo default": "存放庫默認值",
+    "Resized Browser window": "已調整瀏覽器視窗大小",
+    "Resizing Browser window": "正在調整瀏覽器視窗大小",
+    "Resume environment": "恢復環境",
+    "Resume this agent where it paused": "從暫停處恢復此代理",
+    "Resuming environment…": "正在恢復環境…",
+    "Retrieved Browser Pages": "已取得瀏覽器頁面",
+    "Retrieved Console Logs from Browser": "已取得瀏覽器主控台記錄",
+    "Retrieving Browser Pages": "正在取得瀏覽器頁面",
+    "Retrieving Console Logs from Browser": "正在取得瀏覽器主控台記錄",
+    "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.": "依排程執行提示，例如每天早上彙整昨天的變更。執行記錄將顯示在這裡。",
+    "Running processes are killed. This cannot be undone.": "正在執行的處理程序將被終止。此操作無法復原。",
+    "Runs in a cloud environment": "在雲端環境中執行",
+    "Schedule type": "排程類型",
+    "Scroll turns down": "向下捲動對話輪次",
+    "Scroll turns up": "向上捲動對話輪次",
+    "Scrollable table": "可捲動表格",
+    "Scrolled down in Browser": "已在瀏覽器中向下捲動",
+    "Scrolled in Browser": "已在瀏覽器中捲動",
+    "Scrolled up in Browser": "已在瀏覽器中向上捲動",
+    "Scrolling down in Browser": "正在瀏覽器中向下捲動",
+    "Scrolling in Browser": "正在瀏覽器中捲動",
+    "Scrolling up in Browser": "正在瀏覽器中向上捲動",
+    "Search conversations, commands, and code...": "搜尋對話、指令與程式碼...",
+    "Search failed": "搜尋失敗",
+    "Search Hosts…": "搜尋主機…",
+    "Search or enter a URL": "搜尋或輸入網址",
+    "Search shortcuts...": "搜尋快捷鍵...",
+    "Search tabs, files and more": "搜尋分頁、檔案及更多內容",
+    "Selected Option in Browser": "已在瀏覽器中選擇選項",
+    "Selected region": "選取區域",
+    "Selecting Option in Browser": "正在瀏覽器中選擇選項",
+    "Semantic searched": "已完成語意搜尋",
+    "Semantic searching": "正在進行語意搜尋",
+    "Send command input?": "傳送指令輸入？",
+    "Services this plugin connects to on your behalf.": "此插件代表你連線的服務。",
+    "Set up": "設定",
+    "Shares this repository, with a working copy of its own. Uncommitted changes stay behind.": "共用此存放庫，但使用獨立工作複本。未提交的變更不會帶過去。",
+    "Show in Sidebar": "在側邊欄中顯示",
+    "Side Pane UI Available": "有可用的側面板介面",
+    "Side Panel Preview": "側面板預覽",
+    "Sign in in your browser, then paste the authorization code shown on the callback page.": "在瀏覽器中登入，然後貼上回呼頁面顯示的授權碼。",
+    "Sign in needed": "需要登入",
+    "Sign in to an app once and your agent can use it on any device. Open an app to see the account it uses or to disconnect it.": "登入應用程式一次，代理即可在任何裝置上使用它。開啟應用程式可查看它使用的帳號或中斷連線。",
+    "Sort and filter conversations": "排序與篩選對話",
+    "SSH config:": "SSH 設定：",
+    "Starting preview…": "正在啟動預覽…",
+    "Still running": "仍在執行",
+    "Stop all agents": "停止所有代理",
+    "Stop Side Question": "停止側問",
+    "Stream and control": "串流檢視與控制",
+    "Submit code": "提交授權碼",
+    "Summarizing call…": "正在摘要通話…",
+    "Switch To": "切換至",
+    "System Prompt": "系統提示詞",
+    "Taking Screenshot": "正在擷取螢幕畫面",
+    "Task Log": "任務記錄",
+    "The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.": "以下明細顯示規則、技能與 MCP 等自訂項目的 token 用量。超出預算時，較大的規則會降為路徑指引，較大的自訂項目會被自動排除。",
+    "The suggested plugin isn't in the marketplace.": "建議的插件不在市場中。",
+    "Then create the project in its window.": "然後在該視窗中建立項目。",
+    "This automation is currently stopped. Events and stdout streams will appear here once started.": "此自動化目前已停止。啟動後，事件與標準輸出串流將顯示在這裡。",
+    "This chat's environment is paused": "此聊天的環境已暫停",
+    "This conversation is in a different workspace.": "此對話位於其他工作區。",
+    "This link wants to open an app on your device.": "此連結想要開啟你裝置上的應用程式。",
+    "This page is going away soon": "此頁面即將停用",
+    "This permanently deletes all of your Remote Agents conversations, projects, scheduled tasks, connected plugins and settings, and stops any running remote agents. It can't be undone. Data in the desktop app and your Google account are not affected, and you can keep using Remote Agents afterwards.": "這將永久刪除你的所有遠端代理對話、項目、排程任務、已連線插件與設定，並停止所有正在執行的遠端代理。此操作無法復原。桌面應用程式與 Google 帳號中的資料不受影響，之後你仍可繼續使用遠端代理。",
+    "This plugin was force disabled.": "此插件已被強制停用。",
+    "This project is associated with a different workspace.": "此項目關聯至其他工作區。",
+    "Took Screenshot": "已擷取螢幕畫面",
+    "Type to search file contents": "輸入以搜尋檔案內容",
+    "Unknown Server": "未知伺服器",
+    "Unnamed resource": "未命名資源",
+    "Unnamed Theme": "未命名主題",
+    "Unpin Tab": "取消釘選分頁",
+    "Uploaded files and connected resources are mounted in your cloud environment.": "上傳檔案與已連線資源會掛載至你的雲端環境。",
+    "Use Advanced SSO Config": "使用進階 SSO 設定",
+    "Use Antigravity through your Gemini subscription.": "透過 Gemini 訂閱使用 Antigravity。",
+    "Use the default color.": "使用默認色彩。",
+    "Use this if your admin gave you a WIF config. Paste it below to sign in.": "如果管理員提供了 WIF 設定，請在下方貼上以登入。",
+    "Valid until": "有效期限",
+    "View archived in the sidebar": "在側邊欄中檢視已封存內容",
+    "View archived in the sidebar (Display options menu).": "在側邊欄中檢視已封存內容（顯示選項選單）。",
+    "View Branches": "檢視分支",
+    "Waiting for the agents’ windows…": "正在等待代理視窗…",
+    "Waiting for the SSH connection to finish": "正在等待 SSH 連線完成",
+    "Waiting for you to finish signing in…": "正在等待你完成登入…",
+    "When should it run?": "何時執行？",
+    "Where should it run?": "在哪裡執行？",
+    "Workflows are changing on October 19th—stay tuned for updates. You can use the agent to migrate your workflows.": "工作流程將於 10 月 19 日調整，敬請關注更新。你可以讓代理遷移現有工作流程。",
+    "You said": "你說",
+    "Your Antigravity use will be associated with provided project. Make sure you trust the project ID before proceeding. Account activity and data may be logged by your organization.": "你的 Antigravity 使用將關聯至所提供的項目。繼續前請確認你信任此項目 ID。你的組織可能會記錄帳號活動與資料。",
+    "Your Plan": "你的套餐",
+    "Your This Computer setting": "你在這台電腦上的設定",
+    "Allow the browser agent to download a file?": "允許瀏覽器代理下載檔案嗎？",
+    "Blocked: file type not allowed": "已封鎖：不允許此檔案類型",
+    "Yes, allow this download": "是，允許此次下載",
+    "Yes, allow this time": "是，僅允許這一次",
+    "Yes, and always allow": "是，並一律允許",
+    "Yes, and always allow in this conversation": "是，並在此對話中一律允許",
+    "Yes, save rule globally": "是，將規則儲存至全域",
+    "Yes, save rule in this conversation": "是，將規則儲存至此對話",
+    "Authorization code sign-in is unavailable in this version.": "此版本不支援授權碼登入。",
+    "Authorization code was rejected. Paste a fresh code and try again.": "授權碼遭拒，請貼上新授權碼後重試。",
+    "Trouble signing in? Enter authorization code": "登入遇到問題？輸入授權碼",
+    "A high-risk mode that disables all safety barriers. The agent operates with full system access, auto-executes all terminal commands, and reads or writes to all local files without review prompts.": "關閉所有安全屏障的高風險模式。代理擁有完整系統存取權限，會自動執行所有終端指令，並可讀寫所有本機檔案，無須審查確認。",
+    "Useful for tasks that require file access across your full machine. The agent has full read and write access to all local files, but all proposed terminal commands require manual review and approval before running.": "適用於需要存取整台電腦檔案的任務。代理可完整讀寫所有本機檔案，但所有擬執行的終端指令都需要手動審查並核准後才能執行。",
+    "Useful for typical development with an emphasis on security. It prioritizes safety over speed by requiring manual approval for all terminal commands and files outside the project directory.": "適用於注重安全的日常開發。安全優先於速度，所有終端指令以及項目目錄之外的檔案存取都需要手動核准。",
+    "This shortcut is reserved by browser tabs and may not trigger in Web mode. It works in the Desktop Hub or installed PWA.": "此快捷鍵由瀏覽器分頁保留，在網頁版中可能無法觸發。它可用於桌面 Hub 或已安裝的 PWA。",
+    "What should this coordinator accomplish?": "希望此協調器完成什麼？",
+    "1. Accessibility": "1. 輔助使用",
+    "2. Screen Recording": "2. 螢幕錄製",
+    "Could not apply the selected permissions.": "無法套用所選權限。",
+    "Cloud Permissions": "雲端權限",
+    "This Conversation": "此對話",
+    "A customization failed to load": "有自訂項目載入失敗",
+    "A host can't contain spaces.": "主機位址不能包含空白。",
+    "Add label": "新增標籤",
+    "Add Resource": "新增資源",
+    "An error occurred while checking the port. Please try again.": "檢查連接埠時發生錯誤，請重試。",
+    "Are you sure you want to delete this handler?": "確定要刪除此處理常式嗎？",
+    "Are you sure you want to delete this hook card?": "確定要刪除此掛鉤卡片嗎？",
+    "Artifact not found": "找不到產物",
+    "Ask anything, @ to mention": "隨意提問，輸入 @ 引用",
+    "Audio clip": "音訊片段",
+    "Back to all agents": "返回所有代理",
+    "Back to chat": "返回聊天",
+    "Back to reference": "返回參考資料",
+    "This extension is currently stopped. Events and stdout streams will appear here once started.": "此擴充功能目前已停止。啟動後，事件與標準輸出串流將顯示在這裡。",
+    "This file type is not currently supported in remote mode": "遠端模式目前不支援此檔案類型",
+    "This MCP server can no longer be configured.": "無法再設定此 MCP 伺服器。",
+    "This site cannot provide a secure connection.": "此網站無法提供安全連線。",
+    "This site uses an unsupported TLS protocol or cipher suite.": "此網站使用不支援的 TLS 通訊協定或加密套件。",
+    "To continue using this model now, enable AI Credit overages.": "如需立即繼續使用此模型，請啟用 AI 額度超額使用。",
+    "Unknown error.": "未知錯誤。",
+    "Unknown execution error": "未知執行錯誤",
+    "Unknown search error": "未知搜尋錯誤",
+    "Unnamed rule": "未命名規則",
+    "Upload to Google Drive": "上傳至 Google Drive",
+    "Uploading to Drive…": "正在上傳至 Drive…",
+    "Use Default": "使用默認值",
+    "Uses your local files and tools. Schedules only.": "使用本機檔案與工具。僅支援排程執行。",
+    "Validation failed. Please verify requirements and try again.": "驗證失敗，請檢查要求後重試。",
+    "VCS state is not available": "無法取得 VCS 狀態",
+    "View File": "檢視檔案",
+    "Waiting for video…": "正在等待影片…",
+    "Waiting for your answer": "正在等待你的回答",
+    "Waiting for your approval": "正在等待你的核准",
+    "Welcome back. Where should we pick up?": "歡迎回來，想從哪裡繼續？",
+    "Why did you choose this response?": "為什麼選擇此回覆？",
+    "Working copy": "工作複本",
+    "Workspace URI not found": "找不到工作區 URI",
+    "You're viewing a blank page": "你正在檢視空白頁",
+    "You're viewing a local or shared file": "你正在檢視本機或共用檔案",
+    "Your connection to this site is not fully secure": "你與此網站的連線並非完全安全",
+    "Your connection to this site is not secure": "你與此網站的連線不安全",
+    "Asked again: your last answer may not have worked.": "再次詢問：上次的回答可能未生效。",
+    "That's too long.": "內容過長。",
+    "Welcome to the new Antigravity!": "歡迎使用新版 Antigravity！",
+    "Setting up…": "正在設定…",
+    "Download the Antigravity IDE": "下載 Antigravity IDE",
+    "Explore the new Antigravity": "體驗新版 Antigravity",
+    "Antigravity Icon": "Antigravity 圖示",
+    "Knowledge Work": "知識工作",
+    "Software Engineering": "軟體工程",
+    "Simplified interface for research, writing, and everyday tasks.": "適用於研究、寫作和日常工作的簡潔介面。",
+    "Full interface for coding, developer tools, and managing agents.": "提供程式開發、開發工具和代理管理功能的完整介面。",
+    "Give Feedback": "提供意見回饋",
+    "Built-in Browser": "內建瀏覽器",
+    "External Browser": "外部瀏覽器",
+    "Verbose": "詳細",
+    "Choose a Subscription": "選擇訂閱",
+    "The agent never asks for confirmation before executing terminal commands (except those in the Deny list). This provides the agent with the maximum ability to operate over long periods without intervention, but also has the highest risk of the agent executing an unsafe terminal command.": "代理執行終端命令前不會要求確認（拒絕清單中的命令除外）。這讓代理能夠最大限度地長時間自主執行，但也最有可能執行不安全的終端命令。",
+    "Terminal commands automatically proceed inside the sandbox. A command that needs to leave the sandbox proceeds only if an agent judges it reversible, and otherwise requests review.": "終端命令會在沙箱內自動執行。需要離開沙箱的命令，只有在代理判斷其可復原時才會自動執行，否則會請求審查。",
+    "Microphone blocked": "麥克風已遭封鎖",
+    "Microphone is in use or unavailable.": "麥克風正在使用中或無法使用。",
+    "Microphone didn't respond.": "麥克風未回應。",
+    "For any feedback that does not fit into the above categories.": "不屬於以上類別的其他意見回饋。",
+    "Antigravity can review code, trace errors, and ship across your stack.": "Antigravity 可以審查程式碼、追蹤錯誤，並完成整個技術堆疊的交付。",
+    "Build me a web app": "幫我建構一個網頁應用程式",
+    "Add a Gemini feature to my app": "為我的應用程式新增 Gemini 功能",
+    "Bring over my setup from other Agentic Developer Tools": "移轉我在其他代理式開發工具中的設定",
+    "Antigravity can turn notes and docs into plans, decks, and action items.": "Antigravity 可以將筆記與文件整理為計畫、簡報與待辦事項。",
+    "Brief me on my meetings every morning": "每天早上向我簡報會議安排",
+    "Catch up on my recent meeting notes": "幫我回顧最近的會議筆記",
+    "Turn a doc into a slide deck": "將文件轉換成簡報",
+    "Data & Analytics": "資料與分析",
+    "Antigravity can query tables, clean spreadsheets, and chart trends.": "Antigravity 可以查詢資料表、清理試算表並繪製趨勢圖。",
+    "Check a BigQuery table for anomalies": "檢查 BigQuery 資料表中的異常",
+    "Build a dashboard from my sheet": "根據我的試算表建構儀表板",
+    "Analyze user trends and retention cohorts": "分析使用者趨勢與留存群組",
+    "Science": "科學研究",
+    "Antigravity can review literature, design experiments, and analyze results.": "Antigravity 可以整理文獻、設計實驗並分析結果。",
+    "Synthesize recent preprints and papers on a topic": "綜合整理某個主題的近期預印本與論文",
+    "Visualize a protein's 3D structure": "視覺化蛋白質的三維結構",
+    "Prioritize genetic targets and pathways for a disease": "為某種疾病篩選優先研究的遺傳靶點與途徑",
+    "Analyze small-molecule bioactivity and drug-likeness": "分析小分子的生物活性與類藥性",
+    "Design": "設計",
+    "Antigravity can turn your designs into live code, briefs, and assets.": "Antigravity 可以將你的設計轉化為可執行的程式碼、設計簡報與素材。",
+    "Build a page from my Figma design": "根據我的 Figma 設計建構頁面",
+    "Turn a screenshot into a web page": "將螢幕擷取畫面轉換成網頁",
+    "Write a design brief from my research": "根據我的研究撰寫設計簡報",
+    "Move Up": "上移",
+    "Move Down": "下移",
+    "Delete Group": "刪除分組",
+    "Dismiss conversation open elsewhere warning": "關閉對話已在其他位置開啟的警告",
+    "Open plugin page": "開啟插件頁面",
+    "Search Projects…": "搜尋項目…",
+    "Search Workspaces…": "搜尋工作區…",
+    "Browser Task": "瀏覽器任務",
+    "Subagent Conversation": "子代理對話",
+    "Virtual File": "虛擬檔案",
+    "Voice Speed": "語音速度",
+    "Mouse button pressed": "滑鼠按鈕已按下",
+    "Mouse button released": "滑鼠按鈕已放開",
+    "Unknown edit": "未知編輯",
+    "Unknown file edit": "未知檔案編輯",
+    "Events and stdout streams will appear here as they occur.": "事件與標準輸出串流將在產生時顯示在這裡。",
+    "Using browser · Thinking…": "正在使用瀏覽器 · 思考中…",
+    "Something else (optional)": "其他（選填）",
+    "Credentials stay on this machine and are only sent to the domains listed.": "認證資料保存在這台電腦上，只會傳送至列出的網域。",
+    "Other credentials stay on this machine.": "其他認證資料保存在這台電腦上。",
+    "Credentials are only sent to the domains listed.": "認證資料只會傳送至列出的網域。",
+    "DevTools port is still closed. Please make sure Chrome is running with remote debugging enabled.": "DevTools 連接埠仍未開放。請確認 Chrome 正在執行，並已啟用遠端偵錯。",
+    "AI coding agents are known to have certain security risks, including autonomous code execution, data exfiltration, prompt injection and supply chain risks. Ensure that you monitor and verify all actions taken by the agent.": "AI 程式開發代理存在已知的安全風險，包括自主執行程式碼、資料外傳、提示詞注入與供應鏈風險。請務必監控並核驗代理執行的所有操作。",
+    "Enter [user@]host[:port], or pick a host from your SSH config.": "輸入 [user@]host[:port]，或從 SSH 設定中選擇主機。",
+    "hours": "小時",
+    "week": "週",
+    "month": "月",
+    "Legal Help": "法律幫助",
+    "Help us improve Antigravity.": "協助我們改善 Antigravity。"
+  },
+  "inlineMessages": [
+    {
+      "id": "applicationTerms",
+      "selector": "div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://antigravity.google/terms\"]), div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://cloud.google.com/terms\"])",
+      "source": "By using this app, you agree to its {1}",
+      "template": "使用此應用程式即表示你同意其{1}",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Terms of Service"
+        }
+      ]
+    },
+    {
+      "id": "browserChromeRequirement",
+      "selector": "span.text-sm.text-muted-foreground.whitespace-pre-wrap:has(>a[href=\"https://www.google.com/chrome/\"])",
+      "source": "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires {1}.",
+      "template": "設定瀏覽器子代理（透過 /browser 呼叫）允許與拒絕的 URL。需要安裝 {1}。",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Google Chrome"
+        }
+      ]
+    },
+    {
+      "id": "modelsBusinessDocs",
+      "selector": "div.text-secondary-foreground.py-2.px-3:has(>a[href=\"https://antigravity.google/docs/enterprise\"])",
+      "source": "For Antigravity Business consumption options, see {1}.",
+      "template": "關於 Antigravity Business 的用量選項，請參閱{1}。",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "documentation"
+        }
+      ]
+    },
+    {
+      "id": "feedbackLegalHelp",
+      "selector": "p.opacity-70:has(>a[href=\"https://support.google.com/legal/troubleshooter/1114905?hl=en#ts=1115658\"])",
+      "source": "Visit {1} to ask for content changes for legal reasons.",
+      "template": "如需基於法律原因請求變更內容，請造訪{1}。",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Legal Help"
+        }
+      ]
+    },
+    {
+      "id": "voicePrivacySettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "麥克風已遭封鎖，請在{1}中允許存取。",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "Privacy Settings"
+        }
+      ]
+    },
+    {
+      "id": "voiceSystemSettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "麥克風已遭封鎖，請在{1}中允許存取。",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "System Settings"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project.",
+      "template": "在此項目中工作時，也會包含{1}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project. {2}.",
+      "template": "在此項目中工作時，也會包含{1}。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations.",
+      "template": "在這些對話中工作時，也會包含{1}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations. {2}.",
+      "template": "在這些對話中工作時，也會包含{1}。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project.",
+      "template": "此項目為自動化建立。在此項目中工作時，也會包含{1}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project. {2}.",
+      "template": "此項目為自動化建立。在此項目中工作時，也會包含{1}。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations.",
+      "template": "此項目為自動化建立。在這些對話中工作時，也會包含{1}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations. {2}.",
+      "template": "此項目為自動化建立。在這些對話中工作時，也會包含{1}。{2}。",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project.",
+      "template": "此項目為 {1} 自動化建立。在此項目中工作時，也會包含{2}。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project. {3}.",
+      "template": "此項目為 {1} 自動化建立。在此項目中工作時，也會包含{2}。{3}。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations.",
+      "template": "此項目為 {1} 自動化建立。在這些對話中工作時，也會包含{2}。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations. {3}.",
+      "template": "此項目為 {1} 自動化建立。在這些對話中工作時，也會包含{2}。{3}。",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "mcpServerBrowserSignIn",
+      "selector": "[data-testid=\"mcp-server-browser-sign-in\"] > span[role=\"status\"]",
+      "source": "Finish signing in to {1} in your browser.",
+      "template": "請在瀏覽器中完成 {1} 的登入。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "cloudResourceConnect",
+      "selector": "div.flex.flex-col.items-center.gap-2.py-2.text-center > span.text-sm.text-muted-foreground",
+      "source": "Connect your account to browse {1}.",
+      "template": "連線帳號以瀏覽 {1}。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "ideWizardDescription",
+      "selector": "#step-ask > p",
+      "source": "Antigravity has been redesigned to put agents first with new capabilities. If you'd still like a code editor, you can download it as a separate app named {1}.",
+      "template": "Antigravity 已重新設計，以代理為核心並提供新功能。如果你仍需要程式碼編輯器，可以另外下載名為 {1} 的獨立應用程式。",
+      "slots": [
+        {
+          "selector": "b",
+          "text": "Antigravity IDE"
+        }
+      ]
+    },
+    {
+      "id": "onboardingPersonalization",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "Customize your experience across the agent, plugins, and product from the settings and marketplace. We won’t show you ads or let advertisers influence what {1} says.",
+      "template": "可在設定和市集中自訂代理、外掛程式及產品體驗。我們不會向你顯示廣告，也不會讓廣告商影響 {1} 的回答。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "onboardingAgentControl",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "{1}’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.",
+      "template": "{1} 的代理功能強大，能協助你更有效率地完成更多工作，但你仍應核查代理執行的操作。",
+      "slots": [
+        {
+          "textIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "onboardingDataConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>a[href=\"https://antigravity.google/terms\"]):has(>a[href=\"https://policies.google.com/privacy\"])",
+      "source": "{1} Allow Google to collect and use your Interactions data, subject to the {2} and {3}. You can control this from your settings at any point.",
+      "template": "{1} 允許 Google 收集及使用你的互動資料，並須遵守{2}和{3}。你可以隨時在設定中變更此選項。",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Help us improve Antigravity."
+        },
+        {
+          "selector": "a[href=\"https://antigravity.google/terms\"]",
+          "text": "Google Antigravity Terms of Service"
+        },
+        {
+          "selector": "a[href=\"https://policies.google.com/privacy\"]",
+          "text": "Google Privacy Policy"
+        }
+      ]
+    },
+    {
+      "id": "onboardingMarketingConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>span.font-medium.text-secondary-foreground)",
+      "source": "{1} Sign up for newsletters, tips and tricks, and other notifications about {2}.",
+      "template": "{1} 訂閱有關 {2} 的電子報、使用技巧和其他通知。",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Stay up to date."
+        },
+        {
+          "textIndex": 3
+        }
+      ]
+    }
+  ]
 }

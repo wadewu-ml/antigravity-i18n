@@ -6,12 +6,15 @@
  * Delimited by antigravity-i18n:begin/end so a re-run replaces the whole block
  * rather than appending another copy of this comment.
  */
+const agMenuLabels = new Map(Object.entries(MENU_DATA_PLACEHOLDER));
+function menuLabelMatches(actual, source) {
+    return actual === source || actual === agMenuLabels.get(source);
+}
 function translateMenu(menu) {
-    const labels = new Map(Object.entries(MENU_DATA_PLACEHOLDER));
     const visit = (item) => {
         const label = item.label;
-        if (label && labels.has(label)) {
-            item.label = labels.get(label);
+        if (label && agMenuLabels.has(label)) {
+            item.label = agMenuLabels.get(label);
         }
         item.submenu?.items.forEach(visit);
     };

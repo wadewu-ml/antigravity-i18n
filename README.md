@@ -12,9 +12,9 @@ A standalone executable bundling a modern graphical interface, a pure Go asar en
 
 ## Compatibility
 
-Version 3.0.6 targets Antigravity App 2.30.0 as well as 2.29.0. Packs cover the 2.30.0 Settings, first-run setup, built-in browser, and side-question chrome. Spoken transcripts, word-highlighted replies, and side-question user text stay untranslated, while voice controls still translate. The Chinese packs keep the permission preset name Turbo. Backup, restore, and language-pack injection are unchanged.
+The current source has been checked against Antigravity App 2.32.1. Each of the nine packs adds 475 static strings and 22 dynamic rules for the Knowledge Work and Software Engineering layouts in General settings, font size, prompt navigation shortcuts, authorization-code sign-in, download approvals, plugin accounts, remote connections, coordinators, and other UI. Existing 2.29.0 and 2.30.0 entries remain available. IDE setup and SSH prompt windows now load the translation engine, and asynchronous WSL menu translation is fixed. See the [audit record](./docs/translation-audit-2.32.1.md).
 
-Checked against the 2.29.0 renderer: about 97% of public settings labels, titles, and descriptions are translated, including the new public strings from this release. Text that stays English is the Monaco and VS Code color catalog, editor and layout-library messages, KaTeX help, and Google-internal screens (ABFS, CitC, Cog, Chief of Staff, and the developer host simulator).
+Spoken transcripts, call summaries, AI progress text, and side-question user content remain untouched; their UI controls still translate. The Chinese packs keep the permission preset name Turbo. Another 25 inline-message rules cover settings descriptions, project permissions, plugin sign-in, IDE setup, and onboarding terms and consent while preserving the original links, controls, and names. Monaco and VS Code color descriptions, editor and layout-library messages, KaTeX help, and Google-internal screens are outside this update. Mixed inline sentences without a complete match also remain in English. Dictionary alignment does not measure coverage of the entire client.
 
 ---
 

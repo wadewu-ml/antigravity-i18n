@@ -221,16 +221,24 @@ func patchMain(source string, locale *Locale, dialogFragment string) (string, er
 // reapplyMenuRe anchors the call that re-applies the translated menu.
 var reapplyMenuRe = regexp.MustCompile(`(\s*)//\s*Re-apply the menu so the change takes effect\.`)
 
+var menuSetterRe = regexp.MustCompile(`(?m)^([\t ]*)(?:translateMenu\(menu\);[\t ]*\r?\n[\t ]*)?electron_1\.Menu\.setApplicationMenu\(menu\);`)
+var legacyMenuCallRe = regexp.MustCompile(`(?m)^[\t ]*translateMenu\(menu\);[\t ]*\r?\n([\t ]*//\s*Re-apply the menu so the change takes effect\.)`)
+
 // patchMenu rewrites menu.js: the native menu translation plus the call that
 // wires it in.
 func patchMenu(source string, menuFragment string) (string, error) {
 	legacy := &legacySpec{startMarkers: []string{legacyMenuStartMarker}}
 	out := injectFragment(source, menuFragment, legacy, "")
 
-	// Wire the translated menu in. The replacement uses ${1} rather than $1
-	// because Go reads a $1 followed by a letter as a named group reference,
-	// which would silently swallow the group's text.
-	if !strings.Contains(out, "translateMenu(menu);") {
+	// Antigravity adds WSL items asynchronously after installing the initial
+	// menu. Lookups must still find File after it has been localized, and every
+	// subsequent installation must translate newly inserted items as well.
+	out = strings.ReplaceAll(out, "item.label === submenuLabel", "menuLabelMatches(item.label, submenuLabel)")
+	out = legacyMenuCallRe.ReplaceAllString(out, "${1}")
+	if menuSetterRe.MatchString(out) {
+		out = menuSetterRe.ReplaceAllString(out, "${1}translateMenu(menu);\n${1}electron_1.Menu.setApplicationMenu(menu);")
+	} else if !strings.Contains(out, "translateMenu(menu);") {
+		// Older builds (and the fixture) expose only this comment anchor.
 		out = reapplyMenuRe.ReplaceAllString(out, "${1}translateMenu(menu);\n${1}// Re-apply the menu so the change takes effect.")
 	}
 	if !strings.Contains(out, "translateMenu(menu);") {

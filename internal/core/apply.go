@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // ApplyLocale installs a locale into Antigravity, replacing whatever patch is
@@ -232,6 +233,46 @@ func buildPatchedArchive(srcPath string, locale *Locale, preloadFragment, menuFr
 		return "", err
 	}
 	newPreload := patchPreload(string(preload), preloadFragment)
+	patches := []Patch{
+		{Path: "dist/main.js", Data: []byte(newMain)},
+		{Path: "dist/menu.js", Data: []byte(newMenu)},
+		{Path: "dist/preload.js", Data: []byte(newPreload)},
+	}
+	// The IDE installer and SSH password prompt use separate windows and do
+	// not load the Hub preload. Older releases can omit either window.
+	for _, rel := range []string{"dist/ideInstall/wizardPreload.js", "dist/remote/sshPromptPreload.js"} {
+		if arc.lookup(rel) == nil {
+			continue
+		}
+		source, err := arc.ReadFile(rel)
+		if err != nil {
+			return "", err
+		}
+		if rel == "dist/remote/sshPromptPreload.js" {
+			const promptPath = "dist/remote/sshPrompts.js"
+			prompt, err := arc.ReadFile(promptPath)
+			if err != nil {
+				return "", err
+			}
+			// The message comes from the remote SSH process, so preserve it
+			// even when it happens to match a translated button label.
+			const original = `<div id="message"></div>`
+			const protected = `<div id="message" translate="no"></div>`
+			if !strings.Contains(string(prompt), original) && !strings.Contains(string(prompt), protected) {
+				return "", fmt.Errorf("could not locate the SSH prompt message container in %s", promptPath)
+			}
+			promptSource := strings.ReplaceAll(string(prompt), original, protected)
+			if err := checkJavaScriptSyntax(promptPath, promptSource); err != nil {
+				return "", err
+			}
+			patches = append(patches, Patch{Path: promptPath, Data: []byte(promptSource)})
+		}
+		patched := patchPreload(string(source), preloadFragment)
+		if err := checkJavaScriptSyntax(rel, patched); err != nil {
+			return "", err
+		}
+		patches = append(patches, Patch{Path: rel, Data: []byte(patched)})
+	}
 
 	tmp, err := os.CreateTemp("", "antigravity-i18n-patched-*.asar")
 	if err != nil {
@@ -243,13 +284,8 @@ func buildPatchedArchive(srcPath string, locale *Locale, preloadFragment, menuFr
 		return "", err
 	}
 
-	// Every body except these three is copied from the source unchanged, so the
-	// rebuilt archive stays byte identical apart from the patch itself.
-	err = WritePatched(srcPath, staged, []Patch{
-		{Path: "dist/main.js", Data: []byte(newMain)},
-		{Path: "dist/menu.js", Data: []byte(newMenu)},
-		{Path: "dist/preload.js", Data: []byte(newPreload)},
-	})
+	// Every other body is copied from the source unchanged.
+	err = WritePatched(srcPath, staged, patches)
 	if err != nil {
 		os.Remove(staged)
 		return "", err

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><!-- ENGINE --></head>
+<body>
+<script>
+  let checks = 0;
+  const failures = [];
+  const cases = [];
+  const clicks = new Map();
+  const settle = () => new Promise(resolve => setTimeout(resolve, 0));
+  function check(name, actual, expected) {
+    checks++;
+    if (actual !== expected) failures.push(name + ': ' + JSON.stringify(actual) + ' != ' + JSON.stringify(expected));
+  }
+  function text(value) { return document.createTextNode(value); }
+  function element(tag, attributes, value) {
+    const node = document.createElement(tag);
+    for (const [name, content] of Object.entries(attributes || {})) node.setAttribute(name, content);
+    if (value !== undefined) node.append(text(value));
+    return node;
+  }
+  function control(tag, attributes, value) {
+    const node = element(tag, attributes, value);
+    clicks.set(node, 0);
+    node.addEventListener('click', event => {
+      event.preventDefault();
+      clicks.set(node, clicks.get(node) + 1);
+    });
+    return node;
+  }
+  function localized(label) { return AG_LOCALE.text[label] || label; }
+  function expected(id, values) {
+    const rule = AG_LOCALE.inlineMessages.find(item => item.id === id);
+    if (!rule) throw Error('Missing production inline message ' + id);
+    return rule.template.replace(/\{(\d+)\}/g, (_, index) => values[Number(index) - 1]);
+  }
+  function record(id, container, values, slots, host) {
+    const fixture = {id, container, values, slots, nodes: Array.from(container.childNodes), hrefs: slots.map(slot => slot.nodeType === Node.ELEMENT_NODE ? slot.getAttribute('href') : null)};
+    cases.push(fixture);
+    (host || document.body).append(container);
+    return fixture;
+  }
+  function verify(fixture, id = fixture.id, values = fixture.values) {
+    check(id + ' text', fixture.container.textContent, expected(id, values));
+    check(id + ' node count', fixture.container.childNodes.length, fixture.nodes.length);
+    fixture.nodes.forEach((node, index) => check(id + ' original child ' + index, fixture.container.childNodes[index] === node, true));
+    fixture.slots.forEach((slot, index) => {
+      check(id + ' slot still attached ' + index, slot.parentNode === fixture.container, true);
+      if (slot.nodeType === Node.ELEMENT_NODE) {
+        check(id + ' href ' + index, slot.getAttribute('href'), fixture.hrefs[index]);
+        if (clicks.has(slot)) {
+          const before = clicks.get(slot);
+          slot.click();
+          check(id + ' listener ' + index, clicks.get(slot), before + 1);
+        }
+      }
+    });
+  }
+
+  const terms = element('div', {class: 'text-sm text-muted-foreground mt-auto pt-4'});
+  const termsLink = control('a', {href: 'https://antigravity.google/terms', target: '_blank'}, 'Terms of Service');
+  terms.append(text('By using this app, you agree to its'), text(' '), termsLink);
+  const termsCase = record('applicationTerms', terms, [localized('Terms of Service')], [termsLink]);
+
+  const browser = element('span', {class: 'text-sm text-muted-foreground whitespace-pre-wrap'});
+  const chromeLink = control('a', {href: 'https://www.google.com/chrome/'}, 'Google Chrome');
+  browser.append(text('Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires'), text(' '), chromeLink, text('.'));
+  record('browserChromeRequirement', browser, ['Google Chrome'], [chromeLink]);
+
+  const business = element('div', {class: 'text-secondary-foreground py-2 px-3'});
+  const docsLink = control('a', {href: 'https://antigravity.google/docs/enterprise'}, 'documentation');
+  business.append(text('For Antigravity Business consumption options, see'), text(' '), docsLink, text('.'));
+  record('modelsBusinessDocs', business, [localized('documentation')], [docsLink]);
+
+  const feedback = element('p', {class: 'opacity-70'});
+  const legalLink = control('a', {href: 'https://support.google.com/legal/troubleshooter/1114905?hl=en#ts=1115658'}, 'Legal Help');
+  feedback.append(text('Visit'), text(' '), legalLink, text(' '), text('to ask for content changes for legal reasons.'));
+  record('feedbackLegalHelp', feedback, [localized('Legal Help')], [legalLink]);
+
+  const voiceCases = [];
+  for (const [suffix, label] of [['Privacy', 'Privacy Settings'], ['System', 'System Settings']]) {
+    const voice = element('span', {class: 'min-w-0'});
+    const settings = control('button', {'data-testid': 'voice-open-settings'}, label);
+    voice.append(text('Microphone blocked. Allow in '), settings, text('.'));
+    voiceCases.push(record('voice' + suffix + 'Settings', voice, [localized(label)], [settings]));
+  }
+
+  const projectCases = [];
+  for (const prefix of ['', 'Automation', 'NamedAutomation']) {
+    for (const [scopeName, scope] of [['Project', 'in this project'], ['Conversations', 'in these conversations']]) {
+      for (const help of [false, true]) {
+        const outer = element('div', {class: 'text-sm text-muted-foreground leading-relaxed'});
+        document.body.append(outer);
+        const project = element('span');
+        const values = [];
+        const slots = [];
+        if (prefix === 'Automation') {
+          project.append(text('This project was created for'), text(' '), text('an'), text(' '), text('automation. '));
+        } else if (prefix === 'NamedAutomation') {
+          const name = element('strong', {}, 'Run $& <name>{2}');
+          project.append(text('This project was created for'), text(' '), text('the '), name, text(' '), text('automation. '));
+          values.push(name.textContent);
+          slots.push(name);
+        }
+        const permissions = control('span', {class: 'text-link hover:underline cursor-pointer font-medium'}, 'Global Permissions');
+        project.append(text('Also includes'), text(' '), permissions, text(' '), text('when working '), text(scope), text('.'));
+        values.push(localized('Global Permissions'));
+        slots.push(permissions);
+        if (help) {
+          const learn = control('a', {href: 'https://antigravity.google/docs/permissions'}, 'Learn more');
+          project.append(text(' '), learn, text('.'));
+          values.push(localized('Learn more'));
+          slots.push(learn);
+        }
+        projectCases.push(record('projectPermissions' + prefix + scopeName + (help ? 'Help' : ''), project, values, slots, outer));
+      }
+    }
+  }
+
+  function signIn(provider, attach = true) {
+    const outer = element('div', {'data-testid': 'mcp-server-browser-sign-in'});
+    const status = element('span', {role: 'status', class: 'flex-1 text-sm text-muted-foreground'});
+    const name = text(provider);
+    status.append(text('Finish signing in to '), name, text(' in your browser.'));
+    outer.append(status);
+    if (attach) document.body.append(outer);
+    const fixture = {id: 'mcpServerBrowserSignIn', container: status, values: [provider], slots: [name], nodes: Array.from(status.childNodes), hrefs: [null]};
+    cases.push(fixture);
+    return fixture;
+  }
+  const signInCase = signIn('Run');
+
+  const providerOuter = element('div', {class: 'flex flex-col items-center gap-2 py-2 text-center'});
+  document.body.append(providerOuter);
+  const providerDescription = element('span', {class: 'text-sm text-muted-foreground'});
+  const providerName = text('Open');
+  providerDescription.append(text('Connect your account to browse '), providerName, text('.'));
+  record('cloudResourceConnect', providerDescription, ['Open'], [providerName], providerOuter);
+
+  const wizardOuter = element('div', {id: 'step-ask'});
+  document.body.append(wizardOuter);
+  const wizard = element('p');
+  const ide = element('b', {}, 'Antigravity IDE');
+  wizard.append(text("Antigravity has been redesigned to put agents first with new capabilities. If you'd still like a code editor, you can download it as a separate app named "), ide, text('.'));
+  const wizardCase = record('ideWizardDescription', wizard, ['Antigravity IDE'], [ide], wizardOuter);
+
+  // Onboarding terms use React text children for the product name and two
+  // links inside a checkbox label. Preserve every original child and control.
+  const onboardingList = element('ul', {class: 'list-none p-0 m-0 flex flex-col gap-4'});
+  document.body.append(onboardingList);
+  function onboardingParagraph(title, id, children, brand) {
+    const item = element('li');
+    const wrapper = element('span', {class: 'flex flex-col gap-0.5'});
+    const heading = element('span', {class: 'font-medium text-foreground'}, title);
+    const paragraph = element('span', {class: 'text-secondary-foreground leading-relaxed'});
+    wrapper.append(heading, paragraph);
+    item.append(wrapper);
+    onboardingList.append(item);
+    paragraph.append(...children);
+    return record(id, paragraph, ['Antigravity'], [brand], wrapper);
+  }
+  const personalizationBrand = text('Antigravity');
+  const personalizationCase = onboardingParagraph('Optimized for you', 'onboardingPersonalization', [
+    text('Customize your experience across the agent, plugins, and product from the settings and marketplace. We won’t show you ads or let advertisers influence what '),
+    personalizationBrand, text(' says.')
+  ], personalizationBrand);
+  const agentBrand = text('Antigravity');
+  onboardingParagraph('You are in control', 'onboardingAgentControl', [agentBrand,
+    text('’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.')
+  ], agentBrand);
+
+  const consentInputs = [];
+  function consentLabel() {
+    const label = element('label');
+    const input = element('input', {type: 'checkbox'});
+    let changes = 0;
+    input.addEventListener('change', () => changes++);
+    consentInputs.push({input, changes: () => changes});
+    const description = element('span', {class: 'text-sm leading-normal text-muted-foreground'});
+    label.append(input, description);
+    document.body.append(label);
+    return {label, description};
+  }
+  const consent = consentLabel();
+  const consentTitle = element('span', {class: 'font-medium text-secondary-foreground'}, 'Help us improve Antigravity.');
+  const consentTerms = control('a', {href: 'https://antigravity.google/terms', class: 'text-link hover:underline', target: '_blank', rel: 'noreferrer'});
+  consentTerms.append(text('Google '), text('Antigravity'), text(' Terms of Service'));
+  const consentPrivacy = control('a', {href: 'https://policies.google.com/privacy', class: 'text-link hover:underline', target: '_blank', rel: 'noreferrer'}, 'Google Privacy Policy');
+  const consentTermNodes = Array.from(consentTerms.childNodes);
+  consent.description.append(consentTitle, text(' '), text('Allow Google to collect and use your Interactions data, subject to the'), text(' '),
+    consentTerms, text(' '), text('and'), text(' '), consentPrivacy, text('. You can control this from your settings at any point.'));
+  record('onboardingDataConsent', consent.description,
+    [localized('Help us improve Antigravity.'), localized('Google Antigravity Terms of Service'), localized('Google Privacy Policy')],
+    [consentTitle, consentTerms, consentPrivacy], consent.label);
+  const marketing = consentLabel();
+  const marketingTitle = element('span', {class: 'font-medium text-secondary-foreground'}, 'Stay up to date.');
+  const marketingBrand = text('Antigravity');
+  marketing.description.append(marketingTitle, text(' '), text('Sign up for newsletters, tips and tricks, and other notifications about '), marketingBrand, text('.'));
+  const marketingCase = record('onboardingMarketingConsent', marketing.description,
+    [localized('Stay up to date.'), 'Antigravity'], [marketingTitle, marketingBrand], marketing.label);
+
+  const accountCases = [];
+  for (const [kind, credentials] of [
+    ['local', 'Credentials stay on this machine and are only sent to the domains listed.'],
+    ['cloudCredentialsOnly', 'Sign-ins to Google Drive, Notion are kept in the cloud with your account. Credentials are only sent to the domains listed.'],
+    ['cloudCredentialsAndLocal', 'Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.']
+  ]) {
+    for (const multiple of [false, true]) {
+      const section = element('section', {'aria-label': 'Accounts'});
+      const paragraph = element('p', {class: 'text-sm text-muted-foreground'});
+      paragraph.append(text('Services this plugin connects to on your behalf.'), text(' '), text(credentials));
+      if (multiple) paragraph.append(text(' If you add multiple accounts, MCP servers use the one marked Default.'));
+      section.append(paragraph);
+      document.body.append(section);
+      accountCases.push({kind, multiple, paragraph, nodes: Array.from(paragraph.childNodes), credentials});
+    }
+  }
+
+  const protectedOuter = element('div', {'data-testid': 'planner-response-text'});
+  const protectedTerms = terms.cloneNode(true);
+  // Use source content, not a localized clone, to prove exact rich templates
+  // cannot cross a conversation-content boundary.
+  protectedTerms.firstChild.nodeValue = 'By using this app, you agree to its';
+  protectedOuter.append(protectedTerms);
+  document.body.append(protectedOuter);
+  const unknownTerms = terms.cloneNode(true);
+  unknownTerms.firstChild.nodeValue = 'Unknown terms before';
+  document.body.append(unknownTerms);
+
+  function accountExpected(fixture, credentials = fixture.credentials) {
+    return localized('Services this plugin connects to on your behalf.') + ' ' + translateString(credentials) +
+      (fixture.multiple ? ' ' + localized('If you add multiple accounts, MCP servers use the one marked Default.') : '');
+  }
+  function finish() {
+    document.documentElement.setAttribute('data-ag-test-result', btoa(unescape(encodeURIComponent(JSON.stringify({checks, failures})))));
+  }
+  addEventListener('load', async () => {
+    try {
+      await settle();
+      for (const fixture of cases) verify(fixture);
+      for (const fixture of accountCases) {
+        check(fixture.kind + ' credentials', fixture.paragraph.textContent, accountExpected(fixture));
+        fixture.nodes.forEach((node, index) => check(fixture.kind + ' original text ' + index, fixture.paragraph.childNodes[index] === node, true));
+      }
+      check('protected rich source', protectedTerms.textContent, 'By using this app, you agree to its Terms of Service');
+      check('unknown rich source', unknownTerms.textContent, 'Unknown terms before Terms of Service');
+      check('wizard bold node', wizardCase.slots[0].tagName, 'B');
+      consentTermNodes.forEach((node, index) => check('onboarding original terms text ' + index, consentTerms.childNodes[index] === node, true));
+      check('onboarding emphasized title', consentTitle.classList.contains('font-medium'), true);
+      for (const [index, {input, changes}] of consentInputs.entries()) {
+        check('onboarding consent initially unchanged ' + index, input.checked, false);
+        input.click();
+        check('onboarding consent still toggles ' + index, input.checked, true);
+        check('onboarding consent change listener ' + index, changes(), 1);
+      }
+
+      const project = projectCases.find(fixture => fixture.id === 'projectPermissionsProjectHelp');
+      const scopeNode = project.nodes.find(node => node.nodeValue === '' && agSourceText(node) === 'in this project');
+      if (!scopeNode) throw Error('Original React scope text node was not retained');
+      scopeNode.nodeValue = 'in these conversations';
+      const named = projectCases.find(fixture => fixture.id === 'projectPermissionsNamedAutomationProjectHelp');
+      named.slots[0].firstChild.nodeValue = 'Open';
+      signInCase.slots[0].nodeValue = 'Settings';
+      providerName.nodeValue = 'Run';
+      voiceCases[0].slots[0].firstChild.nodeValue = 'System Settings';
+      personalizationBrand.nodeValue = 'Run';
+      marketingBrand.nodeValue = 'Open';
+      const cloud = accountCases.find(fixture => fixture.kind === 'cloudCredentialsOnly' && fixture.multiple);
+      const changedCredentials = 'Sign-ins to Run are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.';
+      cloud.nodes[2].nodeValue = changedCredentials;
+      await settle();
+      verify(project, 'projectPermissionsConversationsHelp');
+      verify(named, named.id, ['Open', localized('Global Permissions'), localized('Learn more')]);
+      verify(signInCase, signInCase.id, ['Settings']);
+      check('provider text remains literal after update', providerDescription.textContent, expected('cloudResourceConnect', ['Run']));
+      verify(voiceCases[0], 'voiceSystemSettings', [localized('System Settings')]);
+      verify(personalizationCase, personalizationCase.id, ['Run']);
+      verify(marketingCase, marketingCase.id, [localized('Stay up to date.'), 'Open']);
+      check('cloud credentials updated between translated sentences', cloud.paragraph.textContent, accountExpected(cloud, changedCredentials));
+
+      // Cancel the automation-only conditional fragment as React does: delete
+      // its five text nodes and leave the remaining original nodes untouched.
+      const automation = projectCases.find(fixture => fixture.id === 'projectPermissionsAutomationProject');
+      for (const node of automation.nodes.slice(0, 5)) node.remove();
+      await settle();
+      verify({...automation, nodes: automation.nodes.slice(5)}, 'projectPermissionsProject');
+
+      const late = signIn('Open');
+      await settle();
+      verify(late);
+
+      termsCase.nodes[0].nodeValue = 'Unknown replacement before';
+      await settle();
+      check('unknown replacement restores original source around existing link', terms.textContent, 'Unknown replacement before Terms of Service');
+      check('unknown replacement retains original link', terms.childNodes[2] === termsLink, true);
+      termsCase.nodes[0].nodeValue = 'By using this app, you agree to its';
+      await settle();
+      verify(termsCase);
+    } catch (error) {
+      failures.push(String(error.stack || error));
+    }
+    finish();
+  });
+</script>
+</body>
+</html>

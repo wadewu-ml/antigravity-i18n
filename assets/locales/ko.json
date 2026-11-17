@@ -849,7 +849,7 @@
     "Image preview not available": "이미지 미리보기를 사용할 수 없습니다.",
     "more": "더",
     "line": "라인",
-    "Artifact Comments": "유물 댓글",
+    "Artifact Comments": "아티팩트 댓글",
     "File Diff Comments": "파일 차이점 설명",
     "File Comments": "파일 댓글",
     "Something went wrong!": "문제가 발생했습니다.",
@@ -1776,7 +1776,7 @@
     "Settings -": "설정 -",
     "Close Settings": "설정 닫기",
     "Saved!": "저장되었습니다!",
-    "Export Artifact": "유물 내보내기",
+    "Export Artifact": "아티팩트 내보내기",
     "Failed to load image": "이미지를 로드하지 못했습니다.",
     "Drag to select a region to comment": "댓글을 달려면 드래그하여 지역을 선택하세요.",
     "Antigravity Interactive HTML": "반중력 대화형 HTML",
@@ -2066,7 +2066,7 @@
     "Clear filter": "필터 지우기",
     "Empty directory": "빈 디렉토리",
     "File path breadcrumbs": "파일 경로 탐색경로",
-    "Artifact": "유물",
+    "Artifact": "아티팩트",
     "Background Task Output": "백그라운드 작업 출력",
     "Empty log": "빈 로그",
     "Task not found": "작업을 찾을 수 없습니다",
@@ -2080,7 +2080,7 @@
     "Copy File Name": "파일 이름 복사",
     "Open Preview": "미리보기 열기",
     "Opens in the in-app preview pane. Some sites don't support iframe embedding and may not load.": "인앱 미리보기 창에서 열립니다. 일부 사이트는 iframe 삽입을 지원하지 않아 로드되지 않을 수 있습니다.",
-    "Artifacts": "유물",
+    "Artifacts": "아티팩트",
     "Cancel All Tasks": "모든 작업 취소",
     "Background Tasks": "백그라운드 작업",
     "No background tasks": "백그라운드 작업 없음",
@@ -3349,7 +3349,7 @@
     "Developer-only tools. These settings do not affect other users.": "개발자 전용 도구입니다. 이 설정은 다른 사용자에게 영향을 주지 않습니다.",
     "Developer: Reset NUX": "개발자: 첫 실행 안내 재설정",
     "Developer: Reset Onboarding": "개발자: 온보딩 재설정",
-    "Stay up to date.": "최신 상태를 유지합니다.",
+    "Stay up to date.": "최신 소식 받기.",
     "Google One Referral": "Google One 추천",
     "Share your referral link with friends": "추천 링크를 친구와 공유합니다",
     "Invite a Friend": "친구 초대",
@@ -3420,7 +3420,482 @@
     "Welcome back.": "다시 오신 것을 환영합니다.",
     "Good to see you.": "만나서 반갑습니다.",
     "Ignore events triggered by the automation owner to avoid self-trigger loops.": "자동화 소유자가 발생시킨 이벤트를 무시하여 자기 트리거 루프를 피합니다.",
-    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "자동 검토 또는 로봇 계정(groupagent-*)이 발생시킨 이벤트를 무시합니다."
+    "Ignore events emitted by automated review or robot accounts (groupagent-*).": "자동 검토 또는 로봇 계정(groupagent-*)이 발생시킨 이벤트를 무시합니다.",
+    "Account connection was not completed.": "계정 연결이 완료되지 않았습니다.",
+    "Add files": "파일 추가",
+    "Address bar suggestions": "주소 표시줄 추천",
+    "Attach terminal output": "터미널 출력 첨부",
+    "Browse MCP resources": "MCP 리소스 찾아보기",
+    "Browse rules": "규칙 찾아보기",
+    "Browser steps": "브라우저 단계",
+    "Cannot parse folder URI.": "폴더 URI를 해석할 수 없습니다.",
+    "Choose icon and color": "아이콘 및 색상 선택",
+    "Click to learn more about sources": "클릭하여 출처 자세히 보기",
+    "Close Panel": "패널 닫기",
+    "Color": "색상",
+    "Connect an account so the agent can use this app.": "에이전트가 이 앱을 사용할 수 있도록 계정을 연결하세요.",
+    "Connect to SSH Host…": "SSH 호스트에 연결…",
+    "Connections": "연결",
+    "Conversation turns": "대화 턴",
+    "Coordinator goal": "코디네이터 목표",
+    "Coordinator name": "코디네이터 이름",
+    "Coordinator settings": "코디네이터 설정",
+    "Coordinators": "코디네이터",
+    "Copy gh auth login command": "gh auth login 명령 복사",
+    "Customize Sections": "섹션 사용자 지정",
+    "Days": "일",
+    "Discard comment draft": "댓글 초안 삭제",
+    "Dismiss artifact update notice": "아티팩트 업데이트 알림 닫기",
+    "Docs, Sheets, Slides, and folders": "문서, 스프레드시트, 프레젠테이션 및 폴더",
+    "Enter always submits. This adds a second shortcut.": "Enter 키는 항상 전송합니다. 여기서 두 번째 단축키를 추가합니다.",
+    "Environments": "환경",
+    "Failed to clone project locally": "프로젝트를 로컬로 복제하지 못했습니다",
+    "Failed to export artifact": "아티팩트를 내보내지 못했습니다",
+    "Failed to read file": "파일을 읽지 못했습니다",
+    "Failed to unarchive local project": "로컬 프로젝트의 보관을 해제하지 못했습니다",
+    "Filter agents": "에이전트 필터링",
+    "Filter files": "파일 필터링",
+    "Filter rows": "행 필터링",
+    "Font Size": "글꼴 크기",
+    "Hidden hosts": "숨겨진 호스트",
+    "Icon": "아이콘",
+    "It was already sent or couldn't be removed from the queue.": "이미 전송되었거나 대기열에서 제거할 수 없었습니다.",
+    "Jump to Next Prompt": "다음 프롬프트로 이동",
+    "Jump to Previous Prompt": "이전 프롬프트로 이동",
+    "Layout": "레이아웃",
+    "Main Agent": "메인 에이전트",
+    "Markdown view mode": "Markdown 보기 모드",
+    "Marketplace notice": "마켓플레이스 알림",
+    "MCP server error": "MCP 서버 오류",
+    "Message this chat": "이 채팅에 메시지 보내기",
+    "New coordinator": "새 코디네이터",
+    "New Coordinator": "새 코디네이터",
+    "Next card": "다음 카드",
+    "No coordinators": "코디네이터 없음",
+    "Open on another device": "다른 기기에서 열기",
+    "Open on phone": "휴대전화에서 열기",
+    "Paste authorization code": "인증 코드 붙여넣기",
+    "Pause this agent; it keeps its place and streams. Resume to continue.": "이 에이전트를 일시 중지합니다. 현재 위치와 스트림은 유지됩니다. 계속하려면 재개하세요.",
+    "Pick up this remote conversation on your phone or in any browser. Scan the QR code or open the link below.": "휴대전화나 브라우저에서 이 원격 대화를 이어가세요. QR 코드를 스캔하거나 아래 링크를 여세요.",
+    "Pin / Unpin Conversation": "대화 고정 / 고정 해제",
+    "Plan upgrade required": "요금제 업그레이드 필요",
+    "Playback speed (< / >)": "재생 속도 (< / >)",
+    "Plugin metadata": "플러그인 메타데이터",
+    "Previous card": "이전 카드",
+    "Project location": "프로젝트 위치",
+    "Promote to conversation": "대화로 전환",
+    "Recent": "최근",
+    "References": "참조",
+    "Remove from history": "방문 기록에서 삭제",
+    "Remove from Recent": "최근 항목에서 제거",
+    "Remove resource": "리소스 제거",
+    "Remove trigger": "트리거 제거",
+    "Reset all shortcuts to defaults": "모든 단축키를 기본값으로 초기화",
+    "Resume": "재개",
+    "Resume 1 comment draft": "댓글 초안 1개 이어 쓰기",
+    "Resume comment draft": "댓글 초안 이어 쓰기",
+    "Search shortcuts": "단축키 검색",
+    "Send": "전송",
+    "Show Details": "세부 정보 표시",
+    "Show or Hide Extensions": "확장 기능 표시 또는 숨기기",
+    "SSH Config": "SSH 구성",
+    "SSH host": "SSH 호스트",
+    "SSH Host": "SSH 호스트",
+    "SSH Host…": "SSH 호스트…",
+    "Starting the conversation…": "대화 시작 중…",
+    "Stop side question": "사이드 질문 중지",
+    "Stop SSH Server…": "SSH 서버 중지…",
+    "Stop this agent": "이 에이전트 중지",
+    "Submit Prompt (Alternate to Enter)": "프롬프트 전송 (Enter 키 대신)",
+    "Switch to This Computer": "이 컴퓨터로 전환",
+    "The Hub sent an unexpected response.": "Hub가 예기치 않은 응답을 보냈습니다.",
+    "Toggle Google Cloud projects": "Google Cloud 프로젝트 표시 전환",
+    "Toggle Terminal Panel": "터미널 패널 표시 전환",
+    "Toggle Word Wrap": "자동 줄 바꿈 전환",
+    "Untrusted sidecar": "신뢰할 수 없는 사이드카",
+    "View MCP servers": "MCP 서버 보기",
+    "When it runs": "실행 시점",
+    "A bash script run in your cloud environment after cloning repositories (or configure interactively in chat with /env-setup).": "저장소를 복제한 후 클라우드 환경에서 실행하는 bash 스크립트입니다. 채팅에서 /env-setup을 사용해 대화식으로 설정할 수도 있습니다.",
+    "Add filter": "필터 추가",
+    "Add trigger": "트리거 추가",
+    "Agent ID:": "에이전트 ID:",
+    "Agent said": "에이전트 발언",
+    "Agent working": "에이전트 작업 중",
+    "All agents": "모든 에이전트",
+    "All runs": "모든 실행",
+    "Analyzed content": "콘텐츠 분석 완료",
+    "Analyzed Task Log": "작업 로그 분석 완료",
+    "Analyzing content": "콘텐츠 분석 중",
+    "Analyzing Task Log": "작업 로그 분석 중",
+    "Appears larger on mobile": "모바일에서는 더 크게 표시됩니다",
+    "Approximate; may start a few minutes later": "예상 시간이며, 몇 분 늦게 시작할 수 있습니다",
+    "Apps connected to your account": "계정에 연결된 앱",
+    "Archived Only": "보관된 항목만",
+    "Are you sure you want to delete this side question? This action cannot be undone.": "이 사이드 질문을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+    "Artifact image": "아티팩트 이미지",
+    "Artifact updated by agent": "에이전트가 아티팩트를 업데이트했습니다",
+    "Ask a side question without interrupting the main conversation": "메인 대화를 중단하지 않고 사이드 질문하기",
+    "Audio File": "오디오 파일",
+    "Authorization code": "인증 코드",
+    "Branch actions": "브랜치 작업",
+    "Branch names": "브랜치 이름",
+    "Browse Connectors": "커넥터 찾아보기",
+    "Cancel Questionnaire and Stop the Agent": "질문지 취소 및 에이전트 중지",
+    "Canvas page · display only": "캔버스 페이지 · 표시 전용",
+    "Certificate is valid": "인증서가 유효합니다",
+    "Clear visited URLs and autocomplete suggestions from side panel preview.": "측면 패널 미리보기의 방문 URL과 자동 완성 추천을 삭제합니다.",
+    "Clones this repo in a cloud environment": "이 저장소를 클라우드 환경에 복제합니다",
+    "Close message": "메시지 닫기",
+    "Code Preview": "코드 미리보기",
+    "Collapse Questionnaire": "질문지 접기",
+    "Collapse questionnaire": "질문지 접기",
+    "Command is required": "명령이 필요합니다",
+    "Connect an account so the agent can run automations.": "에이전트가 자동화를 실행할 수 있도록 계정을 연결하세요.",
+    "Connect to SSH Host": "SSH 호스트에 연결",
+    "Connecting to terminal...": "터미널에 연결 중...",
+    "Continue Task →": "작업 계속 →",
+    "Conversation link": "대화 링크",
+    "Could not start.": "시작할 수 없습니다.",
+    "Couldn't delete your data. Try again.": "데이터를 삭제하지 못했습니다. 다시 시도하세요.",
+    "Couldn't load message": "메시지를 불러오지 못했습니다",
+    "Couldn't load the suggested plugin.": "추천 플러그인을 불러오지 못했습니다.",
+    "Couldn't load your SSH hosts": "SSH 호스트를 불러오지 못했습니다",
+    "Couldn't load your SSH hosts. You can still type one.": "SSH 호스트를 불러오지 못했습니다. 직접 입력할 수는 있습니다.",
+    "Couldn't search files": "파일을 검색하지 못했습니다",
+    "Create a project first.": "먼저 프로젝트를 만드세요.",
+    "Create a project on a machine you reach over SSH. It opens in that host's own window.": "SSH로 접속하는 컴퓨터에 프로젝트를 만듭니다. 해당 호스트의 별도 창에서 열립니다.",
+    "Create Coordinator": "코디네이터 만들기",
+    "Create Group": "그룹 만들기",
+    "Created outline": "개요 생성 완료",
+    "Creates a local automation that runs on this computer": "이 컴퓨터에서 실행되는 로컬 자동화를 만듭니다",
+    "Delete agent": "에이전트 삭제",
+    "Delete all": "모두 삭제",
+    "Delete All Data": "모든 데이터 삭제",
+    "Drop to attach": "놓아서 첨부",
+    "Duplicate project name": "중복된 프로젝트 이름",
+    "Enable macOS Permissions": "macOS 권한 활성화",
+    "Enable the plugin to sign in.": "로그인하려면 플러그인을 활성화하세요.",
+    "Enable this plugin to manage its accounts.": "계정을 관리하려면 이 플러그인을 활성화하세요.",
+    "Environment Setup Script": "환경 설정 스크립트",
+    "Error editing file": "파일 편집 오류",
+    "Error viewing file": "파일 보기 오류",
+    "Execution Identity": "실행 주체",
+    "Expand questionnaire": "질문지 펼치기",
+    "Expand Questionnaire": "질문지 펼치기",
+    "Fork in Current Workspace": "현재 작업 공간에서 포크",
+    "Full Logs": "전체 로그",
+    "Generated media": "생성된 미디어",
+    "Get API key": "API 키 받기",
+    "GitHub Repositories": "GitHub 저장소",
+    "GitHub: not signed in": "GitHub: 로그인하지 않음",
+    "Google Antigravity Terms of Service": "Google Antigravity 서비스 약관",
+    "Here's how uploaded files, attachments, and connected resources work in your cloud environment": "업로드한 파일, 첨부파일 및 연결된 리소스를 클라우드 환경에서 사용하는 방법",
+    "Hey there, what should we build today?": "안녕하세요. 오늘은 무엇을 만들어 볼까요?",
+    "Hidden by policy": "정책에 따라 숨김",
+    "Host Endpoint": "호스트 엔드포인트",
+    "Idle Guard Warning": "유휴 상태 보호 경고",
+    "If you add multiple accounts, MCP servers use the one marked Default.": "계정을 여러 개 추가하면 MCP 서버는 기본값으로 표시된 계정을 사용합니다.",
+    "Issue actions": "이슈 작업",
+    "Issue numbers": "이슈 번호",
+    "Issued by": "발급자",
+    "Issued to": "발급 대상",
+    "Keeps your checkout untouched": "체크아웃한 파일을 변경하지 않습니다",
+    "Live chat in progress": "실시간 채팅 진행 중",
+    "Loading hosts…": "호스트 불러오는 중…",
+    "Loading Hosts…": "호스트 불러오는 중…",
+    "Loading Repositories…": "저장소 불러오는 중…",
+    "Loading resources...": "리소스 불러오는 중...",
+    "Log in": "로그인",
+    "Marked 1 conversation as read": "대화 1개를 읽음으로 표시했습니다",
+    "MCP error": "MCP 오류",
+    "Middle Click": "가운데 버튼 클릭",
+    "Moved Mouse in Browser": "브라우저에서 마우스 이동 완료",
+    "Moving Mouse in Browser": "브라우저에서 마우스 이동 중",
+    "No agent is working right now.": "현재 작업 중인 에이전트가 없습니다.",
+    "No artifacts generated": "생성된 아티팩트 없음",
+    "No commits yet": "아직 커밋이 없습니다",
+    "No connectors available in this project": "이 프로젝트에서 사용할 수 있는 커넥터가 없습니다",
+    "No conversation": "대화 없음",
+    "No events recorded": "기록된 이벤트 없음",
+    "No hosts in ~/.ssh/config yet": "~/.ssh/config에 아직 호스트가 없습니다",
+    "No instances yet.": "아직 인스턴스가 없습니다.",
+    "No keyboard shortcuts found matching your filter.": "필터와 일치하는 키보드 단축키가 없습니다.",
+    "No matching hosts": "일치하는 호스트 없음",
+    "No matching repositories": "일치하는 저장소 없음",
+    "No matching resources found.": "일치하는 리소스를 찾을 수 없습니다.",
+    "No message text": "메시지 본문 없음",
+    "No pinned conversations": "고정된 대화 없음",
+    "No recent downloads": "최근 다운로드 없음",
+    "No recordings": "녹화 또는 녹음 없음",
+    "No repositories found": "저장소를 찾을 수 없습니다",
+    "No resources added yet.": "아직 추가된 리소스가 없습니다.",
+    "Not set": "설정되지 않음",
+    "Nothing is running right now": "현재 실행 중인 항목이 없습니다",
+    "Only Automations": "자동화만",
+    "Only Scheduled": "예약된 항목만",
+    "Open image preview": "이미지 미리보기 열기",
+    "Open in Side Pane": "측면 창에서 열기",
+    "Open skill page": "스킬 페이지 열기",
+    "Open SSH Host": "SSH 호스트 열기",
+    "Open video preview": "동영상 미리보기 열기",
+    "Opened URL in Browser": "브라우저에서 URL 열기 완료",
+    "Opening URL in Browser": "브라우저에서 URL 여는 중",
+    "Other conversation": "다른 대화",
+    "Other Customizations": "기타 사용자 지정",
+    "Paste new key": "새 키 붙여넣기",
+    "Pay only for the tokens you use, billed through Gemini platform.": "사용한 토큰에 대해서만 Gemini 플랫폼을 통해 요금이 청구됩니다.",
+    "Pick a model to change it.": "변경할 모델을 선택하세요.",
+    "Pin Tab": "탭 고정",
+    "Press keys...": "키를 누르세요...",
+    "Process Error": "프로세스 오류",
+    "Process exited with an error": "프로세스가 오류로 종료되었습니다",
+    "Prohibited Use Policy": "금지된 사용 정책",
+    "Pull request actions": "풀 리퀘스트 작업",
+    "Pull request numbers": "풀 리퀘스트 번호",
+    "Read Browser Page in Browser": "브라우저 페이지 읽기 완료",
+    "Read page": "페이지 읽기 완료",
+    "Reading Browser Page in Browser": "브라우저 페이지 읽는 중",
+    "Recent Conversations": "최근 대화",
+    "Recent Events": "최근 이벤트",
+    "Refreshed Browser page": "브라우저 페이지 새로고침 완료",
+    "Refreshing Browser page": "브라우저 페이지 새로고침 중",
+    "Refreshing credentials...": "인증 정보 갱신 중...",
+    "Relaunch the app once to activate Screen Recording.": "화면 기록을 활성화하려면 앱을 한 번 다시 시작하세요.",
+    "Remote Control Instances": "원격 제어 인스턴스",
+    "Remote Projects": "원격 프로젝트",
+    "Removing the bundle removes all of its plugins.": "번들을 제거하면 포함된 모든 플러그인이 제거됩니다.",
+    "Repeat every": "반복 간격",
+    "Replacing removes the currently installed plugin and installs the new one in its place.": "교체하면 현재 설치된 플러그인이 제거되고 그 자리에 새 플러그인이 설치됩니다.",
+    "Repo default": "저장소 기본값",
+    "Resized Browser window": "브라우저 창 크기 변경 완료",
+    "Resizing Browser window": "브라우저 창 크기 변경 중",
+    "Resume environment": "환경 재개",
+    "Resume this agent where it paused": "이 에이전트를 일시 중지한 지점부터 재개",
+    "Resuming environment…": "환경 재개 중…",
+    "Retrieved Browser Pages": "브라우저 페이지 목록 가져오기 완료",
+    "Retrieved Console Logs from Browser": "브라우저 콘솔 로그 가져오기 완료",
+    "Retrieving Browser Pages": "브라우저 페이지 목록 가져오는 중",
+    "Retrieving Console Logs from Browser": "브라우저 콘솔 로그 가져오는 중",
+    "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.": "어제 변경 사항을 아침에 요약하는 등 일정에 따라 프롬프트를 실행합니다. 실행 결과가 여기에 표시됩니다.",
+    "Running processes are killed. This cannot be undone.": "실행 중인 프로세스가 강제 종료됩니다. 이 작업은 되돌릴 수 없습니다.",
+    "Runs in a cloud environment": "클라우드 환경에서 실행됩니다",
+    "Schedule type": "일정 유형",
+    "Scroll turns down": "대화 턴을 아래로 스크롤",
+    "Scroll turns up": "대화 턴을 위로 스크롤",
+    "Scrollable table": "스크롤 가능한 표",
+    "Scrolled down in Browser": "브라우저에서 아래로 스크롤 완료",
+    "Scrolled in Browser": "브라우저에서 스크롤 완료",
+    "Scrolled up in Browser": "브라우저에서 위로 스크롤 완료",
+    "Scrolling down in Browser": "브라우저에서 아래로 스크롤 중",
+    "Scrolling in Browser": "브라우저에서 스크롤 중",
+    "Scrolling up in Browser": "브라우저에서 위로 스크롤 중",
+    "Search conversations, commands, and code...": "대화, 명령 및 코드 검색...",
+    "Search failed": "검색 실패",
+    "Search Hosts…": "호스트 검색…",
+    "Search or enter a URL": "검색 또는 URL 입력",
+    "Search shortcuts...": "단축키 검색...",
+    "Search tabs, files and more": "탭, 파일 등 검색",
+    "Selected Option in Browser": "브라우저에서 옵션 선택 완료",
+    "Selected region": "선택한 영역",
+    "Selecting Option in Browser": "브라우저에서 옵션 선택 중",
+    "Semantic searched": "의미 기반 검색 완료",
+    "Semantic searching": "의미 기반 검색 중",
+    "Send command input?": "명령에 입력을 보내시겠습니까?",
+    "Services this plugin connects to on your behalf.": "이 플러그인이 사용자를 대신해 연결하는 서비스입니다.",
+    "Set up": "설정",
+    "Shares this repository, with a working copy of its own. Uncommitted changes stay behind.": "이 저장소를 공유하되 별도의 작업 사본을 사용합니다. 커밋하지 않은 변경 사항은 전달되지 않습니다.",
+    "Show in Sidebar": "사이드바에 표시",
+    "Side Pane UI Available": "측면 창 UI 사용 가능",
+    "Side Panel Preview": "측면 패널 미리보기",
+    "Sign in in your browser, then paste the authorization code shown on the callback page.": "브라우저에서 로그인한 다음 콜백 페이지에 표시된 인증 코드를 붙여넣으세요.",
+    "Sign in needed": "로그인 필요",
+    "Sign in to an app once and your agent can use it on any device. Open an app to see the account it uses or to disconnect it.": "앱에 한 번 로그인하면 모든 기기에서 에이전트가 사용할 수 있습니다. 사용하는 계정을 확인하거나 연결을 해제하려면 앱을 여세요.",
+    "Sort and filter conversations": "대화 정렬 및 필터링",
+    "SSH config:": "SSH 구성:",
+    "Starting preview…": "미리보기 시작 중…",
+    "Still running": "아직 실행 중",
+    "Stop all agents": "모든 에이전트 중지",
+    "Stop Side Question": "사이드 질문 중지",
+    "Stream and control": "스트리밍 및 제어",
+    "Submit code": "코드 제출",
+    "Summarizing call…": "통화 요약 중…",
+    "Switch To": "전환 대상",
+    "System Prompt": "시스템 프롬프트",
+    "Taking Screenshot": "스크린샷 촬영 중",
+    "Task Log": "작업 로그",
+    "The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.": "아래 내역은 규칙, 스킬, MCP 등 사용자 지정 항목의 토큰 사용량입니다. 예산을 초과하면 큰 규칙은 경로 참조로 대체되고 큰 사용자 지정 항목은 자동으로 제외됩니다.",
+    "The suggested plugin isn't in the marketplace.": "추천 플러그인이 마켓플레이스에 없습니다.",
+    "Then create the project in its window.": "그런 다음 해당 창에서 프로젝트를 만드세요.",
+    "This automation is currently stopped. Events and stdout streams will appear here once started.": "이 자동화는 현재 중지되어 있습니다. 시작하면 이벤트와 표준 출력 스트림이 여기에 표시됩니다.",
+    "This chat's environment is paused": "이 채팅의 환경이 일시 중지되었습니다",
+    "This conversation is in a different workspace.": "이 대화는 다른 작업 공간에 있습니다.",
+    "This link wants to open an app on your device.": "이 링크가 기기에서 앱을 열려고 합니다.",
+    "This page is going away soon": "이 페이지는 곧 종료됩니다",
+    "This permanently deletes all of your Remote Agents conversations, projects, scheduled tasks, connected plugins and settings, and stops any running remote agents. It can't be undone. Data in the desktop app and your Google account are not affected, and you can keep using Remote Agents afterwards.": "Remote Agents의 모든 대화, 프로젝트, 예약된 작업, 연결된 플러그인 및 설정을 영구 삭제하고 실행 중인 원격 에이전트를 중지합니다. 되돌릴 수 없습니다. 데스크톱 앱과 Google 계정의 데이터에는 영향을 주지 않으며, 이후에도 Remote Agents를 계속 사용할 수 있습니다.",
+    "This plugin was force disabled.": "이 플러그인은 강제로 비활성화되었습니다.",
+    "This project is associated with a different workspace.": "이 프로젝트는 다른 작업 공간에 연결되어 있습니다.",
+    "Took Screenshot": "스크린샷 촬영 완료",
+    "Type to search file contents": "입력하여 파일 내용 검색",
+    "Unknown Server": "알 수 없는 서버",
+    "Unnamed resource": "이름 없는 리소스",
+    "Unnamed Theme": "이름 없는 테마",
+    "Unpin Tab": "탭 고정 해제",
+    "Uploaded files and connected resources are mounted in your cloud environment.": "업로드한 파일과 연결된 리소스가 클라우드 환경에 마운트됩니다.",
+    "Use Advanced SSO Config": "고급 SSO 구성 사용",
+    "Use Antigravity through your Gemini subscription.": "Gemini 구독으로 Antigravity를 사용하세요.",
+    "Use the default color.": "기본 색상을 사용합니다.",
+    "Use this if your admin gave you a WIF config. Paste it below to sign in.": "관리자가 WIF 구성을 제공한 경우 사용하세요. 로그인하려면 아래에 붙여넣으세요.",
+    "Valid until": "유효 기한",
+    "View archived in the sidebar": "사이드바에서 보관된 항목 보기",
+    "View archived in the sidebar (Display options menu).": "사이드바에서 보관된 항목을 확인하세요(표시 옵션 메뉴).",
+    "View Branches": "브랜치 보기",
+    "Waiting for the agents’ windows…": "에이전트 창 대기 중…",
+    "Waiting for the SSH connection to finish": "SSH 연결 완료 대기 중",
+    "Waiting for you to finish signing in…": "로그인 완료 대기 중…",
+    "When should it run?": "언제 실행할까요?",
+    "Where should it run?": "어디서 실행할까요?",
+    "Workflows are changing on October 19th—stay tuned for updates. You can use the agent to migrate your workflows.": "10월 19일에 워크플로가 변경됩니다. 업데이트를 기다려 주세요. 에이전트를 사용해 워크플로를 이전할 수 있습니다.",
+    "You said": "사용자 발언",
+    "Your Antigravity use will be associated with provided project. Make sure you trust the project ID before proceeding. Account activity and data may be logged by your organization.": "Antigravity 사용 내역은 제공된 프로젝트에 연결됩니다. 계속하기 전에 신뢰할 수 있는 프로젝트 ID인지 확인하세요. 조직에서 계정 활동과 데이터를 기록할 수 있습니다.",
+    "Your Plan": "내 요금제",
+    "Your This Computer setting": "내 '이 컴퓨터' 설정",
+    "Allow the browser agent to download a file?": "브라우저 에이전트가 파일을 다운로드하도록 허용할까요?",
+    "Blocked: file type not allowed": "차단됨: 허용되지 않는 파일 형식",
+    "Yes, allow this download": "예, 이 다운로드 허용",
+    "Yes, allow this time": "예, 이번에만 허용",
+    "Yes, and always allow": "예, 항상 허용",
+    "Yes, and always allow in this conversation": "예, 이 대화에서 항상 허용",
+    "Yes, save rule globally": "예, 전역 규칙으로 저장",
+    "Yes, save rule in this conversation": "예, 이 대화의 규칙으로 저장",
+    "Authorization code sign-in is unavailable in this version.": "이 버전에서는 인증 코드 로그인을 사용할 수 없습니다.",
+    "Authorization code was rejected. Paste a fresh code and try again.": "인증 코드가 거부되었습니다. 새 코드를 붙여넣고 다시 시도하세요.",
+    "Trouble signing in? Enter authorization code": "로그인에 문제가 있나요? 인증 코드 입력",
+    "A high-risk mode that disables all safety barriers. The agent operates with full system access, auto-executes all terminal commands, and reads or writes to all local files without review prompts.": "모든 안전 장치를 해제하는 고위험 모드입니다. 에이전트가 시스템에 완전히 접근하여 모든 터미널 명령을 자동 실행하고, 검토 요청 없이 모든 로컬 파일을 읽고 씁니다.",
+    "Useful for tasks that require file access across your full machine. The agent has full read and write access to all local files, but all proposed terminal commands require manual review and approval before running.": "컴퓨터 전체의 파일에 접근해야 하는 작업에 유용합니다. 에이전트는 모든 로컬 파일을 읽고 쓸 수 있지만, 제안하는 모든 터미널 명령은 실행 전에 직접 검토하고 승인해야 합니다.",
+    "Useful for typical development with an emphasis on security. It prioritizes safety over speed by requiring manual approval for all terminal commands and files outside the project directory.": "보안을 중시하는 일반적인 개발에 유용합니다. 속도보다 안전을 우선하여 모든 터미널 명령과 프로젝트 디렉터리 밖의 파일 접근에 직접 승인을 요구합니다.",
+    "This shortcut is reserved by browser tabs and may not trigger in Web mode. It works in the Desktop Hub or installed PWA.": "이 단축키는 브라우저 탭에서 예약되어 있어 웹 모드에서는 작동하지 않을 수 있습니다. Desktop Hub 또는 설치된 PWA에서는 작동합니다.",
+    "What should this coordinator accomplish?": "이 코디네이터가 무엇을 달성해야 하나요?",
+    "1. Accessibility": "1. 손쉬운 사용",
+    "2. Screen Recording": "2. 화면 기록",
+    "Could not apply the selected permissions.": "선택한 권한을 적용하지 못했습니다.",
+    "Cloud Permissions": "클라우드 권한",
+    "This Conversation": "이 대화",
+    "A customization failed to load": "사용자 지정 항목을 불러오지 못했습니다",
+    "A host can't contain spaces.": "호스트에는 공백을 포함할 수 없습니다.",
+    "Add label": "라벨 추가",
+    "Add Resource": "리소스 추가",
+    "An error occurred while checking the port. Please try again.": "포트를 확인하는 중 오류가 발생했습니다. 다시 시도하세요.",
+    "Are you sure you want to delete this handler?": "이 핸들러를 삭제하시겠습니까?",
+    "Are you sure you want to delete this hook card?": "이 후크 카드를 삭제하시겠습니까?",
+    "Artifact not found": "아티팩트를 찾을 수 없습니다",
+    "Ask anything, @ to mention": "무엇이든 질문하세요. @로 멘션",
+    "Audio clip": "오디오 클립",
+    "Back to all agents": "모든 에이전트로 돌아가기",
+    "Back to chat": "채팅으로 돌아가기",
+    "Back to reference": "참조로 돌아가기",
+    "This extension is currently stopped. Events and stdout streams will appear here once started.": "이 확장 기능은 현재 중지되어 있습니다. 시작하면 이벤트와 표준 출력 스트림이 여기에 표시됩니다.",
+    "This file type is not currently supported in remote mode": "이 파일 형식은 현재 원격 모드에서 지원되지 않습니다",
+    "This MCP server can no longer be configured.": "이 MCP 서버는 더 이상 구성할 수 없습니다.",
+    "This site cannot provide a secure connection.": "이 사이트에서 보안 연결을 제공할 수 없습니다.",
+    "This site uses an unsupported TLS protocol or cipher suite.": "이 사이트에서 지원되지 않는 TLS 프로토콜 또는 암호화 제품군을 사용합니다.",
+    "To continue using this model now, enable AI Credit overages.": "이 모델을 지금 계속 사용하려면 AI 크레딧 초과 사용을 활성화하세요.",
+    "Unknown error.": "알 수 없는 오류입니다.",
+    "Unknown execution error": "알 수 없는 실행 오류",
+    "Unknown search error": "알 수 없는 검색 오류",
+    "Unnamed rule": "이름 없는 규칙",
+    "Upload to Google Drive": "Google Drive에 업로드",
+    "Uploading to Drive…": "Drive에 업로드 중…",
+    "Use Default": "기본값 사용",
+    "Uses your local files and tools. Schedules only.": "로컬 파일과 도구를 사용합니다. 예약 실행만 지원합니다.",
+    "Validation failed. Please verify requirements and try again.": "검증에 실패했습니다. 요구 사항을 확인하고 다시 시도하세요.",
+    "VCS state is not available": "VCS 상태를 사용할 수 없습니다",
+    "View File": "파일 보기",
+    "Waiting for video…": "동영상 대기 중…",
+    "Waiting for your answer": "답변 대기 중",
+    "Waiting for your approval": "승인 대기 중",
+    "Welcome back. Where should we pick up?": "다시 오셨군요. 어디서 이어갈까요?",
+    "Why did you choose this response?": "이 답변을 선택한 이유는 무엇인가요?",
+    "Working copy": "작업 사본",
+    "Workspace URI not found": "작업 공간 URI를 찾을 수 없습니다",
+    "You're viewing a blank page": "빈 페이지를 보고 있습니다",
+    "You're viewing a local or shared file": "로컬 또는 공유 파일을 보고 있습니다",
+    "Your connection to this site is not fully secure": "이 사이트에 대한 연결이 완전히 안전하지는 않습니다",
+    "Your connection to this site is not secure": "이 사이트에 대한 연결이 안전하지 않습니다",
+    "Asked again: your last answer may not have worked.": "다시 요청했습니다. 이전 응답이 적용되지 않았을 수 있습니다.",
+    "That's too long.": "입력 내용이 너무 깁니다.",
+    "Welcome to the new Antigravity!": "새로운 Antigravity에 오신 것을 환영합니다!",
+    "Setting up…": "설정 중…",
+    "Download the Antigravity IDE": "Antigravity IDE 다운로드",
+    "Explore the new Antigravity": "새로운 Antigravity 둘러보기",
+    "Antigravity Icon": "Antigravity 아이콘",
+    "Knowledge Work": "지식 업무",
+    "Software Engineering": "소프트웨어 엔지니어링",
+    "Simplified interface for research, writing, and everyday tasks.": "조사, 글쓰기, 일상 작업에 적합한 간소화된 인터페이스입니다.",
+    "Full interface for coding, developer tools, and managing agents.": "코딩, 개발자 도구, 에이전트 관리를 위한 전체 기능 인터페이스입니다.",
+    "Give Feedback": "의견 보내기",
+    "Built-in Browser": "내장 브라우저",
+    "External Browser": "외부 브라우저",
+    "Verbose": "상세",
+    "Choose a Subscription": "구독 선택",
+    "The agent never asks for confirmation before executing terminal commands (except those in the Deny list). This provides the agent with the maximum ability to operate over long periods without intervention, but also has the highest risk of the agent executing an unsafe terminal command.": "에이전트는 터미널 명령을 실행하기 전에 확인을 요청하지 않습니다(차단 목록에 있는 명령 제외). 개입 없이 오랫동안 작동할 수 있는 능력을 최대한 제공하지만, 안전하지 않은 터미널 명령을 실행할 위험도 가장 높습니다.",
+    "Terminal commands automatically proceed inside the sandbox. A command that needs to leave the sandbox proceeds only if an agent judges it reversible, and otherwise requests review.": "터미널 명령은 샌드박스 안에서 자동으로 실행됩니다. 샌드박스 밖에서 실행해야 하는 명령은 에이전트가 되돌릴 수 있다고 판단한 경우에만 실행되며, 그렇지 않으면 검토를 요청합니다.",
+    "Microphone blocked": "마이크가 차단되었습니다",
+    "Microphone is in use or unavailable.": "마이크가 사용 중이거나 사용할 수 없습니다.",
+    "Microphone didn't respond.": "마이크가 응답하지 않았습니다.",
+    "For any feedback that does not fit into the above categories.": "위 범주에 해당하지 않는 의견을 남겨 주세요.",
+    "Antigravity can review code, trace errors, and ship across your stack.": "Antigravity는 코드 검토, 오류 추적부터 기술 스택 전반의 구현과 배포까지 지원할 수 있습니다.",
+    "Build me a web app": "웹 앱 만들기",
+    "Add a Gemini feature to my app": "내 앱에 Gemini 기능 추가하기",
+    "Bring over my setup from other Agentic Developer Tools": "다른 에이전트형 개발 도구에서 내 설정 가져오기",
+    "Antigravity can turn notes and docs into plans, decks, and action items.": "Antigravity는 메모와 문서를 계획, 프레젠테이션 및 실행 항목으로 정리할 수 있습니다.",
+    "Brief me on my meetings every morning": "매일 아침 회의 일정 요약받기",
+    "Catch up on my recent meeting notes": "최근 회의 메모 확인하기",
+    "Turn a doc into a slide deck": "문서로 프레젠테이션 만들기",
+    "Data & Analytics": "데이터 및 분석",
+    "Antigravity can query tables, clean spreadsheets, and chart trends.": "Antigravity는 테이블 조회, 스프레드시트 정리 및 추세 시각화를 지원할 수 있습니다.",
+    "Check a BigQuery table for anomalies": "BigQuery 테이블의 이상 징후 확인하기",
+    "Build a dashboard from my sheet": "내 스프레드시트로 대시보드 만들기",
+    "Analyze user trends and retention cohorts": "사용자 추세 및 리텐션 코호트 분석하기",
+    "Science": "과학",
+    "Antigravity can review literature, design experiments, and analyze results.": "Antigravity는 문헌 검토, 실험 설계 및 결과 분석을 지원할 수 있습니다.",
+    "Synthesize recent preprints and papers on a topic": "특정 주제의 최신 프리프린트와 논문 종합하기",
+    "Visualize a protein's 3D structure": "단백질의 3D 구조 시각화하기",
+    "Prioritize genetic targets and pathways for a disease": "질병 관련 유전적 표적과 경로의 우선순위 정하기",
+    "Analyze small-molecule bioactivity and drug-likeness": "저분자 화합물의 생물학적 활성과 약물 유사성 분석하기",
+    "Design": "디자인",
+    "Antigravity can turn your designs into live code, briefs, and assets.": "Antigravity는 디자인을 작동하는 코드, 디자인 브리프 및 에셋으로 만들 수 있습니다.",
+    "Build a page from my Figma design": "내 Figma 디자인으로 페이지 만들기",
+    "Turn a screenshot into a web page": "스크린샷으로 웹 페이지 만들기",
+    "Write a design brief from my research": "내 조사 내용으로 디자인 브리프 작성하기",
+    "Move Up": "위로 이동",
+    "Move Down": "아래로 이동",
+    "Delete Group": "그룹 삭제",
+    "Dismiss conversation open elsewhere warning": "다른 곳에서 열린 대화 경고 닫기",
+    "Open plugin page": "플러그인 페이지 열기",
+    "Search Projects…": "프로젝트 검색…",
+    "Search Workspaces…": "작업 공간 검색…",
+    "Browser Task": "브라우저 작업",
+    "Subagent Conversation": "하위 에이전트 대화",
+    "Virtual File": "가상 파일",
+    "Voice Speed": "음성 속도",
+    "Mouse button pressed": "마우스 버튼 누름",
+    "Mouse button released": "마우스 버튼 뗌",
+    "Unknown edit": "알 수 없는 편집",
+    "Unknown file edit": "알 수 없는 파일 편집",
+    "Events and stdout streams will appear here as they occur.": "이벤트와 표준 출력 스트림이 발생하면 여기에 표시됩니다.",
+    "Using browser · Thinking…": "브라우저 사용 중 · 생각 중…",
+    "Something else (optional)": "기타(선택 사항)",
+    "Credentials stay on this machine and are only sent to the domains listed.": "인증 정보는 이 컴퓨터에 저장되며 목록에 있는 도메인으로만 전송됩니다.",
+    "Other credentials stay on this machine.": "다른 인증 정보는 이 컴퓨터에 저장됩니다.",
+    "Credentials are only sent to the domains listed.": "인증 정보는 목록에 있는 도메인으로만 전송됩니다.",
+    "DevTools port is still closed. Please make sure Chrome is running with remote debugging enabled.": "DevTools 포트가 아직 닫혀 있습니다. 원격 디버깅을 활성화한 상태로 Chrome이 실행 중인지 확인하세요.",
+    "AI coding agents are known to have certain security risks, including autonomous code execution, data exfiltration, prompt injection and supply chain risks. Ensure that you monitor and verify all actions taken by the agent.": "AI 코딩 에이전트에는 자율적인 코드 실행, 데이터 유출, 프롬프트 인젝션 및 공급망 위험 등 특정 보안 위험이 있는 것으로 알려져 있습니다. 에이전트가 수행하는 모든 작업을 반드시 모니터링하고 검증하세요.",
+    "Enter [user@]host[:port], or pick a host from your SSH config.": "[user@]host[:port]를 입력하거나 SSH 구성에서 호스트를 선택하세요.",
+    "hours": "시간",
+    "week": "주",
+    "month": "개월",
+    "Legal Help": "법률 도움말",
+    "Help us improve Antigravity.": "Antigravity 개선에 참여하세요."
   },
   "patterns": [
     {
@@ -3918,6 +4393,141 @@
       "replace": {
         "2": "deviceKind"
       }
+    },
+    {
+      "id": "authorizationCodeFor",
+      "pattern": "^(?:Authorization code|Auth code) for (.+)$",
+      "sample": "Authorization code for Example $& Account",
+      "template": "{1}의 인증 코드"
+    },
+    {
+      "id": "recordShortcutFor",
+      "pattern": "^Recording shortcut for (.+)\\. Press keys to bind, Enter to save, Escape to cancel\\.$",
+      "sample": "Recording shortcut for Submit Prompt. Press keys to bind, Enter to save, Escape to cancel.",
+      "template": "{1}의 단축키를 기록하는 중입니다. 키를 눌러 지정하고 Enter로 저장하거나 Escape로 취소하세요."
+    },
+    {
+      "id": "shortcutFor",
+      "pattern": "^Shortcut (.+?) for (.+)$",
+      "sample": "Shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "{2}의 단축키: {1}"
+    },
+    {
+      "id": "removeShortcutFor",
+      "pattern": "^Remove shortcut (.+?) for (.+)$",
+      "sample": "Remove shortcut Ctrl+Shift+Enter for Submit Prompt",
+      "template": "{2}의 단축키 {1} 삭제"
+    },
+    {
+      "id": "addShortcutFor",
+      "pattern": "^Add shortcut for (.+)$",
+      "sample": "Add shortcut for Submit Prompt",
+      "template": "{1}의 단축키 추가"
+    },
+    {
+      "id": "resetShortcutToDefault",
+      "pattern": "^Reset (.+) to default$",
+      "sample": "Reset Submit Prompt to default",
+      "template": "{1}을(를) 기본값으로 재설정"
+    },
+    {
+      "id": "downloadProgress",
+      "pattern": "^(.+) download progress$",
+      "sample": "report $&.pdf download progress",
+      "template": "{1} 다운로드 진행률"
+    },
+    {
+      "id": "showDownloadInFolder",
+      "pattern": "^Show (.+) in folder$",
+      "sample": "Show report $&.pdf in folder",
+      "template": "폴더에서 {1} 표시"
+    },
+    {
+      "id": "removeDownloadFromList",
+      "pattern": "^Remove (.+) from list$",
+      "sample": "Remove report $&.pdf from list",
+      "template": "목록에서 {1} 삭제"
+    },
+    {
+      "id": "permissionModesSandboxUnavailable",
+      "pattern": "^(Default|Auto|Default and Auto|Auto and Default) (?:need|needs) the terminal sandbox, which isn't available on this host\\.$",
+      "sample": "Default and Auto need the terminal sandbox, which isn't available on this host.",
+      "template": "{1} 모드에는 터미널 샌드박스가 필요하지만 이 호스트에서는 사용할 수 없습니다.",
+      "replace": {
+        "1": "sandboxPermissionModes"
+      }
+    },
+    {
+      "id": "goToTurn",
+      "pattern": "^Go to turn (\\d+) of (\\d+)$",
+      "sample": "Go to turn 2 of 12",
+      "template": "전체 {2}개 턴 중 {1}번째 턴으로 이동"
+    },
+    {
+      "id": "voiceSpeed",
+      "pattern": "^Voice [Ss]peed, (\\d+(?:\\.\\d+)?x)$",
+      "sample": "Voice speed, 1.5x",
+      "template": "음성 속도, {1}"
+    },
+    {
+      "id": "moreActionsFor",
+      "pattern": "^More actions for (.+)$",
+      "sample": "More actions for Example $& Project",
+      "template": "{1}의 추가 작업"
+    },
+    {
+      "id": "searchMarketplaceFor",
+      "pattern": "^Search for \"(.+)\" in the Marketplace$",
+      "sample": "Search for \"Example $& Plugin\" in the Marketplace",
+      "template": "마켓플레이스에서 “{1}” 검색"
+    },
+    {
+      "id": "noPluginsFoundFor",
+      "pattern": "^No plugins found for \"(.+)\"\\.$",
+      "sample": "No plugins found for \"Example $& Plugin\".",
+      "template": "“{1}”에 해당하는 플러그인이 없습니다."
+    },
+    {
+      "id": "noMcpServersFoundFor",
+      "pattern": "^No MCP servers found for \"(.+)\"$",
+      "sample": "No MCP servers found for \"Example $& Server\"",
+      "template": "“{1}”에 해당하는 MCP 서버가 없습니다"
+    },
+    {
+      "id": "switchEnvironment",
+      "pattern": "^Switch environment \\((.+)\\)$",
+      "sample": "Switch environment (Example $& Host)",
+      "template": "환경 전환({1})"
+    },
+    {
+      "id": "openSubagent",
+      "pattern": "^Open Subagent: (.+)$",
+      "sample": "Open Subagent: Example $& Agent",
+      "template": "하위 에이전트 열기: {1}"
+    },
+    {
+      "id": "searchGoogleFor",
+      "pattern": "^Search Google for \"(.+)\"$",
+      "sample": "Search Google for \"Example $& Query\"",
+      "template": "Google에서 “{1}” 검색"
+    },
+    {
+      "id": "sshHostAsks",
+      "pattern": "^(.+) asks:$",
+      "sample": "user@example.com asks:",
+      "template": "{1}의 요청:"
+    },
+    {
+      "id": "cloudCredentialsOnly",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Credentials are only sent to the domains listed.",
+      "template": "{1} 로그인 정보는 계정에 연결되어 클라우드에 저장됩니다. 인증 정보는 목록에 있는 도메인으로만 전송됩니다."
+    },
+    {
+      "id": "cloudCredentialsAndLocal",
+      "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
+      "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
+      "template": "{1} 로그인 정보는 계정에 연결되어 클라우드에 저장됩니다. 다른 인증 정보는 이 컴퓨터에 저장됩니다. 인증 정보는 목록에 있는 도메인으로만 전송됩니다."
     }
   ],
   "menu": {
@@ -3996,6 +4606,12 @@
       "a HID device": "HID 기기",
       "a USB device": "USB 기기",
       "a serial port": "직렬 포트"
+    },
+    "sandboxPermissionModes": {
+      "Default": "기본값",
+      "Auto": "자동",
+      "Default and Auto": "기본값 및 자동",
+      "Auto and Default": "자동 및 기본값"
     }
   },
   "valueRules": {
@@ -4129,5 +4745,350 @@
         "template": "12월 {1}일"
       }
     ]
-  }
+  },
+  "inlineMessages": [
+    {
+      "id": "applicationTerms",
+      "selector": "div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://antigravity.google/terms\"]), div.text-sm.text-muted-foreground.mt-auto.pt-4:has(>a[href=\"https://cloud.google.com/terms\"])",
+      "source": "By using this app, you agree to its {1}",
+      "template": "이 앱을 사용하면 다음 약관에 동의한 것으로 간주됩니다: {1}",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Terms of Service"
+        }
+      ]
+    },
+    {
+      "id": "browserChromeRequirement",
+      "selector": "span.text-sm.text-muted-foreground.whitespace-pre-wrap:has(>a[href=\"https://www.google.com/chrome/\"])",
+      "source": "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires {1}.",
+      "template": "브라우저 하위 에이전트(/browser로 호출)의 허용 및 차단 URL을 설정합니다. {1}이 필요합니다.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Google Chrome"
+        }
+      ]
+    },
+    {
+      "id": "modelsBusinessDocs",
+      "selector": "div.text-secondary-foreground.py-2.px-3:has(>a[href=\"https://antigravity.google/docs/enterprise\"])",
+      "source": "For Antigravity Business consumption options, see {1}.",
+      "template": "Antigravity Business 이용 옵션은 {1}를 확인하세요.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "documentation"
+        }
+      ]
+    },
+    {
+      "id": "feedbackLegalHelp",
+      "selector": "p.opacity-70:has(>a[href=\"https://support.google.com/legal/troubleshooter/1114905?hl=en#ts=1115658\"])",
+      "source": "Visit {1} to ask for content changes for legal reasons.",
+      "template": "법적 사유에 따른 콘텐츠 변경 요청은 {1}에서 할 수 있습니다.",
+      "slots": [
+        {
+          "selector": "a",
+          "text": "Legal Help"
+        }
+      ]
+    },
+    {
+      "id": "voicePrivacySettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "마이크가 차단되었습니다. {1}에서 허용하세요.",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "Privacy Settings"
+        }
+      ]
+    },
+    {
+      "id": "voiceSystemSettings",
+      "selector": "span.min-w-0:has(>button[data-testid=\"voice-open-settings\"])",
+      "source": "Microphone blocked. Allow in {1}.",
+      "template": "마이크가 차단되었습니다. {1}에서 허용하세요.",
+      "slots": [
+        {
+          "selector": "button[data-testid=\"voice-open-settings\"]",
+          "text": "System Settings"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project.",
+      "template": "이 프로젝트에서 작업할 때는 {1}도 포함됩니다.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in this project. {2}.",
+      "template": "이 프로젝트에서 작업할 때는 {1}도 포함됩니다. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations.",
+      "template": "이 대화들에서 작업할 때는 {1}도 포함됩니다.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "Also includes {1} when working in these conversations. {2}.",
+      "template": "이 대화들에서 작업할 때는 {1}도 포함됩니다. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project.",
+      "template": "이 프로젝트는 자동화를 위해 만들어졌습니다. 이 프로젝트에서 작업할 때는 {1}도 포함됩니다.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in this project. {2}.",
+      "template": "이 프로젝트는 자동화를 위해 만들어졌습니다. 이 프로젝트에서 작업할 때는 {1}도 포함됩니다. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations.",
+      "template": "이 프로젝트는 자동화를 위해 만들어졌습니다. 이 대화들에서 작업할 때는 {1}도 포함됩니다.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for an automation. Also includes {1} when working in these conversations. {2}.",
+      "template": "이 프로젝트는 자동화를 위해 만들어졌습니다. 이 대화들에서 작업할 때는 {1}도 포함됩니다. {2}.",
+      "slots": [
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProject",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project.",
+      "template": "이 프로젝트는 {1} 자동화를 위해 만들어졌습니다. 이 프로젝트에서 작업할 때는 {2}도 포함됩니다.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationProjectHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in this project. {3}.",
+      "template": "이 프로젝트는 {1} 자동화를 위해 만들어졌습니다. 이 프로젝트에서 작업할 때는 {2}도 포함됩니다. {3}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversations",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations.",
+      "template": "이 프로젝트는 {1} 자동화를 위해 만들어졌습니다. 이 대화들에서 작업할 때는 {2}도 포함됩니다.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        }
+      ]
+    },
+    {
+      "id": "projectPermissionsNamedAutomationConversationsHelp",
+      "selector": "div.text-sm.text-muted-foreground.leading-relaxed > span:has(>span.text-link)",
+      "source": "This project was created for the {1} automation. Also includes {2} when working in these conversations. {3}.",
+      "template": "이 프로젝트는 {1} 자동화를 위해 만들어졌습니다. 이 대화들에서 작업할 때는 {2}도 포함됩니다. {3}.",
+      "slots": [
+        {
+          "selector": "strong"
+        },
+        {
+          "selector": "span.text-link",
+          "text": "Global Permissions"
+        },
+        {
+          "selector": "a",
+          "text": "Learn more"
+        }
+      ]
+    },
+    {
+      "id": "mcpServerBrowserSignIn",
+      "selector": "[data-testid=\"mcp-server-browser-sign-in\"] > span[role=\"status\"]",
+      "source": "Finish signing in to {1} in your browser.",
+      "template": "브라우저에서 {1} 로그인을 완료하세요.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "cloudResourceConnect",
+      "selector": "div.flex.flex-col.items-center.gap-2.py-2.text-center > span.text-sm.text-muted-foreground",
+      "source": "Connect your account to browse {1}.",
+      "template": "계정을 연결하여 {1} 탐색을 시작하세요.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "ideWizardDescription",
+      "selector": "#step-ask > p",
+      "source": "Antigravity has been redesigned to put agents first with new capabilities. If you'd still like a code editor, you can download it as a separate app named {1}.",
+      "template": "Antigravity는 에이전트를 중심으로 새롭게 설계되었으며 새로운 기능이 추가되었습니다. 코드 편집기가 계속 필요하다면 {1}라는 별도 앱을 다운로드할 수 있습니다.",
+      "slots": [
+        {
+          "selector": "b",
+          "text": "Antigravity IDE"
+        }
+      ]
+    },
+    {
+      "id": "onboardingPersonalization",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "Customize your experience across the agent, plugins, and product from the settings and marketplace. We won’t show you ads or let advertisers influence what {1} says.",
+      "template": "설정과 마켓플레이스에서 에이전트, 플러그인, 제품 사용 환경을 맞춤설정할 수 있습니다. 광고를 표시하거나 광고주가 {1}의 답변에 영향을 주도록 허용하지 않습니다.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "onboardingAgentControl",
+      "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
+      "source": "{1}’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.",
+      "template": "{1}의 에이전트는 강력하며 이전보다 더 많은 작업을 빠르고 효과적으로 처리하도록 도와주지만, 에이전트가 수행한 작업은 반드시 확인해야 합니다.",
+      "slots": [
+        {
+          "textIndex": 0
+        }
+      ]
+    },
+    {
+      "id": "onboardingDataConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>a[href=\"https://antigravity.google/terms\"]):has(>a[href=\"https://policies.google.com/privacy\"])",
+      "source": "{1} Allow Google to collect and use your Interactions data, subject to the {2} and {3}. You can control this from your settings at any point.",
+      "template": "{1} {2} 및 {3}에 따라 Google이 상호작용 데이터를 수집하고 사용하도록 허용합니다. 설정에서 언제든지 변경할 수 있습니다.",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Help us improve Antigravity."
+        },
+        {
+          "selector": "a[href=\"https://antigravity.google/terms\"]",
+          "text": "Google Antigravity Terms of Service"
+        },
+        {
+          "selector": "a[href=\"https://policies.google.com/privacy\"]",
+          "text": "Google Privacy Policy"
+        }
+      ]
+    },
+    {
+      "id": "onboardingMarketingConsent",
+      "selector": "span.text-sm.leading-normal.text-muted-foreground:has(>span.font-medium.text-secondary-foreground)",
+      "source": "{1} Sign up for newsletters, tips and tricks, and other notifications about {2}.",
+      "template": "{1} {2}에 관한 뉴스레터, 유용한 팁과 기타 알림을 구독합니다.",
+      "slots": [
+        {
+          "selector": "span.font-medium.text-secondary-foreground",
+          "text": "Stay up to date."
+        },
+        {
+          "textIndex": 3
+        }
+      ]
+    }
+  ]
 }
