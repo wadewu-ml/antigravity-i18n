@@ -60,6 +60,8 @@ Se a ferramenta solicitar o WebView2 ao iniciar, instale o [Runtime do Microsoft
 
 ## Isenção de responsabilidade
 
-Este é um projeto não oficial mantido pela comunidade e não é afiliado, endossado ou autorizado pelo Google ou pela Antigravity.
+1. Este é um projeto não oficial mantido pela comunidade e não é afiliado, endossado ou autorizado pelo Google ou pela Antigravity.
+2. Google Antigravity e marcas registradas relacionadas pertencem aos seus respectivos proprietários.
+3. Esta ferramenta é fornecida para uso pessoal e educacional. Garanta a conformidade com os termos de serviço do software relevantes.
 
 [Licença MIT](./LICENSE)

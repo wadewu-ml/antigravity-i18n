@@ -60,6 +60,8 @@ Si l’outil demande WebView2 au démarrage, installez le [runtime Microsoft Edg
 
 ## Clause de non-responsabilité
 
-Il s'agit d'un projet non officiel maintenu par la communauté et n'est ni affilié, ni approuvé ni autorisé par Google ou Antigravity.
+1. Il s'agit d'un projet non officiel maintenu par la communauté et n'est ni affilié, ni approuvé ni autorisé par Google ou Antigravity.
+2. Google Antigravity et les marques associées appartiennent à leurs propriétaires respectifs.
+3. Cet outil est fourni pour un usage personnel et éducatif. Veuillez vous assurer du respect des conditions de service du logiciel concerné.
 
 [Licence MIT](./LICENSE)

@@ -60,6 +60,8 @@ Falls das Tool beim Start nach WebView2 fragt, installieren Sie die [Microsoft E
 
 ## Haftungsausschluss
 
-Dies ist ein inoffizielles, von der Community gepflegtes Projekt und steht in keiner Verbindung zu Google oder Antigravity, wird von diesen nicht unterstützt oder autorisiert.
+1. Dies ist ein inoffizielles, von der Community gepflegtes Projekt und steht in keiner Verbindung zu Google oder Antigravity, wird von diesen nicht unterstützt oder autorisiert.
+2. Google Antigravity und zugehörige Marken gehören ihren jeweiligen Eigentümern.
+3. Dieses Tool wird für den persönlichen und pädagogischen Gebrauch bereitgestellt. Bitte stellen Sie sicher, dass Sie die entsprechenden Software-Nutzungsbedingungen einhalten.
 
 [MIT-Lizenz](./LICENSE)

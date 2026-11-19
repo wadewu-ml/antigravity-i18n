@@ -60,6 +60,8 @@ Si la herramienta solicita WebView2 al iniciarse, instala el [entorno de ejecuci
 
 ## Descargo de responsabilidad
 
-Este es un proyecto no oficial mantenido por la comunidad y no está afiliado, respaldado ni autorizado por Google o Antigravity.
+1. Este es un proyecto no oficial mantenido por la comunidad y no está afiliado, respaldado ni autorizado por Google o Antigravity.
+2. Google Antigravity y las marcas comerciales relacionadas pertenecen a sus respectivos propietarios.
+3. Esta herramienta se proporciona para uso personal y educativo. Asegúrese de cumplir con los términos de servicio de software relevantes.
 
 [Licencia MIT](./LICENSE)

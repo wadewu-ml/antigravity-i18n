@@ -60,6 +60,8 @@ If the tool asks for WebView2 at startup, install the [Microsoft Edge WebView2 R
 
 ## Disclaimer
 
-This is an unofficial, community-maintained project and is not affiliated with, endorsed by, or authorized by Google or Antigravity.
+1. This is an unofficial, community-maintained project and is not affiliated with, endorsed by, or authorized by Google or Antigravity.
+2. Google Antigravity and related trademarks belong to their respective owners.
+3. This tool is provided for personal and educational use. Please ensure compliance with relevant software terms of service.
 
 [MIT License](./LICENSE)
