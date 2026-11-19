@@ -34,6 +34,26 @@ func closeProcesses(processes []antigravityProcess) {
 	}
 }
 
+func processExited(handle windows.Handle) (bool, error) {
+	state, err := windows.WaitForSingleObject(handle, 0)
+	return state == windows.WAIT_OBJECT_0, err
+}
+
+// Use a wait-only handle when Windows refuses the image query access. A
+// process we cannot identify still blocks the operation while it is alive.
+func processIDExited(pid uint32) bool {
+	handle, err := windows.OpenProcess(windows.SYNCHRONIZE, false, pid)
+	if errors.Is(err, windows.ERROR_INVALID_PARAMETER) {
+		return true
+	}
+	if err != nil {
+		return false
+	}
+	defer windows.CloseHandle(handle)
+	exited, err := processExited(handle)
+	return err == nil && exited
+}
+
 // matchingProcesses retains handles until the caller finishes using the PIDs.
 func matchingProcesses(p *paths) ([]antigravityProcess, error) {
 	target, err := filepath.Abs(filepath.Join(p.AppDir, antigravityExe))
@@ -63,13 +83,23 @@ func matchingProcesses(p *paths) ([]antigravityProcess, error) {
 		if !strings.EqualFold(windows.UTF16ToString(entry.ExeFile[:]), antigravityExe) {
 			continue
 		}
-		handle, queryErr := windows.OpenProcess(windows.PROCESS_QUERY_LIMITED_INFORMATION, false, entry.ProcessID)
-		if errors.Is(queryErr, windows.ERROR_INVALID_PARAMETER) {
+		handle, queryErr := windows.OpenProcess(windows.PROCESS_QUERY_LIMITED_INFORMATION|windows.SYNCHRONIZE, false, entry.ProcessID)
+		if errors.Is(queryErr, windows.ERROR_INVALID_PARAMETER) ||
+			(errors.Is(queryErr, windows.ERROR_ACCESS_DENIED) && processIDExited(entry.ProcessID)) {
 			continue // The process has already exited.
 		}
 		if queryErr != nil {
 			closeProcesses(matched)
 			return nil, fmt.Errorf("identifying Antigravity process %d: %w", entry.ProcessID, queryErr)
+		}
+		exited, waitErr := processExited(handle)
+		if waitErr != nil || exited {
+			_ = windows.CloseHandle(handle)
+			if waitErr != nil {
+				closeProcesses(matched)
+				return nil, fmt.Errorf("checking Antigravity process %d: %w", entry.ProcessID, waitErr)
+			}
+			continue
 		}
 		length := uint32(len(path))
 		queryErr = windows.QueryFullProcessImageName(handle, 0, &path[0], &length)
@@ -81,11 +111,16 @@ func matchingProcesses(p *paths) ([]antigravityProcess, error) {
 				continue
 			}
 		}
-		_ = windows.CloseHandle(handle)
 		if queryErr != nil && !os.IsNotExist(queryErr) && !errors.Is(queryErr, windows.ERROR_INVALID_PARAMETER) {
-			closeProcesses(matched)
-			return nil, fmt.Errorf("identifying Antigravity process %d: %w", entry.ProcessID, queryErr)
+			// The process can exit between the signal check and the image query.
+			exited, err := processExited(handle)
+			if err != nil || !exited {
+				_ = windows.CloseHandle(handle)
+				closeProcesses(matched)
+				return nil, fmt.Errorf("identifying Antigravity process %d: %w", entry.ProcessID, queryErr)
+			}
 		}
+		_ = windows.CloseHandle(handle)
 	}
 	if !errors.Is(err, windows.ERROR_NO_MORE_FILES) {
 		closeProcesses(matched)
@@ -105,7 +140,7 @@ func stopAntigravity(p *paths, force bool, timeoutMs int) (bool, error) {
 	if err != nil || len(processes) == 0 {
 		return false, err
 	}
-	defer closeProcesses(processes)
+	defer func() { closeProcesses(processes) }()
 
 	// Include child processes such as the Antigravity language server.
 	args := []string{"/T"}
@@ -120,11 +155,29 @@ func stopAntigravity(p *paths, force bool, timeoutMs int) (bool, error) {
 	defer cancel()
 	cmd := exec.CommandContext(ctx, "taskkill.exe", args...)
 	hideWindow(cmd)
-	_ = cmd.Run() // Poll the installation in case a selected process already exited.
+	_ = cmd.Run() // A selected process may have exited before taskkill reached it.
 
 	for {
-		running, err := isAntigravityRunning(p)
-		if err != nil || !running {
+		// The handles identify the processes we already checked. Querying their
+		// image paths again during termination can fail before Windows drops the PID.
+		allExited := true
+		for _, process := range processes {
+			exited, err := processExited(process.handle)
+			if err != nil {
+				return true, fmt.Errorf("waiting for Antigravity process %d to exit: %w", process.pid, err)
+			}
+			if !exited {
+				allExited = false
+				break
+			}
+		}
+		if allExited {
+			closeProcesses(processes)
+			processes = nil
+			running, err := isAntigravityRunning(p)
+			if err == nil && running {
+				err = errors.New("Antigravity restarted during shutdown. Close it and re-run")
+			}
 			return true, err
 		}
 		remaining := time.Until(deadline)
