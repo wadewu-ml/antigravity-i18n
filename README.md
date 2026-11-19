@@ -4,7 +4,7 @@ Nine language packs translate settings, chat controls, menus, and quit prompts i
 
 [Download for Windows x64](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Releases](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-Tested with **Antigravity App 2.33.0**. If the tool asks for WebView2 at startup, install the [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download).
+Tested with **Antigravity App 2.33.0**.
 
 [简体中文](./README.zh-CN.md) · **English** · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -54,4 +54,12 @@ Open PowerShell in the folder containing `antigravity-i18n.exe`.
 
 On Windows, install PowerShell 7, Go 1.26.3 or later, and the Wails v2 CLI. Run `.\build.ps1 -Target gui` from the repository root to build `build/bin/antigravity-i18n.exe`.
 
-An unofficial, community-maintained tool. [MIT License](./LICENSE)
+## Startup troubleshooting
+
+If the tool asks for WebView2 at startup, install the [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download).
+
+## Disclaimer
+
+This is an unofficial, community-maintained project and is not affiliated with, endorsed by, or authorized by Google or Antigravity.
+
+[MIT License](./LICENSE)

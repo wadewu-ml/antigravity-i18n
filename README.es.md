@@ -4,7 +4,7 @@ Nueve paquetes de idiomas traducen los ajustes, los controles del chat, los men�
 
 [Descargar para Windows x64](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Versiones](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-Probado con **Antigravity App 2.33.0**. Si la herramienta solicita WebView2 al iniciarse, instala el [entorno de ejecución de Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download).
+Probado con **Antigravity App 2.33.0**.
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · **Español** · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -54,4 +54,12 @@ Abre PowerShell en la carpeta que contiene `antigravity-i18n.exe`.
 
 Para compilar en Windows, instala PowerShell 7, Go 1.26.3 o posterior y la CLI de Wails v2. Ejecuta `.\build.ps1 -Target gui` desde la raíz del repositorio. El resultado se guarda en `build/bin/antigravity-i18n.exe`.
 
-Herramienta no oficial mantenida por la comunidad. [Licencia MIT](./LICENSE)
+## Problemas al iniciar
+
+Si la herramienta solicita WebView2 al iniciarse, instala el [entorno de ejecución de Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download).
+
+## Descargo de responsabilidad
+
+Este es un proyecto no oficial mantenido por la comunidad y no está afiliado, respaldado ni autorizado por Google o Antigravity.
+
+[Licencia MIT](./LICENSE)

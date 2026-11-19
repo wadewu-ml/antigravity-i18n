@@ -4,7 +4,7 @@
 
 [下载 Windows x64 版](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [发布记录](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-适配 **Antigravity App 2.33.0**。如果启动工具时提示缺少 WebView2，请安装 [Microsoft Edge WebView2 运行时](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)。
+适配 **Antigravity App 2.33.0**。
 
 **简体中文** · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -54,4 +54,12 @@
 
 在 Windows 上安装 PowerShell 7、Go 1.26.3 或更新版本，以及 Wails v2 CLI。在仓库根目录运行 `.\build.ps1 -Target gui`，产物位于 `build/bin/antigravity-i18n.exe`。
 
-社区维护的非官方工具。[MIT 许可证](./LICENSE)
+## 启动问题
+
+如果启动工具时提示缺少 WebView2，请安装 [Microsoft Edge WebView2 运行时](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)。
+
+## 免责声明
+
+本项目为开源社区维护的非官方本地化工具，与 Google 或 Antigravity 官方无关。
+
+[MIT 许可证](./LICENSE)

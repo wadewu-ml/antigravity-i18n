@@ -4,7 +4,7 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 [Windows x64 版をダウンロード](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [リリース一覧](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-対応を確認したバージョンは **Antigravity App 2.33.0** です。ツールの起動時に WebView2 が必要と表示された場合は、[Microsoft Edge WebView2 ランタイム](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)をインストールしてください。
+対応を確認したバージョンは **Antigravity App 2.33.0** です。
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · **日本語** · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -54,4 +54,12 @@ Antigravity の更新後に翻訳や指標が消えた場合は、このペー�
 
 Windows でビルドするには、PowerShell 7、Go 1.26.3 以降、Wails v2 CLI が必要です。リポジトリのルートで `.\build.ps1 -Target gui` を実行すると `build/bin/antigravity-i18n.exe` が生成されます。
 
-コミュニティがメンテナンスする非公式ツールです。[MIT ライセンス](./LICENSE)
+## 起動時のトラブル
+
+ツールの起動時に WebView2 が必要と表示された場合は、[Microsoft Edge WebView2 ランタイム](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)をインストールしてください。
+
+## 免責事項
+
+本プロジェクトはコミュニティにより保守される非公式ツールであり、Google または Antigravity 公式とは一切関係ありません。
+
+[MIT ライセンス](./LICENSE)

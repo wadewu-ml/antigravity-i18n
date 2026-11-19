@@ -4,7 +4,7 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 [Windows x64 다운로드](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [릴리스](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-**Antigravity App 2.33.0**에서 호환성을 확인했습니다. 도구를 실행할 때 WebView2가 필요하다는 안내가 뜨면 [Microsoft Edge WebView2 런타임](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)을 설치하세요.
+**Antigravity App 2.33.0**에서 호환성을 확인했습니다.
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · **한국어** · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -54,4 +54,12 @@ Antigravity 업데이트 후 번역이나 지표가 사라지면 이 페이지 �
 
 Windows에서 빌드하려면 PowerShell 7, Go 1.26.3 이상, Wails v2 CLI가 필요합니다. 저장소 루트에서 `.\build.ps1 -Target gui`를 실행하면 `build/bin/antigravity-i18n.exe`가 생성됩니다.
 
-커뮤니티에서 관리하는 비공식 도구입니다. [MIT 라이선스](./LICENSE)
+## 시작 문제 해결
+
+도구를 실행할 때 WebView2가 필요하다는 안내가 뜨면 [Microsoft Edge WebView2 런타임](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)을 설치하세요.
+
+## 면책 조항
+
+본 프로젝트는 커뮤니티에서 유지 관리하는 비공식 도구이며 Google 또는 Antigravity 공식과 아무런 관련이 없습니다.
+
+[MIT 라이선스](./LICENSE)
