@@ -8,17 +8,18 @@ Ferramenta de localização de IU para o cliente de desktop Google Antigravity.
 
 ---
 
-Um executável independente que reúne uma interface gráfica moderna, um mecanismo Go asar puro e pacotes de idiomas completos. Funciona imediatamente com zero dependências de Node.js ou bibliotecas de tempo de execução e oferece suporte à restauração exata de bytes para a compilação oficial a qualquer momento.
+**v4.0.0** inclui nove pacotes de idiomas e foi testada com o Antigravity App **2.33.0**.
 
 ---
 
 ## Principais recursos
 
-- **Binário independente único**: executável independente de aproximadamente 12 MB — não é necessário tempo de execução de Node.js, npm ou Python.
+- **Executável portátil para Windows x64**. A interface gráfica usa o Microsoft Edge WebView2.
 - **Modo duplo GUI e CLI**: abre uma janela limpa da área de trabalho por padrão, enquanto incorpora subcomandos CLI completos (`apply` / `restore` / `status` / `locales`) para scripts e automação.
 - **Restauração exata de bytes**: Cria automaticamente um backup original (`app.asar.clean-backup`) antes de qualquer alteração. A restauração recupera um arquivo idêntico byte por byte (verificado pelo SHA-256) ao lançamento oficial.
-- **Design não invasivo**: localiza apenas a UI do shell, menus nativos e caixas de diálogo de encerramento. Editores de código (Monaco), terminais integrados (xterm) e fluxos de conversação de IA permanecem estritamente intocados.
-- **Off-line e confiável**: Zero atividade de rede, zero coleta de dados. Equipado com validação antecipada de sintaxe JavaScript e reversão transacional em caso de erros inesperados.
+- **Tradução da interface** principal, dos menus nativos e das caixas de diálogo de encerramento.
+- **Métricas opcionais da sessão**. Um anel à direita do seletor de modelo mostra o uso do contexto. Os detalhes mostram o contexto restante, a velocidade de saída, a taxa de acertos do cache e o tempo até o primeiro token. O Antigravity lê os valores do banco de dados local de sessões.
+- **Processamento local dos patches** com validação da sintaxe JavaScript e reversão em caso de falha na gravação.
 
 ---
 
@@ -32,8 +33,8 @@ Baixe o `antigravity-i18n.exe` mais recente na página de lançamentos e execute
 
 Clique duas vezes em `antigravity-i18n.exe`:
 1. O aplicativo detecta automaticamente a pasta de instalação do Antigravity (ou clique em ‘Alterar local’ para especificar manualmente).
-2. Clique no seu idioma preferido (selecionar inglês restaura a versão oficial).
-3. Clique em “Aplicar”. Quando o Antigravity fechar, a ferramenta atualiza os recursos e abre o aplicativo novamente.
+2. Escolha o idioma da interface e configure as métricas da sessão separadamente. As métricas também funcionam na interface oficial em inglês.
+3. Clique em “Aplicar”. Quando o Antigravity fechar, a ferramenta atualiza os recursos e abre o aplicativo novamente. “Restaurar versão oficial” recupera o arquivo original em inglês e desativa o indicador.
 
 Quando for preciso fechar o Antigravity para aplicar ou restaurar, a ferramenta solicita o encerramento normal da instalação selecionada. Se ela continuar aberta após 30 segundos, você pode fechá-la manualmente e tentar de novo ou clicar em “Forçar o encerramento e tentar novamente”.
 
@@ -59,6 +60,7 @@ Opções comuns:
 - `--app-dir <caminho>`: Especifique manualmente o diretório de instalação do Antigravity (ou defina via `ANTIGRAVITY_APP_DIR`).
 - `--locale <code>`: Código do idioma de destino (por exemplo, `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
 - `--no-restart`: Não reinicie o Antigravity após a correção.
+- `apply --session-metrics` ativa o indicador e `--session-metrics=false` o desativa. `apply --locale en --session-metrics` ativa o indicador na interface oficial em inglês.
 - `--force` encerra imediatamente o Antigravity na instalação selecionada. Alterações não salvas podem ser perdidas.
 - `--timeout <ms>` define o tempo de espera em milissegundos antes de cancelar a operação. O padrão é `30000`.
 - `--yes`: Suprime o prompt de confirmação de desligamento.

@@ -8,17 +8,18 @@ UI-Lokalisierungstool für den Google Antigravity-Desktop-Client.
 
 ---
 
-Eine eigenständige ausführbare Datei, die eine moderne grafische Benutzeroberfläche, eine reine Go-Asar-Engine und vollständige Sprachpakete bündelt. Läuft sofort ohne Abhängigkeiten von Node.js oder Laufzeitbibliotheken und unterstützt jederzeit eine bytegenaue Wiederherstellung des offiziellen Builds.
+**v4.0.0** enthält neun Sprachpakete und wurde mit Antigravity App **2.33.0** getestet.
 
 ---
 
 ## Hauptmerkmale
 
-- **Einzelne eigenständige Binärdatei**: ~12 MB eigenständige ausführbare Datei – keine Node.js-, npm- oder Python-Laufzeit erforderlich.
+- **Portable Windows-x64-Anwendung**. Die grafische Oberfläche verwendet Microsoft Edge WebView2.
 - **GUI- und CLI-Dual-Modus**: Öffnet standardmäßig ein sauberes Desktop-Fenster und bettet gleichzeitig vollständige CLI-Unterbefehle („apply“ / „restore“ / „status“ / „locales“) für Skripterstellung und Automatisierung ein.
 - **Bytegenaue Wiederherstellung**: Erstellt automatisch ein makelloses Backup („app.asar.clean-backup“), bevor Änderungen vorgenommen werden. Beim Wiederherstellen wird ein Archiv wiederhergestellt, das Byte für Byte mit der offiziellen Version identisch ist (SHA-256-verifiziert).
-- **Nicht-invasives Design**: Lokalisiert nur die Shell-Benutzeroberfläche, native Menüs und Beenden-Dialoge. Code-Editoren (Monaco), integrierte Terminals (xterm) und KI-Konversationsströme bleiben strikt unberührt.
-- **Offline und zuverlässig**: Keine Netzwerkaktivität, keine Datenerfassung. Ausgestattet mit einer JavaScript-Syntaxvalidierung im Voraus und einem Transaktions-Rollback bei unerwarteten Fehlern.
+- **Oberflächenübersetzung** für die Shell, native Menüs und Beenden-Dialoge.
+- **Optionale Sitzungsmetriken** zeigen die Kontextauslastung als Ring rechts neben der Modellauswahl. Die Detailansicht zeigt den verbleibenden Kontext, die Ausgabegeschwindigkeit, die Cache-Trefferrate und die Zeit bis zum ersten Token. Antigravity liest die Werte aus seiner lokalen Sitzungsdatenbank.
+- **Lokale Patch-Verarbeitung** mit Prüfung der JavaScript-Syntax und Rollback bei Schreibfehlern.
 
 ---
 
@@ -32,8 +33,8 @@ Laden Sie die neueste „antigravity-i18n.exe“ von der Seite „Releases“ he
 
 Doppelklicken Sie auf „antigravity-i18n.exe“:
 1. Die App erkennt den Antigravity-Installationsordner automatisch (oder klicken Sie auf „Speicherort ändern“, um ihn manuell anzugeben).
-2. Klicken Sie auf Ihre bevorzugte Sprache (durch Auswahl von Englisch wird die offizielle Version wiederhergestellt).
-3. Klicken Sie auf „Übernehmen“. Sobald Antigravity beendet ist, aktualisiert das Tool die Ressourcen und startet Antigravity neu.
+2. Wählen Sie eine Sprache und stellen Sie die Sitzungsmetriken separat ein. Sie sind auch mit der offiziellen englischen Oberfläche verfügbar.
+3. Klicken Sie auf „Übernehmen“. Sobald Antigravity beendet ist, aktualisiert das Tool die Ressourcen und startet Antigravity neu. Mit „Offizielle Version wiederherstellen“ stellen Sie das englische Originalarchiv wieder her und entfernen die Anzeige.
 
 Wenn Antigravity für das Anwenden oder Wiederherstellen geschlossen werden muss, fordert das Tool die ausgewählte Installation zum regulären Beenden auf. Läuft sie nach 30 Sekunden noch, können Sie Antigravity manuell beenden und es erneut versuchen oder auf „Beenden erzwingen und erneut versuchen“ klicken.
 
@@ -59,6 +60,7 @@ Häufige Optionen:
 - `--app-dir <Pfad>`: Geben Sie das Antigravity-Installationsverzeichnis manuell an (oder legen Sie es über `ANTIGRAVITY_APP_DIR` fest).
 - `--locale <code>`: Zielsprachencode (z. B. `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
 - „--no-restart“: Antigravity nach dem Patchen nicht neu starten.
+- `apply --session-metrics` aktiviert die Anzeige, `--session-metrics=false` deaktiviert sie. `apply --locale en --session-metrics` nutzt die offizielle englische Oberfläche mit Anzeige.
 - `--force` beendet die ausgewählte Installation sofort. Ungespeicherte Änderungen können verloren gehen.
 - `--timeout <ms>` legt die Wartezeit bis zum Abbruch in Millisekunden fest. Der Standardwert ist `30000`.
 - „--yes“: Unterdrückt die Bestätigungsaufforderung zum Herunterfahren.

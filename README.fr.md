@@ -8,17 +8,18 @@ Outil de localisation d'interface utilisateur pour le client de bureau Google An
 
 ---
 
-Un exécutable autonome regroupant une interface graphique moderne, un moteur Go asar pur et des packs de langue complets. Fonctionne immédiatement sans aucune dépendance sur Node.js ou les bibliothèques d'exécution, et prend en charge la restauration exacte en octets vers la version officielle à tout moment.
+**v4.0.0** inclut neuf packs de langue et a été testé avec Antigravity App **2.33.0**.
 
 ---
 
 ## Principales fonctionnalités
 
-- **Binaire autonome unique** : exécutable autonome d'environ 12 Mo – aucun environnement d'exécution Node.js, npm ou Python requis.
+- **Exécutable portable pour Windows x64**. L’interface graphique utilise Microsoft Edge WebView2.
 - **GUI & CLI Dual Mode** : Ouvre une fenêtre de bureau propre par défaut, tout en intégrant des sous-commandes CLI complètes (`apply` / `restore` / `status` / `locales`) pour les scripts et l'automatisation.
 - **Restauration exacte en octets** : crée automatiquement une sauvegarde vierge (`app.asar.clean-backup`) avant toute modification. La restauration récupère une archive identique octet par octet (vérifiée SHA-256) à la version officielle.
-- **Conception non invasive** : localise uniquement l'interface utilisateur du shell, les menus natifs et les boîtes de dialogue de fermeture. Les éditeurs de code (Monaco), les terminaux intégrés (xterm) et les flux de conversations IA restent strictement intacts.
-- **Hors ligne et fiable** : zéro activité réseau, zéro collecte de données. Équipé d'une validation initiale de la syntaxe JavaScript et d'une restauration transactionnelle en cas d'erreurs inattendues.
+- **Traduction de l’interface** principale, des menus natifs et des boîtes de dialogue de fermeture.
+- **Métriques de session facultatives**. Un anneau à droite du sélecteur de modèle indique l’utilisation du contexte. Les détails affichent le contexte restant, la vitesse de génération, le taux de réussite du cache et le délai avant le premier jeton. Antigravity lit ces valeurs dans sa base de données locale de sessions.
+- **Traitement local des correctifs** avec validation de la syntaxe JavaScript et restauration en cas d’échec de l’écriture.
 
 ---
 
@@ -32,8 +33,8 @@ Téléchargez le dernier « antigravity-i18n.exe » depuis la page des versions 
 
 Double-cliquez sur « antigravity-i18n.exe » :
 1. L'application détecte automatiquement le dossier d'installation d'Antigravity (ou cliquez sur « Modifier l'emplacement » pour le spécifier manuellement).
-2. Cliquez sur votre langue préférée (la sélection de l'anglais restaure la version officielle).
-3. Cliquez sur « Appliquer ». Une fois Antigravity fermé, l’outil met à jour les ressources et relance l’application.
+2. Choisissez la langue de l’interface et réglez les métriques de session séparément. Elles fonctionnent aussi avec l’interface officielle en anglais.
+3. Cliquez sur « Appliquer ». Une fois Antigravity fermé, l’outil met à jour les ressources et relance l’application. « Restaurer la version officielle » rétablit l’archive anglaise d’origine et désactive l’indicateur.
 
 Si l’application ou la restauration nécessite de fermer Antigravity, l’outil demande à l’installation sélectionnée de se fermer normalement. Si elle est encore ouverte après 30 secondes, vous pouvez la fermer manuellement et réessayer ou cliquer sur « Forcer la fermeture et réessayer ».
 
@@ -59,6 +60,7 @@ Options courantes :
 - `--app-dir <path>` : spécifiez manuellement le répertoire d'installation d'Antigravity (ou définissez via `ANTIGRAVITY_APP_DIR`).
 - `--locale <code>` : code de la langue cible (par exemple, `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
 - `--no-restart` : Ne relancez pas Antigravity après l'application du correctif.
+- `apply --session-metrics` active l’indicateur, `--session-metrics=false` le désactive. `apply --locale en --session-metrics` affiche l’indicateur dans l’interface officielle en anglais.
 - `--force` ferme immédiatement l’installation sélectionnée. Les modifications non enregistrées peuvent être perdues.
 - `--timeout <ms>` fixe le délai d’attente en millisecondes avant l’annulation de l’opération. La valeur par défaut est `30000`.
 - `--yes` : supprime l'invite de confirmation d'arrêt.

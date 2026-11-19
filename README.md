@@ -1,18 +1,14 @@
 # antigravity-i18n
 
-UI localization tool for the [Google Antigravity](https://antigravity.google/) desktop client.
+Portable Windows tool for UI localization and optional session metrics in the Google Antigravity desktop client. [Google Antigravity](https://antigravity.google/)
 
 [简体中文](./README.zh-CN.md) | English | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português (Brasil)](./README.pt-BR.md) | [Русский](./README.ru.md)
 
 ---
 
-A standalone executable bundling a modern graphical interface, a pure Go asar engine, and complete language packs. Runs out of the box with zero dependencies on Node.js or runtime libraries, and supports byte-exact restoration to the official build at any time.
-
----
-
 ## Compatibility
 
-The current source supports Antigravity App 2.33.0. All nine packs cover the new browser data controls, shortcut schemes, built-in slash command descriptions, SSH host controls, GitHub connection errors, side question actions, plugin bundle dialogs, and voice dictation status. Applying, switching languages, and restoring have been verified against the official 2.33.0 archive. See the [Antigravity changelog](https://antigravity.google/docs/changelog#rel-hub-2.33.0).
+v4.0.0 supports Antigravity App **2.33.0**. All nine packs cover the new browser data controls, shortcut schemes, built-in slash command descriptions, SSH host controls, GitHub connection errors, side question actions, plugin bundle dialogs, and voice dictation status. Applying, switching languages, and restoring have been verified against the official 2.33.0 archive. [Antigravity changelog](https://antigravity.google/docs/changelog#rel-hub-2.33.0)
 
 The [2.32.1 audit](./docs/translation-audit-2.32.1.md) describes the earlier updates to settings, onboarding, and related screens. The engine preserves spoken transcripts, call summaries, AI progress text, and user text in side questions. It also preserves links, controls, and values such as hosts and search terms in translated sentences. The Chinese packs keep the permission preset name Turbo. Dictionary alignment measures keys in the bundled packs. The audit lists surfaces and text outside its scope.
 
@@ -20,12 +16,12 @@ The [2.32.1 audit](./docs/translation-audit-2.32.1.md) describes the earlier upd
 
 ## Key Features
 
-- **Single Self-Contained Binary**: ~12 MB standalone executable—no Node.js, npm, or Python runtime required.
+- **Portable Windows x64 executable**. Run the file directly. The graphical interface uses Microsoft Edge WebView2.
 - **GUI & CLI Dual Mode**: Opens a clean desktop window by default, while embedding complete CLI subcommands (`apply` / `restore` / `status` / `locales`) for scripting and automation.
 - **Byte-Exact Restoration**: Automatically creates a pristine backup (`app.asar.clean-backup`) before any changes. Restoring recovers an archive identical byte-for-byte (SHA-256 verified) to the official release.
 - **Interface localization** covers the shell, native menus, and quit dialogs.
-- **Optional session metrics** show context usage as a ring next to the model selector. Hover for context headroom, recent output speed, cache hit rate, and time to first token, or click to keep the details open. Antigravity reads the metrics from its local session database.
-- **Offline operation** with JavaScript syntax validation and transactional rollback on unexpected errors.
+- **Optional session metrics** show context usage in a ring to the right of the model selector. Hover for remaining context, recent output speed, cache hit rate, and time to first token, or click to keep the details open. Antigravity reads the metrics from its local database in read-only mode.
+- **Local patch processing** includes JavaScript syntax validation and transactional rollback on errors.
 
 ---
 
@@ -40,7 +36,7 @@ Download the latest `antigravity-i18n.exe` from the [Releases](../../releases) p
 Double-click `antigravity-i18n.exe`:
 1. The app automatically detects the Antigravity installation folder (or click "Change Location" to specify manually).
 2. Select a language and set the “会话指标” switch independently. The metrics also work with the built-in English interface.
-3. Click “应用更改” to apply your changes. Once Antigravity has closed, the tool updates the resources and relaunches it. Use “还原官方版本” to restore the official archive.
+3. Click “应用更改” to apply and restart Antigravity. Use “还原官方版本” to restore the official English archive and remove the indicator.
 
 Split views, side questions, and subagent panes show metrics for their own conversation. A dash indicates unavailable data. You can close the installer after applying the patch.
 

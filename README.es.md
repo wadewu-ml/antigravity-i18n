@@ -8,17 +8,18 @@ Herramienta de localización de UI para el cliente de escritorio Google Antigrav
 
 ---
 
-Un ejecutable independiente que incluye una interfaz gráfica moderna, un motor Go asar puro y paquetes de idiomas completos. Se ejecuta de inmediato sin dependencias de Node.js o bibliotecas de tiempo de ejecución, y admite la restauración exacta de bytes a la compilación oficial en cualquier momento.
+**v4.0.0** incluye nueve paquetes de idiomas y se ha probado con Antigravity App **2.33.0**.
 
 ---
 
 ## Características clave
 
-- **Binario autónomo único**: ejecutable independiente de ~12 MB; no se requiere tiempo de ejecución de Node.js, npm o Python.
+- **Ejecutable portátil para Windows x64**. La interfaz gráfica utiliza Microsoft Edge WebView2.
 - **Modo dual GUI y CLI**: abre una ventana de escritorio limpia de forma predeterminada, al tiempo que incorpora subcomandos CLI completos (`apply`/`restore`/`status`/`locales`) para secuencias de comandos y automatización.
 - **Restauración exacta en bytes**: crea automáticamente una copia de seguridad impecable (`app.asar.clean-backup`) antes de cualquier cambio. La restauración recupera un archivo idéntico byte por byte (verificado SHA-256) a la versión oficial.
-- **Diseño no invasivo**: localiza solo la interfaz de usuario del shell, los menús nativos y los cuadros de diálogo para salir. Los editores de código (Mónaco), los terminales integrados (xterm) y los flujos de conversaciones de IA permanecen estrictamente intactos.
-- **Sin conexión y confiable**: Cero actividad de red, cero recopilación de datos. Equipado con validación inicial de sintaxis de JavaScript y reversión transaccional en caso de errores inesperados.
+- **Traducción de la interfaz** del entorno principal, los menús nativos y los cuadros de diálogo de salida.
+- **Métricas de sesión opcionales**. Un anillo a la derecha del selector de modelo muestra el uso del contexto. El panel de detalles muestra el contexto restante, la velocidad de salida, la tasa de aciertos de caché y la latencia hasta el primer token. Antigravity lee los datos de su base de datos local de sesiones.
+- **Procesamiento local de los parches** con validación de la sintaxis de JavaScript y reversión si falla la escritura.
 
 ---
 
@@ -32,8 +33,8 @@ Descargue la última versión `antigravity-i18n.exe` de la página de Versiones 
 
 Haga doble clic en `antigravity-i18n.exe`:
 1. La aplicación detecta automáticamente la carpeta de instalación de Antigravity (o haga clic en "Cambiar ubicación" para especificarla manualmente).
-2. Haga clic en su idioma preferido (al seleccionar inglés se restaura la versión oficial).
-3. Haga clic en «Aplicar». Una vez cerrado Antigravity, la herramienta actualiza los recursos y lo vuelve a iniciar.
+2. Elija el idioma de la interfaz y configure las métricas de sesión por separado. También están disponibles con la interfaz oficial en inglés.
+3. Haga clic en «Aplicar». Una vez cerrado Antigravity, la herramienta actualiza los recursos y lo vuelve a iniciar. «Restaurar la versión oficial» recupera el archivo original en inglés y desactiva el indicador.
 
 Si es necesario cerrar Antigravity para aplicar o restaurar, la herramienta solicita el cierre normal de la instalación seleccionada. Si sigue abierta tras 30 segundos, puede cerrarla manualmente y volver a intentarlo o hacer clic en «Forzar el cierre y reintentar».
 
@@ -59,6 +60,7 @@ Opciones comunes:
 - `--app-dir <ruta>`: especifique manualmente el directorio de instalación de Antigravity (o configúrelo mediante `ANTIGRAVITY_APP_DIR`).
 - `--locale <código>`: código del idioma de destino (por ejemplo, `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
 - `--no-restart`: No reinicie Antigravity después de aplicar el parche.
+- `apply --session-metrics` activa el indicador y `--session-metrics=false` lo desactiva. `apply --locale en --session-metrics` activa el indicador en la interfaz oficial en inglés.
 - `--force` cierra de inmediato la instalación seleccionada. Puede perder los cambios sin guardar.
 - `--timeout <ms>` fija el tiempo de espera en milisegundos antes de cancelar la operación. El valor predeterminado es `30000`.
 - `--yes`: suprime el mensaje de confirmación de apagado.

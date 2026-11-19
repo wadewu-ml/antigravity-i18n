@@ -1,18 +1,14 @@
 # antigravity-i18n
 
-适用于 [Google Antigravity](https://antigravity.google/) 桌面客户端的多语言本地化工具。
+适用于 Google Antigravity 桌面客户端的 Windows 便携工具，提供界面多语言本地化和可选的会话指标。[Google Antigravity 官网](https://antigravity.google/)
 
 **简体中文** | [English](./README.md) | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português (Brasil)](./README.pt-BR.md) | [Русский](./README.ru.md)
 
 ---
 
-单个可执行文件集成现代化图形界面、纯 Go 实现的 asar 读写引擎与完整语言包；无需安装 Node.js 或任何运行库，解压即用，并支持随时按字节原样还原为官方原版。
-
----
-
 ## 兼容性
 
-当前源码已适配 Antigravity App 2.33.0。九套语言包补齐了浏览数据管理、快捷键方案、内置斜杠命令说明、SSH 主机操作、GitHub 连接错误、侧问操作、插件组合包及语音听写状态。应用、切换语言和还原已用官方 2.33.0 归档验证。参见 [Antigravity 官方更新记录](https://antigravity.google/docs/changelog#rel-hub-2.33.0)。
+v4.0.0 已适配 Antigravity App **2.33.0**。九套语言包补齐了浏览数据管理、快捷键方案、内置斜杠命令说明、SSH 主机操作、GitHub 连接错误、侧问操作、插件组合包及语音听写状态。应用、切换语言和还原已用官方 2.33.0 归档验证。[Antigravity 官方更新记录](https://antigravity.google/docs/changelog#rel-hub-2.33.0)
 
 此前的设置、首次使用等界面适配见 [2.32.1 核对记录](./docs/translation-audit-2.32.1.md)。翻译引擎保留语音转写、通话摘要、AI 进度正文和侧问中的用户文字。翻译说明时也会保留链接、控件及主机名和搜索词等内容。简繁中文保留权限预设名称 Turbo。词库对齐率按内置语言包的词条计算，适配范围和限制见核对记录。
 
@@ -20,12 +16,12 @@
 
 ## 核心特性
 
-- **单文件免安装**：约 12 MB 独立绿色程序，无需配置 Node.js、npm 或 Python 环境，开箱即用。
+- **Windows x64 单文件**可直接运行。图形界面使用 Microsoft Edge WebView2。
 - **图形与命令行双支持**：默认启动直观易用的图形界面，同时内嵌完整命令行子命令（`apply` / `restore` / `status` / `locales`），兼顾日常使用与脚本自动化。
 - **字节级原样还原**：首次修改前自动保存官方原始归档（`app.asar.clean-backup`）；执行还原后，`app.asar` 与官方发布的初始文件 SHA-256 哈希完全一致。
 - **界面本地化**集中覆盖外壳、系统菜单和退出确认框，保留编辑器、终端与对话正文。
-- **可选会话指标**在模型选择器旁用圆环显示上下文用量，悬停预览余量、最近一次输出速度、缓存命中和首 token 延迟，点击可固定详情。指标由 Antigravity 自身进程从本地会话库只读获取。
-- **离线与高可靠**：全流程零网络请求、零数据上传；内置脚本语法合法性门禁与全流程事务控制，遇到异常自动安全回滚。
+- **可选会话指标**在模型选择器右侧用圆环显示上下文用量。悬停查看上下文余量、最近一次输出速度、缓存命中率和首 token 延迟，点击可固定详情。Antigravity 从本地会话库只读获取这些指标。
+- **本地补丁处理**包含 JavaScript 语法校验，写入失败时会执行事务回滚。
 
 ---
 
@@ -40,7 +36,7 @@
 双击运行 `antigravity-i18n.exe`：
 1. 程序会自动检测 Antigravity 的安装目录（若未检测到，可点击“更改位置”手动选择）。
 2. 选择界面语言，再单独设置「会话指标」开关。官方英文也可以开启指标。
-3. 点击「应用更改」。Antigravity 退出后，工具会改写资源并重启客户端。需要恢复原版时点击「还原官方版本」。
+3. 点击「应用更改」即可应用并重启 Antigravity。点击「还原官方版本」可恢复官方英文归档并关闭指标。
 
 本地会话生成指标后会显示圆环，分屏、侧问和子 Agent 面板按各自的会话显示。详情中的 `—` 表示暂缺相应指标。应用后即可退出本工具。
 
