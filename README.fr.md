@@ -14,14 +14,15 @@ Testé avec **Antigravity App 2.33.0**.
 
 Les langues proposées sont le chinois simplifié, le chinois traditionnel, le japonais, le coréen, l’allemand, l’espagnol, le français, le portugais du Brésil et le russe. L’outil de configuration est en chinois simplifié.
 
-1. Ouvrez `antigravity-i18n.exe`. Si l’outil ne trouve pas la bonne installation, cliquez sur **更改位置** et sélectionnez le dossier qui contient `Antigravity.exe`.
-2. Choisissez une langue dans **界面语言**. Activez **会话指标** pour afficher les métriques de session. Pour les utiliser avec l’interface anglaise d’origine, sélectionnez **English**.
-3. Enregistrez votre travail et quittez Antigravity, puis cliquez sur **应用更改** pour appliquer les réglages. Antigravity s’ouvre à nouveau avec ces réglages.
+1. Ouvrez `antigravity-i18n.exe`. Si l’outil ne trouve pas la bonne installation, cliquez sur « Changer d’emplacement » et sélectionnez le dossier qui contient `Antigravity.exe`.
+2. Choisissez une langue dans « Langue de l’interface ». Activez « Métriques de session » pour afficher les métriques de session. Pour les utiliser avec l’interface anglaise d’origine, sélectionnez English.
+3. Enregistrez votre travail et quittez Antigravity, puis cliquez sur « Appliquer les modifications » pour appliquer les réglages. Antigravity s’ouvre à nouveau avec ces réglages.
 
-Si l’outil vous demande de quitter Antigravity, le bouton **强制退出并重试** force sa fermeture et relance l’opération. Les sessions en cours sont interrompues et les modifications non enregistrées risquent d’être perdues.
+Si l’outil vous demande de quitter Antigravity, le bouton « Forcer la fermeture et réessayer » force sa fermeture et relance l’opération. Les sessions en cours sont interrompues et les modifications non enregistrées risquent d’être perdues.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Fenêtre de configuration avec le chinois simplifié sélectionné et les métriques de session activées"></a>
 
+Sur la capture, le bouton vert « 重新应用 » permet de réappliquer les réglages.
 
 ## Consulter les métriques de session
 
@@ -33,9 +34,9 @@ Chaque panneau utilise le dernier appel au modèle pour lequel sa session dispos
 
 ## Restaurer ou réappliquer
 
-Pour retrouver l’interface anglaise d’origine et retirer l’indicateur, quittez Antigravity, cliquez sur **还原官方版本** dans l’outil et confirmez avec **还原**. L’outil sauvegarde le fichier d’origine à la première application des réglages. Conservez `resources/app.asar.clean-backup` dans le dossier d’installation d’Antigravity pour la restauration.
+Pour retrouver l’interface anglaise d’origine et retirer l’indicateur, quittez Antigravity, cliquez sur « Restaurer la version officielle » dans l’outil et confirmez avec « Restaurer ». L’outil sauvegarde le fichier d’origine à la première application des réglages. Conservez `resources/app.asar.clean-backup` dans le dossier d’installation d’Antigravity pour la restauration.
 
-Si la traduction ou l’indicateur disparaît après une mise à jour d’Antigravity, vérifiez la version prise en charge en haut de cette page, puis sélectionnez et appliquez à nouveau vos réglages. Pour réappliquer les réglages déjà actifs, cliquez sur **重新应用**.
+Si la traduction ou l’indicateur disparaît après une mise à jour d’Antigravity, vérifiez la version prise en charge en haut de cette page, puis sélectionnez et appliquez à nouveau vos réglages. Pour réappliquer les réglages déjà actifs, cliquez sur « Réappliquer ».
 
 ## Commandes PowerShell
 

@@ -14,14 +14,15 @@ Getestet mit **Antigravity App 2.33.0**.
 
 Zur Auswahl stehen vereinfachtes und traditionelles Chinesisch, Japanisch, Koreanisch, Deutsch, Spanisch, Französisch, brasilianisches Portugiesisch und Russisch. Das Tool selbst ist auf vereinfachtem Chinesisch beschriftet.
 
-1. Öffnen Sie `antigravity-i18n.exe`. Falls das Tool die Installation nicht findet oder den falschen Ordner anzeigt, klicken Sie auf **更改位置** und wählen Sie den Ordner mit `Antigravity.exe`.
-2. Wählen Sie unter **界面语言** eine Sprache. Mit **会话指标** schalten Sie die Sitzungsmetriken ein. Für Metriken mit der englischen Originaloberfläche wählen Sie **English**.
-3. Speichern Sie Ihre Arbeit und beenden Sie Antigravity. Klicken Sie dann auf **应用更改**, um die Einstellungen zu übernehmen. Antigravity öffnet sich mit den neuen Einstellungen.
+1. Öffnen Sie `antigravity-i18n.exe`. Falls das Tool die Installation nicht findet oder den falschen Ordner anzeigt, klicken Sie auf „Speicherort ändern“ und wählen Sie den Ordner mit `Antigravity.exe`.
+2. Wählen Sie unter „Oberflächensprache“ eine Sprache. Mit „Sitzungsmetriken“ schalten Sie die Sitzungsmetriken ein. Für Metriken mit der englischen Originaloberfläche wählen Sie English.
+3. Speichern Sie Ihre Arbeit und beenden Sie Antigravity. Klicken Sie dann auf „Änderungen anwenden“, um die Einstellungen zu übernehmen. Antigravity öffnet sich mit den neuen Einstellungen.
 
-Mit **强制退出并重试** können Sie bei einer entsprechenden Aufforderung das Beenden erzwingen und den Vorgang wiederholen. Laufende Sitzungen werden dabei unterbrochen und ungespeicherte Änderungen können verloren gehen.
+Mit „Beenden erzwingen und erneut versuchen“ können Sie bei einer entsprechenden Aufforderung das Beenden erzwingen und den Vorgang wiederholen. Laufende Sitzungen werden dabei unterbrochen und ungespeicherte Änderungen können verloren gehen.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Einstellungsfenster mit vereinfachtem Chinesisch als Sprache und aktivierten Sitzungsmetriken"></a>
 
+Die grüne Schaltfläche im Bild trägt die Aufschrift „重新应用“ (erneut anwenden).
 
 ## Sitzungsmetriken ablesen
 
@@ -33,9 +34,9 @@ In geteilten Ansichten, Nebenunterhaltungen und Bereichen für Subagenten stamme
 
 ## Wiederherstellen oder erneut anwenden
 
-Um zur englischen Originaloberfläche zurückzukehren und die Anzeige zu entfernen, beenden Sie Antigravity, klicken Sie im Tool auf **还原官方版本** und bestätigen Sie mit **还原**. Beim ersten Anwenden sichert das Tool die Originaldatei. Bewahren Sie `resources/app.asar.clean-backup` im Installationsordner von Antigravity auf.
+Um zur englischen Originaloberfläche zurückzukehren und die Anzeige zu entfernen, beenden Sie Antigravity, klicken Sie im Tool auf „Originalversion wiederherstellen“ und bestätigen Sie mit „Wiederherstellen“. Beim ersten Anwenden sichert das Tool die Originaldatei. Bewahren Sie `resources/app.asar.clean-backup` im Installationsordner von Antigravity auf.
 
-Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit **重新应用** erneut anwenden.
+Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit „Erneut anwenden“ erneut anwenden.
 
 ## PowerShell-Befehle
 

@@ -14,14 +14,15 @@ Compatibilidade verificada com o **Antigravity App 2.33.0**.
 
 Os idiomas disponíveis são chinês simplificado, chinês tradicional, japonês, coreano, alemão, espanhol, francês, português do Brasil e russo. A ferramenta de configuração está em chinês simplificado.
 
-1. Abra `antigravity-i18n.exe`. Se a ferramenta não localizar a instalação correta, clique em **更改位置** e selecione a pasta que contém `Antigravity.exe`.
-2. Escolha o idioma em **界面语言**. Ative **会话指标** para ver as métricas da sessão. Para usá-las com a interface original em inglês, selecione **English**.
-3. Salve seu trabalho, encerre o Antigravity e clique em **应用更改** para aplicar as configurações. O Antigravity é reaberto com as novas configurações.
+1. Abra `antigravity-i18n.exe`. Se a ferramenta não localizar a instalação correta, clique em “Alterar local” e selecione a pasta que contém `Antigravity.exe`.
+2. Escolha o idioma em “Idioma da interface”. Ative “Métricas da sessão” para ver as métricas da sessão. Para usá-las com a interface original em inglês, selecione English.
+3. Salve seu trabalho, encerre o Antigravity e clique em “Aplicar alterações” para aplicar as configurações. O Antigravity é reaberto com as novas configurações.
 
-Se a ferramenta pedir que você encerre o Antigravity, a opção **强制退出并重试** força o encerramento e tenta de novo. Isso interrompe as sessões em andamento e pode descartar alterações que ainda não foram salvas.
+Se a ferramenta pedir que você encerre o Antigravity, a opção “Forçar encerramento e tentar novamente” força o encerramento e tenta de novo. Isso interrompe as sessões em andamento e pode descartar alterações que ainda não foram salvas.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Janela de configurações com chinês simplificado selecionado e métricas da sessão ativadas"></a>
 
+Na imagem, o botão verde “重新应用” reaplica as configurações.
 
 ## Consultar as métricas da sessão
 
@@ -33,9 +34,9 @@ Na tela dividida, nos chats laterais e nos painéis de subagentes, cada painel u
 
 ## Restaurar ou reaplicar
 
-Para voltar à interface original em inglês e remover o indicador, encerre o Antigravity, clique em **还原官方版本** na ferramenta e confirme com **还原**. A ferramenta cria uma cópia do arquivo original na primeira vez que você aplica as configurações. Mantenha `resources/app.asar.clean-backup` na pasta de instalação do Antigravity para poder restaurá-lo.
+Para voltar à interface original em inglês e remover o indicador, encerre o Antigravity, clique em “Restaurar versão oficial” na ferramenta e confirme com “Restaurar”. A ferramenta cria uma cópia do arquivo original na primeira vez que você aplica as configurações. Mantenha `resources/app.asar.clean-backup` na pasta de instalação do Antigravity para poder restaurá-lo.
 
-Se a tradução ou o indicador desaparecer após uma atualização do Antigravity, confira a versão compatível no início desta página e volte a selecionar e aplicar as configurações. Para reaplicar as configurações que já estão em uso, clique em **重新应用**.
+Se a tradução ou o indicador desaparecer após uma atualização do Antigravity, confira a versão compatível no início desta página e volte a selecionar e aplicar as configurações. Para reaplicar as configurações que já estão em uso, clique em “Reaplicar”.
 
 ## Comandos do PowerShell
 

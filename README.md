@@ -14,14 +14,15 @@ Tested with **Antigravity App 2.33.0**.
 
 The packs cover Simplified Chinese, Traditional Chinese, Japanese, Korean, German, Spanish, French, Brazilian Portuguese, and Russian. The setup tool uses Simplified Chinese.
 
-1. Open `antigravity-i18n.exe`. If the tool cannot find the right installation, click **更改位置** and select the folder containing `Antigravity.exe`.
-2. Choose a language under **界面语言**. Turn on **会话指标** if you want session metrics. For metrics with the original interface, select **English**.
-3. Save your work and quit Antigravity, then click **应用更改** to apply. Antigravity reopens with your new settings.
+1. Open `antigravity-i18n.exe`. If the installation folder is wrong, use the button beside the path to select the folder containing `Antigravity.exe`.
+2. Choose your language. To see session metrics, turn on the switch below the language list. You can also use it with English.
+3. Save your work, quit Antigravity, and click the green button at the bottom right to apply your settings. Antigravity will reopen.
 
-If prompted, **强制退出并重试** forces Antigravity to quit and retries the operation. This interrupts active sessions and can discard unsaved edits.
+If prompted to quit, save your work first. Forcing Antigravity to close interrupts active sessions and can discard unsaved edits.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Settings window with Simplified Chinese selected and session metrics enabled"></a>
 
+The green button shown here reads 重新应用 (Reapply).
 
 ## Read session metrics
 
@@ -33,9 +34,9 @@ In split views, side chats, and subagent panels, each panel shows the latest mod
 
 ## Restore or reapply
 
-To return to the original English interface and remove the indicator, quit Antigravity, click **还原官方版本** in the tool, then confirm with **还原**. The first time you apply settings, the tool saves the original file in the Antigravity installation folder. Keep `resources/app.asar.clean-backup` there for restoration.
+To return to the original English interface and remove the indicator, quit Antigravity, click the red restore link at the bottom left of the tool, then confirm. The first time you apply settings, the tool saves the original file in the Antigravity installation folder. Keep `resources/app.asar.clean-backup` there for restoration.
 
-If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click **重新应用**.
+If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click the green button again.
 
 ## PowerShell commands
 
