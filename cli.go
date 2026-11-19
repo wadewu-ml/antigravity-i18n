@@ -28,6 +28,7 @@ Shorthands:
 Options:
   --app-dir <path>   Antigravity installation directory
   --locale <code>    Language pack to install (default: zh-CN)
+  --session-metrics[=false] Enable or disable the session metrics indicator on apply
   --no-restart       Do not relaunch Antigravity afterwards
   --force            Force the selected Antigravity installation to close
   --timeout <ms>     Milliseconds to wait for it to exit before aborting (default: 30000)
@@ -138,6 +139,9 @@ func parseArgs(args []string) (*parsedArgs, error) {
 			out.opts.Locale = rest[i]
 		case arg == "--no-restart":
 			out.opts.Restart = false
+		case arg == "--session-metrics":
+			enabled := true
+			out.opts.SessionMetrics = &enabled
 		case arg == "--force":
 			out.opts.Force = true
 		case arg == "--yes" || arg == "-y":
@@ -156,6 +160,12 @@ func parseArgs(args []string) (*parsedArgs, error) {
 			out.opts.AppDir = strings.TrimPrefix(arg, "--app-dir=")
 		case strings.HasPrefix(arg, "--locale="):
 			out.opts.Locale = strings.TrimPrefix(arg, "--locale=")
+		case strings.HasPrefix(arg, "--session-metrics="):
+			enabled, err := strconv.ParseBool(strings.TrimPrefix(arg, "--session-metrics="))
+			if err != nil {
+				return nil, errors.New("--session-metrics expects true or false")
+			}
+			out.opts.SessionMetrics = &enabled
 		case strings.HasPrefix(arg, "--timeout="):
 			ms, err := strconv.Atoi(strings.TrimPrefix(arg, "--timeout="))
 			if err != nil || ms <= 0 {
@@ -173,6 +183,9 @@ func parseArgs(args []string) (*parsedArgs, error) {
 	case "apply", "restore", "status", "locales", "gui":
 	default:
 		return nil, fmt.Errorf("unknown command %q", cmd)
+	}
+	if out.opts.SessionMetrics != nil && cmd != "apply" {
+		return nil, errors.New("--session-metrics requires the apply command")
 	}
 	out.cmd = cmd
 	return out, nil
@@ -209,10 +222,8 @@ func runCLI(svc *core.Service, args []string) int {
 
 	switch cmd {
 	case "apply":
-		// English is not a language pack; it is the untranslated build that
-		// restore reinstalls. The GUI routes a pick of English to restore, so
-		// the CLI does the same instead of failing on an unknown locale.
-		if opts.Locale != "" && sameLocale(opts.Locale, core.EnglishLocale) {
+		metricsRequested := opts.SessionMetrics != nil && *opts.SessionMetrics
+		if sameLocale(opts.Locale, core.EnglishLocale) && !metricsRequested {
 			return cliRestore(svc, opts, confirm)
 		}
 		return cliApply(svc, opts, confirm)
@@ -298,6 +309,11 @@ func cliStatus(svc *core.Service, opts core.Options) int {
 		fmt.Printf(" (%s)", status.LocaleName)
 	}
 	fmt.Println()
+	if status.SessionMetrics {
+		fmt.Println("Session metrics: enabled")
+	} else {
+		fmt.Println("Session metrics: disabled")
+	}
 	fmt.Printf("Clean backup  : %s (%s)\n", status.CleanBackupStatus, status.CleanBackupPath)
 	if status.LastPatchedAt != nil {
 		fmt.Printf("Last patched  : %s\n", *status.LastPatchedAt)

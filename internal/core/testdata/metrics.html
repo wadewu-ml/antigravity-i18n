@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    nav, .agy-composer-footer, .model-group { display: flex; align-items: center; }
+    .agy-composer-footer { justify-content: space-between; gap: 8px; }
+    .agy-composer-footer > button { flex: none; white-space: nowrap; }
+    .model-group { min-width: 0; }
+    .model-group > button { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    #right { width: 225px; }
+  </style>
+</head>
+<body>
+  <section id="left" data-testid="conversation-view" data-cascade-id="10000000-0000-0000-0000-000000000000">
+    <div class="agy-composer-footer">
+      <div class="model-group"><button>+</button><button data-testid="model-selector-trigger">Claude Sonnet 5.5</button></div>
+      <button data-testid="input-cancel-button">Stop</button>
+    </div>
+  </section>
+  <section id="right" data-testid="conversation-view" data-cascade-id="20000000-0000-0000-0000-000000000000">
+    <div class="agy-composer-footer">
+      <div class="model-group"><button>+</button><button data-testid="model-selector-trigger">Claude Sonnet 5.5 Medium</button></div>
+      <button>Send</button>
+    </div>
+  </section>
+  <section id="side" data-testid="side-question-tab-content">
+    <article data-testid="side-question-tab-conversation" data-cascade-id="30000000-0000-0000-0000-000000000000"></article>
+    <div data-testid="side-question-tab-composer"><div class="agy-composer-footer"><button>Send</button></div></div>
+  </section>
+  <section id="subagent" data-testid="subagent-tab-conversation" data-cascade-id="40000000-0000-0000-0000-000000000000">
+    <nav>Subagent</nav>
+  </section>
+  <script>
+    const metricsByID = {
+      1: {used: 1000, limit: 10000, speed: 11, cacheRate: 0.5, firstToken: 0.35},
+      2: {used: 2000, limit: null, speed: 22, cacheRate: 0.1, firstToken: null},
+      3: {used: 3000, limit: 10000, speed: 33, cacheRate: 0, firstToken: 1},
+      4: {used: 4000, limit: 10000, speed: 44, cacheRate: 0.25, firstToken: 2},
+    };
+    window.require = () => ({ ipcRenderer: {
+      invoke: async (channel, id) => {
+        check('requests use the metrics channel', channel, 'antigravity-i18n:session-metrics');
+        return metricsByID[id[0]] ?? null;
+      },
+    } });
+  </script>
+  <!-- ENGINE -->
+  <script>
+    let wideHeight, narrowHeight;
+    document.addEventListener('DOMContentLoaded', () => {
+      wideHeight = document.getElementById('left').offsetHeight;
+      narrowHeight = document.getElementById('right').offsetHeight;
+    }, { once: true });
+    verify(async () => {
+      const control = (id) => document.querySelector('#' + id + ' .ai18n-usage-control');
+      const progress = (id) => control(id)?.style.getPropertyValue('--ai18n-context-used');
+      const detailFor = (id) => document.getElementById(control(id).getAttribute('aria-describedby'));
+      const values = (id) => [...detailFor(id).querySelectorAll('dd')].map(el => el.textContent);
+      await settle(150);
+      check('one ring in each conversation pane', document.querySelectorAll('.ai18n-usage-control').length, 4);
+      check('left pane usage', progress('left'), '10%');
+      check('right pane missing a context limit', values('right').slice(0, 3).join('|'), '2,000|—|22 tok/s');
+      check('side question uses its own data', progress('side'), '30%');
+      check('read-only subagent uses its own data', progress('subagent'), '40%');
+      check('read-only subagent ring stays in its toolbar', control('subagent').parentElement.tagName, 'NAV');
+      check('ring follows the native model picker', control('left').previousElementSibling.dataset.testid, 'model-selector-trigger');
+      check('ring follows the model picker in a narrow pane', control('right').previousElementSibling.dataset.testid,
+        'model-selector-trigger');
+      check('wide composer height', document.getElementById('left').offsetHeight, wideHeight);
+      check('narrow composer height', document.getElementById('right').offsetHeight, narrowHeight);
+      const narrowFooter = document.querySelector('#right .agy-composer-footer');
+      check('send control stays inside the narrow toolbar',
+        narrowFooter.lastElementChild.getBoundingClientRect().right <= narrowFooter.getBoundingClientRect().right + 1, true);
+      check('no visible metrics text in toolbar', control('left').textContent, '');
+      control('left').dispatchEvent(new PointerEvent('pointerenter'));
+      const detail = detailFor('left');
+      check('no popover on a brief pointer pass', detail.matches(':popover-open'), false);
+      await settle(270);
+      check('details open on hover', detail.matches(':popover-open'), true);
+      check('context, headroom, speed, cache and latency', values('left').join('|'),
+        '1,000 / 10,000 (10%)|9,000|11 tok/s|50%|0.35 s');
+      control('left').dispatchEvent(new PointerEvent('pointerleave'));
+      detail.dispatchEvent(new PointerEvent('pointerenter'));
+      await settle(165);
+      check('moving into details keeps it open', detail.matches(':popover-open'), true);
+      detail.dispatchEvent(new PointerEvent('pointerleave'));
+      await settle(165);
+      check('details close on pointer exit', detail.matches(':popover-open'), false);
+      control('left').click();
+      control('left').dispatchEvent(new PointerEvent('pointerleave'));
+      await settle(165);
+      check('click pins details', detail.matches(':popover-open'), true);
+      document.body.dispatchEvent(new PointerEvent('pointerdown', {bubbles: true}));
+      check('outside click closes details', detail.matches(':popover-open'), false);
+
+      metricsByID[1].speed = 19;
+      document.querySelector('[data-testid="input-cancel-button"]').remove();
+      await settle(100);
+      check('generation end refreshes speed', values('left')[2], '19 tok/s');
+
+      const right = document.getElementById('right');
+      right.dataset.cascadeId = '50000000-0000-0000-0000-000000000000';
+      await settle(100);
+      check('switch clears measurements from the old conversation', values('right').join('|'), '—|—|—|—|—');
+      check('a conversation without data has no visible ring', control('right').hidden, true);
+      check('switching conversations keeps the ring after the model picker', control('right').previousElementSibling.dataset.testid,
+        'model-selector-trigger');
+      right.hidden = true;
+      await settle(100);
+      check('hidden panes release their ring', Boolean(control('right')), false);
+    });
+  </script>
+</body>
+</html>

@@ -7,8 +7,7 @@ import (
 	"strings"
 )
 
-// ApplyLocale installs a locale into Antigravity, replacing whatever patch is
-// present.
+// ApplyLocale installs the selected localization and session metrics.
 func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	s.clearNotes()
 
@@ -26,39 +25,6 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if localeCode == "" {
 		localeCode = DefaultLocale
 	}
-	locale, err := s.store.LoadLocale(localeCode)
-	if err != nil {
-		return nil, err
-	}
-	s.progress("正在校验语言包", locale.Name)
-
-	// Fragments are built before anything is modified, so a malformed locale
-	// fails fast instead of producing a broken UI after the rewrite.
-	preloadFragment, err := s.store.buildPreloadFragment(locale)
-	if err != nil {
-		return nil, err
-	}
-	menuFragment, err := s.store.buildMenuFragment(locale)
-	if err != nil {
-		return nil, err
-	}
-	dialogFragment, err := s.store.buildDialogFragment(locale)
-	if err != nil {
-		return nil, err
-	}
-
-	// The generated JavaScript goes into the app's own scripts, so it is checked
-	// here rather than being discovered by a failed launch.
-	for _, f := range []struct{ name, src string }{
-		{"dist/preload.js", preloadFragment},
-		{"dist/menu.js", menuFragment},
-		{"dist/main.js", dialogFragment},
-	} {
-		if err := checkJavaScriptSyntax(f.name, f.src); err != nil {
-			return nil, err
-		}
-	}
-
 	initialHash, err := hashArchive(p.AsarPath)
 	if err != nil {
 		return nil, err
@@ -71,8 +37,48 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	s.progress("正在读取 app.asar 身份", p.AsarPath)
-
+	var sessionMetrics bool
+	if opts.SessionMetrics != nil {
+		sessionMetrics = *opts.SessionMetrics
+	} else if currentPatched {
+		_, _, sessionMetrics, _ = readArchiveLocale(p.AsarPath)
+	}
+	english := CanonicalLocale(localeCode) == EnglishLocale
+	var locale *Locale
+	var patch patchFragments
+	if english {
+		if !sessionMetrics {
+			return nil, fmt.Errorf("use restore for official English with session metrics disabled")
+		}
+		locale = &Locale{Language: EnglishLocale, Name: "English", HTMLLang: "en"}
+		empty := blockSentinels[0][0] + "\n" + blockSentinels[0][1]
+		patch = patchFragments{main: empty, preload: empty}
+	} else {
+		locale, err = s.store.LoadLocale(localeCode)
+		if err != nil {
+			return nil, err
+		}
+		patch, err = s.store.buildLocalizationFragments(locale)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if sessionMetrics {
+		if err := s.store.addSessionMetrics(&patch, locale); err != nil {
+			return nil, err
+		}
+	}
+	s.progress("正在校验补丁", locale.Name)
+	// Check the generated fragments before closing the app or touching its files.
+	for _, f := range []struct{ name, src string }{
+		{"dist/preload.js", patch.preload},
+		{"dist/menu.js", patch.menu},
+		{"dist/main.js", patch.main},
+	} {
+		if err := checkJavaScriptSyntax(f.name, f.src); err != nil {
+			return nil, err
+		}
+	}
 	wasRunning, err := s.closeApp(p, opts)
 	if err != nil {
 		return nil, err
@@ -94,7 +100,13 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	noteBackupAccumulation(s, p.ResourcesDir)
 	s.progress("已创建安全备份", backupPath)
 
-	staged, err := buildPatchedArchive(p.AsarPath, locale, preloadFragment, menuFragment, dialogFragment)
+	source := p.AsarPath
+	if english {
+		// Start with the verified original to remove previous locale changes,
+		// including the native menus and secondary windows.
+		source = p.CleanBackupPath
+	}
+	staged, err := buildPatchedArchive(source, locale, patch)
 	if err != nil {
 		return nil, txn.failWithRollback("building the patched archive", err)
 	}
@@ -107,16 +119,16 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	}
 	if patched := detectPatchState(staged); patched == nil || !*patched {
 		return nil, txn.failWithRollback("verifying the patched archive",
-			fmt.Errorf("localization markers were not found in the patched archive"))
+			fmt.Errorf("patch markers were not found in the archive"))
 	}
 	if !SameRelease(expectedIdentity, arc.Identity()) {
 		return nil, txn.failWithRollback("verifying the patched archive",
 			fmt.Errorf("application identity changed in the patched archive"))
 	}
 	s.progress("正在校验补丁内容", "")
-	if _, _, ok := readArchiveLocale(staged); !ok {
+	if code, _, metrics, ok := readArchiveLocale(staged); !ok || code != locale.Language || metrics != sessionMetrics {
 		return nil, txn.failWithRollback("verifying the patched archive",
-			fmt.Errorf("the patched archive does not declare a locale"))
+			fmt.Errorf("the patched archive does not declare the requested locale and features"))
 	}
 	for _, rel := range []string{"dist/main.js", "dist/menu.js", "dist/preload.js"} {
 		data, err := arc.ReadFile(rel)
@@ -180,9 +192,32 @@ func readArchiveIdentity(asarPath string) (*Identity, error) {
 	return id, nil
 }
 
+type patchFragments struct {
+	main          string
+	menu          string
+	preload       string
+	windowPreload string
+}
+
+func (s *LocaleStore) buildLocalizationFragments(locale *Locale) (patchFragments, error) {
+	preload, err := s.buildPreloadFragment(locale)
+	if err != nil {
+		return patchFragments{}, err
+	}
+	menu, err := s.buildMenuFragment(locale)
+	if err != nil {
+		return patchFragments{}, err
+	}
+	main, err := s.buildDialogFragment(locale)
+	if err != nil {
+		return patchFragments{}, err
+	}
+	return patchFragments{main: main, menu: menu, preload: preload, windowPreload: preload}, nil
+}
+
 // buildPatchedArchive produces a patched copy of the archive in a temporary
 // directory and returns its path.
-func buildPatchedArchive(srcPath string, locale *Locale, preloadFragment, menuFragment, dialogFragment string) (string, error) {
+func buildPatchedArchive(srcPath string, locale *Locale, patch patchFragments) (string, error) {
 	arc, err := ReadArchive(srcPath)
 	if err != nil {
 		return "", err
@@ -192,63 +227,31 @@ func buildPatchedArchive(srcPath string, locale *Locale, preloadFragment, menuFr
 	if err != nil {
 		return "", err
 	}
-	menu, err := arc.ReadFile("dist/menu.js")
-	if err != nil {
-		return "", err
-	}
 	preload, err := arc.ReadFile("dist/preload.js")
 	if err != nil {
 		return "", err
 	}
 
-	newMain, err := patchMain(string(main), locale, dialogFragment)
-	if err != nil {
-		return "", err
-	}
-	newMenu, err := patchMenu(string(menu), menuFragment)
-	if err != nil {
-		return "", err
-	}
-	newPreload := patchPreload(string(preload), preloadFragment)
-	patches := []Patch{
-		{Path: "dist/main.js", Data: []byte(newMain)},
-		{Path: "dist/menu.js", Data: []byte(newMenu)},
-		{Path: "dist/preload.js", Data: []byte(newPreload)},
-	}
-	// The IDE installer and SSH password prompt use separate windows and do
-	// not load the Hub preload. Older releases can omit either window.
-	for _, rel := range []string{"dist/ideInstall/wizardPreload.js", "dist/remote/sshPromptPreload.js"} {
-		if arc.lookup(rel) == nil {
-			continue
-		}
-		source, err := arc.ReadFile(rel)
+	var newMain string
+	if locale.Language == EnglishLocale {
+		newMain = injectFragment(string(main), patch.main, nil, "")
+	} else {
+		newMain, err = patchMain(string(main), locale, patch.main)
 		if err != nil {
 			return "", err
 		}
-		if rel == "dist/remote/sshPromptPreload.js" {
-			const promptPath = "dist/remote/sshPrompts.js"
-			prompt, err := arc.ReadFile(promptPath)
-			if err != nil {
-				return "", err
-			}
-			// The message comes from the remote SSH process, so preserve it
-			// even when it happens to match a translated button label.
-			const original = `<div id="message"></div>`
-			const protected = `<div id="message" translate="no"></div>`
-			if !strings.Contains(string(prompt), original) && !strings.Contains(string(prompt), protected) {
-				return "", fmt.Errorf("could not locate the SSH prompt message container in %s", promptPath)
-			}
-			promptSource := strings.ReplaceAll(string(prompt), original, protected)
-			if err := checkJavaScriptSyntax(promptPath, promptSource); err != nil {
-				return "", err
-			}
-			patches = append(patches, Patch{Path: promptPath, Data: []byte(promptSource)})
-		}
-		patched := patchPreload(string(source), preloadFragment)
-		if err := checkJavaScriptSyntax(rel, patched); err != nil {
+	}
+	newPreload := patchPreload(string(preload), patch.preload)
+	patches := []Patch{
+		{Path: "dist/main.js", Data: []byte(newMain)},
+		{Path: "dist/preload.js", Data: []byte(newPreload)},
+	}
+	if locale.Language != EnglishLocale {
+		extra, err := buildLocalizedWindowPatches(arc, patch)
+		if err != nil {
 			return "", err
 		}
-		patches = append(patches, Patch{Path: rel, Data: []byte(patched)})
+		patches = append(patches, extra...)
 	}
 
 	tmp, err := os.CreateTemp("", "antigravity-i18n-patched-*.asar")
@@ -261,13 +264,61 @@ func buildPatchedArchive(srcPath string, locale *Locale, preloadFragment, menuFr
 		return "", err
 	}
 
-	// Every other body is copied from the source unchanged.
 	err = WritePatched(srcPath, staged, patches)
 	if err != nil {
 		os.Remove(staged)
 		return "", err
 	}
 	return staged, nil
+}
+
+func buildLocalizedWindowPatches(arc *Archive, patch patchFragments) ([]Patch, error) {
+	menu, err := arc.ReadFile("dist/menu.js")
+	if err != nil {
+		return nil, err
+	}
+	newMenu, err := patchMenu(string(menu), patch.menu)
+	if err != nil {
+		return nil, err
+	}
+	patches := []Patch{{Path: "dist/menu.js", Data: []byte(newMenu)}}
+	// The IDE installer and SSH password prompt use separate windows and do
+	// not load the Hub preload. Older releases can omit either window.
+	for _, rel := range []string{"dist/ideInstall/wizardPreload.js", "dist/remote/sshPromptPreload.js"} {
+		if arc.lookup(rel) == nil {
+			continue
+		}
+		source, err := arc.ReadFile(rel)
+		if err != nil {
+			return nil, err
+		}
+		if rel == "dist/remote/sshPromptPreload.js" {
+			const promptPath = "dist/remote/sshPrompts.js"
+			prompt, err := arc.ReadFile(promptPath)
+			if err != nil {
+				return nil, err
+			}
+			// The message comes from the remote SSH process, so preserve it
+			// even when it happens to match a translated button label.
+			const original = `<div id="message"></div>`
+			const protected = `<div id="message" translate="no"></div>`
+			if !strings.Contains(string(prompt), original) && !strings.Contains(string(prompt), protected) {
+				return nil, fmt.Errorf("could not locate the SSH prompt message container in %s", promptPath)
+			}
+			promptSource := strings.ReplaceAll(string(prompt), original, protected)
+			if err := checkJavaScriptSyntax(promptPath, promptSource); err != nil {
+				return nil, err
+			}
+			patches = append(patches, Patch{Path: promptPath, Data: []byte(promptSource)})
+		}
+		patched := patchPreload(string(source), patch.windowPreload)
+		if err := checkJavaScriptSyntax(rel, patched); err != nil {
+			return nil, err
+		}
+		patches = append(patches, Patch{Path: rel, Data: []byte(patched)})
+	}
+
+	return patches, nil
 }
 
 // RestoreOfficial restores the official untranslated archive.

@@ -2,15 +2,15 @@ package core
 
 // Options controls an apply or restore run.
 type Options struct {
-	AppDir    string
-	Locale    string
-	Restart   bool
-	Force     bool
-	TimeoutMs int
+	AppDir         string
+	Locale         string
+	Restart        bool
+	Force          bool
+	TimeoutMs      int
+	SessionMetrics *bool // nil keeps the setting in the installed archive
 }
 
-// EnglishLocale is the official untranslated build. It is not a language pack:
-// it is the state apply leaves behind, reached through restore.
+// EnglishLocale uses Antigravity's built-in language.
 const EnglishLocale = "en"
 
 // Service is the entry point the CLI and the GUI both drive.
@@ -37,9 +37,7 @@ func (s *Service) Notes() []string { return s.notes }
 
 // DescribeLocales lists the bundled language packs with their coverage.
 //
-// The official English build is listed as well, because choosing it from the
-// GUI means restore rather than apply. Without it the picker cannot express the
-// only language every installation actually ships with.
+// English is provided by Antigravity, so it has no bundled translations.
 func (s *Service) DescribeLocales() ([]LocaleInfo, error) {
 	locales, err := s.store.Describe()
 	if err != nil {
@@ -63,7 +61,11 @@ func (s *Service) closeApp(p *paths, opts Options) (bool, error) {
 		timeout = gracefulTimeoutMs
 	}
 	s.progress("正在关闭 Antigravity", p.AppDir)
-	return s.stopApp(p, opts.Force, timeout)
+	running, err := s.stopApp(p, opts.Force, timeout)
+	if err != nil {
+		return running, &OpError{Op: "closing Antigravity", Cause: err}
+	}
+	return running, nil
 }
 
 // progress reports a stage update when a sink is configured.

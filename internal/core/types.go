@@ -31,6 +31,7 @@ type Status struct {
 	// authoritative answer rather than a recorded one.
 	CurrentLanguage   string
 	LocaleName        string
+	SessionMetrics    bool
 	HasCleanBackup    bool
 	CleanBackupStatus string
 	LastPatchedAt     *string

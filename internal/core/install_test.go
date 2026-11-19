@@ -1,6 +1,7 @@
 package core
 
 import (
+	"bytes"
 	"errors"
 	"os"
 	"path/filepath"
@@ -96,11 +97,12 @@ func TestApplySwitchAndRestore(t *testing.T) {
 				t.Fatal("the same-version backup was not refreshed from the installed archive")
 			}
 			opts.Locale = "ja"
+			opts.SessionMetrics = new(true)
 			if _, err := svc.ApplyLocale(opts); err != nil {
 				t.Fatal(err)
 			}
 			status, err := svc.GetStatus(p.AppDir)
-			if err != nil || status.CurrentLanguage != "ja" || status.AppVersion != identity.Version {
+			if err != nil || status.CurrentLanguage != "ja" || status.AppVersion != identity.Version || !status.SessionMetrics {
 				t.Fatalf("status after switching locale: %+v, %v", status, err)
 			}
 			patched, err := ReadArchive(p.AsarPath)
@@ -115,6 +117,9 @@ func TestApplySwitchAndRestore(t *testing.T) {
 				if err != nil || strings.Count(string(preload), "/* antigravity-i18n:begin */") != 1 {
 					t.Fatalf("%s does not contain exactly one engine after switching: %v", rel, err)
 				}
+				if strings.Contains(string(preload), sessionMetricsMarker) != (rel == "dist/preload.js") {
+					t.Fatalf("unexpected session metrics state in %s", rel)
+				}
 			}
 			if original.lookup("dist/remote/sshPromptPreload.js") != nil {
 				prompt, err := patched.ReadFile("dist/remote/sshPrompts.js")
@@ -123,8 +128,48 @@ func TestApplySwitchAndRestore(t *testing.T) {
 				}
 			}
 			first := fileHash(t, p.AsarPath)
+			opts.SessionMetrics = nil
 			if _, err := svc.ApplyLocale(opts); err != nil || fileHash(t, p.AsarPath) != first {
 				t.Fatalf("re-applying the locale was not byte-stable: %v", err)
+			}
+			opts.Locale = EnglishLocale
+			opts.SessionMetrics = new(true)
+			if _, err := svc.ApplyLocale(opts); err != nil {
+				t.Fatal(err)
+			}
+			status, err = svc.GetStatus(p.AppDir)
+			if err != nil || status.CurrentLanguage != EnglishLocale || !status.SessionMetrics {
+				t.Fatalf("status with metrics alone: %+v, %v", status, err)
+			}
+			english, err := ReadArchive(p.AsarPath)
+			if err != nil {
+				t.Fatal(err)
+			}
+			clean, err := ReadArchive(p.CleanBackupPath)
+			if err != nil {
+				t.Fatal(err)
+			}
+			for _, rel := range []string{"dist/menu.js", "dist/ideInstall/wizardPreload.js", "dist/remote/sshPromptPreload.js", "dist/remote/sshPrompts.js"} {
+				if clean.lookup(rel) == nil {
+					continue
+				}
+				pristine, err := clean.ReadFile(rel)
+				if err != nil {
+					t.Fatal(err)
+				}
+				actual, err := english.ReadFile(rel)
+				if err != nil || !bytes.Equal(pristine, actual) {
+					t.Fatalf("metrics-only apply left a language patch in %s: %v", rel, err)
+				}
+			}
+			opts.Locale = "ja"
+			opts.SessionMetrics = new(false)
+			if _, err := svc.ApplyLocale(opts); err != nil {
+				t.Fatal(err)
+			}
+			status, err = svc.GetStatus(p.AppDir)
+			if err != nil || status.SessionMetrics || status.CurrentLanguage != "ja" {
+				t.Fatalf("status after disabling metrics: %+v, %v", status, err)
 			}
 			if result, err := svc.RestoreOfficial(opts); err != nil || result.AlreadyEnglish || fileHash(t, p.AsarPath) != want {
 				t.Fatalf("restoring Antigravity %s did not reproduce the official bytes: %v", identity.Version, err)

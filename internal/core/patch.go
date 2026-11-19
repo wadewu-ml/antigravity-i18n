@@ -17,6 +17,7 @@ var patchMarkers = []string{
 	"installZhCNPatch",
 	"const zhCNText = new Map([",
 	"function translateMenu(menu)",
+	sessionMetricsMarker,
 }
 
 // blockSentinels wrap every injected block. Fragments carry them, so a re-run

@@ -28,6 +28,8 @@
   var elBtnRestore = document.getElementById('btnRestore');
   var elLocaleChips = document.getElementById('localeChips');
   var elLocaleNote = document.getElementById('localeNote');
+  var elSessionMetrics = document.getElementById('sessionMetrics');
+  var elSessionMetricsDetail = document.getElementById('sessionMetricsDetail');
   var elBtnToggleLogs = document.getElementById('btnToggleLogs');
   var elLogDrawer = document.getElementById('logDrawer');
   var elLogContent = document.getElementById('logContent');
@@ -44,6 +46,7 @@
   var elMsgModal = document.getElementById('msgModal');
   var elMsgTitle = document.getElementById('msgTitle');
   var elMsgBody = document.getElementById('msgBody');
+  var elBtnMsgLogs = document.getElementById('btnMsgLogs');
   var elBtnMsgOk = document.getElementById('btnMsgOk');
 
   function backend() {
@@ -62,9 +65,10 @@
     elLogContent.scrollTop = elLogContent.scrollHeight;
   }
 
-  function showMessage(title, body) {
+  function showMessage(title, body, showLogs) {
     elMsgTitle.textContent = title;
     elMsgBody.textContent = body;
+    elBtnMsgLogs.classList.toggle('hidden', !showLogs);
     elMsgModal.classList.remove('hidden');
   }
 
@@ -83,10 +87,21 @@
     Array.prototype.forEach.call(elLocaleChips.querySelectorAll('.chip'), function (chip) {
       chip.disabled = operating;
     });
+    renderPrimaryLabel();
   }
 
-  function isPatched(st) {
-    return !!(st && st.CurrentLanguage && st.CurrentLanguage !== 'en');
+  function isCustomized(st) {
+    return !!(st && (st.SessionMetrics || st.CurrentLanguage && st.CurrentLanguage !== 'en'));
+  }
+
+  function setStatus(st, selectInstalled) {
+    currentStatus = st;
+    if (selectInstalled || !selectedLocale) {
+      selectedLocale = st.CurrentLanguage;
+      elSessionMetrics.checked = Boolean(st.SessionMetrics);
+    }
+    renderStatus(st);
+    renderChips();
   }
 
   function refreshStatus() {
@@ -98,11 +113,10 @@
       return Promise.resolve();
     }
     return app.GetStatus().then(function (st) {
-      currentStatus = st;
-      renderStatus(st);
-      renderChips();
+      setStatus(st, false);
     }).catch(function (err) {
       currentStatus = null;
+      renderPrimaryLabel();
       elStatusPill.className = 'status-pill danger';
       elStatusLabel.textContent = '读取失败';
       elStatusDesc.textContent = errorText(err);
@@ -121,27 +135,24 @@
     elBtnSecondaryAction.classList.add('hidden');
     elBtnRestore.classList.add('hidden');
 
-    if (isPatched(st)) {
+    if (isCustomized(st)) {
       elStatusPill.classList.add('success');
-      elStatusLabel.textContent = '已本地化 · ' + st.CurrentLanguage;
-      elStatusDesc.textContent = '当前界面语言为 ' + (st.LocaleName || st.CurrentLanguage) +
-        '，可随时还原为官方英文版。';
-      elBtnPrimaryAction.textContent = '重新应用';
+      elStatusLabel.textContent = st.CurrentLanguage === 'en' ? '官方英文' : '已本地化 · ' + st.CurrentLanguage;
+      elStatusDesc.textContent = '当前界面语言为 ' + (st.LocaleName || st.CurrentLanguage) + '。' +
+        (st.SessionMetrics ? '会话指标已开启。' : '');
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
       elBtnRestore.classList.remove('hidden');
     } else if (st.HasCleanBackup) {
       elStatusPill.classList.add('default');
       elStatusLabel.textContent = '官方英文';
-      elStatusDesc.textContent = '当前是官方原始版本，干净备份可用，可以选择并应用界面语言。';
-      elBtnPrimaryAction.textContent = '应用中文';
+      elStatusDesc.textContent = '干净备份可用。';
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
     } else {
       elStatusPill.classList.add('warning');
       elStatusLabel.textContent = '官方英文';
-      elStatusDesc.textContent = '当前是官方原始版本；应用时会先创建一份干净备份供还原使用。';
-      elBtnPrimaryAction.textContent = '应用中文';
+      elStatusDesc.textContent = '应用前会自动创建干净备份。';
     }
 
     if (st.CleanBackupStatus && st.CleanBackupStatus !== 'valid') {
@@ -151,9 +162,6 @@
       elStatusDesc.textContent += ' 状态文件与实际内容不一致，以 app.asar 的实际内容为准。';
     }
   }
-  // The button names the locale the click will install, not the one already
-  // installed. Saying "应用中文" while the selection is Japanese misreports what
-  // the next click does.
   function selectedLabel() {
     for (var i = 0; i < locales.length; i++) {
       if (locales[i].code === selectedLocale) return locales[i].name;
@@ -161,22 +169,21 @@
     return selectedLocale;
   }
 
-  function localeLabel(code) {
-    for (var i = 0; i < locales.length; i++) {
-      if (locales[i].code === code) return locales[i].name + ' (' + code + ')';
-    }
-    return code;
-  }
-
   function renderPrimaryLabel() {
-    var label = selectedLocale === 'en' ? 'English' : selectedLabel();
-    if (isPatched(currentStatus)) {
-      elBtnPrimaryAction.textContent = currentStatus.CurrentLanguage === selectedLocale
-        ? '重新应用 ' + label
-        : '切换到 ' + label;
+    elSessionMetrics.disabled = isOperating || !currentStatus;
+    if (!currentStatus) {
+      elBtnPrimaryAction.textContent = '重新检测';
+      elBtnPrimaryAction.disabled = isOperating;
       return;
     }
-    elBtnPrimaryAction.textContent = selectedLocale === 'en' ? '保持英文' : '应用 ' + label;
+    var metricsChanged = Boolean(currentStatus.SessionMetrics) !== elSessionMetrics.checked;
+    var hasChanges = currentStatus.CurrentLanguage !== selectedLocale || metricsChanged;
+    var canReapply = !hasChanges && isCustomized(currentStatus);
+    elBtnPrimaryAction.textContent = canReapply ? '重新应用' : '应用更改';
+    elBtnPrimaryAction.disabled = isOperating || (!hasChanges && !canReapply);
+    elSessionMetricsDetail.textContent = metricsChanged
+      ? (elSessionMetrics.checked ? '应用后开启' : '应用后关闭')
+      : '在 Antigravity 的模型选择器旁显示上下文用量。';
   }
 
   function renderChips() {
@@ -185,7 +192,6 @@
       elLocaleNote.textContent = '没有可用的语言包';
       return;
     }
-    var patched = isPatched(currentStatus);
     locales.forEach(function (loc) {
       var chip = document.createElement('button');
       chip.type = 'button';
@@ -208,9 +214,7 @@
       });
       elLocaleChips.appendChild(chip);
     });
-    elLocaleNote.textContent = patched
-      ? '点击其他语言可直接切换'
-      : '共 ' + locales.length + ' 个选项，选中 English 即保持官方英文';
+    elLocaleNote.textContent = '';
     renderPrimaryLabel();
   }
 
@@ -219,13 +223,6 @@
     if (!app) return Promise.resolve();
     return app.GetLocales().then(function (list) {
       locales = list || [];
-      if (!selectedLocale) {
-        // English leads the list, so the fallback must name a real language pack
-        // rather than whichever entry happens to be first.
-        selectedLocale = isPatched(currentStatus)
-          ? currentStatus.CurrentLanguage
-          : 'zh-CN';
-      }
       renderChips();
     }).catch(function (err) {
       elLocaleNote.textContent = '读取语言列表失败';
@@ -239,23 +236,23 @@
     if (!app) return;
     var code = selectedLocale || 'zh-CN';
 
-    // English is not a language pack: it is the untranslated build that restore
-    // reinstalls. Routing it through apply could only fail on an unknown locale.
-    if (code === 'en') {
-      confirmAction('保持官方英文', code, doRestore);
-      return;
-    }
-
-    confirmAction('切换到 ' + selectedLabel() + '?' , code, function (force) {
-      runApply(app, code, force);
-    });
+    var metrics = elSessionMetrics.checked;
+    var changes = [];
+    if (currentStatus.CurrentLanguage !== code) changes.push('界面语言设为 ' + selectedLabel());
+    if (Boolean(currentStatus.SessionMetrics) !== metrics) changes.push((metrics ? '开启' : '关闭') + '会话指标');
+    var title = changes.length ? '应用更改？' : '重新应用？';
+    var description = changes.length ? changes.join('，') + '。' : '重新写入当前的语言和会话指标设置。';
+    var apply = (code === 'en' && !metrics) ? doRestore : function (force) { runApply(app, code, metrics, force); };
+    confirmAction(title, description, apply);
   }
 
-  function confirmAction(title, code, onConfirm) {
+  function confirmRestore() {
+    confirmAction('还原官方版本？', 'Antigravity 将恢复官方英文界面，会话指标将关闭。', doRestore);
+  }
+
+  function confirmAction(title, description, onConfirm) {
     elApplyConfirmTitle.textContent = title;
-    elApplyConfirmBody.textContent = code === 'en'
-      ? '将用官方英文版 app.asar 替换当前文件，并移除全部本地化补丁。'
-      : '将改写 app.asar 中的界面语言资源，Antigravity 需要先关闭。';
+    elApplyConfirmBody.textContent = description;
     elForceShutdown.checked = false;
     elBtnConfirmApply.onclick = function () {
       elApplyConfirmModal.classList.add('hidden');
@@ -264,19 +261,18 @@
     elApplyConfirmModal.classList.remove('hidden');
   }
 
-  function runApply(app, code, force) {
-    setOperatingState(true, '正在改写 app.asar', '正在准备语言包与翻译资源...');
-    appendLog('[操作] 应用语言包: ' + code);
+  function runApply(app, code, metrics, force) {
+    setOperatingState(true, '正在应用更改', '正在准备补丁...');
+    appendLog('[操作] 应用 ' + code + ' · 会话指标' + (metrics ? '开启' : '关闭') + (force ? ' · 强制退出' : ''));
 
-    app.ApplyLocale(code, true, force).then(function (res) {
+    app.ApplyCustomization(code, metrics, true, force).then(function (res) {
       var name = res && res.LocaleName ? res.LocaleName : code;
-      appendLog('[完成] 已切换为 ' + name);
-      showMessage('已应用', '界面语言已切换为 ' + name + '。' +
-        (res && res.Relaunched ? 'Antigravity 已重新启动。' : '未能自动打开 Antigravity，请手动启动。'));
+      appendLog('[完成] 已应用 ' + name);
+      if (!res || !res.Relaunched) showMessage('已应用', '请手动打开 Antigravity。');
     }).catch(function (err) {
       var msg = errorText(err);
       appendLog('[错误] ' + msg);
-      showMessage('应用失败', msg);
+      showMessage('应用失败', msg, true);
     }).then(function () {
       setOperatingState(false);
       return refreshStatus();
@@ -292,14 +288,14 @@
     appendLog('[操作] 还原为官方英文');
 
     app.RestoreLocale(true, force).then(function (res) {
+      selectedLocale = 'en';
+      elSessionMetrics.checked = false;
       appendLog('[完成] 已还原为官方英文');
-      var message = res && res.AlreadyEnglish ? '当前已是官方英文版本。' : 'app.asar 已恢复为官方英文版本。';
-      if (res && !res.AlreadyEnglish && !res.Relaunched) message += '未能自动打开 Antigravity，请手动启动。';
-      showMessage('已还原', message);
+      if (res && !res.AlreadyEnglish && !res.Relaunched) showMessage('已还原', '请手动打开 Antigravity。');
     }).catch(function (err) {
       var msg = errorText(err);
       appendLog('[错误] ' + msg);
-      showMessage('还原失败', msg);
+      showMessage('还原失败', msg, true);
     }).then(function () {
       setOperatingState(false);
       return refreshStatus();
@@ -336,9 +332,7 @@
       if (!selected) return null;
       setOperatingState(true, '正在切换安装位置', selected);
       return app.SetAppDir(selected).then(function (st) {
-        currentStatus = st;
-        renderStatus(st);
-        return refreshStatus();
+        setStatus(st, true);
       });
     }).catch(function (err) {
       var msg = errorText(err);
@@ -352,9 +346,8 @@
   elBtnPrimaryAction.addEventListener('click', handlePrimaryAction);
   elBtnSecondaryAction.addEventListener('click', launchApp);
   elBtnChangePath.addEventListener('click', handleChangePath);
-  elBtnRestore.addEventListener('click', function () {
-    confirmAction('还原为官方英文？', 'en', doRestore);
-  });
+  elBtnRestore.addEventListener('click', confirmRestore);
+  elSessionMetrics.addEventListener('change', renderPrimaryLabel);
   elBtnCancelApply.addEventListener('click', function () {
     elApplyConfirmModal.classList.add('hidden');
     elBtnConfirmApply.onclick = null;
@@ -369,6 +362,10 @@
 
   elBtnMsgOk.addEventListener('click', function () {
     elMsgModal.classList.add('hidden');
+  });
+  elBtnMsgLogs.addEventListener('click', function () {
+    elMsgModal.classList.add('hidden');
+    elLogDrawer.classList.remove('hidden');
   });
 
   elBtnToggleLogs.addEventListener('click', function () {

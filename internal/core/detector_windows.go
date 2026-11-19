@@ -155,7 +155,7 @@ func stopAntigravity(p *paths, force bool, timeoutMs int) (bool, error) {
 	defer cancel()
 	cmd := exec.CommandContext(ctx, "taskkill.exe", args...)
 	hideWindow(cmd)
-	_ = cmd.Run() // A selected process may have exited before taskkill reached it.
+	runErr := cmd.Run() // A selected process may have exited before taskkill reached it.
 
 	for {
 		// The handles identify the processes we already checked. Querying their
@@ -182,10 +182,14 @@ func stopAntigravity(p *paths, force bool, timeoutMs int) (bool, error) {
 		}
 		remaining := time.Until(deadline)
 		if remaining <= 0 {
+			message := "Antigravity did not exit before the timeout. Close it manually or explicitly choose forced shutdown and retry"
 			if force {
-				return true, errors.New("Antigravity is still running after forced shutdown. Close it and retry")
+				message = "Antigravity is still running after forced shutdown. Close it and retry"
 			}
-			return true, errors.New("Antigravity did not exit before the timeout. Close it manually or explicitly choose forced shutdown and retry")
+			if runErr != nil {
+				return true, fmt.Errorf("%s (taskkill: %w)", message, runErr)
+			}
+			return true, errors.New(message)
 		}
 		time.Sleep(min(remaining, gracefulPollIntervalMs*time.Millisecond))
 	}

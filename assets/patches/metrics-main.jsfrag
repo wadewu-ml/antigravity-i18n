@@ -1,0 +1,126 @@
+(function installSessionMetricsReader() {
+    let DatabaseSync;
+    let isLocalHubTopFrame;
+    try {
+        ({ isLocalHubTopFrame } = require('./utils'));
+        ({ DatabaseSync } = require('node:sqlite'));
+    } catch {
+        return;
+    }
+    if (typeof isLocalHubTopFrame !== 'function') return;
+    const { app, ipcMain } = require('electron');
+    const { stat } = require('node:fs/promises');
+    const { join } = require('node:path');
+    const idPattern = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
+    const recent = new Map();
+    const readStat = (file) => stat(file).catch(() => null);
+    // Skip oversized records inside SQLite before copying their blobs into JS.
+    const recentGenerations = 'SELECT CASE WHEN length(data) <= 16777216 THEN data END AS data '
+        + 'FROM gen_metadata ORDER BY idx DESC LIMIT 4';
+
+    function readFields(bytes) {
+        const fields = new Map();
+        if (!(bytes instanceof Uint8Array)) return fields;
+        let offset = 0;
+        function varint() {
+            let value = 0;
+            let scale = 1;
+            for (let i = 0; i < 10 && offset < bytes.length; i++) {
+                const byte = bytes[offset++];
+                value += (byte & 127) * scale;
+                if (byte < 128) return value;
+                scale *= 128;
+            }
+            throw new Error('Invalid generation metadata varint');
+        }
+        while (offset < bytes.length) {
+            const key = varint();
+            const field = Math.floor(key / 8);
+            if (!Number.isSafeInteger(key) || field === 0) throw new Error('Invalid generation metadata field');
+            const wire = key % 8;
+            if (wire === 0) {
+                const value = varint();
+                if (Number.isSafeInteger(value)) fields.set(field, value);
+                continue;
+            }
+            const length = wire === 2 ? varint() : wire === 1 ? 8 : wire === 5 ? 4 : -1;
+            const end = offset + length;
+            if (length < 0 || end > bytes.length) throw new Error('Invalid generation metadata length');
+            if (wire === 2) fields.set(field, bytes.subarray(offset, end));
+            offset = end;
+        }
+        return fields;
+    }
+
+    function seconds(bytes) {
+        if (!(bytes instanceof Uint8Array)) return null;
+        const parts = readFields(bytes);
+        const secs = parts.get(1) ?? 0;
+        const nanos = parts.get(2) ?? 0;
+        if (typeof secs !== 'number' || typeof nanos !== 'number' || nanos >= 1e9) return null;
+        return secs + nanos / 1e9;
+    }
+
+    function decodeMetrics(data) {
+        // GenerationMetadata contains a nested model call with usage, context
+        // limits and timing. Only those wire fields are decoded.
+        const call = readFields(readFields(data).get(1));
+        const usage = readFields(call.get(4));
+        const window = readFields(readFields(call.get(9)).get(10));
+        const input = usage.get(2);
+        const cached = usage.get(5);
+        const output = usage.get(3);
+        const used = typeof input === 'number' || typeof cached === 'number'
+            ? (input ?? 0) + (cached ?? 0) : null;
+        const limit = window.get(4);
+        const stream = seconds(call.get(12));
+        const firstToken = seconds(call.get(11));
+        if (!Number.isSafeInteger(used) && typeof output !== 'number') return null;
+        return {
+            used: Number.isSafeInteger(used) ? used : null,
+            limit: typeof limit === 'number' && limit > 0 ? limit : null,
+            speed: typeof output === 'number' && stream > 0 ? output / stream : null,
+            cacheRate: Number.isSafeInteger(used) && used > 0 ? (cached ?? 0) / used : null,
+            firstToken,
+        };
+    }
+
+    async function latestMetrics(id) {
+        const databasePath = join(app.getPath('home'), '.gemini', 'antigravity', 'conversations', id + '.db');
+        const [dbStat, walStat] = await Promise.all([readStat(databasePath), readStat(databasePath + '-wal')]);
+        if (!dbStat?.isFile()) return null;
+        const signature = [dbStat.mtimeMs, dbStat.size, walStat?.mtimeMs, walStat?.size].join(':');
+        const previous = recent.get(id);
+        if (previous?.signature === signature) return previous.metrics;
+
+        const db = new DatabaseSync(databasePath, { readOnly: true });
+        let metrics = null;
+        try {
+            for (const row of db.prepare(recentGenerations).iterate()) {
+                try {
+                    metrics = decodeMetrics(row.data);
+                } catch {
+                    // A malformed record can precede a readable older call.
+                    continue;
+                }
+                if (metrics) break;
+            }
+        } finally {
+            db.close();
+        }
+        recent.delete(id);
+        if (recent.size === 32) recent.delete(recent.keys().next().value);
+        recent.set(id, { signature, metrics });
+        return metrics;
+    }
+
+    ipcMain.handle('antigravity-i18n:session-metrics', async (event, id) => {
+        if (typeof id !== 'string' || !idPattern.test(id) || !isLocalHubTopFrame(event)) return null;
+        try {
+            return await latestMetrics(id.toLowerCase());
+        } catch {
+            // The language server can replace or temporarily lock its database.
+            return null;
+        }
+    });
+})();

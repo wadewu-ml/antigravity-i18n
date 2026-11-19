@@ -45,11 +45,6 @@
         <div class="progress-detail" id="progressDetail">请稍候...</div>
       </div>
 
-      <div class="action-row" id="actionRow">
-        <button class="btn btn-primary" id="btnPrimaryAction">应用中文</button>
-        <button class="btn btn-secondary hidden" id="btnSecondaryAction">打开 Antigravity</button>
-        <button class="text-link-danger hidden" id="btnRestore">还原为英文</button>
-      </div>
     </section>
 
     <section class="card locale-card">
@@ -58,6 +53,21 @@
         <span class="section-note" id="localeNote">正在读取语言包...</span>
       </div>
       <div class="chips" id="localeChips"></div>
+      <div class="feature-setting">
+        <div>
+          <label class="section-title" for="sessionMetrics">会话指标</label>
+          <p class="setting-detail" id="sessionMetricsDetail">在 Antigravity 的模型选择器旁显示上下文用量。</p>
+        </div>
+        <input class="setting-switch" type="checkbox" role="switch" id="sessionMetrics"
+          aria-describedby="sessionMetricsDetail" disabled>
+      </div>
+      <div class="action-row" id="actionRow">
+        <div class="secondary-actions">
+          <button class="text-link hidden" id="btnSecondaryAction">打开 Antigravity</button>
+          <button class="text-link-danger hidden" id="btnRestore">还原官方版本</button>
+        </div>
+        <button class="btn btn-primary" id="btnPrimaryAction">应用更改</button>
+      </div>
     </section>
 
     <footer class="app-footer">
@@ -81,11 +91,11 @@
     <div class="modal-box">
       <h3>关于 antigravity-i18n</h3>
       <p class="modal-desc">
-        为 Antigravity 桌面应用提供界面多语言本地化的单文件工具，纯 Go 实现，不依赖 Node 运行时。
+        为 Antigravity 桌面应用提供界面多语言本地化的单文件工具，即开即用。
       </p>
       <ul class="about-features">
         <li><b>按字节还原</b>：应用前保留一份干净的 app.asar，还原后与官方版本逐字节一致。</li>
-        <li><b>只动三个文件</b>：仅替换界面外壳的 JS，其余内容从原 asar 原样拷贝。</li>
+        <li><b>会话指标</b>在模型选择器旁显示上下文用量，悬停预览，点击固定详情。</li>
         <li><b>完整校验与回滚</b>：重算 offset 与 integrity，任何一步失败都会自动恢复原状。</li>
       </ul>
       <p class="modal-note">本工具为社区维护的非官方本地化工具，与 Antigravity 官方无关。</p>
@@ -97,16 +107,16 @@
 
   <div class="modal-backdrop hidden" id="applyConfirmModal">
     <div class="modal-box">
-      <h3 id="applyConfirmTitle">确认切换语言？</h3>
+      <h3 id="applyConfirmTitle">应用更改？</h3>
       <p class="modal-desc" id="applyConfirmBody"></p>
-      <p class="modal-sub">如需关闭 Antigravity，默认请求正常退出，等待 30 秒后若仍在运行则取消操作。</p>
+      <p class="modal-sub">Antigravity 正在运行时会先请求退出。等待 30 秒后仍未退出，本次操作会取消。</p>
       <label class="modal-force">
         <input type="checkbox" id="forceShutdown">
         <span>强制退出 Antigravity，未保存的编辑和正在进行的会话可能丢失</span>
       </label>
       <div class="modal-actions">
         <button class="btn btn-secondary" id="btnCancelApply">取消</button>
-        <button class="btn btn-primary" id="btnConfirmApply">确认继续</button>
+        <button class="btn btn-primary" id="btnConfirmApply">继续</button>
       </div>
     </div>
   </div>
@@ -116,6 +126,7 @@
       <h3 id="msgTitle">提示</h3>
       <p class="modal-desc" id="msgBody"></p>
       <div class="modal-actions">
+        <button class="text-link hidden" id="btnMsgLogs">查看运行日志</button>
         <button class="btn btn-primary" id="btnMsgOk">知道了</button>
       </div>
     </div>

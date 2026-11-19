@@ -75,31 +75,35 @@ func detectPatchState(asarPath string) *bool {
 // language is active instead of a state marker having to be trusted.
 var archiveLocaleRe = regexp.MustCompile(`(?s)const AG_LOCALE = (\{.*?\});\s*const agText`)
 
-// readArchiveLocale reads the locale out of a patched archive.
-func readArchiveLocale(asarPath string) (code, name string, ok bool) {
+// readArchiveLocale reads the locale and enabled features from the Hub preload.
+func readArchiveLocale(asarPath string) (code, name string, sessionMetrics, ok bool) {
 	arc, err := ReadArchive(asarPath)
 	if err != nil {
-		return "", "", false
+		return "", "", false, false
 	}
 	preload, err := arc.ReadFile("dist/preload.js")
 	if err != nil {
-		return "", "", false
+		return "", "", false, false
 	}
+	sessionMetrics = strings.Contains(string(preload), sessionMetricsMarker)
 	m := archiveLocaleRe.FindSubmatch(preload)
 	if m == nil {
-		return "", "", false
+		if sessionMetrics {
+			return EnglishLocale, "English", true, true
+		}
+		return "", "", false, false
 	}
 	var header struct {
 		Language string `json:"language"`
 		Name     string `json:"name"`
 	}
 	if err := json.Unmarshal(m[1], &header); err != nil {
-		return "", "", false
+		return "", "", false, false
 	}
 	if header.Language == "" {
-		return "", "", false
+		return "", "", false, false
 	}
-	return header.Language, header.Name, true
+	return header.Language, header.Name, sessionMetrics, true
 }
 
 // normalizeLanguage maps a recorded language onto a locale code. Markers written
@@ -134,12 +138,14 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 
 	state := readState(p)
 	var currentLanguage, localeName string
+	var sessionMetrics bool
 	if detected {
 		// A patched archive names its own locale. Archives written by a release
 		// that predated locale files carry no header, and those were zh-CN only.
-		if code, name, ok := readArchiveLocale(p.AsarPath); ok {
+		if code, name, metrics, ok := readArchiveLocale(p.AsarPath); ok {
 			currentLanguage = code
 			localeName = name
+			sessionMetrics = metrics
 		} else {
 			currentLanguage = DefaultLocale
 		}
@@ -161,6 +167,7 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 		AppVersion:        expectedIdentity.Version,
 		CurrentLanguage:   currentLanguage,
 		LocaleName:        localeName,
+		SessionMetrics:    sessionMetrics,
 		HasCleanBackup:    backupState == cleanBackupValid,
 		CleanBackupStatus: backupState,
 		LastPatchedAt:     statePatchedAt(state),

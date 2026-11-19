@@ -116,6 +116,15 @@ func (a *App) SetAppDir(path string) (*core.Status, error) {
 
 // ApplyLocale installs a language pack, replacing whatever patch is present.
 func (a *App) ApplyLocale(locale string, confirmed, force bool) (*core.ApplyResult, error) {
+	return a.applyCustomization(locale, nil, confirmed, force)
+}
+
+// ApplyCustomization installs a language pack with the selected features.
+func (a *App) ApplyCustomization(locale string, sessionMetrics, confirmed, force bool) (*core.ApplyResult, error) {
+	return a.applyCustomization(locale, &sessionMetrics, confirmed, force)
+}
+
+func (a *App) applyCustomization(locale string, sessionMetrics *bool, confirmed, force bool) (*core.ApplyResult, error) {
 	if !confirmed {
 		return nil, errors.New(confirmationRequired)
 	}
@@ -124,10 +133,11 @@ func (a *App) ApplyLocale(locale string, confirmed, force bool) (*core.ApplyResu
 	}
 	defer a.opMu.Unlock()
 	result, err := a.svc.ApplyLocale(core.Options{
-		AppDir:  a.currentDir(),
-		Locale:  locale,
-		Restart: true,
-		Force:   force,
+		AppDir:         a.currentDir(),
+		Locale:         locale,
+		Restart:        true,
+		Force:          force,
+		SessionMetrics: sessionMetrics,
 	})
 	for _, note := range a.svc.Notes() {
 		a.appendLog("note: " + note)

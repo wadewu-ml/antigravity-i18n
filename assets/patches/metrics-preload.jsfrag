@@ -1,0 +1,319 @@
+(function installSessionMetricsView() {
+    const { ipcRenderer } = require('electron');
+    const labels = METRICS_LOCALE_PLACEHOLDER;
+    const idPattern = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
+    const footerSelector = '.agy-composer-footer';
+    const modelSelector = '[data-testid="model-selector-trigger"]';
+    const mainView = '[data-testid="conversation-view"][data-cascade-id]';
+    const sideView = ':is([data-testid="side-question-tab-conversation"], [data-testid="subagent-tab-conversation"])[data-cascade-id]';
+    const sideContent = ':is([data-testid="side-question-tab-content"], [data-media-drop-scope="subpane"])';
+    const sideScope = ':is([data-testid="side-question-tab-content"], [data-testid="side-question-tab-composer"], [data-side-panel-composer], [data-media-drop-scope="subpane"])';
+    const sideTab = ':is([data-active-tab-id^="side_question__"], [data-active-tab-id^="subagent_convo__"])';
+    const cancelButton = '[data-testid="input-cancel-button"]';
+    const scopeSelector = [footerSelector, modelSelector, mainView, sideView, sideScope, sideTab, cancelButton].join(', ');
+    const views = new Map();
+    const requests = new Map();
+    const count = new Intl.NumberFormat(labels.language);
+    const decimal = new Intl.NumberFormat(labels.language, { maximumFractionDigits: 2 });
+    const percent = new Intl.NumberFormat(labels.language, { style: 'percent', maximumFractionDigits: 1 });
+    let panelNumber = 0;
+    let refreshTimer = 0;
+    let activeDetail = null;
+
+    const validId = (candidate) => idPattern.test(candidate ?? '') ? candidate.toLowerCase() : '';
+    const nodeId = (element) => validId(element?.getAttribute('data-cascade-id'));
+    const visible = (element) => element.getClientRects().length > 0 && getComputedStyle(element).visibility === 'visible';
+
+    function mainRouteId() {
+        // A URL with multiple conversation IDs cannot identify a particular pane.
+        const route = location.pathname.match(/\/c\/([^/]+)/i);
+        return validId(route?.[1]);
+    }
+
+    function resolveFooter(footer, onlyMainFooter) {
+        const view = footer.closest(mainView + ', ' + sideView);
+        const scope = footer.closest(sideScope);
+        if (scope) {
+            if (view?.matches(sideView)) return nodeId(view);
+            const tab = scope.closest(sideContent) ?? scope;
+            const conversation = Array.from(tab.querySelectorAll(sideView)).find(visible);
+            if (conversation) return nodeId(conversation);
+            const pane = scope.closest('[data-testid="aux-pane-split"], [data-pane-id]');
+            const strip = pane?.matches(sideTab) ? pane : pane?.querySelector(sideTab);
+            return validId(strip?.getAttribute('data-active-tab-id').split('__')[1]);
+        }
+        if (view) return nodeId(view);
+        return onlyMainFooter ? mainRouteId() : '';
+    }
+
+    function addStyles() {
+        const style = document.createElement('style');
+        style.textContent = [
+            '.ai18n-usage-control { box-sizing: border-box; display: inline-grid; place-items: center; flex: none;',
+            '  align-self: center; vertical-align: middle; inline-size: 22px; block-size: 20px;',
+            '  color: var(--vscode-descriptionForeground, var(--muted-foreground, CanvasText));',
+            '  background: transparent; border: 0; border-radius: 5px; padding: 0; cursor: default; }',
+            '.ai18n-usage-control[hidden] { display: none; }',
+            '.ai18n-usage-control:hover { background: color-mix(in srgb, currentColor 10%, transparent); }',
+            '.ai18n-usage-control:focus-visible { outline: 1px solid var(--vscode-focusBorder, Highlight); }',
+            '.ai18n-usage-ring { display: block; inline-size: 13px; block-size: 13px; border-radius: 50%;',
+            '  background: conic-gradient(currentColor 0% var(--ai18n-context-used, 0%),',
+            '    color-mix(in srgb, currentColor 25%, transparent) 0%);',
+            '  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), black calc(100% - 1.5px)); }',
+            '.ai18n-usage-detail { position: fixed; inset: auto; margin: 0; box-sizing: border-box;',
+            '  padding: 12px; width: max-content; min-width: min(220px, calc(100vw - 16px));',
+            '  max-width: calc(100vw - 16px); border-radius: 10px;',
+            '  color: var(--vscode-editorWidget-foreground, var(--foreground, CanvasText));',
+            '  background: var(--vscode-editorWidget-background, var(--popover, Canvas));',
+            '  border: 1px solid var(--vscode-widget-border, var(--border, GrayText));',
+            '  box-shadow: 0 5px 18px #0002; font: inherit; font-size: 12px; }',
+            '.ai18n-usage-detail p { margin: 0 0 8px; font-weight: 600; }',
+            '.ai18n-usage-meter { height: 3px; margin: 8px 0 10px; overflow: hidden; border-radius: 2px;',
+            '  background: color-mix(in srgb, currentColor 14%, transparent); }',
+            '.ai18n-usage-meter span { display: block; height: 100%; border-radius: inherit;',
+            '  background: var(--vscode-progressBar-background, currentColor); }',
+            '.ai18n-usage-detail dl { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto;',
+            '  gap: 5px 16px; align-items: baseline; }',
+            '.ai18n-usage-detail dt { color: var(--vscode-descriptionForeground, var(--muted-foreground, inherit)); }',
+            '.ai18n-usage-detail dd { margin: 0; text-align: end; font-variant-numeric: tabular-nums; }',
+        ].join('\n');
+        document.head.appendChild(style);
+    }
+
+    function toolbarSlot(anchor) {
+        if (anchor.matches(footerSelector)) {
+            const model = anchor.querySelector(modelSelector);
+            let trigger = model?.closest('button, [role="button"]') ?? model;
+            while (trigger && trigger !== anchor && anchor.contains(trigger)) {
+                const parent = trigger.parentElement;
+                const style = getComputedStyle(parent);
+                if (['flex', 'inline-flex'].includes(style.display) && style.flexDirection.startsWith('row')) {
+                    return { parent, after: trigger };
+                }
+                trigger = parent;
+            }
+            const group = Array.from(anchor.children).find((element) =>
+                element instanceof HTMLElement && !element.matches('button, [role="button"]') &&
+                ['flex', 'inline-flex'].includes(getComputedStyle(element).display));
+            const parent = group ?? anchor;
+            return { parent, prepend: true };
+        }
+        // Read-only views can share the auxiliary pane's tab toolbar.
+        const pane = anchor.closest('[data-testid="aux-pane-split"], [data-pane-id]');
+        const toolbar = anchor.querySelector(':scope > :is(header, nav, [role="toolbar"]), [data-testid="conversation-header"]')
+            ?? (pane?.matches(sideTab) ? pane : pane?.querySelector(sideTab));
+        if (toolbar && !toolbar.closest('button, [role="button"], [role="tab"]')) return { parent: toolbar };
+        return null;
+    }
+
+    function createView(id) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'ai18n-usage-control';
+        button.setAttribute('translate', 'no');
+        const ring = document.createElement('span');
+        ring.className = 'ai18n-usage-ring';
+        ring.setAttribute('aria-hidden', 'true');
+        button.append(ring);
+        const detail = document.createElement('div');
+        detail.className = 'ai18n-usage-detail';
+        detail.id = 'ai18n-usage-detail-' + ++panelNumber;
+        detail.setAttribute('popover', 'manual');
+        detail.setAttribute('role', 'region');
+        detail.setAttribute('aria-label', labels.title);
+        detail.setAttribute('translate', 'no');
+        button.setAttribute('aria-describedby', detail.id);
+        button.setAttribute('aria-expanded', 'false');
+        const title = document.createElement('p');
+        title.textContent = labels.title;
+        const meter = document.createElement('div');
+        meter.className = 'ai18n-usage-meter';
+        meter.setAttribute('aria-hidden', 'true');
+        const fill = document.createElement('span');
+        meter.append(fill);
+        const list = document.createElement('dl');
+        const values = [labels.context, labels.remaining, labels.speed, labels.cache, labels.firstToken].map((label) => {
+            const key = document.createElement('dt');
+            key.textContent = label;
+            const value = document.createElement('dd');
+            list.append(key, value);
+            return value;
+        });
+        detail.append(title, meter, list);
+        document.body.append(detail);
+
+        let hoverTimer;
+        let leaveTimer;
+        let pinned = false;
+        const view = { id, button, detail, meter, fill, values, close, pending: false };
+        function close() {
+            clearTimeout(hoverTimer);
+            clearTimeout(leaveTimer);
+            pinned = false;
+            if (detail.matches(':popover-open')) detail.hidePopover();
+            button.setAttribute('aria-expanded', 'false');
+            if (activeDetail === view) activeDetail = null;
+        }
+        function open() {
+            clearTimeout(hoverTimer);
+            clearTimeout(leaveTimer);
+            if (button.hidden || !button.isConnected) return;
+            if (activeDetail && activeDetail !== view) activeDetail.close();
+            if (!detail.matches(':popover-open')) detail.showPopover();
+            activeDetail = view;
+            button.setAttribute('aria-expanded', 'true');
+            const rectangle = button.getBoundingClientRect();
+            const width = detail.offsetWidth;
+            const height = detail.offsetHeight;
+            const left = Math.max(8, Math.min(rectangle.left + (rectangle.width - width) / 2, innerWidth - width - 8));
+            const top = rectangle.top >= height + 14 ? rectangle.top - height - 6
+                : Math.max(8, Math.min(rectangle.bottom + 6, innerHeight - height - 8));
+            detail.style.left = left + 'px';
+            detail.style.top = top + 'px';
+        }
+        function leave() {
+            clearTimeout(hoverTimer);
+            clearTimeout(leaveTimer);
+            if (!pinned) leaveTimer = setTimeout(close, 150);
+        }
+        button.addEventListener('pointerenter', () => {
+            clearTimeout(leaveTimer);
+            if (!detail.matches(':popover-open')) hoverTimer = setTimeout(open, 240);
+        });
+        button.addEventListener('pointerleave', leave);
+        detail.addEventListener('pointerenter', () => clearTimeout(leaveTimer));
+        detail.addEventListener('pointerleave', leave);
+        button.addEventListener('focus', open);
+        button.addEventListener('blur', leave);
+        button.addEventListener('click', () => {
+            if (pinned) close();
+            else {
+                pinned = true;
+                open();
+            }
+        });
+        setMetrics(view, null);
+        return view;
+    }
+
+    function setMetrics(view, metrics) {
+        if (view.button.hidden !== !metrics) view.button.hidden = !metrics;
+        const used = metrics?.used;
+        const limit = metrics?.limit;
+        const knownLimit = Number.isFinite(used) && Number.isFinite(limit) && limit > 0;
+        const usedRatio = knownLimit ? used / limit : 0;
+        const remaining = knownLimit ? count.format(Math.max(0, limit - used)) : '—';
+        const speed = Number.isFinite(metrics?.speed) ? decimal.format(metrics.speed) + ' tok/s' : '—';
+        const progress = Math.max(0, Math.min(1, usedRatio)) * 100 + '%';
+        view.button.style.setProperty('--ai18n-context-used', progress);
+        if (view.meter.hidden !== !knownLimit) view.meter.hidden = !knownLimit;
+        view.fill.style.width = progress;
+        const context = Number.isFinite(used) ? count.format(used) + (knownLimit
+            ? ' / ' + count.format(limit) + ' (' + percent.format(usedRatio) + ')' : '') : '—';
+        const description = labels.title + ' · ' + labels.context + ' ' + context;
+        if (view.button.getAttribute('aria-label') !== description) view.button.setAttribute('aria-label', description);
+        const cache = Number.isFinite(metrics?.cacheRate) ? percent.format(metrics.cacheRate) : '—';
+        const firstToken = Number.isFinite(metrics?.firstToken) ? decimal.format(metrics.firstToken) + ' s' : '—';
+        [context, remaining, speed, cache, firstToken].forEach((value, index) => {
+            if (view.values[index].textContent !== value) view.values[index].textContent = value;
+        });
+    }
+
+    function requestMetrics(id) {
+        if (!requests.has(id)) {
+            requests.set(id, ipcRenderer.invoke('antigravity-i18n:session-metrics', id)
+                .catch(() => null).finally(() => requests.delete(id)));
+        }
+        return requests.get(id);
+    }
+
+    function refresh() {
+        if (document.hidden) return;
+        const footers = Array.from(document.querySelectorAll(footerSelector)).filter(visible);
+        const onlyMainFooter = footers.filter((footer) => !footer.closest(sideScope + ', ' + sideView)).length === 1;
+        const targets = new Map();
+        for (const footer of footers) {
+            const id = resolveFooter(footer, onlyMainFooter);
+            const slot = id && toolbarSlot(footer);
+            if (slot) targets.set(footer, { id, slot });
+        }
+        // A read-only subagent pane can have a conversation without a composer.
+        for (const side of document.querySelectorAll(sideView)) {
+            if (!visible(side) || side.querySelector(footerSelector)) continue;
+            const id = nodeId(side);
+            const content = side.closest(sideContent);
+            const hasComposer = content && footers.some((footer) => content.contains(footer) && targets.get(footer)?.id === id);
+            const slot = id && !hasComposer && toolbarSlot(side);
+            if (slot) targets.set(side, { id, slot });
+        }
+        for (const [anchor, view] of views) {
+            if (targets.get(anchor)?.id !== view.id) {
+                view.close();
+                view.button.remove();
+                view.detail.remove();
+                views.delete(anchor);
+            }
+        }
+        for (const [anchor, { id, slot }] of targets) {
+            if (!views.has(anchor)) views.set(anchor, createView(id));
+            const view = views.get(anchor);
+            // Resolve the sibling after stale conversation controls have been removed.
+            let before = slot.after?.nextElementSibling ?? null;
+            if (slot.prepend) before = slot.parent.firstElementChild;
+            if (before !== view.button && (view.button.parentElement !== slot.parent || view.button.nextElementSibling !== before)) {
+                slot.parent.insertBefore(view.button, before);
+            }
+            if (view.pending) continue;
+            view.pending = true;
+            requestMetrics(id).then((metrics) => {
+                view.pending = false;
+                if (metrics && views.get(anchor) === view && view.button.isConnected) setMetrics(view, metrics);
+            });
+        }
+    }
+
+    function scheduleRefresh() {
+        if (refreshTimer || document.hidden) return;
+        refreshTimer = setTimeout(() => {
+            refreshTimer = 0;
+            refresh();
+        }, 25);
+    }
+
+    function start() {
+        addStyles();
+        document.addEventListener('pointerdown', (event) => {
+            const view = activeDetail;
+            if (view && !view.button.contains(event.target) && !view.detail.contains(event.target)) view.close();
+        }, true);
+        document.addEventListener('keydown', (event) => {
+            if (activeDetail && event.key === 'Escape') {
+                activeDetail.close();
+                event.stopPropagation();
+            }
+        }, true);
+        const observer = new MutationObserver((changes) => {
+            for (const change of changes) {
+                if (change.type === 'attributes' && change.target.closest('.ai18n-usage-control, .ai18n-usage-detail')) continue;
+                if (change.type === 'attributes' || [...change.addedNodes, ...change.removedNodes].some((node) =>
+                    node.nodeType === 1 && (node.matches(scopeSelector) || node.querySelector(scopeSelector)))) {
+                    scheduleRefresh();
+                    return;
+                }
+            }
+        });
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['data-cascade-id', 'data-active-tab-id', 'hidden'],
+        });
+        document.addEventListener('visibilitychange', scheduleRefresh);
+        // Some model calls write their metadata after the stop button disappears.
+        // The main process checks file timestamps before querying SQLite again.
+        setInterval(scheduleRefresh, 2000);
+        scheduleRefresh();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+    else start();
+})();

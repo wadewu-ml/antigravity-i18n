@@ -256,8 +256,15 @@ body {
 .action-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding-top: 4px;
+}
+
+.secondary-actions {
+  display: flex;
+  align-items: center;
   gap: 12px;
-  margin-top: 4px;
 }
 
 /* Buttons */
@@ -389,6 +396,64 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.feature-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 12px 0;
+  margin-top: 2px;
+}
+
+.setting-detail {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.setting-switch {
+  appearance: none;
+  position: relative;
+  flex: none;
+  width: 33px;
+  height: 19px;
+  border-radius: 12px;
+  background: #c5cdd7;
+  cursor: pointer;
+}
+
+.setting-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px #0002;
+}
+
+.setting-switch:checked {
+  background: var(--primary);
+}
+
+.setting-switch:checked::after {
+  transform: translateX(14px);
+}
+
+.setting-switch:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.setting-switch:disabled {
+  opacity: 0.55;
+  cursor: default;
 }
 
 .chip {

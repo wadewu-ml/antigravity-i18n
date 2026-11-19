@@ -73,6 +73,7 @@ export namespace core {
 	    AppVersion: string;
 	    CurrentLanguage: string;
 	    LocaleName: string;
+	    SessionMetrics: boolean;
 	    HasCleanBackup: boolean;
 	    CleanBackupStatus: string;
 	    LastPatchedAt?: string;
@@ -92,6 +93,7 @@ export namespace core {
 	        this.AppVersion = source["AppVersion"];
 	        this.CurrentLanguage = source["CurrentLanguage"];
 	        this.LocaleName = source["LocaleName"];
+	        this.SessionMetrics = source["SessionMetrics"];
 	        this.HasCleanBackup = source["HasCleanBackup"];
 	        this.CleanBackupStatus = source["CleanBackupStatus"];
 	        this.LastPatchedAt = source["LastPatchedAt"];

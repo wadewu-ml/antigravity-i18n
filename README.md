@@ -23,8 +23,9 @@ The [2.32.1 audit](./docs/translation-audit-2.32.1.md) describes the earlier upd
 - **Single Self-Contained Binary**: ~12 MB standalone executable—no Node.js, npm, or Python runtime required.
 - **GUI & CLI Dual Mode**: Opens a clean desktop window by default, while embedding complete CLI subcommands (`apply` / `restore` / `status` / `locales`) for scripting and automation.
 - **Byte-Exact Restoration**: Automatically creates a pristine backup (`app.asar.clean-backup`) before any changes. Restoring recovers an archive identical byte-for-byte (SHA-256 verified) to the official release.
-- **Non-Invasive Design**: Localizes only the shell UI, native menus, and quit dialogs. Code editors (Monaco), integrated terminals (xterm), and AI conversation streams remain strictly untouched.
-- **Offline & Reliable**: Zero network activity, zero data collection. Equipped with upfront JavaScript syntax validation and transactional rollback on unexpected errors.
+- **Interface localization** covers the shell, native menus, and quit dialogs.
+- **Optional session metrics** show context usage as a ring next to the model selector. Hover for context headroom, recent output speed, cache hit rate, and time to first token, or click to keep the details open. Antigravity reads the metrics from its local session database.
+- **Offline operation** with JavaScript syntax validation and transactional rollback on unexpected errors.
 
 ---
 
@@ -38,8 +39,10 @@ Download the latest `antigravity-i18n.exe` from the [Releases](../../releases) p
 
 Double-click `antigravity-i18n.exe`:
 1. The app automatically detects the Antigravity installation folder (or click "Change Location" to specify manually).
-2. Click on your preferred language (selecting **English** restores the official build).
-3. Click “Apply” and confirm. Once Antigravity has closed, the tool updates the resources and relaunches it.
+2. Select a language and set the “会话指标” switch independently. The metrics also work with the built-in English interface.
+3. Choose “应用更改” and confirm. Once Antigravity has closed, the tool updates the resources and relaunches it. Use “还原官方版本” to restore the official archive.
+
+Split views, side questions, and subagent panes show metrics for their own conversation. A dash indicates unavailable data. You can close the installer after applying the patch.
 
 When apply or restore needs to close Antigravity, the tool asks the selected installation to exit normally. The operation stops if it is still running after 30 seconds. Select the force-quit option in the confirmation dialog to close it immediately.
 
@@ -64,6 +67,7 @@ Open PowerShell in the folder containing `antigravity-i18n.exe`.
 Common options:
 - `--app-dir <path>`: Manually specify the Antigravity installation directory (or set via `ANTIGRAVITY_APP_DIR`).
 - `--locale <code>`: Target language code (e.g., `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
+- Add `--session-metrics` to `apply` to enable the indicator, or `--session-metrics=false` to disable it. `apply --locale en --session-metrics` uses built-in English with the indicator. For bundled language packs, omitting the flag uses the setting in the installed archive.
 - `--no-restart`: Do not relaunch Antigravity after patching.
 - `--force` immediately closes the selected installation. Unsaved work may be lost.
 - `--timeout <ms>` sets how long to wait for Antigravity to exit before stopping the operation. The default is `30000`.
