@@ -37,17 +37,13 @@
   var elBtnCloseLogs = document.getElementById('btnCloseLogs');
   var elAboutModal = document.getElementById('aboutModal');
   var elBtnCloseAbout = document.getElementById('btnCloseAbout');
-  var elApplyConfirmModal = document.getElementById('applyConfirmModal');
-  var elApplyConfirmTitle = document.getElementById('applyConfirmTitle');
-  var elApplyConfirmBody = document.getElementById('applyConfirmBody');
-  var elForceShutdown = document.getElementById('forceShutdown');
-  var elBtnCancelApply = document.getElementById('btnCancelApply');
-  var elBtnConfirmApply = document.getElementById('btnConfirmApply');
+  var elRestoreConfirmModal = document.getElementById('restoreConfirmModal');
   var elMsgModal = document.getElementById('msgModal');
   var elMsgTitle = document.getElementById('msgTitle');
   var elMsgBody = document.getElementById('msgBody');
   var elBtnMsgLogs = document.getElementById('btnMsgLogs');
   var elBtnMsgOk = document.getElementById('btnMsgOk');
+  var elBtnForceRetry = document.getElementById('btnForceRetry');
 
   function backend() {
     return window.go && window.go.main && window.go.main.App ? window.go.main.App : null;
@@ -65,11 +61,19 @@
     elLogContent.scrollTop = elLogContent.scrollHeight;
   }
 
-  function showMessage(title, body, showLogs) {
+  function showMessage(title, body, showLogs, retry) {
     elMsgTitle.textContent = title;
     elMsgBody.textContent = body;
     elBtnMsgLogs.classList.toggle('hidden', !showLogs);
-    elMsgModal.classList.remove('hidden');
+    elBtnMsgOk.textContent = retry ? '取消' : '知道了';
+    elBtnMsgOk.className = retry ? 'btn btn-ghost' : 'btn btn-primary';
+    elBtnForceRetry.classList.toggle('hidden', !retry);
+    elBtnForceRetry.onclick = retry ? function () {
+      elMsgModal.close();
+      retry();
+    } : null;
+    elMsgModal.showModal();
+    elBtnMsgOk.focus();
   }
 
   function setOperatingState(operating, stage, detail) {
@@ -162,15 +166,9 @@
       elStatusDesc.textContent += ' 状态文件与实际内容不一致，以 app.asar 的实际内容为准。';
     }
   }
-  function selectedLabel() {
-    for (var i = 0; i < locales.length; i++) {
-      if (locales[i].code === selectedLocale) return locales[i].name;
-    }
-    return selectedLocale;
-  }
-
   function renderPrimaryLabel() {
     elSessionMetrics.disabled = isOperating || !currentStatus;
+    elBtnPrimaryAction.title = currentStatus ? '应用后会重启 Antigravity' : '';
     if (!currentStatus) {
       elBtnPrimaryAction.textContent = '重新检测';
       elBtnPrimaryAction.disabled = isOperating;
@@ -237,28 +235,24 @@
     var code = selectedLocale || 'zh-CN';
 
     var metrics = elSessionMetrics.checked;
-    var changes = [];
-    if (currentStatus.CurrentLanguage !== code) changes.push('界面语言设为 ' + selectedLabel());
-    if (Boolean(currentStatus.SessionMetrics) !== metrics) changes.push((metrics ? '开启' : '关闭') + '会话指标');
-    var title = changes.length ? '应用更改？' : '重新应用？';
-    var description = changes.length ? changes.join('，') + '。' : '重新写入当前的语言和会话指标设置。';
-    var apply = (code === 'en' && !metrics) ? doRestore : function (force) { runApply(app, code, metrics, force); };
-    confirmAction(title, description, apply);
+    if (code === 'en' && !metrics) {
+      doRestore(false);
+      return;
+    }
+    runApply(app, code, metrics, false);
   }
 
-  function confirmRestore() {
-    confirmAction('还原官方版本？', 'Antigravity 将恢复官方英文界面，会话指标将关闭。', doRestore);
-  }
-
-  function confirmAction(title, description, onConfirm) {
-    elApplyConfirmTitle.textContent = title;
-    elApplyConfirmBody.textContent = description;
-    elForceShutdown.checked = false;
-    elBtnConfirmApply.onclick = function () {
-      elApplyConfirmModal.classList.add('hidden');
-      onConfirm(elForceShutdown.checked);
-    };
-    elApplyConfirmModal.classList.remove('hidden');
+  function showOperationError(title, err, retry) {
+    var msg = errorText(err);
+    var timeoutPrefix = 'shutdown_timeout: ';
+    var timedOut = msg.startsWith(timeoutPrefix);
+    if (timedOut) msg = msg.slice(timeoutPrefix.length);
+    appendLog('[错误] ' + msg);
+    if (retry && timedOut) {
+      showMessage('Antigravity 未退出', '可以手动退出 Antigravity 后再试。强制退出会中断正在进行的会话，未保存的编辑可能丢失。', true, retry);
+      return;
+    }
+    showMessage(title, msg, true);
   }
 
   function runApply(app, code, metrics, force) {
@@ -270,9 +264,7 @@
       appendLog('[完成] 已应用 ' + name);
       if (!res || !res.Relaunched) showMessage('已应用', '请手动打开 Antigravity。');
     }).catch(function (err) {
-      var msg = errorText(err);
-      appendLog('[错误] ' + msg);
-      showMessage('应用失败', msg, true);
+      showOperationError('应用失败', err, force ? null : function () { runApply(app, code, metrics, true); });
     }).then(function () {
       setOperatingState(false);
       return refreshStatus();
@@ -293,9 +285,7 @@
       appendLog('[完成] 已还原为官方英文');
       if (res && !res.AlreadyEnglish && !res.Relaunched) showMessage('已还原', '请手动打开 Antigravity。');
     }).catch(function (err) {
-      var msg = errorText(err);
-      appendLog('[错误] ' + msg);
-      showMessage('还原失败', msg, true);
+      showOperationError('还原失败', err, force ? null : function () { doRestore(true); });
     }).then(function () {
       setOperatingState(false);
       return refreshStatus();
@@ -346,11 +336,16 @@
   elBtnPrimaryAction.addEventListener('click', handlePrimaryAction);
   elBtnSecondaryAction.addEventListener('click', launchApp);
   elBtnChangePath.addEventListener('click', handleChangePath);
-  elBtnRestore.addEventListener('click', confirmRestore);
+  elBtnRestore.addEventListener('click', function () {
+    elRestoreConfirmModal.showModal();
+  });
   elSessionMetrics.addEventListener('change', renderPrimaryLabel);
-  elBtnCancelApply.addEventListener('click', function () {
-    elApplyConfirmModal.classList.add('hidden');
-    elBtnConfirmApply.onclick = null;
+  document.getElementById('btnCancelRestore').addEventListener('click', function () {
+    elRestoreConfirmModal.close();
+  });
+  document.getElementById('btnConfirmRestore').addEventListener('click', function () {
+    elRestoreConfirmModal.close();
+    doRestore(false);
   });
 
   elBtnAbout.addEventListener('click', function () {
@@ -361,10 +356,10 @@
   });
 
   elBtnMsgOk.addEventListener('click', function () {
-    elMsgModal.classList.add('hidden');
+    elMsgModal.close();
   });
   elBtnMsgLogs.addEventListener('click', function () {
-    elMsgModal.classList.add('hidden');
+    elMsgModal.close();
     elLogDrawer.classList.remove('hidden');
   });
 

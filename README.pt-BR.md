@@ -33,9 +33,9 @@ Baixe o `antigravity-i18n.exe` mais recente na página de lançamentos e execute
 Clique duas vezes em `antigravity-i18n.exe`:
 1. O aplicativo detecta automaticamente a pasta de instalação do Antigravity (ou clique em ‘Alterar local’ para especificar manualmente).
 2. Clique no seu idioma preferido (selecionar inglês restaura a versão oficial).
-3. Clique em “Aplicar” e confirme. Quando o Antigravity fechar, a ferramenta atualiza os recursos e abre o aplicativo novamente.
+3. Clique em “Aplicar”. Quando o Antigravity fechar, a ferramenta atualiza os recursos e abre o aplicativo novamente.
 
-Quando for preciso fechar o Antigravity para aplicar ou restaurar, a ferramenta solicita o encerramento normal da instalação selecionada. A operação é cancelada se ela continuar aberta após 30 segundos. Para fechá-la imediatamente, marque a opção de encerramento forçado na janela de confirmação.
+Quando for preciso fechar o Antigravity para aplicar ou restaurar, a ferramenta solicita o encerramento normal da instalação selecionada. Se ela continuar aberta após 30 segundos, você pode fechá-la manualmente e tentar de novo ou clicar em “Forçar o encerramento e tentar novamente”.
 
 ### 2. Interface de linha de comando
 

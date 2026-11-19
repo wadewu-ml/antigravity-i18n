@@ -54,6 +54,27 @@ func processIDExited(pid uint32) bool {
 	return err == nil && exited
 }
 
+// agy-node.cmd uses the same executable in Electron's Node mode. The Sidecar
+// SDK supplies its ESM loader and entry point on the command line.
+func isAntigravitySidecar(handle windows.Handle) bool {
+	var size uint32
+	_ = windows.NtQueryInformationProcess(handle, windows.ProcessCommandLineInformation, nil, 0, &size)
+	if size < uint32(unsafe.Sizeof(windows.NTUnicodeString{})) {
+		return false
+	}
+	buffer := make([]byte, size)
+	ptr := unsafe.Pointer(&buffer[0])
+	if err := windows.NtQueryInformationProcess(handle, windows.ProcessCommandLineInformation, ptr, size, nil); err != nil {
+		return false
+	}
+	args, err := windows.DecomposeCommandLine((*windows.NTUnicodeString)(ptr).String())
+	if err != nil || len(args) < 3 || args[2] != "main.mjs" {
+		return false
+	}
+	loader, ok := strings.CutPrefix(args[1], "--import=file:///")
+	return ok && strings.HasSuffix(loader, "/lib/node_modules/sidecar_sdk/register_loader.js")
+}
+
 // matchingProcesses retains handles until the caller finishes using the PIDs.
 func matchingProcesses(p *paths) ([]antigravityProcess, error) {
 	target, err := filepath.Abs(filepath.Join(p.AppDir, antigravityExe))
@@ -106,7 +127,7 @@ func matchingProcesses(p *paths) ([]antigravityProcess, error) {
 		if queryErr == nil {
 			var image string
 			image, queryErr = filepath.EvalSymlinks(windows.UTF16ToString(path[:length]))
-			if queryErr == nil && image == target {
+			if queryErr == nil && image == target && !isAntigravitySidecar(handle) {
 				matched = append(matched, antigravityProcess{pid: entry.ProcessID, handle: handle})
 				continue
 			}
@@ -182,14 +203,14 @@ func stopAntigravity(p *paths, force bool, timeoutMs int) (bool, error) {
 		}
 		remaining := time.Until(deadline)
 		if remaining <= 0 {
-			message := "Antigravity did not exit before the timeout. Close it manually or explicitly choose forced shutdown and retry"
+			timeoutErr := ErrGracefulShutdownTimeout
 			if force {
-				message = "Antigravity is still running after forced shutdown. Close it and retry"
+				timeoutErr = errors.New("Antigravity is still running after forced shutdown. Close it and retry")
 			}
 			if runErr != nil {
-				return true, fmt.Errorf("%s (taskkill: %w)", message, runErr)
+				return true, fmt.Errorf("%w (taskkill: %w)", timeoutErr, runErr)
 			}
-			return true, errors.New(message)
+			return true, timeoutErr
 		}
 		time.Sleep(min(remaining, gracefulPollIntervalMs*time.Millisecond))
 	}

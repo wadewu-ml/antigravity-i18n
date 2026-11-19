@@ -123,7 +123,7 @@ func TestTranslationInBrowser(t *testing.T) {
 	}
 }
 
-func TestShutdownConfirmationInBrowser(t *testing.T) {
+func TestApplyShutdownInBrowser(t *testing.T) {
 	html := readTestFile(t, "../../frontend/dist/index.html")
 	app := readTestFile(t, "../../frontend/dist/app.js")
 	checks := readTestFile(t, "testdata/shutdown.js")

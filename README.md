@@ -40,11 +40,11 @@ Download the latest `antigravity-i18n.exe` from the [Releases](../../releases) p
 Double-click `antigravity-i18n.exe`:
 1. The app automatically detects the Antigravity installation folder (or click "Change Location" to specify manually).
 2. Select a language and set the “会话指标” switch independently. The metrics also work with the built-in English interface.
-3. Choose “应用更改” and confirm. Once Antigravity has closed, the tool updates the resources and relaunches it. Use “还原官方版本” to restore the official archive.
+3. Click “应用更改” to apply your changes. Once Antigravity has closed, the tool updates the resources and relaunches it. Use “还原官方版本” to restore the official archive.
 
 Split views, side questions, and subagent panes show metrics for their own conversation. A dash indicates unavailable data. You can close the installer after applying the patch.
 
-When apply or restore needs to close Antigravity, the tool asks the selected installation to exit normally. The operation stops if it is still running after 30 seconds. Select the force-quit option in the confirmation dialog to close it immediately.
+When apply or restore needs to close Antigravity, the tool asks the selected installation to exit normally. If it is still running after 30 seconds, you can close it manually and try again or click “强制退出并重试” (Force quit and retry).
 
 ### 2. Command Line Interface
 

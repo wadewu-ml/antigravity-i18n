@@ -105,32 +105,24 @@
     </div>
   </div>
 
-  <div class="modal-backdrop hidden" id="applyConfirmModal">
-    <div class="modal-box">
-      <h3 id="applyConfirmTitle">应用更改？</h3>
-      <p class="modal-desc" id="applyConfirmBody"></p>
-      <p class="modal-sub">Antigravity 正在运行时会先请求退出。等待 30 秒后仍未退出，本次操作会取消。</p>
-      <label class="modal-force">
-        <input type="checkbox" id="forceShutdown">
-        <span>强制退出 Antigravity，未保存的编辑和正在进行的会话可能丢失</span>
-      </label>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" id="btnCancelApply">取消</button>
-        <button class="btn btn-primary" id="btnConfirmApply">继续</button>
-      </div>
+  <dialog class="modal-box" id="restoreConfirmModal" aria-labelledby="restoreTitle" aria-describedby="restoreBody">
+    <h3 id="restoreTitle">还原官方版本？</h3>
+    <p class="modal-desc" id="restoreBody">Antigravity 将恢复官方英文界面，会话指标将关闭。</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="btnCancelRestore" autofocus>取消</button>
+      <button class="btn btn-primary" id="btnConfirmRestore">还原</button>
     </div>
-  </div>
+  </dialog>
 
-  <div class="modal-backdrop hidden" id="msgModal">
-    <div class="modal-box">
-      <h3 id="msgTitle">提示</h3>
-      <p class="modal-desc" id="msgBody"></p>
-      <div class="modal-actions">
-        <button class="text-link hidden" id="btnMsgLogs">查看运行日志</button>
-        <button class="btn btn-primary" id="btnMsgOk">知道了</button>
-      </div>
+  <dialog class="modal-box" id="msgModal" aria-labelledby="msgTitle" aria-describedby="msgBody">
+    <h3 id="msgTitle">提示</h3>
+    <p class="modal-desc" id="msgBody"></p>
+    <div class="modal-actions">
+      <button class="text-link hidden" id="btnMsgLogs">查看运行日志</button>
+      <button class="btn btn-primary" id="btnMsgOk" autofocus>知道了</button>
+      <button class="btn btn-danger hidden" id="btnForceRetry">强制退出并重试</button>
     </div>
-  </div>
+  </dialog>
 
   <script src="app.js"></script>
 </body>

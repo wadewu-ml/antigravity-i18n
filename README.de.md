@@ -33,9 +33,9 @@ Laden Sie die neueste „antigravity-i18n.exe“ von der Seite „Releases“ he
 Doppelklicken Sie auf „antigravity-i18n.exe“:
 1. Die App erkennt den Antigravity-Installationsordner automatisch (oder klicken Sie auf „Speicherort ändern“, um ihn manuell anzugeben).
 2. Klicken Sie auf Ihre bevorzugte Sprache (durch Auswahl von Englisch wird die offizielle Version wiederhergestellt).
-3. Klicken Sie auf „Übernehmen“ und bestätigen Sie den Vorgang. Sobald Antigravity beendet ist, aktualisiert das Tool die Ressourcen und startet Antigravity neu.
+3. Klicken Sie auf „Übernehmen“. Sobald Antigravity beendet ist, aktualisiert das Tool die Ressourcen und startet Antigravity neu.
 
-Wenn Antigravity für das Anwenden oder Wiederherstellen geschlossen werden muss, fordert das Tool die ausgewählte Installation zum regulären Beenden auf. Läuft sie nach 30 Sekunden noch, wird der Vorgang abgebrochen. Im Bestätigungsdialog können Sie das sofortige Beenden ausdrücklich auswählen.
+Wenn Antigravity für das Anwenden oder Wiederherstellen geschlossen werden muss, fordert das Tool die ausgewählte Installation zum regulären Beenden auf. Läuft sie nach 30 Sekunden noch, können Sie Antigravity manuell beenden und es erneut versuchen oder auf „Beenden erzwingen und erneut versuchen“ klicken.
 
 ### 2. Befehlszeilenschnittstelle
 

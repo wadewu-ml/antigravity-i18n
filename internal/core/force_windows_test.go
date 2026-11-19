@@ -5,6 +5,7 @@ package core
 import (
 	"bufio"
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -16,6 +17,15 @@ import (
 )
 
 const archiveHolderEnv = "ANTIGRAVITY_I18N_TEST_ARCHIVE_HOLDER"
+
+func TestMain(m *testing.M) {
+	if os.Getenv(archiveHolderEnv) != "" {
+		// The helper can start with the Sidecar SDK's arguments in its Windows
+		// command line. Only the Go test runner needs to see the test flag.
+		os.Args = []string{os.Args[0], "-test.run=^TestArchiveHolderProcess$"}
+	}
+	os.Exit(m.Run())
+}
 
 func TestArchiveHolderProcess(t *testing.T) {
 	path := os.Getenv(archiveHolderEnv)
@@ -35,8 +45,8 @@ func TestArchiveHolderProcess(t *testing.T) {
 	time.Sleep(30 * time.Second)
 }
 
-func TestForceApplyClosesArchiveHolder(t *testing.T) {
-	p := fixtureInstall(t, syntheticAsar)
+func startArchiveHolder(t *testing.T, p *paths, path string, args ...string) uint32 {
+	t.Helper()
 	self, err := os.Executable()
 	if err != nil {
 		t.Fatal(err)
@@ -44,9 +54,9 @@ func TestForceApplyClosesArchiveHolder(t *testing.T) {
 	fixtureExe := filepath.Join(p.AppDir, antigravityExe)
 	copyFixture(t, self, fixtureExe)
 	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
-	defer cancel()
-	holder := exec.CommandContext(ctx, fixtureExe, "-test.run=^TestArchiveHolderProcess$")
-	holder.Env = append(os.Environ(), archiveHolderEnv+"="+p.AsarPath)
+	t.Cleanup(cancel)
+	holder := exec.CommandContext(ctx, fixtureExe, args...)
+	holder.Env = append(os.Environ(), archiveHolderEnv+"="+path)
 	hideWindow(holder)
 	stdout, err := holder.StdoutPipe()
 	if err != nil {
@@ -55,20 +65,53 @@ func TestForceApplyClosesArchiveHolder(t *testing.T) {
 	if err := holder.Start(); err != nil {
 		t.Fatal(err)
 	}
-	defer func() {
+	t.Cleanup(func() {
 		_ = holder.Process.Kill()
 		_ = holder.Wait()
-	}()
+	})
 	scanner := bufio.NewScanner(stdout)
 	if !scanner.Scan() || scanner.Text() != "archive open" {
 		t.Fatalf("isolated process did not open its archive: %q, %v", scanner.Text(), scanner.Err())
 	}
+	return uint32(holder.Process.Pid)
+}
+
+func TestForceApplyClosesArchiveHolder(t *testing.T) {
+	p := fixtureInstall(t, syntheticAsar)
+	startArchiveHolder(t, p, p.AsarPath)
+	svc := newTestService(t)
+	svc.stopApp = stopAntigravity
+	svc.appRunning = isAntigravityRunning
+	opts := Options{AppDir: p.AppDir, Locale: EnglishLocale, SessionMetrics: new(true), TimeoutMs: 500}
+	if _, err := svc.ApplyLocale(opts); !errors.Is(err, ErrGracefulShutdownTimeout) {
+		t.Fatalf("expected a normal shutdown timeout, got %v", err)
+	}
+	opts.Force = true
+	opts.TimeoutMs = 5000
+	applied, err := svc.ApplyLocale(opts)
+	if err != nil || !applied.Forced {
+		t.Fatalf("force apply with a locked archive: %+v, %v", applied, err)
+	}
+}
+
+func TestApplyWithAntigravitySidecar(t *testing.T) {
+	p := fixtureInstall(t, syntheticAsar)
+	dataPath := filepath.Join(p.AppDir, "sidecar-data")
+	if err := os.WriteFile(dataPath, nil, 0o600); err != nil {
+		t.Fatal(err)
+	}
+	pid := startArchiveHolder(t, p, dataPath,
+		"--import=file:///C:/Users/Test/.gemini/antigravity/lib/node_modules/sidecar_sdk/register_loader.js",
+		"main.mjs")
 
 	svc := newTestService(t)
 	svc.stopApp = stopAntigravity
 	svc.appRunning = isAntigravityRunning
-	applied, err := svc.ApplyLocale(Options{AppDir: p.AppDir, Locale: EnglishLocale, Force: true, SessionMetrics: new(true), TimeoutMs: 5000})
-	if err != nil || !applied.Forced {
-		t.Fatalf("force apply with a locked archive: %+v, %v", applied, err)
+	applied, err := svc.ApplyLocale(Options{AppDir: p.AppDir, Locale: EnglishLocale, SessionMetrics: new(true), TimeoutMs: 2000})
+	if err != nil || applied.WasRunning {
+		t.Fatalf("apply with a running Sidecar SDK worker: %+v, %v", applied, err)
+	}
+	if processIDExited(pid) {
+		t.Fatal("applying settings stopped the Sidecar SDK worker")
 	}
 }

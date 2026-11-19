@@ -33,9 +33,9 @@ Téléchargez le dernier « antigravity-i18n.exe » depuis la page des versions 
 Double-cliquez sur « antigravity-i18n.exe » :
 1. L'application détecte automatiquement le dossier d'installation d'Antigravity (ou cliquez sur « Modifier l'emplacement » pour le spécifier manuellement).
 2. Cliquez sur votre langue préférée (la sélection de l'anglais restaure la version officielle).
-3. Cliquez sur « Appliquer », puis confirmez. Une fois Antigravity fermé, l’outil met à jour les ressources et relance l’application.
+3. Cliquez sur « Appliquer ». Une fois Antigravity fermé, l’outil met à jour les ressources et relance l’application.
 
-Si l’application ou la restauration nécessite de fermer Antigravity, l’outil demande à l’installation sélectionnée de se fermer normalement. L’opération est annulée si elle est encore ouverte après 30 secondes. Pour la fermer immédiatement, cochez l’option de fermeture forcée dans la boîte de confirmation.
+Si l’application ou la restauration nécessite de fermer Antigravity, l’outil demande à l’installation sélectionnée de se fermer normalement. Si elle est encore ouverte après 30 secondes, vous pouvez la fermer manuellement et réessayer ou cliquer sur « Forcer la fermeture et réessayer ».
 
 ### 2. Interface de ligne de commande
 

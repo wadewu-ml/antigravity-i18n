@@ -1,5 +1,10 @@
 package core
 
+import "errors"
+
+// ErrGracefulShutdownTimeout allows callers to offer an explicit force retry.
+var ErrGracefulShutdownTimeout = errors.New("Antigravity did not exit before the timeout. Close it manually or explicitly choose forced shutdown and retry")
+
 // Options controls an apply or restore run.
 type Options struct {
 	AppDir         string

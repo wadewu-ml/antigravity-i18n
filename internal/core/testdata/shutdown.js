@@ -1,6 +1,14 @@
 const calls = [];
 const installed = {CurrentLanguage: 'en', SessionMetrics: false};
-let rejectForcedApply = true;
+const timeout = new Error('shutdown_timeout: closing Antigravity: simulated shutdown timeout');
+let nextError;
+
+function failIfRequested() {
+  const err = nextError;
+  nextError = null;
+  if (err) throw err;
+}
+
 window.go = {main: {App: {
   GetVersion: async () => 'test',
   GetStatus: async () => ({
@@ -13,15 +21,13 @@ window.go = {main: {App: {
   ],
   ApplyCustomization: async (locale, metrics, confirmed, force) => {
     calls.push(['apply', locale, metrics, confirmed, force]);
-    if (force && rejectForcedApply) {
-      rejectForcedApply = false;
-      throw new Error('closing Antigravity: simulated shutdown failure');
-    }
+    failIfRequested();
     Object.assign(installed, {CurrentLanguage: locale, SessionMetrics: metrics});
     return {LocaleName: 'English', Relaunched: true};
   },
   RestoreLocale: async (confirmed, force) => {
     calls.push(['restore', confirmed, force]);
+    failIfRequested();
     Object.assign(installed, {CurrentLanguage: 'en', SessionMetrics: false});
     return {Relaunched: true};
   },
@@ -29,43 +35,67 @@ window.go = {main: {App: {
 
 verify(async () => {
   const byId = id => document.getElementById(id);
-  const force = byId('forceShutdown');
-  const confirm = byId('btnConfirmApply');
   const metrics = byId('sessionMetrics');
+  const apply = byId('btnPrimaryAction');
+  const message = byId('msgModal');
+  const retry = byId('btnForceRetry');
+  const restoreConfirm = byId('restoreConfirmModal');
   await settle(200);
   check('the installed language is the default selection',
     byId('localeChips').firstElementChild.getAttribute('aria-pressed'), 'true');
   metrics.click();
   check('English can be combined with metrics', metrics.checked && !metrics.disabled, true);
   check('unapplied preference is visible', byId('sessionMetricsDetail').textContent, '应用后开启');
-  byId('btnPrimaryAction').click();
-  check('confirmation describes only the changed feature', byId('applyConfirmBody').textContent, '开启会话指标。');
-  check('default force selection', force.checked, false);
-  check('timeout notice remains visible', byId('applyConfirmModal').querySelector('.modal-sub').textContent.includes('30 秒'), true);
-  force.click();
-  confirm.click();
+  apply.click();
+  check('one click starts a normal apply', calls.length === 1 && calls[0][4] === false, true);
   await settle();
-  check('failure names the stage', byId('msgBody').textContent.includes('closing Antigravity'), true);
+  check('successful apply needs no dialog', message.open || restoreConfirm.open, false);
+
+  nextError = timeout;
+  apply.click();
+  await settle();
+  check('normal shutdown timeout offers force retry', message.open && !retry.classList.contains('hidden'), true);
+  check('the log keeps the readable shutdown error',
+    byId('logContent').textContent.includes('[错误] closing Antigravity: simulated shutdown timeout'), true);
+  check('retry dialog has no checkbox', message.querySelector('input') === null, true);
+  check('cancel is focused by default', document.activeElement === byId('btnMsgOk'), true);
   check('failed apply preserves the preference', metrics.checked, true);
+  byId('btnMsgOk').click();
+  check('cancel does not retry', !message.open && calls.length === 2, true);
+
+  nextError = timeout;
+  apply.click();
+  await settle();
+  retry.click();
+  await settle();
+  check('force retry finishes in a single click', message.open, false);
+
+  nextError = new Error('closing Antigravity: simulated process query failure');
+  apply.click();
+  await settle();
+  check('other failures only show diagnostics', message.open && retry.classList.contains('hidden'), true);
   byId('btnMsgLogs').click();
   check('failure opens the exact error log', !byId('logDrawer').classList.contains('hidden') &&
-    byId('logContent').textContent.includes('[错误] closing Antigravity'), true);
+    byId('logContent').textContent.includes('[错误] closing Antigravity: simulated process query failure'), true);
   byId('btnCloseLogs').click();
-  byId('btnPrimaryAction').click();
-  check('force is reset for each operation', force.checked, false);
-  confirm.click();
-  await settle();
-  check('successful apply needs no additional dismissal', byId('msgModal').classList.contains('hidden'), true);
 
+  byId('btnRestore').click();
+  check('explicit restore has a simple confirmation', restoreConfirm.open && restoreConfirm.querySelector('input') === null, true);
+  byId('btnCancelRestore').click();
   metrics.click();
-  byId('btnPrimaryAction').click();
-  check('turning off the indicator is an independent action', byId('applyConfirmBody').textContent, '关闭会话指标。');
-  force.click();
-  confirm.click();
+  nextError = timeout;
+  apply.click();
+  check('turning off metrics starts a normal restore directly', !restoreConfirm.open && calls[5][0] === 'restore' && calls[5][2] === false, true);
   await settle();
-  check('backend receives explicit consent', JSON.stringify(calls), JSON.stringify([
+  retry.click();
+  await settle();
+  check('backend receives force only after a retry click', JSON.stringify(calls), JSON.stringify([
+    ['apply', 'en', true, true, false],
+    ['apply', 'en', true, true, false],
+    ['apply', 'en', true, true, false],
     ['apply', 'en', true, true, true],
     ['apply', 'en', true, true, false],
+    ['restore', true, false],
     ['restore', true, true],
   ]));
 });

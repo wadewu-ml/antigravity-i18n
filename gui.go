@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io/fs"
 	"os"
@@ -35,6 +36,7 @@ func runWails(svc *core.Service) {
 		},
 		BackgroundColour: &options.RGBA{R: 250, G: 251, B: 253, A: 255},
 		OnStartup:        app.startup,
+		ErrorFormatter:   formatAppError,
 		Bind: []interface{}{
 			app,
 		},
@@ -47,4 +49,13 @@ func runWails(svc *core.Service) {
 		fmt.Fprintln(os.Stderr, "error:", err)
 		os.Exit(1)
 	}
+}
+
+func formatAppError(err error) any {
+	var rollbackErr *core.RollbackError
+	if errors.Is(err, core.ErrGracefulShutdownTimeout) && !errors.As(err, &rollbackErr) {
+		// Wails passes the formatted value through the JavaScript Error constructor.
+		return "shutdown_timeout: " + err.Error()
+	}
+	return err.Error()
 }
