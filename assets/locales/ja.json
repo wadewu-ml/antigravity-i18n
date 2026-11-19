@@ -3895,7 +3895,136 @@
     "week": "週",
     "month": "月",
     "Legal Help": "法律に関するヘルプ",
-    "Help us improve Antigravity.": "Antigravity の改善にご協力ください。"
+    "Help us improve Antigravity.": "Antigravity の改善にご協力ください。",
+    "Enable Browser Agent": "ブラウザエージェントを有効にする",
+    "Let the agent open URLs, read web pages, and interact with browser content. This gives the agent access to important (and often critical) knowledge and methods of validation, but any browser integration does increase exposure to external malicious parties for security exploits.": "エージェントが URL を開き、ウェブページを読み取り、ページの内容を操作できるようにします。重要な情報の取得や検証に役立ちますが、ブラウザとの連携により外部からの攻撃にさらされるリスクが高まります。",
+    "Browsing Data": "閲覧データ",
+    "Clear history, cookies and site data from the built-in browser, or manage cookies for each site.": "内蔵ブラウザの履歴、Cookie、サイトデータを消去したり、サイトごとに Cookie を管理したりできます。",
+    "Cookies by Site": "サイト別の Cookie",
+    "Clear Browsing Data?": "閲覧データを消去しますか？",
+    "Choose what to clear from the built-in browser. It can't be undone.": "内蔵ブラウザから消去する項目を選択してください。この操作は取り消せません。",
+    "Browsing history": "閲覧履歴",
+    "Visited URLs and autocomplete suggestions.": "アクセスした URL と自動補完の候補。",
+    "Cookies and other site data": "Cookie とその他のサイトデータ",
+    "Cookies, site storage and cache. Signs you out of all sites in the built-in browser and reloads its open tabs.": "Cookie、サイトストレージ、キャッシュを消去します。内蔵ブラウザのすべてのサイトからログアウトし、開いているタブが再読み込みされます。",
+    "An agent is using the built-in browser. Clearing its data signs the agent out of sites and may interrupt its task.": "エージェントが内蔵ブラウザを使用しています。データを消去すると、エージェントはサイトからログアウトし、作業が中断される場合があります。",
+    "Couldn't clear browsing data. Try again.": "閲覧データを消去できませんでした。もう一度お試しください。",
+    "Cleared built-in browser data": "内蔵ブラウザのデータを消去しました",
+    "Cleared built-in browser history": "内蔵ブラウザの履歴を消去しました",
+    "Loading cookies…": "Cookie を読み込み中…",
+    "Couldn't load cookies.": "Cookie を読み込めませんでした。",
+    "No sites have cookies in the built-in browser.": "内蔵ブラウザに Cookie を保存しているサイトはありません。",
+    "Sites with cookies": "Cookie を保存しているサイト",
+    "Cookies the built-in browser stores for each site. Deleting a site's cookies usually signs you out of it. Other site data (local storage, IndexedDB, cache) is cleared only by Browsing Data → Clear.": "内蔵ブラウザがサイトごとに保存する Cookie です。サイトの Cookie を削除すると、通常はそのサイトからログアウトします。他のサイトデータ（ローカルストレージ、IndexedDB、キャッシュ）は「閲覧データ → 消去」でのみ消去できます。",
+    "Search sites...": "サイトを検索…",
+    "Search sites": "サイトを検索",
+    "Loading browser steps…": "ブラウザの操作手順を読み込み中…",
+    "Browser task still running…": "ブラウザのタスクを実行中…",
+    "No browser steps recorded": "ブラウザの操作手順は記録されていません",
+    "Open browser screenshot": "ブラウザのスクリーンショットを開く",
+    "Browser screenshot": "ブラウザのスクリーンショット",
+    "VS Code Default": "VS Code のデフォルト",
+    "Antigravity (AGY) Style": "Antigravity（AGY）スタイル",
+    "Manage your keybinding scheme and customize shortcuts in VS Code.": "キーバインドの方式を管理し、VS Code でショートカットをカスタマイズします。",
+    "Keybinding Scheme": "キーバインドの方式",
+    "Choose between non-colliding VS Code defaults or standalone Antigravity chords.": "VS Code の標準キーと競合しない方式か、Antigravity 独自のキー操作を選択します。",
+    "Customize Shortcuts": "ショートカットをカスタマイズ",
+    "All active Antigravity shortcuts and user keybinding overrides are managed directly by VS Code.": "有効な Antigravity のショートカットとユーザー設定による上書きは、すべて VS Code で直接管理されます。",
+    "VS Code Keyboard Shortcuts": "VS Code のキーボードショートカット",
+    "Managed by application menu": "アプリケーションメニューで管理",
+    "Terminal: Select All": "ターミナル: すべて選択",
+    "System default app": "システム既定のアプリ",
+    "Loading preview…": "プレビューを読み込み中…",
+    "Side Question Selection": "選択範囲についてサイド質問",
+    "The main conversation's input isn't available right now.": "メイン会話には現在入力できません。",
+    "Insert into main conversation": "メイン会話に挿入",
+    "Unarchive the main conversation to insert": "挿入するにはメイン会話のアーカイブを解除してください",
+    "This side question isn't available in this conversation.": "この会話では、このサイド質問を利用できません。",
+    "Response actions": "回答の操作",
+    "Waiting for subagent": "サブエージェントを待機中",
+    "Not started": "未開始",
+    "In progress": "進行中",
+    "Failed": "失敗",
+    "Connecting…": "接続中…",
+    "Hide from this list": "この一覧から非表示にする",
+    "Show in the list again": "一覧に再表示する",
+    "Token rejected": "トークンが拒否されました",
+    "Repository access required": "リポジトリへのアクセス権が必要です",
+    "Setup Script": "環境セットアップスクリプト",
+    "Saving setup routine": "セットアップ手順を保存中",
+    "Canceled saving setup routine": "セットアップ手順の保存をキャンセルしました",
+    "Saved setup routine": "セットアップ手順を保存しました",
+    "Deleting setup routine": "セットアップ手順を削除中",
+    "Canceled deletion of setup routine": "セットアップ手順の削除をキャンセルしました",
+    "Deleted setup routine": "セットアップ手順を削除しました",
+    "Open in settings": "設定で開く",
+    "Access restricted": "アクセスが制限されています",
+    "Checking access...": "アクセス権を確認中…",
+    "Interrupt Agent": "エージェントを中断",
+    "Check that the microphone is unmuted and the right input device is selected.": "マイクのミュートが解除されていて、正しい入力デバイスが選択されているか確認してください。",
+    "Microphone access is blocked by your operating system. Grant microphone permission in System Settings and try again.": "OS でマイクへのアクセスがブロックされています。システム設定でマイクを許可してから、もう一度お試しください。",
+    "No microphone was found on this machine. Connect or enable an input device and try again.": "このマシンにマイクが見つかりません。入力デバイスを接続または有効にして、もう一度お試しください。",
+    "Microphone is already in use by another recording session.": "別の録音セッションがマイクを使用しています。",
+    "Microphone capture is not supported in this environment.": "この環境ではマイクでの録音に対応していません。",
+    "Microphone capture failed.": "マイクで録音できませんでした。",
+    "Microphone capture ended unexpectedly.": "マイク録音が予期せず終了しました。",
+    "Speech recognition service is failing, and the current model doesn't support direct audio file input.": "音声認識サービスに問題が発生しており、現在のモデルは音声ファイルの直接入力に対応していません。",
+    "Microphone silent": "マイクに音声入力がありません",
+    "Microphone problem": "マイクの問題",
+    "Voice dictation unavailable": "音声入力を利用できません",
+    "Transcribing audio…": "音声を文字起こし中…",
+    "Stop transcription": "文字起こしを停止",
+    "File exceeds the 200MB display limit, so it can't be opened or downloaded here.": "ファイルが 200 MB の表示上限を超えているため、ここで開いたりダウンロードしたりできません。",
+    "Browser tools run on the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on the SSH host, not on this computer:": "ブラウザツールは、このウィンドウが接続している SSH ホスト上で動作します。その Chrome はリモートデバッグを受け付けていません。次の手順は SSH ホスト上で実行してください。",
+    "Open Google Chrome on the SSH host.": "SSH ホストで Google Chrome を開きます。",
+    "Search Recent Workspaces": "最近使ったワークスペースを検索",
+    "Select Workspace": "ワークスペースを選択",
+    "No longer available": "提供終了",
+    "Removed from the marketplace. Stays installed until you uninstall it.": "マーケットプレイスでの提供は終了しました。アンインストールするまでインストール済みのままです。",
+    "Installed separately": "個別にインストール済み",
+    "Disabling or removing this bundle doesn't affect it.": "このバンドルを無効にしたり削除したりしても、このプラグインには影響しません。",
+    "Review bundle before adding": "追加する前にバンドルを確認",
+    "Review contents": "内容を確認",
+    "Add anyway": "そのまま追加",
+    "Remove bundle": "バンドルを削除",
+    "Add bundle": "バンドルを追加",
+    "No bundles available.": "利用できるバンドルはありません。",
+    "Loading bundles...": "バンドルを読み込み中…",
+    "Failed to load marketplace bundles. Please try again.": "マーケットプレイスのバンドルを読み込めませんでした。もう一度お試しください。",
+    "Failed to add bundle.": "バンドルを追加できませんでした。",
+    "Failed to add bundle. Please try again.": "バンドルを追加できませんでした。もう一度お試しください。",
+    "Failed to update the bundle.": "バンドルを更新できませんでした。",
+    "Failed to update the bundle. Please try again.": "バンドルを更新できませんでした。もう一度お試しください。",
+    "Replacing...": "置き換え中…",
+    "Robot": "ロボット",
+    "Hub": "ハブ",
+    "Sliders": "スライダー",
+    "Command prompt": "コマンドプロンプト",
+    "Code": "コード",
+    "Sparkles": "きらめき",
+    "Wrench": "レンチ",
+    "Shield": "シールド",
+    "Speedometer": "スピードメーター",
+    "Gauge": "ゲージ",
+    "Eye": "目",
+    "Flask": "フラスコ",
+    "Radar": "レーダー",
+    "Remote Debugging Required": "リモートデバッグが必要です",
+    "Review plugin before installing": "インストールする前にプラグインを確認",
+    "Review skill before installing": "インストールする前にスキルを確認",
+    "Honors standard VS Code shortcuts without collisions (e.g. Ctrl+L Focus Input, Ctrl+Shift+L New Conversation, Ctrl+Shift+A Picker, Ctrl+Shift+, Settings).": "VS Code の標準ショートカットとの競合を避けます（例: Ctrl+L 入力にフォーカス、Ctrl+Shift+L 新しい会話、Ctrl+Shift+A ピッカー、Ctrl+Shift+, 設定）。",
+    "Uses standalone Antigravity chords (e.g. Ctrl+I Focus Input, Ctrl+Shift+O New Conversation, Ctrl+K Picker in chat, Ctrl+, Settings, Ctrl+[/] History). Replaces Go to Symbol (Ctrl+Shift+O) and Trigger Suggest (Ctrl+I), and rebinds VS Code Settings to Ctrl+Alt+,.": "Antigravity 専用のショートカットを使用します（例: Ctrl+I 入力にフォーカス、Ctrl+Shift+O 新しい会話、Ctrl+K チャット内のピッカー、Ctrl+, 設定、Ctrl+[/] 歴史）。「シンボルに移動」（Ctrl+Shift+O）と「候補を表示」（Ctrl+I）の割り当てを置き換え、VS Code の設定を Ctrl+Alt+, に割り当てます。",
+    "Honors standard VS Code shortcuts without collisions (e.g. ⌘L Focus Input, ⌘⇧L New Conversation, ⌘⇧A Picker, ⌘⇧, Settings).": "VS Code の標準ショートカットとの競合を避けます（例: ⌘L 入力にフォーカス、⌘⇧L 新しい会話、⌘⇧A ピッカー、⌘⇧, 設定）。",
+    "Uses standalone Antigravity chords (e.g. ⌘I Focus Input, ⌘⇧O New Conversation, ⌘K Picker in chat, ⌘, Settings, ⌘[/] History). Replaces Go to Symbol (⌘⇧O) and Trigger Suggest (⌘I), and rebinds VS Code Settings to ⌘⌥,.": "Antigravity 専用のショートカットを使用します（例: ⌘I 入力にフォーカス、⌘⇧O 新しい会話、⌘K チャット内のピッカー、⌘, 設定、⌘[/] 歴史）。「シンボルに移動」（⌘⇧O）と「候補を表示」（⌘I）の割り当てを置き換え、VS Code の設定を ⌘⌥, に割り当てます。",
+    "Run until the specified goal is completely finished.": "指定された目標を完全に達成するまで実行します。",
+    "Compact the conversation now (summarize history to free up the context window).": "会話を今すぐ圧縮します（履歴を要約してコンテキストの空きを増やします）。",
+    "Run an instruction on a recurring schedule or as a one-time timer.": "指示を定期スケジュールまたは一度限りのタイマーで実行します。",
+    "Invoke a browser agent for web tasks.": "ウェブ上のタスクにブラウザエージェントを呼び出します。",
+    "Plan carefully before executing a task.": "タスクを実行する前に、詳しい計画を立てます。",
+    "Interview me to align on a plan.": "私に質問しながら、計画について認識をすり合わせます。",
+    "Invoke a team of agents to autonomously tackle large projects.": "大規模なプロジェクトを自律的に進めるエージェントチームを呼び出します。",
+    "Reflect on recent successes or corrections to capture reusable skills or rules.": "最近うまくいったことや修正したことを振り返り、再利用できるスキルやルールにまとめます。",
+    "Invoke the Boost multi-agent orchestrator for complex tasks.": "複雑なタスクに Boost のマルチエージェントオーケストレーターを呼び出します。"
   },
   "patterns": [
     {
@@ -4528,6 +4657,222 @@
       "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
       "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
       "template": "{1} へのログイン情報は、ご利用のアカウントに紐づけてクラウドに保存されます。その他の認証情報はこのマシンに保存されます。認証情報は一覧にあるドメインにのみ送信されます。"
+    },
+    {
+      "id": "browserCookieCount",
+      "pattern": "^(\\d+) cookies?$",
+      "sample": "12 cookies",
+      "template": "Cookie {1} 件"
+    },
+    {
+      "id": "browserCookieDelete",
+      "pattern": "^Delete cookies for (.+)$",
+      "sample": "Delete cookies for example.com",
+      "template": "{1} の Cookie を削除"
+    },
+    {
+      "id": "browserCookieDeleted",
+      "pattern": "^Deleted cookies for (.+)$",
+      "sample": "Deleted cookies for example.com",
+      "template": "{1} の Cookie を削除しました"
+    },
+    {
+      "id": "browserLatestSteps",
+      "pattern": "^Showing latest (\\d+) browser steps$",
+      "sample": "Showing latest 12 browser steps",
+      "template": "ブラウザの直近 {1} 件の操作手順を表示中"
+    },
+    {
+      "id": "browserPreviewPort",
+      "pattern": "^The preview did not respond on port (\\d+)\\.$",
+      "sample": "The preview did not respond on port 3000.",
+      "template": "ポート {1} でプレビューから応答がありませんでした。"
+    },
+    {
+      "id": "sshHostConnectFailed",
+      "pattern": "^Couldn't connect to (.+)$",
+      "sample": "Couldn't connect to dev-host",
+      "template": "接続できませんでした: {1}"
+    },
+    {
+      "id": "sshHostForget",
+      "pattern": "^Remove (.+) from Recent$",
+      "sample": "Remove dev-host from Recent",
+      "template": "{1} を最近の項目から削除"
+    },
+    {
+      "id": "sshHostForgotten",
+      "pattern": "^Removed (.+) from Recent$",
+      "sample": "Removed dev-host from Recent",
+      "template": "{1} を最近の項目から削除しました"
+    },
+    {
+      "id": "sshHostForgetFailed",
+      "pattern": "^Couldn't remove (.+) from Recent$",
+      "sample": "Couldn't remove dev-host from Recent",
+      "template": "{1} を最近の項目から削除できませんでした"
+    },
+    {
+      "id": "sshHostHide",
+      "pattern": "^Hide (.+) from this list$",
+      "sample": "Hide dev-host from this list",
+      "template": "{1} をこの一覧から非表示にする"
+    },
+    {
+      "id": "sshHostShow",
+      "pattern": "^Show (.+) in the list again$",
+      "sample": "Show dev-host in the list again",
+      "template": "{1} を一覧に再表示する"
+    },
+    {
+      "id": "sshHostHidden",
+      "pattern": "^Hid (.+)$",
+      "sample": "Hid dev-host",
+      "template": "{1} を非表示にしました"
+    },
+    {
+      "id": "sshHostShown",
+      "pattern": "^Showing (.+) again$",
+      "sample": "Showing dev-host again",
+      "template": "{1} を再表示しました"
+    },
+    {
+      "id": "sshHiddenHostCount",
+      "pattern": "^(\\d+) hidden hosts?$",
+      "sample": "2 hidden hosts",
+      "template": "非表示のホスト {1} 件"
+    },
+    {
+      "id": "sshNamedConfig",
+      "pattern": "^SSH Config \\((.+)\\)$",
+      "sample": "SSH Config (work.conf)",
+      "template": "SSH 設定（{1}）"
+    },
+    {
+      "id": "sshSignInHost",
+      "pattern": "^You're signing in on (.+)\\. Your sign-in stays on that machine\\.$",
+      "sample": "You're signing in on dev-host. Your sign-in stays on that machine.",
+      "template": "{1} にログインしています。ログイン情報はそのマシンに保持されます。"
+    },
+    {
+      "id": "sshHostConnected",
+      "pattern": "^Connected to (.+)$",
+      "sample": "Connected to dev-host",
+      "template": "{1} に接続しました"
+    },
+    {
+      "id": "sshWindowHost",
+      "pattern": "^This window's agents, files, and terminals are on (.+)\\.$",
+      "sample": "This window's agents, files, and terminals are on dev-host.",
+      "template": "このウィンドウのエージェント、ファイル、ターミナルは {1} にあります。"
+    },
+    {
+      "id": "sshBrowserDebugging",
+      "pattern": "^Browser tools run on (.+), the SSH host this window is connected to, and Chrome there isn't accepting remote debugging\\. Complete these steps on (.+), not on this computer:$",
+      "sample": "Browser tools run on dev-host, the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on dev-host, not on this computer:",
+      "template": "ブラウザツールは、このウィンドウが接続している SSH ホスト {1} 上で動作します。その Chrome はリモートデバッグを受け付けていません。次の手順は {2} 上で実行してください。"
+    },
+    {
+      "id": "sshOpenChrome",
+      "pattern": "^Open Google Chrome on (.+)\\.$",
+      "sample": "Open Google Chrome on dev-host.",
+      "template": "{1} で Google Chrome を開きます。"
+    },
+    {
+      "id": "externalProtocolOpen",
+      "pattern": "^Open ([a-z][a-z0-9+.-]*) link\\?$",
+      "sample": "Open vscode link?",
+      "template": "{1} リンクを開きますか？"
+    },
+    {
+      "id": "voiceTranscriptionRetry",
+      "pattern": "^Retrying transcription \\(attempt (\\d+)\\)…$",
+      "sample": "Retrying transcription (attempt 2)…",
+      "template": "文字起こしを再試行中（{1} 回目）…"
+    },
+    {
+      "id": "planProgressLabel",
+      "pattern": "^Plan, (\\d+) of (\\d+) steps done$",
+      "sample": "Plan, 2 of 5 steps done",
+      "template": "計画、{2} ステップ中 {1} 件が完了"
+    },
+    {
+      "id": "mediaDisplayLimit",
+      "pattern": "^File exceeds the (\\d+)MB display limit \\((\\d+)MB\\), so it can't be opened or downloaded here\\.$",
+      "sample": "File exceeds the 200MB display limit (240MB), so it can't be opened or downloaded here.",
+      "template": "ファイル（{2} MB）が表示上限の {1} MB を超えているため、ここで開いたりダウンロードしたりできません。"
+    },
+    {
+      "id": "bundleAddedAndInstalled",
+      "pattern": "^Added (.+) and installed (\\d+) plugins?\\.$",
+      "sample": "Added Example Tools and installed 3 plugins.",
+      "template": "{1} を追加し、プラグインを {2} 件インストールしました。"
+    },
+    {
+      "id": "bundleAdded",
+      "pattern": "^Added (.+)\\.$",
+      "sample": "Added Example Tools.",
+      "template": "{1} を追加しました。"
+    },
+    {
+      "id": "bundleRemoved",
+      "pattern": "^Removed (.+)\\.$",
+      "sample": "Removed Example Tools.",
+      "template": "{1} を削除しました。"
+    },
+    {
+      "id": "bundleAddLabel",
+      "pattern": "^Add bundle (.+)$",
+      "sample": "Add bundle Example Tools",
+      "template": "バンドル {1} を追加"
+    },
+    {
+      "id": "bundleAddingPlugins",
+      "pattern": "^Adding plugins from (.+)$",
+      "sample": "Adding plugins from Example Tools",
+      "template": "{1} のプラグインを追加中"
+    },
+    {
+      "id": "bundleReviewWarning",
+      "pattern": "^(?:This plugin|These plugins) in (.+) may have looser code review\\. Review (?:its|their) contents before adding the bundle\\.$",
+      "sample": "These plugins in Example Tools may have looser code review. Review their contents before adding the bundle.",
+      "template": "{1} 内の対象プラグインは、コードレビューの基準が緩い場合があります。バンドルを追加する前に内容を確認してください。"
+    },
+    {
+      "id": "bundleSummaryAllInstalled",
+      "pattern": "^(\\d+) plugins?, all already installed\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "3 plugins, all already installed. Adding the bundle installs plugins it gains later.",
+      "template": "プラグイン {1} 件はすべてインストール済みです。バンドルを追加すると、今後追加されるプラグインもインストールされます。"
+    },
+    {
+      "id": "bundleSummaryFuture",
+      "pattern": "^(\\d+) plugins?\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "0 plugins. Adding the bundle installs plugins it gains later.",
+      "template": "プラグイン {1} 件。バンドルを追加すると、今後追加されるプラグインもインストールされます。"
+    },
+    {
+      "id": "bundleSummaryInstallAll",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (?:it|all of them)\\.$",
+      "sample": "3 plugins. Add bundle installs all of them.",
+      "template": "プラグイン {1} 件。バンドルを追加すると、すべてインストールされます。"
+    },
+    {
+      "id": "bundleSummaryInstallSome",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (\\d+); the ones you already have stay as they are\\.$",
+      "sample": "4 plugins. Add bundle installs 2; the ones you already have stay as they are.",
+      "template": "プラグイン {1} 件。バンドルを追加すると {2} 件をインストールし、インストール済みのものはそのまま残ります。"
+    },
+    {
+      "id": "bundleSummaryInstalled",
+      "pattern": "^(\\d+) plugins?\\. Disabling or removing the bundle applies only to the ones it installed\\.$",
+      "sample": "4 plugins. Disabling or removing the bundle applies only to the ones it installed.",
+      "template": "プラグイン {1} 件。バンドルを無効にしたり削除したりすると、このバンドルでインストールしたプラグインだけが対象になります。"
+    },
+    {
+      "id": "accountPlanLabel",
+      "pattern": "^Your Plan: (.+)$",
+      "sample": "Your Plan: Google AI Pro",
+      "template": "現在のプラン: {1}"
     }
   ],
   "menu": {
@@ -5087,6 +5432,72 @@
         },
         {
           "textIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "browserCookieDeleteError",
+      "selector": "p[data-testid=\"browser-site-data-delete-error\"]",
+      "source": "Couldn't delete cookies for {1}. Try again.",
+      "template": "{1} の Cookie を削除できませんでした。もう一度お試しください。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "browserCookieSiteSearch",
+      "selector": "p[data-testid=\"browser-site-data-no-match\"]",
+      "source": "No sites match “{1}”.",
+      "template": "「{1}」に一致するサイトはありません。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshConnectErrorHost",
+      "selector": "[data-testid=\"ssh-connect-error\"] span.text-foreground",
+      "source": "Couldn't connect to {1}",
+      "template": "接続できなかったホスト: {1}",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshEmptyHostConfig",
+      "selector": "[data-testid=\"ssh-connect-dialog\"] p.px-2.text-sm.text-muted-foreground",
+      "source": "No hosts in {1} yet. Type one above.",
+      "template": "{1} にホストがまだありません。上の欄に入力してください。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "vscodeShortcutFilter",
+      "selector": "div.flex.flex-col.gap-1.min-w-0 > span.text-xs.text-muted-foreground.leading-relaxed:has(>code.font-mono)",
+      "source": "Inspect live bindings or record custom key chords filtered to {1} commands.",
+      "template": "{1} コマンドに絞って、有効なキーバインドを確認したりカスタムショートカットを記録したりできます。",
+      "slots": [
+        {
+          "selector": "code.font-mono"
+        }
+      ]
+    },
+    {
+      "id": "externalProtocolRemember",
+      "selector": "[data-testid=\"external-link-confirm-always\"] span:has(>code.font-mono)",
+      "source": "Always open {1} links without asking",
+      "template": "{1} リンクを確認せず常に開く",
+      "slots": [
+        {
+          "selector": "code.font-mono"
         }
       ]
     }

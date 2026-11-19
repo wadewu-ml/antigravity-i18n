@@ -29,7 +29,9 @@
     "Turbo",
     "MCP",
     "UTC",
-    "Color"
+    "Color",
+    "Robot",
+    "Radar"
   ],
   "dialogs": {
     "Confirm Quit": "Confirmar salida",
@@ -3909,7 +3911,136 @@
     "week": "semana",
     "month": "mes",
     "Legal Help": "Ayuda legal",
-    "Help us improve Antigravity.": "Ayúdanos a mejorar Antigravity."
+    "Help us improve Antigravity.": "Ayúdanos a mejorar Antigravity.",
+    "Enable Browser Agent": "Activar el agente del navegador",
+    "Let the agent open URLs, read web pages, and interact with browser content. This gives the agent access to important (and often critical) knowledge and methods of validation, but any browser integration does increase exposure to external malicious parties for security exploits.": "Permite que el agente abra URL, lea páginas web e interactúe con su contenido. Así puede obtener información importante y verificar resultados, aunque integrar el navegador aumenta el riesgo de ataques externos.",
+    "Browsing Data": "Datos de navegación",
+    "Clear history, cookies and site data from the built-in browser, or manage cookies for each site.": "Borra el historial, las cookies y los datos de sitios del navegador integrado, o gestiona las cookies de cada sitio.",
+    "Cookies by Site": "Cookies por sitio",
+    "Clear Browsing Data?": "¿Borrar los datos de navegación?",
+    "Choose what to clear from the built-in browser. It can't be undone.": "Elige qué quieres borrar del navegador integrado. Esta acción no se puede deshacer.",
+    "Browsing history": "Historial de navegación",
+    "Visited URLs and autocomplete suggestions.": "URL visitadas y sugerencias de autocompletado.",
+    "Cookies and other site data": "Cookies y otros datos de sitios",
+    "Cookies, site storage and cache. Signs you out of all sites in the built-in browser and reloads its open tabs.": "Cookies, almacenamiento de sitios y caché. Se cerrará la sesión en todos los sitios del navegador integrado y se recargarán las pestañas abiertas.",
+    "An agent is using the built-in browser. Clearing its data signs the agent out of sites and may interrupt its task.": "Un agente está usando el navegador integrado. Si borras los datos, se cerrará su sesión en los sitios y su tarea podría interrumpirse.",
+    "Couldn't clear browsing data. Try again.": "No se han podido borrar los datos de navegación. Inténtalo de nuevo.",
+    "Cleared built-in browser data": "Se han borrado los datos del navegador integrado",
+    "Cleared built-in browser history": "Se ha borrado el historial del navegador integrado",
+    "Loading cookies…": "Cargando cookies…",
+    "Couldn't load cookies.": "No se han podido cargar las cookies.",
+    "No sites have cookies in the built-in browser.": "Ningún sitio tiene cookies en el navegador integrado.",
+    "Sites with cookies": "Sitios con cookies",
+    "Cookies the built-in browser stores for each site. Deleting a site's cookies usually signs you out of it. Other site data (local storage, IndexedDB, cache) is cleared only by Browsing Data → Clear.": "Cookies que guarda el navegador integrado por cada sitio. Si eliminas las cookies de un sitio, normalmente se cerrará la sesión en él. Los demás datos (almacenamiento local, IndexedDB y caché) solo se borran en «Datos de navegación → Borrar».",
+    "Search sites...": "Buscar sitios…",
+    "Search sites": "Buscar sitios",
+    "Loading browser steps…": "Cargando pasos del navegador…",
+    "Browser task still running…": "La tarea del navegador sigue en curso…",
+    "No browser steps recorded": "No se han registrado pasos del navegador",
+    "Open browser screenshot": "Abrir captura del navegador",
+    "Browser screenshot": "Captura del navegador",
+    "VS Code Default": "Predeterminado de VS Code",
+    "Antigravity (AGY) Style": "Estilo Antigravity (AGY)",
+    "Manage your keybinding scheme and customize shortcuts in VS Code.": "Gestiona tu esquema de atajos y personaliza los atajos en VS Code.",
+    "Keybinding Scheme": "Esquema de atajos",
+    "Choose between non-colliding VS Code defaults or standalone Antigravity chords.": "Elige entre los atajos predeterminados de VS Code sin conflictos y los propios de Antigravity.",
+    "Customize Shortcuts": "Personalizar atajos",
+    "All active Antigravity shortcuts and user keybinding overrides are managed directly by VS Code.": "VS Code gestiona directamente todos los atajos activos de Antigravity y las asignaciones personalizadas.",
+    "VS Code Keyboard Shortcuts": "Atajos de teclado de VS Code",
+    "Managed by application menu": "Gestionado por el menú de la aplicación",
+    "Terminal: Select All": "Terminal: Seleccionar todo",
+    "System default app": "Aplicación predeterminada del sistema",
+    "Loading preview…": "Cargando vista previa…",
+    "Side Question Selection": "Pregunta paralela sobre la selección",
+    "The main conversation's input isn't available right now.": "El campo de entrada de la conversación principal no está disponible ahora mismo.",
+    "Insert into main conversation": "Insertar en la conversación principal",
+    "Unarchive the main conversation to insert": "Desarchiva la conversación principal para insertar la respuesta",
+    "This side question isn't available in this conversation.": "Esta pregunta paralela no está disponible en esta conversación.",
+    "Response actions": "Acciones de la respuesta",
+    "Waiting for subagent": "Esperando al subagente",
+    "Not started": "Sin iniciar",
+    "In progress": "En curso",
+    "Failed": "Error",
+    "Connecting…": "Conectando…",
+    "Hide from this list": "Ocultar de esta lista",
+    "Show in the list again": "Volver a mostrar en la lista",
+    "Token rejected": "Token rechazado",
+    "Repository access required": "Se requiere acceso al repositorio",
+    "Setup Script": "Script de configuración",
+    "Saving setup routine": "Guardando la rutina de configuración",
+    "Canceled saving setup routine": "Se ha cancelado el guardado de la rutina de configuración",
+    "Saved setup routine": "Se ha guardado la rutina de configuración",
+    "Deleting setup routine": "Eliminando la rutina de configuración",
+    "Canceled deletion of setup routine": "Se ha cancelado la eliminación de la rutina de configuración",
+    "Deleted setup routine": "Se ha eliminado la rutina de configuración",
+    "Open in settings": "Abrir en la configuración",
+    "Access restricted": "Acceso restringido",
+    "Checking access...": "Comprobando el acceso…",
+    "Interrupt Agent": "Interrumpir al agente",
+    "Check that the microphone is unmuted and the right input device is selected.": "Comprueba que el micrófono no esté silenciado y que hayas seleccionado el dispositivo de entrada correcto.",
+    "Microphone access is blocked by your operating system. Grant microphone permission in System Settings and try again.": "El sistema operativo bloquea el acceso al micrófono. Concédele permiso en los ajustes del sistema e inténtalo de nuevo.",
+    "No microphone was found on this machine. Connect or enable an input device and try again.": "No se ha encontrado ningún micrófono en este equipo. Conecta o habilita un dispositivo de entrada e inténtalo de nuevo.",
+    "Microphone is already in use by another recording session.": "El micrófono ya está en uso en otra sesión de grabación.",
+    "Microphone capture is not supported in this environment.": "Este entorno no admite la grabación con micrófono.",
+    "Microphone capture failed.": "No se ha podido grabar con el micrófono.",
+    "Microphone capture ended unexpectedly.": "La grabación con el micrófono ha terminado inesperadamente.",
+    "Speech recognition service is failing, and the current model doesn't support direct audio file input.": "El servicio de reconocimiento de voz está fallando y el modelo actual no admite archivos de audio como entrada directa.",
+    "Microphone silent": "No se detecta sonido en el micrófono",
+    "Microphone problem": "Problema con el micrófono",
+    "Voice dictation unavailable": "Dictado por voz no disponible",
+    "Transcribing audio…": "Transcribiendo audio…",
+    "Stop transcription": "Detener la transcripción",
+    "File exceeds the 200MB display limit, so it can't be opened or downloaded here.": "El archivo supera el límite de visualización de 200 MB, por lo que no se puede abrir ni descargar aquí.",
+    "Browser tools run on the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on the SSH host, not on this computer:": "Las herramientas del navegador se ejecutan en el host SSH conectado a esta ventana, y Chrome no acepta allí la depuración remota. Sigue estos pasos en el host SSH:",
+    "Open Google Chrome on the SSH host.": "Abre Google Chrome en el host SSH.",
+    "Search Recent Workspaces": "Buscar espacios de trabajo recientes",
+    "Select Workspace": "Seleccionar espacio de trabajo",
+    "No longer available": "Ya no está disponible",
+    "Removed from the marketplace. Stays installed until you uninstall it.": "Se ha retirado del mercado. Seguirá instalado hasta que lo desinstales.",
+    "Installed separately": "Instalado por separado",
+    "Disabling or removing this bundle doesn't affect it.": "Desactivar o quitar este paquete no afecta a este complemento.",
+    "Review bundle before adding": "Revisar el paquete antes de añadirlo",
+    "Review contents": "Revisar contenido",
+    "Add anyway": "Añadir de todos modos",
+    "Remove bundle": "Quitar paquete",
+    "Add bundle": "Añadir paquete",
+    "No bundles available.": "No hay paquetes disponibles.",
+    "Loading bundles...": "Cargando paquetes…",
+    "Failed to load marketplace bundles. Please try again.": "No se han podido cargar los paquetes del mercado. Inténtalo de nuevo.",
+    "Failed to add bundle.": "No se ha podido añadir el paquete.",
+    "Failed to add bundle. Please try again.": "No se ha podido añadir el paquete. Inténtalo de nuevo.",
+    "Failed to update the bundle.": "No se ha podido actualizar el paquete.",
+    "Failed to update the bundle. Please try again.": "No se ha podido actualizar el paquete. Inténtalo de nuevo.",
+    "Replacing...": "Reemplazando…",
+    "Robot": "Robot",
+    "Hub": "Nodo central",
+    "Sliders": "Controles deslizantes",
+    "Command prompt": "Símbolo del sistema",
+    "Code": "Código",
+    "Sparkles": "Destellos",
+    "Wrench": "Llave inglesa",
+    "Shield": "Escudo",
+    "Speedometer": "Velocímetro",
+    "Gauge": "Medidor",
+    "Eye": "Ojo",
+    "Flask": "Matraz",
+    "Radar": "Radar",
+    "Remote Debugging Required": "Se requiere depuración remota",
+    "Review plugin before installing": "Revisar el complemento antes de instalarlo",
+    "Review skill before installing": "Revisar la habilidad antes de instalarla",
+    "Honors standard VS Code shortcuts without collisions (e.g. Ctrl+L Focus Input, Ctrl+Shift+L New Conversation, Ctrl+Shift+A Picker, Ctrl+Shift+, Settings).": "Respeta los atajos estándar de VS Code y evita conflictos (p. ej., Ctrl+L Enfocar entrada, Ctrl+Shift+L Nueva conversación, Ctrl+Shift+A Selector, Ctrl+Shift+, Configuración).",
+    "Uses standalone Antigravity chords (e.g. Ctrl+I Focus Input, Ctrl+Shift+O New Conversation, Ctrl+K Picker in chat, Ctrl+, Settings, Ctrl+[/] History). Replaces Go to Symbol (Ctrl+Shift+O) and Trigger Suggest (Ctrl+I), and rebinds VS Code Settings to Ctrl+Alt+,.": "Usa atajos propios de Antigravity (p. ej., Ctrl+I Enfocar entrada, Ctrl+Shift+O Nueva conversación, Ctrl+K Selector en el chat, Ctrl+, Configuración, Ctrl+[/] Historia). Sustituye los atajos «Ir a símbolo» (Ctrl+Shift+O) y «Activar sugerencias» (Ctrl+I), y reasigna la configuración de VS Code a Ctrl+Alt+,.",
+    "Honors standard VS Code shortcuts without collisions (e.g. ⌘L Focus Input, ⌘⇧L New Conversation, ⌘⇧A Picker, ⌘⇧, Settings).": "Respeta los atajos estándar de VS Code y evita conflictos (p. ej., ⌘L Enfocar entrada, ⌘⇧L Nueva conversación, ⌘⇧A Selector, ⌘⇧, Configuración).",
+    "Uses standalone Antigravity chords (e.g. ⌘I Focus Input, ⌘⇧O New Conversation, ⌘K Picker in chat, ⌘, Settings, ⌘[/] History). Replaces Go to Symbol (⌘⇧O) and Trigger Suggest (⌘I), and rebinds VS Code Settings to ⌘⌥,.": "Usa atajos propios de Antigravity (p. ej., ⌘I Enfocar entrada, ⌘⇧O Nueva conversación, ⌘K Selector en el chat, ⌘, Configuración, ⌘[/] Historia). Sustituye los atajos «Ir a símbolo» (⌘⇧O) y «Activar sugerencias» (⌘I), y reasigna la configuración de VS Code a ⌘⌥,.",
+    "Run until the specified goal is completely finished.": "Continúa la ejecución hasta alcanzar por completo el objetivo especificado.",
+    "Compact the conversation now (summarize history to free up the context window).": "Compacta la conversación ahora resumiendo el historial para liberar espacio en la ventana de contexto.",
+    "Run an instruction on a recurring schedule or as a one-time timer.": "Ejecuta una instrucción de forma periódica o prográmala para una sola vez.",
+    "Invoke a browser agent for web tasks.": "Invoca un agente del navegador para las tareas web.",
+    "Plan carefully before executing a task.": "Planifica la tarea con detenimiento antes de ejecutarla.",
+    "Interview me to align on a plan.": "Hazme preguntas para ponernos de acuerdo sobre un plan.",
+    "Invoke a team of agents to autonomously tackle large projects.": "Invoca un equipo de agentes para abordar proyectos grandes de forma autónoma.",
+    "Reflect on recent successes or corrections to capture reusable skills or rules.": "Reflexiona sobre los aciertos o las correcciones recientes para registrar habilidades o reglas reutilizables.",
+    "Invoke the Boost multi-agent orchestrator for complex tasks.": "Invoca el orquestador multiagente Boost para tareas complejas."
   },
   "patterns": [
     {
@@ -4614,6 +4745,222 @@
       "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
       "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
       "template": "Los inicios de sesión en {1} se guardan en la nube junto con tu cuenta. Las demás credenciales permanecen en este equipo. Las credenciales solo se envían a los dominios indicados."
+    },
+    {
+      "id": "browserCookieCount",
+      "pattern": "^(\\d+) cookies?$",
+      "sample": "12 cookies",
+      "template": "Cookies: {1}"
+    },
+    {
+      "id": "browserCookieDelete",
+      "pattern": "^Delete cookies for (.+)$",
+      "sample": "Delete cookies for example.com",
+      "template": "Eliminar las cookies de {1}"
+    },
+    {
+      "id": "browserCookieDeleted",
+      "pattern": "^Deleted cookies for (.+)$",
+      "sample": "Deleted cookies for example.com",
+      "template": "Se han eliminado las cookies de {1}"
+    },
+    {
+      "id": "browserLatestSteps",
+      "pattern": "^Showing latest (\\d+) browser steps$",
+      "sample": "Showing latest 12 browser steps",
+      "template": "Se muestran los últimos {1} pasos del navegador"
+    },
+    {
+      "id": "browserPreviewPort",
+      "pattern": "^The preview did not respond on port (\\d+)\\.$",
+      "sample": "The preview did not respond on port 3000.",
+      "template": "La vista previa no respondió en el puerto {1}."
+    },
+    {
+      "id": "sshHostConnectFailed",
+      "pattern": "^Couldn't connect to (.+)$",
+      "sample": "Couldn't connect to dev-host",
+      "template": "No se ha podido conectar a {1}"
+    },
+    {
+      "id": "sshHostForget",
+      "pattern": "^Remove (.+) from Recent$",
+      "sample": "Remove dev-host from Recent",
+      "template": "Quitar {1} de los hosts recientes"
+    },
+    {
+      "id": "sshHostForgotten",
+      "pattern": "^Removed (.+) from Recent$",
+      "sample": "Removed dev-host from Recent",
+      "template": "Se ha quitado {1} de los hosts recientes"
+    },
+    {
+      "id": "sshHostForgetFailed",
+      "pattern": "^Couldn't remove (.+) from Recent$",
+      "sample": "Couldn't remove dev-host from Recent",
+      "template": "No se ha podido quitar {1} de los hosts recientes"
+    },
+    {
+      "id": "sshHostHide",
+      "pattern": "^Hide (.+) from this list$",
+      "sample": "Hide dev-host from this list",
+      "template": "Ocultar {1} en esta lista"
+    },
+    {
+      "id": "sshHostShow",
+      "pattern": "^Show (.+) in the list again$",
+      "sample": "Show dev-host in the list again",
+      "template": "Volver a mostrar {1} en la lista"
+    },
+    {
+      "id": "sshHostHidden",
+      "pattern": "^Hid (.+)$",
+      "sample": "Hid dev-host",
+      "template": "Se ha ocultado {1}"
+    },
+    {
+      "id": "sshHostShown",
+      "pattern": "^Showing (.+) again$",
+      "sample": "Showing dev-host again",
+      "template": "Se vuelve a mostrar {1}"
+    },
+    {
+      "id": "sshHiddenHostCount",
+      "pattern": "^(\\d+) hidden hosts?$",
+      "sample": "2 hidden hosts",
+      "template": "Hosts ocultos: {1}"
+    },
+    {
+      "id": "sshNamedConfig",
+      "pattern": "^SSH Config \\((.+)\\)$",
+      "sample": "SSH Config (work.conf)",
+      "template": "Configuración SSH ({1})"
+    },
+    {
+      "id": "sshSignInHost",
+      "pattern": "^You're signing in on (.+)\\. Your sign-in stays on that machine\\.$",
+      "sample": "You're signing in on dev-host. Your sign-in stays on that machine.",
+      "template": "Estás iniciando sesión en {1}. La sesión se queda en ese equipo."
+    },
+    {
+      "id": "sshHostConnected",
+      "pattern": "^Connected to (.+)$",
+      "sample": "Connected to dev-host",
+      "template": "Conexión establecida con {1}"
+    },
+    {
+      "id": "sshWindowHost",
+      "pattern": "^This window's agents, files, and terminals are on (.+)\\.$",
+      "sample": "This window's agents, files, and terminals are on dev-host.",
+      "template": "Los agentes, archivos y terminales de esta ventana están en {1}."
+    },
+    {
+      "id": "sshBrowserDebugging",
+      "pattern": "^Browser tools run on (.+), the SSH host this window is connected to, and Chrome there isn't accepting remote debugging\\. Complete these steps on (.+), not on this computer:$",
+      "sample": "Browser tools run on dev-host, the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on dev-host, not on this computer:",
+      "template": "Las herramientas del navegador se ejecutan en {1}, el host SSH de esta ventana. Chrome no acepta allí la depuración remota. Sigue estos pasos en {2}:"
+    },
+    {
+      "id": "sshOpenChrome",
+      "pattern": "^Open Google Chrome on (.+)\\.$",
+      "sample": "Open Google Chrome on dev-host.",
+      "template": "Abre Google Chrome en {1}."
+    },
+    {
+      "id": "externalProtocolOpen",
+      "pattern": "^Open ([a-z][a-z0-9+.-]*) link\\?$",
+      "sample": "Open vscode link?",
+      "template": "¿Abrir enlace {1}?"
+    },
+    {
+      "id": "voiceTranscriptionRetry",
+      "pattern": "^Retrying transcription \\(attempt (\\d+)\\)…$",
+      "sample": "Retrying transcription (attempt 2)…",
+      "template": "Volviendo a intentar la transcripción (intento {1})…"
+    },
+    {
+      "id": "planProgressLabel",
+      "pattern": "^Plan, (\\d+) of (\\d+) steps done$",
+      "sample": "Plan, 2 of 5 steps done",
+      "template": "Plan, {1} de {2} pasos completados"
+    },
+    {
+      "id": "mediaDisplayLimit",
+      "pattern": "^File exceeds the (\\d+)MB display limit \\((\\d+)MB\\), so it can't be opened or downloaded here\\.$",
+      "sample": "File exceeds the 200MB display limit (240MB), so it can't be opened or downloaded here.",
+      "template": "El archivo de {2} MB supera el límite de visualización de {1} MB y no se puede abrir ni descargar aquí."
+    },
+    {
+      "id": "bundleAddedAndInstalled",
+      "pattern": "^Added (.+) and installed (\\d+) plugins?\\.$",
+      "sample": "Added Example Tools and installed 3 plugins.",
+      "template": "Se ha añadido {1}. Complementos instalados: {2}."
+    },
+    {
+      "id": "bundleAdded",
+      "pattern": "^Added (.+)\\.$",
+      "sample": "Added Example Tools.",
+      "template": "Se ha añadido {1}."
+    },
+    {
+      "id": "bundleRemoved",
+      "pattern": "^Removed (.+)\\.$",
+      "sample": "Removed Example Tools.",
+      "template": "Se ha quitado {1}."
+    },
+    {
+      "id": "bundleAddLabel",
+      "pattern": "^Add bundle (.+)$",
+      "sample": "Add bundle Example Tools",
+      "template": "Añadir el paquete {1}"
+    },
+    {
+      "id": "bundleAddingPlugins",
+      "pattern": "^Adding plugins from (.+)$",
+      "sample": "Adding plugins from Example Tools",
+      "template": "Añadiendo complementos de {1}"
+    },
+    {
+      "id": "bundleReviewWarning",
+      "pattern": "^(?:This plugin|These plugins) in (.+) may have looser code review\\. Review (?:its|their) contents before adding the bundle\\.$",
+      "sample": "These plugins in Example Tools may have looser code review. Review their contents before adding the bundle.",
+      "template": "Es posible que el código de los complementos de {1} se revise con criterios menos estrictos. Revisa su contenido antes de añadir el paquete."
+    },
+    {
+      "id": "bundleSummaryAllInstalled",
+      "pattern": "^(\\d+) plugins?, all already installed\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "3 plugins, all already installed. Adding the bundle installs plugins it gains later.",
+      "template": "Ya están instalados todos los complementos ({1}). Si añades el paquete, se instalarán los complementos que se incorporen más adelante."
+    },
+    {
+      "id": "bundleSummaryFuture",
+      "pattern": "^(\\d+) plugins?\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "0 plugins. Adding the bundle installs plugins it gains later.",
+      "template": "Complementos: {1}. Si añades el paquete, se instalarán los complementos que se incorporen más adelante."
+    },
+    {
+      "id": "bundleSummaryInstallAll",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (?:it|all of them)\\.$",
+      "sample": "3 plugins. Add bundle installs all of them.",
+      "template": "Complementos: {1}. Añadir el paquete los instala todos."
+    },
+    {
+      "id": "bundleSummaryInstallSome",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (\\d+); the ones you already have stay as they are\\.$",
+      "sample": "4 plugins. Add bundle installs 2; the ones you already have stay as they are.",
+      "template": "Complementos: {1}. Añadir el paquete instala {2}. Los que ya tienes se mantienen como están."
+    },
+    {
+      "id": "bundleSummaryInstalled",
+      "pattern": "^(\\d+) plugins?\\. Disabling or removing the bundle applies only to the ones it installed\\.$",
+      "sample": "4 plugins. Disabling or removing the bundle applies only to the ones it installed.",
+      "template": "Complementos: {1}. Desactivar o quitar el paquete solo afecta a los que instaló el propio paquete."
+    },
+    {
+      "id": "accountPlanLabel",
+      "pattern": "^Your Plan: (.+)$",
+      "sample": "Your Plan: Google AI Pro",
+      "template": "Tu plan: {1}"
     }
   ],
   "menu": {
@@ -5173,6 +5520,72 @@
         },
         {
           "textIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "browserCookieDeleteError",
+      "selector": "p[data-testid=\"browser-site-data-delete-error\"]",
+      "source": "Couldn't delete cookies for {1}. Try again.",
+      "template": "No se han podido eliminar las cookies de {1}. Inténtalo de nuevo.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "browserCookieSiteSearch",
+      "selector": "p[data-testid=\"browser-site-data-no-match\"]",
+      "source": "No sites match “{1}”.",
+      "template": "No hay sitios que coincidan con «{1}».",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshConnectErrorHost",
+      "selector": "[data-testid=\"ssh-connect-error\"] span.text-foreground",
+      "source": "Couldn't connect to {1}",
+      "template": "No se ha podido conectar a {1}",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshEmptyHostConfig",
+      "selector": "[data-testid=\"ssh-connect-dialog\"] p.px-2.text-sm.text-muted-foreground",
+      "source": "No hosts in {1} yet. Type one above.",
+      "template": "Todavía no hay hosts en {1}. Escribe uno arriba.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "vscodeShortcutFilter",
+      "selector": "div.flex.flex-col.gap-1.min-w-0 > span.text-xs.text-muted-foreground.leading-relaxed:has(>code.font-mono)",
+      "source": "Inspect live bindings or record custom key chords filtered to {1} commands.",
+      "template": "Consulta las asignaciones activas o graba tus propias combinaciones. Solo se muestran los comandos {1}.",
+      "slots": [
+        {
+          "selector": "code.font-mono"
+        }
+      ]
+    },
+    {
+      "id": "externalProtocolRemember",
+      "selector": "[data-testid=\"external-link-confirm-always\"] span:has(>code.font-mono)",
+      "source": "Always open {1} links without asking",
+      "template": "Abrir siempre los enlaces {1} sin preguntar",
+      "slots": [
+        {
+          "selector": "code.font-mono"
         }
       ]
     }

@@ -12,9 +12,9 @@ A standalone executable bundling a modern graphical interface, a pure Go asar en
 
 ## Compatibility
 
-The current source has been checked against Antigravity App 2.32.1. Each of the nine packs adds 475 static strings and 22 dynamic rules for the Knowledge Work and Software Engineering layouts in General settings, font size, prompt navigation shortcuts, authorization-code sign-in, download approvals, plugin accounts, remote connections, coordinators, and other UI. Existing 2.29.0 and 2.30.0 entries remain available. IDE setup and SSH prompt windows now load the translation engine, and asynchronous WSL menu translation is fixed. See the [audit record](./docs/translation-audit-2.32.1.md).
+The current source supports Antigravity App 2.33.0. All nine packs cover the new browser data controls, shortcut schemes, built-in slash command descriptions, SSH host controls, GitHub connection errors, side question actions, plugin bundle dialogs, and voice dictation status. Applying, switching languages, and restoring have been verified against the official 2.33.0 archive. See the [Antigravity changelog](https://antigravity.google/docs/changelog#rel-hub-2.33.0).
 
-Spoken transcripts, call summaries, AI progress text, and side-question user content remain untouched; their UI controls still translate. The Chinese packs keep the permission preset name Turbo. Another 25 inline-message rules cover settings descriptions, project permissions, plugin sign-in, IDE setup, and onboarding terms and consent while preserving the original links, controls, and names. Monaco and VS Code color descriptions, editor and layout-library messages, KaTeX help, and Google-internal screens are outside this update. Mixed inline sentences without a complete match also remain in English. Dictionary alignment does not measure coverage of the entire client.
+The [2.32.1 audit](./docs/translation-audit-2.32.1.md) describes the earlier updates to settings, onboarding, and related screens. The engine preserves spoken transcripts, call summaries, AI progress text, and user text in side questions. It also preserves links, controls, and values such as hosts and search terms in translated sentences. The Chinese packs keep the permission preset name Turbo. Dictionary alignment measures keys in the bundled packs. The audit lists surfaces and text outside its scope.
 
 ---
 

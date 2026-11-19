@@ -18,6 +18,28 @@
   <div id="terms" class="text-sm text-muted-foreground mt-auto pt-4">By using this app, you agree to its <a href="https://antigravity.google/terms">Terms of Service</a></div>
   <div class="text-sm text-muted-foreground leading-relaxed"><span id="project">Also includes <span class="text-link">Global Permissions</span> when working in this project.</span></div>
   <div data-testid="mcp-server-browser-sign-in"><span id="provider" role="status"></span></div>
+  <div data-testid="browser-site-data-dialog">
+    <input id="site-search" value="Open" placeholder="Search sites..." aria-label="Search sites">
+    <p id="no-sites" data-testid="browser-site-data-no-match"></p>
+    <p id="cookie-error" data-testid="browser-site-data-delete-error" role="alert"></p>
+    <span id="cookie-count">12 cookies</span>
+    <button id="cookie-delete" aria-label="Delete cookies for example.com"></button>
+  </div>
+  <div data-testid="ssh-connect-error"><span id="ssh-error" class="text-foreground"></span></div>
+  <div data-testid="ssh-connect-dialog"><p id="ssh-empty" class="px-2 text-sm text-muted-foreground"></p></div>
+  <div class="flex flex-col gap-1 min-w-0">
+    <span id="vscode-filter" class="text-xs text-muted-foreground leading-relaxed">Inspect live bindings or record custom key chords filtered to <code class="font-mono">antigravity.</code> commands.</span>
+  </div>
+  <div data-testid="external-link-confirm-always">
+    <label><input id="protocol-choice" type="checkbox"><span id="protocol-label">Always open <code class="font-mono">vscode:</code> links without asking</span></label>
+  </div>
+  <p id="bundle-summary">4 plugins. Add bundle installs 2; the ones you already have stay as they are.</p>
+  <div role="option" aria-selected="true">
+    <div style="display:flex">
+      <span data-testid="menu-option-label" id="slash-name"><span>goal</span></span>
+      <span data-testid="menu-option-description"><span id="slash-description">Run until the specified goal is completely finished.</span></span>
+    </div>
+  </div>
   <script>
     const byId = id => document.getElementById(id);
     const text = id => byId(id).textContent;
@@ -32,6 +54,13 @@
     project.prepend(automation);
     const providerName = document.createTextNode('Run');
     byId('provider').append('Finish signing in to ', providerName, ' in your browser.');
+    const query = document.createTextNode('Open');
+    byId('no-sites').append('No sites match “', query, '”.');
+    byId('cookie-error').append("Couldn't delete cookies for ", 'example.com', '. Try again.');
+    byId('ssh-error').append("Couldn't connect to ", 'Run');
+    byId('ssh-empty').append('No hosts in ', '~/.ssh/config', ' yet. Type one above.');
+    const commandPrefix = byId('vscode-filter').querySelector('code');
+    const protocol = byId('protocol-label').querySelector('code');
 
     verify(async () => {
       for (const [id, expected] of Object.entries({
@@ -41,7 +70,16 @@
         editor: 'Run', remote: 'Run', timer: '运行了 5秒',
         terms: '使用此应用即表示你同意其服务条款',
         project: '此项目为自动化创建。在此项目中工作时，也会包含全局权限。',
-        provider: '请在浏览器中完成 Run 的登录。'
+        provider: '请在浏览器中完成 Run 的登录。',
+        'no-sites': '没有与“Open”匹配的网站。',
+        'cookie-error': '无法删除 example.com 的 Cookie，请重试。',
+        'cookie-count': '12 个 Cookie',
+        'ssh-error': '无法连接到 Run',
+        'ssh-empty': '~/.ssh/config 中尚未配置主机。请在上方输入一个主机名。',
+        'vscode-filter': '查看当前键位或录制自定义快捷键，仅显示 antigravity. 命令。',
+        'protocol-label': '始终打开 vscode: 链接，无需询问',
+        'bundle-summary': '共 4 个插件。添加此组合包会安装 2 个插件，已安装的插件保持现状。',
+        'slash-name': 'goal', 'slash-description': '持续执行，直到指定目标完全达成。'
       })) check(id, text(id), expected);
       check('UI tooltip', byId('control').title, '运行');
       check('editor label', byId('editor').getAttribute('aria-label'), '打开');
@@ -52,6 +90,14 @@
       check('link destination', link.href, 'https://antigravity.google/terms');
       link.click();
       check('original link handler', clicks, 1);
+      check('site query stays unchanged', byId('site-search').value, 'Open');
+      check('site search placeholder', byId('site-search').placeholder, '搜索网站…');
+      check('site delete label', byId('cookie-delete').getAttribute('aria-label'), '删除 example.com 的 Cookie');
+      check('shortcut command node retained', byId('vscode-filter').querySelector('code') === commandPrefix, true);
+      check('protocol code node retained', byId('protocol-label').querySelector('code') === protocol, true);
+      check('protocol checkbox initially unchecked', byId('protocol-choice').checked, false);
+      byId('protocol-label').click();
+      check('protocol checkbox still toggles', byId('protocol-choice').checked, true);
 
       automation.remove();
       providerName.nodeValue = 'Open';
@@ -59,6 +105,13 @@
       byId('control').firstChild.nodeValue = 'Close';
       byId('attachment').alt = 'Run';
       byId('voice').firstChild.firstChild.nodeValue = 'Open';
+      query.nodeValue = 'Run $&';
+      protocol.firstChild.nodeValue = 'ssh:';
+      const slashDescription = byId('slash-description');
+      const highlight = document.createElement('span');
+      highlight.dataset.testid = 'fuzzy-match-highlight';
+      highlight.textContent = 'goal';
+      slashDescription.replaceChildren('Run until the specified ', highlight, ' is completely finished.');
       await settle();
       check('React-only deletion', text('project'), '在此项目中工作时，也会包含全局权限。');
       check('updated provider name', text('provider'), '请在浏览器中完成 Open 的登录。');
@@ -66,6 +119,15 @@
       check('updated UI label', text('control'), '关闭');
       check('updated user attachment alt', byId('attachment').alt, 'Run');
       check('updated voice content', text('voice'), 'Open Open');
+      check('updated site query', text('no-sites'), '没有与“Run $&”匹配的网站。');
+      check('updated protocol', text('protocol-label'), '始终打开 ssh: 链接，无需询问');
+      check('filtered slash menu description', slashDescription.textContent, '持续执行，直到指定目标完全达成。');
+      check('original search highlight node', slashDescription.children[0] === highlight, true);
+      check('filtered slash command name', text('slash-name'), 'goal');
+
+      highlight.firstChild.nodeValue = 'workflow';
+      await settle();
+      check('unrecognized description after update', slashDescription.textContent, 'Run until the specified workflow is completely finished.');
     });
   </script>
 </body>

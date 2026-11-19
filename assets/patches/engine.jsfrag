@@ -223,6 +223,43 @@ function agMatchInlineMessage(element, rule) {
     return { groups, slots, segments };
 }
 
+// Filtering the command menu wraps part of a description in highlight spans.
+// Match the whole sentence and keep the existing React text nodes in place.
+function agMatchHighlightedDescription(element) {
+    if (!element.childElementCount || !element.matches('[data-testid="menu-option-description"] span:has(> span[data-testid="fuzzy-match-highlight"])')) {
+        return null;
+    }
+    const texts = [];
+    let plainText = null;
+    for (const child of element.childNodes) {
+        if (child.nodeType === Node.COMMENT_NODE) {
+            continue;
+        }
+        let node = child;
+        if (child.nodeType === Node.TEXT_NODE) {
+            plainText = plainText || child;
+        } else if (child.nodeType === Node.ELEMENT_NODE && child.matches('span[data-testid="fuzzy-match-highlight"]') &&
+            child.childNodes.length === 1 && child.firstChild.nodeType === Node.TEXT_NODE) {
+            node = child.firstChild;
+        } else {
+            return null;
+        }
+        texts.push({ node, source: agSourceText(node) });
+    }
+    const source = texts.map(entry => entry.source).join('');
+    const translated = agLookup(agNormalizeInline(source));
+    if (!translated || translated === source) {
+        return null;
+    }
+    // The match offsets describe English. Prefer a plain node for the full
+    // translation so the old offsets don't highlight unrelated words.
+    const index = texts.findIndex(entry => entry.node === plainText);
+    if (index > 0) {
+        texts.unshift(texts.splice(index, 1)[0]);
+    }
+    return { groups: [texts], slots: [], segments: [translated] };
+}
+
 function agReleaseInlineMessage(element, restore) {
     const state = agInlineContainers.get(element);
     if (!state) {
@@ -244,50 +281,49 @@ function agReleaseInlineMessage(element, restore) {
 }
 
 function agTranslateInlineMessage(element) {
-    if (!agInlineMessages.length || isSkippableElement(element)) {
+    if (isSkippableElement(element)) {
         return false;
     }
+    let match;
     for (const rule of agInlineMessages) {
-        if (!element.matches(rule.selector)) {
-            continue;
+        if (element.matches(rule.selector)) {
+            match = agMatchInlineMessage(element, rule);
+            if (match) break;
         }
-        const match = agMatchInlineMessage(element, rule);
-        if (!match) {
-            continue;
-        }
-        agReleaseInlineMessage(element, false);
-        const texts = [];
-        const slots = [];
-        match.groups.forEach((group, index) => group.forEach((entry, part) => {
-            agWriteText(entry.node, entry.source, part === 0 ? match.segments[index] : '');
-            agInlineTextNodes.add(entry.node);
-            texts.push(entry.node);
-        }));
-        for (const slot of match.slots) {
-            slots.push(slot.node);
-            agInlineSlots.add(slot.node);
-            if (slot.spec.text) {
-                const translated = translateString(slot.spec.text);
-                slot.texts.forEach((entry, index) => {
-                    agWriteText(entry.node, entry.source, index === 0 ? translated : '');
-                    texts.push(entry.node);
-                });
-            } else {
-                agInlineLiteralSlots.add(slot.node);
-            }
-        }
-        agInlineContainers.set(element, { texts, slots });
-        return true;
     }
-    // If React changes a previously handled UI into an unknown sentence,
-    // restore unchanged source nodes rather than mixing old translated pieces
-    // with the new text. Nodes actually updated by React are left as supplied.
-    agReleaseInlineMessage(element, true);
-    return false;
+    match = match || agMatchHighlightedDescription(element);
+    if (!match) {
+        // Restore unchanged source nodes if React supplies an unknown sentence.
+        agReleaseInlineMessage(element, true);
+        return false;
+    }
+    agReleaseInlineMessage(element, false);
+    const texts = [];
+    const slots = [];
+    match.groups.forEach((group, index) => group.forEach((entry, part) => {
+        agWriteText(entry.node, entry.source, part === 0 ? match.segments[index] : '');
+        agInlineTextNodes.add(entry.node);
+        texts.push(entry.node);
+    }));
+    for (const slot of match.slots) {
+        slots.push(slot.node);
+        agInlineSlots.add(slot.node);
+        if (slot.spec.text) {
+            const translated = translateString(slot.spec.text);
+            slot.texts.forEach((entry, index) => {
+                agWriteText(entry.node, entry.source, index === 0 ? translated : '');
+                texts.push(entry.node);
+            });
+        } else {
+            agInlineLiteralSlots.add(slot.node);
+        }
+    }
+    agInlineContainers.set(element, { texts, slots });
+    return true;
 }
 
 function agTranslateInlineAncestors(element) {
-    if (!agInlineMessages.length || element?.closest(agContentSelector) || element?.isContentEditable) {
+    if (element?.closest(agContentSelector) || element?.isContentEditable) {
         return;
     }
     for (let current = element; current; current = current.parentElement) {

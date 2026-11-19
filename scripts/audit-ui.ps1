@@ -9,7 +9,8 @@ param(
 
 # Read-only audit of the static UI resources shipped by a running Antigravity.
 # This is a candidate list for human review, not a percentage of translated UI.
-# Running-app audits also read the public layout copy and onboarding presets.
+# Running-app audits also read public layout copy, onboarding presets and
+# descriptions of system slash commands for an available model.
 # Bootstrap HTML is inspected in memory only: it contains session credentials.
 # Requires PowerShell 7; no npm packages or app modifications are involved.
 $ErrorActionPreference = 'Stop'
@@ -84,6 +85,23 @@ if (-not $BundlePath) {
             }
             $runtimeSources.Add('public-onboarding-personas')
         } catch { Write-Warning 'Could not read the public onboarding copy; check the rendered preset cards.' }
+        try {
+            $models = Invoke-RestMethod -Uri "$service/GetCascadeModelConfigData" -Method Post -Body '{}' -ContentType 'application/json' -Headers $headers -SkipCertificateCheck -TimeoutSec 10
+            $model = $models.clientModelConfigs | Where-Object { -not $_.disabled -and $_.modelOrAlias } | Select-Object -First 1
+            if (-not $model) { throw 'No available model for the command list.' }
+            $planner = @{ requestedModel = $model.modelOrAlias }
+            if ($model.modelOrAlias.model) { $planner.planModel = $model.modelOrAlias.model }
+            $request = ConvertTo-Json -InputObject @{ cascadeConfig = @{ plannerConfig = $planner } } -Depth 8 -Compress
+            $result = Invoke-RestMethod -Uri "$service/GetSlashCommands" -Method Post -Body $request -ContentType 'application/json' -Headers $headers -SkipCertificateCheck -TimeoutSec 10
+            foreach ($command in $result.commands) {
+                # Persist only the explicit UI description of system commands.
+                # Custom skills, workflow content and model-facing prompts stay out.
+                if ($command.info.type -ceq 'SLASH_COMMAND_TYPE_SYSTEM' -and $command.description) {
+                    $runtimeCopy.Add([ordered]@{ text = $command.description; source = "system-slash-command.$($command.info.name)" })
+                }
+            }
+            $runtimeSources.Add('system-slash-commands')
+        } catch { Write-Warning 'Could not read system slash command descriptions; check the slash menu.' }
         $csrf = $null
         $headers = $null
     }

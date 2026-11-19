@@ -651,6 +651,222 @@
       "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
       "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
       "template": "{1} 的登入資訊隨帳號保存在雲端。其他認證資料保存在這台電腦上。認證資料只會傳送至列出的網域。"
+    },
+    {
+      "id": "browserCookieCount",
+      "pattern": "^(\\d+) cookies?$",
+      "sample": "12 cookies",
+      "template": "{1} 個 Cookie"
+    },
+    {
+      "id": "browserCookieDelete",
+      "pattern": "^Delete cookies for (.+)$",
+      "sample": "Delete cookies for example.com",
+      "template": "刪除 {1} 的 Cookie"
+    },
+    {
+      "id": "browserCookieDeleted",
+      "pattern": "^Deleted cookies for (.+)$",
+      "sample": "Deleted cookies for example.com",
+      "template": "已刪除 {1} 的 Cookie"
+    },
+    {
+      "id": "browserLatestSteps",
+      "pattern": "^Showing latest (\\d+) browser steps$",
+      "sample": "Showing latest 12 browser steps",
+      "template": "顯示最近的 {1} 個瀏覽器操作步驟"
+    },
+    {
+      "id": "browserPreviewPort",
+      "pattern": "^The preview did not respond on port (\\d+)\\.$",
+      "sample": "The preview did not respond on port 3000.",
+      "template": "預覽未在連接埠 {1} 回應。"
+    },
+    {
+      "id": "sshHostConnectFailed",
+      "pattern": "^Couldn't connect to (.+)$",
+      "sample": "Couldn't connect to dev-host",
+      "template": "無法連線至 {1}"
+    },
+    {
+      "id": "sshHostForget",
+      "pattern": "^Remove (.+) from Recent$",
+      "sample": "Remove dev-host from Recent",
+      "template": "從最近使用中移除 {1}"
+    },
+    {
+      "id": "sshHostForgotten",
+      "pattern": "^Removed (.+) from Recent$",
+      "sample": "Removed dev-host from Recent",
+      "template": "已從最近使用中移除 {1}"
+    },
+    {
+      "id": "sshHostForgetFailed",
+      "pattern": "^Couldn't remove (.+) from Recent$",
+      "sample": "Couldn't remove dev-host from Recent",
+      "template": "無法從最近使用中移除 {1}"
+    },
+    {
+      "id": "sshHostHide",
+      "pattern": "^Hide (.+) from this list$",
+      "sample": "Hide dev-host from this list",
+      "template": "從清單中隱藏 {1}"
+    },
+    {
+      "id": "sshHostShow",
+      "pattern": "^Show (.+) in the list again$",
+      "sample": "Show dev-host in the list again",
+      "template": "重新在清單中顯示 {1}"
+    },
+    {
+      "id": "sshHostHidden",
+      "pattern": "^Hid (.+)$",
+      "sample": "Hid dev-host",
+      "template": "已隱藏 {1}"
+    },
+    {
+      "id": "sshHostShown",
+      "pattern": "^Showing (.+) again$",
+      "sample": "Showing dev-host again",
+      "template": "已重新顯示 {1}"
+    },
+    {
+      "id": "sshHiddenHostCount",
+      "pattern": "^(\\d+) hidden hosts?$",
+      "sample": "2 hidden hosts",
+      "template": "{1} 部隱藏的主機"
+    },
+    {
+      "id": "sshNamedConfig",
+      "pattern": "^SSH Config \\((.+)\\)$",
+      "sample": "SSH Config (work.conf)",
+      "template": "SSH 設定（{1}）"
+    },
+    {
+      "id": "sshSignInHost",
+      "pattern": "^You're signing in on (.+)\\. Your sign-in stays on that machine\\.$",
+      "sample": "You're signing in on dev-host. Your sign-in stays on that machine.",
+      "template": "你正在 {1} 上登入。登入狀態會儲存在該主機上。"
+    },
+    {
+      "id": "sshHostConnected",
+      "pattern": "^Connected to (.+)$",
+      "sample": "Connected to dev-host",
+      "template": "已連線至 {1}"
+    },
+    {
+      "id": "sshWindowHost",
+      "pattern": "^This window's agents, files, and terminals are on (.+)\\.$",
+      "sample": "This window's agents, files, and terminals are on dev-host.",
+      "template": "此視窗的代理程式、檔案和終端機都在 {1} 上。"
+    },
+    {
+      "id": "sshBrowserDebugging",
+      "pattern": "^Browser tools run on (.+), the SSH host this window is connected to, and Chrome there isn't accepting remote debugging\\. Complete these steps on (.+), not on this computer:$",
+      "sample": "Browser tools run on dev-host, the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on dev-host, not on this computer:",
+      "template": "瀏覽器工具在此視窗連線的 SSH 主機 {1} 上執行，而該主機的 Chrome 不接受遠端偵錯。請在 {2} 上完成下列步驟："
+    },
+    {
+      "id": "sshOpenChrome",
+      "pattern": "^Open Google Chrome on (.+)\\.$",
+      "sample": "Open Google Chrome on dev-host.",
+      "template": "在 {1} 上開啟 Google Chrome。"
+    },
+    {
+      "id": "externalProtocolOpen",
+      "pattern": "^Open ([a-z][a-z0-9+.-]*) link\\?$",
+      "sample": "Open vscode link?",
+      "template": "開啟 {1} 連結？"
+    },
+    {
+      "id": "voiceTranscriptionRetry",
+      "pattern": "^Retrying transcription \\(attempt (\\d+)\\)…$",
+      "sample": "Retrying transcription (attempt 2)…",
+      "template": "正在重試轉錄（第 {1} 次）…"
+    },
+    {
+      "id": "planProgressLabel",
+      "pattern": "^Plan, (\\d+) of (\\d+) steps done$",
+      "sample": "Plan, 2 of 5 steps done",
+      "template": "計畫，已完成 {1}/{2} 個步驟"
+    },
+    {
+      "id": "mediaDisplayLimit",
+      "pattern": "^File exceeds the (\\d+)MB display limit \\((\\d+)MB\\), so it can't be opened or downloaded here\\.$",
+      "sample": "File exceeds the 200MB display limit (240MB), so it can't be opened or downloaded here.",
+      "template": "檔案大小為 {2} MB，超過 {1} MB 的顯示上限，無法在這裡開啟或下載。"
+    },
+    {
+      "id": "bundleAddedAndInstalled",
+      "pattern": "^Added (.+) and installed (\\d+) plugins?\\.$",
+      "sample": "Added Example Tools and installed 3 plugins.",
+      "template": "已新增 {1}，並安裝 {2} 個外掛程式。"
+    },
+    {
+      "id": "bundleAdded",
+      "pattern": "^Added (.+)\\.$",
+      "sample": "Added Example Tools.",
+      "template": "已新增 {1}。"
+    },
+    {
+      "id": "bundleRemoved",
+      "pattern": "^Removed (.+)\\.$",
+      "sample": "Removed Example Tools.",
+      "template": "已移除 {1}。"
+    },
+    {
+      "id": "bundleAddLabel",
+      "pattern": "^Add bundle (.+)$",
+      "sample": "Add bundle Example Tools",
+      "template": "新增組合包 {1}"
+    },
+    {
+      "id": "bundleAddingPlugins",
+      "pattern": "^Adding plugins from (.+)$",
+      "sample": "Adding plugins from Example Tools",
+      "template": "正在新增 {1} 中的外掛程式"
+    },
+    {
+      "id": "bundleReviewWarning",
+      "pattern": "^(?:This plugin|These plugins) in (.+) may have looser code review\\. Review (?:its|their) contents before adding the bundle\\.$",
+      "sample": "These plugins in Example Tools may have looser code review. Review their contents before adding the bundle.",
+      "template": "組合包 {1} 中的這些外掛程式可能經過較寬鬆的程式碼審查。新增組合包前請檢查外掛內容。"
+    },
+    {
+      "id": "bundleSummaryAllInstalled",
+      "pattern": "^(\\d+) plugins?, all already installed\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "3 plugins, all already installed. Adding the bundle installs plugins it gains later.",
+      "template": "共 {1} 個外掛程式，均已安裝。新增此組合包後，將自動安裝日後加入的外掛程式。"
+    },
+    {
+      "id": "bundleSummaryFuture",
+      "pattern": "^(\\d+) plugins?\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "0 plugins. Adding the bundle installs plugins it gains later.",
+      "template": "共 {1} 個外掛程式。新增此組合包後，將自動安裝日後加入的外掛程式。"
+    },
+    {
+      "id": "bundleSummaryInstallAll",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (?:it|all of them)\\.$",
+      "sample": "3 plugins. Add bundle installs all of them.",
+      "template": "共 {1} 個外掛程式。新增此組合包會安裝其中的所有外掛程式。"
+    },
+    {
+      "id": "bundleSummaryInstallSome",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (\\d+); the ones you already have stay as they are\\.$",
+      "sample": "4 plugins. Add bundle installs 2; the ones you already have stay as they are.",
+      "template": "共 {1} 個外掛程式。新增此組合包會安裝 {2} 個外掛程式，已安裝的外掛程式維持原狀。"
+    },
+    {
+      "id": "bundleSummaryInstalled",
+      "pattern": "^(\\d+) plugins?\\. Disabling or removing the bundle applies only to the ones it installed\\.$",
+      "sample": "4 plugins. Disabling or removing the bundle applies only to the ones it installed.",
+      "template": "共 {1} 個外掛程式。停用或移除此組合包只會影響隨附安裝的外掛程式。"
+    },
+    {
+      "id": "accountPlanLabel",
+      "pattern": "^Your Plan: (.+)$",
+      "sample": "Your Plan: Google AI Pro",
+      "template": "你的方案：{1}"
     }
   ],
   "valueMaps": {
@@ -4747,7 +4963,136 @@
     "week": "週",
     "month": "月",
     "Legal Help": "法律幫助",
-    "Help us improve Antigravity.": "協助我們改善 Antigravity。"
+    "Help us improve Antigravity.": "協助我們改善 Antigravity。",
+    "Enable Browser Agent": "啟用瀏覽器代理",
+    "Let the agent open URLs, read web pages, and interact with browser content. This gives the agent access to important (and often critical) knowledge and methods of validation, but any browser integration does increase exposure to external malicious parties for security exploits.": "允許代理程式開啟網址、閱讀網頁並與網頁內容互動。這樣代理程式就能取得重要資訊並驗證結果，但接入瀏覽器也會增加遭受外部惡意攻擊的風險。",
+    "Browsing Data": "瀏覽資料",
+    "Clear history, cookies and site data from the built-in browser, or manage cookies for each site.": "清除內建瀏覽器的記錄、Cookie 和網站資料，或依網站管理 Cookie。",
+    "Cookies by Site": "依網站管理 Cookie",
+    "Clear Browsing Data?": "清除瀏覽資料？",
+    "Choose what to clear from the built-in browser. It can't be undone.": "選擇要從內建瀏覽器清除的內容。這項操作無法復原。",
+    "Browsing history": "瀏覽記錄",
+    "Visited URLs and autocomplete suggestions.": "造訪過的網址和自動完成建議。",
+    "Cookies and other site data": "Cookie 和其他網站資料",
+    "Cookies, site storage and cache. Signs you out of all sites in the built-in browser and reloads its open tabs.": "清除 Cookie、網站儲存空間和快取。這會登出內建瀏覽器中的所有網站，並重新載入已開啟的分頁。",
+    "An agent is using the built-in browser. Clearing its data signs the agent out of sites and may interrupt its task.": "有代理程式正在使用內建瀏覽器。清除資料會讓代理程式登出網站，可能中斷目前的工作。",
+    "Couldn't clear browsing data. Try again.": "無法清除瀏覽資料，請再試一次。",
+    "Cleared built-in browser data": "已清除內建瀏覽器資料",
+    "Cleared built-in browser history": "已清除內建瀏覽器記錄",
+    "Loading cookies…": "正在載入 Cookie…",
+    "Couldn't load cookies.": "無法載入 Cookie。",
+    "No sites have cookies in the built-in browser.": "內建瀏覽器沒有任何網站儲存 Cookie。",
+    "Sites with cookies": "存有 Cookie 的網站",
+    "Cookies the built-in browser stores for each site. Deleting a site's cookies usually signs you out of it. Other site data (local storage, IndexedDB, cache) is cleared only by Browsing Data → Clear.": "內建瀏覽器為各網站儲存的 Cookie。刪除單一網站的 Cookie 通常會登出該網站。其他網站資料（本機儲存空間、IndexedDB、快取）只能透過「瀏覽資料 → 清除」刪除。",
+    "Search sites...": "搜尋網站…",
+    "Search sites": "搜尋網站",
+    "Loading browser steps…": "正在載入瀏覽器操作步驟…",
+    "Browser task still running…": "瀏覽器工作仍在執行…",
+    "No browser steps recorded": "未記錄瀏覽器操作步驟",
+    "Open browser screenshot": "開啟瀏覽器螢幕擷取畫面",
+    "Browser screenshot": "瀏覽器螢幕擷取畫面",
+    "VS Code Default": "VS Code 預設",
+    "Antigravity (AGY) Style": "Antigravity（AGY）風格",
+    "Manage your keybinding scheme and customize shortcuts in VS Code.": "管理快速鍵配置，並在 VS Code 中自訂快速鍵。",
+    "Keybinding Scheme": "快速鍵配置",
+    "Choose between non-colliding VS Code defaults or standalone Antigravity chords.": "選擇與 VS Code 預設快速鍵不衝突的配置，或使用 Antigravity 獨立快速鍵。",
+    "Customize Shortcuts": "自訂快速鍵",
+    "All active Antigravity shortcuts and user keybinding overrides are managed directly by VS Code.": "所有啟用的 Antigravity 快速鍵和使用者自訂設定都由 VS Code 直接管理。",
+    "VS Code Keyboard Shortcuts": "VS Code 鍵盤快速鍵",
+    "Managed by application menu": "由應用程式選單管理",
+    "Terminal: Select All": "終端機：全選",
+    "System default app": "系統預設應用程式",
+    "Loading preview…": "正在載入預覽…",
+    "Side Question Selection": "對選取內容發起側問",
+    "The main conversation's input isn't available right now.": "主對話的輸入框目前無法使用。",
+    "Insert into main conversation": "插入主對話",
+    "Unarchive the main conversation to insert": "取消封存主對話後即可插入",
+    "This side question isn't available in this conversation.": "此側問在目前的對話中無法使用。",
+    "Response actions": "回覆操作",
+    "Waiting for subagent": "正在等待子代理程式",
+    "Not started": "尚未開始",
+    "In progress": "進行中",
+    "Failed": "失敗",
+    "Connecting…": "正在連線…",
+    "Hide from this list": "從這份清單隱藏",
+    "Show in the list again": "重新在清單中顯示",
+    "Token rejected": "權杖遭拒",
+    "Repository access required": "需要存取存放庫的權限",
+    "Setup Script": "環境初始化指令碼",
+    "Saving setup routine": "正在儲存環境設定流程",
+    "Canceled saving setup routine": "已取消儲存環境設定流程",
+    "Saved setup routine": "已儲存環境設定流程",
+    "Deleting setup routine": "正在刪除環境設定流程",
+    "Canceled deletion of setup routine": "已取消刪除環境設定流程",
+    "Deleted setup routine": "已刪除環境設定流程",
+    "Open in settings": "在設定中開啟",
+    "Access restricted": "存取受限",
+    "Checking access...": "正在檢查存取權限…",
+    "Interrupt Agent": "中斷代理程式",
+    "Check that the microphone is unmuted and the right input device is selected.": "請確認麥克風未靜音，並已選取正確的輸入裝置。",
+    "Microphone access is blocked by your operating system. Grant microphone permission in System Settings and try again.": "作業系統已封鎖麥克風存取。請在系統設定中授予麥克風權限後再試一次。",
+    "No microphone was found on this machine. Connect or enable an input device and try again.": "此裝置找不到麥克風。請連接或啟用輸入裝置後再試一次。",
+    "Microphone is already in use by another recording session.": "另一個錄音工作階段正在使用麥克風。",
+    "Microphone capture is not supported in this environment.": "此環境不支援麥克風錄音。",
+    "Microphone capture failed.": "麥克風錄音失敗。",
+    "Microphone capture ended unexpectedly.": "麥克風錄音意外結束。",
+    "Speech recognition service is failing, and the current model doesn't support direct audio file input.": "語音辨識服務發生錯誤，目前的模型也不支援直接輸入音訊檔案。",
+    "Microphone silent": "麥克風未偵測到聲音",
+    "Microphone problem": "麥克風異常",
+    "Voice dictation unavailable": "無法使用語音聽寫",
+    "Transcribing audio…": "正在轉錄音訊…",
+    "Stop transcription": "停止轉錄",
+    "File exceeds the 200MB display limit, so it can't be opened or downloaded here.": "檔案超過 200 MB 的顯示上限，無法在這裡開啟或下載。",
+    "Browser tools run on the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on the SSH host, not on this computer:": "瀏覽器工具在此視窗連線的 SSH 主機上執行，而該主機的 Chrome 不接受遠端偵錯。請在 SSH 主機上完成下列步驟：",
+    "Open Google Chrome on the SSH host.": "在 SSH 主機上開啟 Google Chrome。",
+    "Search Recent Workspaces": "搜尋最近使用的工作區",
+    "Select Workspace": "選取工作區",
+    "No longer available": "已下架",
+    "Removed from the marketplace. Stays installed until you uninstall it.": "已從市集下架。已安裝的版本會保留，直到你解除安裝。",
+    "Installed separately": "獨立安裝",
+    "Disabling or removing this bundle doesn't affect it.": "停用或移除此組合包不會影響該外掛程式。",
+    "Review bundle before adding": "新增前檢查組合包",
+    "Review contents": "檢查內容",
+    "Add anyway": "仍要新增",
+    "Remove bundle": "移除組合包",
+    "Add bundle": "新增組合包",
+    "No bundles available.": "沒有可用的組合包。",
+    "Loading bundles...": "正在載入組合包…",
+    "Failed to load marketplace bundles. Please try again.": "無法載入市集中的組合包，請再試一次。",
+    "Failed to add bundle.": "無法新增組合包。",
+    "Failed to add bundle. Please try again.": "無法新增組合包，請再試一次。",
+    "Failed to update the bundle.": "無法更新組合包。",
+    "Failed to update the bundle. Please try again.": "無法更新組合包，請再試一次。",
+    "Replacing...": "正在取代…",
+    "Robot": "機器人",
+    "Hub": "中心節點",
+    "Sliders": "滑桿",
+    "Command prompt": "命令提示字元",
+    "Code": "程式碼",
+    "Sparkles": "閃光",
+    "Wrench": "扳手",
+    "Shield": "盾牌",
+    "Speedometer": "速度表",
+    "Gauge": "儀表",
+    "Eye": "眼睛",
+    "Flask": "燒瓶",
+    "Radar": "雷達",
+    "Remote Debugging Required": "需要遠端偵錯",
+    "Review plugin before installing": "安裝前檢查外掛程式",
+    "Review skill before installing": "安裝前檢查技能",
+    "Honors standard VS Code shortcuts without collisions (e.g. Ctrl+L Focus Input, Ctrl+Shift+L New Conversation, Ctrl+Shift+A Picker, Ctrl+Shift+, Settings).": "採用 VS Code 標準快速鍵，避免衝突（例如 Ctrl+L 聚焦輸入框、Ctrl+Shift+L 新建對話、Ctrl+Shift+A 選擇器、Ctrl+Shift+, 設置）。",
+    "Uses standalone Antigravity chords (e.g. Ctrl+I Focus Input, Ctrl+Shift+O New Conversation, Ctrl+K Picker in chat, Ctrl+, Settings, Ctrl+[/] History). Replaces Go to Symbol (Ctrl+Shift+O) and Trigger Suggest (Ctrl+I), and rebinds VS Code Settings to Ctrl+Alt+,.": "使用 Antigravity 獨立快速鍵（例如 Ctrl+I 聚焦輸入框、Ctrl+Shift+O 新建對話、Ctrl+K 對話內選擇器、Ctrl+, 設置、Ctrl+[/] 歷史記錄）。此配置會取代「移至符號」（Ctrl+Shift+O）和「觸發建議」（Ctrl+I）的繫結，並將 VS Code 設定重新繫結至 Ctrl+Alt+,。",
+    "Honors standard VS Code shortcuts without collisions (e.g. ⌘L Focus Input, ⌘⇧L New Conversation, ⌘⇧A Picker, ⌘⇧, Settings).": "採用 VS Code 標準快速鍵，避免衝突（例如 ⌘L 聚焦輸入框、⌘⇧L 新建對話、⌘⇧A 選擇器、⌘⇧, 設置）。",
+    "Uses standalone Antigravity chords (e.g. ⌘I Focus Input, ⌘⇧O New Conversation, ⌘K Picker in chat, ⌘, Settings, ⌘[/] History). Replaces Go to Symbol (⌘⇧O) and Trigger Suggest (⌘I), and rebinds VS Code Settings to ⌘⌥,.": "使用 Antigravity 獨立快速鍵（例如 ⌘I 聚焦輸入框、⌘⇧O 新建對話、⌘K 對話內選擇器、⌘, 設置、⌘[/] 歷史記錄）。此配置會取代「移至符號」（⌘⇧O）和「觸發建議」（⌘I）的繫結，並將 VS Code 設定重新繫結至 ⌘⌥,。",
+    "Run until the specified goal is completely finished.": "持續執行，直到指定目標完全達成。",
+    "Compact the conversation now (summarize history to free up the context window).": "立即壓縮對話（摘要歷史訊息，釋放上下文空間）。",
+    "Run an instruction on a recurring schedule or as a one-time timer.": "定期執行一項指令，或設定一次定時執行。",
+    "Invoke a browser agent for web tasks.": "呼叫瀏覽器代理處理網頁工作。",
+    "Plan carefully before executing a task.": "執行工作前先仔細規劃。",
+    "Interview me to align on a plan.": "透過提問與我一起確認計畫。",
+    "Invoke a team of agents to autonomously tackle large projects.": "讓一組代理協作，自主處理大型專案。",
+    "Reflect on recent successes or corrections to capture reusable skills or rules.": "回顧近期的成功做法或修正，整理成可重複使用的技能或規則。",
+    "Invoke the Boost multi-agent orchestrator for complex tasks.": "呼叫 Boost 多代理協調器處理複雜工作。"
   },
   "inlineMessages": [
     {
@@ -5090,6 +5435,72 @@
         },
         {
           "textIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "browserCookieDeleteError",
+      "selector": "p[data-testid=\"browser-site-data-delete-error\"]",
+      "source": "Couldn't delete cookies for {1}. Try again.",
+      "template": "無法刪除 {1} 的 Cookie，請再試一次。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "browserCookieSiteSearch",
+      "selector": "p[data-testid=\"browser-site-data-no-match\"]",
+      "source": "No sites match “{1}”.",
+      "template": "沒有與「{1}」相符的網站。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshConnectErrorHost",
+      "selector": "[data-testid=\"ssh-connect-error\"] span.text-foreground",
+      "source": "Couldn't connect to {1}",
+      "template": "無法連線至 {1}",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshEmptyHostConfig",
+      "selector": "[data-testid=\"ssh-connect-dialog\"] p.px-2.text-sm.text-muted-foreground",
+      "source": "No hosts in {1} yet. Type one above.",
+      "template": "{1} 中尚未設定主機。請在上方輸入主機名稱。",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "vscodeShortcutFilter",
+      "selector": "div.flex.flex-col.gap-1.min-w-0 > span.text-xs.text-muted-foreground.leading-relaxed:has(>code.font-mono)",
+      "source": "Inspect live bindings or record custom key chords filtered to {1} commands.",
+      "template": "查看目前的快速鍵或錄製自訂快速鍵，僅顯示 {1} 命令。",
+      "slots": [
+        {
+          "selector": "code.font-mono"
+        }
+      ]
+    },
+    {
+      "id": "externalProtocolRemember",
+      "selector": "[data-testid=\"external-link-confirm-always\"] span:has(>code.font-mono)",
+      "source": "Always open {1} links without asking",
+      "template": "一律開啟 {1} 連結，無須詢問",
+      "slots": [
+        {
+          "selector": "code.font-mono"
         }
       ]
     }

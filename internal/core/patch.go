@@ -161,14 +161,13 @@ func trimLeadingSpace(s string) string {
 
 // langSwitchRe matches the Chromium language switch block. It is rewritten in
 // place: pointing --lang at the locale is what makes native dialogs, spell
-// checking and date formatting follow the chosen language. Writing it inside a
-// hasSwitch guard keeps an explicit command-line --lang from the user winning.
+// checking and date formatting follow the chosen language. The guard lets an
+// explicit command-line --lang take precedence.
 var langSwitchRe = regexp.MustCompile(`if \(!electron_1\.app\.commandLine\.hasSwitch\('lang'\)\) \{\s*electron_1\.app\.commandLine\.appendSwitch\('lang', '[^']*'\);\s*\}`)
 
-// debugPortRe matches the remote debugging port block. Antigravity 2.28 dropped
-// its own language switch, and 2.29.0 still inserts nothing in its place, so
-// this block remains the anchor used when the older language switch is absent.
-var debugPortRe = regexp.MustCompile(`if\s*\(!electron_1\.app\.commandLine\.hasSwitch\('remote-debugging-port'\)\)\s*\{\s*electron_1\.app\.commandLine\.appendSwitch\('remote-debugging-port',\s*'0'\);\s*\}`)
+// A fresh install sets the language after importing Electron, before app
+// readiness. Antigravity 2.33 no longer opens a debugging port at startup.
+var electronImportRe = regexp.MustCompile(`(?m)^const electron_1 = require\((?:"electron"|'electron')\);[\t ]*\r?$`)
 
 // applyLanguageSwitch points Chromium's --lang switch at the locale being
 // installed.
@@ -194,10 +193,10 @@ func applyLanguageSwitch(source string, locale *Locale) (string, error) {
 	if langSwitchRe.MatchString(source) {
 		return langSwitchRe.ReplaceAllStringFunc(source, func(string) string { return block }), nil
 	}
-	if loc := debugPortRe.FindStringIndex(source); loc != nil {
+	if loc := electronImportRe.FindStringIndex(source); loc != nil {
 		return source[:loc[1]] + "\n" + block + source[loc[1]:], nil
 	}
-	return source, nil
+	return "", fmt.Errorf("could not apply the language switch to main.js: the Electron import was not found")
 }
 
 // chromiumLangRe restricts the language code to characters safe to place in
@@ -209,12 +208,6 @@ func patchMain(source string, locale *Locale, dialogFragment string) (string, er
 	out, err := applyLanguageSwitch(source, locale)
 	if err != nil {
 		return "", err
-	}
-	if !strings.Contains(out, "appendSwitch('lang'") {
-		return "", fmt.Errorf(
-			"could not apply the language switch to main.js: the expected code pattern was not found. " +
-				"Antigravity was likely updated to a build this patch does not recognise; " +
-				"report this so the anchor can be updated")
 	}
 	out = injectFragment(out, dialogFragment, nil, "if (!electron_1.app.commandLine.hasSwitch('lang')) {")
 	return out, nil

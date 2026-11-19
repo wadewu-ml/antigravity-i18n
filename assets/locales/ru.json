@@ -3898,7 +3898,136 @@
     "week": "неделя",
     "month": "месяц",
     "Legal Help": "Юридическая справка",
-    "Help us improve Antigravity.": "Помогите нам улучшить Antigravity."
+    "Help us improve Antigravity.": "Помогите нам улучшить Antigravity.",
+    "Enable Browser Agent": "Включить агента браузера",
+    "Let the agent open URLs, read web pages, and interact with browser content. This gives the agent access to important (and often critical) knowledge and methods of validation, but any browser integration does increase exposure to external malicious parties for security exploits.": "Разрешите агенту открывать URL, читать страницы и взаимодействовать с их содержимым. Это помогает получать важные сведения и проверять результаты, но интеграция с браузером повышает риск атак извне.",
+    "Browsing Data": "Данные браузера",
+    "Clear history, cookies and site data from the built-in browser, or manage cookies for each site.": "Удалите историю, файлы cookie и данные сайтов во встроенном браузере или управляйте cookie для каждого сайта отдельно.",
+    "Cookies by Site": "Файлы cookie по сайтам",
+    "Clear Browsing Data?": "Удалить данные браузера?",
+    "Choose what to clear from the built-in browser. It can't be undone.": "Выберите данные, которые нужно удалить из встроенного браузера. Это действие нельзя отменить.",
+    "Browsing history": "История браузера",
+    "Visited URLs and autocomplete suggestions.": "Посещённые URL и подсказки автозаполнения.",
+    "Cookies and other site data": "Файлы cookie и другие данные сайтов",
+    "Cookies, site storage and cache. Signs you out of all sites in the built-in browser and reloads its open tabs.": "Файлы cookie, хранилища сайтов и кеш. Вы выйдете из всех аккаунтов во встроенном браузере. Открытые вкладки перезагрузятся.",
+    "An agent is using the built-in browser. Clearing its data signs the agent out of sites and may interrupt its task.": "Агент использует встроенный браузер. При удалении данных агент выйдет из аккаунтов на сайтах, и его задача может прерваться.",
+    "Couldn't clear browsing data. Try again.": "Не удалось удалить данные браузера. Повторите попытку.",
+    "Cleared built-in browser data": "Данные встроенного браузера удалены",
+    "Cleared built-in browser history": "История встроенного браузера удалена",
+    "Loading cookies…": "Загрузка файлов cookie…",
+    "Couldn't load cookies.": "Не удалось загрузить файлы cookie.",
+    "No sites have cookies in the built-in browser.": "Во встроенном браузере нет сайтов с сохранёнными файлами cookie.",
+    "Sites with cookies": "Сайты с файлами cookie",
+    "Cookies the built-in browser stores for each site. Deleting a site's cookies usually signs you out of it. Other site data (local storage, IndexedDB, cache) is cleared only by Browsing Data → Clear.": "Файлы cookie, которые встроенный браузер хранит для каждого сайта. Удаление cookie сайта обычно приводит к выходу из аккаунта. Другие данные сайтов (локальное хранилище, IndexedDB и кеш) можно удалить только через «Данные браузера → Очистить».",
+    "Search sites...": "Поиск сайтов…",
+    "Search sites": "Поиск сайтов",
+    "Loading browser steps…": "Загрузка действий в браузере…",
+    "Browser task still running…": "Задача в браузере ещё выполняется…",
+    "No browser steps recorded": "Действия в браузере не записаны",
+    "Open browser screenshot": "Открыть снимок экрана браузера",
+    "Browser screenshot": "Снимок экрана браузера",
+    "VS Code Default": "Стандартная раскладка VS Code",
+    "Antigravity (AGY) Style": "Стиль Antigravity (AGY)",
+    "Manage your keybinding scheme and customize shortcuts in VS Code.": "Управляйте схемой клавиш и настраивайте сочетания в VS Code.",
+    "Keybinding Scheme": "Схема сочетаний клавиш",
+    "Choose between non-colliding VS Code defaults or standalone Antigravity chords.": "Выберите схему без конфликтов со стандартными сочетаниями VS Code или отдельные сочетания Antigravity.",
+    "Customize Shortcuts": "Настроить сочетания клавиш",
+    "All active Antigravity shortcuts and user keybinding overrides are managed directly by VS Code.": "Все активные сочетания клавиш Antigravity и пользовательские назначения управляются непосредственно в VS Code.",
+    "VS Code Keyboard Shortcuts": "Сочетания клавиш VS Code",
+    "Managed by application menu": "Управляется через меню приложения",
+    "Terminal: Select All": "Терминал: выделить всё",
+    "System default app": "Приложение по умолчанию в системе",
+    "Loading preview…": "Загрузка предпросмотра…",
+    "Side Question Selection": "Дополнительный вопрос по выделенному фрагменту",
+    "The main conversation's input isn't available right now.": "Поле ввода в основном диалоге сейчас недоступно.",
+    "Insert into main conversation": "Вставить в основной диалог",
+    "Unarchive the main conversation to insert": "Разархивируйте основной диалог, чтобы вставить ответ",
+    "This side question isn't available in this conversation.": "Этот дополнительный вопрос недоступен в данном диалоге.",
+    "Response actions": "Действия с ответом",
+    "Waiting for subagent": "Ожидание субагента",
+    "Not started": "Не начато",
+    "In progress": "В процессе",
+    "Failed": "Сбой",
+    "Connecting…": "Подключение…",
+    "Hide from this list": "Скрыть в этом списке",
+    "Show in the list again": "Снова показать в списке",
+    "Token rejected": "Токен отклонён",
+    "Repository access required": "Требуется доступ к репозиторию",
+    "Setup Script": "Скрипт настройки",
+    "Saving setup routine": "Сохранение процедуры настройки",
+    "Canceled saving setup routine": "Сохранение процедуры настройки отменено",
+    "Saved setup routine": "Процедура настройки сохранена",
+    "Deleting setup routine": "Удаление процедуры настройки",
+    "Canceled deletion of setup routine": "Удаление процедуры настройки отменено",
+    "Deleted setup routine": "Процедура настройки удалена",
+    "Open in settings": "Открыть в настройках",
+    "Access restricted": "Доступ ограничен",
+    "Checking access...": "Проверка доступа…",
+    "Interrupt Agent": "Прервать работу агента",
+    "Check that the microphone is unmuted and the right input device is selected.": "Убедитесь, что микрофон не выключен и выбрано нужное устройство ввода.",
+    "Microphone access is blocked by your operating system. Grant microphone permission in System Settings and try again.": "Операционная система заблокировала доступ к микрофону. Разрешите доступ в системных настройках и повторите попытку.",
+    "No microphone was found on this machine. Connect or enable an input device and try again.": "На этом компьютере не найден микрофон. Подключите или включите устройство ввода и повторите попытку.",
+    "Microphone is already in use by another recording session.": "Микрофон уже используется в другой сессии записи.",
+    "Microphone capture is not supported in this environment.": "В этой среде запись с микрофона не поддерживается.",
+    "Microphone capture failed.": "Не удалось записать звук с микрофона.",
+    "Microphone capture ended unexpectedly.": "Запись с микрофона неожиданно завершилась.",
+    "Speech recognition service is failing, and the current model doesn't support direct audio file input.": "Служба распознавания речи работает со сбоями, а текущая модель не поддерживает прямую загрузку аудиофайлов.",
+    "Microphone silent": "Микрофон не улавливает звук",
+    "Microphone problem": "Проблема с микрофоном",
+    "Voice dictation unavailable": "Голосовой ввод недоступен",
+    "Transcribing audio…": "Расшифровка аудио…",
+    "Stop transcription": "Остановить расшифровку",
+    "File exceeds the 200MB display limit, so it can't be opened or downloaded here.": "Размер файла превышает лимит отображения в 200 МБ. Здесь его нельзя открыть или скачать.",
+    "Browser tools run on the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on the SSH host, not on this computer:": "Инструменты браузера работают на SSH-хосте, к которому подключено это окно. Chrome на нём не принимает удалённую отладку. Выполните следующие действия на SSH-хосте:",
+    "Open Google Chrome on the SSH host.": "Откройте Google Chrome на SSH-хосте.",
+    "Search Recent Workspaces": "Поиск по недавним рабочим областям",
+    "Select Workspace": "Выбрать рабочую область",
+    "No longer available": "Больше недоступно",
+    "Removed from the marketplace. Stays installed until you uninstall it.": "Удалено из каталога. Останется установленным, пока вы его не удалите.",
+    "Installed separately": "Установлено отдельно",
+    "Disabling or removing this bundle doesn't affect it.": "Отключение или удаление этого набора не влияет на плагин.",
+    "Review bundle before adding": "Проверьте набор перед добавлением",
+    "Review contents": "Проверить содержимое",
+    "Add anyway": "Всё равно добавить",
+    "Remove bundle": "Удалить набор",
+    "Add bundle": "Добавить набор",
+    "No bundles available.": "Нет доступных наборов.",
+    "Loading bundles...": "Загрузка наборов…",
+    "Failed to load marketplace bundles. Please try again.": "Не удалось загрузить наборы из каталога. Повторите попытку.",
+    "Failed to add bundle.": "Не удалось добавить набор.",
+    "Failed to add bundle. Please try again.": "Не удалось добавить набор. Повторите попытку.",
+    "Failed to update the bundle.": "Не удалось обновить набор.",
+    "Failed to update the bundle. Please try again.": "Не удалось обновить набор. Повторите попытку.",
+    "Replacing...": "Замена…",
+    "Robot": "Робот",
+    "Hub": "Центральный узел",
+    "Sliders": "Ползунки",
+    "Command prompt": "Командная строка",
+    "Code": "Код",
+    "Sparkles": "Искры",
+    "Wrench": "Гаечный ключ",
+    "Shield": "Щит",
+    "Speedometer": "Спидометр",
+    "Gauge": "Измерительный прибор",
+    "Eye": "Глаз",
+    "Flask": "Колба",
+    "Radar": "Радар",
+    "Remote Debugging Required": "Требуется удалённая отладка",
+    "Review plugin before installing": "Проверьте плагин перед установкой",
+    "Review skill before installing": "Проверьте навык перед установкой",
+    "Honors standard VS Code shortcuts without collisions (e.g. Ctrl+L Focus Input, Ctrl+Shift+L New Conversation, Ctrl+Shift+A Picker, Ctrl+Shift+, Settings).": "Учитывает стандартные сочетания VS Code и избегает конфликтов (например, Ctrl+L Ввод фокуса, Ctrl+Shift+L Новый разговор, Ctrl+Shift+A Меню выбора, Ctrl+Shift+, Настройки).",
+    "Uses standalone Antigravity chords (e.g. Ctrl+I Focus Input, Ctrl+Shift+O New Conversation, Ctrl+K Picker in chat, Ctrl+, Settings, Ctrl+[/] History). Replaces Go to Symbol (Ctrl+Shift+O) and Trigger Suggest (Ctrl+I), and rebinds VS Code Settings to Ctrl+Alt+,.": "Использует собственные сочетания Antigravity (например, Ctrl+I Ввод фокуса, Ctrl+Shift+O Новый разговор, Ctrl+K Меню выбора в чате, Ctrl+, Настройки, Ctrl+[/] История). Заменяет сочетания для команд «Перейти к символу» (Ctrl+Shift+O) и «Показать предложения» (Ctrl+I), а для настроек VS Code назначает Ctrl+Alt+,.",
+    "Honors standard VS Code shortcuts without collisions (e.g. ⌘L Focus Input, ⌘⇧L New Conversation, ⌘⇧A Picker, ⌘⇧, Settings).": "Учитывает стандартные сочетания VS Code и избегает конфликтов (например, ⌘L Ввод фокуса, ⌘⇧L Новый разговор, ⌘⇧A Меню выбора, ⌘⇧, Настройки).",
+    "Uses standalone Antigravity chords (e.g. ⌘I Focus Input, ⌘⇧O New Conversation, ⌘K Picker in chat, ⌘, Settings, ⌘[/] History). Replaces Go to Symbol (⌘⇧O) and Trigger Suggest (⌘I), and rebinds VS Code Settings to ⌘⌥,.": "Использует собственные сочетания Antigravity (например, ⌘I Ввод фокуса, ⌘⇧O Новый разговор, ⌘K Меню выбора в чате, ⌘, Настройки, ⌘[/] История). Заменяет сочетания для команд «Перейти к символу» (⌘⇧O) и «Показать предложения» (⌘I), а для настроек VS Code назначает ⌘⌥,.",
+    "Run until the specified goal is completely finished.": "Продолжайте выполнение, пока указанная цель не будет полностью достигнута.",
+    "Compact the conversation now (summarize history to free up the context window).": "Сократите диалог сейчас: история будет сведена в краткое резюме, чтобы освободить место в контексте.",
+    "Run an instruction on a recurring schedule or as a one-time timer.": "Запускайте инструкцию регулярно по расписанию или один раз по таймеру.",
+    "Invoke a browser agent for web tasks.": "Вызовите агента браузера для работы в интернете.",
+    "Plan carefully before executing a task.": "Тщательно спланируйте задачу перед выполнением.",
+    "Interview me to align on a plan.": "Задайте мне вопросы, чтобы согласовать план.",
+    "Invoke a team of agents to autonomously tackle large projects.": "Вызовите команду агентов для самостоятельной работы над крупными проектами.",
+    "Reflect on recent successes or corrections to capture reusable skills or rules.": "Разберите недавние успехи или исправления, чтобы сохранить пригодные для повторного использования навыки или правила.",
+    "Invoke the Boost multi-agent orchestrator for complex tasks.": "Вызовите координатор нескольких агентов Boost для сложных задач."
   },
   "patterns": [
     {
@@ -4651,6 +4780,222 @@
       "pattern": "^Sign-ins to (.+) are kept in the cloud with your account\\. Other credentials stay on this machine\\. Credentials are only sent to the domains listed\\.$",
       "sample": "Sign-ins to Google Drive, Notion are kept in the cloud with your account. Other credentials stay on this machine. Credentials are only sent to the domains listed.",
       "template": "Данные входа в {1} хранятся в облаке вместе с вашим аккаунтом. Другие учётные данные остаются на этом компьютере. Учётные данные передаются только указанным доменам."
+    },
+    {
+      "id": "browserCookieCount",
+      "pattern": "^(\\d+) cookies?$",
+      "sample": "12 cookies",
+      "template": "Файлы cookie: {1}"
+    },
+    {
+      "id": "browserCookieDelete",
+      "pattern": "^Delete cookies for (.+)$",
+      "sample": "Delete cookies for example.com",
+      "template": "Удалить файлы cookie для {1}"
+    },
+    {
+      "id": "browserCookieDeleted",
+      "pattern": "^Deleted cookies for (.+)$",
+      "sample": "Deleted cookies for example.com",
+      "template": "Файлы cookie для {1} удалены"
+    },
+    {
+      "id": "browserLatestSteps",
+      "pattern": "^Showing latest (\\d+) browser steps$",
+      "sample": "Showing latest 12 browser steps",
+      "template": "Показано последних действий в браузере: {1}"
+    },
+    {
+      "id": "browserPreviewPort",
+      "pattern": "^The preview did not respond on port (\\d+)\\.$",
+      "sample": "The preview did not respond on port 3000.",
+      "template": "Предпросмотр не ответил на порту {1}."
+    },
+    {
+      "id": "sshHostConnectFailed",
+      "pattern": "^Couldn't connect to (.+)$",
+      "sample": "Couldn't connect to dev-host",
+      "template": "Не удалось подключиться к {1}"
+    },
+    {
+      "id": "sshHostForget",
+      "pattern": "^Remove (.+) from Recent$",
+      "sample": "Remove dev-host from Recent",
+      "template": "Удалить {1} из недавних хостов"
+    },
+    {
+      "id": "sshHostForgotten",
+      "pattern": "^Removed (.+) from Recent$",
+      "sample": "Removed dev-host from Recent",
+      "template": "Хост {1} удалён из недавних"
+    },
+    {
+      "id": "sshHostForgetFailed",
+      "pattern": "^Couldn't remove (.+) from Recent$",
+      "sample": "Couldn't remove dev-host from Recent",
+      "template": "Не удалось удалить {1} из недавних хостов"
+    },
+    {
+      "id": "sshHostHide",
+      "pattern": "^Hide (.+) from this list$",
+      "sample": "Hide dev-host from this list",
+      "template": "Скрыть {1} в этом списке"
+    },
+    {
+      "id": "sshHostShow",
+      "pattern": "^Show (.+) in the list again$",
+      "sample": "Show dev-host in the list again",
+      "template": "Снова показать {1} в списке"
+    },
+    {
+      "id": "sshHostHidden",
+      "pattern": "^Hid (.+)$",
+      "sample": "Hid dev-host",
+      "template": "Хост {1} скрыт"
+    },
+    {
+      "id": "sshHostShown",
+      "pattern": "^Showing (.+) again$",
+      "sample": "Showing dev-host again",
+      "template": "Хост {1} снова отображается"
+    },
+    {
+      "id": "sshHiddenHostCount",
+      "pattern": "^(\\d+) hidden hosts?$",
+      "sample": "2 hidden hosts",
+      "template": "Скрытые хосты: {1}"
+    },
+    {
+      "id": "sshNamedConfig",
+      "pattern": "^SSH Config \\((.+)\\)$",
+      "sample": "SSH Config (work.conf)",
+      "template": "Конфигурация SSH ({1})"
+    },
+    {
+      "id": "sshSignInHost",
+      "pattern": "^You're signing in on (.+)\\. Your sign-in stays on that machine\\.$",
+      "sample": "You're signing in on dev-host. Your sign-in stays on that machine.",
+      "template": "Вы входите в аккаунт на {1}. Сеанс входа останется на этом компьютере."
+    },
+    {
+      "id": "sshHostConnected",
+      "pattern": "^Connected to (.+)$",
+      "sample": "Connected to dev-host",
+      "template": "Подключено к {1}"
+    },
+    {
+      "id": "sshWindowHost",
+      "pattern": "^This window's agents, files, and terminals are on (.+)\\.$",
+      "sample": "This window's agents, files, and terminals are on dev-host.",
+      "template": "Агенты, файлы и терминалы этого окна находятся на {1}."
+    },
+    {
+      "id": "sshBrowserDebugging",
+      "pattern": "^Browser tools run on (.+), the SSH host this window is connected to, and Chrome there isn't accepting remote debugging\\. Complete these steps on (.+), not on this computer:$",
+      "sample": "Browser tools run on dev-host, the SSH host this window is connected to, and Chrome there isn't accepting remote debugging. Complete these steps on dev-host, not on this computer:",
+      "template": "Инструменты браузера работают на {1}, SSH-хосте этого окна. Chrome на нём не принимает удалённую отладку. Выполните эти действия на {2}:"
+    },
+    {
+      "id": "sshOpenChrome",
+      "pattern": "^Open Google Chrome on (.+)\\.$",
+      "sample": "Open Google Chrome on dev-host.",
+      "template": "Откройте Google Chrome на {1}."
+    },
+    {
+      "id": "externalProtocolOpen",
+      "pattern": "^Open ([a-z][a-z0-9+.-]*) link\\?$",
+      "sample": "Open vscode link?",
+      "template": "Открыть ссылку {1}?"
+    },
+    {
+      "id": "voiceTranscriptionRetry",
+      "pattern": "^Retrying transcription \\(attempt (\\d+)\\)…$",
+      "sample": "Retrying transcription (attempt 2)…",
+      "template": "Повторная расшифровка (попытка {1})…"
+    },
+    {
+      "id": "planProgressLabel",
+      "pattern": "^Plan, (\\d+) of (\\d+) steps done$",
+      "sample": "Plan, 2 of 5 steps done",
+      "template": "План, выполнено шагов: {1} из {2}"
+    },
+    {
+      "id": "mediaDisplayLimit",
+      "pattern": "^File exceeds the (\\d+)MB display limit \\((\\d+)MB\\), so it can't be opened or downloaded here\\.$",
+      "sample": "File exceeds the 200MB display limit (240MB), so it can't be opened or downloaded here.",
+      "template": "Размер файла ({2} МБ) превышает лимит отображения в {1} МБ. Здесь его нельзя открыть или скачать."
+    },
+    {
+      "id": "bundleAddedAndInstalled",
+      "pattern": "^Added (.+) and installed (\\d+) plugins?\\.$",
+      "sample": "Added Example Tools and installed 3 plugins.",
+      "template": "Добавлен набор {1}. Установлено плагинов: {2}."
+    },
+    {
+      "id": "bundleAdded",
+      "pattern": "^Added (.+)\\.$",
+      "sample": "Added Example Tools.",
+      "template": "Добавлено: {1}."
+    },
+    {
+      "id": "bundleRemoved",
+      "pattern": "^Removed (.+)\\.$",
+      "sample": "Removed Example Tools.",
+      "template": "Удалено: {1}."
+    },
+    {
+      "id": "bundleAddLabel",
+      "pattern": "^Add bundle (.+)$",
+      "sample": "Add bundle Example Tools",
+      "template": "Добавить набор {1}"
+    },
+    {
+      "id": "bundleAddingPlugins",
+      "pattern": "^Adding plugins from (.+)$",
+      "sample": "Adding plugins from Example Tools",
+      "template": "Добавление плагинов из набора {1}"
+    },
+    {
+      "id": "bundleReviewWarning",
+      "pattern": "^(?:This plugin|These plugins) in (.+) may have looser code review\\. Review (?:its|their) contents before adding the bundle\\.$",
+      "sample": "These plugins in Example Tools may have looser code review. Review their contents before adding the bundle.",
+      "template": "Код указанных плагинов в наборе {1} может проверяться менее строго. Проверьте их содержимое перед добавлением набора."
+    },
+    {
+      "id": "bundleSummaryAllInstalled",
+      "pattern": "^(\\d+) plugins?, all already installed\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "3 plugins, all already installed. Adding the bundle installs plugins it gains later.",
+      "template": "Все плагины уже установлены ({1}). Если добавить набор, плагины, которые появятся в нём позже, будут установлены."
+    },
+    {
+      "id": "bundleSummaryFuture",
+      "pattern": "^(\\d+) plugins?\\. Adding the bundle installs plugins it gains later\\.$",
+      "sample": "0 plugins. Adding the bundle installs plugins it gains later.",
+      "template": "Плагинов: {1}. Если добавить набор, плагины, которые появятся в нём позже, будут установлены."
+    },
+    {
+      "id": "bundleSummaryInstallAll",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (?:it|all of them)\\.$",
+      "sample": "3 plugins. Add bundle installs all of them.",
+      "template": "Плагинов: {1}. При добавлении набора будут установлены все плагины."
+    },
+    {
+      "id": "bundleSummaryInstallSome",
+      "pattern": "^(\\d+) plugins?\\. Add bundle installs (\\d+); the ones you already have stay as they are\\.$",
+      "sample": "4 plugins. Add bundle installs 2; the ones you already have stay as they are.",
+      "template": "Плагинов: {1}. При добавлении набора будет установлено {2}. Уже установленные плагины сохранятся без изменений."
+    },
+    {
+      "id": "bundleSummaryInstalled",
+      "pattern": "^(\\d+) plugins?\\. Disabling or removing the bundle applies only to the ones it installed\\.$",
+      "sample": "4 plugins. Disabling or removing the bundle applies only to the ones it installed.",
+      "template": "Плагинов: {1}. Отключение или удаление набора влияет только на плагины, установленные вместе с ним."
+    },
+    {
+      "id": "accountPlanLabel",
+      "pattern": "^Your Plan: (.+)$",
+      "sample": "Your Plan: Google AI Pro",
+      "template": "Ваш тариф: {1}"
     }
   ],
   "menu": {
@@ -5270,6 +5615,72 @@
         },
         {
           "textIndex": 3
+        }
+      ]
+    },
+    {
+      "id": "browserCookieDeleteError",
+      "selector": "p[data-testid=\"browser-site-data-delete-error\"]",
+      "source": "Couldn't delete cookies for {1}. Try again.",
+      "template": "Не удалось удалить файлы cookie для {1}. Повторите попытку.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "browserCookieSiteSearch",
+      "selector": "p[data-testid=\"browser-site-data-no-match\"]",
+      "source": "No sites match “{1}”.",
+      "template": "Нет сайтов, соответствующих запросу «{1}».",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshConnectErrorHost",
+      "selector": "[data-testid=\"ssh-connect-error\"] span.text-foreground",
+      "source": "Couldn't connect to {1}",
+      "template": "Не удалось подключиться к {1}",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "sshEmptyHostConfig",
+      "selector": "[data-testid=\"ssh-connect-dialog\"] p.px-2.text-sm.text-muted-foreground",
+      "source": "No hosts in {1} yet. Type one above.",
+      "template": "В {1} пока нет хостов. Введите хост в поле выше.",
+      "slots": [
+        {
+          "textIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "vscodeShortcutFilter",
+      "selector": "div.flex.flex-col.gap-1.min-w-0 > span.text-xs.text-muted-foreground.leading-relaxed:has(>code.font-mono)",
+      "source": "Inspect live bindings or record custom key chords filtered to {1} commands.",
+      "template": "Просматривайте действующие сочетания клавиш и записывайте свои. В списке показаны только команды {1}.",
+      "slots": [
+        {
+          "selector": "code.font-mono"
+        }
+      ]
+    },
+    {
+      "id": "externalProtocolRemember",
+      "selector": "[data-testid=\"external-link-confirm-always\"] span:has(>code.font-mono)",
+      "source": "Always open {1} links without asking",
+      "template": "Всегда открывать ссылки {1} без подтверждения",
+      "slots": [
+        {
+          "selector": "code.font-mono"
         }
       ]
     }
