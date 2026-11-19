@@ -78,8 +78,10 @@
       check('no popover on a brief pointer pass', detail.matches(':popover-open'), false);
       await settle(270);
       check('details open on hover', detail.matches(':popover-open'), true);
+      check('metrics labels identify the estimate and average', [...detail.querySelectorAll('dt')].map(dt => dt.textContent).join('|'),
+        '上下文估算|估算余量|平均输出速度|缓存命中率|首 token 延迟');
       check('context, headroom, speed, cache and latency', values('left').join('|'),
-        '1,000 / 10,000 (10%)|9,000|11 tok/s|50%|0.35 s');
+        '1,000 / 10,000 · 10%|9,000|11 tok/s|50%|0.35 s');
       control('left').dispatchEvent(new PointerEvent('pointerleave'));
       detail.dispatchEvent(new PointerEvent('pointerenter'));
       await settle(165);

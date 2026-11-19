@@ -209,7 +209,7 @@
         if (view.meter.hidden !== !knownLimit) view.meter.hidden = !knownLimit;
         view.fill.style.width = progress;
         const context = Number.isFinite(used) ? count.format(used) + (knownLimit
-            ? ' / ' + count.format(limit) + ' (' + percent.format(usedRatio) + ')' : '') : '—';
+            ? ' / ' + count.format(limit) + ' · ' + percent.format(usedRatio) : '') : '—';
         const description = labels.title + ' · ' + labels.context + ' ' + context;
         if (view.button.getAttribute('aria-label') !== description) view.button.setAttribute('aria-label', description);
         const cache = Number.isFinite(metrics?.cacheRate) ? percent.format(metrics.cacheRate) : '—';

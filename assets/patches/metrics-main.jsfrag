@@ -62,25 +62,27 @@
     }
 
     function decodeMetrics(data) {
-        // GenerationMetadata contains a nested model call with usage, context
-        // limits and timing. Only those wire fields are decoded.
+        // Decode the usage, context and timing fields of the model call.
         const call = readFields(readFields(data).get(1));
         const usage = readFields(call.get(4));
         const window = readFields(readFields(call.get(9)).get(10));
-        const input = usage.get(2);
         const cached = usage.get(5);
         const output = usage.get(3);
-        const used = typeof input === 'number' || typeof cached === 'number'
-            ? (input ?? 0) + (cached ?? 0) : null;
+        const inputCounts = [usage.get(2), usage.get(4), cached].filter(Number.isSafeInteger);
+        const totalInput = inputCounts.length ? inputCounts.reduce((sum, count) => sum + count, 0) : null;
+        const estimatedUsed = window.get(1);
+        const used = Number.isSafeInteger(estimatedUsed) ? estimatedUsed : totalInput;
         const limit = window.get(4);
         const stream = seconds(call.get(12));
         const firstToken = seconds(call.get(11));
+        const elapsed = firstToken !== null && stream !== null ? firstToken + stream : null;
         if (!Number.isSafeInteger(used) && typeof output !== 'number') return null;
         return {
             used: Number.isSafeInteger(used) ? used : null,
             limit: typeof limit === 'number' && limit > 0 ? limit : null,
-            speed: typeof output === 'number' && stream > 0 ? output / stream : null,
-            cacheRate: Number.isSafeInteger(used) && used > 0 ? (cached ?? 0) / used : null,
+            speed: typeof output === 'number' && elapsed > 0 ? output / elapsed : null,
+            cacheRate: Number.isSafeInteger(totalInput) && totalInput > 0
+                ? (Number.isSafeInteger(cached) ? cached : 0) / totalInput : null,
             firstToken,
         };
     }

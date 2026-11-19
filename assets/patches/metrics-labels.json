@@ -1,81 +1,81 @@
 {
   "en": {
     "title": "Session metrics",
-    "remaining": "Context remaining",
-    "context": "Context usage",
-    "speed": "Last output speed",
+    "remaining": "Estimated remaining",
+    "context": "Estimated context use",
+    "speed": "Average output speed",
     "cache": "Cache hit rate",
     "firstToken": "Time to first token"
   },
   "zh-CN": {
     "title": "会话指标",
-    "remaining": "余量",
-    "context": "上下文用量",
-    "speed": "上次输出速度",
+    "remaining": "估算余量",
+    "context": "上下文估算",
+    "speed": "平均输出速度",
     "cache": "缓存命中率",
     "firstToken": "首 token 延迟"
   },
   "zh-Hant": {
     "title": "對話指標",
-    "remaining": "餘量",
-    "context": "上下文用量",
-    "speed": "上次輸出速度",
+    "remaining": "估算餘量",
+    "context": "上下文估算",
+    "speed": "平均輸出速度",
     "cache": "快取命中率",
     "firstToken": "首 token 延遲"
   },
   "ja": {
     "title": "会話メトリクス",
-    "remaining": "残り",
-    "context": "コンテキスト使用量",
-    "speed": "前回の出力速度",
+    "remaining": "推定残量",
+    "context": "推定コンテキスト使用量",
+    "speed": "平均出力速度",
     "cache": "キャッシュヒット率",
     "firstToken": "最初のトークンまでの時間"
   },
   "ko": {
     "title": "대화 지표",
-    "remaining": "남은 양",
-    "context": "컨텍스트 사용량",
-    "speed": "최근 출력 속도",
+    "remaining": "예상 잔여량",
+    "context": "추정 컨텍스트 사용량",
+    "speed": "평균 출력 속도",
     "cache": "캐시 적중률",
     "firstToken": "첫 토큰 지연 시간"
   },
   "de": {
     "title": "Sitzungsmetriken",
-    "remaining": "Frei",
-    "context": "Kontextnutzung",
-    "speed": "Letzte Ausgabegeschwindigkeit",
+    "remaining": "Geschätzt verbleibend",
+    "context": "Geschätzte Kontextnutzung",
+    "speed": "Mittlere Ausgaberate",
     "cache": "Cache-Trefferrate",
     "firstToken": "Zeit bis zum ersten Token"
   },
   "es": {
     "title": "Métricas de la conversación",
-    "remaining": "Restante",
-    "context": "Uso del contexto",
-    "speed": "Última velocidad de salida",
+    "remaining": "Restante estimado",
+    "context": "Uso estimado del contexto",
+    "speed": "Velocidad media de salida",
     "cache": "Tasa de aciertos de caché",
     "firstToken": "Tiempo hasta el primer token"
   },
   "fr": {
     "title": "Mesures de la conversation",
-    "remaining": "Restant",
-    "context": "Utilisation du contexte",
-    "speed": "Dernière vitesse de génération",
+    "remaining": "Marge estimée",
+    "context": "Utilisation estimée du contexte",
+    "speed": "Débit moyen",
     "cache": "Taux de réussite du cache",
     "firstToken": "Délai avant le premier jeton"
   },
   "pt-BR": {
     "title": "Métricas da conversa",
-    "remaining": "Restante",
-    "context": "Uso do contexto",
-    "speed": "Última velocidade de saída",
+    "remaining": "Restante estimado",
+    "context": "Uso estimado do contexto",
+    "speed": "Velocidade média de saída",
     "cache": "Taxa de acertos do cache",
     "firstToken": "Tempo até o primeiro token"
   },
   "ru": {
     "title": "Метрики диалога",
-    "remaining": "Осталось",
-    "context": "Использование контекста",
-    "speed": "Последняя скорость вывода",
+    "remaining": "Примерный остаток",
+    "context": "Оценка использования контекста",
+    "speed": "Средняя скорость вывода",
     "cache": "Доля попаданий в кеш",
     "firstToken": "Время до первого токена"
   }

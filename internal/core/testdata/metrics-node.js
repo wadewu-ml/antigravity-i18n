@@ -21,12 +21,16 @@ function message(field, ...values) {
     return Buffer.concat([varint(field * 8 + 2), varint(body.length), body]);
 }
 
-function generation(output) {
-    return message(1,
-        message(4, scalar(2, 200), scalar(3, output), scalar(5, 800)),
-        message(9, message(10, scalar(4, 10000))),
-        message(11, scalar(1, 1), scalar(2, 250000000)),
-        message(12, scalar(1, 5)));
+function generation(output, { estimatedUsed, includeFirstToken = true } = {}) {
+    const window = [scalar(4, 10000)];
+    if (estimatedUsed !== undefined) window.push(scalar(1, estimatedUsed));
+    const call = [
+        message(4, scalar(2, 200), scalar(3, output), scalar(4, 600), scalar(5, 800)),
+        message(9, message(10, ...window)),
+        message(12, scalar(1, 5)),
+    ];
+    if (includeFirstToken) call.push(message(11, scalar(1, 1), scalar(2, 250000000)));
+    return message(1, ...call);
 }
 
 async function test() {
@@ -52,15 +56,19 @@ async function test() {
         });
         const event = {local: true};
         assert.deepEqual(await handle(event, id), {
-            used: 1000, limit: 10000, speed: 240, cacheRate: 0.8, firstToken: 1.25,
+            used: 1600, limit: 10000, speed: 192, cacheRate: 0.5, firstToken: 1.25,
         });
         assert.equal(await handle({local: false}, id), null);
         assert.equal(await handle(event, '../unknown'), null);
         assert.equal(await handle(event, '20000000-0000-0000-0000-000000000000'), null);
-        insert.run(3, generation(1400));
+        insert.run(3, generation(1400, {estimatedUsed: 2500}));
         const updated = await handle(event, id);
-        assert.equal(updated.speed, 280);
+        assert.deepEqual(updated, {
+            used: 2500, limit: 10000, speed: 224, cacheRate: 0.5, firstToken: 1.25,
+        });
         assert.deepEqual(await handle(event, id), updated);
+        insert.run(4, generation(1400, {estimatedUsed: 2500, includeFirstToken: false}));
+        assert.deepEqual(await handle(event, id), {...updated, speed: null, firstToken: null});
     } finally {
         db.close();
     }
