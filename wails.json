@@ -13,8 +13,8 @@
   "info": {
     "companyName": "antigravity-i18n",
     "productName": "antigravity-i18n",
-    "productVersion": "4.0.0",
+    "productVersion": "4.0.1",
     "copyright": "Copyright © 2026",
-    "comments": "Antigravity 多语言本地化工具"
+    "comments": "Antigravity 界面翻译与会话指标工具"
   }
 }

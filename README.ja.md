@@ -1,135 +1,56 @@
-# antigravity-i18n
+# <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
 
+Windows 版 Google Antigravity の設定、チャットのボタン、メニュー、終了時の確認画面を、日本語を含む 9 言語に翻訳できます。チャットの入力欄には、コンテキストの残量やモデルの出力速度も表示できます。設定を適用したら、ツールは閉じてかまいません。
 
-[Google Antigravity](https://antigravity.google/) デスクトップ クライアント用の UI ローカリゼーション ツール。
+[Windows x64 版をダウンロード](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [リリース一覧](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
+対応を確認したバージョンは **Antigravity App 2.33.0** です。ツールの起動時に WebView2 が必要と表示された場合は、[Microsoft Edge WebView2 ランタイム](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)をインストールしてください。
 
-[简体中文](./README.zh-CN.md) | [English](./README.md) | [繁體中文](./README.zh-Hant.md) | **日本語** | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português (Brasil)](./README.pt-BR.md) | [Русский](./README.ru.md)
+[简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · **日本語** · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
----
+## 表示言語を変更する
 
-**v4.0.0** は 9 つの言語パックを収録し、Antigravity App **2.33.0** で動作を確認しています。
+言語パックは簡体字中国語、繁体字中国語、日本語、韓国語、ドイツ語、スペイン語、フランス語、ブラジルポルトガル語、ロシア語の 9 種類です。設定ツールの画面は簡体字中国語です。
 
----
+1. `antigravity-i18n.exe` を開きます。正しいインストール先が表示されない場合は「更改位置」をクリックし、`Antigravity.exe` のあるフォルダーを選びます。
+2. 「界面语言」で表示言語を選びます。セッション指標を表示するには「会话指标」をオンにします。元の英語表示のまま指標を使う場合は **English** を選びます。
+3. 作業を保存して Antigravity を終了し、「应用更改」をクリックします。新しい設定で Antigravity が起動します。
 
-## 主な機能
+終了を求められたときに「强制退出并重试」を選ぶと、Antigravity が強制終了して処理を再試行します。進行中のセッションは中断され、未保存の変更が失われることがあります。
 
-- **Windows x64 向けのポータブル実行ファイル**。グラフィカルインターフェイスは Microsoft Edge WebView2 を使用します。
-- **GUI と CLI の両対応**: デフォルトで直感的なデスクトップ画面を起動。自動化やスクリプト向けに完全な CLI サブコマンド (`apply` / `restore` / `status` / `locales`) も内包しています。
-- **バイト単位の正確な復元**: 初回変更前に公式オリジナルのバックアップ (`app.asar.clean-backup`) を自動作成。復元後は公式アーカイブと SHA-256 ハッシュが完全に一致します。
-- **インターフェイスの翻訳**。シェル UI、ネイティブメニュー、終了ダイアログを対象とします。
-- **オプションのセッション指標**。モデル選択の右側にリングでコンテキスト使用量を表示します。詳細には残りのコンテキスト、出力速度、キャッシュヒット率、最初のトークンまでの時間を表示します。Antigravity がローカルのセッションデータベースから値を読み取ります。
-- **ローカルでのパッチ処理**。JavaScript の構文検証を行い、書き込みに失敗した場合はロールバックします。
+## セッション指標を見る
 
----
+チャットにモデル呼び出しの記録ができると、入力欄のモデル選択ボタンの右にリングが表示されます。リングが示すのはコンテキストの推定使用率です。ポインターを重ねると、残りのトークン数、出力速度、キャッシュヒット率、最初のトークンが届くまでの時間を確認できます。クリックで詳細を固定し、もう一度クリックすると閉じます。
 
-## ダウンロードと使用方法
+分割画面、サイドチャット、サブエージェントの各パネルには、それぞれのセッションでローカルに記録された直近のモデル呼び出しの値が表示されます。出力数にはモデルが記録した思考トークンも含まれます。値を取得できない項目は `—` で表示されます。
 
-### ダウンロード
+## 元に戻す・再適用する
 
-リポジトリの [Releases](../../releases) ページから最新の `antigravity-i18n.exe` をダウンロードして直接実行します。
+元の英語表示に戻して指標を削除するには、Antigravity を終了し、ツールで「还原官方版本」をクリックして「还原」で確定します。ツールは初回適用時に元のファイルをバックアップします。復元用に、インストール先の `resources/app.asar.clean-backup` を保管してください。
 
-### 1. グラフィカル インターフェイス (推奨)
+Antigravity の更新後に翻訳や指標が消えた場合は、このページの冒頭で対応バージョンを確認してから言語と指標を選び直して適用します。すでに有効な設定を再適用するときは「重新应用」をクリックします。
 
-`antigravity-i18n.exe` をダブルクリックします:
-1. Antigravity のインストール先フォルダーを自動検出します (未検出時は「場所の変更」をクリック)。
-2. 表示言語を選び、セッション指標を個別に設定します。公式の英語インターフェイスでも指標を表示できます。
-3. 「適用」をクリックします。Antigravity が終了すると、リソースが更新され、アプリが再起動します。 「公式版に復元」で公式の英語アーカイブを復元し、指標を無効にできます。
-
-適用や復元で Antigravity を閉じる必要がある場合、選択したインストール先のアプリに通常終了を要求します。30 秒経っても終了しない場合は、手動で終了して再試行するか、「強制終了して再試行」をクリックします。
-
-### 2. コマンドライン モード
+<details>
+<summary>PowerShell のコマンド</summary>
 
 `antigravity-i18n.exe` のあるフォルダーで PowerShell を開きます。
 
-```powershell
-# Check current localization status and backups
-.\antigravity-i18n.exe status
+| 操作 | コマンド |
+| --- | --- |
+| 言語コードを一覧表示 | `.\antigravity-i18n.exe locales` |
+| 日本語を適用 | `.\antigravity-i18n.exe apply --locale ja` |
+| 公式英語で指標を表示 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 現在の設定を確認 | `.\antigravity-i18n.exe status` |
+| 公式版に復元 | `.\antigravity-i18n.exe restore` |
+| 全オプションを表示 | `.\antigravity-i18n.exe --help` |
 
-# Install a language pack (Simplified Chinese by default)
-.\antigravity-i18n.exe apply --locale zh-CN
+</details>
 
-# Restore the official untranslated English version
-.\antigravity-i18n.exe restore
+<details>
+<summary>ソースからビルドする</summary>
 
-# List all bundled language packs with coverage
-.\antigravity-i18n.exe locales
-```
+Windows でビルドするには、PowerShell 7、Go 1.26.3 以降、Wails v2 CLI が必要です。リポジトリのルートで `.\build.ps1 -Target gui` を実行すると `build/bin/antigravity-i18n.exe` が生成されます。
 
-一般的なオプション:
-- `--app-dir <path>`: Antigravity のインストール ディレクトリを手動指定 (環境変数 `ANTIGRAVITY_APP_DIR` も利用可能)。
-- `--locale <code>`: 対象言語コード (`zh-CN`、`zh-Hant`、`ja`、`ko`、`de`、`es`、`fr` 等)。
-- `--no-restart`: 適用後に Antigravity を自動再起動しない。
-- `apply --session-metrics` で指標を有効にし、`--session-metrics=false` で無効にします。`apply --locale en --session-metrics` で公式の英語インターフェイスに指標を表示します。
-- `--force` を指定すると、選択したインストール先の Antigravity を直ちに強制終了します。未保存の作業が失われることがあります。
-- `--timeout <ms>` で操作を中止するまでの待ち時間をミリ秒単位で指定できます。既定値は `30000` です。
-- `--yes`: 終了確認プロンプトに自動同意。
+</details>
 
-同じインストール先では、適用または復元を一度に一つだけ実行できます。別の操作が進行中の場合は、完了を待ってから再試行してください。`status` でインストール先とバックアップを確認できます。アーカイブを読み込めない場合や Antigravity のものと確認できない場合は、エラーが表示されます。
-
----
-
-## 内蔵言語サポート
-
-すべての言語パックはバイナリに直接埋め込まれています:
-
-| コード | 言語 | カバレッジ | 説明 |
-| :--- | :--- | :--- | :--- |
-| `zh-CN` | Simplified Chinese (简体中文) | 100% | シェル UI、ネイティブ メニュー、およびダイアログの完全なカバレッジ |
-| `zh-Hant` | Traditional Chinese (繁體中文) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `ja` | Japanese (日本語) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `ko` | Korean (한국어) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `de` | German (Deutsch) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `es` | Spanish (Español) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `fr` | French (Français) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `pt-BR` | Portuguese (Brasil) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `ru` | Russian (Русский) | 100% | 検証済みの技術用語による完全なカバレッジ |
-| `en` | English | - | 公式の未変更ビルド (復元するにはこれを選択します) |
-
----
-
-## 仕組みとよくある質問
-
-### 1. 公式アップデート後の対応
-公式アップデートにより `app.asar` が上書きされます。更新完了後、本ツールを再度開いて「適用」をクリックするだけで再有効化されます (ツールが自動的に新バージョン基準でバックアップを更新します)。
-
-### 2. 言語切り替えと復元
-異なる言語間は事前の復元なしに直接切り替え可能です。いつでも「公式英語に戻す」を選択して初期状態へ復元できます。
-
-### 3. バックアップ ファイルの管理
-- `app.asar.clean-backup` は復元に使う元のアーカイブです。パッチが未適用の状態で適用または復元を行うと、インストール済みアーカイブとの SHA-256 を照合します。同じバージョンを再インストールした場合でも、ハッシュが異なればバックアップを更新します。**このファイルを保持してください。**
-- `app.asar.bak-*` はタイムスタンプ付きのコピーです。元のバックアップがない場合や無効な場合に復旧に使えます。アプリの動作を確認し、`status` でバックアップが有効と確認できたら、古いコピーを削除して容量を確保できます。
-
----
-
-## ソースからのビルド
-
-**必要な環境**:
-- Go 1.26.3+
-- [Wails v2](https://wails.io/) CLI
-- PowerShell 7
-
-```powershell
-# Clone the repository
-git clone https://github.com/wadewu-ml/antigravity-i18n.git
-cd antigravity-i18n
-
-# Build both GUI and CLI binaries
-.\build.ps1
-
-# 公式アーカイブの復元テストを含める場合は次の行のコメントを外す
-# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
-go test ./...
-```
-
----
-
-## 免責事項
-
-1. 本プロジェクトはコミュニティにより保守される非公式ツールであり、Google または Antigravity 公式とは一切関係ありません。
-2. Google Antigravity および関連商標の著作権は各権利者に帰属します。
-3. 本ツールは学習・個人利用を目的として提供されます。関連する利用規約を遵守してご使用ください。
-
-## ライセンス
-
-[MIT License](./LICENSE)
+コミュニティがメンテナンスする非公式ツールです。[MIT ライセンス](./LICENSE)

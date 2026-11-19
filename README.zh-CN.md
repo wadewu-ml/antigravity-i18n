@@ -1,150 +1,56 @@
-# antigravity-i18n
+# <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
 
-适用于 Google Antigravity 桌面客户端的 Windows 便携工具，提供界面多语言本地化和可选的会话指标。[Google Antigravity 官网](https://antigravity.google/)
+为 Windows 版 Google Antigravity 提供九种界面语言包，翻译设置、对话区按钮、菜单和退出提示。还可以在输入框旁查看上下文余量和模型的输出速度。设置生效后即可关闭本工具。
 
-**简体中文** | [English](./README.md) | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Deutsch](./README.de.md) | [Español](./README.es.md) | [Français](./README.fr.md) | [Português (Brasil)](./README.pt-BR.md) | [Русский](./README.ru.md)
+[下载 Windows x64 版](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [发布记录](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
----
+适配 **Antigravity App 2.33.0**。如果启动工具时提示缺少 WebView2，请安装 [Microsoft Edge WebView2 运行时](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)。
 
-## 兼容性
+**简体中文** · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
-v4.0.0 已适配 Antigravity App **2.33.0**。九套语言包补齐了浏览数据管理、快捷键方案、内置斜杠命令说明、SSH 主机操作、GitHub 连接错误、侧问操作、插件组合包及语音听写状态。应用、切换语言和还原已用官方 2.33.0 归档验证。[Antigravity 官方更新记录](https://antigravity.google/docs/changelog#rel-hub-2.33.0)
+## 切换界面语言
 
-此前的设置、首次使用等界面适配见 [2.32.1 核对记录](./docs/translation-audit-2.32.1.md)。翻译引擎保留语音转写、通话摘要、AI 进度正文和侧问中的用户文字。翻译说明时也会保留链接、控件及主机名和搜索词等内容。简繁中文保留权限预设名称 Turbo。词库对齐率按内置语言包的词条计算，适配范围和限制见核对记录。
+可选简体中文、繁体中文、日语、韩语、德语、西班牙语、法语、巴西葡萄牙语和俄语。
 
----
+1. 双击 `antigravity-i18n.exe`。如果工具没找到正确的安装目录，点「更改位置」，选择包含 `Antigravity.exe` 的文件夹。
+2. 在「界面语言」中选好语言，按需打开「会话指标」。想保留英文界面并查看指标，语言选 **English** 即可。
+3. 保存工作并退出 Antigravity，再点「应用更改」。Antigravity 会按新设置重新打开。
 
-## 核心特性
+退出提示中的「强制退出并重试」会中断进行中的会话，未保存的编辑可能丢失。
 
-- **Windows x64 单文件**可直接运行。图形界面使用 Microsoft Edge WebView2。
-- **图形与命令行双支持**：默认启动直观易用的图形界面，同时内嵌完整命令行子命令（`apply` / `restore` / `status` / `locales`），兼顾日常使用与脚本自动化。
-- **字节级原样还原**：首次修改前自动保存官方原始归档（`app.asar.clean-backup`）；执行还原后，`app.asar` 与官方发布的初始文件 SHA-256 哈希完全一致。
-- **界面本地化**集中覆盖外壳、系统菜单和退出确认框，保留编辑器、终端与对话正文。
-- **可选会话指标**在模型选择器右侧用圆环显示上下文用量。悬停查看上下文余量、最近一次输出速度、缓存命中率和首 token 延迟，点击可固定详情。Antigravity 从本地会话库只读获取这些指标。
-- **本地补丁处理**包含 JavaScript 语法校验，写入失败时会执行事务回滚。
+## 查看会话指标
 
----
+对话有了模型调用记录后，输入框里的模型选择器右侧会出现一个圆环，表示上下文大约用了多少。将鼠标移到圆环上，可以查看剩余 token 数、输出速度、缓存命中率和首个 token 的等待时间。单击圆环可固定详情，再点一次收起。
 
-## 下载与使用
+指标取自本机的会话记录。分屏、侧问和子 Agent 面板各自显示对应会话最近一次有数据的模型调用。输出量包含模型记录的思考 token。`—` 表示这一项暂时没有数据。
 
-### 下载运行
+## 还原与更新
 
-前往项目的 [Releases](../../releases) 页面，下载最新版本的 `antigravity-i18n.exe` 即可直接使用。
+要恢复官方英文界面，先退出 Antigravity，在工具里点「还原官方版本」，再点「还原」。会话指标也会随之关闭。首次应用时工具会自动备份原文件，请保留安装目录下的 `resources/app.asar.clean-backup`。
 
-### 1. 图形界面（推荐）
+如果 Antigravity 更新后翻译或指标消失，可先对照本页顶部的适配版本，再选择语言和指标并应用。要再次应用已经生效的设置，点「重新应用」。
 
-双击运行 `antigravity-i18n.exe`：
-1. 程序会自动检测 Antigravity 的安装目录（若未检测到，可点击“更改位置”手动选择）。
-2. 选择界面语言，再单独设置「会话指标」开关。官方英文也可以开启指标。
-3. 点击「应用更改」即可应用并重启 Antigravity。点击「还原官方版本」可恢复官方英文归档并关闭指标。
-
-本地会话生成指标后会显示圆环，分屏、侧问和子 Agent 面板按各自的会话显示。详情中的 `—` 表示暂缺相应指标。应用后即可退出本工具。
-
-应用和还原需要关停客户端时，工具会请求选定安装的 Antigravity 正常退出。等待 30 秒仍未退出时，可手动退出后重试，也可点击「强制退出并重试」。
-
-### 2. 命令行模式
+<details>
+<summary>命令行用法</summary>
 
 在 `antigravity-i18n.exe` 所在目录打开 PowerShell。
 
-```powershell
-# 查看当前本地化状态与备份信息
-.\antigravity-i18n.exe status
+| 操作 | 命令 |
+| --- | --- |
+| 列出语言代码 | `.\antigravity-i18n.exe locales` |
+| 应用简体中文 | `.\antigravity-i18n.exe apply --locale zh-CN` |
+| 使用官方英文并开启指标 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 查看当前设置 | `.\antigravity-i18n.exe status` |
+| 还原官方版本 | `.\antigravity-i18n.exe restore` |
+| 查看全部参数 | `.\antigravity-i18n.exe --help` |
 
-# 安装指定语言包（默认简体中文）
-.\antigravity-i18n.exe apply --locale zh-CN
+</details>
 
-# 随时还原为官方英文原版
-.\antigravity-i18n.exe restore
+<details>
+<summary>从源码构建</summary>
 
-# 查看所有内置语言包及其覆盖率
-.\antigravity-i18n.exe locales
-```
+在 Windows 上安装 PowerShell 7、Go 1.26.3 或更新版本，以及 Wails v2 CLI。在仓库根目录运行 `.\build.ps1 -Target gui`，产物位于 `build/bin/antigravity-i18n.exe`。
 
-常用参数：
-- `--app-dir <path>`：手动指定 Antigravity 安装路径（亦可通过环境变量 `ANTIGRAVITY_APP_DIR` 设置）。
-- `--locale <code>`：指定语言代码，如 `zh-CN`、`zh-Hant`、`ja`、`ko`、`de`、`es`、`fr` 等。
-- `apply --session-metrics` 启用会话指标，`--session-metrics=false` 关闭。`apply --locale en --session-metrics` 可保留官方英文并启用指标。应用内置语言包时，省略开关将沿用当前设置。
-- `--no-restart`：完成改写后不自动重启客户端。
-- 使用 `--force` 立即结束选定安装的 Antigravity 进程。未保存的工作可能丢失。
-- 使用 `--timeout <ms>` 设置退出等待时长，单位为毫秒，默认 `30000`。
-- `--yes`：静默确认进程关闭提示。
+</details>
 
-同一安装同一时间只能执行一次应用或还原。收到另一项操作正在运行的提示时，等它结束后再试。用 `status` 检查所选安装及备份。归档无法读取或应用身份无法验证时，命令会报错。
-
----
-
-## 内置语言支持
-
-所有语言包均已内嵌于二进制中，无需额外下载：
-
-下表的覆盖度表示与内置基准词库的条目对齐程度，不代表客户端所有英文都应被翻译。语音正文、用户内容和无法完整匹配的句子片段会保留原文。
-
-| 语言代码 | 语言名称 | 翻译覆盖度 | 说明 |
-| :--- | :--- | :--- | :--- |
-| `zh-CN` | 简体中文 | 100% | 完整覆盖界面外壳、原生菜单与退出弹窗 |
-| `zh-Hant` | 繁體中文 | 100% | 完整覆盖，标准繁体计算机术语 |
-| `ja` | 日本語 | 100% | 完整覆盖，专业 IDE 术语核对与对齐 |
-| `ko` | 한국어 | 100% | 完整覆盖，专业 IDE 术语核对与对齐 |
-| `de` | Deutsch | 100% | 完整覆盖，专业 IDE 术语核对与对齐 |
-| `es` | Español | 100% | 完整覆盖，专业 IDE 术语核对与对齐 |
-| `fr` | Français | 100% | 完整覆盖，专业 IDE 术语核对与对齐 |
-| `pt-BR` | Português (Brasil) | 100% | 完整覆盖，专业 IDE 术语核对与对齐 |
-| `ru` | Русский | 100% | 完整覆盖，专业 IDE 术语核对与对齐 |
-| `en` | English | - | 官方原版英文（选中即执行还原） |
-
----
-
-## 机制与常见问题
-
-### 1. Antigravity 官方更新后失效？
-Antigravity 自动更新会覆盖 `app.asar`。官方更新完成后，重新打开本工具点击一次“应用”即可重新生效；工具会自动基于新版文件刷新干净备份。
-
-### 2. 语言切换与还原
-不同语言之间可以直接点击切换，工具会自动替换现有补丁，无需先手动执行还原。任何时候点击“还原为官方英文”均可恢复至纯净状态。
-
-### 3. 备份文件说明
-- `app.asar.clean-backup` 保存用于还原的原始归档。对未打补丁的安装执行应用或还原时，工具会比对它与当前归档的 SHA-256。即使版本号相同，哈希不一致时也会刷新备份。**请保留此文件。**
-- `app.asar.bak-*` 是带时间戳的归档快照。干净备份缺失或无效时，工具会从这些快照查找可用原档。确认客户端运行正常且 `status` 显示干净备份有效后，可清理旧快照释放空间。
-
-### 4. 为什么部分词语或句子保持英文？
-翻译按完整文本匹配，不对未知英文句子逐词替换。句子被内联标签拆分时，也会跳过片段，避免局部中文混入英文。独立按钮、菜单项和无障碍标签仍可正常翻译。
-
-语音模式的用户发言、逐词高亮回复和转写正文保持原文，语音按钮与工作状态仍可翻译。简繁中文保留 `Turbo` 这一权限模式名称；它涉及自动执行和访问权限，译成“极速”容易产生误解。
-
----
-
-## 源码构建
-
-如需自行编译：
-
-**依赖环境**：
-- Go 1.26.3+
-- [Wails v2](https://wails.io/) CLI
-- PowerShell 7
-
-```powershell
-# 克隆仓库
-git clone https://github.com/wadewu-ml/antigravity-i18n.git
-cd antigravity-i18n
-
-# 完整构建（同时产出 GUI 与 CLI）
-.\build.ps1
-
-# 取消下一行注释可一并验证官方归档的逐字节还原
-# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
-go test ./...
-```
-
-DOM 回归使用独立的无头 Chrome 或 Edge 实例。可用 `ANTIGRAVITY_TEST_BROWSER` 指定 Chromium 可执行文件。未找到浏览器时会跳过 DOM 用例。
-
----
-
-## 免责声明
-
-1. 本项目为开源社区维护的非官方本地化工具，与 Google 或 Antigravity 官方无关。
-2. Antigravity 及相关商标版权归原权利人所有。
-3. 本工具仅供学习交流及个人使用，请在遵循相关软件使用协议的前提下合理使用。
-
-## 开源协议
-
-[MIT License](./LICENSE)
+社区维护的非官方工具。[MIT 许可证](./LICENSE)

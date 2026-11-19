@@ -1,135 +1,56 @@
-# antigravity-i18n
+# <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
 
+Neun Sprachpakete übersetzen Einstellungen, Bedienelemente im Chat, Menüs und Rückfragen beim Beenden von Google Antigravity für Windows. Auf Wunsch sehen Sie direkt am Eingabefeld, wie viel Kontext noch verfügbar ist und wie schnell das Modell geantwortet hat. Nach dem Anwenden können Sie das Tool schließen.
 
-UI-Lokalisierungstool für den Google Antigravity-Desktop-Client.
+[Für Windows x64 herunterladen](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Versionen](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
+Getestet mit **Antigravity App 2.33.0**. Falls das Tool beim Start nach WebView2 fragt, installieren Sie die [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download).
 
-[简体中文](./README.zh-CN.md) | [English](./README.md) | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | **Deutsch** | [Español](./README.es.md) | [Français](./README.fr.md) | [Português (Brasil)](./README.pt-BR.md) | [Русский](./README.ru.md)
+[简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · **Deutsch** · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
----
+## Oberflächensprache ändern
 
-**v4.0.0** enthält neun Sprachpakete und wurde mit Antigravity App **2.33.0** getestet.
+Zur Auswahl stehen vereinfachtes und traditionelles Chinesisch, Japanisch, Koreanisch, Deutsch, Spanisch, Französisch, brasilianisches Portugiesisch und Russisch. Das Tool selbst ist auf vereinfachtem Chinesisch beschriftet.
 
----
+1. Öffnen Sie `antigravity-i18n.exe`. Falls das Tool die Installation nicht findet oder den falschen Ordner anzeigt, klicken Sie auf **更改位置** und wählen Sie den Ordner mit `Antigravity.exe`.
+2. Wählen Sie unter **界面语言** eine Sprache. Mit **会话指标** schalten Sie die Sitzungsmetriken ein. Für Metriken mit der englischen Originaloberfläche wählen Sie **English**.
+3. Speichern Sie Ihre Arbeit und beenden Sie Antigravity. Klicken Sie dann auf **应用更改**, um die Einstellungen zu übernehmen. Antigravity öffnet sich mit den neuen Einstellungen.
 
-## Hauptmerkmale
+Mit **强制退出并重试** können Sie bei einer entsprechenden Aufforderung das Beenden erzwingen und den Vorgang wiederholen. Laufende Sitzungen werden dabei unterbrochen und ungespeicherte Änderungen können verloren gehen.
 
-- **Portable Windows-x64-Anwendung**. Die grafische Oberfläche verwendet Microsoft Edge WebView2.
-- **GUI- und CLI-Dual-Modus**: Öffnet standardmäßig ein sauberes Desktop-Fenster und bettet gleichzeitig vollständige CLI-Unterbefehle („apply“ / „restore“ / „status“ / „locales“) für Skripterstellung und Automatisierung ein.
-- **Bytegenaue Wiederherstellung**: Erstellt automatisch ein makelloses Backup („app.asar.clean-backup“), bevor Änderungen vorgenommen werden. Beim Wiederherstellen wird ein Archiv wiederhergestellt, das Byte für Byte mit der offiziellen Version identisch ist (SHA-256-verifiziert).
-- **Oberflächenübersetzung** für die Shell, native Menüs und Beenden-Dialoge.
-- **Optionale Sitzungsmetriken** zeigen die Kontextauslastung als Ring rechts neben der Modellauswahl. Die Detailansicht zeigt den verbleibenden Kontext, die Ausgabegeschwindigkeit, die Cache-Trefferrate und die Zeit bis zum ersten Token. Antigravity liest die Werte aus seiner lokalen Sitzungsdatenbank.
-- **Lokale Patch-Verarbeitung** mit Prüfung der JavaScript-Syntax und Rollback bei Schreibfehlern.
+## Sitzungsmetriken ablesen
 
----
+Sobald ein Modellaufruf für den Chat aufgezeichnet wurde, erscheint rechts neben der Modellauswahl im Eingabefeld ein Ring. Er zeigt an, welcher Anteil des Kontextfensters schätzungsweise belegt ist. Bewegen Sie den Mauszeiger auf den Ring, um die verbleibenden Token, die Ausgabegeschwindigkeit, die Cache-Trefferquote und die Wartezeit bis zum ersten Token zu sehen. Ein Klick hält die Details offen, ein weiterer schließt sie.
 
-## Download und Nutzung
+In geteilten Ansichten, Nebenunterhaltungen und Bereichen für Subagenten stammen die Werte jeweils aus dem letzten lokal aufgezeichneten Modellaufruf der betreffenden Sitzung, für den Daten vorliegen. Die Ausgabemenge umfasst auch die vom Modell gemeldeten Reasoning-Token. Ein `—` kennzeichnet einen fehlenden Wert.
 
-### Herunterladen
+## Wiederherstellen oder erneut anwenden
 
-Laden Sie die neueste „antigravity-i18n.exe“ von der Seite „Releases“ herunter und führen Sie sie direkt aus.
+Um zur englischen Originaloberfläche zurückzukehren und die Anzeige zu entfernen, beenden Sie Antigravity, klicken Sie im Tool auf **还原官方版本** und bestätigen Sie mit **还原**. Beim ersten Anwenden sichert das Tool die Originaldatei. Bewahren Sie `resources/app.asar.clean-backup` im Installationsordner von Antigravity auf.
 
-### 1. Grafische Oberfläche (empfohlen)
+Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit **重新应用** erneut anwenden.
 
-Doppelklicken Sie auf „antigravity-i18n.exe“:
-1. Die App erkennt den Antigravity-Installationsordner automatisch (oder klicken Sie auf „Speicherort ändern“, um ihn manuell anzugeben).
-2. Wählen Sie eine Sprache und stellen Sie die Sitzungsmetriken separat ein. Sie sind auch mit der offiziellen englischen Oberfläche verfügbar.
-3. Klicken Sie auf „Übernehmen“. Sobald Antigravity beendet ist, aktualisiert das Tool die Ressourcen und startet Antigravity neu. Mit „Offizielle Version wiederherstellen“ stellen Sie das englische Originalarchiv wieder her und entfernen die Anzeige.
-
-Wenn Antigravity für das Anwenden oder Wiederherstellen geschlossen werden muss, fordert das Tool die ausgewählte Installation zum regulären Beenden auf. Läuft sie nach 30 Sekunden noch, können Sie Antigravity manuell beenden und es erneut versuchen oder auf „Beenden erzwingen und erneut versuchen“ klicken.
-
-### 2. Befehlszeilenschnittstelle
+<details>
+<summary>PowerShell-Befehle</summary>
 
 Öffnen Sie PowerShell im Ordner mit `antigravity-i18n.exe`.
 
-```powershell
-# Check current localization status and backups
-.\antigravity-i18n.exe status
+| Aufgabe | Befehl |
+| --- | --- |
+| Sprachcodes auflisten | `.\antigravity-i18n.exe locales` |
+| Deutsch anwenden | `.\antigravity-i18n.exe apply --locale de` |
+| Englisch mit Sitzungsmetriken verwenden | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| Aktuelle Einstellungen anzeigen | `.\antigravity-i18n.exe status` |
+| Offizielle Version wiederherstellen | `.\antigravity-i18n.exe restore` |
+| Alle Optionen anzeigen | `.\antigravity-i18n.exe --help` |
 
-# Install a language pack (Simplified Chinese by default)
-.\antigravity-i18n.exe apply --locale zh-CN
+</details>
 
-# Restore the official untranslated English version
-.\antigravity-i18n.exe restore
+<details>
+<summary>Aus dem Quellcode bauen</summary>
 
-# List all bundled language packs with coverage
-.\antigravity-i18n.exe locales
-```
+Für den Windows-Build benötigen Sie PowerShell 7, Go 1.26.3 oder neuer und die Wails-v2-CLI. Führen Sie `.\build.ps1 -Target gui` im Repository-Stamm aus. Die Datei entsteht unter `build/bin/antigravity-i18n.exe`.
 
-Häufige Optionen:
-- `--app-dir <Pfad>`: Geben Sie das Antigravity-Installationsverzeichnis manuell an (oder legen Sie es über `ANTIGRAVITY_APP_DIR` fest).
-- `--locale <code>`: Zielsprachencode (z. B. `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`).
-- „--no-restart“: Antigravity nach dem Patchen nicht neu starten.
-- `apply --session-metrics` aktiviert die Anzeige, `--session-metrics=false` deaktiviert sie. `apply --locale en --session-metrics` nutzt die offizielle englische Oberfläche mit Anzeige.
-- `--force` beendet die ausgewählte Installation sofort. Ungespeicherte Änderungen können verloren gehen.
-- `--timeout <ms>` legt die Wartezeit bis zum Abbruch in Millisekunden fest. Der Standardwert ist `30000`.
-- „--yes“: Unterdrückt die Bestätigungsaufforderung zum Herunterfahren.
+</details>
 
-Pro Installation ist jeweils nur ein Vorgang zum Anwenden oder Wiederherstellen möglich. Falls bereits ein Vorgang läuft, warten Sie auf dessen Abschluss und versuchen Sie es erneut. Mit `status` prüfen Sie die ausgewählte Installation und ihre Sicherung. Ein unlesbares Archiv oder eine nicht überprüfbare Anwendungsidentität führt zu einer Fehlermeldung.
-
----
-
-## Gebündelte Sprachen
-
-Alle Sprachpakete sind direkt in die ausführbare Datei eingebettet:
-
-| Code | Sprache | Abdeckung | Hinweise |
-| :--- | :--- | :--- | :--- |
-| `zh-CN` | Simplified Chinese (简体中文) | 100% | Vollständige Abdeckung der Benutzeroberfläche, Menüs und Dialoge |
-| `zh-Hant` | Traditional Chinese (繁體中文) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `ja` | Japanese (日本語) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `ko` | Korean (한국어) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `de` | German (Deutsch) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `es` | Spanish (Español) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `fr` | French (Français) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `pt-BR` | Portuguese (Brasil) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `ru` | Russian (Русский) | 100% | Vollständige Abdeckung mit verifizierten Fachbegriffen |
-| `en` | English | - | Offizieller Original-Build (zum Wiederherstellen auswählen) |
-
----
-
-## FAQ & Mechanik
-
-### 1. Was passiert nach einem offiziellen Antigravity-Update?
-Offizielle Updates überschreiben „app.asar“. Öffnen Sie einfach dieses Tool erneut und klicken Sie erneut auf „Übernehmen“. Das Tool aktualisiert sein sauberes Backup automatisch mit der neuen offiziellen Version.
-
-### 2. Sprachumschaltung und Wiederherstellung
-Sie können direkt zwischen jeder Sprache wechseln; Das Tool ersetzt aktive Patches nahtlos, ohne dass zunächst eine manuelle Wiederherstellung erforderlich ist. Durch Klicken auf „Offizielles Englisch wiederherstellen“ kann der Client jederzeit in einen unberührten Zustand zurückversetzt werden.
-
-### 3. Verwaltung der Sicherungsdateien
-- `app.asar.clean-backup` enthält das Originalarchiv für die Wiederherstellung. Beim Anwenden oder Wiederherstellen einer ungepatchten Installation vergleicht das Tool die SHA-256-Prüfsummen und aktualisiert die Sicherung bei Abweichungen, auch nach einer Neuinstallation derselben Version. **Bewahren Sie diese Datei auf.**
-- `app.asar.bak-*` sind Kopien mit Zeitstempel, aus denen das Tool eine fehlende oder ungültige Sicherung wiederherstellen kann. Sobald der Client funktioniert und `status` eine gültige Sicherung meldet, können Sie ältere Kopien löschen, um Speicherplatz freizugeben.
-
----
-
-## Bauen aus der Quelle
-
-**Voraussetzungen**:
-- Go 1.26.3+
-- [Wails v2](https://wails.io/) CLI
-- PowerShell 7
-
-```powershell
-# Clone the repository
-git clone https://github.com/wadewu-ml/antigravity-i18n.git
-cd antigravity-i18n
-
-# Build both GUI and CLI binaries
-.\build.ps1
-
-# Entfernen Sie das Kommentarzeichen der nächsten Zeile, um ein offizielles Archiv zu testen.
-# $env:ANTIGRAVITY_ASAR = "$env:LOCALAPPDATA\Programs\antigravity\resources\app.asar.clean-backup"
-go test ./...
-```
-
----
-
-## Haftungsausschluss
-
-1. Dies ist ein inoffizielles, von der Community gepflegtes Projekt und steht in keiner Verbindung zu Google oder Antigravity, wird von diesen nicht unterstützt oder autorisiert.
-2. Google Antigravity und zugehörige Marken gehören ihren jeweiligen Eigentümern.
-3. Dieses Tool wird für den persönlichen und pädagogischen Gebrauch bereitgestellt. Bitte stellen Sie sicher, dass Sie die entsprechenden Software-Nutzungsbedingungen einhalten.
-
-## Lizenz
-
-[MIT-Lizenz](./LICENSE)
+Ein inoffizielles Tool, das von der Community gepflegt wird. [MIT-Lizenz](./LICENSE)
