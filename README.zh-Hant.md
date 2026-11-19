@@ -37,8 +37,7 @@
 
 如果 Antigravity 更新後翻譯或指標消失，請先對照本頁頂端列出的適用版本，再選擇語言和指標並套用。要再次套用目前生效的設定，請點選「重新应用」。
 
-<details>
-<summary>命令列用法</summary>
+## 命令列用法
 
 在 `antigravity-i18n.exe` 所在目錄開啟 PowerShell。
 
@@ -51,13 +50,8 @@
 | 還原官方版本 | `.\antigravity-i18n.exe restore` |
 | 查看所有選項 | `.\antigravity-i18n.exe --help` |
 
-</details>
-
-<details>
-<summary>從原始碼建置</summary>
+## 從原始碼建置
 
 在 Windows 上安裝 PowerShell 7、Go 1.26.3 或更新版本，以及 Wails v2 CLI。在儲存庫根目錄執行 `.\build.ps1 -Target gui`，產物位於 `build/bin/antigravity-i18n.exe`。
-
-</details>
 
 由社群維護的非官方工具。[MIT 授權條款](./LICENSE)

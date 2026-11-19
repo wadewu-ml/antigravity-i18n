@@ -37,8 +37,7 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 Antigravity の更新後に翻訳や指標が消えた場合は、このページの冒頭で対応バージョンを確認してから言語と指標を選び直して適用します。すでに有効な設定を再適用するときは「重新应用」をクリックします。
 
-<details>
-<summary>PowerShell のコマンド</summary>
+## PowerShell のコマンド
 
 `antigravity-i18n.exe` のあるフォルダーで PowerShell を開きます。
 
@@ -51,13 +50,8 @@ Antigravity の更新後に翻訳や指標が消えた場合は、このペー�
 | 公式版に復元 | `.\antigravity-i18n.exe restore` |
 | 全オプションを表示 | `.\antigravity-i18n.exe --help` |
 
-</details>
-
-<details>
-<summary>ソースからビルドする</summary>
+## ソースからビルドする
 
 Windows でビルドするには、PowerShell 7、Go 1.26.3 以降、Wails v2 CLI が必要です。リポジトリのルートで `.\build.ps1 -Target gui` を実行すると `build/bin/antigravity-i18n.exe` が生成されます。
-
-</details>
 
 コミュニティがメンテナンスする非公式ツールです。[MIT ライセンス](./LICENSE)

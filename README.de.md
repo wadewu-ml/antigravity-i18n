@@ -37,8 +37,7 @@ Um zur englischen Originaloberfläche zurückzukehren und die Anzeige zu entfern
 
 Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit **重新应用** erneut anwenden.
 
-<details>
-<summary>PowerShell-Befehle</summary>
+## PowerShell-Befehle
 
 Öffnen Sie PowerShell im Ordner mit `antigravity-i18n.exe`.
 
@@ -51,13 +50,8 @@ Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, verg
 | Offizielle Version wiederherstellen | `.\antigravity-i18n.exe restore` |
 | Alle Optionen anzeigen | `.\antigravity-i18n.exe --help` |
 
-</details>
-
-<details>
-<summary>Aus dem Quellcode bauen</summary>
+## Aus dem Quellcode bauen
 
 Für den Windows-Build benötigen Sie PowerShell 7, Go 1.26.3 oder neuer und die Wails-v2-CLI. Führen Sie `.\build.ps1 -Target gui` im Repository-Stamm aus. Die Datei entsteht unter `build/bin/antigravity-i18n.exe`.
-
-</details>
 
 Ein inoffizielles Tool, das von der Community gepflegt wird. [MIT-Lizenz](./LICENSE)

@@ -37,8 +37,7 @@ Pour retrouver l’interface anglaise d’origine et retirer l’indicateur, qui
 
 Si la traduction ou l’indicateur disparaît après une mise à jour d’Antigravity, vérifiez la version prise en charge en haut de cette page, puis sélectionnez et appliquez à nouveau vos réglages. Pour réappliquer les réglages déjà actifs, cliquez sur **重新应用**.
 
-<details>
-<summary>Commandes PowerShell</summary>
+## Commandes PowerShell
 
 Ouvrez PowerShell dans le dossier contenant `antigravity-i18n.exe`.
 
@@ -51,13 +50,8 @@ Ouvrez PowerShell dans le dossier contenant `antigravity-i18n.exe`.
 | Restaurer la version officielle | `.\antigravity-i18n.exe restore` |
 | Voir toutes les options | `.\antigravity-i18n.exe --help` |
 
-</details>
-
-<details>
-<summary>Compiler à partir des sources</summary>
+## Compiler à partir des sources
 
 Pour compiler sous Windows, installez PowerShell 7, Go 1.26.3 ou ultérieur et la CLI de Wails v2. Exécutez `.\build.ps1 -Target gui` à la racine du dépôt. Le fichier est généré dans `build/bin/antigravity-i18n.exe`.
-
-</details>
 
 Outil non officiel maintenu par la communauté. [Licence MIT](./LICENSE)

@@ -37,8 +37,7 @@ To return to the original English interface and remove the indicator, quit Antig
 
 If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click **重新应用**.
 
-<details>
-<summary>PowerShell commands</summary>
+## PowerShell commands
 
 Open PowerShell in the folder containing `antigravity-i18n.exe`.
 
@@ -51,13 +50,8 @@ Open PowerShell in the folder containing `antigravity-i18n.exe`.
 | Restore the official version | `.\antigravity-i18n.exe restore` |
 | See all options | `.\antigravity-i18n.exe --help` |
 
-</details>
-
-<details>
-<summary>Build from source</summary>
+## Build from source
 
 On Windows, install PowerShell 7, Go 1.26.3 or later, and the Wails v2 CLI. Run `.\build.ps1 -Target gui` from the repository root to build `build/bin/antigravity-i18n.exe`.
-
-</details>
 
 An unofficial, community-maintained tool. [MIT License](./LICENSE)

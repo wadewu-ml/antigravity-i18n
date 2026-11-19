@@ -37,8 +37,7 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 Antigravity 업데이트 후 번역이나 지표가 사라지면 이 페이지 상단에서 지원 버전을 확인한 뒤 언어와 지표를 다시 선택해 적용합니다. 이미 적용된 설정을 다시 쓰려면 ‘重新应用’을 누릅니다.
 
-<details>
-<summary>PowerShell 명령</summary>
+## PowerShell 명령
 
 `antigravity-i18n.exe`가 있는 폴더에서 PowerShell을 엽니다.
 
@@ -51,13 +50,8 @@ Antigravity 업데이트 후 번역이나 지표가 사라지면 이 페이지 �
 | 공식 버전 복원 | `.\antigravity-i18n.exe restore` |
 | 모든 옵션 보기 | `.\antigravity-i18n.exe --help` |
 
-</details>
-
-<details>
-<summary>소스에서 빌드</summary>
+## 소스에서 빌드
 
 Windows에서 빌드하려면 PowerShell 7, Go 1.26.3 이상, Wails v2 CLI가 필요합니다. 저장소 루트에서 `.\build.ps1 -Target gui`를 실행하면 `build/bin/antigravity-i18n.exe`가 생성됩니다.
-
-</details>
 
 커뮤니티에서 관리하는 비공식 도구입니다. [MIT 라이선스](./LICENSE)
