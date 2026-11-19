@@ -2,6 +2,9 @@ package core
 
 import "errors"
 
+// ErrAntigravityRunning reports an installation that requires the user's choice.
+var ErrAntigravityRunning = errors.New("Antigravity is running. Exit it and retry")
+
 // ErrGracefulShutdownTimeout allows callers to offer an explicit force retry.
 var ErrGracefulShutdownTimeout = errors.New("Antigravity did not exit before the timeout. Close it manually or explicitly choose forced shutdown and retry")
 
@@ -11,6 +14,7 @@ type Options struct {
 	Locale         string
 	Restart        bool
 	Force          bool
+	RequireClosed  bool // check for a running app before proceeding unless Force is set
 	TimeoutMs      int
 	SessionMetrics *bool // nil keeps the setting in the installed archive
 }
@@ -61,6 +65,17 @@ func (s *Service) DescribeLocales() ([]LocaleInfo, error) {
 func (s *Service) clearNotes() { s.notes = nil }
 
 func (s *Service) closeApp(p *paths, opts Options) (bool, error) {
+	if opts.RequireClosed && !opts.Force {
+		running, err := s.appRunning(p)
+		if err != nil {
+			return running, &OpError{Op: "checking Antigravity", Cause: err}
+		}
+		if running {
+			return true, ErrAntigravityRunning
+		}
+		return false, nil
+	}
+
 	timeout := opts.TimeoutMs
 	if timeout <= 0 {
 		timeout = gracefulTimeoutMs

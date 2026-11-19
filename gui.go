@@ -53,9 +53,9 @@ func runWails(svc *core.Service) {
 
 func formatAppError(err error) any {
 	var rollbackErr *core.RollbackError
-	if errors.Is(err, core.ErrGracefulShutdownTimeout) && !errors.As(err, &rollbackErr) {
+	if errors.Is(err, core.ErrAntigravityRunning) && !errors.As(err, &rollbackErr) {
 		// Wails passes the formatted value through the JavaScript Error constructor.
-		return "shutdown_timeout: " + err.Error()
+		return "antigravity_running: " + err.Error()
 	}
 	return err.Error()
 }

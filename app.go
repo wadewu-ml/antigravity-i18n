@@ -124,6 +124,15 @@ func (a *App) ApplyCustomization(locale string, sessionMetrics, confirmed, force
 	return a.applyCustomization(locale, &sessionMetrics, confirmed, force)
 }
 
+func (a *App) operationOptions(force bool) core.Options {
+	return core.Options{
+		AppDir:        a.currentDir(),
+		Restart:       true,
+		Force:         force,
+		RequireClosed: true,
+	}
+}
+
 func (a *App) applyCustomization(locale string, sessionMetrics *bool, confirmed, force bool) (*core.ApplyResult, error) {
 	if !confirmed {
 		return nil, errors.New(confirmationRequired)
@@ -132,13 +141,10 @@ func (a *App) applyCustomization(locale string, sessionMetrics *bool, confirmed,
 		return nil, errors.New("正在执行另一项语言操作。")
 	}
 	defer a.opMu.Unlock()
-	result, err := a.svc.ApplyLocale(core.Options{
-		AppDir:         a.currentDir(),
-		Locale:         locale,
-		Restart:        true,
-		Force:          force,
-		SessionMetrics: sessionMetrics,
-	})
+	opts := a.operationOptions(force)
+	opts.Locale = locale
+	opts.SessionMetrics = sessionMetrics
+	result, err := a.svc.ApplyLocale(opts)
 	for _, note := range a.svc.Notes() {
 		a.appendLog("note: " + note)
 	}
@@ -160,11 +166,7 @@ func (a *App) RestoreLocale(confirmed, force bool) (*core.RestoreResult, error) 
 		return nil, errors.New("正在执行另一项语言操作。")
 	}
 	defer a.opMu.Unlock()
-	result, err := a.svc.RestoreOfficial(core.Options{
-		AppDir:  a.currentDir(),
-		Restart: true,
-		Force:   force,
-	})
+	result, err := a.svc.RestoreOfficial(a.operationOptions(force))
 	for _, note := range a.svc.Notes() {
 		a.appendLog("note: " + note)
 	}

@@ -244,14 +244,13 @@
 
   function showOperationError(title, err, retry) {
     var msg = errorText(err);
-    var timeoutPrefix = 'shutdown_timeout: ';
-    var timedOut = msg.startsWith(timeoutPrefix);
-    if (timedOut) msg = msg.slice(timeoutPrefix.length);
-    appendLog('[错误] ' + msg);
-    if (retry && timedOut) {
-      showMessage('Antigravity 未退出', '可以手动退出 Antigravity 后再试。强制退出会中断正在进行的会话，未保存的编辑可能丢失。', true, retry);
+    var runningPrefix = 'antigravity_running: ';
+    if (retry && msg.startsWith(runningPrefix)) {
+      appendLog('[提示] ' + msg.slice(runningPrefix.length));
+      showMessage('Antigravity 正在运行', '请先手动退出 Antigravity 再试。强制退出会中断正在进行的会话，未保存的编辑可能丢失。', true, retry);
       return;
     }
+    appendLog('[错误] ' + msg);
     showMessage(title, msg, true);
   }
 

@@ -1,6 +1,6 @@
 const calls = [];
 const installed = {CurrentLanguage: 'en', SessionMetrics: false};
-const timeout = new Error('shutdown_timeout: closing Antigravity: simulated shutdown timeout');
+const running = new Error('antigravity_running: Antigravity is running. Exit it and retry');
 let nextError;
 
 function failIfRequested() {
@@ -51,19 +51,21 @@ verify(async () => {
   await settle();
   check('successful apply needs no dialog', message.open || restoreConfirm.open, false);
 
-  nextError = timeout;
+  nextError = running;
   apply.click();
   await settle();
-  check('normal shutdown timeout offers force retry', message.open && !retry.classList.contains('hidden'), true);
-  check('the log keeps the readable shutdown error',
-    byId('logContent').textContent.includes('[错误] closing Antigravity: simulated shutdown timeout'), true);
+  check('a running installation offers force retry', message.open && !retry.classList.contains('hidden'), true);
+  check('the prompt tells users to exit Antigravity first',
+    byId('msgTitle').textContent === 'Antigravity 正在运行' && byId('msgBody').textContent.includes('手动退出'), true);
+  check('the log keeps the readable running-app notice',
+    byId('logContent').textContent.includes('[提示] Antigravity is running'), true);
   check('retry dialog has no checkbox', message.querySelector('input') === null, true);
   check('cancel is focused by default', document.activeElement === byId('btnMsgOk'), true);
   check('failed apply preserves the preference', metrics.checked, true);
   byId('btnMsgOk').click();
   check('cancel does not retry', !message.open && calls.length === 2, true);
 
-  nextError = timeout;
+  nextError = running;
   apply.click();
   await settle();
   retry.click();
@@ -83,7 +85,7 @@ verify(async () => {
   check('explicit restore has a simple confirmation', restoreConfirm.open && restoreConfirm.querySelector('input') === null, true);
   byId('btnCancelRestore').click();
   metrics.click();
-  nextError = timeout;
+  nextError = running;
   apply.click();
   check('turning off metrics starts a normal restore directly', !restoreConfirm.open && calls[5][0] === 'restore' && calls[5][2] === false, true);
   await settle();

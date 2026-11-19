@@ -80,13 +80,22 @@ func TestForceApplyClosesArchiveHolder(t *testing.T) {
 	p := fixtureInstall(t, syntheticAsar)
 	startArchiveHolder(t, p, p.AsarPath)
 	svc := newTestService(t)
-	svc.stopApp = stopAntigravity
 	svc.appRunning = isAntigravityRunning
-	opts := Options{AppDir: p.AppDir, Locale: EnglishLocale, SessionMetrics: new(true), TimeoutMs: 500}
+	svc.stopApp = func(*paths, bool, int) (bool, error) {
+		t.Fatal("require-closed apply must only check for a running process")
+		return false, nil
+	}
+	opts := Options{AppDir: p.AppDir, Locale: EnglishLocale, SessionMetrics: new(true), RequireClosed: true, TimeoutMs: 500}
+	if _, err := svc.ApplyLocale(opts); !errors.Is(err, ErrAntigravityRunning) {
+		t.Fatalf("expected an immediate running-app error, got %v", err)
+	}
+	svc.stopApp = stopAntigravity
+	opts.RequireClosed = false
 	if _, err := svc.ApplyLocale(opts); !errors.Is(err, ErrGracefulShutdownTimeout) {
 		t.Fatalf("expected a normal shutdown timeout, got %v", err)
 	}
 	opts.Force = true
+	opts.RequireClosed = true
 	opts.TimeoutMs = 5000
 	applied, err := svc.ApplyLocale(opts)
 	if err != nil || !applied.Forced {
