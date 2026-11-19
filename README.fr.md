@@ -8,6 +8,8 @@ Testé avec **Antigravity App 2.33.0**. Si l’outil demande WebView2 au démarr
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · **Français** · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="Antigravity en chinois simplifié avec les menus traduits et l’anneau à droite du sélecteur de modèle"></a>
+
 ## Changer la langue de l’interface
 
 Les langues proposées sont le chinois simplifié, le chinois traditionnel, le japonais, le coréen, l’allemand, l’espagnol, le français, le portugais du Brésil et le russe. L’outil de configuration est en chinois simplifié.
@@ -18,9 +20,14 @@ Les langues proposées sont le chinois simplifié, le chinois traditionnel, le j
 
 Si l’outil vous demande de quitter Antigravity, le bouton **强制退出并重试** force sa fermeture et relance l’opération. Les sessions en cours sont interrompues et les modifications non enregistrées risquent d’être perdues.
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Fenêtre de configuration avec le chinois simplifié sélectionné et les métriques de session activées"></a>
+
+
 ## Consulter les métriques de session
 
 Dès qu’un appel au modèle est enregistré pour la conversation, un anneau apparaît à droite du sélecteur de modèle dans la zone de saisie. Son remplissage indique la proportion estimée de la fenêtre de contexte déjà utilisée. Survolez-le pour voir le nombre de tokens restants, la vitesse de sortie, le taux de succès du cache et le délai avant le premier token. Cliquez pour épingler les détails, puis cliquez à nouveau pour les refermer.
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="Le panneau en chinois simplifié affiche le contexte utilisé, les tokens restants et la vitesse de sortie"></a>
 
 Chaque panneau utilise le dernier appel au modèle pour lequel sa session dispose de données locales, y compris en vue partagée, dans les conversations latérales et pour les sous-agents. Le nombre de tokens de sortie inclut les tokens de raisonnement signalés par le modèle. Un `—` indique qu’une valeur est indisponible.
 

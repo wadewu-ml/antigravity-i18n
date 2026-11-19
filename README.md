@@ -8,6 +8,8 @@ Tested with **Antigravity App 2.33.0**. If the tool asks for WebView2 at startup
 
 [简体中文](./README.zh-CN.md) · **English** · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="Antigravity in Simplified Chinese, with translated menus and the metrics ring beside the model selector"></a>
+
 ## Change the interface language
 
 The packs cover Simplified Chinese, Traditional Chinese, Japanese, Korean, German, Spanish, French, Brazilian Portuguese, and Russian. The setup tool uses Simplified Chinese.
@@ -18,9 +20,14 @@ The packs cover Simplified Chinese, Traditional Chinese, Japanese, Korean, Germa
 
 If prompted, **强制退出并重试** forces Antigravity to quit and retries the operation. This interrupts active sessions and can discard unsaved edits.
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Settings window with Simplified Chinese selected and session metrics enabled"></a>
+
+
 ## Read session metrics
 
 Once a chat has a recorded model call, a ring appears to the right of the model selector in the chat input. Its fill shows the estimated share of the context window used. Hover to see the remaining tokens, output speed, cache hit rate, and time to first token. Click the ring to pin the details and click again to dismiss them.
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="The open panel above the ring shows context usage, remaining tokens, and output speed in Simplified Chinese"></a>
 
 In split views, side chats, and subagent panels, each panel shows the latest model call with data in its own local session record. The output count includes any thinking tokens the model reports. A dash (`—`) means that a value is unavailable.
 

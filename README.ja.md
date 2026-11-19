@@ -8,6 +8,8 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · **日本語** · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="簡体字中国語のメニューと、入力欄のモデル選択ボタンの隣にあるリング"></a>
+
 ## 表示言語を変更する
 
 言語パックは簡体字中国語、繁体字中国語、日本語、韓国語、ドイツ語、スペイン語、フランス語、ブラジルポルトガル語、ロシア語の 9 種類です。設定ツールの画面は簡体字中国語です。
@@ -18,9 +20,14 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 終了を求められたときに「强制退出并重试」を選ぶと、Antigravity が強制終了して処理を再試行します。進行中のセッションは中断され、未保存の変更が失われることがあります。
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="簡体字中国語が選択され、セッション指標が有効になっている設定画面"></a>
+
+
 ## セッション指標を見る
 
 チャットにモデル呼び出しの記録ができると、入力欄のモデル選択ボタンの右にリングが表示されます。リングが示すのはコンテキストの推定使用率です。ポインターを重ねると、残りのトークン数、出力速度、キャッシュヒット率、最初のトークンが届くまでの時間を確認できます。クリックで詳細を固定し、もう一度クリックすると閉じます。
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="リングの上に開いた簡体字中国語のパネルに、コンテキスト使用量、残りトークン数、出力速度が表示されている"></a>
 
 分割画面、サイドチャット、サブエージェントの各パネルには、それぞれのセッションでローカルに記録された直近のモデル呼び出しの値が表示されます。出力数にはモデルが記録した思考トークンも含まれます。値を取得できない項目は `—` で表示されます。
 

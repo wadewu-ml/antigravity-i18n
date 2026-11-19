@@ -8,6 +8,8 @@
 
 **简体中文** · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="简体中文界面，顶部是中文菜单，输入框里可以看到模型选择器和指标圆环"></a>
+
 ## 切换界面语言
 
 可选简体中文、繁体中文、日语、韩语、德语、西班牙语、法语、巴西葡萄牙语和俄语。
@@ -18,9 +20,14 @@
 
 退出提示中的「强制退出并重试」会中断进行中的会话，未保存的编辑可能丢失。
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已选简体中文，并已打开「会话指标」开关"></a>
+
+
 ## 查看会话指标
 
 对话有了模型调用记录后，输入框里的模型选择器右侧会出现一个圆环，表示上下文大约用了多少。将鼠标移到圆环上，可以查看剩余 token 数、输出速度、缓存命中率和首个 token 的等待时间。单击圆环可固定详情，再点一次收起。
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="模型选择器右侧的圆环上方展开了会话指标，显示上下文用量、余量和输出速度"></a>
 
 指标取自本机的会话记录。分屏、侧问和子 Agent 面板各自显示对应会话最近一次有数据的模型调用。输出量包含模型记录的思考 token。`—` 表示这一项暂时没有数据。
 

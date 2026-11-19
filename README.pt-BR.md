@@ -8,6 +8,8 @@ Compatibilidade verificada com o **Antigravity App 2.33.0**. Se a ferramenta sol
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · **Português (Brasil)** · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="Antigravity em chinês simplificado com os menus traduzidos e o anel ao lado do seletor de modelo"></a>
+
 ## Alterar o idioma da interface
 
 Os idiomas disponíveis são chinês simplificado, chinês tradicional, japonês, coreano, alemão, espanhol, francês, português do Brasil e russo. A ferramenta de configuração está em chinês simplificado.
@@ -18,9 +20,14 @@ Os idiomas disponíveis são chinês simplificado, chinês tradicional, japonês
 
 Se a ferramenta pedir que você encerre o Antigravity, a opção **强制退出并重试** força o encerramento e tenta de novo. Isso interrompe as sessões em andamento e pode descartar alterações que ainda não foram salvas.
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Janela de configurações com chinês simplificado selecionado e métricas da sessão ativadas"></a>
+
+
 ## Consultar as métricas da sessão
 
 Assim que uma chamada ao modelo é registrada no chat, aparece um anel à direita do seletor de modelo na caixa de mensagem. O preenchimento do anel mostra a proporção estimada da janela de contexto em uso. Passe o ponteiro sobre ele para ver os tokens restantes, a velocidade de saída, a taxa de acertos do cache e o tempo até o primeiro token. Clique para fixar os detalhes e clique de novo para fechá-los.
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="O painel em chinês simplificado mostra o uso do contexto, os tokens restantes e a velocidade de saída"></a>
 
 Na tela dividida, nos chats laterais e nos painéis de subagentes, cada painel usa a chamada ao modelo mais recente com dados no registro local da sua sessão. A contagem de saída inclui os tokens de raciocínio informados pelo modelo. Um `—` indica que aquele dado não está disponível.
 

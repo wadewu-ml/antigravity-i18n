@@ -8,6 +8,8 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · **한국어** · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="중국어 간체 메뉴와 입력창의 모델 선택기 옆에 있는 세션 지표 표시기"></a>
+
 ## 표시 언어 바꾸기
 
 언어 팩은 중국어 간체, 중국어 번체, 일본어, 한국어, 독일어, 스페인어, 프랑스어, 브라질 포르투갈어, 러시아어를 지원합니다. 설정 도구의 화면은 중국어 간체로 표시됩니다.
@@ -18,9 +20,14 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 종료 안내에서 ‘强制退出并重试’를 선택하면 Antigravity를 강제로 종료하고 다시 시도합니다. 진행 중인 세션이 중단되며 저장하지 않은 변경 사항이 사라질 수 있습니다.
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="중국어 간체가 선택되고 세션 지표가 켜진 설정 화면"></a>
+
+
 ## 세션 지표 보기
 
 채팅에 모델 호출 기록이 생기면 입력창의 모델 선택기 오른쪽에 원형 표시기가 나타납니다. 원이 채워진 정도는 컨텍스트를 얼마나 사용했는지 보여 주는 추정치입니다. 포인터를 올리면 남은 토큰 수, 출력 속도, 캐시 적중률, 첫 토큰까지 걸린 시간을 볼 수 있습니다. 한 번 누르면 세부 정보가 고정되고 다시 누르면 닫힙니다.
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="원형 표시기 위에 열린 중국어 간체 패널에 컨텍스트 사용량, 남은 토큰 수, 출력 속도가 표시된 모습"></a>
 
 분할 화면, 사이드 채팅, 하위 에이전트 패널은 각각 해당 세션에 저장된 가장 최근 모델 호출 기록에서 지표를 읽습니다. 출력 토큰 수에는 모델이 기록한 추론 토큰이 포함됩니다. 값이 없는 항목은 `—`로 표시됩니다.
 

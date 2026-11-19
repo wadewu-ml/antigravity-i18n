@@ -8,6 +8,8 @@
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · **繁體中文** · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="簡體中文介面，頂部是中文選單，輸入框內可見模型選擇器與指標圓環"></a>
+
 ## 切換介面語言
 
 可選擇簡體中文、繁體中文、日文、韓文、德文、西班牙文、法文、巴西葡萄牙文和俄文。工具本身的按鈕使用簡體中文。
@@ -18,9 +20,14 @@
 
 結束提示中的「强制退出并重试」會中斷進行中的工作階段，尚未儲存的變更可能會遺失。
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已選取簡體中文，並開啟了會話指標"></a>
+
+
 ## 查看會話指標
 
 對話有了模型呼叫紀錄後，輸入框內的模型選擇器右側就會出現圓環，顯示上下文已用比例的估計值。將游標移到圓環上，可查看剩餘 token 數、輸出速度、快取命中率，以及等待第一個 token 的時間。點一下固定詳細資料，再點一下即可收起。
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="圓環上方的簡體中文面板顯示上下文用量、剩餘 token 和輸出速度"></a>
 
 指標取自本機的會話紀錄。分割畫面、側問和子代理面板各自顯示對應會話最近一次有資料的模型呼叫。輸出量包含模型記錄的思考 token。`—` 表示該項資料暫時無法取得。
 

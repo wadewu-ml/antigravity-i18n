@@ -8,6 +8,8 @@ Probado con **Antigravity App 2.33.0**. Si la herramienta solicita WebView2 al i
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · **Español** · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="Antigravity en chino simplificado con menús traducidos y el anillo junto al selector de modelo"></a>
+
 ## Cambiar el idioma de la interfaz
 
 Los idiomas disponibles son chino simplificado, chino tradicional, japonés, coreano, alemán, español, francés, portugués de Brasil y ruso. La herramienta de configuración está en chino simplificado.
@@ -18,9 +20,14 @@ Los idiomas disponibles son chino simplificado, chino tradicional, japonés, cor
 
 Si aparece el aviso de salida, **强制退出并重试** fuerza el cierre de Antigravity y vuelve a intentar la operación. Esto interrumpe las sesiones activas y puede provocar la pérdida de cambios sin guardar.
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Ventana de configuración con chino simplificado seleccionado y métricas de sesión activadas"></a>
+
+
 ## Consultar las métricas de sesión
 
 Cuando se registra una llamada al modelo en el chat, aparece un anillo a la derecha del selector de modelo en el cuadro de entrada. La parte rellena indica qué proporción de la ventana de contexto se estima que está en uso. Pasa el puntero sobre el anillo para ver los tokens restantes, la velocidad de salida, la tasa de aciertos de la caché y el tiempo hasta el primer token. Haz clic para fijar los detalles y vuelve a hacer clic para cerrarlos.
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="El panel en chino simplificado muestra el uso del contexto, los tokens restantes y la velocidad de salida"></a>
 
 En las vistas divididas, los chats laterales y los paneles de subagentes, cada panel muestra la llamada más reciente con datos en el registro local de su sesión. El recuento de salida incluye los tokens de razonamiento que indica el modelo. Un `—` indica que ese dato no está disponible.
 

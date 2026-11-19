@@ -8,6 +8,8 @@ Getestet mit **Antigravity App 2.33.0**. Falls das Tool beim Start nach WebView2
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · **Deutsch** · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
+<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="Antigravity mit Menüs auf vereinfachtem Chinesisch und dem Ring neben der Modellauswahl"></a>
+
 ## Oberflächensprache ändern
 
 Zur Auswahl stehen vereinfachtes und traditionelles Chinesisch, Japanisch, Koreanisch, Deutsch, Spanisch, Französisch, brasilianisches Portugiesisch und Russisch. Das Tool selbst ist auf vereinfachtem Chinesisch beschriftet.
@@ -18,9 +20,14 @@ Zur Auswahl stehen vereinfachtes und traditionelles Chinesisch, Japanisch, Korea
 
 Mit **强制退出并重试** können Sie bei einer entsprechenden Aufforderung das Beenden erzwingen und den Vorgang wiederholen. Laufende Sitzungen werden dabei unterbrochen und ungespeicherte Änderungen können verloren gehen.
 
+<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Einstellungsfenster mit vereinfachtem Chinesisch als Sprache und aktivierten Sitzungsmetriken"></a>
+
+
 ## Sitzungsmetriken ablesen
 
 Sobald ein Modellaufruf für den Chat aufgezeichnet wurde, erscheint rechts neben der Modellauswahl im Eingabefeld ein Ring. Er zeigt an, welcher Anteil des Kontextfensters schätzungsweise belegt ist. Bewegen Sie den Mauszeiger auf den Ring, um die verbleibenden Token, die Ausgabegeschwindigkeit, die Cache-Trefferquote und die Wartezeit bis zum ersten Token zu sehen. Ein Klick hält die Details offen, ein weiterer schließt sie.
+
+<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="Das chinesische Metrikfenster über dem Ring zeigt Kontextnutzung, verbleibende Token und Ausgabegeschwindigkeit"></a>
 
 In geteilten Ansichten, Nebenunterhaltungen und Bereichen für Subagenten stammen die Werte jeweils aus dem letzten lokal aufgezeichneten Modellaufruf der betreffenden Sitzung, für den Daten vorliegen. Die Ausgabemenge umfasst auch die vom Modell gemeldeten Reasoning-Token. Ein `—` kennzeichnet einen fehlenden Wert.
 
