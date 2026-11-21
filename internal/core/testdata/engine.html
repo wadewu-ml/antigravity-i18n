@@ -34,6 +34,8 @@
     <label><input id="protocol-choice" type="checkbox"><span id="protocol-label">Always open <code class="font-mono">vscode:</code> links without asking</span></label>
   </div>
   <p id="bundle-summary">4 plugins. Add bundle installs 2; the ones you already have stay as they are.</p>
+  <div><span id="delivery-toast" class="whitespace-normal">Messages now send immediately. Configure in <span class="whitespace-nowrap"><button id="delivery-settings">settings</button>.</span></span></div>
+  <div id="history-status" role="status">No messages in last 8 steps · Load more</div>
   <div role="option" aria-selected="true">
     <div style="display:flex">
       <span data-testid="menu-option-label" id="slash-name"><span>goal</span></span>
@@ -61,6 +63,9 @@
     byId('ssh-empty').append('No hosts in ', '~/.ssh/config', ' yet. Type one above.');
     const commandPrefix = byId('vscode-filter').querySelector('code');
     const protocol = byId('protocol-label').querySelector('code');
+    const deliverySettings = byId('delivery-settings');
+    let settingsClicks = 0;
+    deliverySettings.addEventListener('click', () => { settingsClicks++; });
 
     verify(async () => {
       for (const [id, expected] of Object.entries({
@@ -79,6 +84,8 @@
         'vscode-filter': '查看当前键位或录制自定义快捷键，仅显示 antigravity. 命令。',
         'protocol-label': '始终打开 vscode: 链接，无需询问',
         'bundle-summary': '共 4 个插件。添加此组合包会安装 2 个插件，已安装的插件保持现状。',
+        'delivery-toast': '消息现在会立即发送。如需更改，请前往设置。',
+        'history-status': '最近 8 步没有消息，加载更早的消息',
         'slash-name': 'goal', 'slash-description': '持续执行，直到指定目标完全达成。'
       })) check(id, text(id), expected);
       check('UI tooltip', byId('control').title, '运行');
@@ -98,6 +105,9 @@
       check('protocol checkbox initially unchecked', byId('protocol-choice').checked, false);
       byId('protocol-label').click();
       check('protocol checkbox still toggles', byId('protocol-choice').checked, true);
+      check('delivery settings button retained', byId('delivery-settings') === deliverySettings, true);
+      deliverySettings.click();
+      check('delivery settings handler retained', settingsClicks, 1);
 
       automation.remove();
       providerName.nodeValue = 'Open';
