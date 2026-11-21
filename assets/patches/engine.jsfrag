@@ -171,6 +171,12 @@ const agSkipSelector = [
 ].join(',');
 
 const agControlSelector = 'button, input, textarea, select, [role="button"], [role="menuitem"], [role="option"], [role="tab"]';
+const agModelTriggerSelector = '[data-testid="model-selector-trigger"]';
+const agModelEffortSelector = [
+    agModelTriggerSelector + ' > span > span.opacity-70',
+    '[data-testid="model-selector-orchestrator-model"]',
+    '[data-testid="model-selector-effort-option"][data-effort="xhigh"]',
+].join(', ');
 
 function agNormalizeInline(value) {
     return String(value).trim().replace(/\s+/g, ' ');
@@ -571,29 +577,45 @@ function isSkippableElement(element) {
     // [contenteditable="true"] can rewrite text the user is actively editing.
     return Boolean(element?.isContentEditable || element?.closest?.(agSkipSelector) || agHasInlineSlotAncestor(element) || isTooltipShortcutSpan(element));
 }
-function shouldTranslateTextNode(node) {
+// Effort is also rendered as a suffix in the picker and coordinator summaries.
+function translateModelEffort(value) {
+    const label = agLookup('Extra High');
+    if (typeof value !== 'string' || !label) {
+        return value;
+    }
+    return value.replace(/(^|\s)Extra High(?=\s*(?:·|$))/, (_, prefix) => prefix + label);
+}
+
+function translateTextNode(node) {
     if (agInlineTextNodes.has(node) || agInlineSlots.has(node)) {
-        return false;
+        return;
     }
     const state = agTextState.get(node);
     if (state) {
         if (node.nodeValue === state.output) {
-            return false;
+            return;
         }
         agTextState.delete(node);
     }
     const parent = node.parentElement;
     if (!parent || isSkippableElement(parent)) {
-        return false;
+        return;
     }
     if (parent.tagName === 'INPUT' || parent.tagName === 'TEXTAREA') {
-        return false;
+        return;
     }
-    const trimmed = node.nodeValue?.trim();
-    if (!trimmed || !hasTranslation(trimmed)) {
-        return false;
+    const source = node.nodeValue;
+    const trimmed = source.trim();
+    if (!trimmed) {
+        return;
     }
-    return !isSentenceFragment(node);
+    let next = parent.matches(agModelEffortSelector) ? translateModelEffort(source) : source;
+    if (next === source && hasTranslation(trimmed) && !isSentenceFragment(node)) {
+        next = translateString(source);
+    }
+    if (next !== source) {
+        agWriteText(node, source, next);
+    }
 }
 function translateAttributes(root) {
     if (root.nodeType !== Node.ELEMENT_NODE) {
@@ -614,7 +636,8 @@ function translateAttributes(root) {
         if (outputs?.get(attr) === current) {
             continue;
         }
-        const next = translateString(current);
+        const source = attr === 'aria-label' && element.matches(agModelTriggerSelector) ? translateModelEffort(current) : current;
+        const next = translateString(source);
         if (next === current) {
             outputs?.delete(attr);
             continue;
@@ -633,12 +656,7 @@ function translateNode(root) {
     }
     if (root.nodeType === Node.TEXT_NODE) {
         agTranslateInlineAncestors(root.parentElement);
-        if (shouldTranslateTextNode(root)) {
-            const next = translateString(root.nodeValue);
-            if (next !== root.nodeValue) {
-                agWriteText(root, root.nodeValue, next);
-            }
-        }
+        translateTextNode(root);
         return;
     }
     if (root.nodeType !== Node.ELEMENT_NODE) {
@@ -667,12 +685,7 @@ function translateNode(root) {
     let node = walker.nextNode();
     while (node) {
         if (node.nodeType === Node.TEXT_NODE) {
-            if (shouldTranslateTextNode(node)) {
-                const next = translateString(node.nodeValue);
-                if (next !== node.nodeValue) {
-                    agWriteText(node, node.nodeValue, next);
-                }
-            }
+            translateTextNode(node);
         }
         else {
             agTranslateInlineMessage(node);
