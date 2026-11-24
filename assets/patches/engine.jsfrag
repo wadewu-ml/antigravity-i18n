@@ -172,10 +172,12 @@ const agSkipSelector = [
 
 const agControlSelector = 'button, input, textarea, select, [role="button"], [role="menuitem"], [role="option"], [role="tab"]';
 const agModelTriggerSelector = '[data-testid="model-selector-trigger"]';
+const agModelBadge = '[data-testid="model-selector-panel"] div.bg-secondary.rounded-full.text-sm';
+const agModelBadgeSelector = agModelBadge + ', ' + agModelBadge + '[data-tooltip-id] > span';
 const agModelEffortSelector = [
     agModelTriggerSelector + ' > span > span.opacity-70',
     '[data-testid="model-selector-orchestrator-model"]',
-    '[data-testid="model-selector-effort-option"][data-effort="xhigh"]',
+    '[data-testid="model-selector-effort-option"]',
 ].join(', ');
 
 function agNormalizeInline(value) {
@@ -579,11 +581,11 @@ function isSkippableElement(element) {
 }
 // Effort is also rendered as a suffix in the picker and coordinator summaries.
 function translateModelEffort(value) {
-    const label = agLookup('Extra High');
-    if (typeof value !== 'string' || !label) {
+    if (typeof value !== 'string') {
         return value;
     }
-    return value.replace(/(^|\s)Extra High(?=\s*(?:·|$))/, (_, prefix) => prefix + label);
+    return value.replace(/(^|\s)(Low|Medium|Extra High|High|Max|Default \(Gemini Pro\))(?=\s*(?:·|$|, Model cannot be changed while the agent is running$))/,
+        (_, prefix, effort) => prefix + (agLookup(effort) || effort));
 }
 
 function translateTextNode(node) {
@@ -610,7 +612,10 @@ function translateTextNode(node) {
         return;
     }
     let next = parent.matches(agModelEffortSelector) ? translateModelEffort(source) : source;
-    if (next === source && hasTranslation(trimmed) && !isSentenceFragment(node)) {
+    const badgeLabel = agValueMaps.modelBadge?.[trimmed];
+    if (typeof badgeLabel === 'string' && parent.matches(agModelBadgeSelector)) {
+        next = agSpliceLiteral(source, trimmed, badgeLabel);
+    } else if (next === source && hasTranslation(trimmed) && !isSentenceFragment(node)) {
         next = translateString(source);
     }
     if (next !== source) {

@@ -4,7 +4,7 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 [Windows x64 版をダウンロード](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [リリース一覧](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-対応を確認したバージョンは **Antigravity App 2.34.0** です。
+対応を確認したバージョンは **Antigravity App 2.35.0** です。
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · **日本語** · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 

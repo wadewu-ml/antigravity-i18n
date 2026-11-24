@@ -36,6 +36,8 @@
   <p id="bundle-summary">4 plugins. Add bundle installs 2; the ones you already have stay as they are.</p>
   <div><span id="delivery-toast" class="whitespace-normal">Messages now send immediately. Configure in <span class="whitespace-nowrap"><button id="delivery-settings">settings</button>.</span></span></div>
   <div id="history-status" role="status">No messages in last 8 steps · Load more</div>
+  <div id="queued-wait">Waiting on Build $&amp;</div>
+  <p id="move-target">Move this conversation to "Demo"?</p>
   <span id="selected-effort" data-testid="model-selector-effort-option" data-effort="xhigh">Extra High</span>
   <span id="old-effort">Extra</span>
   <div data-testid="model-selector-orchestrator" style="display:flex">
@@ -43,7 +45,14 @@
     <span id="planner-model" data-testid="model-selector-orchestrator-model">Gemini 4 Neon Extra High</span>
   </div>
   <button id="model-trigger" data-testid="model-selector-trigger" aria-label="Select model, current: Gemini 4 Neon Extra High"><span>Gemini 4 Neon<span class="opacity-70"> Extra High</span></span></button>
+  <button id="locked-model-trigger" data-testid="model-selector-trigger" aria-label="Model: Gemini 4 Neon Medium, Model cannot be changed while the agent is running"><span>Gemini 4 Neon<span class="opacity-70"> Medium</span></span></button>
   <p id="model-in-response" data-testid="planner-response-text">Gemini 4 Neon Extra High</p>
+  <button id="new-action">New</button>
+  <div data-testid="model-selector-panel">
+    <div role="menuitem" style="display:flex"><span>Gemini 4 Neon</span><div class="bg-secondary opacity-70 flex rounded-full px-1.5 text-sm" data-tooltip-id="new-model"><span id="new-model-badge">New</span><svg aria-hidden="true"></svg></div></div>
+    <div role="menuitem" style="display:flex"><span>Gemini 4 Carbon</span><div id="plain-new-model-badge" class="bg-secondary rounded-full px-1.5 text-sm">New</div></div>
+    <div role="menuitem" style="display:flex"><span>Gemini 4 Argon</span><div id="leaving-model" class="bg-secondary rounded-full px-1.5 text-sm">Leaving Soon</div></div>
+  </div>
   <div role="option" aria-selected="true">
     <div style="display:flex">
       <span data-testid="menu-option-label" id="slash-name"><span>goal</span></span>
@@ -94,14 +103,18 @@
         'bundle-summary': '共 4 个插件。添加此组合包会安装 2 个插件，已安装的插件保持现状。',
         'delivery-toast': '消息现在会立即发送。如需更改，请前往设置。',
         'history-status': '最近 8 步没有消息，加载更早的消息',
+        'queued-wait': '正在等待 Build $&', 'move-target': '将此对话移动到「Demo」？',
         'selected-effort': '极高', 'old-effort': 'Extra',
         'orchestrator-name': 'Orchestrator', 'planner-model': 'Gemini 4 Neon 极高',
         'model-trigger': 'Gemini 4 Neon 极高',
         'model-in-response': 'Gemini 4 Neon Extra High',
+        'new-action': '新建', 'new-model-badge': '新上线', 'plain-new-model-badge': '新上线',
+        'leaving-model': '即将下线',
         'slash-name': 'goal', 'slash-description': '持续执行，直到指定目标完全达成。'
       })) check(id, text(id), expected);
       check('UI tooltip', byId('control').title, '运行');
       check('model selector label', byId('model-trigger').getAttribute('aria-label'), '选择模型，当前：Gemini 4 Neon 极高');
+      check('locked model selector label', byId('locked-model-trigger').getAttribute('aria-label'), '模型：Gemini 4 Neon 中 · 智能体运行期间无法切换模型');
       check('editor label', byId('editor').getAttribute('aria-label'), '打开');
       check('remote tooltip', byId('remote').title, 'Open');
       check('input value', byId('input').value, 'Run');
@@ -126,7 +139,7 @@
       providerName.nodeValue = 'Open';
       termsCopy.nodeValue = 'Unknown terms before ';
       byId('control').firstChild.nodeValue = 'Close';
-      byId('planner-model').firstChild.nodeValue = 'Gemini 4 Hydrogen Extra High';
+      byId('planner-model').firstChild.nodeValue = 'Gemini 4 Hydrogen High';
       byId('attachment').alt = 'Run';
       byId('voice').firstChild.firstChild.nodeValue = 'Open';
       query.nodeValue = 'Run $&';
@@ -141,7 +154,7 @@
       check('updated provider name', text('provider'), '请在浏览器中完成 Open 的登录。');
       check('unmatched inline sentence', terms.textContent, 'Unknown terms before Terms of Service');
       check('updated UI label', text('control'), '关闭');
-      check('updated planner model', text('planner-model'), 'Gemini 4 Hydrogen 极高');
+      check('updated planner model', text('planner-model'), 'Gemini 4 Hydrogen 高');
       check('updated user attachment alt', byId('attachment').alt, 'Run');
       check('updated voice content', text('voice'), 'Open Open');
       check('updated site query', text('no-sites'), '没有与“Run $&”匹配的网站。');
