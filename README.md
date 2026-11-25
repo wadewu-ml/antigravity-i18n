@@ -38,7 +38,7 @@ To return to the original English interface and remove the indicator, quit Antig
 
 If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click the green button again.
 
-To update the tool, use the link beside its version number at the top of the window. It checks GitHub when you click. Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
+To update the tool, click Check for updates (检查更新) at the top right of the window. It checks GitHub when you click. Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
 
 ## PowerShell commands
 

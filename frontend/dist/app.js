@@ -366,16 +366,23 @@
   elBtnMsgOk.addEventListener('click', function () {
     elMsgModal.close();
   });
+  function setLogsOpen(open) {
+    elLogDrawer.classList.toggle('hidden', !open);
+    elBtnToggleLogs.setAttribute('aria-expanded', String(open));
+    if (open) elBtnCopyLogs.focus();
+    else elBtnToggleLogs.focus();
+  }
+
   elBtnMsgLogs.addEventListener('click', function () {
     elMsgModal.close();
-    elLogDrawer.classList.remove('hidden');
+    setLogsOpen(true);
   });
 
   elBtnToggleLogs.addEventListener('click', function () {
-    elLogDrawer.classList.toggle('hidden');
+    setLogsOpen(elLogDrawer.classList.contains('hidden'));
   });
   elBtnCloseLogs.addEventListener('click', function () {
-    elLogDrawer.classList.add('hidden');
+    setLogsOpen(false);
   });
   elBtnCopyLogs.addEventListener('click', function () {
     var text = operationLogs.join('\n');
