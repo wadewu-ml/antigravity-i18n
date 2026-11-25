@@ -26,11 +26,18 @@ Pour activer le curseur, utilisez l’interrupteur sous les métriques de sessio
 
 Le bouton « 重新应用 », en bas à droite, permet de réappliquer les réglages.
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="Sélecteur de modèles avec un effort de raisonnement élevé"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="Sélecteur de modèles avec un effort de raisonnement maximal"></a>
+</p>
+
 ## Consulter les métriques de session
 
 Survolez l’anneau à côté du sélecteur de modèle pour consulter le quota restant par groupe de modèles et par période. Survolez un pourcentage pour voir l’heure locale de la prochaine réinitialisation. Ces informations sont accessibles avant le premier message. Dès le premier appel enregistré, l’anneau indique l’utilisation estimée du contexte. Le panneau affiche aussi le nombre de tokens utilisés et la capacité totale, la vitesse de sortie, le taux de succès du cache et le délai avant le premier token. Cliquez pour épingler le panneau, puis cliquez à nouveau pour le refermer.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="Le panneau en chinois simplifié affiche le contexte utilisé, les tokens restants et la vitesse de sortie"></a>
+
+[Panneau des quotas avant le premier appel au modèle](./docs/images/session-quota-before-first-call.webp)
 
 Chaque panneau utilise le dernier appel au modèle pour lequel sa session dispose de données locales, y compris en vue partagée, dans les conversations latérales et pour les sous-agents. Le nombre de tokens de sortie inclut les tokens de raisonnement signalés par le modèle. Un `—` indique qu’une valeur est indisponible.
 

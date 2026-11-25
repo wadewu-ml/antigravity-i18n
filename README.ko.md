@@ -26,11 +26,18 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 오른쪽 아래 ‘重新应用’ 버튼을 누르면 현재 설정이 다시 적용됩니다.
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="추론 강도를 높음으로 설정한 모델 선택 메뉴"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="추론 강도를 최고로 설정한 모델 선택 메뉴"></a>
+</p>
+
 ## 세션 지표 보기
 
 모델 선택기 옆의 원형 표시기에 포인터를 올리면 모델 그룹별로 각 기간의 남은 한도를 확인할 수 있습니다. 백분율에 포인터를 올리면 다음 초기화 시각이 현지 시간으로 표시됩니다. 첫 메시지를 보내기 전에도 확인할 수 있습니다. 모델 호출이 기록되면 원이 채워진 정도로 추정 컨텍스트 사용률을 알 수 있고, 패널에는 사용한 토큰 수와 전체 용량, 출력 속도, 캐시 적중률, 첫 토큰까지 걸린 시간이 표시됩니다. 한 번 누르면 패널이 고정되고 다시 누르면 닫힙니다.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="원형 표시기 위에 열린 중국어 간체 패널에 컨텍스트 사용량, 남은 토큰 수, 출력 속도가 표시된 모습"></a>
+
+[첫 모델 호출 전의 한도 패널](./docs/images/session-quota-before-first-call.webp)
 
 분할 화면, 사이드 채팅, 하위 에이전트 패널은 각각 해당 세션에 저장된 가장 최근 모델 호출 기록에서 지표를 읽습니다. 출력 토큰 수에는 모델이 기록한 추론 토큰이 포함됩니다. 값이 없는 항목은 `—`로 표시됩니다.
 

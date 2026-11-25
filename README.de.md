@@ -26,11 +26,18 @@ Um den Regler zu verwenden, aktivieren Sie im Tool den Schalter unter den Sitzun
 
 Über die Schaltfläche „重新应用“ (erneut anwenden) unten rechts lassen sich die aktuellen Einstellungen erneut anwenden.
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="Modellauswahl mit dem Denkaufwand auf der Stufe Hoch"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="Modellauswahl mit dem Denkaufwand auf der höchsten Stufe"></a>
+</p>
+
 ## Sitzungsmetriken ablesen
 
 Bewegen Sie den Mauszeiger auf den Ring neben der Modellauswahl. Für jede Modellgruppe sehen Sie das verbleibende Kontingent je Zeitraum, auch schon vor der ersten Nachricht. Bewegen Sie den Mauszeiger auf einen Prozentwert, um die lokale Rücksetzzeit zu sehen. Nach dem ersten aufgezeichneten Modellaufruf zeigt der Ring die geschätzte Kontextauslastung. Im Detail sehen Sie außerdem die genutzten Token und die Gesamtkapazität, die Ausgabegeschwindigkeit, die Cache-Trefferquote und die Wartezeit bis zum ersten Token. Ein Klick hält die Details offen, ein weiterer schließt sie.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="Das chinesische Metrikfenster über dem Ring zeigt Kontextnutzung, verbleibende Token und Ausgabegeschwindigkeit"></a>
+
+[Kontingentanzeige vor dem ersten Modellaufruf](./docs/images/session-quota-before-first-call.webp)
 
 In geteilten Ansichten, Nebenunterhaltungen und Bereichen für Subagenten stammen die Werte jeweils aus dem letzten lokal aufgezeichneten Modellaufruf der betreffenden Sitzung, für den Daten vorliegen. Die Ausgabemenge umfasst auch die vom Modell gemeldeten Reasoning-Token. Ein `—` kennzeichnet einen fehlenden Wert.
 

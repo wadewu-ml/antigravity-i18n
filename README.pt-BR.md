@@ -26,11 +26,18 @@ Para ativar o controle deslizante, ligue o interruptor abaixo das métricas da s
 
 O botão “重新应用”, no canto inferior direito, reaplica as configurações atuais.
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="Seletor de modelos com esforço de raciocínio alto"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="Seletor de modelos com esforço de raciocínio máximo"></a>
+</p>
+
 ## Consultar as métricas da sessão
 
 Passe o ponteiro sobre o anel ao lado do seletor de modelo para ver a cota restante de cada grupo por período. Passe o ponteiro sobre uma porcentagem para ver o horário local da próxima redefinição. Você pode consultar a cota antes de enviar a primeira mensagem. Após a primeira chamada registrada, o anel indica o uso estimado do contexto e o painel mostra os tokens usados e a capacidade total, a velocidade de saída, a taxa de acertos do cache e o tempo até o primeiro token. Clique para fixar o painel e clique novamente para fechá-lo.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="O painel em chinês simplificado mostra o uso do contexto, os tokens restantes e a velocidade de saída"></a>
+
+[Painel de cotas antes da primeira chamada ao modelo](./docs/images/session-quota-before-first-call.webp)
 
 Na tela dividida, nos chats laterais e nos painéis de subagentes, cada painel usa a chamada ao modelo mais recente com dados no registro local da sua sessão. A contagem de saída inclui os tokens de raciocínio informados pelo modelo. Um `—` indica que aquele dado não está disponível.
 

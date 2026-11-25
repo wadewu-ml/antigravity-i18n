@@ -26,11 +26,18 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 右下の「重新应用」ボタンで、現在の設定を再適用できます。
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="モデル選択メニューで推論強度が「高」の状態"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="モデル選択メニューで推論強度が最大の状態"></a>
+</p>
+
 ## セッション指標を見る
 
 モデル選択ボタンの横のリングにポインターを合わせると、モデルグループごとに各期間の残り利用枠を確認できます。割合にポインターを合わせると、次のリセット日時（現地時間）が表示されます。最初のメッセージを送る前から利用できます。モデル呼び出しが記録されると、リングはコンテキストの推定使用率を示し、詳細には使用済みトークン数と総容量、出力速度、キャッシュヒット率、最初のトークンまでの待ち時間が表示されます。クリックすると詳細が固定され、もう一度クリックすると閉じます。
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="リングの上に開いた簡体字中国語のパネルに、コンテキスト使用量、残りトークン数、出力速度が表示されている"></a>
+
+[最初のモデル呼び出し前の利用枠パネル](./docs/images/session-quota-before-first-call.webp)
 
 分割画面、サイドチャット、サブエージェントの各パネルには、それぞれのセッションでローカルに記録された直近のモデル呼び出しの値が表示されます。出力数にはモデルが記録した思考トークンも含まれます。値を取得できない項目は `—` で表示されます。
 

@@ -26,11 +26,18 @@ To use the thinking-effort slider, turn on the second switch (思考强度滑块
 
 Click Reapply (重新应用) at the bottom right to apply the current settings again.
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="Model picker with thinking effort at High"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="Model picker with thinking effort at Max"></a>
+</p>
+
 ## Read session metrics
 
 Hover over the ring beside the model selector to see each model group’s remaining quota by period. Hover over a percentage for the local reset time. You can check quota before sending your first message. Once the chat records a model call, the ring shows estimated context use and the panel shows tokens used and total capacity, output speed, cache hit rate, and time to first token. Click the ring to pin or dismiss the panel.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="The open panel above the ring shows context usage, remaining tokens, and output speed in Simplified Chinese"></a>
+
+[Quota panel before the first model call](./docs/images/session-quota-before-first-call.webp)
 
 In split views, side chats, and subagent panels, each panel shows the latest model call with data in its own local session record. The output count includes any thinking tokens the model reports. A dash (`—`) means that a value is unavailable.
 

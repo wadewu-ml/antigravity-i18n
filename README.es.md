@@ -26,11 +26,18 @@ Para activar el control deslizante, enciende el interruptor situado debajo de la
 
 El botón «重新应用», abajo a la derecha, vuelve a aplicar los ajustes.
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="Selector de modelos con el nivel de razonamiento alto"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="Selector de modelos con el nivel de razonamiento máximo"></a>
+</p>
+
 ## Consultar las métricas de sesión
 
 Pasa el puntero sobre el anillo junto al selector de modelo para ver la cuota restante de cada grupo por periodo. Pasa el puntero sobre un porcentaje para ver la hora local del próximo restablecimiento. Puedes consultarla antes de enviar el primer mensaje. Tras la primera llamada registrada, el anillo indica el uso estimado del contexto y el panel muestra los tokens utilizados y la capacidad total, la velocidad de salida, la tasa de aciertos de la caché y el tiempo hasta el primer token. Haz clic para fijar el panel y vuelve a hacer clic para cerrarlo.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="El panel en chino simplificado muestra el uso del contexto, los tokens restantes y la velocidad de salida"></a>
+
+[Panel de cuotas antes de la primera llamada al modelo](./docs/images/session-quota-before-first-call.webp)
 
 En las vistas divididas, los chats laterales y los paneles de subagentes, cada panel muestra la llamada más reciente con datos en el registro local de su sesión. El recuento de salida incluye los tokens de razonamiento que indica el modelo. Un `—` indica que ese dato no está disponible.
 

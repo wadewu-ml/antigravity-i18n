@@ -24,12 +24,18 @@
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已选简体中文，并已打开「会话指标」开关"></a>
 
+<p>
+  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="模型菜单中的思考强度滑块，当前为「高」"></a>
+  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="模型菜单中的紫色思考强度滑块，当前为「极高」"></a>
+</p>
 
 ## 查看会话指标
 
 将鼠标移到模型选择器右侧的圆环上，就能查看各模型组在不同周期的剩余额度。将鼠标停在百分比上可查看本地重置时间。新对话发出第一条消息前也能查额度。有了模型调用记录后，圆环会显示上下文估算用量，详情将已用比例、已用 token 数和总容量列在同一行，还可查看输出速度、缓存命中率和首个 token 的等待时间。单击圆环可固定详情，再点一次收起。
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="模型选择器右侧的圆环上方展开了会话指标，显示上下文用量、余量和输出速度"></a>
+
+[查看首次模型调用前的额度面板](./docs/images/session-quota-before-first-call.webp)
 
 指标取自本机的会话记录。分屏、侧问和子 Agent 面板各自显示对应会话最近一次有数据的模型调用。输出量包含模型记录的思考 token。`—` 表示这一项暂时没有数据。
 
