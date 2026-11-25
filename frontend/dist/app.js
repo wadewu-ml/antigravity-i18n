@@ -13,6 +13,7 @@
   var operationLogs = [];
 
   var elAppVersionBadge = document.getElementById('appVersionBadge');
+  var elMoreActions = document.getElementById('moreActions');
   var elCheckUpdate = document.getElementById('btnCheckUpdate');
   var elUpdateStatus = document.getElementById('updateStatus');
   var elUpdateModal = document.getElementById('updateModal');
@@ -39,8 +40,7 @@
   var elEffortSlider = document.getElementById('effortSlider');
   var elEffortSliderDetail = document.getElementById('effortSliderDetail');
   var elSessionMetricsDetail = document.getElementById('sessionMetricsDetail');
-  var elBtnToggleLogs = document.getElementById('btnToggleLogs');
-  var elLogDrawer = document.getElementById('logDrawer');
+  var elLogModal = document.getElementById('logModal');
   var elLogContent = document.getElementById('logContent');
   var elBtnCopyLogs = document.getElementById('btnCopyLogs');
   var elBtnCloseLogs = document.getElementById('btnCloseLogs');
@@ -152,23 +152,16 @@
 
     var currentName = st.CurrentLanguage === 'en' ? '官方英文' : (st.LocaleName || st.CurrentLanguage);
     elStatusLabel.textContent = '当前语言：' + currentName;
+    elStatusDesc.textContent = '';
     if (isCustomized(st)) {
       elStatusPill.classList.add('success');
-      var enabled = [];
-      if (st.SessionMetrics) enabled.push('会话指标');
-      if (st.EffortSlider) enabled.push('思考强度滑块');
-      elStatusDesc.textContent = enabled.length ? enabled.join('、') + '已开启。' : '';
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
       elBtnRestore.classList.remove('hidden');
     } else if (st.HasCleanBackup) {
       elStatusPill.classList.add('default');
-      elStatusDesc.textContent = '干净备份可用。';
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
-    } else {
-      elStatusPill.classList.add('warning');
-      elStatusDesc.textContent = '应用前会自动创建干净备份。';
     }
 
     if (st.CleanBackupStatus && st.CleanBackupStatus !== 'valid') {
@@ -197,10 +190,10 @@
     elBtnPrimaryAction.disabled = isOperating || (!hasChanges && !canReapply);
     elEffortSliderDetail.textContent = sliderChanged
       ? (elEffortSlider.checked ? '应用后开启' : '应用后关闭')
-      : '在模型菜单的「查看用量」上方，拖动滑块调节当前模型的思考强度。';
+      : '';
     elSessionMetricsDetail.textContent = metricsChanged
       ? (elSessionMetrics.checked ? '应用后开启' : '应用后关闭')
-      : '在模型选择器旁查看上下文用量和模型剩余额度。';
+      : '';
   }
 
   function renderChips() {
@@ -357,6 +350,25 @@
   }
 
   elBtnPrimaryAction.addEventListener('click', handlePrimaryAction);
+  function closeMoreActions() {
+    elMoreActions.querySelector('summary').focus();
+    elMoreActions.open = false;
+  }
+  elMoreActions.addEventListener('keydown', function (event) {
+    if (elMoreActions.open && event.key === 'Escape') {
+      event.preventDefault();
+      closeMoreActions();
+    }
+  });
+  elMoreActions.querySelector('.action-list').addEventListener('click', function (event) {
+    if (event.target.closest('button')) closeMoreActions();
+  }, true);
+  document.addEventListener('click', function (event) {
+    if (!elMoreActions.contains(event.target)) elMoreActions.open = false;
+  });
+  elMoreActions.addEventListener('focusout', function (event) {
+    if (!elMoreActions.contains(event.relatedTarget)) elMoreActions.open = false;
+  });
   elBtnSecondaryAction.addEventListener('click', launchApp);
   elBtnChangePath.addEventListener('click', handleChangePath);
   elBtnRestore.addEventListener('click', function () {
@@ -373,32 +385,28 @@
   });
 
   elBtnAbout.addEventListener('click', function () {
-    elAboutModal.classList.remove('hidden');
+    elAboutModal.showModal();
   });
   elBtnCloseAbout.addEventListener('click', function () {
-    elAboutModal.classList.add('hidden');
+    elAboutModal.close();
   });
 
   elBtnMsgOk.addEventListener('click', function () {
     elMsgModal.close();
   });
-  function setLogsOpen(open) {
-    elLogDrawer.classList.toggle('hidden', !open);
-    elBtnToggleLogs.setAttribute('aria-expanded', String(open));
-    if (open) elBtnCopyLogs.focus();
-    else elBtnToggleLogs.focus();
+  function openLogs() {
+    elLogModal.showModal();
+    elLogContent.scrollTop = elLogContent.scrollHeight;
   }
 
   elBtnMsgLogs.addEventListener('click', function () {
     elMsgModal.close();
-    setLogsOpen(true);
+    openLogs();
   });
 
-  elBtnToggleLogs.addEventListener('click', function () {
-    setLogsOpen(elLogDrawer.classList.contains('hidden'));
-  });
+  document.getElementById('btnOpenLogs').addEventListener('click', openLogs);
   elBtnCloseLogs.addEventListener('click', function () {
-    setLogsOpen(false);
+    elLogModal.close();
   });
   elBtnCopyLogs.addEventListener('click', function () {
     var text = operationLogs.join('\n');

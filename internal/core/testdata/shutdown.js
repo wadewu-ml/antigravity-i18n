@@ -78,10 +78,11 @@ verify(async () => {
   await settle();
   check('other failures only show diagnostics', message.open && retry.classList.contains('hidden'), true);
   byId('btnMsgLogs').click();
-  check('failure opens the exact error log', !byId('logDrawer').classList.contains('hidden') &&
+  check('failure opens the exact error log', byId('logModal').open &&
     byId('logContent').textContent.includes('[错误] closing Antigravity: simulated process query failure'), true);
   byId('btnCloseLogs').click();
 
+  byId('moreActions').querySelector('summary').click();
   byId('btnRestore').click();
   check('explicit restore has a simple confirmation', restoreConfirm.open && restoreConfirm.querySelector('input') === null, true);
   byId('btnCancelRestore').click();
@@ -109,7 +110,8 @@ verify(async () => {
   apply.click();
   await settle();
   check('English with only the slider', installed.EffortSlider && !installed.SessionMetrics, true);
-  check('successful slider apply updates the status', byId('statusDesc').textContent.includes('思考强度滑块已开启'), true);
+  check('applied slider stays enabled with no pending change',
+    slider.checked && byId('effortSliderDetail').textContent === '' && apply.textContent === '重新应用', true);
   metrics.click();
   apply.click();
   await settle();
