@@ -13,6 +13,12 @@
   var operationLogs = [];
 
   var elAppVersionBadge = document.getElementById('appVersionBadge');
+  var elCheckUpdate = document.getElementById('btnCheckUpdate');
+  var elUpdateStatus = document.getElementById('updateStatus');
+  var elUpdateModal = document.getElementById('updateModal');
+  var elCancelDownload = document.getElementById('btnCancelDownload');
+  var elReleaseFallback = document.getElementById('btnReleaseFallback');
+  var offeredVersion = '';
   var elAppVersion = document.getElementById('appVersion');
   var elAppPathDisplay = document.getElementById('appPathDisplay');
   var elBtnChangePath = document.getElementById('btnChangePath');
@@ -62,6 +68,7 @@
   }
 
   function showMessage(title, body, showLogs, retry) {
+    elReleaseFallback.classList.add('hidden');
     elMsgTitle.textContent = title;
     elMsgBody.textContent = body;
     elBtnMsgLogs.classList.toggle('hidden', !showLogs);
@@ -85,7 +92,7 @@
     } else {
       elProgressBox.classList.add('hidden');
     }
-    [elBtnPrimaryAction, elBtnSecondaryAction, elBtnRestore, elBtnChangePath].forEach(function (btn) {
+    [elBtnPrimaryAction, elBtnSecondaryAction, elBtnRestore, elBtnChangePath, elCheckUpdate].forEach(function (btn) {
       btn.disabled = operating;
     });
     Array.prototype.forEach.call(elLocaleChips.querySelectorAll('.chip'), function (chip) {
@@ -407,10 +414,63 @@
     showMessage('复制失败', '无法访问剪贴板，请手动选择日志内容。');
   }
 
+  function showUpdateError(title, err) {
+    showMessage(title, errorText(err));
+    elReleaseFallback.classList.remove('hidden');
+  }
+
+  elCheckUpdate.addEventListener('click', async function () {
+    var app = backend();
+    if (!app || isOperating) return;
+    elUpdateStatus.textContent = '';
+    setOperatingState(true, '正在检查更新', '正在查询 GitHub 发布记录…');
+    try {
+      var release = await app.CheckForUpdate();
+      if (!release.available) {
+        elUpdateStatus.textContent = '已是最新版本';
+        return;
+      }
+      offeredVersion = release.version;
+      document.getElementById('updateTitle').textContent = '发现新版本 ' + release.version;
+      document.getElementById('updateSummary').textContent = '当前版本 ' + elAppVersionBadge.textContent + '。更新后将重新打开本工具。';
+      document.getElementById('updateNotes').textContent = release.notes;
+      elUpdateModal.showModal();
+    } catch (err) {
+      showUpdateError('检查更新失败', err);
+    } finally {
+      setOperatingState(false);
+    }
+  });
+
+  function openReleases() { backend().OpenReleases(); }
+  elReleaseFallback.addEventListener('click', openReleases);
+  document.getElementById('btnReleaseNotes').addEventListener('click', openReleases);
+  document.getElementById('btnLater').addEventListener('click', function () { elUpdateModal.close(); });
+  document.getElementById('btnInstallUpdate').addEventListener('click', async function () {
+    elUpdateModal.close();
+    setOperatingState(true, '正在下载更新', '正在准备下载…');
+    elCancelDownload.disabled = false;
+    elCancelDownload.classList.remove('hidden');
+    try {
+      await backend().InstallUpdate(offeredVersion);
+    } catch (err) {
+      if (errorText(err) === '已取消更新。') elUpdateStatus.textContent = '已取消更新';
+      else showUpdateError('更新失败', err);
+    } finally {
+      elCancelDownload.classList.add('hidden');
+      setOperatingState(false);
+    }
+  });
+  elCancelDownload.addEventListener('click', function () {
+    elCancelDownload.disabled = true;
+    backend().CancelUpdate();
+  });
+
   function setupWailsEvents() {
     if (window.runtime && window.runtime.EventsOn) {
       window.runtime.EventsOn('progress', function (data) {
         if (!data || !isOperating) return;
+        if (data.stage === '正在重启工具') elCancelDownload.classList.add('hidden');
         if (data.stage) elProgressStage.textContent = data.stage;
         if (data.detail) elProgressDetail.textContent = data.detail;
         appendLog('[进度] ' + (data.stage || '') + (data.detail ? ': ' + data.detail : ''));
@@ -425,7 +485,10 @@
       var app = backend();
       if (app) {
         app.GetVersion().then(function (v) {
-          if (v) elAppVersionBadge.textContent = 'v' + v;
+          if (v) {
+            elAppVersionBadge.textContent = 'v' + v;
+            app.UpdateWindowReady();
+          }
         }).catch(function () {});
       }
       refreshStatus().then(loadLocales);

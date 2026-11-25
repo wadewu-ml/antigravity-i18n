@@ -38,6 +38,8 @@ Pour retrouver l’interface anglaise d’origine et retirer l’indicateur, qui
 
 Si la traduction ou l’indicateur disparaît après une mise à jour d’Antigravity, vérifiez la version prise en charge en haut de cette page, puis sélectionnez et appliquez à nouveau vos réglages. Pour réappliquer les réglages déjà actifs, cliquez sur « Réappliquer ».
 
+Pour mettre à jour l’outil, cliquez sur le bouton à côté du numéro de version en haut de la fenêtre. L’outil consulte alors GitHub. Confirmez le téléchargement pour relancer la nouvelle version depuis le même fichier EXE. Réappliquez vos réglages pour utiliser les nouvelles traductions dans Antigravity.
+
 ## Commandes PowerShell
 
 Ouvrez PowerShell dans le dossier contenant `antigravity-i18n.exe`.

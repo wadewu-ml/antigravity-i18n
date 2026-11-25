@@ -10,6 +10,14 @@ export function ApplyLocale(arg1, arg2, arg3) {
   return window['go']['main']['App']['ApplyLocale'](arg1, arg2, arg3);
 }
 
+export function CancelUpdate() {
+  return window['go']['main']['App']['CancelUpdate']();
+}
+
+export function CheckForUpdate() {
+  return window['go']['main']['App']['CheckForUpdate']();
+}
+
 export function GetLocales() {
   return window['go']['main']['App']['GetLocales']();
 }
@@ -26,8 +34,16 @@ export function GetVersion() {
   return window['go']['main']['App']['GetVersion']();
 }
 
+export function InstallUpdate(arg1) {
+  return window['go']['main']['App']['InstallUpdate'](arg1);
+}
+
 export function LaunchAntigravity() {
   return window['go']['main']['App']['LaunchAntigravity']();
+}
+
+export function OpenReleases() {
+  return window['go']['main']['App']['OpenReleases']();
 }
 
 export function RestoreLocale(arg1, arg2) {
@@ -40,4 +56,8 @@ export function SelectAppDir() {
 
 export function SetAppDir(arg1) {
   return window['go']['main']['App']['SetAppDir'](arg1);
+}
+
+export function UpdateWindowReady() {
+  return window['go']['main']['App']['UpdateWindowReady']();
 }

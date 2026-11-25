@@ -14,6 +14,8 @@
         <div class="title-group">
           <h1 class="app-title">Antigravity 多语言工具</h1>
           <span class="version-tag" id="appVersionBadge">&nbsp;</span>
+          <button class="text-link" id="btnCheckUpdate">检查更新</button>
+          <span class="section-note" id="updateStatus" role="status"></span>
         </div>
       </div>
       <button class="icon-btn text-link" id="btnAbout">关于</button>
@@ -43,6 +45,7 @@
           <span class="spinner"></span>
         </div>
         <div class="progress-detail" id="progressDetail">请稍候...</div>
+        <button class="text-link hidden" id="btnCancelDownload">取消下载</button>
       </div>
 
     </section>
@@ -114,11 +117,23 @@
     </div>
   </dialog>
 
+  <dialog class="modal-box" id="updateModal" aria-labelledby="updateTitle">
+    <h3 id="updateTitle"></h3>
+    <p class="modal-desc" id="updateSummary"></p>
+    <p class="modal-desc update-notes" id="updateNotes"></p>
+    <div class="modal-actions">
+      <button class="text-link" id="btnReleaseNotes">打开发布页</button>
+      <button class="btn btn-ghost" id="btnLater" autofocus>稍后</button>
+      <button class="btn btn-primary" id="btnInstallUpdate">更新并重启</button>
+    </div>
+  </dialog>
+
   <dialog class="modal-box" id="msgModal" aria-labelledby="msgTitle" aria-describedby="msgBody">
     <h3 id="msgTitle">提示</h3>
     <p class="modal-desc" id="msgBody"></p>
     <div class="modal-actions">
       <button class="text-link hidden" id="btnMsgLogs">查看运行日志</button>
+      <button class="text-link hidden" id="btnReleaseFallback">打开发布页</button>
       <button class="btn btn-primary" id="btnMsgOk" autofocus>知道了</button>
       <button class="btn btn-danger hidden" id="btnForceRetry">强制退出并重试</button>
     </div>

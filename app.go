@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"antigravity-i18n/internal/core"
+	"antigravity-i18n/internal/selfupdate"
 
 	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -19,13 +20,18 @@ const confirmationRequired = "请先确认是否继续。"
 // App binds the Go core to the Wails frontend. The GUI only reaches the core
 // through this type, so a window click and a CLI command perform the same work.
 type App struct {
-	ctx      context.Context
-	svc      *core.Service
-	appDir   string
-	mu       sync.Mutex
-	opMu     sync.Mutex
-	logs     []string
-	progress func(stage, detail string)
+	ctx              context.Context
+	svc              *core.Service
+	appDir           string
+	mu               sync.Mutex
+	opMu             sync.Mutex
+	logs             []string
+	progress         func(stage, detail string)
+	offered          *selfupdate.Release
+	cancelDownload   context.CancelFunc
+	installing       bool
+	closeAfterUpdate bool
+	readyOnce        sync.Once
 }
 
 // NewApp builds the GUI application around the shared locale store.
@@ -138,7 +144,7 @@ func (a *App) applyCustomization(locale string, sessionMetrics *bool, confirmed,
 		return nil, errors.New(confirmationRequired)
 	}
 	if !a.opMu.TryLock() {
-		return nil, errors.New("正在执行另一项语言操作。")
+		return nil, errors.New("正在执行另一项操作。")
 	}
 	defer a.opMu.Unlock()
 	opts := a.operationOptions(force)
@@ -163,7 +169,7 @@ func (a *App) RestoreLocale(confirmed, force bool) (*core.RestoreResult, error) 
 		return nil, errors.New(confirmationRequired)
 	}
 	if !a.opMu.TryLock() {
-		return nil, errors.New("正在执行另一项语言操作。")
+		return nil, errors.New("正在执行另一项操作。")
 	}
 	defer a.opMu.Unlock()
 	result, err := a.svc.RestoreOfficial(a.operationOptions(force))

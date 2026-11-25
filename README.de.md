@@ -38,6 +38,8 @@ Um zur englischen Originaloberfläche zurückzukehren und die Anzeige zu entfern
 
 Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit „Erneut anwenden“ erneut anwenden.
 
+Über die Schaltfläche neben der Versionsnummer oben im Fenster können Sie auf GitHub nach Updates suchen. Nach Ihrer Bestätigung lädt das Tool die neue Version herunter und startet am bisherigen Speicherort der EXE-Datei neu. Wenden Sie die Einstellungen erneut an, um die neuen Übersetzungen in Antigravity zu übernehmen.
+
 ## PowerShell-Befehle
 
 Öffnen Sie PowerShell im Ordner mit `antigravity-i18n.exe`.

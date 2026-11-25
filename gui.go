@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"antigravity-i18n/internal/core"
+	"antigravity-i18n/internal/selfupdate"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -24,7 +25,8 @@ func runWails(svc *core.Service) {
 		os.Exit(1)
 	}
 
-	app := NewApp(svc, "")
+	app := NewApp(svc, os.Getenv(selfupdate.RestartDirEnv))
+	_ = os.Unsetenv(selfupdate.RestartDirEnv)
 	if err := wails.Run(&options.App{
 		Title:     "Antigravity 多语言工具",
 		Width:     860,
@@ -36,6 +38,7 @@ func runWails(svc *core.Service) {
 		},
 		BackgroundColour: &options.RGBA{R: 250, G: 251, B: 253, A: 255},
 		OnStartup:        app.startup,
+		OnBeforeClose:    app.beforeClose,
 		ErrorFormatter:   formatAppError,
 		Bind: []interface{}{
 			app,

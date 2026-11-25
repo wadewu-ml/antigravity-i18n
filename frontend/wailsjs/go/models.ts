@@ -103,3 +103,24 @@ export namespace core {
 
 }
 
+export namespace selfupdate {
+
+	export class Release {
+	    version: string;
+	    notes: string;
+	    available: boolean;
+
+	    static createFrom(source: any = {}) {
+	        return new Release(source);
+	    }
+
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.version = source["version"];
+	        this.notes = source["notes"];
+	        this.available = source["available"];
+	    }
+	}
+
+}
+

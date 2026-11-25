@@ -5,6 +5,7 @@ go 1.26.3
 require (
 	github.com/dop251/goja v0.0.0-20261014135309-2cb8274eed06
 	github.com/wailsapp/wails/v2 v2.16.0
+	golang.org/x/mod v0.42.0
 	golang.org/x/sys v0.46.0
 )
 

@@ -628,6 +628,16 @@ dialog .btn:focus-visible {
   color: var(--text-sub);
 }
 
+.update-notes {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-y: auto;
+  max-height: 35vh;
+  user-select: text;
+}
+
+#btnCancelDownload { align-self: flex-start; }
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;
