@@ -131,26 +131,26 @@ function agMountEffortSliders(labels) {
             shadow.innerHTML = `<style>
               :host {display:block; flex:none; font:inherit; color:inherit}
               .control {
-                --accent:light-dark(#6043a7,#cebbff); --rim:color-mix(in srgb,var(--accent) 23%,transparent);
+                --accent:light-dark(#55595c,#c6c9cb); --rim:color-mix(in srgb,currentColor 14%,transparent);
                 margin:5px 4px 3px; padding:7px 10px 6px; border-radius:11px; border:1px solid var(--rim);
-                background:linear-gradient(115deg,color-mix(in srgb,#8474ec 10%,transparent),color-mix(in srgb,#c193e4 6%,transparent));
+                background:linear-gradient(115deg,color-mix(in srgb,currentColor 5%,transparent),transparent);
                 box-shadow:inset 0 1px 0 #ffffff20;
               }
-              header {display:flex; align-items:center; justify-content:space-between; gap:10px; line-height:16px}
+              header {display:flex; align-items:baseline; gap:7px; line-height:16px}
               label {font-size:12px; font-weight:550}
-              output {color:var(--accent); font-size:12px; font-weight:650}
+              output {color:var(--accent); font-size:12px; font-weight:500}
               .rail {position:relative; height:29px; direction:ltr; --radius:10px}
               .track {position:absolute; inset:5px 0 4px; border-radius:99px; overflow:hidden;
-                background:linear-gradient(115deg,color-mix(in srgb,#8b77d5 23%,transparent),color-mix(in srgb,#bb9fd8 20%,transparent));
-                box-shadow:inset 0 1px 2px #29153e24,inset 0 0 0 1px var(--rim)}
+                background:color-mix(in srgb,currentColor 10%,transparent);
+                box-shadow:inset 0 1px 2px #0002,inset 0 0 0 1px var(--rim)}
               .travel, .stops {position:absolute; inset:0 var(--radius)}
               .ink {position:absolute; inset:0 calc(100% - var(--fill)) 0 calc(-1 * var(--radius));
                 border-radius:99px 0 0 99px;
                 background:
-                  radial-gradient(ellipse at 62% 0%,#ffedff70,transparent 46%),
+                  radial-gradient(ellipse at 62% 0%,#ffffff50,transparent 46%),
                   linear-gradient(168deg,transparent 40%,#ffffff20 41%,transparent 54%),
-                  linear-gradient(100deg,#6253bc,#9064dd 56%,#bd8ae7);
-                box-shadow:inset 0 1px 1px #fffc,inset 0 -2px 4px #522e8e45}
+                  linear-gradient(100deg,#35383a,#585c5f 56%,#85898c);
+                box-shadow:inset 0 1px 1px #ffffff65,inset 0 -2px 4px #15171938}
               .ink::after {content:"";position:absolute;inset:0;
                 background:radial-gradient(circle at 13px 6px,#fffc .65px,transparent 1px) 0 0/41px 100%,
                   radial-gradient(circle at 5px 14px,#fff9 .75px,transparent 1.3px) 0 0/53px 100%}
@@ -159,10 +159,10 @@ function agMountEffortSliders(labels) {
               .stops i::after {content:"";width:3px;height:3px;transform:rotate(45deg);background:var(--accent);opacity:.48}
               .stops i.lit::after {background:#fff;opacity:.85}
               .thumb {position:absolute;top:50%;left:var(--fill);width:18px;height:18px;border-radius:50%;
-                transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 25%,#fff 28%,#f9f5ff 62%,#e4d9f8);
-                box-shadow:0 0 0 1px #634b9233,0 1px 3px #321b5a55,0 0 7px #d5b6ff99}
-              .thumb::after {content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid #ac91ce5c;
-                background:linear-gradient(145deg,#fbf8ff,#e3d5f6)}
+                transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 25%,#fff 28%,#f6f7f7 62%,#dce0e2);
+                box-shadow:0 0 0 1px #383c402c,0 1px 3px #191b1e55,0 0 6px #ffffff38}
+              .thumb::after {content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid #7c828638;
+                background:linear-gradient(145deg,#fafbfb,#dce0e1)}
               .thumb {transition:left 150ms cubic-bezier(.18,.85,.3,1)}
               .ink {transition:right 150ms cubic-bezier(.18,.85,.3,1)}
               :host([data-dragging]) .thumb,:host([data-dragging]) .ink {transition:none}
