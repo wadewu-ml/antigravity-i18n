@@ -182,7 +182,7 @@ function agMountEffortSliders(labels) {
               }
               :host([data-dragging]) .handle,:host([data-dragging]) .fill {transition:none}
               input {position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; touch-action:none}
-              .rail:has(input:focus-visible) .track {outline:1px solid currentColor; outline-offset:2px}
+              .rail:has(input:focus-visible:not([data-pointer-focus])) .handle {outline:2px solid currentColor; outline-offset:2px}
               @media(prefers-reduced-motion:reduce){.fill,.handle,.fill::after,.marks {transition:none}}
               @media(forced-colors:active){input {opacity:1} .track {display:none} :host output {color:CanvasText}}
             </style><div class="control"><header><label for="effort"></label><output for="effort"></output></header>
@@ -196,9 +196,11 @@ function agMountEffortSliders(labels) {
                 host.addEventListener(name, event => event.stopPropagation());
             }
             slider.addEventListener('keydown', event => {
+                delete slider.dataset.pointerFocus;
                 if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End','PageUp','PageDown'].includes(event.key))
                     event.stopPropagation();
             });
+            slider.addEventListener('blur', () => { delete slider.dataset.pointerFocus; });
             slider.addEventListener('input', () => { if (state) preview(); });
             slider.addEventListener('change', commit);
             slider.addEventListener('pointerdown', event => {
@@ -208,6 +210,7 @@ function agMountEffortSliders(labels) {
                 // Keep the native range's discrete keyboard/accessibility steps.
                 // Pointer travel is continuous and commits only on release.
                 event.preventDefault();
+                slider.dataset.pointerFocus = '';
                 slider.focus({preventScroll:true});
                 slider.setPointerCapture(event.pointerId);
                 drag = {id:event.pointerId, left:bounds.left, width:bounds.width};

@@ -47,6 +47,9 @@ verify(async () => {
     const host = usage.parentElement.previousElementSibling;
     check('slider is above usage',host?.hasAttribute('data-ag-effort-slider'),true);
     const input = host.shadowRoot.querySelector('input');
+    input.focus();
+    check('focus never outlines the full track',getComputedStyle(host.shadowRoot.querySelector('.track')).outlineStyle,'none');
+    check('keyboard focus marks the handle',getComputedStyle(host.shadowRoot.querySelector('.handle')).outlineStyle,'solid');
     const aurora = host.shadowRoot.querySelector('.aurora');
     const motionEnabled = matchMedia('(prefers-reduced-motion: no-preference)').matches;
     check('reads actual level count',input.max,'3');
