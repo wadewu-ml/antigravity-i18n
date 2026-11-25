@@ -195,9 +195,9 @@ function agMountEffortSliders(labels) {
               header {display:flex; align-items:baseline; justify-content:center; gap:7px; line-height:17px}
               label {font-size:12px; font-weight:550}
               output {color:color-mix(in srgb,currentColor 70%,transparent); font-size:12px; font-weight:500}
-              .rail {--handle:28px; --inset:calc(var(--handle) / 2 + 2px);
+              .rail {--handle:36px; --inset:calc(var(--handle) / 2);
                 position:relative; width:min(100%,clamp(190px,98%,272px)); height:30px; margin:2px auto 0; direction:ltr}
-              .track {--ink:light-dark(#101011,#b0b0b5); position:absolute; inset:5px 0; border-radius:99px; background:light-dark(#d9d9db,#424245)}
+              .track {--ink:light-dark(#101011,#b0b0b5); position:absolute; inset:3px 0; border-radius:99px; background:light-dark(#d9d9db,#424245)}
               .travel {position:absolute; inset:0 var(--inset); pointer-events:none}
               .fill {position:absolute; inset:0 calc(100% - var(--position) - var(--inset)) 0 calc(-1 * var(--inset));
                 border-radius:99px; overflow:hidden; background:var(--ink); transition:right var(--travel-time,140ms) ease-out}
@@ -220,9 +220,10 @@ function agMountEffortSliders(labels) {
                 radial-gradient(circle at 23px 52%,#fff6 .7px,transparent 1.1px) 0 0 / 47px 100%}
               :host([data-maximum]) output {color:light-dark(#7642d1,#be9aff)}
               .handle {position:absolute; z-index:1; pointer-events:auto; cursor:grab; touch-action:none; left:var(--position); top:2px; bottom:2px; width:var(--handle);
-                translate:-50% 0; border-radius:99px; display:grid; place-content:center; gap:2px;
-                background:#fff; box-shadow:0 0 0 1px #00000012,0 1px 3px #0003; transition:left var(--travel-time,140ms) ease-out}
-              .handle::before,.handle::after {content:""; width:10px; height:1.5px; border-radius:2px; background:#bdbdc2}
+                translate:-50% 0; border-radius:99px; display:grid; place-content:center; gap:3px;
+                background:#fff; color:#ceced1; box-shadow:0 1px 3px #0003; transition:left var(--travel-time,140ms) ease-out}
+              .handle::before,.handle::after {content:""; width:16px; height:2px; border-radius:1px; background:currentColor}
+              :host([data-dragging]) .handle {color:#a8a8ae}
               @media(prefers-reduced-motion:no-preference){
                 :host([data-receding]) .aurora {transition:mask-position 360ms ease-out}
                 :host([data-maximum]) .aurora::before {animation:flow 3.8s ease-in-out infinite alternate}
