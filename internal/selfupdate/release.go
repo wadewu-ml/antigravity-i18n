@@ -11,6 +11,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -33,10 +34,39 @@ var client = &http.Client{CheckRedirect: func(req *http.Request, via []*http.Req
 
 var errRateLimited = errors.New("GitHub 暂时限制了更新请求，请稍后重试，或打开发布页手动下载。")
 
+// RateLimitError carries the time at which GitHub allows another check.
+type RateLimitError struct {
+	RetryAt time.Time
+}
+
+func (e *RateLimitError) Error() string { return errRateLimited.Error() }
+func (e *RateLimitError) Unwrap() error { return errRateLimited }
+
+func rateLimitDeadline(header http.Header, now time.Time) time.Time {
+	var until time.Time
+	if value := header.Get("Retry-After"); value != "" {
+		if seconds, err := strconv.ParseUint(value, 10, 31); err == nil {
+			until = now.Add(time.Duration(seconds) * time.Second)
+		} else if date, err := http.ParseTime(value); err == nil {
+			until = date
+		}
+	}
+	if header.Get("X-RateLimit-Remaining") == "0" {
+		if seconds, err := strconv.ParseInt(header.Get("X-RateLimit-Reset"), 10, 64); err == nil && time.Unix(seconds, 0).After(until) {
+			until = time.Unix(seconds, 0)
+		}
+	}
+	if !until.After(now) {
+		return now.Add(time.Hour)
+	}
+	return until
+}
+
 type Release struct {
 	Version   string `json:"version"`
 	Notes     string `json:"notes"`
 	Available bool   `json:"available"`
+	RetryAt   int64  `json:"retryAt,omitempty"`
 	size      int64
 	digest    string
 	hasSums   bool
@@ -54,8 +84,8 @@ func request(ctx context.Context, method, url string) (*http.Response, error) {
 	}
 	if res.StatusCode != http.StatusOK {
 		res.Body.Close()
-		if res.StatusCode == http.StatusTooManyRequests || (res.StatusCode == http.StatusForbidden && res.Header.Get("X-RateLimit-Remaining") == "0") {
-			return nil, errRateLimited
+		if res.StatusCode == http.StatusTooManyRequests || (res.StatusCode == http.StatusForbidden && (res.Header.Get("X-RateLimit-Remaining") == "0" || res.Header.Get("Retry-After") != "")) {
+			return nil, &RateLimitError{RetryAt: rateLimitDeadline(res.Header, time.Now())}
 		}
 		return nil, fmt.Errorf("更新请求失败（HTTP %d）", res.StatusCode)
 	}
@@ -90,20 +120,21 @@ func Check(ctx context.Context, current string) (*Release, error) {
 		return &Release{Version: tag}, nil
 	}
 	body, err := get(ctx, tagAPI+tag)
-	if errors.Is(err, errRateLimited) {
+	var limited *RateLimitError
+	if errors.As(err, &limited) {
 		// Official releases publish a checksum alongside the executable.
-		r := &Release{Version: tag, Available: true, Notes: "完整更新说明可在 GitHub 发布页查看。"}
+		r := &Release{Version: tag, Available: true, RetryAt: limited.RetryAt.UnixMilli(), Notes: "完整更新说明可在 GitHub 发布页查看。"}
 		hash, err := r.checksum(ctx)
 		if err != nil {
-			return nil, err
+			return nil, errors.Join(err, limited)
 		}
 		asset, err := request(ctx, http.MethodHead, r.assetURL(exeAsset))
 		if err != nil {
-			return nil, err
+			return nil, errors.Join(err, limited)
 		}
 		asset.Body.Close()
 		if asset.ContentLength <= 0 {
-			return nil, errors.New("无法确认更新程序的文件大小。")
+			return nil, errors.Join(errors.New("无法确认更新程序的文件大小。"), limited)
 		}
 		r.size, r.digest = asset.ContentLength, "sha256:"+hash
 		return r, nil

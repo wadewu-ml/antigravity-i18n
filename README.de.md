@@ -47,7 +47,7 @@ Um zur englischen Originaloberfläche zurückzukehren und Anzeige sowie Regler z
 
 Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit „Erneut anwenden“ erneut anwenden.
 
-Öffnen Sie oben rechts im Fenster das Menü und klicken Sie auf die Updatesuche (检查更新), um auf GitHub nach Updates zu suchen. Nach Ihrer Bestätigung lädt das Tool die neue Version herunter und startet am bisherigen Speicherort der EXE-Datei neu. Wenden Sie die Einstellungen erneut an, um die neuen Übersetzungen in Antigravity zu übernehmen.
+Beim Start sucht das Tool nach Updates, wenn die letzte erfolgreiche Prüfung mindestens 24 Stunden zurückliegt. Ein blauer Punkt am Menü oben rechts weist auf eine neue Version hin. Dort können Sie die Versionshinweise lesen. Die automatische Suche lässt sich unter „Info“ (关于) ausschalten. Die manuelle Updatesuche (检查更新) bleibt verfügbar. Nach Ihrer Bestätigung lädt das Tool die neue Version herunter und startet am bisherigen Speicherort der EXE-Datei neu. Wenden Sie die Einstellungen erneut an, um die neuen Übersetzungen in Antigravity zu übernehmen.
 
 ## PowerShell-Befehle
 

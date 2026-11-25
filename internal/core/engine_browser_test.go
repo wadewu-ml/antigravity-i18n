@@ -148,11 +148,19 @@ func TestStatusSelectionInBrowser(t *testing.T) {
 	runSetupBrowserChecks(t, "testdata/status-selection.js")
 }
 
-func runSetupBrowserChecks(t *testing.T, script string) {
+func TestAutoUpdateInBrowser(t *testing.T) {
+	for _, scenario := range []string{"available", "cached", "disabled", "offline", "limited", "upgraded"} {
+		t.Run(scenario, func(t *testing.T) {
+			runSetupBrowserChecks(t, "testdata/auto-update.js", "const scenario = '"+scenario+"';")
+		})
+	}
+}
+
+func runSetupBrowserChecks(t *testing.T, script string, setup ...string) {
 	t.Helper()
 	html := readTestFile(t, "../../frontend/dist/index.html")
 	app := readTestFile(t, "../../frontend/dist/app.js")
-	checks := readTestFile(t, script)
+	checks := strings.Join(setup, "\n") + "\n" + readTestFile(t, script)
 	scripts := "<script>" + checks + "</script><script>" + app + "</script>"
 	runBrowserChecks(t, strings.Replace(html, `<script src="app.js"></script>`, scripts, 1))
 }

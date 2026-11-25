@@ -10,14 +10,27 @@ import (
 	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
-func (a *App) CheckForUpdate() (*selfupdate.Release, error) {
-	if !a.opMu.TryLock() {
-		return nil, errors.New("正在执行另一项操作。")
-	}
-	defer a.opMu.Unlock()
+type UpdateCheckResult struct {
+	Release *selfupdate.Release `json:"release,omitempty"`
+	Error   string              `json:"error,omitempty"`
+	RetryAt int64               `json:"retryAt,omitempty"`
+}
+
+func (a *App) CheckForUpdate() UpdateCheckResult {
+	// Checking is read-only. Apply and Restore must stay available during network I/O.
 	release, err := selfupdate.Check(a.ctx, core.Version)
+	if err != nil {
+		result := UpdateCheckResult{Error: err.Error()}
+		var limited *selfupdate.RateLimitError
+		if errors.As(err, &limited) {
+			result.RetryAt = limited.RetryAt.UnixMilli()
+		}
+		return result
+	}
+	a.mu.Lock()
 	a.offered = release
-	return release, err
+	a.mu.Unlock()
+	return UpdateCheckResult{Release: release}
 }
 
 func (a *App) OpenReleases() {
@@ -28,7 +41,10 @@ func (a *App) InstallUpdate(version string) error {
 	if !a.opMu.TryLock() {
 		return errors.New("正在执行另一项操作。")
 	}
-	if a.offered == nil || !a.offered.Available || a.offered.Version != version {
+	a.mu.Lock()
+	offered := a.offered
+	a.mu.Unlock()
+	if offered == nil || !offered.Available || offered.Version != version {
 		a.opMu.Unlock()
 		return errors.New("请先检查并确认更新版本。")
 	}
@@ -38,7 +54,7 @@ func (a *App) InstallUpdate(version string) error {
 	a.installing, a.cancelDownload = true, cancel
 	a.mu.Unlock()
 
-	err := a.offered.Install(ctx, core.Version, a.currentDir(), a.progress, func() error {
+	err := offered.Install(ctx, core.Version, a.currentDir(), a.progress, func() error {
 		a.mu.Lock()
 		defer a.mu.Unlock()
 		if err := ctx.Err(); err != nil {

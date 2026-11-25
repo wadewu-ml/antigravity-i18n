@@ -47,7 +47,7 @@ Pour retrouver l’interface anglaise d’origine et retirer l’indicateur ains
 
 Si la traduction ou l’indicateur disparaît après une mise à jour d’Antigravity, vérifiez la version prise en charge en haut de cette page, puis sélectionnez et appliquez à nouveau vos réglages. Pour réappliquer les réglages déjà actifs, cliquez sur « Réappliquer ».
 
-Pour mettre à jour l’outil, ouvrez le menu en haut à droite de la fenêtre et cliquez sur la recherche de mises à jour (检查更新). L’outil consulte alors GitHub. Confirmez le téléchargement pour relancer la nouvelle version depuis le même fichier EXE. Réappliquez vos réglages pour utiliser les nouvelles traductions dans Antigravity.
+Au démarrage, l’outil recherche les mises à jour si la dernière vérification réussie remonte à au moins 24 heures. Un point bleu sur le menu en haut à droite signale une nouvelle version. Ouvrez le menu pour lire les notes de version. Vous pouvez désactiver la vérification automatique dans À propos (关于) et continuer à vérifier manuellement (检查更新). Confirmez le téléchargement pour relancer la nouvelle version depuis le même fichier EXE. Réappliquez vos réglages pour utiliser les nouvelles traductions dans Antigravity.
 
 ## Commandes PowerShell
 

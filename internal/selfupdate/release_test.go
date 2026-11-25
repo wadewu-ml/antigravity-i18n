@@ -11,7 +11,30 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 )
+
+func TestRateLimitDeadline(t *testing.T) {
+	now := time.Unix(1700000000, 0).UTC()
+	for _, tc := range []struct {
+		after, remaining, reset string
+		wait                    time.Duration
+	}{
+		{"120", "", "", 2 * time.Minute},
+		{now.Add(10 * time.Minute).Format(http.TimeFormat), "", "", 10 * time.Minute},
+		{"120", "0", "1700000600", 10 * time.Minute},
+		{"", "0", "1700000300", 5 * time.Minute},
+		{"invalid", "", "", time.Hour},
+	} {
+		headers := make(http.Header)
+		headers.Set("Retry-After", tc.after)
+		headers.Set("X-RateLimit-Remaining", tc.remaining)
+		headers.Set("X-RateLimit-Reset", tc.reset)
+		if got := rateLimitDeadline(headers, now); !got.Equal(now.Add(tc.wait)) {
+			t.Errorf("%v: got %s, want %s", headers, got, now.Add(tc.wait))
+		}
+	}
+}
 
 func TestReleaseSelection(t *testing.T) {
 	const data = `{"tag_name":"v4.0.10","assets":[{"name":"antigravity-i18n.exe","size":16},{"name":"SHA256SUMS.txt","size":87}]}`

@@ -53,6 +53,12 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
   width: 36px; height: 36px; border-radius: 50%;
   color: var(--secondary); cursor: pointer; list-style: none;
 }
+.more-actions.has-update summary::after {
+  content: ""; position: absolute; top: 6px; right: 4px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  pointer-events: none;
+}
+.auto-update-setting { margin-top: 12px; border-top: 1px solid var(--line); }
 .more-actions summary::-webkit-details-marker { display: none; }
 .more-actions summary:hover, .more-actions[open] summary { background: var(--fill); color: var(--ink); }
 .more-actions summary span {

@@ -47,7 +47,7 @@ Para recuperar la interfaz original en inglés y quitar el indicador y el contro
 
 Si la traducción o el indicador desaparecen tras actualizar Antigravity, consulta la versión compatible al principio de esta página y vuelve a seleccionar y aplicar los ajustes. Para volver a aplicar los ajustes que ya están activos, pulsa «Volver a aplicar».
 
-Para actualizar la herramienta, abre el menú en la esquina superior derecha de la ventana y pulsa buscar actualizaciones (检查更新). Al pulsarlo se consulta GitHub. Confirma la descarga y la herramienta se volverá a abrir desde la misma ruta del EXE. Vuelve a aplicar los ajustes para usar las nuevas traducciones en Antigravity.
+Al abrirse, la herramienta busca actualizaciones si han pasado 24 horas desde la última comprobación correcta. Un punto azul en el menú superior derecho indica que hay una versión nueva. Abre el menú para leer las novedades. Puedes desactivar la búsqueda automática en Acerca de (关于) y seguir buscando actualizaciones manualmente (检查更新). Confirma la descarga y la herramienta se volverá a abrir desde la misma ruta del EXE. Vuelve a aplicar los ajustes para usar las nuevas traducciones en Antigravity.
 
 ## Comandos de PowerShell
 

@@ -21,6 +21,12 @@
   var elCancelDownload = document.getElementById('btnCancelDownload');
   var elReleaseFallback = document.getElementById('btnReleaseFallback');
   var offeredVersion = '';
+  var elAutoCheck = document.getElementById('autoCheckUpdates');
+  var checkInFlight = null;
+  var latestRelease = null;
+  var hour = 60 * 60 * 1000;
+  var updateCache = {};
+  var toolVersion = '';
   var elAppVersion = document.getElementById('appVersion');
   var elAppPathDisplay = document.getElementById('appPathDisplay');
   var elBtnChangePath = document.getElementById('btnChangePath');
@@ -458,13 +464,94 @@
     elReleaseFallback.classList.remove('hidden');
   }
 
+  function renderUpdateNotice() {
+    var version = elAutoCheck.checked && toolVersion && updateCache.current === toolVersion && updateCache.available;
+    var label = version ? '发现新版本 ' + version : '检查更新';
+    elCheckUpdate.textContent = label;
+    elMoreActions.classList.toggle('has-update', Boolean(version));
+    var summary = elMoreActions.querySelector('summary');
+    summary.setAttribute('aria-label', version ? '更多操作，' + label : '更多操作');
+    summary.title = summary.getAttribute('aria-label');
+  }
+
+  function saveUpdateCache() {
+    try {
+      localStorage.setItem('updateCheck', JSON.stringify(updateCache));
+    } catch (err) {
+      appendLog('[更新] 无法保存检查时间：' + errorText(err));
+    }
+  }
+
+  function queryUpdate() {
+    if (checkInFlight) return checkInFlight;
+    if (Date.now() < updateCache.retryAt) {
+      return Promise.reject(new Error('GitHub 暂时限制了更新请求，请在 ' +
+        new Date(updateCache.retryAt).toLocaleTimeString() + ' 后重试。'));
+    }
+    // Retain the last known version if the window closes or the network drops.
+    updateCache.nextCheck = Date.now() + hour;
+    saveUpdateCache();
+    checkInFlight = Promise.resolve().then(function () {
+      return backend().CheckForUpdate();
+    }).then(function (result) {
+      if (result.error) {
+        updateCache.retryAt = result.retryAt || 0;
+        throw new Error(result.error);
+      }
+      latestRelease = result.release;
+      updateCache = {
+        current: toolVersion,
+        available: latestRelease.available ? latestRelease.version : '',
+        nextCheck: Date.now() + 24 * hour,
+        retryAt: latestRelease.retryAt || 0
+      };
+      return latestRelease;
+    }).catch(function (err) {
+      updateCache.nextCheck = Math.max(updateCache.retryAt || 0, Date.now() + hour);
+      throw err;
+    }).finally(function () {
+      checkInFlight = null;
+      saveUpdateCache();
+      renderUpdateNotice();
+    });
+    return checkInFlight;
+  }
+
+  function checkOnStartup() {
+    renderUpdateNotice();
+    if (!toolVersion || !elAutoCheck.checked || Date.now() < updateCache.retryAt ||
+        Date.now() < updateCache.nextCheck) return;
+    queryUpdate().catch(function (err) {
+      appendLog('[更新] ' + errorText(err));
+    });
+  }
+
+  try {
+    elAutoCheck.checked = localStorage.getItem('autoCheckUpdates') !== 'off';
+    var saved = JSON.parse(localStorage.getItem('updateCheck'));
+    if (saved && typeof saved === 'object') updateCache = saved;
+  } catch (err) {
+    appendLog('[更新] 无法读取更新设置：' + errorText(err));
+  }
+  elAutoCheck.addEventListener('change', function () {
+    try {
+      localStorage.setItem('autoCheckUpdates', elAutoCheck.checked ? 'on' : 'off');
+    } catch (err) {
+      elAutoCheck.checked = !elAutoCheck.checked;
+      showMessage('保存失败', errorText(err));
+      return;
+    }
+    checkOnStartup();
+  });
+
   elCheckUpdate.addEventListener('click', async function () {
     var app = backend();
     if (!app || isOperating) return;
     elUpdateStatus.textContent = '';
     setOperatingState(true, '正在检查更新', '正在查询 GitHub 发布记录…');
     try {
-      var release = await app.CheckForUpdate();
+      var release = elMoreActions.classList.contains('has-update') && latestRelease && latestRelease.available
+        ? latestRelease : await queryUpdate();
       if (!release.available) {
         var currentVersion = elAppVersionBadge.textContent.trim();
         showMessage('已是最新版本', currentVersion ? '当前版本为 ' + currentVersion + '。' : '当前工具已是最新版本。');
@@ -527,7 +614,9 @@
         app.GetVersion().then(function (v) {
           if (v) {
             elAppVersionBadge.textContent = 'v' + v;
+            toolVersion = v;
             app.UpdateWindowReady();
+            checkOnStartup();
           }
         }).catch(function () {});
       }

@@ -47,7 +47,7 @@ To return to the original English interface and remove the indicator and effort 
 
 If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click Reapply (重新应用).
 
-To update the tool, open the menu at the top right of the window and click Check for updates (检查更新). It checks GitHub when you click. Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
+On startup, the tool checks GitHub for updates once every 24 hours. A blue dot on the top-right menu means a new version is available. Open the menu to see the version and release notes. You can turn off automatic checks in About (关于) and still check manually (检查更新). Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
 
 ## PowerShell commands
 
