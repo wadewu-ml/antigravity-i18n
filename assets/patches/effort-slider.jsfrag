@@ -86,6 +86,7 @@ function agMountEffortSliders(labels) {
         if (panel[installed]) return;
         panel[installed] = true;
         let host, slider, value, scale, state, drag;
+        let previousReveal = 0;
         function preview(fraction = slider.valueAsNumber / (state.levels.length - 1)) {
             const index = slider.valueAsNumber;
             value.textContent = state.levels[index].label;
@@ -95,6 +96,10 @@ function agMountEffortSliders(labels) {
             // A click or keyboard step covers the same distance via the CSS transition.
             const last = state.levels.length - 1;
             const reveal = Math.min(1, Math.max(0, 1 - (1 - fraction) * last));
+            if (reveal !== previousReveal) {
+                host.toggleAttribute('data-receding', reveal < previousReveal);
+                previousReveal = reveal;
+            }
             host.style.setProperty('--wipe', (-100 * reveal) + '%');
             host.style.setProperty('--dots-opacity', String(1 - reveal));
             host.toggleAttribute('data-maximum', index === state.levels.length - 1);
@@ -169,6 +174,7 @@ function agMountEffortSliders(labels) {
                 background:#fff; box-shadow:0 0 0 1px #00000012,0 1px 3px #0003; transition:left 140ms ease-out}
               .handle::before,.handle::after {content:""; width:12px; height:2px; border-radius:2px; background:#c9c9cb}
               @media(prefers-reduced-motion:no-preference){
+                :host([data-receding]) .fill::after {transition:transform 360ms ease-out}
                 :host([data-maximum]) .aurora::before {animation:flow 3.8s ease-in-out infinite alternate}
                 :host([data-maximum]) .aurora::after {animation:drift 4s linear infinite}
                 @keyframes flow {from {background-position:0% 20%} to {background-position:100% 80%}}

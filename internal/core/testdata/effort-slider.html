@@ -65,10 +65,14 @@ verify(async () => {
     check('commit uses original effort key',calls.join(','),'xhigh');
     await settle();
     check('committing maximum keeps the track lit',host.hasAttribute('data-maximum'),true);
+    const wipeDuration = () => parseFloat(getComputedStyle(aurora.parentElement,'::after').transitionDuration);
+    const entryDuration = wipeDuration();
     check('maximum moves the light when motion is enabled',getComputedStyle(aurora,'::before').animationName,motionEnabled ? 'flow' : 'none');
     check('maximum moves the particles when motion is enabled',getComputedStyle(aurora,'::after').animationName,motionEnabled ? 'drift' : 'none');
     input.value='0'; input.dispatchEvent(new Event('change')); await settle();
     check('leaving maximum clears its accent',host.hasAttribute('data-maximum'),false);
+    check('purple recedes faster than it enters, respecting reduced motion',
+        motionEnabled ? wipeDuration() < entryDuration : wipeDuration() === 0 && entryDuration === 0,true);
     check('particles stop below maximum',getComputedStyle(aurora,'::after').animationName,'none');
     check('two changes in the same menu',calls.join(','),'xhigh,low');
     check('slider did not invoke select-and-dismiss',dismissals,0);
