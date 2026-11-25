@@ -4,7 +4,7 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 [Windows x64 다운로드](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [릴리스](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-**Antigravity App 2.35.0**에서 호환성을 확인했습니다.
+**Antigravity App 2.35.1**에서 호환성을 확인했습니다.
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · **한국어** · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 

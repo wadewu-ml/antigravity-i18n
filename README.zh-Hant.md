@@ -4,7 +4,7 @@
 
 [下載 Windows x64 版](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [版本記錄](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-適用於 **Antigravity App 2.35.0**。
+適用於 **Antigravity App 2.35.1**。
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · **繁體中文** · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
