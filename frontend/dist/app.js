@@ -438,7 +438,8 @@
     try {
       var release = await app.CheckForUpdate();
       if (!release.available) {
-        elUpdateStatus.textContent = '已是最新版本';
+        var currentVersion = elAppVersionBadge.textContent.trim();
+        showMessage('已是最新版本', currentVersion ? '当前版本为 ' + currentVersion + '。' : '当前工具已是最新版本。');
         return;
       }
       offeredVersion = release.version;

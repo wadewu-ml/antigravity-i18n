@@ -19,7 +19,7 @@ import (
 
 const (
 	Repository = "https://github.com/wadewu-ml/antigravity-i18n"
-	latestAPI  = "https://api.github.com/repos/wadewu-ml/antigravity-i18n/releases/latest"
+	tagAPI     = "https://api.github.com/repos/wadewu-ml/antigravity-i18n/releases/tags/"
 	exeAsset   = "antigravity-i18n.exe"
 	sumsAsset  = "SHA256SUMS.txt"
 )
@@ -31,6 +31,8 @@ var client = &http.Client{CheckRedirect: func(req *http.Request, via []*http.Req
 	return nil
 }}
 
+var errRateLimited = errors.New("GitHub 暂时限制了更新请求，请稍后重试，或打开发布页手动下载。")
+
 type Release struct {
 	Version   string `json:"version"`
 	Notes     string `json:"notes"`
@@ -40,8 +42,8 @@ type Release struct {
 	hasSums   bool
 }
 
-func get(ctx context.Context, url string) (io.ReadCloser, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+func request(ctx context.Context, method, url string) (*http.Response, error) {
+	req, err := http.NewRequestWithContext(ctx, method, url, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -53,9 +55,17 @@ func get(ctx context.Context, url string) (io.ReadCloser, error) {
 	if res.StatusCode != http.StatusOK {
 		res.Body.Close()
 		if res.StatusCode == http.StatusTooManyRequests || (res.StatusCode == http.StatusForbidden && res.Header.Get("X-RateLimit-Remaining") == "0") {
-			return nil, errors.New("GitHub 暂时限制了更新请求，请稍后重试，或打开发布页手动下载。")
+			return nil, errRateLimited
 		}
 		return nil, fmt.Errorf("更新请求失败（HTTP %d）", res.StatusCode)
+	}
+	return res, nil
+}
+
+func get(ctx context.Context, url string) (io.ReadCloser, error) {
+	res, err := request(ctx, http.MethodGet, url)
+	if err != nil {
+		return nil, err
 	}
 	return res.Body, nil
 }
@@ -65,15 +75,47 @@ func versionTag(version string) string { return "v" + strings.TrimPrefix(version
 func Check(ctx context.Context, current string) (*Release, error) {
 	ctx, cancel := context.WithTimeout(ctx, 20*time.Second)
 	defer cancel()
-	body, err := get(ctx, latestAPI)
+	// GitHub's public latest-release link resolves to the stable tag without
+	// consuming an anonymous REST request.
+	page, err := request(ctx, http.MethodHead, Repository+"/releases/latest")
+	if err != nil {
+		return nil, err
+	}
+	page.Body.Close()
+	tag, ok := strings.CutPrefix(page.Request.URL.String(), Repository+"/releases/tag/")
+	if !ok || !semver.IsValid(tag) || semver.Prerelease(tag) != "" || !semver.IsValid(versionTag(current)) {
+		return nil, errors.New("无法比较当前工具与正式发布的版本号。")
+	}
+	if semver.Compare(tag, versionTag(current)) <= 0 {
+		return &Release{Version: tag}, nil
+	}
+	body, err := get(ctx, tagAPI+tag)
+	if errors.Is(err, errRateLimited) {
+		// Official releases publish a checksum alongside the executable.
+		r := &Release{Version: tag, Available: true, Notes: "完整更新说明可在 GitHub 发布页查看。"}
+		hash, err := r.checksum(ctx)
+		if err != nil {
+			return nil, err
+		}
+		asset, err := request(ctx, http.MethodHead, r.assetURL(exeAsset))
+		if err != nil {
+			return nil, err
+		}
+		asset.Body.Close()
+		if asset.ContentLength <= 0 {
+			return nil, errors.New("无法确认更新程序的文件大小。")
+		}
+		r.size, r.digest = asset.ContentLength, "sha256:"+hash
+		return r, nil
+	}
 	if err != nil {
 		return nil, err
 	}
 	defer body.Close()
-	return readRelease(body, current)
+	return readRelease(body, tag)
 }
 
-func readRelease(body io.Reader, current string) (*Release, error) {
+func readRelease(body io.Reader, tag string) (*Release, error) {
 	var release struct {
 		Tag               string `json:"tag_name"`
 		Body              string
@@ -86,13 +128,10 @@ func readRelease(body io.Reader, current string) (*Release, error) {
 	if err := json.NewDecoder(io.LimitReader(body, 1<<20)).Decode(&release); err != nil {
 		return nil, err
 	}
-	if release.Draft || release.Prerelease || !semver.IsValid(release.Tag) || semver.Prerelease(release.Tag) != "" || !semver.IsValid(versionTag(current)) {
-		return nil, errors.New("无法比较当前工具与正式发布的版本号。")
+	if release.Draft || release.Prerelease || release.Tag != tag {
+		return nil, errors.New("获取的发布信息与正式版本不符。")
 	}
-	r := &Release{Version: release.Tag, Notes: release.Body, Available: semver.Compare(release.Tag, versionTag(current)) > 0}
-	if !r.Available {
-		return r, nil
-	}
+	r := &Release{Version: tag, Notes: release.Body, Available: true}
 	for _, asset := range release.Assets {
 		switch asset.Name {
 		case exeAsset:

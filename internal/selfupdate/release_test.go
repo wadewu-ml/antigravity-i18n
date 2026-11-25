@@ -15,17 +15,12 @@ import (
 
 func TestReleaseSelection(t *testing.T) {
 	const data = `{"tag_name":"v4.0.10","assets":[{"name":"antigravity-i18n.exe","size":16},{"name":"SHA256SUMS.txt","size":87}]}`
-	for _, tc := range []struct {
-		current   string
-		available bool
-	}{{"4.0.9", true}, {"4.0.10", false}, {"4.1.0", false}} {
-		r, err := readRelease(strings.NewReader(data), tc.current)
-		if err != nil || r.Available != tc.available {
-			t.Fatalf("version %s: %+v, %v", tc.current, r, err)
-		}
+	r, err := readRelease(strings.NewReader(data), "v4.0.10")
+	if err != nil || !r.Available || r.size != 16 {
+		t.Fatalf("release metadata: %+v, %v", r, err)
 	}
 	for _, invalid := range []string{strings.Replace(data, "v4.0.10", "v4.0.10-beta.1", 1), strings.Replace(data, "SHA256SUMS.txt", "other", 1)} {
-		if _, err := readRelease(strings.NewReader(invalid), "4.0.9"); err == nil {
+		if _, err := readRelease(strings.NewReader(invalid), "v4.0.10"); err == nil {
 			t.Fatal("accepted an ineligible release")
 		}
 	}
@@ -34,6 +29,78 @@ func TestReleaseSelection(t *testing.T) {
 type transportFunc func(*http.Request) (*http.Response, error)
 
 func (f transportFunc) RoundTrip(req *http.Request) (*http.Response, error) { return f(req) }
+
+func TestCheckPublicRelease(t *testing.T) {
+	const tag = "v4.0.10"
+	const payload = "GUI package"
+	hash := fmt.Sprintf("%x", sha256.Sum256([]byte(payload)))
+	saved := client
+	t.Cleanup(func() { client = saved })
+	for _, tc := range []struct {
+		current, page                       string
+		available, limited, badSum, wantErr bool
+	}{
+		{current: "4.0.10", page: tag},
+		{current: "4.1.0", page: tag},
+		{current: "4.0.9", page: tag, available: true},
+		{current: "4.0.9", page: tag, available: true, limited: true},
+		{current: "4.0.9", page: tag, limited: true, badSum: true, wantErr: true},
+		{current: "4.0.9", page: tag + "-beta.1", wantErr: true},
+	} {
+		apiCalls := 0
+		client = &http.Client{Transport: transportFunc(func(req *http.Request) (*http.Response, error) {
+			res := &http.Response{StatusCode: 200, Request: req, Header: make(http.Header), Body: http.NoBody}
+			switch req.Method + " " + req.URL.String() {
+			case "HEAD " + Repository + "/releases/latest":
+				res.StatusCode = 302
+				res.Header.Set("Location", Repository+"/releases/tag/"+tc.page)
+			case "HEAD " + Repository + "/releases/tag/" + tc.page:
+			case "GET " + tagAPI + tag:
+				apiCalls++
+				if tc.limited {
+					res.StatusCode = 403
+					res.Header.Set("X-RateLimit-Remaining", "0")
+				} else {
+					res.Body = io.NopCloser(strings.NewReader(fmt.Sprintf(`{"tag_name":"%s","body":"Notes","assets":[{"name":"%s","digest":"sha256:%s","size":%d}]}`, tag, exeAsset, hash, len(payload))))
+				}
+			case "GET " + Repository + "/releases/download/" + tag + "/" + sumsAsset:
+				if tc.badSum {
+					res.Body = io.NopCloser(strings.NewReader("invalid checksum"))
+				} else {
+					res.Body = io.NopCloser(strings.NewReader(hash + "  " + exeAsset))
+				}
+			case "HEAD " + Repository + "/releases/download/" + tag + "/" + exeAsset:
+				res.ContentLength = int64(len(payload))
+			case "GET " + Repository + "/releases/download/" + tag + "/" + exeAsset:
+				res.Body = io.NopCloser(strings.NewReader(payload))
+			default:
+				t.Fatalf("unexpected update request: %s %s", req.Method, req.URL)
+			}
+			return res, nil
+		})}
+		r, err := Check(context.Background(), tc.current)
+		if tc.wantErr {
+			if err == nil {
+				t.Fatalf("%+v: accepted invalid release", tc)
+			}
+			continue
+		}
+		if err != nil || r.Available != tc.available || r.Version != tag {
+			t.Fatalf("%+v: got %+v, %v", tc, r, err)
+		}
+		if !tc.available && apiCalls != 0 {
+			t.Fatal("unnecessary API call")
+		}
+		if tc.available {
+			if !tc.limited && r.Notes != "Notes" {
+				t.Fatal("missing release notes")
+			}
+			if err := r.download(context.Background(), filepath.Join(t.TempDir(), exeAsset), func(string, string) {}); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+}
 
 func TestDownloadVerification(t *testing.T) {
 	const payload = "GUI package"
