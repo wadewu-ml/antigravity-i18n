@@ -153,6 +153,7 @@ type LocaleStore struct {
 	patchDir  string
 
 	engineFragment []byte
+	effortSlider   []byte
 	menuFragment   []byte
 	dialogFragment []byte
 }
@@ -163,6 +164,9 @@ func NewLocaleStore(localesFS, patchesFS fs.FS, localeDir, patchDir string) (*Lo
 	var err error
 	if s.engineFragment, err = fs.ReadFile(patchesFS, patchDir+"/engine.jsfrag"); err != nil {
 		return nil, fmt.Errorf("cannot read the translation engine template: %w", err)
+	}
+	if s.effortSlider, err = fs.ReadFile(patchesFS, patchDir+"/effort-slider.jsfrag"); err != nil {
+		return nil, fmt.Errorf("cannot read the effort slider: %w", err)
 	}
 	if s.menuFragment, err = fs.ReadFile(patchesFS, patchDir+"/menu.jsfrag"); err != nil {
 		return nil, fmt.Errorf("cannot read the menu template: %w", err)
@@ -761,7 +765,8 @@ func (s *LocaleStore) buildPreloadFragment(loc *Locale) (string, error) {
 	}
 	// Replace once: the template may legitimately contain the placeholder text
 	// inside its own comments, and replacing all of them would corrupt those.
-	out, n := replaceFirst(string(s.engineFragment), localeDataPlaceholder, string(data))
+	engine := strings.Replace(string(s.engineFragment), "/* EFFORT_SLIDER */", string(s.effortSlider), 1)
+	out, n := replaceFirst(engine, localeDataPlaceholder, string(data))
 	if n == 0 {
 		return "", fmt.Errorf("the translation engine template has no %s", localeDataPlaceholder)
 	}

@@ -106,6 +106,7 @@ func TestTranslationInBrowser(t *testing.T) {
 	store := newTestService(t).store
 	for _, example := range []struct{ code, fixture string }{
 		{DefaultLocale, "testdata/engine.html"},
+		{DefaultLocale, "testdata/effort-slider.html"},
 		{"de", "testdata/engine-repeat.html"},
 	} {
 		t.Run(example.code, func(t *testing.T) {

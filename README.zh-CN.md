@@ -20,6 +20,8 @@
 
 退出提示中的「强制退出并重试」会中断进行中的会话，未保存的编辑可能丢失。
 
+应用语言包后，打开模型选择菜单。当前模型支持直接选择思考强度时，「查看用量」上方会出现滑块，拖动可预览档位，松开即应用。
+
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已选简体中文，并已打开「会话指标」开关"></a>
 
 

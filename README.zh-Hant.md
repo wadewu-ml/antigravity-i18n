@@ -20,6 +20,8 @@
 
 結束提示中的「强制退出并重试」會中斷進行中的工作階段，尚未儲存的變更可能會遺失。
 
+套用語言包後，打開模型選單。若目前的模型可直接選擇思考強度，用量選項上方會顯示滑桿；拖曳可預覽，放開即可套用。
+
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已選取簡體中文，並開啟了會話指標"></a>
 
 

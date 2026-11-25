@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body>
+<div data-testid="model-selector-panel" id="panel">
+  <div><button role="menuitem"><span id="model" data-testid="model-selector-effort-group" data-model-base="Gemini">Gemini</span></button></div>
+  <div><button id="usage" role="menuitem"><span>View Usage</span></button></div>
+</div>
+<script>
+// Matches the selected effort group's menu elements in the 2.35.1 renderer.
+// The native submenu's choices exist before its popup is mounted.
+const el = props => ({props});
+const choices = [['low','Low'],['medium','Medium'],['high','High'],['xhigh','Extra High']];
+const calls = [];
+const nativeGroup = el({
+    value:'medium', onValueChange:id => calls.push(id),
+    children:choices.map(([id,label]) => el({value:id, children:el({'data-testid':'model-selector-effort-option','data-effort':id,children:label})}))
+});
+const trigger = el({selected:true, children:[el({'data-testid':'model-selector-effort-group','data-model-base':'Gemini'})]});
+const group = {memoizedProps:{children:[trigger, el({children:[el({}),nativeGroup]})]}};
+const root = {stateNode:{}};
+root.stateNode.current=root;
+group.return=root;
+model.__reactFiber$test={return:group};
+root.child=group;
+group.child=model.__reactFiber$test;
+</script>
+<!-- ENGINE -->
+<script>
+verify(async () => {
+    await settle();
+    const host = usage.previousElementSibling;
+    check('slider is above usage',host?.hasAttribute('data-ag-effort-slider'),true);
+    const input = host.shadowRoot.querySelector('input');
+    check('reads actual level count',input.max,'3');
+    check('native selected level',input.value,'1');
+    check('localized accessible value',input.getAttribute('aria-valuetext'),'中');
+    input.value='3'; input.dispatchEvent(new Event('input'));
+    check('drag previews without switching',calls.length,0);
+    check('preview shows extra high',input.getAttribute('aria-valuetext'),'极高');
+    input.dispatchEvent(new Event('change'));
+    check('commit uses original effort key',calls.join(','),'xhigh');
+    // Reused host elements can still point into the previous render even
+    // when its return chain reaches the current root.
+    const nextGroup = {memoizedProps:{children:[trigger, el({children:[el({}),el({...nativeGroup.props,value:'high'})]})]}};
+    const nextMarker = {return:nextGroup};
+    nextGroup.child=nextMarker; nextGroup.return=root;
+    group.alternate=nextGroup; model.__reactFiber$test.alternate=nextMarker;
+    root.child=nextGroup;
+    model.className='rerender'; await settle();
+    check('reads the committed React tree',input.value,'2');
+    root.child=group;
+    trigger.props.disabled=true; model.className='locked'; await settle();
+    check('locked groups have no slider',usage.previousElementSibling,null);
+    trigger.props.disabled=false;
+    nativeGroup.props.children.pop(); nativeGroup.props.value='high';
+    model.className='unlocked'; await settle();
+    const newInput=usage.previousElementSibling.shadowRoot.querySelector('input');
+    check('changed model has only its native steps',newInput.max,'2');
+    check('selection follows changed model',newInput.value,'2');
+    trigger.props.selected=false;
+    model.className='inactive'; await settle();
+    check('no slider for an inactive group',usage.previousElementSibling,null);
+});
+</script></body></html>
