@@ -13,6 +13,7 @@ window.go = {main: {App: {
   GetVersion: async () => 'test',
   GetStatus: async () => ({
     AppDir: 'C:/Antigravity', AppVersion: '2.33.0', ...installed,
+    LocaleName: installed.CurrentLanguage === 'zh-CN' ? '简体中文' : 'English',
     HasCleanBackup: true, CleanBackupStatus: 'valid',
   }),
   GetLocales: async () => [
@@ -100,4 +101,18 @@ verify(async () => {
     ['restore', true, false],
     ['restore', true, true],
   ]));
+
+  const picker = byId('localeChips');
+  const pending = byId('pendingLanguage');
+  const current = byId('statusLabel');
+  picker.lastElementChild.click();
+  check('selection previews the change', pending.textContent, '将切换为 简体中文');
+  check('the installed language stays visible', current.textContent, '当前语言：官方英文');
+  picker.firstElementChild.click();
+  check('reselecting the installed language clears the preview', pending.textContent, '');
+  picker.lastElementChild.click();
+  apply.click();
+  await settle();
+  check('successful apply refreshes the installed language', current.textContent, '当前语言：简体中文');
+  check('applied changes no longer show a preview', pending.textContent, '');
 });

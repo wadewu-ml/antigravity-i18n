@@ -30,6 +30,7 @@
   var elProgressStage = document.getElementById('progressStage');
   var elProgressDetail = document.getElementById('progressDetail');
   var elBtnPrimaryAction = document.getElementById('btnPrimaryAction');
+  var elPendingLanguage = document.getElementById('pendingLanguage');
   var elBtnSecondaryAction = document.getElementById('btnSecondaryAction');
   var elBtnRestore = document.getElementById('btnRestore');
   var elLocaleChips = document.getElementById('localeChips');
@@ -146,23 +147,21 @@
     elBtnSecondaryAction.classList.add('hidden');
     elBtnRestore.classList.add('hidden');
 
+    var currentName = st.CurrentLanguage === 'en' ? '官方英文' : (st.LocaleName || st.CurrentLanguage);
+    elStatusLabel.textContent = '当前语言：' + currentName;
     if (isCustomized(st)) {
       elStatusPill.classList.add('success');
-      elStatusLabel.textContent = st.CurrentLanguage === 'en' ? '官方英文' : '已本地化 · ' + st.CurrentLanguage;
-      elStatusDesc.textContent = '当前界面语言为 ' + (st.LocaleName || st.CurrentLanguage) + '。' +
-        (st.SessionMetrics ? '会话指标已开启。' : '');
+      elStatusDesc.textContent = st.SessionMetrics ? '会话指标已开启。' : '';
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
       elBtnRestore.classList.remove('hidden');
     } else if (st.HasCleanBackup) {
       elStatusPill.classList.add('default');
-      elStatusLabel.textContent = '官方英文';
       elStatusDesc.textContent = '干净备份可用。';
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
     } else {
       elStatusPill.classList.add('warning');
-      elStatusLabel.textContent = '官方英文';
       elStatusDesc.textContent = '应用前会自动创建干净备份。';
     }
 
@@ -174,6 +173,9 @@
     }
   }
   function renderPrimaryLabel() {
+    var languageChanged = currentStatus && selectedLocale && currentStatus.CurrentLanguage !== selectedLocale;
+    var pending = languageChanged && locales.find(function (loc) { return loc.code === selectedLocale; });
+    elPendingLanguage.textContent = pending ? '将切换为 ' + pending.name : '';
     elSessionMetrics.disabled = isOperating || !currentStatus;
     elBtnPrimaryAction.title = currentStatus ? '应用后会重启 Antigravity' : '';
     if (!currentStatus) {
@@ -182,7 +184,7 @@
       return;
     }
     var metricsChanged = Boolean(currentStatus.SessionMetrics) !== elSessionMetrics.checked;
-    var hasChanges = currentStatus.CurrentLanguage !== selectedLocale || metricsChanged;
+    var hasChanges = languageChanged || metricsChanged;
     var canReapply = !hasChanges && isCustomized(currentStatus);
     elBtnPrimaryAction.textContent = canReapply ? '重新应用' : '应用更改';
     elBtnPrimaryAction.disabled = isOperating || (!hasChanges && !canReapply);
