@@ -142,7 +142,7 @@ function agMountEffortSliders(labels) {
                 host.toggleAttribute('data-receding', reveal < previousReveal);
                 previousReveal = reveal;
             }
-            host.style.setProperty('--wipe', (-100 * reveal) + '%');
+            host.style.setProperty('--reveal', (100 * reveal) + '%');
             host.style.setProperty('--dots-opacity', String(1 - reveal));
             host.toggleAttribute('data-maximum', index === state.levels.length - 1);
         }
@@ -154,9 +154,17 @@ function agMountEffortSliders(labels) {
             if (slider.hasPointerCapture(id)) slider.releasePointerCapture(id);
         }
         function followPointer(x) {
-            const fraction = Math.min(1, Math.max(0, (x - drag.left) / drag.width));
-            slider.valueAsNumber = Math.round(fraction * (state.levels.length - 1));
-            preview(fraction);
+            const fraction = Math.min(1, Math.max(0, (x - drag.origin) / drag.width));
+            const steps = state.levels.length - 1;
+            const position = fraction * steps;
+            const index = Math.round(position);
+            slider.valueAsNumber = index;
+            // Hold near a detent, then taper the pull to zero halfway to the next.
+            const offset = position - index;
+            const stepWidth = drag.width / steps;
+            const grip = Math.min(12 / stepWidth, 0.18) * Math.cos(Math.PI * offset) ** 2;
+            const travel = Math.sign(offset) * Math.max(0, Math.abs(offset) - grip);
+            preview((index + travel) / steps);
         }
         function commit() {
             if (!state) return;
@@ -184,22 +192,22 @@ function agMountEffortSliders(labels) {
             shadow.innerHTML = `<style>
               :host {display:block; flex:none; font:inherit; color:inherit}
               .control {margin:4px 5px 0; padding:8px 5px 5px; border-top:1px solid color-mix(in srgb,currentColor 12%,transparent)}
-              header {display:flex; align-items:baseline; gap:7px; line-height:17px}
+              header {display:flex; align-items:baseline; justify-content:center; gap:7px; line-height:17px}
               label {font-size:12px; font-weight:550}
               output {color:color-mix(in srgb,currentColor 70%,transparent); font-size:12px; font-weight:500}
-              .rail {--handle:30px; --inset:calc(var(--handle) / 2 + 2px);
-                position:relative; height:30px; margin-top:2px; direction:ltr}
-              .track {--ink:light-dark(#101011,#b0b0b5); position:absolute; inset:5px 0; border-radius:99px; background:light-dark(#e1e1e3,#39393c)}
+              .rail {--handle:28px; --inset:calc(var(--handle) / 2 + 2px);
+                position:relative; width:min(100%,clamp(190px,98%,272px)); height:30px; margin:2px auto 0; direction:ltr}
+              .track {--ink:light-dark(#101011,#b0b0b5); position:absolute; inset:5px 0; border-radius:99px; background:light-dark(#d9d9db,#424245)}
               .travel {position:absolute; inset:0 var(--inset); pointer-events:none}
               .fill {position:absolute; inset:0 calc(100% - var(--position) - var(--inset)) 0 calc(-1 * var(--inset));
-                border-radius:99px; overflow:hidden; background:var(--ink); transition:right 140ms ease-out}
+                border-radius:99px; overflow:hidden; background:var(--ink); transition:right var(--travel-time,140ms) ease-out}
               .aurora {position:absolute; inset:0;
-                background:linear-gradient(105deg,#2847bc,#704dff 38%,#af76ff 65%,#6155fb)}
-              .fill::after {content:"";position:absolute;inset:0 auto 0 0;width:145%;
-                background:linear-gradient(to right,var(--ink) 69%,transparent 100%);
-                transform:translateX(var(--wipe,0%));transition:transform 960ms cubic-bezier(.3,.12,.47,.96)}
+                background:linear-gradient(105deg,#2847bc,#704dff 38%,#af76ff 65%,#6155fb);
+                mask-image:linear-gradient(to right,transparent 42%,#000 58%);
+                mask-size:250% 100%; mask-repeat:no-repeat; mask-position:var(--reveal,0%) center;
+                transition:mask-position 960ms cubic-bezier(.3,.12,.47,.96)}
               .marks {position:absolute;inset:0;opacity:var(--dots-opacity,1);transition:opacity 400ms ease}
-              .marks i {position:absolute;top:50%;translate:-50% -50%;width:3.5px;height:3.5px;border-radius:50%;
+              .marks i {position:absolute;top:50%;translate:-50% -50%;width:3px;height:3px;border-radius:50%;
                 background:light-dark(#87878b,#68686d);opacity:.7}
               .aurora::before,.aurora::after {content:"";position:absolute;inset:0}
               .aurora::before {background:
@@ -211,21 +219,22 @@ function agMountEffortSliders(labels) {
                 radial-gradient(circle at 38px 68%,#fff9 .8px,transparent 1.4px) 0 0 / 77px 100%,
                 radial-gradient(circle at 23px 52%,#fff6 .7px,transparent 1.1px) 0 0 / 47px 100%}
               :host([data-maximum]) output {color:light-dark(#7642d1,#be9aff)}
-              .handle {position:absolute; left:var(--position); top:2px; bottom:2px; width:var(--handle);
+              .handle {position:absolute; z-index:1; pointer-events:auto; cursor:grab; touch-action:none; left:var(--position); top:2px; bottom:2px; width:var(--handle);
                 translate:-50% 0; border-radius:99px; display:grid; place-content:center; gap:2px;
-                background:#fff; box-shadow:0 0 0 1px #00000012,0 1px 3px #0003; transition:left 140ms ease-out}
-              .handle::before,.handle::after {content:""; width:12px; height:2px; border-radius:2px; background:#c9c9cb}
+                background:#fff; box-shadow:0 0 0 1px #00000012,0 1px 3px #0003; transition:left var(--travel-time,140ms) ease-out}
+              .handle::before,.handle::after {content:""; width:10px; height:1.5px; border-radius:2px; background:#bdbdc2}
               @media(prefers-reduced-motion:no-preference){
-                :host([data-receding]) .fill::after {transition:transform 360ms ease-out}
+                :host([data-receding]) .aurora {transition:mask-position 360ms ease-out}
                 :host([data-maximum]) .aurora::before {animation:flow 3.8s ease-in-out infinite alternate}
                 :host([data-maximum]) .aurora::after {animation:drift 4s linear infinite}
                 @keyframes flow {from {background-position:0% 20%} to {background-position:100% 80%}}
                 @keyframes drift {to {background-position:-59px 0,-77px 0,47px 0}}
               }
-              :host([data-dragging]) .handle,:host([data-dragging]) .fill {transition:none}
-              input {position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; touch-action:none}
+              :host([data-dragging]) {--travel-time:85ms}
+              :host([data-dragging]) :is(input,.handle) {cursor:grabbing}
+              input {position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer; touch-action:none}
               .rail:has(input:focus-visible:not([data-pointer-focus])) .handle {outline:2px solid currentColor; outline-offset:2px}
-              @media(prefers-reduced-motion:reduce){.fill,.handle,.fill::after,.marks {transition:none}}
+              @media(prefers-reduced-motion:reduce){.fill,.handle,.aurora,.marks {transition:none}}
               @media(forced-colors:active){input {opacity:1} .track {display:none} :host output {color:CanvasText}}
             </style><div class="control"><header><label for="effort"></label><output for="effort"></output></header>
               <div class="rail"><div class="track" aria-hidden="true"><div class="travel"><div class="fill"><div class="aurora"></div></div><div class="marks"></div><div class="handle"></div></div></div>
@@ -245,7 +254,7 @@ function agMountEffortSliders(labels) {
             slider.addEventListener('blur', () => { delete slider.dataset.pointerFocus; });
             slider.addEventListener('input', () => { if (state) preview(); });
             slider.addEventListener('change', commit);
-            slider.addEventListener('pointerdown', event => {
+            shadow.querySelector('.rail').addEventListener('pointerdown', event => {
                 if (!state || drag || !event.isPrimary || event.button !== 0) return;
                 const bounds = scale.getBoundingClientRect();
                 if (!bounds.width) return;
@@ -255,7 +264,12 @@ function agMountEffortSliders(labels) {
                 slider.dataset.pointerFocus = '';
                 slider.focus({preventScroll:true});
                 slider.setPointerCapture(event.pointerId);
-                drag = {id:event.pointerId, left:bounds.left, width:bounds.width};
+                let origin = bounds.left;
+                if (event.target.matches('.handle')) {
+                    const thumb = event.target.getBoundingClientRect();
+                    origin += event.clientX - (thumb.left + thumb.width / 2);
+                }
+                drag = {id:event.pointerId, origin, width:bounds.width};
                 host.dataset.dragging = '';
                 followPointer(event.clientX);
             });
