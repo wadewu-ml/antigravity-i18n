@@ -1,9 +1,29 @@
 // The desktop picker mounts its effort submenu only on hover. The selected
-// group's React children already describe its native choices and callbacks.
+// group's React children already describe its native choices.
 // Read that group in the renderer world; no Electron API is exposed to the page.
 function agMountEffortSliders(labels) {
     const groupSelector = '[data-testid="model-selector-effort-group"]';
     const panelSelector = '[data-testid="model-selector-panel"]';
+    function modelSelection(path, activeId) {
+        // The picker passes a select-and-dismiss callback down to its submenu.
+        // Its own input props still hold the model setter used by the composer.
+        const context = path.map(node => node.memoizedProps?.value)
+            .find(value => value?.effortIndex instanceof Map && value.selectedModel);
+        if (!context) return null;
+        const owner = path.map(node => node.memoizedProps).find(props =>
+            props?.modelOptions === context.modelOptions && typeof props?.setIsOpen === 'function' &&
+            typeof props.setSelectedModel === 'function' && props.setSelectedModel !== context.setSelectedModel);
+        if (!owner || !owner.open || owner.lockedReason !== undefined) return null;
+        const selected = context.selectedModel;
+        for (const options of context.effortIndex.values()) {
+            const active = options.get(activeId);
+            if (active && (active === selected || (active.modelId && selected.modelId
+                ? active.modelId === selected.modelId : active.label === selected.label))) {
+                return {options, select:owner.setSelectedModel};
+            }
+        }
+        return null;
+    }
     function selection(panel) {
         for (const marker of panel.querySelectorAll(groupSelector)) {
             const key = Object.keys(marker).find(k => k.startsWith('__reactFiber$'));
@@ -46,17 +66,15 @@ function agMountEffortSliders(labels) {
                         typeof label.children !== 'string') return null;
                     if (p.disabled) continue;
                     const id = label['data-effort'];
-                    let pick;
-                    if (typeof radio?.onValueChange === 'function' && p.value === id) {
-                        pick = () => radio.onValueChange(id);
-                    } else if (typeof p.onClick === 'function') {
-                        pick = p.onClick;
-                    } else return null;
-                    levels.push({id, label: labels[label.children] || label.children, pick,
+                    levels.push({id, label: labels[label.children] || label.children,
                         active: radio ? radio.value === id : p.selected});
                 }
                 const index = levels.findIndex(level => level.active);
-                if (index >= 0 && levels.length > 1) return {base: marker.dataset.modelBase, levels, index};
+                if (index >= 0 && levels.length > 1) {
+                    const model = modelSelection(path, levels[index].id);
+                    if (model && levels.every(level => model.options.has(level.id)))
+                        return {base: marker.dataset.modelBase, levels, index, model};
+                }
                 return null;
             }
         }
@@ -72,27 +90,32 @@ function agMountEffortSliders(labels) {
             const i = slider.valueAsNumber;
             value.textContent = state.levels[i].label;
             slider.setAttribute('aria-valuetext', value.textContent);
-            slider.style.setProperty('--fill', (100 * i / (state.levels.length - 1)) + '%');
+            host.style.setProperty('--fill', (100 * i / (state.levels.length - 1)) + '%');
+            host.shadowRoot.querySelectorAll('.scale i').forEach((dot, n) => dot.classList.toggle('filled', n <= i));
         }
         function create() {
             host = document.createElement('div');
             host.dataset.agEffortSlider = '';
             const shadow = host.attachShadow({mode:'open'});
             shadow.innerHTML = `<style>
-              :host {display:block; padding:6px 9px 7px; color:inherit; font:inherit}
-              label {display:flex; justify-content:space-between; align-items:baseline; gap:8px; font-size:13px}
-              output {font-weight:600}
-              .rail {position:relative; margin-top:3px}
-              .ticks {position:absolute; inset:0 8.5px; display:flex; align-items:center; justify-content:space-between; pointer-events:none}
-              .ticks i {width:3px; height:3px; border-radius:50%; background:currentColor; opacity:.4}
-              input {display:block; width:100%; margin:0; height:24px; appearance:none; background:transparent; color:inherit; cursor:pointer}
-              input::-webkit-slider-runnable-track {height:8px; border-radius:8px;
-                background:linear-gradient(to right,currentColor var(--fill),color-mix(in srgb,currentColor 16%,transparent) var(--fill))}
-              input::-webkit-slider-thumb {appearance:none; width:17px; height:17px; margin-top:-4.5px; border:1px solid #8888;
-                border-radius:50%; background:Canvas; box-shadow:0 1px 3px #0004}
-              input:focus-visible {outline:2px solid currentColor; outline-offset:2px; border-radius:5px}
-              @media(forced-colors:active){input {appearance:auto}}
-            </style><label for="effort"><span></span><output></output></label><div class="rail"><input id="effort" type="range" min="0" step="1"><div class="ticks" aria-hidden="true"></div></div>`;
+              :host {display:block; color:inherit; font:inherit}
+              .control {padding:8px 16px 9px; text-align:center}
+              label {display:block; font-size:11px; line-height:15px; opacity:.65}
+              output {display:block; font-size:16px; font-weight:600; line-height:21px}
+              .rail {position:relative; height:28px; margin:4px auto 0; max-width:280px; direction:ltr}
+              .track {position:absolute; inset:4px 0; border-radius:12px; overflow:hidden; background:color-mix(in srgb,currentColor 11%,transparent)}
+              .scale {position:absolute; inset:0 10px; display:flex; align-items:center; justify-content:space-between}
+              .scale::before {content:""; position:absolute; inset:0 auto 0 -10px; width:calc(var(--fill) + 10px); background:currentColor; opacity:.83}
+              .scale i {position:relative; width:0; display:grid; place-content:center}
+              .scale i::before {content:""; width:4px; height:4px; border-radius:50%; background:currentColor; opacity:.27}
+              .scale i.filled::before {background:Canvas; opacity:.55}
+              input {position:absolute; inset:0; width:100%; height:100%; margin:0; appearance:none; background:transparent; cursor:pointer}
+              input::-webkit-slider-runnable-track {height:20px; background:transparent}
+              input::-webkit-slider-thumb {appearance:none; width:20px; height:20px; border:1px solid #0002; border-radius:50%;
+                background:#fff; box-shadow:0 1px 3px #0003}
+              input:focus-visible {outline:2px solid currentColor; outline-offset:2px; border-radius:16px}
+              @media(forced-colors:active){input {appearance:auto} .track {display:none}}
+            </style><div class="control"><label for="effort"><span></span></label><output for="effort"></output><div class="rail"><div class="track" aria-hidden="true"><div class="scale"></div></div><input id="effort" type="range" min="0" step="1"></div></div>`;
             shadow.querySelector('span').textContent = labels['Thinking effort'];
             value = shadow.querySelector('output');
             slider = shadow.querySelector('input');
@@ -111,7 +134,12 @@ function agMountEffortSliders(labels) {
                 const current = selection(panel);
                 if (current && current.base === state.base && current.levels[current.index].id === state.levels[state.index].id &&
                     next.id !== current.levels[current.index].id) {
-                    current.levels.find(level => level.id === next.id)?.pick();
+                    const option = current.model.options.get(next.id);
+                    if (option && !option.disabled && current.levels.some(level => level.id === next.id)) {
+                        current.model.select(option);
+                        // The composer focuses its editor after a model change.
+                        slider.focus({preventScroll:true});
+                    }
                 }
                 state = null;
                 sync();
@@ -133,7 +161,7 @@ function agMountEffortSliders(labels) {
             if (changed) {
                 slider.max = String(state.levels.length - 1);
                 slider.value = String(state.index);
-                host.shadowRoot.querySelector('.ticks').replaceChildren(...state.levels.map(() => document.createElement('i')));
+                host.shadowRoot.querySelector('.scale').replaceChildren(...state.levels.map(() => document.createElement('i')));
                 preview();
             }
         }

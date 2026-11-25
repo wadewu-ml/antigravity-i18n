@@ -9,19 +9,34 @@
 const el = props => ({props});
 const choices = [['low','Low'],['medium','Medium'],['high','High'],['xhigh','Extra High']];
 const calls = [];
+const models = new Map(choices.map(([id,label]) => [id,{modelId:id,label}]));
+const modelOptions = [...models.values()];
+let dismissals = 0;
+const ctx = {selectedModel:models.get('medium'),modelOptions,effortIndex:new Map([['gemini',models]]),
+    setSelectedModel(){ dismissals++; }};
+const owner = {memoizedProps:{modelOptions,open:true,setIsOpen(){},setSelectedModel(option){
+    calls.push(option.modelId);
+    ctx.selectedModel=option;
+    nativeGroup.props.value=option.modelId;
+    model.textContent='Gemini '+option.label;
+}}};
+const provider = {return:owner,memoizedProps:{value:ctx}};
 const nativeGroup = el({
-    value:'medium', onValueChange:id => calls.push(id),
+    value:'medium', onValueChange:ctx.setSelectedModel,
     children:choices.map(([id,label]) => el({value:id, children:el({'data-testid':'model-selector-effort-option','data-effort':id,children:label})}))
 });
 const trigger = el({selected:true, children:[el({'data-testid':'model-selector-effort-group','data-model-base':'Gemini'})]});
 const group = {memoizedProps:{children:[trigger, el({children:[el({}),nativeGroup]})]}};
 const root = {stateNode:{}};
 root.stateNode.current=root;
-group.return=root;
+group.return=provider;
 // The real desktop menu wraps this same label before the submenu trigger.
 const layout = {return:group,memoizedProps:{children:[el({children:trigger.props.children}),el({})]}};
 model.__reactFiber$test={return:layout};
-root.child=group;
+root.child=owner;
+owner.return=root;
+owner.child=provider;
+provider.child=group;
 group.child=layout;
 layout.child=model.__reactFiber$test;
 </script>
@@ -40,18 +55,23 @@ verify(async () => {
     check('preview shows extra high',input.getAttribute('aria-valuetext'),'极高');
     input.dispatchEvent(new Event('change'));
     check('commit uses original effort key',calls.join(','),'xhigh');
+    await settle();
+    input.value='0'; input.dispatchEvent(new Event('change')); await settle();
+    check('two changes in the same menu',calls.join(','),'xhigh,low');
+    check('slider did not invoke select-and-dismiss',dismissals,0);
     // Reused host elements can still point into the previous render even
     // when its return chain reaches the current root.
     const nextGroup = {memoizedProps:{children:[trigger, el({children:[el({}),el({...nativeGroup.props,value:'high'})]})]}};
     const nextLayout = {...layout,return:nextGroup};
     const nextMarker = {return:nextLayout};
-    nextGroup.child=nextLayout; nextLayout.child=nextMarker; nextGroup.return=root;
+    nextGroup.child=nextLayout; nextLayout.child=nextMarker; nextGroup.return=provider;
     layout.alternate=nextLayout;
     group.alternate=nextGroup; model.__reactFiber$test.alternate=nextMarker;
-    root.child=nextGroup;
+    ctx.selectedModel=models.get('high');
+    provider.child=nextGroup;
     model.className='rerender'; await settle();
     check('reads the committed React tree',input.value,'2');
-    root.child=group;
+    provider.child=group;
     trigger.props.disabled=true; model.className='locked'; await settle();
     check('locked groups have no slider',usage.previousElementSibling,null);
     trigger.props.disabled=false;
