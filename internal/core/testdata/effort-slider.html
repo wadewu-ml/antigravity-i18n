@@ -18,9 +18,12 @@ const group = {memoizedProps:{children:[trigger, el({children:[el({}),nativeGrou
 const root = {stateNode:{}};
 root.stateNode.current=root;
 group.return=root;
-model.__reactFiber$test={return:group};
+// The real desktop menu wraps this same label before the submenu trigger.
+const layout = {return:group,memoizedProps:{children:[el({children:trigger.props.children}),el({})]}};
+model.__reactFiber$test={return:layout};
 root.child=group;
-group.child=model.__reactFiber$test;
+group.child=layout;
+layout.child=model.__reactFiber$test;
 </script>
 <!-- ENGINE -->
 <script>
@@ -40,8 +43,10 @@ verify(async () => {
     // Reused host elements can still point into the previous render even
     // when its return chain reaches the current root.
     const nextGroup = {memoizedProps:{children:[trigger, el({children:[el({}),el({...nativeGroup.props,value:'high'})]})]}};
-    const nextMarker = {return:nextGroup};
-    nextGroup.child=nextMarker; nextGroup.return=root;
+    const nextLayout = {...layout,return:nextGroup};
+    const nextMarker = {return:nextLayout};
+    nextGroup.child=nextLayout; nextLayout.child=nextMarker; nextGroup.return=root;
+    layout.alternate=nextLayout;
     group.alternate=nextGroup; model.__reactFiber$test.alternate=nextMarker;
     root.child=nextGroup;
     model.className='rerender'; await settle();

@@ -28,6 +28,9 @@ function agMountEffortSliders(labels) {
                 const model = trigger?.children?.[0]?.props;
                 if (model?.['data-testid'] !== 'model-selector-effort-group' ||
                     model['data-model-base'] !== marker.dataset.modelBase) continue;
+                // The menu item's layout wrappers reuse the label as a child.
+                // Only the native submenu trigger declares the selection state.
+                if (typeof trigger.selected !== 'boolean') continue;
                 if (!trigger.selected || trigger.disabled) break;
                 const choices = pair[1]?.props?.children?.[1];
                 const radio = choices?.props;
