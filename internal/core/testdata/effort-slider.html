@@ -1,7 +1,7 @@
 <!doctype html><html><head><meta charset="utf-8"></head><body>
 <div data-testid="model-selector-panel" id="panel">
   <div><button role="menuitem"><span id="model" data-testid="model-selector-effort-group" data-model-base="Gemini">Gemini</span></button></div>
-  <div><button id="usage" role="menuitem"><span>View Usage</span></button></div>
+  <div><button id="usage" role="menuitem"><span>Usage de la semaine</span></button></div>
 </div>
 <script>
 // Matches the selected effort group's menu elements in the 2.35.1 renderer.
@@ -44,7 +44,7 @@ layout.child=model.__reactFiber$test;
 <script>
 verify(async () => {
     await settle();
-    const host = usage.previousElementSibling;
+    const host = usage.parentElement.previousElementSibling;
     check('slider is above usage',host?.hasAttribute('data-ag-effort-slider'),true);
     const input = host.shadowRoot.querySelector('input');
     check('reads actual level count',input.max,'3');
@@ -73,15 +73,15 @@ verify(async () => {
     check('reads the committed React tree',input.value,'2');
     provider.child=group;
     trigger.props.disabled=true; model.className='locked'; await settle();
-    check('locked groups have no slider',usage.previousElementSibling,null);
+    check('locked groups have no slider',panel.querySelector('[data-ag-effort-slider]'),null);
     trigger.props.disabled=false;
     nativeGroup.props.children.pop(); nativeGroup.props.value='high';
     model.className='unlocked'; await settle();
-    const newInput=usage.previousElementSibling.shadowRoot.querySelector('input');
+    const newInput=usage.parentElement.previousElementSibling.shadowRoot.querySelector('input');
     check('changed model has only its native steps',newInput.max,'2');
     check('selection follows changed model',newInput.value,'2');
     trigger.props.selected=false;
     model.className='inactive'; await settle();
-    check('no slider for an inactive group',usage.previousElementSibling,null);
+    check('no slider for an inactive group',panel.querySelector('[data-ag-effort-slider]'),null);
 });
 </script></body></html>

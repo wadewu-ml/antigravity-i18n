@@ -776,7 +776,7 @@ const effortSliderMarker = "function agMountEffortSliders("
 
 func (s *LocaleStore) addEffortSlider(patch *patchFragments, loc *Locale) error {
 	labels := make(map[string]string)
-	for _, key := range []string{"Thinking effort", "View Usage", "Minimal", "Low", "Medium", "High", "Extra High", "Max"} {
+	for _, key := range []string{"Thinking effort", "Minimal", "Low", "Medium", "High", "Extra High", "Max"} {
 		label := loc.Text[key]
 		if label == "" {
 			label = key
