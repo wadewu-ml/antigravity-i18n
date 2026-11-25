@@ -3,7 +3,7 @@
 import {core} from '../models';
 import {selfupdate} from '../models';
 
-export function ApplyCustomization(arg1:string,arg2:boolean,arg3:boolean,arg4:boolean):Promise<core.ApplyResult>;
+export function ApplyCustomization(arg1:string,arg2:boolean,arg3:boolean,arg4:boolean,arg5:boolean):Promise<core.ApplyResult>;
 
 export function ApplyLocale(arg1:string,arg2:boolean,arg3:boolean):Promise<core.ApplyResult>;
 

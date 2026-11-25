@@ -380,6 +380,10 @@ body {
   padding: 12px 0;
 }
 
+.feature-setting + .feature-setting {
+  border-top: 0;
+}
+
 .feature-copy {
   min-width: 0;
 }

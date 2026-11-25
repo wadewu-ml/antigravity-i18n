@@ -153,6 +153,7 @@ type LocaleStore struct {
 	patchDir  string
 
 	engineFragment []byte
+	effortSlider   []byte
 	menuFragment   []byte
 	dialogFragment []byte
 }
@@ -163,6 +164,9 @@ func NewLocaleStore(localesFS, patchesFS fs.FS, localeDir, patchDir string) (*Lo
 	var err error
 	if s.engineFragment, err = fs.ReadFile(patchesFS, patchDir+"/engine.jsfrag"); err != nil {
 		return nil, fmt.Errorf("cannot read the translation engine template: %w", err)
+	}
+	if s.effortSlider, err = fs.ReadFile(patchesFS, patchDir+"/effort-slider.jsfrag"); err != nil {
+		return nil, fmt.Errorf("cannot read the effort slider: %w", err)
 	}
 	if s.menuFragment, err = fs.ReadFile(patchesFS, patchDir+"/menu.jsfrag"); err != nil {
 		return nil, fmt.Errorf("cannot read the menu template: %w", err)
@@ -766,6 +770,30 @@ func (s *LocaleStore) buildPreloadFragment(loc *Locale) (string, error) {
 		return "", fmt.Errorf("the translation engine template has no %s", localeDataPlaceholder)
 	}
 	return out, nil
+}
+
+const effortSliderMarker = "function agMountEffortSliders("
+
+func (s *LocaleStore) addEffortSlider(patch *patchFragments, loc *Locale) error {
+	labels := make(map[string]string)
+	for _, key := range []string{"Thinking effort", "Minimal", "Low", "Medium", "High", "Extra High", "Max"} {
+		label := loc.Text[key]
+		if label == "" {
+			label = key
+		}
+		labels[key] = label
+	}
+	data, err := json.Marshal(labels)
+	if err != nil {
+		return err
+	}
+	view, n := replaceFirst(string(s.effortSlider), "EFFORT_LABELS_PLACEHOLDER", string(data))
+	if n == 0 {
+		return fmt.Errorf("the effort slider template has no labels placeholder")
+	}
+	end := blockSentinels[0][1]
+	patch.preload = strings.Replace(patch.preload, end, view+"\n"+end, 1)
+	return nil
 }
 
 func (s *LocaleStore) buildMenuFragment(loc *Locale) (string, error) {

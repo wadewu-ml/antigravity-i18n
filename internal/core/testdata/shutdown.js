@@ -1,5 +1,5 @@
 const calls = [];
-const installed = {CurrentLanguage: 'en', SessionMetrics: false};
+const installed = {CurrentLanguage: 'en', SessionMetrics: false, EffortSlider: false};
 const running = new Error('antigravity_running: Antigravity is running. Exit it and retry');
 let nextError;
 
@@ -20,16 +20,16 @@ window.go = {main: {App: {
     {code: 'en', name: 'English', coverage: 100},
     {code: 'zh-CN', name: '简体中文', coverage: 100},
   ],
-  ApplyCustomization: async (locale, metrics, confirmed, force) => {
-    calls.push(['apply', locale, metrics, confirmed, force]);
+  ApplyCustomization: async (locale, metrics, slider, confirmed, force) => {
+    calls.push(['apply', locale, metrics, slider, confirmed, force]);
     failIfRequested();
-    Object.assign(installed, {CurrentLanguage: locale, SessionMetrics: metrics});
+    Object.assign(installed, {CurrentLanguage: locale, SessionMetrics: metrics, EffortSlider: slider});
     return {LocaleName: 'English', Relaunched: true};
   },
   RestoreLocale: async (confirmed, force) => {
     calls.push(['restore', confirmed, force]);
     failIfRequested();
-    Object.assign(installed, {CurrentLanguage: 'en', SessionMetrics: false});
+    Object.assign(installed, {CurrentLanguage: 'en', SessionMetrics: false, EffortSlider: false});
     return {Relaunched: true};
   },
 }}};
@@ -48,7 +48,7 @@ verify(async () => {
   check('English can be combined with metrics', metrics.checked && !metrics.disabled, true);
   check('unapplied preference is visible', byId('sessionMetricsDetail').textContent, '应用后开启');
   apply.click();
-  check('one click starts a normal apply', calls.length === 1 && calls[0][4] === false, true);
+  check('one click starts a normal apply', calls.length === 1 && calls[0][5] === false, true);
   await settle();
   check('successful apply needs no dialog', message.open || restoreConfirm.open, false);
 
@@ -93,15 +93,30 @@ verify(async () => {
   retry.click();
   await settle();
   check('backend receives force only after a retry click', JSON.stringify(calls), JSON.stringify([
-    ['apply', 'en', true, true, false],
-    ['apply', 'en', true, true, false],
-    ['apply', 'en', true, true, false],
-    ['apply', 'en', true, true, true],
-    ['apply', 'en', true, true, false],
+    ['apply', 'en', true, false, true, false],
+    ['apply', 'en', true, false, true, false],
+    ['apply', 'en', true, false, true, false],
+    ['apply', 'en', true, false, true, true],
+    ['apply', 'en', true, false, true, false],
     ['restore', true, false],
     ['restore', true, true],
   ]));
 
+  const slider = byId('effortSlider');
+  check('slider starts off', slider.checked, false);
+  slider.click();
+  check('pending slider change', byId('effortSliderDetail').textContent, '应用后开启');
+  apply.click();
+  await settle();
+  check('English with only the slider', installed.EffortSlider && !installed.SessionMetrics, true);
+  check('successful slider apply updates the status', byId('statusDesc').textContent.includes('思考强度滑块已开启'), true);
+  metrics.click();
+  apply.click();
+  await settle();
+  slider.click();
+  apply.click();
+  await settle();
+  check('disabling the slider keeps metrics', !installed.EffortSlider && installed.SessionMetrics, true);
   const picker = byId('localeChips');
   const pending = byId('pendingLanguage');
   const current = byId('statusLabel');

@@ -97,12 +97,13 @@ func TestApplySwitchAndRestore(t *testing.T) {
 				t.Fatal("the same-version backup was not refreshed from the installed archive")
 			}
 			opts.Locale = "ja"
+			opts.EffortSlider = new(true)
 			opts.SessionMetrics = new(true)
 			if _, err := svc.ApplyLocale(opts); err != nil {
 				t.Fatal(err)
 			}
 			status, err := svc.GetStatus(p.AppDir)
-			if err != nil || status.CurrentLanguage != "ja" || status.AppVersion != identity.Version || !status.SessionMetrics {
+			if err != nil || status.CurrentLanguage != "ja" || status.AppVersion != identity.Version || !status.SessionMetrics || !status.EffortSlider {
 				t.Fatalf("status after switching locale: %+v, %v", status, err)
 			}
 			patched, err := ReadArchive(p.AsarPath)
@@ -117,6 +118,9 @@ func TestApplySwitchAndRestore(t *testing.T) {
 				if err != nil || strings.Count(string(preload), "/* antigravity-i18n:begin */") != 1 {
 					t.Fatalf("%s does not contain exactly one engine after switching: %v", rel, err)
 				}
+				if strings.Contains(string(preload), effortSliderMarker) != (rel == "dist/preload.js") {
+					t.Fatalf("unexpected effort slider state in %s", rel)
+				}
 				if strings.Contains(string(preload), sessionMetricsMarker) != (rel == "dist/preload.js") {
 					t.Fatalf("unexpected session metrics state in %s", rel)
 				}
@@ -128,17 +132,19 @@ func TestApplySwitchAndRestore(t *testing.T) {
 				}
 			}
 			first := fileHash(t, p.AsarPath)
+			opts.EffortSlider = nil
 			opts.SessionMetrics = nil
 			if _, err := svc.ApplyLocale(opts); err != nil || fileHash(t, p.AsarPath) != first {
 				t.Fatalf("re-applying the locale was not byte-stable: %v", err)
 			}
 			opts.Locale = EnglishLocale
+			opts.EffortSlider = new(false)
 			opts.SessionMetrics = new(true)
 			if _, err := svc.ApplyLocale(opts); err != nil {
 				t.Fatal(err)
 			}
 			status, err = svc.GetStatus(p.AppDir)
-			if err != nil || status.CurrentLanguage != EnglishLocale || !status.SessionMetrics {
+			if err != nil || status.CurrentLanguage != EnglishLocale || !status.SessionMetrics || status.EffortSlider {
 				t.Fatalf("status with metrics alone: %+v, %v", status, err)
 			}
 			english, err := ReadArchive(p.AsarPath)
@@ -162,13 +168,22 @@ func TestApplySwitchAndRestore(t *testing.T) {
 					t.Fatalf("metrics-only apply left a language patch in %s: %v", rel, err)
 				}
 			}
-			opts.Locale = "ja"
 			opts.SessionMetrics = new(false)
+			opts.EffortSlider = new(true)
 			if _, err := svc.ApplyLocale(opts); err != nil {
 				t.Fatal(err)
 			}
 			status, err = svc.GetStatus(p.AppDir)
-			if err != nil || status.SessionMetrics || status.CurrentLanguage != "ja" {
+			if err != nil || status.CurrentLanguage != EnglishLocale || status.SessionMetrics || !status.EffortSlider {
+				t.Fatalf("status with only the slider: %+v, %v", status, err)
+			}
+			opts.Locale = "ja"
+			opts.EffortSlider = new(false)
+			if _, err := svc.ApplyLocale(opts); err != nil {
+				t.Fatal(err)
+			}
+			status, err = svc.GetStatus(p.AppDir)
+			if err != nil || status.SessionMetrics || status.EffortSlider || status.CurrentLanguage != "ja" {
 				t.Fatalf("status after disabling metrics: %+v, %v", status, err)
 			}
 			if result, err := svc.RestoreOfficial(opts); err != nil || result.AlreadyEnglish || fileHash(t, p.AsarPath) != want {

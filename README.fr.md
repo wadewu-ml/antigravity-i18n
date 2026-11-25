@@ -20,6 +20,8 @@ Les langues proposées sont le chinois simplifié, le chinois traditionnel, le j
 
 Si l’outil vous demande de quitter Antigravity, le bouton « Forcer la fermeture et réessayer » force sa fermeture et relance l’opération. Les sessions en cours sont interrompues et les modifications non enregistrées risquent d’être perdues.
 
+Pour activer le curseur, utilisez l’interrupteur sous les métriques de session dans l’outil. Appliquez les changements et ouvrez le sélecteur de modèles. Si le modèle permet de régler l’effort de raisonnement, un curseur apparaît au-dessus de l’option de consultation de l’utilisation. Faites-le glisser et relâchez-le pour appliquer le niveau choisi.
+
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Fenêtre de configuration avec le chinois simplifié sélectionné et les métriques de session activées"></a>
 
 Sur la capture, le bouton vert « 重新应用 » permet de réappliquer les réglages.

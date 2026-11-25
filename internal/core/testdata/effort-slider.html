@@ -1,0 +1,102 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body>
+<div data-testid="model-selector-panel" id="panel">
+  <div><button role="menuitem"><span id="model" data-testid="model-selector-effort-group" data-model-base="Gemini">Gemini</span></button></div>
+  <div><button id="usage" role="menuitem"><span>Usage de la semaine</span></button></div>
+</div>
+<script>
+// Matches the selected effort group's menu elements in the 2.35.1 renderer.
+// The native submenu's choices exist before its popup is mounted.
+const el = props => ({props});
+const choices = [['low','Low'],['medium','Medium'],['high','High'],['xhigh','Extra High']];
+const calls = [];
+const models = new Map(choices.map(([id,label]) => [id,{modelId:id,label}]));
+const modelOptions = [...models.values()];
+let dismissals = 0;
+const ctx = {selectedModel:models.get('medium'),modelOptions,effortIndex:new Map([['gemini',models]]),
+    setSelectedModel(){ dismissals++; }};
+const owner = {memoizedProps:{modelOptions,open:true,setIsOpen(){},setSelectedModel(option){
+    calls.push(option.modelId);
+    ctx.selectedModel=option;
+    nativeGroup.props.value=option.modelId;
+    model.textContent='Gemini '+option.label;
+}}};
+const provider = {return:owner,memoizedProps:{value:ctx}};
+const nativeGroup = el({
+    value:'medium', onValueChange:ctx.setSelectedModel,
+    children:choices.map(([id,label]) => el({value:id, children:el({'data-testid':'model-selector-effort-option','data-effort':id,children:label})}))
+});
+const trigger = el({selected:true, children:[el({'data-testid':'model-selector-effort-group','data-model-base':'Gemini'})]});
+const group = {memoizedProps:{children:[trigger, el({children:[el({}),nativeGroup]})]}};
+const root = {stateNode:{}};
+root.stateNode.current=root;
+group.return=provider;
+// The real desktop menu wraps this same label before the submenu trigger.
+const layout = {return:group,memoizedProps:{children:[el({children:trigger.props.children}),el({})]}};
+model.__reactFiber$test={return:layout};
+root.child=owner;
+owner.return=root;
+owner.child=provider;
+provider.child=group;
+group.child=layout;
+layout.child=model.__reactFiber$test;
+</script>
+<!-- ENGINE -->
+<script>
+verify(async () => {
+    await settle();
+    const host = usage.parentElement.previousElementSibling;
+    check('slider is above usage',host?.hasAttribute('data-ag-effort-slider'),true);
+    const input = host.shadowRoot.querySelector('input');
+    const aurora = host.shadowRoot.querySelector('.aurora');
+    const motionEnabled = matchMedia('(prefers-reduced-motion: no-preference)').matches;
+    check('reads actual level count',input.max,'3');
+    const marks = host.shadowRoot.querySelector('.marks');
+    check('one mark per native level',marks.childElementCount,4);
+    check('endpoint mark lines up with maximum',marks.lastElementChild.style.left,'100%');
+    check('ordinary level covers the aurora',host.style.getPropertyValue('--wipe'),'0%');
+    check('native selected level',input.value,'1');
+    check('localized accessible value',input.getAttribute('aria-valuetext'),'中');
+    input.value='3'; input.dispatchEvent(new Event('input'));
+    check('drag previews without switching',calls.length,0);
+    check('preview shows extra high',input.getAttribute('aria-valuetext'),'极高');
+    check('drag previews the maximum track',host.hasAttribute('data-maximum'),true);
+    check('final detent fully uncovers the aurora',host.style.getPropertyValue('--wipe'),'-100%');
+    input.dispatchEvent(new Event('change'));
+    check('commit uses original effort key',calls.join(','),'xhigh');
+    await settle();
+    check('committing maximum keeps the track lit',host.hasAttribute('data-maximum'),true);
+    check('maximum moves the light when motion is enabled',getComputedStyle(aurora,'::before').animationName,motionEnabled ? 'flow' : 'none');
+    check('maximum moves the particles when motion is enabled',getComputedStyle(aurora,'::after').animationName,motionEnabled ? 'drift' : 'none');
+    input.value='0'; input.dispatchEvent(new Event('change')); await settle();
+    check('leaving maximum clears its accent',host.hasAttribute('data-maximum'),false);
+    check('particles stop below maximum',getComputedStyle(aurora,'::after').animationName,'none');
+    check('two changes in the same menu',calls.join(','),'xhigh,low');
+    check('slider did not invoke select-and-dismiss',dismissals,0);
+    // Reused host elements can still point into the previous render even
+    // when its return chain reaches the current root.
+    const nextGroup = {memoizedProps:{children:[trigger, el({children:[el({}),el({...nativeGroup.props,value:'high'})]})]}};
+    const nextLayout = {...layout,return:nextGroup};
+    const nextMarker = {return:nextLayout};
+    nextGroup.child=nextLayout; nextLayout.child=nextMarker; nextGroup.return=provider;
+    layout.alternate=nextLayout;
+    group.alternate=nextGroup; model.__reactFiber$test.alternate=nextMarker;
+    ctx.selectedModel=models.get('high');
+    provider.child=nextGroup;
+    model.className='rerender'; await settle();
+    check('reads the committed React tree',input.value,'2');
+    provider.child=group;
+    trigger.props.disabled=true; model.className='locked'; await settle();
+    check('locked groups have no slider',panel.querySelector('[data-ag-effort-slider]'),null);
+    trigger.props.disabled=false;
+    nativeGroup.props.children.pop(); nativeGroup.props.value='high';
+    model.className='unlocked'; await settle();
+    const newInput=usage.parentElement.previousElementSibling.shadowRoot.querySelector('input');
+    check('changed model has only its native steps',newInput.max,'2');
+    check('marks follow model changes',marks.childElementCount,3);
+    check('three-level model accents its own maximum',host.hasAttribute('data-maximum'),true);
+    check('selection follows changed model',newInput.value,'2');
+    trigger.props.selected=false;
+    model.className='inactive'; await settle();
+    check('no slider for an inactive group',panel.querySelector('[data-ag-effort-slider]'),null);
+});
+</script></body></html>

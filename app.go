@@ -122,12 +122,12 @@ func (a *App) SetAppDir(path string) (*core.Status, error) {
 
 // ApplyLocale installs a language pack, replacing whatever patch is present.
 func (a *App) ApplyLocale(locale string, confirmed, force bool) (*core.ApplyResult, error) {
-	return a.applyCustomization(locale, nil, confirmed, force)
+	return a.applyCustomization(locale, nil, nil, confirmed, force)
 }
 
 // ApplyCustomization installs a language pack with the selected features.
-func (a *App) ApplyCustomization(locale string, sessionMetrics, confirmed, force bool) (*core.ApplyResult, error) {
-	return a.applyCustomization(locale, &sessionMetrics, confirmed, force)
+func (a *App) ApplyCustomization(locale string, sessionMetrics, effortSlider, confirmed, force bool) (*core.ApplyResult, error) {
+	return a.applyCustomization(locale, &sessionMetrics, &effortSlider, confirmed, force)
 }
 
 func (a *App) operationOptions(force bool) core.Options {
@@ -139,7 +139,7 @@ func (a *App) operationOptions(force bool) core.Options {
 	}
 }
 
-func (a *App) applyCustomization(locale string, sessionMetrics *bool, confirmed, force bool) (*core.ApplyResult, error) {
+func (a *App) applyCustomization(locale string, sessionMetrics, effortSlider *bool, confirmed, force bool) (*core.ApplyResult, error) {
 	if !confirmed {
 		return nil, errors.New(confirmationRequired)
 	}
@@ -150,6 +150,7 @@ func (a *App) applyCustomization(locale string, sessionMetrics *bool, confirmed,
 	opts := a.operationOptions(force)
 	opts.Locale = locale
 	opts.SessionMetrics = sessionMetrics
+	opts.EffortSlider = effortSlider
 	result, err := a.svc.ApplyLocale(opts)
 	for _, note := range a.svc.Notes() {
 		a.appendLog("note: " + note)

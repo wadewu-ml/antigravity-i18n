@@ -123,6 +123,23 @@ func TestTranslationInBrowser(t *testing.T) {
 	}
 }
 
+func TestEffortSliderInBrowser(t *testing.T) {
+	store := newTestService(t).store
+	loc, err := store.LoadLocale(DefaultLocale)
+	if err != nil {
+		t.Fatal(err)
+	}
+	patch, err := store.buildLocalizationFragments(loc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := store.addEffortSlider(&patch, loc); err != nil {
+		t.Fatal(err)
+	}
+	html := readTestFile(t, "testdata/effort-slider.html")
+	runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+patch.preload+"</script>", 1))
+}
+
 func TestApplyShutdownInBrowser(t *testing.T) {
 	html := readTestFile(t, "../../frontend/dist/index.html")
 	app := readTestFile(t, "../../frontend/dist/app.js")

@@ -32,6 +32,7 @@ type Status struct {
 	CurrentLanguage   string
 	LocaleName        string
 	SessionMetrics    bool
+	EffortSlider      bool
 	HasCleanBackup    bool
 	CleanBackupStatus string
 	LastPatchedAt     *string

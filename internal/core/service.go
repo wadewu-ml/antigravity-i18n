@@ -16,6 +16,7 @@ type Options struct {
 	Force          bool
 	RequireClosed  bool // check for a running app before proceeding unless Force is set
 	TimeoutMs      int
+	EffortSlider   *bool // nil keeps the setting in the installed archive
 	SessionMetrics *bool // nil keeps the setting in the installed archive
 }
 

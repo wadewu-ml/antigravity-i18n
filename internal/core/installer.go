@@ -1,6 +1,7 @@
 package core
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
@@ -75,35 +76,41 @@ func detectPatchState(asarPath string) *bool {
 // language is active instead of a state marker having to be trusted.
 var archiveLocaleRe = regexp.MustCompile(`(?s)const AG_LOCALE = (\{.*?\});\s*const agText`)
 
+type archiveFeatures struct {
+	sessionMetrics bool
+	effortSlider   bool
+}
+
 // readArchiveLocale reads the locale and enabled features from the Hub preload.
-func readArchiveLocale(asarPath string) (code, name string, sessionMetrics, ok bool) {
+func readArchiveLocale(asarPath string) (code, name string, features archiveFeatures, ok bool) {
 	arc, err := ReadArchive(asarPath)
 	if err != nil {
-		return "", "", false, false
+		return "", "", archiveFeatures{}, false
 	}
 	preload, err := arc.ReadFile("dist/preload.js")
 	if err != nil {
-		return "", "", false, false
+		return "", "", archiveFeatures{}, false
 	}
-	sessionMetrics = strings.Contains(string(preload), sessionMetricsMarker)
+	features.sessionMetrics = bytes.Contains(preload, []byte(sessionMetricsMarker))
+	features.effortSlider = bytes.Contains(preload, []byte(effortSliderMarker))
 	m := archiveLocaleRe.FindSubmatch(preload)
 	if m == nil {
-		if sessionMetrics {
-			return EnglishLocale, "English", true, true
+		if features.sessionMetrics || features.effortSlider {
+			return EnglishLocale, "English", features, true
 		}
-		return "", "", false, false
+		return "", "", archiveFeatures{}, false
 	}
 	var header struct {
 		Language string `json:"language"`
 		Name     string `json:"name"`
 	}
 	if err := json.Unmarshal(m[1], &header); err != nil {
-		return "", "", false, false
+		return "", "", archiveFeatures{}, false
 	}
 	if header.Language == "" {
-		return "", "", false, false
+		return "", "", archiveFeatures{}, false
 	}
-	return header.Language, header.Name, sessionMetrics, true
+	return header.Language, header.Name, features, true
 }
 
 // normalizeLanguage maps a recorded language onto a locale code. Markers written
@@ -138,14 +145,14 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 
 	state := readState(p)
 	var currentLanguage, localeName string
-	var sessionMetrics bool
+	var features archiveFeatures
 	if detected {
 		// A patched archive names its own locale. Archives written by a release
 		// that predated locale files carry no header, and those were zh-CN only.
-		if code, name, metrics, ok := readArchiveLocale(p.AsarPath); ok {
+		if code, name, installed, ok := readArchiveLocale(p.AsarPath); ok {
 			currentLanguage = code
 			localeName = name
-			sessionMetrics = metrics
+			features = installed
 		} else {
 			currentLanguage = DefaultLocale
 		}
@@ -167,7 +174,8 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 		AppVersion:        expectedIdentity.Version,
 		CurrentLanguage:   currentLanguage,
 		LocaleName:        localeName,
-		SessionMetrics:    sessionMetrics,
+		SessionMetrics:    features.sessionMetrics,
+		EffortSlider:      features.effortSlider,
 		HasCleanBackup:    backupState == cleanBackupValid,
 		CleanBackupStatus: backupState,
 		LastPatchedAt:     statePatchedAt(state),

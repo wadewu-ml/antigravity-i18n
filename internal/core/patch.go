@@ -18,6 +18,7 @@ var patchMarkers = []string{
 	"const zhCNText = new Map([",
 	"function translateMenu(menu)",
 	sessionMetricsMarker,
+	effortSliderMarker,
 }
 
 // blockSentinels wrap every injected block. Fragments carry them, so a re-run

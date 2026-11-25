@@ -20,6 +20,8 @@ Zur Auswahl stehen vereinfachtes und traditionelles Chinesisch, Japanisch, Korea
 
 Mit „Beenden erzwingen und erneut versuchen“ können Sie bei einer entsprechenden Aufforderung das Beenden erzwingen und den Vorgang wiederholen. Laufende Sitzungen werden dabei unterbrochen und ungespeicherte Änderungen können verloren gehen.
 
+Um den Regler zu verwenden, aktivieren Sie im Tool den Schalter unter den Sitzungsmetriken. Wenden Sie die Änderungen an und öffnen Sie die Modellauswahl. Bei Modellen mit einstellbarem Denkaufwand erscheint über der Nutzungsanzeige ein Regler. Ziehen Sie ihn auf die gewünschte Stufe und lassen Sie ihn los.
+
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Einstellungsfenster mit vereinfachtem Chinesisch als Sprache und aktivierten Sitzungsmetriken"></a>
 
 Die grüne Schaltfläche im Bild trägt die Aufschrift „重新应用“ (erneut anwenden).
