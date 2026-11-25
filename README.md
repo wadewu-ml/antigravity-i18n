@@ -26,7 +26,7 @@ The green button shown here reads 重新应用 (Reapply).
 
 ## Read session metrics
 
-Once a chat has a recorded model call, a ring appears to the right of the model selector in the chat input. Its fill shows the estimated share of the context window used. Hover to see the remaining tokens, output speed, cache hit rate, and time to first token. Click the ring to pin the details and click again to dismiss them.
+Hover over the ring beside the model selector to see each model group’s remaining quota by period. Hover over a percentage for the local reset time. You can check quota before sending your first message. Once the chat records a model call, the ring shows estimated context use and the panel shows tokens used and total capacity, output speed, cache hit rate, and time to first token. Click the ring to pin or dismiss the panel.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="The open panel above the ring shows context usage, remaining tokens, and output speed in Simplified Chinese"></a>
 

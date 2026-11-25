@@ -26,7 +26,7 @@ Die grüne Schaltfläche im Bild trägt die Aufschrift „重新应用“ (erneu
 
 ## Sitzungsmetriken ablesen
 
-Sobald ein Modellaufruf für den Chat aufgezeichnet wurde, erscheint rechts neben der Modellauswahl im Eingabefeld ein Ring. Er zeigt an, welcher Anteil des Kontextfensters schätzungsweise belegt ist. Bewegen Sie den Mauszeiger auf den Ring, um die verbleibenden Token, die Ausgabegeschwindigkeit, die Cache-Trefferquote und die Wartezeit bis zum ersten Token zu sehen. Ein Klick hält die Details offen, ein weiterer schließt sie.
+Bewegen Sie den Mauszeiger auf den Ring neben der Modellauswahl. Für jede Modellgruppe sehen Sie das verbleibende Kontingent je Zeitraum, auch schon vor der ersten Nachricht. Bewegen Sie den Mauszeiger auf einen Prozentwert, um die lokale Rücksetzzeit zu sehen. Nach dem ersten aufgezeichneten Modellaufruf zeigt der Ring die geschätzte Kontextauslastung. Im Detail sehen Sie außerdem die genutzten Token und die Gesamtkapazität, die Ausgabegeschwindigkeit, die Cache-Trefferquote und die Wartezeit bis zum ersten Token. Ein Klick hält die Details offen, ein weiterer schließt sie.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="Das chinesische Metrikfenster über dem Ring zeigt Kontextnutzung, verbleibende Token und Ausgabegeschwindigkeit"></a>
 

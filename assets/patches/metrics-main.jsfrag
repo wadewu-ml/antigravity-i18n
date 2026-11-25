@@ -125,4 +125,54 @@
             return null;
         }
     });
+
+    // Use the host's local session and certificate trust, just as the Hub does.
+    // Keep only in-flight requests: the LS owns the account-aware quota cache.
+    let pendingQuota;
+    ipcMain.handle('antigravity-i18n:model-quota', async (event) => {
+        if (!isLocalHubTopFrame(event)) return null;
+        try {
+            const host = require('./languageServer');
+            const base = new URL(host.getLsBaseUrl());
+            if (base.protocol !== 'https:' || base.hostname !== '127.0.0.1' ||
+                new URL(event.senderFrame.url).origin !== base.origin) return null;
+            const token = host.getLsCsrfToken();
+            if (!token) return null;
+            if (pendingQuota?.origin === base.origin && pendingQuota.token === token) return pendingQuota.result;
+            const result = readQuota(event.sender.session, base.origin, token);
+            pendingQuota = { origin: base.origin, token, result };
+            try {
+                return await result;
+            } finally {
+                if (pendingQuota?.result === result) pendingQuota = null;
+            }
+        } catch {
+            return null;
+        }
+    });
+
+    async function readQuota(session, origin, token) {
+        try {
+            const response = await session.fetch(origin + '/exa.language_server_pb.LanguageServerService/RetrieveUserQuotaSummary', {
+                method: 'POST', redirect: 'error', signal: AbortSignal.timeout(8000),
+                headers: { 'content-type': 'application/json', 'connect-protocol-version': '1', 'x-codeium-csrf-token': token },
+                body: '{}',
+            });
+            if (!response.ok) return null;
+            const summary = (await response.json())?.response;
+            if (!summary || (summary.groups != null && !Array.isArray(summary.groups))) return null;
+            return (summary.groups ?? []).map((group) => ({
+                name: group.displayName || '',
+                buckets: (group.buckets ?? []).map((bucket) => ({
+                    name: bucket.displayName || bucket.window || '',
+                    window: bucket.window || '',
+                    fraction: !bucket.disabled && Number.isFinite(bucket.remainingFraction) &&
+                        bucket.remainingFraction >= 0 && bucket.remainingFraction <= 1 ? bucket.remainingFraction : null,
+                    reset: !bucket.disabled && typeof bucket.resetTime === 'string' ? bucket.resetTime : null,
+                })),
+            }));
+        } catch {
+            return null;
+        }
+    }
 })();

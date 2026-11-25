@@ -44,17 +44,52 @@ async function test() {
         const insert = db.prepare('INSERT INTO gen_metadata VALUES (?, ?)');
         insert.run(1, generation(1200));
         insert.run(2, Buffer.from([10, 5, 1]));
-        let handle;
+        const handlers = new Map();
+        const origin = 'https://127.0.0.1:50000';
         const install = new Function('require', readFileSync('../../assets/patches/metrics-main.jsfrag', 'utf8'));
         install((module) => {
             if (module === './utils') return { isLocalHubTopFrame: (event) => event.local };
+            if (module === './languageServer') return { getLsBaseUrl: () => origin, getLsCsrfToken: () => 'fixture' };
             if (module === 'electron') return {
                 app: { getPath: () => home },
-                ipcMain: { handle: (_, fn) => { handle = fn; } },
+                ipcMain: { handle: (channel, fn) => handlers.set(channel, fn) },
             };
             return require(module);
         });
         const event = {local: true};
+        const handle = handlers.get('antigravity-i18n:session-metrics');
+        const quota = handlers.get('antigravity-i18n:model-quota');
+        let calls = 0;
+        let reply;
+        const session = { fetch(url, options) {
+            calls++;
+            assert.equal(url, origin + '/exa.language_server_pb.LanguageServerService/RetrieveUserQuotaSummary');
+            assert.equal(options.method, 'POST');
+            assert.equal(options.headers['x-codeium-csrf-token'], 'fixture');
+            return new Promise(resolve => { reply = resolve; });
+        } };
+        const hub = {local: true, senderFrame: {url: origin + '/c/example'}, sender: {session}};
+        assert.equal(await quota({...hub, local: false}), null);
+        assert.equal(await quota({...hub, senderFrame: {url: 'https://example.org/'}}), null);
+        assert.equal(calls, 0);
+        const first = quota(hub);
+        const concurrent = quota(hub);
+        assert.equal(calls, 1);
+        reply({ok: true, json: async () => ({response: {groups: [{displayName: 'Gemini', buckets: [
+            {window: '5h', remainingFraction: 0, resetTime: '2026-11-25T12:00:00Z'},
+            {window: 'weekly'}, {disabled: true, remainingFraction: 1},
+        ]}]}})});
+        const groups = await first;
+        assert.deepEqual(groups, await concurrent);
+        assert.equal(groups[0].name, 'Gemini');
+        assert.deepEqual(groups[0].buckets.map(bucket => bucket.fraction), [0, null, null]);
+        assert.equal(groups[0].buckets[0].reset, '2026-11-25T12:00:00Z');
+        const failed = quota(hub);
+        reply({ok: false});
+        assert.equal(await failed, null);
+        const empty = quota(hub);
+        reply({ok: true, json: async () => ({response: {}})});
+        assert.deepEqual(await empty, []);
         assert.deepEqual(await handle(event, id), {
             used: 1600, limit: 10000, speed: 192, cacheRate: 0.5, firstToken: 1.25,
         });

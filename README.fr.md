@@ -26,7 +26,7 @@ Sur la capture, le bouton vert « 重新应用 » permet de réappliquer les ré
 
 ## Consulter les métriques de session
 
-Dès qu’un appel au modèle est enregistré pour la conversation, un anneau apparaît à droite du sélecteur de modèle dans la zone de saisie. Son remplissage indique la proportion estimée de la fenêtre de contexte déjà utilisée. Survolez-le pour voir le nombre de tokens restants, la vitesse de sortie, le taux de succès du cache et le délai avant le premier token. Cliquez pour épingler les détails, puis cliquez à nouveau pour les refermer.
+Survolez l’anneau à côté du sélecteur de modèle pour consulter le quota restant par groupe de modèles et par période. Survolez un pourcentage pour voir l’heure locale de la prochaine réinitialisation. Ces informations sont accessibles avant le premier message. Dès le premier appel enregistré, l’anneau indique l’utilisation estimée du contexte. Le panneau affiche aussi le nombre de tokens utilisés et la capacité totale, la vitesse de sortie, le taux de succès du cache et le délai avant le premier token. Cliquez pour épingler le panneau, puis cliquez à nouveau pour le refermer.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="Le panneau en chinois simplifié affiche le contexte utilisé, les tokens restants et la vitesse de sortie"></a>
 

@@ -38,8 +38,20 @@
       3: {used: 3000, limit: 10000, speed: 33, cacheRate: 0, firstToken: 1},
       4: {used: 4000, limit: 10000, speed: 44, cacheRate: 0.25, firstToken: 2},
     };
+    let quotaCalls = 0;
+    let quotaReply = [{name: 'Gemini Models', buckets: [
+      {name: '', window: 'weekly', fraction: 0.934, reset: null},
+      {name: 'Five Hour Limit Remaining', window: '', fraction: 1, reset: '2026-11-25T12:00:00Z'},
+    ]}, {name: 'Claude and GPT models', buckets: [
+      {name: '', window: '5h', fraction: 0, reset: null},
+      {name: '', window: 'weekly', fraction: null, reset: null},
+    ]}];
     window.require = () => ({ ipcRenderer: {
       invoke: async (channel, id) => {
+        if (channel === 'antigravity-i18n:model-quota') {
+          quotaCalls++;
+          return quotaReply;
+        }
         check('requests use the metrics channel', channel, 'antigravity-i18n:session-metrics');
         return metricsByID[id[0]] ?? null;
       },
@@ -60,7 +72,7 @@
       await settle(150);
       check('one ring in each conversation pane', document.querySelectorAll('.ai18n-usage-control').length, 4);
       check('left pane usage', progress('left'), '10%');
-      check('right pane missing a context limit', values('right').slice(0, 3).join('|'), '2,000|—|22 tok/s');
+      check('right pane missing a context limit', values('right').slice(0, 2).join('|'), '≈2k tokens|22 tok/s');
       check('side question uses its own data', progress('side'), '30%');
       check('read-only subagent uses its own data', progress('subagent'), '40%');
       check('read-only subagent ring stays in its toolbar', control('subagent').parentElement.tagName, 'NAV');
@@ -73,15 +85,24 @@
       check('send control stays inside the narrow toolbar',
         narrowFooter.lastElementChild.getBoundingClientRect().right <= narrowFooter.getBoundingClientRect().right + 1, true);
       check('no visible metrics text in toolbar', control('left').textContent, '');
+      check('closed panels do not fetch quota', quotaCalls, 0);
       control('left').dispatchEvent(new PointerEvent('pointerenter'));
       const detail = detailFor('left');
       check('no popover on a brief pointer pass', detail.matches(':popover-open'), false);
       await settle(270);
       check('details open on hover', detail.matches(':popover-open'), true);
-      check('metrics labels identify the estimate and average', [...detail.querySelectorAll('dt')].map(dt => dt.textContent).join('|'),
-        '上下文估算|估算余量|平均输出速度|缓存命中率|首 token 延迟');
-      check('context, headroom, speed, cache and latency', values('left').join('|'),
-        '1,000 / 10,000 · 10%|9,000|11 tok/s|50%|0.35 s');
+      const table = detail.querySelector('.ai18n-quota table');
+      const rowText = row => [...row.cells].map(cell => cell.textContent).join('|');
+      check('quota uses just a header and two group rows', table.rows.length, 3);
+      check('periods have compact localized headings', rowText(table.rows[0]).replace(/\s/g, ''), '模型剩余额度|每周|5小时');
+      check('quota is available while generating', rowText(table.rows[1]), 'Gemini|93.4%|100%');
+      check('periods align across groups and missing values differ from zero', rowText(table.rows[2]), 'Claude / GPT|—|0%');
+      check('reset time is available on the corresponding percentage', table.rows[1].cells[2].firstChild.title.startsWith('重置时间'), true);
+      check('quota section fits within four lines', table.offsetHeight <= 80, true);
+      check('context use has a single labeled row', [...detail.querySelectorAll('dt')].map(dt => dt.textContent).join('|'),
+        '上下文已用|平均输出速度|缓存命中率|首 token 延迟');
+      check('estimated share, used and total tokens, speed, cache and latency', values('left').join('|'),
+        '≈10% · 1k / 10k tokens|11 tok/s|50%|0.35 s');
       control('left').dispatchEvent(new PointerEvent('pointerleave'));
       detail.dispatchEvent(new PointerEvent('pointerenter'));
       await settle(165);
@@ -96,18 +117,38 @@
       document.body.dispatchEvent(new PointerEvent('pointerdown', {bubbles: true}));
       check('outside click closes details', detail.matches(':popover-open'), false);
 
-      metricsByID[1].speed = 19;
+      Object.assign(metricsByID[1], {speed: 19, used: 40681, limit: 512000});
+      metricsByID[2].used = 999;
       document.querySelector('[data-testid="input-cancel-button"]').remove();
       await settle(100);
-      check('generation end refreshes speed', values('left')[2], '19 tok/s');
+      check('generation end refreshes speed', values('left')[1], '19 tok/s');
+      check('large token counts use decimal thousands', values('left')[0], '≈7.9% · 40.7k / 512k tokens');
+      check('hover exposes the full token counts', detail.querySelector('dd').title, '40,681 / 512,000 tokens');
+      check('small token counts stay exact', values('right')[0], '≈999 tokens');
 
       const right = document.getElementById('right');
       right.dataset.cascadeId = '50000000-0000-0000-0000-000000000000';
       await settle(100);
-      check('switch clears measurements from the old conversation', values('right').join('|'), '—|—|—|—|—');
-      check('a conversation without data has no visible ring', control('right').hidden, true);
+      check('switch clears measurements from the old conversation', values('right').join('|'), '—|—|—|—');
+      check('a conversation without data still has a quota control', control('right').hidden, false);
       check('switching conversations keeps the ring after the model picker', control('right').previousElementSibling.dataset.testid,
         'model-selector-trigger');
+      right.removeAttribute('data-cascade-id');
+      await settle(100);
+      control('right').click();
+      await settle(30);
+      check('new chat without an ID can open quota', detailFor('right').querySelector('.ai18n-quota tbody th').textContent, 'Gemini');
+      let finishOld;
+      quotaReply = new Promise(resolve => { finishOld = resolve; });
+      control('left').click();
+      quotaReply = null;
+      control('right').click();
+      await settle(30);
+      finishOld([{name: 'old response', buckets: []}]);
+      await settle(30);
+      check('a late response does not overwrite the active panel', detailFor('right').querySelector('.ai18n-quota').textContent,
+        '暂无额度数据');
+      check('quota failure preserves conversation metrics', values('left')[1], '19 tok/s');
       right.hidden = true;
       await settle(100);
       check('hidden panes release their ring', Boolean(control('right')), false);

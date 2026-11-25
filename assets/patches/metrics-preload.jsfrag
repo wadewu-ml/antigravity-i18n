@@ -14,8 +14,12 @@
     const views = new Map();
     const requests = new Map();
     const count = new Intl.NumberFormat(labels.language);
+    const thousands = new Intl.NumberFormat(labels.language, { maximumFractionDigits: 1 });
+    const tokenCount = value => value < 1000 ? count.format(value) : thousands.format(value / 1000) + 'k';
     const decimal = new Intl.NumberFormat(labels.language, { maximumFractionDigits: 2 });
     const percent = new Intl.NumberFormat(labels.language, { style: 'percent', maximumFractionDigits: 1 });
+    const resetDate = new Intl.DateTimeFormat(labels.language, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    const hours = new Intl.NumberFormat(labels.language, { style: 'unit', unit: 'hour', unitDisplay: 'short' });
     let panelNumber = 0;
     let refreshTimer = 0;
     let activeDetail = null;
@@ -62,7 +66,7 @@
             '  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), black calc(100% - 1.5px)); }',
             '.ai18n-usage-detail { position: fixed; inset: auto; margin: 0; box-sizing: border-box;',
             '  padding: 12px; width: max-content; min-width: min(220px, calc(100vw - 16px));',
-            '  max-width: calc(100vw - 16px); border-radius: 10px;',
+            '  max-width: min(360px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: auto; overflow-wrap: anywhere; border-radius: 10px;',
             '  color: var(--vscode-editorWidget-foreground, var(--foreground, CanvasText));',
             '  background: var(--vscode-editorWidget-background, var(--popover, Canvas));',
             '  border: 1px solid var(--vscode-widget-border, var(--border, GrayText));',
@@ -76,6 +80,13 @@
             '  gap: 5px 16px; align-items: baseline; }',
             '.ai18n-usage-detail dt { color: var(--vscode-descriptionForeground, var(--muted-foreground, inherit)); }',
             '.ai18n-usage-detail dd { margin: 0; text-align: end; font-variant-numeric: tabular-nums; }',
+            '.ai18n-usage-meter[hidden] + dl { margin-top: 8px; }',
+            '.ai18n-quota { margin-top: 12px; padding-top: 10px; border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent); }',
+            '.ai18n-quota table { width: 100%; border-collapse: collapse; font: inherit; font-variant-numeric: tabular-nums; }',
+            '.ai18n-quota :is(th, td) { border: 0; padding: 4px 0 0 12px; text-align: end; font-weight: normal; }',
+            '.ai18n-quota th:first-child { padding-inline-start: 0; text-align: start; }',
+            '.ai18n-quota thead th { padding-top: 0; color: var(--vscode-descriptionForeground, inherit); }',
+            '.ai18n-quota thead th:first-child { color: inherit; font-weight: 600; }',
         ].join('\n');
         document.head.appendChild(style);
     }
@@ -106,6 +117,55 @@
         return null;
     }
 
+    function quotaPeriod(bucket) {
+        const windowName = bucket.window.trim().toLowerCase();
+        if (windowName === 'weekly') return labels.weekly;
+        if (windowName === 'daily') return labels.daily;
+        const duration = /^(\d+)h$/.exec(windowName);
+        if (duration) return hours.format(Number(duration[1]));
+        if (/^five[ -]hour limit remaining$/i.test(bucket.name)) return hours.format(5);
+        return bucket.name || '—';
+    }
+
+    function renderQuota(container, groups) {
+        const periods = [...new Set((groups ?? []).flatMap(group => group.buckets.map(quotaPeriod)))];
+        if (!periods.length) {
+            container.textContent = labels.quotaUnavailable;
+            return;
+        }
+        const table = document.createElement('table');
+        const header = table.createTHead().insertRow();
+        for (const label of [labels.quota, ...periods]) {
+            const heading = document.createElement('th');
+            heading.scope = 'col';
+            heading.textContent = label;
+            header.append(heading);
+        }
+        const body = table.createTBody();
+        for (const group of groups) {
+            const row = body.insertRow();
+            const name = document.createElement('th');
+            name.scope = 'row';
+            name.textContent = group.name.replace(/^(gemini) models$/i, '$1')
+                .replace(/^claude and gpt models$/i, 'Claude / GPT');
+            row.append(name);
+            const cells = new Map(periods.map(period => [period, row.insertCell()]));
+            for (const bucket of group.buckets) {
+                const cell = cells.get(quotaPeriod(bucket));
+                const balance = document.createElement('span');
+                balance.textContent = Number.isFinite(bucket.fraction) ? percent.format(bucket.fraction) : '—';
+                const timestamp = Date.parse(bucket.reset);
+                if (Number.isFinite(timestamp)) {
+                    balance.title = labels.resets + ' · ' + resetDate.format(timestamp);
+                }
+                if (cell.hasChildNodes()) cell.append(' / ');
+                cell.append(balance);
+            }
+            for (const cell of cells.values()) if (!cell.hasChildNodes()) cell.textContent = '—';
+        }
+        container.replaceChildren(table);
+    }
+
     function createView(id) {
         const button = document.createElement('button');
         button.type = 'button';
@@ -131,24 +191,32 @@
         meter.setAttribute('aria-hidden', 'true');
         const fill = document.createElement('span');
         meter.append(fill);
+        const contextList = document.createElement('dl');
         const list = document.createElement('dl');
-        const values = [labels.context, labels.remaining, labels.speed, labels.cache, labels.firstToken].map((label) => {
+        const values = [labels.context, labels.speed, labels.cache, labels.firstToken].map((label, index) => {
             const key = document.createElement('dt');
             key.textContent = label;
             const value = document.createElement('dd');
-            list.append(key, value);
+            (index === 0 ? contextList : list).append(key, value);
             return value;
         });
-        detail.append(title, meter, list);
+        const quota = document.createElement('section');
+        quota.className = 'ai18n-quota';
+        quota.setAttribute('aria-label', labels.quota);
+        detail.append(title, contextList, meter, list, quota);
         document.body.append(detail);
 
         let hoverTimer;
         let leaveTimer;
+        let quotaTimer;
+        let quotaEpoch = 0;
         let pinned = false;
         const view = { id, button, detail, meter, fill, values, close, pending: false };
         function close() {
             clearTimeout(hoverTimer);
             clearTimeout(leaveTimer);
+            clearTimeout(quotaTimer);
+            quotaEpoch++;
             pinned = false;
             if (detail.matches(':popover-open')) detail.hidePopover();
             button.setAttribute('aria-expanded', 'false');
@@ -159,9 +227,22 @@
             clearTimeout(leaveTimer);
             if (button.hidden || !button.isConnected) return;
             if (activeDetail && activeDetail !== view) activeDetail.close();
-            if (!detail.matches(':popover-open')) detail.showPopover();
+            if (detail.matches(':popover-open')) return;
+            quota.textContent = labels.loadingQuota;
+            detail.showPopover();
             activeDetail = view;
             button.setAttribute('aria-expanded', 'true');
+            position();
+            refreshQuota(++quotaEpoch);
+        }
+        async function refreshQuota(epoch) {
+            const groups = await ipcRenderer.invoke('antigravity-i18n:model-quota').catch(() => null);
+            if (epoch !== quotaEpoch) return;
+            renderQuota(quota, groups);
+            position();
+            quotaTimer = setTimeout(() => refreshQuota(epoch), 60000);
+        }
+        function position() {
             const rectangle = button.getBoundingClientRect();
             const width = detail.offsetWidth;
             const height = detail.offsetHeight;
@@ -197,24 +278,29 @@
     }
 
     function setMetrics(view, metrics) {
-        if (view.button.hidden !== !metrics) view.button.hidden = !metrics;
         const used = metrics?.used;
         const limit = metrics?.limit;
         const knownLimit = Number.isFinite(used) && Number.isFinite(limit) && limit > 0;
         const usedRatio = knownLimit ? used / limit : 0;
-        const remaining = knownLimit ? count.format(Math.max(0, limit - used)) : '—';
         const speed = Number.isFinite(metrics?.speed) ? decimal.format(metrics.speed) + ' tok/s' : '—';
         const progress = Math.max(0, Math.min(1, usedRatio)) * 100 + '%';
         view.button.style.setProperty('--ai18n-context-used', progress);
         if (view.meter.hidden !== !knownLimit) view.meter.hidden = !knownLimit;
         view.fill.style.width = progress;
-        const context = Number.isFinite(used) ? count.format(used) + (knownLimit
-            ? ' / ' + count.format(limit) + ' · ' + percent.format(usedRatio) : '') : '—';
-        const description = labels.title + ' · ' + labels.context + ' ' + context;
+        let context = '—';
+        let fullCount = '';
+        if (Number.isFinite(used)) {
+            const share = knownLimit ? percent.format(usedRatio) + ' · ' : '';
+            const unit = ' ' + labels.tokenUnit;
+            context = '≈' + share + tokenCount(used) + (knownLimit ? ' / ' + tokenCount(limit) : '') + unit;
+            fullCount = count.format(used) + (knownLimit ? ' / ' + count.format(limit) : '') + unit;
+        }
+        if (view.values[0].title !== fullCount) view.values[0].title = fullCount;
+        const description = labels.title + ' · ' + labels.quota + (metrics ? ' · ' + labels.context + ' ' + context : '');
         if (view.button.getAttribute('aria-label') !== description) view.button.setAttribute('aria-label', description);
         const cache = Number.isFinite(metrics?.cacheRate) ? percent.format(metrics.cacheRate) : '—';
         const firstToken = Number.isFinite(metrics?.firstToken) ? decimal.format(metrics.firstToken) + ' s' : '—';
-        [context, remaining, speed, cache, firstToken].forEach((value, index) => {
+        [context, speed, cache, firstToken].forEach((value, index) => {
             if (view.values[index].textContent !== value) view.values[index].textContent = value;
         });
     }
@@ -234,7 +320,7 @@
         const targets = new Map();
         for (const footer of footers) {
             const id = resolveFooter(footer, onlyMainFooter);
-            const slot = id && toolbarSlot(footer);
+            const slot = toolbarSlot(footer);
             if (slot) targets.set(footer, { id, slot });
         }
         // A read-only subagent pane can have a conversation without a composer.
@@ -263,7 +349,7 @@
             if (before !== view.button && (view.button.parentElement !== slot.parent || view.button.nextElementSibling !== before)) {
                 slot.parent.insertBefore(view.button, before);
             }
-            if (view.pending) continue;
+            if (!id || view.pending) continue;
             view.pending = true;
             requestMetrics(id).then((metrics) => {
                 view.pending = false;
@@ -308,7 +394,10 @@
             attributes: true,
             attributeFilter: ['data-cascade-id', 'data-active-tab-id', 'hidden'],
         });
-        document.addEventListener('visibilitychange', scheduleRefresh);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) activeDetail?.close();
+            else scheduleRefresh();
+        });
         // Some model calls write their metadata after the stop button disappears.
         // The main process checks file timestamps before querying SQLite again.
         setInterval(scheduleRefresh, 2000);

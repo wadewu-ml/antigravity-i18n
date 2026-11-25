@@ -190,7 +190,7 @@
     elBtnPrimaryAction.disabled = isOperating || (!hasChanges && !canReapply);
     elSessionMetricsDetail.textContent = metricsChanged
       ? (elSessionMetrics.checked ? '应用后开启' : '应用后关闭')
-      : '在 Antigravity 的模型选择器旁显示上下文用量。';
+      : '在模型选择器旁查看上下文用量和模型剩余额度。';
   }
 
   function renderChips() {

@@ -26,7 +26,7 @@ Na imagem, o botão verde “重新应用” reaplica as configurações.
 
 ## Consultar as métricas da sessão
 
-Assim que uma chamada ao modelo é registrada no chat, aparece um anel à direita do seletor de modelo na caixa de mensagem. O preenchimento do anel mostra a proporção estimada da janela de contexto em uso. Passe o ponteiro sobre ele para ver os tokens restantes, a velocidade de saída, a taxa de acertos do cache e o tempo até o primeiro token. Clique para fixar os detalhes e clique de novo para fechá-los.
+Passe o ponteiro sobre o anel ao lado do seletor de modelo para ver a cota restante de cada grupo por período. Passe o ponteiro sobre uma porcentagem para ver o horário local da próxima redefinição. Você pode consultar a cota antes de enviar a primeira mensagem. Após a primeira chamada registrada, o anel indica o uso estimado do contexto e o painel mostra os tokens usados e a capacidade total, a velocidade de saída, a taxa de acertos do cache e o tempo até o primeiro token. Clique para fixar o painel e clique novamente para fechá-lo.
 
 <a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="O painel em chinês simplificado mostra o uso do contexto, os tokens restantes e a velocidade de saída"></a>
 
