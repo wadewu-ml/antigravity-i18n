@@ -53,10 +53,14 @@ verify(async () => {
     input.value='3'; input.dispatchEvent(new Event('input'));
     check('drag previews without switching',calls.length,0);
     check('preview shows extra high',input.getAttribute('aria-valuetext'),'极高');
+    check('preview alone does not trigger the maximum accent',host.hasAttribute('data-maximum'),false);
     input.dispatchEvent(new Event('change'));
     check('commit uses original effort key',calls.join(','),'xhigh');
     await settle();
+    check('entering maximum accents the handle',host.hasAttribute('data-maximum'),true);
+    check('entering maximum gives arrival feedback',host.hasAttribute('data-arrived'),true);
     input.value='0'; input.dispatchEvent(new Event('change')); await settle();
+    check('leaving maximum clears its accent',host.hasAttribute('data-maximum'),false);
     check('two changes in the same menu',calls.join(','),'xhigh,low');
     check('slider did not invoke select-and-dismiss',dismissals,0);
     // Reused host elements can still point into the previous render even
@@ -79,6 +83,8 @@ verify(async () => {
     model.className='unlocked'; await settle();
     const newInput=usage.parentElement.previousElementSibling.shadowRoot.querySelector('input');
     check('changed model has only its native steps',newInput.max,'2');
+    check('three-level model accents its own maximum',host.hasAttribute('data-maximum'),true);
+    check('mounting at maximum does not replay arrival',host.hasAttribute('data-arrived'),false);
     check('selection follows changed model',newInput.value,'2');
     trigger.props.selected=false;
     model.className='inactive'; await settle();
