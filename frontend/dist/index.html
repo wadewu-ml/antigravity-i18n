@@ -14,40 +14,41 @@
         <div class="title-group">
           <h1 class="app-title">Antigravity 多语言工具</h1>
           <span class="version-tag" id="appVersionBadge">&nbsp;</span>
-          <button class="text-link" id="btnCheckUpdate">检查更新</button>
-          <span class="section-note" id="updateStatus" role="status"></span>
+          <span class="update-status" id="updateStatus" role="status"></span>
         </div>
       </div>
-      <button class="icon-btn text-link" id="btnAbout">关于</button>
+      <div class="header-actions">
+        <button class="btn-sm btn-ghost" id="btnCheckUpdate">检查更新</button>
+        <button class="btn-sm btn-subtle" id="btnAbout">关于</button>
+      </div>
     </header>
 
-    <section class="card app-card">
+    <section class="card status-overview-card" id="statusCard">
       <div class="card-header-line">
         <div class="app-meta">
           <span class="app-name" id="appName">Antigravity</span>
           <span class="app-version-badge" id="appVersion">检测中...</span>
+          <div class="status-pill" id="statusPill">
+            <span class="status-dot" id="statusDot"></span>
+            <span class="status-label" id="statusLabel">检测中...</span>
+          </div>
         </div>
         <button class="btn-sm btn-ghost" id="btnChangePath">更改位置</button>
       </div>
-      <div class="path-display" id="appPathDisplay" title="点击更改路径">正在检测 Antigravity 安装路径...</div>
-    </section>
 
-    <section class="card hero-card" id="statusCard">
-      <div class="status-pill" id="statusPill">
-        <span class="status-dot" id="statusDot"></span>
-        <span class="status-label" id="statusLabel">检测中...</span>
-      </div>
+      <div class="path-display" id="appPathDisplay" title="点击更改路径">正在检测 Antigravity 安装路径...</div>
       <p class="status-desc" id="statusDesc">正在读取 app.asar 的实际状态...</p>
 
       <div class="progress-box hidden" id="progressBox">
-        <div class="progress-info">
-          <span class="progress-stage" id="progressStage">正在准备...</span>
+        <div class="progress-main">
           <span class="spinner"></span>
+          <div class="progress-text">
+            <span class="progress-stage" id="progressStage">正在准备...</span>
+            <span class="progress-detail" id="progressDetail">请稍候...</span>
+          </div>
         </div>
-        <div class="progress-detail" id="progressDetail">请稍候...</div>
-        <button class="text-link hidden" id="btnCancelDownload">取消下载</button>
+        <button class="btn-xs btn-ghost hidden" id="btnCancelDownload">取消下载</button>
       </div>
-
     </section>
 
     <section class="card locale-card">
@@ -56,27 +57,26 @@
         <span class="section-note" id="localeNote">正在读取语言包...</span>
       </div>
       <div class="chips" id="localeChips"></div>
+
       <div class="feature-setting">
-        <div>
+        <div class="feature-copy">
           <label class="section-title" for="sessionMetrics">会话指标</label>
           <p class="setting-detail" id="sessionMetricsDetail">在 Antigravity 的模型选择器旁显示上下文用量。</p>
         </div>
         <input class="setting-switch" type="checkbox" role="switch" id="sessionMetrics"
           aria-describedby="sessionMetricsDetail" disabled>
       </div>
+
       <div class="action-row" id="actionRow">
-        <div class="secondary-actions">
-          <button class="text-link hidden" id="btnSecondaryAction">打开 Antigravity</button>
+        <div class="danger-actions">
           <button class="text-link-danger hidden" id="btnRestore">还原官方版本</button>
         </div>
-        <button class="btn btn-primary" id="btnPrimaryAction">应用更改</button>
+        <div class="primary-actions">
+          <button class="btn btn-outline hidden" id="btnSecondaryAction">打开 Antigravity</button>
+          <button class="btn btn-primary" id="btnPrimaryAction">应用更改</button>
+        </div>
       </div>
     </section>
-
-    <footer class="app-footer">
-      <button class="text-link" id="btnToggleLogs">查看运行日志 ▾</button>
-      <span class="footer-note">便携单文件版 · 词典与软件版本配套</span>
-    </footer>
 
     <div class="log-drawer hidden" id="logDrawer">
       <div class="log-drawer-header">
@@ -88,6 +88,11 @@
       </div>
       <pre class="log-content" id="logContent">暂无操作日志。</pre>
     </div>
+
+    <footer class="app-footer">
+      <button class="text-link" id="btnToggleLogs">查看运行日志 ▾</button>
+      <span class="footer-note">便携单文件版 · 词典与软件版本配套</span>
+    </footer>
   </div>
 
   <div class="modal-backdrop hidden" id="aboutModal">
@@ -98,7 +103,7 @@
       </p>
       <ul class="about-features">
         <li><b>按字节还原</b>：应用前保留一份干净的 app.asar，还原后与官方版本逐字节一致。</li>
-        <li><b>会话指标</b>在模型选择器旁显示上下文用量，悬停预览，点击固定详情。</li>
+        <li><b>会话指标</b>：在模型选择器旁显示上下文用量，悬停预览，点击固定详情。</li>
         <li><b>完整校验与回滚</b>：重算 offset 与 integrity，任何一步失败都会自动恢复原状。</li>
       </ul>
       <p class="modal-note">本工具为社区维护的非官方本地化工具，与 Antigravity 官方无关。</p>

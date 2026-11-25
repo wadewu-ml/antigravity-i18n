@@ -207,11 +207,13 @@
 
       var name = document.createElement('span');
       name.textContent = loc.name;
-      var cov = document.createElement('span');
-      cov.className = 'cov';
-      cov.textContent = loc.coverage + '%';
       chip.appendChild(name);
-      chip.appendChild(cov);
+      if (loc.coverage < 100) {
+        var cov = document.createElement('span');
+        cov.className = 'cov';
+        cov.textContent = loc.coverage + '%';
+        chip.appendChild(cov);
+      }
 
       chip.addEventListener('click', function () {
         selectedLocale = loc.code;

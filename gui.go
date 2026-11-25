@@ -29,14 +29,14 @@ func runWails(svc *core.Service) {
 	_ = os.Unsetenv(selfupdate.RestartDirEnv)
 	if err := wails.Run(&options.App{
 		Title:     "Antigravity 多语言工具",
-		Width:     860,
-		Height:    760,
+		Width:     760,
+		Height:    580,
 		MinWidth:  640,
-		MinHeight: 620,
+		MinHeight: 520,
 		AssetServer: &assetserver.Options{
 			Assets: distFS,
 		},
-		BackgroundColour: &options.RGBA{R: 250, G: 251, B: 253, A: 255},
+		BackgroundColour: &options.RGBA{R: 244, G: 246, B: 249, A: 255},
 		OnStartup:        app.startup,
 		OnBeforeClose:    app.beforeClose,
 		ErrorFormatter:   formatAppError,
