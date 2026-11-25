@@ -91,6 +91,7 @@ function agMountEffortSliders(labels) {
             value.textContent = state.levels[index].label;
             slider.setAttribute('aria-valuetext', value.textContent);
             host.style.setProperty('--position', (100 * fraction) + '%');
+            host.toggleAttribute('data-maximum', index === state.levels.length - 1);
         }
         function stopDrag() {
             if (!drag) return;
@@ -138,24 +139,40 @@ function agMountEffortSliders(labels) {
               .track {position:absolute; inset:5px 0; border-radius:99px; background:light-dark(#e1e1e3,#39393c)}
               .travel {position:absolute; inset:0 var(--inset); pointer-events:none}
               .fill {position:absolute; inset:0 calc(100% - var(--position) - var(--inset)) 0 calc(-1 * var(--inset));
-                border-radius:99px; background:light-dark(#101011,#b0b0b5); transition:right 140ms ease-out}
+                border-radius:99px; overflow:hidden; background:light-dark(#101011,#b0b0b5); transition:right 140ms ease-out}
+              .aurora {position:absolute; inset:0; opacity:0;
+                background:linear-gradient(105deg,#2847bc,#704dff 38%,#af76ff 65%,#6155fb);
+                mask-image:linear-gradient(to right,transparent 32%,#000 66%);
+                mask-size:310% 100%; mask-position:0% 50%;
+                transition:mask-position 680ms cubic-bezier(.2,.7,.25,1),opacity 220ms ease}
+              .aurora::before,.aurora::after {content:"";position:absolute;inset:0}
+              .aurora::before {background:
+                radial-gradient(ellipse at 70% 45%,#d3aaffbb,transparent 40%),
+                linear-gradient(110deg,#214deb 8%,#8153ff 49%,#8c78ff 70%,#4359f8);
+                background-size:180% 165%; opacity:.85}
+              .aurora::after {background:
+                radial-gradient(circle at 11px 35%,#ffffffe6 1px,transparent 1.6px) 0 0 / 59px 100%,
+                radial-gradient(circle at 38px 68%,#fff9 .8px,transparent 1.4px) 0 0 / 77px 100%,
+                radial-gradient(circle at 23px 52%,#fff6 .7px,transparent 1.1px) 0 0 / 47px 100%}
+              :host([data-maximum]) .aurora {mask-position:100% 50%; opacity:1}
+              :host([data-maximum]) output {color:light-dark(#7642d1,#be9aff)}
               .handle {position:absolute; left:var(--position); top:2px; bottom:2px; width:var(--handle);
                 translate:-50% 0; border-radius:99px; display:grid; place-content:center; gap:2px;
                 background:#fff; box-shadow:0 0 0 1px #00000012,0 1px 3px #0003; transition:left 140ms ease-out}
               .handle::before,.handle::after {content:""; width:12px; height:2px; border-radius:2px; background:#c9c9cb}
-              :host([data-maximum]) .handle {box-shadow:inset 0 0 0 1px #c6a668,0 1px 3px #0003}
-              :host([data-maximum]) .handle::before,:host([data-maximum]) .handle::after {background:#ad8846}
               @media(prefers-reduced-motion:no-preference){
-                :host([data-arrived]) .handle {transform-origin:right center; animation:seat 285ms ease-out}
-                @keyframes seat {0%,100% {transform:scale(1)} 35% {transform:scale(.92,1.07)} 70% {transform:scale(1.025,.98)}}
+                :host([data-maximum]) .aurora::before {animation:flow 3.8s ease-in-out infinite alternate}
+                :host([data-maximum]) .aurora::after {animation:drift 4s linear infinite}
+                @keyframes flow {from {background-position:0% 20%} to {background-position:100% 80%}}
+                @keyframes drift {to {background-position:-59px 0,-77px 0,47px 0}}
               }
               :host([data-dragging]) .handle,:host([data-dragging]) .fill {transition:none}
               input {position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; touch-action:none}
               .rail:has(input:focus-visible) .track {outline:1px solid currentColor; outline-offset:2px}
-              @media(prefers-reduced-motion:reduce){.fill,.handle {transition:none}}
-              @media(forced-colors:active){input {opacity:1} .track {display:none} output {color:CanvasText}}
+              @media(prefers-reduced-motion:reduce){.fill,.handle,.aurora {transition:none}}
+              @media(forced-colors:active){input {opacity:1} .track {display:none} :host output {color:CanvasText}}
             </style><div class="control"><header><label for="effort"></label><output for="effort"></output></header>
-              <div class="rail"><div class="track" aria-hidden="true"><div class="travel"><div class="fill"></div><div class="handle"></div></div></div>
+              <div class="rail"><div class="track" aria-hidden="true"><div class="travel"><div class="fill"><div class="aurora"></div></div><div class="handle"></div></div></div>
               <input id="effort" type="range" min="0" step="1"></div></div>`;
             shadow.querySelector('label').textContent = labels['Thinking effort'];
             value = shadow.querySelector('output');
@@ -207,13 +224,8 @@ function agMountEffortSliders(labels) {
             const changed = !state || state.base !== current.base || state.index !== current.index ||
                 state.levels.length !== current.levels.length || state.levels.some((v,i) =>
                     v.id !== current.levels[i].id || v.label !== current.levels[i].label);
-            const previous = state;
             state = current;
             if (changed) {
-                const maximum = current.index === current.levels.length - 1;
-                const arrived = maximum && previous?.base === current.base && previous.index < previous.levels.length - 1;
-                host.toggleAttribute('data-maximum', maximum);
-                host.toggleAttribute('data-arrived', arrived);
                 stopDrag();
                 slider.max = String(state.levels.length - 1);
                 slider.value = String(state.index);
