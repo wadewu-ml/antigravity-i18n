@@ -149,12 +149,6 @@ func atomicReplaceFile(tempPath, destPath string, verify func(staged string) err
 	if err := os.MkdirAll(filepath.Dir(destPath), 0o755); err != nil {
 		return err
 	}
-	info, err := os.Stat(destPath)
-	mode := os.FileMode(0o644)
-	if err == nil {
-		mode = info.Mode().Perm()
-	}
-
 	// Stage inside the destination directory so the rename never crosses a
 	// filesystem boundary, where it would stop being atomic.
 	staged, err := os.CreateTemp(filepath.Dir(destPath), ".antigravity-i18n-stage-*.asar")
@@ -180,6 +174,15 @@ func atomicReplaceFile(tempPath, destPath string, verify func(staged string) err
 	}
 	if err := staged.Close(); err != nil {
 		return err
+	}
+	return commitStagedFile(stagedPath, destPath, verify)
+}
+
+// commitStagedFile takes a synced and closed file beside destPath.
+func commitStagedFile(stagedPath, destPath string, verify func(staged string) error) error {
+	mode := os.FileMode(0o644)
+	if info, err := os.Stat(destPath); err == nil {
+		mode = info.Mode().Perm()
 	}
 	if err := os.Chmod(stagedPath, mode); err != nil {
 		return err

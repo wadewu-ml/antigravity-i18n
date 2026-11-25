@@ -4,7 +4,7 @@ Neun Sprachpakete übersetzen Einstellungen, Bedienelemente im Chat, Menüs und 
 
 [Für Windows x64 herunterladen](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Versionen](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-Getestet mit **Antigravity App 2.35.1**.
+Getestet mit **Antigravity App 2.35.1**. Die portable EXE enthält alle neun Sprachpakete.
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · **Deutsch** · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -20,11 +20,11 @@ Zur Auswahl stehen vereinfachtes und traditionelles Chinesisch, Japanisch, Korea
 
 Mit „Beenden erzwingen und erneut versuchen“ können Sie bei einer entsprechenden Aufforderung das Beenden erzwingen und den Vorgang wiederholen. Laufende Sitzungen werden dabei unterbrochen und ungespeicherte Änderungen können verloren gehen.
 
-Um den Regler zu verwenden, aktivieren Sie im Tool den Schalter unter den Sitzungsmetriken. Wenden Sie die Änderungen an und öffnen Sie die Modellauswahl. Bei Modellen mit einstellbarem Denkaufwand erscheint über der Nutzungsanzeige ein Regler. Ziehen Sie ihn auf die gewünschte Stufe und lassen Sie ihn los.
+Um den Regler zu verwenden, aktivieren Sie im Tool den Schalter unter den Sitzungsmetriken. Beide Funktionen lassen sich unabhängig voneinander und auch mit der englischen Oberfläche verwenden. Wenden Sie die Änderungen an und öffnen Sie die Modellauswahl. Bei Modellen mit einstellbarem Denkaufwand erscheint über der Nutzungsanzeige ein Regler. Ziehen Sie ihn auf die gewünschte Stufe und lassen Sie ihn los.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Einstellungsfenster mit vereinfachtem Chinesisch als Sprache und aktivierten Sitzungsmetriken"></a>
 
-Die grüne Schaltfläche im Bild trägt die Aufschrift „重新应用“ (erneut anwenden).
+Über die Schaltfläche „重新应用“ (erneut anwenden) unten rechts lassen sich die aktuellen Einstellungen erneut anwenden.
 
 ## Sitzungsmetriken ablesen
 
@@ -51,6 +51,7 @@ Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, verg
 | Sprachcodes auflisten | `.\antigravity-i18n.exe locales` |
 | Deutsch anwenden | `.\antigravity-i18n.exe apply --locale de` |
 | Englisch mit Sitzungsmetriken verwenden | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| Englisch mit dem Regler für den Denkaufwand verwenden | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | Aktuelle Einstellungen anzeigen | `.\antigravity-i18n.exe status` |
 | Offizielle Version wiederherstellen | `.\antigravity-i18n.exe restore` |
 | Alle Optionen anzeigen | `.\antigravity-i18n.exe --help` |

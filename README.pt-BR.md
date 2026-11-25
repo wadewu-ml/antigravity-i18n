@@ -4,7 +4,7 @@ Nove pacotes de idiomas traduzem as configurações, os controles do chat, os me
 
 [Baixar para Windows x64](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Versões](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-Compatibilidade verificada com o **Antigravity App 2.35.1**.
+Compatibilidade verificada com o **Antigravity App 2.35.1**. O EXE portátil inclui os nove pacotes de idiomas.
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · **Português (Brasil)** · [Русский](./README.ru.md)
 
@@ -20,11 +20,11 @@ Os idiomas disponíveis são chinês simplificado, chinês tradicional, japonês
 
 Se a ferramenta pedir que você encerre o Antigravity, a opção “Forçar encerramento e tentar novamente” força o encerramento e tenta de novo. Isso interrompe as sessões em andamento e pode descartar alterações que ainda não foram salvas.
 
-Para ativar o controle deslizante, ligue o interruptor abaixo das métricas da sessão na ferramenta. Aplique as alterações e abra o seletor de modelos. Se o modelo permitir ajustar o esforço de raciocínio, um controle deslizante aparecerá acima da opção de uso. Arraste e solte para aplicar o nível escolhido.
+Para ativar o controle deslizante, ligue o interruptor abaixo das métricas da sessão na ferramenta. Os dois recursos podem ser usados separadamente, inclusive com a interface em inglês. Aplique as alterações e abra o seletor de modelos. Se o modelo permitir ajustar o esforço de raciocínio, um controle deslizante aparecerá acima da opção de uso. Arraste e solte para aplicar o nível escolhido.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Janela de configurações com chinês simplificado selecionado e métricas da sessão ativadas"></a>
 
-Na imagem, o botão verde “重新应用” reaplica as configurações.
+O botão “重新应用”, no canto inferior direito, reaplica as configurações atuais.
 
 ## Consultar as métricas da sessão
 
@@ -51,6 +51,7 @@ Abra o PowerShell na pasta que contém `antigravity-i18n.exe`.
 | Listar os códigos de idioma | `.\antigravity-i18n.exe locales` |
 | Aplicar português do Brasil | `.\antigravity-i18n.exe apply --locale pt-BR` |
 | Usar o inglês oficial com métricas | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| Usar o inglês oficial com o controle de esforço de raciocínio | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | Ver as configurações atuais | `.\antigravity-i18n.exe status` |
 | Restaurar a versão oficial | `.\antigravity-i18n.exe restore` |
 | Ver todas as opções | `.\antigravity-i18n.exe --help` |

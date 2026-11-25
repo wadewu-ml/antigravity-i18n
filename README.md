@@ -1,10 +1,10 @@
 # <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
 
-Nine language packs translate settings, chat controls, menus, and quit prompts in the Google Antigravity desktop app for Windows. You can also see how much context is left and how fast the model responded, right in the chat input. Once your settings are applied, you can close the tool.
+Nine language packs translate settings, chat controls, menus, and quit prompts in the Google Antigravity desktop app for Windows. Optional controls show session metrics and model quotas by the chat input and add a thinking-effort slider to the model picker. Once your settings are applied, you can close the tool.
 
 [Download for Windows x64](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Releases](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-Tested with **Antigravity App 2.35.1**.
+Tested with **Antigravity App 2.35.1**. The portable EXE includes all nine language packs.
 
 [简体中文](./README.zh-CN.md) · **English** · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -14,17 +14,17 @@ Tested with **Antigravity App 2.35.1**.
 
 The packs cover Simplified Chinese, Traditional Chinese, Japanese, Korean, German, Spanish, French, Brazilian Portuguese, and Russian. The setup tool uses Simplified Chinese.
 
-1. Open `antigravity-i18n.exe`. If the installation folder is wrong, use the button beside the path to select the folder containing `Antigravity.exe`.
+1. Open `antigravity-i18n.exe`. To select another installation, click Change location (更改位置) and choose the folder containing `Antigravity.exe`.
 2. Choose your language. To see session metrics, turn on the switch below the language list. You can also use it with English.
 3. Save your work, quit Antigravity, and click Apply changes (应用更改) at the bottom right. Antigravity will reopen.
 
 If prompted to quit, save your work first. Forcing Antigravity to close interrupts active sessions and can discard unsaved edits.
 
-To enable the optional slider, turn on the switch below Session metrics in the setup tool and apply your changes. Then open the model picker. For models with selectable thinking effort, drag the slider above View Usage and release it to apply the level.
+To use the thinking-effort slider, turn on the second switch (思考强度滑块) and apply your changes. The two switches work independently and can be used with the built-in English interface. For models with selectable thinking effort, drag the slider above View Usage and release it to apply the level.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Settings window with Simplified Chinese selected and session metrics enabled"></a>
 
-The green button shown here reads 重新应用 (Reapply).
+Click Reapply (重新应用) at the bottom right to apply the current settings again.
 
 ## Read session metrics
 
@@ -51,6 +51,7 @@ Open PowerShell in the folder containing `antigravity-i18n.exe`.
 | List language codes | `.\antigravity-i18n.exe locales` |
 | Apply Simplified Chinese | `.\antigravity-i18n.exe apply --locale zh-CN` |
 | Use built-in English with metrics | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| Use built-in English with the thinking-effort slider | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | Check current settings | `.\antigravity-i18n.exe status` |
 | Restore the official version | `.\antigravity-i18n.exe restore` |
 | See all options | `.\antigravity-i18n.exe --help` |

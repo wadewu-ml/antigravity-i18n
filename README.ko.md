@@ -4,7 +4,7 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 [Windows x64 다운로드](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [릴리스](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-**Antigravity App 2.35.1**에서 호환성을 확인했습니다.
+**Antigravity App 2.35.1**에서 호환성을 확인했습니다. 휴대용 EXE에 언어 팩 9개가 모두 포함되어 있습니다.
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · **한국어** · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -20,11 +20,11 @@ Windows용 Google Antigravity의 설정, 채팅 버튼, 메뉴, 종료 안내를
 
 종료 안내에서 ‘강제 종료 후 다시 시도’를 선택하면 Antigravity를 강제로 종료하고 다시 시도합니다. 진행 중인 세션이 중단되며 저장하지 않은 변경 사항이 사라질 수 있습니다.
 
-슬라이더를 사용하려면 설정 도구에서 세션 지표 아래의 스위치를 켜고 변경 사항을 적용한 뒤 모델 선택 메뉴를 여세요. 추론 강도를 선택할 수 있는 모델에는 사용량 항목 위에 슬라이더가 표시됩니다. 슬라이더를 끌어 단계를 확인하고 놓으면 적용됩니다.
+슬라이더를 사용하려면 설정 도구에서 세션 지표 아래의 스위치를 켜고 변경 사항을 적용한 뒤 모델 선택 메뉴를 여세요. 두 기능은 각각 켤 수 있으며 기본 영어 인터페이스에서도 사용할 수 있습니다. 추론 강도를 선택할 수 있는 모델에는 사용량 항목 위에 슬라이더가 표시됩니다. 슬라이더를 끌어 단계를 확인하고 놓으면 적용됩니다.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="중국어 간체가 선택되고 세션 지표가 켜진 설정 화면"></a>
 
-화면 오른쪽 아래의 초록색 ‘重新应用’ 버튼을 누르면 설정이 다시 적용됩니다.
+오른쪽 아래 ‘重新应用’ 버튼을 누르면 현재 설정이 다시 적용됩니다.
 
 ## 세션 지표 보기
 
@@ -51,6 +51,7 @@ Antigravity 업데이트 후 번역이나 지표가 사라지면 이 페이지 �
 | 언어 코드 목록 보기 | `.\antigravity-i18n.exe locales` |
 | 한국어 적용 | `.\antigravity-i18n.exe apply --locale ko` |
 | 공식 영어 및 지표 사용 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 기본 영어에서 추론 강도 슬라이더 사용 | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | 현재 설정 확인 | `.\antigravity-i18n.exe status` |
 | 공식 버전 복원 | `.\antigravity-i18n.exe restore` |
 | 모든 옵션 보기 | `.\antigravity-i18n.exe --help` |

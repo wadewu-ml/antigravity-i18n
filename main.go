@@ -11,8 +11,12 @@ import (
 // store is built once and shared, so a window click and a console command can
 // never disagree about which language packs exist.
 func main() {
-	store, err := core.NewLocaleStore(assetFS("assets"), assetFS("assets"),
-		"locales", "patches")
+	locales, err := openLocaleAssets()
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "error loading the bundled locales:", err)
+		os.Exit(1)
+	}
+	store, err := core.NewLocaleStore(locales, patchesFS, "assets/locales", "assets/patches")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "error:", err)
 		os.Exit(1)

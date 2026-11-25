@@ -7,6 +7,7 @@
   'use strict';
 
   var currentStatus = null;
+  var statusRequest = 0;
   var locales = [];
   var selectedLocale = '';
   var isOperating = false;
@@ -127,9 +128,11 @@
       elStatusDesc.textContent = '窗口运行库没有就绪，请重新启动本工具。';
       return Promise.resolve();
     }
+    var request = ++statusRequest;
     return app.GetStatus().then(function (st) {
-      setStatus(st, false);
+      if (request === statusRequest) setStatus(st, false);
     }).catch(function (err) {
+      if (request !== statusRequest) return;
       currentStatus = null;
       renderPrimaryLabel();
       elStatusPill.className = 'status-pill danger';
@@ -333,11 +336,14 @@
 
   function handleChangePath() {
     var app = backend();
-    if (!app) return;
+    if (!app || isOperating) return;
+    setOperatingState(true, '正在切换安装位置', '请选择 Antigravity 安装目录');
     app.SelectAppDir().then(function (selected) {
       if (!selected) return null;
-      setOperatingState(true, '正在切换安装位置', selected);
+      elProgressDetail.textContent = selected;
       return app.SetAppDir(selected).then(function (st) {
+        // Invalidate any status request for the previously selected directory.
+        statusRequest++;
         setStatus(st, true);
       });
     }).catch(function (err) {

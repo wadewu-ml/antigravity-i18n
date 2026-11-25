@@ -4,7 +4,7 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 [Windows x64 版をダウンロード](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [リリース一覧](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-対応を確認したバージョンは **Antigravity App 2.35.1** です。
+対応を確認したバージョンは **Antigravity App 2.35.1** です。ポータブル版の EXE に全 9 言語のパックが含まれています。
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · **日本語** · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -20,11 +20,11 @@ Windows 版 Google Antigravity の設定、チャットのボタン、メニュ�
 
 終了を求められたときに「強制終了して再試行」を選ぶと、Antigravity が強制終了して処理を再試行します。進行中のセッションは中断され、未保存の変更が失われることがあります。
 
-スライダーを使うには、設定ツールでセッション指標の下のスイッチをオンにし、変更を適用してからモデル選択メニューを開きます。推論の強度を選べるモデルでは、使用量の項目の上にスライダーが表示されます。ドラッグで段階を確認し、離すと適用されます。
+スライダーを使うには、設定ツールでセッション指標の下のスイッチをオンにし、変更を適用してからモデル選択メニューを開きます。セッション指標とスライダーは個別に有効にでき、標準の英語表示でも使えます。推論の強度を選べるモデルでは、使用量の項目の上にスライダーが表示されます。ドラッグで段階を確認し、離すと適用されます。
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="簡体字中国語が選択され、セッション指標が有効になっている設定画面"></a>
 
-画像の右下にある緑色の「重新应用」ボタンで、設定を再適用できます。
+右下の「重新应用」ボタンで、現在の設定を再適用できます。
 
 ## セッション指標を見る
 
@@ -51,6 +51,7 @@ Antigravity の更新後に翻訳や指標が消えた場合は、このペー�
 | 言語コードを一覧表示 | `.\antigravity-i18n.exe locales` |
 | 日本語を適用 | `.\antigravity-i18n.exe apply --locale ja` |
 | 公式英語で指標を表示 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 標準の英語表示で推論強度スライダーを使う | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | 現在の設定を確認 | `.\antigravity-i18n.exe status` |
 | 公式版に復元 | `.\antigravity-i18n.exe restore` |
 | 全オプションを表示 | `.\antigravity-i18n.exe --help` |

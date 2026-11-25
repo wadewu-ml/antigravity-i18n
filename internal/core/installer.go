@@ -11,7 +11,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -61,16 +60,6 @@ func assertArchiveUnchanged(path, expected string) error {
 	return nil
 }
 
-// detectPatchState reports whether the archive is patched, or nil when the
-// archive cannot be read at all.
-func detectPatchState(asarPath string) *bool {
-	patched, err := detectPatchInArchive(asarPath)
-	if err != nil {
-		return nil
-	}
-	return &patched
-}
-
 // archiveLocaleRe parses the locale header of an installed patch. The engine
 // declares its own locale, so an installed archive is authoritative about which
 // language is active instead of a state marker having to be trusted.
@@ -81,36 +70,59 @@ type archiveFeatures struct {
 	effortSlider   bool
 }
 
-// readArchiveLocale reads the locale and enabled features from the Hub preload.
-func readArchiveLocale(asarPath string) (code, name string, features archiveFeatures, ok bool) {
-	arc, err := ReadArchive(asarPath)
+type archiveState struct {
+	identity   *Identity
+	patched    bool
+	language   string
+	localeName string
+	features   archiveFeatures
+}
+
+// readArchiveState reads all status fields from the same archive snapshot.
+func readArchiveState(path string, includeLocale bool) (archiveState, error) {
+	arc, file, err := openArchive(path)
 	if err != nil {
-		return "", "", archiveFeatures{}, false
+		return archiveState{}, fmt.Errorf("could not read Antigravity archive %s: %w", path, err)
 	}
-	preload, err := arc.ReadFile("dist/preload.js")
+	defer file.Close()
+	id := arc.readIdentity(file)
+	if id == nil || id.Name != "antigravity" {
+		return archiveState{}, fmt.Errorf("could not verify Antigravity archive identity: %s", path)
+	}
+	patched, err := detectPatchInArchive(file)
 	if err != nil {
-		return "", "", archiveFeatures{}, false
+		return archiveState{}, err
+	}
+	state := archiveState{identity: id, patched: patched}
+	if patched && includeLocale {
+		state.language, state.localeName, state.features = readArchiveLocale(arc, file)
+	}
+	return state, nil
+}
+
+// readArchiveLocale reads the locale and enabled features from the Hub preload.
+func readArchiveLocale(arc *Archive, file *os.File) (code, name string, features archiveFeatures) {
+	preload, err := arc.readFile(file, "dist/preload.js", arc.payloadSize)
+	if err != nil {
+		return "", "", archiveFeatures{}
 	}
 	features.sessionMetrics = bytes.Contains(preload, []byte(sessionMetricsMarker))
 	features.effortSlider = bytes.Contains(preload, []byte(effortSliderMarker))
 	m := archiveLocaleRe.FindSubmatch(preload)
 	if m == nil {
 		if features.sessionMetrics || features.effortSlider {
-			return EnglishLocale, "English", features, true
+			return EnglishLocale, "English", features
 		}
-		return "", "", archiveFeatures{}, false
+		return "", "", archiveFeatures{}
 	}
 	var header struct {
 		Language string `json:"language"`
 		Name     string `json:"name"`
 	}
-	if err := json.Unmarshal(m[1], &header); err != nil {
-		return "", "", archiveFeatures{}, false
+	if err := json.Unmarshal(m[1], &header); err != nil || header.Language == "" {
+		return "", "", archiveFeatures{}
 	}
-	if header.Language == "" {
-		return "", "", archiveFeatures{}, false
-	}
-	return header.Language, header.Name, features, true
+	return header.Language, header.Name, features
 }
 
 // normalizeLanguage maps a recorded language onto a locale code. Markers written
@@ -133,31 +145,19 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 		return nil, err
 	}
 
-	expectedIdentity, err := readArchiveIdentity(p.AsarPath)
+	installed, err := readArchiveState(p.AsarPath, true)
 	if err != nil {
 		return nil, err
 	}
-	detected, err := detectPatchInArchive(p.AsarPath)
-	if err != nil {
-		return nil, err
-	}
-	backupState := inspectCleanBackup(p.CleanBackupPath, expectedIdentity)
+	backupState := inspectCleanBackup(p.CleanBackupPath, installed.identity)
 
 	state := readState(p)
-	var currentLanguage, localeName string
-	var features archiveFeatures
-	if detected {
-		// A patched archive names its own locale. Archives written by a release
-		// that predated locale files carry no header, and those were zh-CN only.
-		if code, name, installed, ok := readArchiveLocale(p.AsarPath); ok {
-			currentLanguage = code
-			localeName = name
-			features = installed
-		} else {
-			currentLanguage = DefaultLocale
-		}
-	} else {
+	currentLanguage := installed.language
+	if !installed.patched {
 		currentLanguage = EnglishLocale
+	} else if currentLanguage == "" {
+		// Archives patched before locale files only supported zh-CN.
+		currentLanguage = DefaultLocale
 	}
 
 	stale := false
@@ -171,11 +171,11 @@ func (s *Service) GetStatus(appDir string) (*Status, error) {
 		AsarPath:          p.AsarPath,
 		CleanBackupPath:   p.CleanBackupPath,
 		StatePath:         p.StatePath,
-		AppVersion:        expectedIdentity.Version,
+		AppVersion:        installed.identity.Version,
 		CurrentLanguage:   currentLanguage,
-		LocaleName:        localeName,
-		SessionMetrics:    features.sessionMetrics,
-		EffortSlider:      features.effortSlider,
+		LocaleName:        installed.localeName,
+		SessionMetrics:    installed.features.sessionMetrics,
+		EffortSlider:      installed.features.effortSlider,
 		HasCleanBackup:    backupState == cleanBackupValid,
 		CleanBackupStatus: backupState,
 		LastPatchedAt:     statePatchedAt(state),
@@ -207,31 +207,31 @@ func inspectCleanBackup(path string, expectedIdentity *Identity) string {
 	if !fileExists(path) {
 		return cleanBackupMissing
 	}
-	arc, err := ReadArchive(path)
+	arc, file, err := openArchive(path)
 	if err != nil {
 		return cleanBackupInvalid
 	}
-	identity := arc.Identity()
+	defer file.Close()
+	identity := arc.readIdentity(file)
 	if identity == nil || identity.Name != "antigravity" {
 		return cleanBackupInvalid
 	}
 	if expectedIdentity != nil && !SameRelease(expectedIdentity, identity) {
 		return cleanBackupVersionDiff
 	}
-	patched := detectPatchState(path)
-	if patched == nil {
+	patched, err := detectPatchInArchive(file)
+	if err != nil {
 		return cleanBackupInvalid
 	}
-	if *patched {
+	if patched {
 		return cleanBackupPatched
 	}
 
 	// Backups share app.asar.unpacked with the installation, so only packed
 	// entries are checked; sidecar entries are not stored in the backup itself.
-	payloadSize := int64(0)
-	if info, err := os.Stat(path); err == nil {
-		payloadSize = info.Size() - int64(8+arc.HeaderSize)
-	}
+	buffer := make([]byte, 32<<10)
+	hash := sha256.New()
+	var sum [sha256.Size]byte
 	for _, rel := range arc.FileEntries() {
 		node := arc.lookup(rel)
 		if node == nil || node.Size == nil || node.Offset == nil {
@@ -243,25 +243,18 @@ func inspectCleanBackup(path string, expectedIdentity *Identity) string {
 		if node.Unpacked != nil && *node.Unpacked {
 			continue
 		}
-		off, err := strconv.ParseInt(*node.Offset, 10, 64)
-		if err != nil || off < 0 || off+*node.Size > payloadSize {
-			return cleanBackupInvalid
-		}
-		data, err := arc.ReadFile(rel)
+		offset, err := packedOffset(node, rel, arc.payloadSize)
 		if err != nil {
 			return cleanBackupInvalid
 		}
-		if int64(len(data)) != *node.Size {
+		hash.Reset()
+		entry := io.NewSectionReader(file, arc.Base+offset, *node.Size)
+		if n, err := io.CopyBuffer(hash, entry, buffer); err != nil || n != *node.Size {
 			return cleanBackupInvalid
 		}
-		if node.Integrity != nil {
-			if node.Integrity.Algorithm != "SHA256" {
-				return cleanBackupInvalid
-			}
-			sum := sha256.Sum256(data)
-			if hex.EncodeToString(sum[:]) != node.Integrity.Hash {
-				return cleanBackupInvalid
-			}
+		if node.Integrity != nil && (node.Integrity.Algorithm != "SHA256" ||
+			hex.EncodeToString(hash.Sum(sum[:0])) != node.Integrity.Hash) {
+			return cleanBackupInvalid
 		}
 	}
 	return cleanBackupValid

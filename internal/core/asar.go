@@ -111,17 +111,35 @@ type Archive struct {
 	Base       int64
 	Root       *asarNode
 
-	rawHeader []byte
-	spans     map[string]*span
+	rawHeader   []byte
+	payloadSize int64
 }
 
 // ReadArchive parses the asar header of the file at path.
 func ReadArchive(path string) (*Archive, error) {
-	f, err := os.Open(path)
+	arc, file, err := openArchive(path)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer file.Close()
+	return arc, nil
+}
+
+// openArchive keeps reads of the header and entries on the same open file.
+func openArchive(path string) (*Archive, *os.File, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, nil, err
+	}
+	arc, err := parseArchive(f)
+	if err != nil {
+		f.Close()
+		return nil, nil, err
+	}
+	return arc, f, nil
+}
+
+func parseArchive(f *os.File) (*Archive, error) {
 	info, err := f.Stat()
 	if err != nil {
 		return nil, err
@@ -164,13 +182,14 @@ func ReadArchive(path string) (*Archive, error) {
 		return nil, errors.New("asar header has no files map")
 	}
 
+	base := int64(8 + headerSize)
 	arc := &Archive{
-		Path:       path,
-		HeaderSize: headerSize,
-		Base:       int64(8 + headerSize),
-		Root:       &root,
-		rawHeader:  raw,
-		spans:      indexNodes(raw),
+		Path:        f.Name(),
+		HeaderSize:  headerSize,
+		Base:        base,
+		Root:        &root,
+		rawHeader:   raw,
+		payloadSize: info.Size() - base,
 	}
 	var validate func(*asarNode, string) error
 	validate = func(node *asarNode, rel string) error {
@@ -188,7 +207,7 @@ func ReadArchive(path string) (*Archive, error) {
 		if node.Link != nil || (node.Unpacked != nil && *node.Unpacked) {
 			return nil
 		}
-		_, err := packedOffset(node, rel, info.Size()-arc.Base)
+		_, err := packedOffset(node, rel, arc.payloadSize)
 		return err
 	}
 	if err := validate(&root, ""); err != nil {
@@ -233,13 +252,6 @@ func (a *Archive) lookup(rel string) *asarNode {
 
 // ReadFile returns the bytes of a packed entry.
 func (a *Archive) ReadFile(rel string) ([]byte, error) {
-	node := a.lookup(rel)
-	if node == nil {
-		return nil, fmt.Errorf("asar entry not found: %s", rel)
-	}
-	if node.Unpacked != nil && *node.Unpacked {
-		return nil, fmt.Errorf("asar entry is unpacked, read it from app.asar.unpacked: %s", rel)
-	}
 	f, err := os.Open(a.Path)
 	if err != nil {
 		return nil, err
@@ -249,15 +261,23 @@ func (a *Archive) ReadFile(rel string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	off, err := packedOffset(node, rel, info.Size()-a.Base)
+	return a.readFile(f, rel, info.Size()-a.Base)
+}
+
+func (a *Archive) readFile(f *os.File, rel string, payloadSize int64) ([]byte, error) {
+	node := a.lookup(rel)
+	if node == nil {
+		return nil, fmt.Errorf("asar entry not found: %s", rel)
+	}
+	if node.Unpacked != nil && *node.Unpacked {
+		return nil, fmt.Errorf("asar entry is unpacked, read it from app.asar.unpacked: %s", rel)
+	}
+	off, err := packedOffset(node, rel, payloadSize)
 	if err != nil {
 		return nil, err
 	}
-	if _, err := f.Seek(a.Base+off, io.SeekStart); err != nil {
-		return nil, err
-	}
 	buf := make([]byte, *node.Size)
-	if _, err := io.ReadFull(f, buf); err != nil {
+	if _, err := f.ReadAt(buf, a.Base+off); err != nil {
 		return nil, fmt.Errorf("short read for asar entry %s: %w", rel, err)
 	}
 	return buf, nil
@@ -325,10 +345,16 @@ func (a *Archive) FileEntries() []string {
 // Identity returns the name and version recorded in the archive's package.json
 // entry. A missing or malformed package.json yields nil, not a guess.
 func (a *Archive) Identity() *Identity {
-	data, err := a.ReadFile("package.json")
-	if err != nil {
-		return nil
-	}
+	data, _ := a.ReadFile("package.json")
+	return parseIdentity(data)
+}
+
+func (a *Archive) readIdentity(f *os.File) *Identity {
+	data, _ := a.readFile(f, "package.json", a.payloadSize)
+	return parseIdentity(data)
+}
+
+func parseIdentity(data []byte) *Identity {
 	var pkg struct {
 		Name    string `json:"name"`
 		Version string `json:"version"`
@@ -390,14 +416,18 @@ type plannedBody struct {
 // Header bytes are spliced in place so the document's key order and formatting
 // survive untouched.
 func WritePatched(srcPath, destPath string, patches []Patch) error {
-	arc, err := ReadArchive(srcPath)
+	arc, in, err := openArchive(srcPath)
 	if err != nil {
 		return err
 	}
+	defer in.Close()
+	return arc.writePatched(in, destPath, patches)
+}
 
+func (a *Archive) writePatched(in *os.File, destPath string, patches []Patch) error {
 	repl := make(map[string][]byte, len(patches))
 	for _, p := range patches {
-		node := arc.lookup(p.Path)
+		node := a.lookup(p.Path)
 		if node == nil || node.Offset == nil || (node.Unpacked != nil && *node.Unpacked) {
 			return fmt.Errorf("cannot patch missing or unpacked asar entry: %s", p.Path)
 		}
@@ -406,8 +436,8 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 
 	var bodies []plannedBody
 	offset := int64(0)
-	for _, rel := range arc.FileEntries() {
-		node := arc.lookup(rel)
+	for _, rel := range a.FileEntries() {
+		node := a.lookup(rel)
 		if node == nil {
 			return fmt.Errorf("asar entry disappeared while patching: %s", rel)
 		}
@@ -431,16 +461,11 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 		offset += size
 	}
 
-	newHeader, err := arc.spliceHeader(bodies)
+	newHeader, err := a.spliceHeader(bodies)
 	if err != nil {
 		return err
 	}
 
-	in, err := os.Open(srcPath)
-	if err != nil {
-		return err
-	}
-	defer in.Close()
 	srcInfo, err := in.Stat()
 	if err != nil {
 		return err
@@ -465,13 +490,16 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 	if _, err := out.Write(newHeader); err != nil {
 		return err
 	}
+	buffer := make([]byte, 32<<10)
+	// Limit the destination to io.Writer so CopyBuffer uses our shared buffer.
+	writer := struct{ io.Writer }{out}
 	for _, b := range bodies {
 		if b.changed {
 			if _, err := out.Write(b.data); err != nil {
 				return err
 			}
 		} else {
-			n, err := io.Copy(out, io.NewSectionReader(in, arc.Base+b.sourceOff, b.newSize))
+			n, err := io.CopyBuffer(writer, io.NewSectionReader(in, a.Base+b.sourceOff, b.newSize), buffer)
 			if err != nil {
 				return err
 			}
@@ -489,9 +517,8 @@ func WritePatched(srcPath, destPath string, patches []Patch) error {
 // spliceHeader rewrites the offset, size and integrity members of the raw
 // header bytes.
 //
-// Every edit is expressed as a range in the ORIGINAL document, and the edits
-// are applied from the end of the file backwards, so the byte position of a
-// later edit has not moved yet when it is applied.
+// Edits are ranges in the original document. Append the intervening bytes and
+// replacements in order to avoid copying the rest of the header for each edit.
 func (a *Archive) spliceHeader(bodies []plannedBody) ([]byte, error) {
 	type edit struct {
 		start int
@@ -499,6 +526,7 @@ func (a *Archive) spliceHeader(bodies []plannedBody) ([]byte, error) {
 		text  string
 	}
 	var edits []edit
+	spans := indexNodes(a.rawHeader)
 
 	add := func(r [2]int, text string) {
 		if r[0] < 0 || r[1] < r[0] {
@@ -508,7 +536,7 @@ func (a *Archive) spliceHeader(bodies []plannedBody) ([]byte, error) {
 	}
 
 	for _, b := range bodies {
-		sp, ok := a.spans[b.rel]
+		sp, ok := spans[b.rel]
 		if !ok {
 			return nil, fmt.Errorf("asar header has no span for %s", b.rel)
 		}
@@ -553,19 +581,19 @@ func (a *Archive) spliceHeader(bodies []plannedBody) ([]byte, error) {
 		}
 	}
 
-	sort.Slice(edits, func(i, j int) bool { return edits[i].start > edits[j].start })
+	sort.Slice(edits, func(i, j int) bool { return edits[i].start < edits[j].start })
 
-	out := make([]byte, len(a.rawHeader))
-	copy(out, a.rawHeader)
+	out := make([]byte, 0, len(a.rawHeader))
+	previous := 0
 	for _, e := range edits {
-		if e.start < 0 || e.end > len(out) || e.start > e.end {
+		if e.start < previous || e.end > len(a.rawHeader) || e.start > e.end {
 			return nil, fmt.Errorf("asar header edit %d:%d is outside the document", e.start, e.end)
 		}
-		tail := append([]byte{}, out[e.end:]...)
-		out = out[:e.start]
+		out = append(out, a.rawHeader[previous:e.start]...)
 		out = append(out, e.text...)
-		out = append(out, tail...)
+		previous = e.end
 	}
+	out = append(out, a.rawHeader[previous:]...)
 
 	var check asarNode
 	if err := json.Unmarshal(out, &check); err != nil {

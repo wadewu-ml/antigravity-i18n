@@ -3,6 +3,7 @@ package core
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/fs"
 	"regexp"
@@ -203,6 +204,21 @@ func (s *LocaleStore) ListLocales() []string {
 
 // Describe lists the bundled locales with their coverage, for status reporting.
 func (s *LocaleStore) Describe() ([]LocaleInfo, error) {
+	index, err := fs.ReadFile(s.localesFS, s.localeDir+"/"+localeIndexFile)
+	if err == nil {
+		var locales []LocaleInfo
+		if err := json.Unmarshal(index, &locales); err != nil {
+			return nil, fmt.Errorf("cannot parse the bundled locale index: %w", err)
+		}
+		return locales, nil
+	}
+	if !errors.Is(err, fs.ErrNotExist) {
+		return nil, fmt.Errorf("cannot read the bundled locale index: %w", err)
+	}
+	return s.describeLocaleFiles()
+}
+
+func (s *LocaleStore) describeLocaleFiles() ([]LocaleInfo, error) {
 	var out []LocaleInfo
 	reference, err := s.loadResolved(DefaultLocale)
 	if err != nil {

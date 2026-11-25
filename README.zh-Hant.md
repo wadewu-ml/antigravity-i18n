@@ -4,7 +4,7 @@
 
 [下載 Windows x64 版](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [版本記錄](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-適用於 **Antigravity App 2.35.1**。
+適用於 **Antigravity App 2.35.1**。單一可攜式 EXE 內含九種語言套件。
 
 [简体中文](./README.zh-CN.md) · [English](./README.md) · **繁體中文** · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -20,7 +20,7 @@
 
 結束提示中的「强制退出并重试」會中斷進行中的工作階段，尚未儲存的變更可能會遺失。
 
-如需使用滑桿，請在工具的工作階段指標下方開啟「思考强度滑块」，套用變更後打開 Antigravity 的模型選單。若目前的模型可直接選擇思考強度，用量選項上方會顯示滑桿；拖曳可預覽，放開即可套用。
+如需使用滑桿，請在工具的工作階段指標下方開啟「思考强度滑块」，套用變更後打開 Antigravity 的模型選單。兩項功能可分別開啟，也支援官方英文介面。若目前的模型可直接選擇思考強度，用量選項上方會顯示滑桿。拖曳可預覽，放開即可套用。
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已選取簡體中文，並開啟了會話指標"></a>
 
@@ -50,6 +50,7 @@
 | 列出語言代碼 | `.\antigravity-i18n.exe locales` |
 | 套用繁體中文 | `.\antigravity-i18n.exe apply --locale zh-Hant` |
 | 使用官方英文並開啟指標 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 使用官方英文並開啟思考強度滑桿 | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | 查看目前設定 | `.\antigravity-i18n.exe status` |
 | 還原官方版本 | `.\antigravity-i18n.exe restore` |
 | 查看所有選項 | `.\antigravity-i18n.exe --help` |

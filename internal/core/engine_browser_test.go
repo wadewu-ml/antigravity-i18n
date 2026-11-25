@@ -141,9 +141,18 @@ func TestEffortSliderInBrowser(t *testing.T) {
 }
 
 func TestApplyShutdownInBrowser(t *testing.T) {
+	runSetupBrowserChecks(t, "testdata/shutdown.js")
+}
+
+func TestStatusSelectionInBrowser(t *testing.T) {
+	runSetupBrowserChecks(t, "testdata/status-selection.js")
+}
+
+func runSetupBrowserChecks(t *testing.T, script string) {
+	t.Helper()
 	html := readTestFile(t, "../../frontend/dist/index.html")
 	app := readTestFile(t, "../../frontend/dist/app.js")
-	checks := readTestFile(t, "testdata/shutdown.js")
+	checks := readTestFile(t, script)
 	scripts := "<script>" + checks + "</script><script>" + app + "</script>"
 	runBrowserChecks(t, strings.Replace(html, `<script src="app.js"></script>`, scripts, 1))
 }

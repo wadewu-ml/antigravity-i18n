@@ -1,6 +1,7 @@
 package core
 
 import (
+	"bytes"
 	"errors"
 	"io"
 	"io/fs"
@@ -42,7 +43,7 @@ func containsAny(haystack []byte, needles []string) bool {
 		return false
 	}
 	for _, n := range needles {
-		if indexBytes(haystack, []byte(n)) >= 0 {
+		if n != "" && bytes.Contains(haystack, []byte(n)) {
 			return true
 		}
 	}

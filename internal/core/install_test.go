@@ -293,6 +293,38 @@ func TestOperationsPreserveConcurrentArchiveUpdate(t *testing.T) {
 	}
 }
 
+func TestApplyRejectsModifiedStagingAndRollsBack(t *testing.T) {
+	p := fixtureInstall(t, syntheticAsar)
+	liveHash := fileHash(t, p.AsarPath)
+	writeOtherRelease(t, p.CleanBackupPath)
+	previousBackup := fileHash(t, p.CleanBackupPath)
+	svc := newTestService(t)
+	stagingPattern := filepath.Join(p.ResourcesDir, ".antigravity-i18n-stage-*.asar")
+	svc.Progress = func(stage, _ string) {
+		if stage != "正在写回 app.asar" {
+			return
+		}
+		files, err := filepath.Glob(stagingPattern)
+		if err != nil || len(files) != 1 {
+			t.Fatalf("expected one verified staged archive, got %v: %v", files, err)
+		}
+		if err := os.WriteFile(files[0], []byte("changed after verification"), 0o600); err != nil {
+			t.Fatal(err)
+		}
+	}
+	_, err := svc.ApplyLocale(Options{AppDir: p.AppDir})
+	var opErr *OpError
+	if !errors.As(err, &opErr) || opErr.Op != "installing the patched archive" {
+		t.Fatalf("staged archive change was not rejected at commit: %v", err)
+	}
+	if fileHash(t, p.AsarPath) != liveHash || fileHash(t, p.CleanBackupPath) != previousBackup {
+		t.Fatal("the installed archive or previous clean backup changed after rollback")
+	}
+	if files, err := filepath.Glob(stagingPattern); err != nil || len(files) != 0 {
+		t.Fatalf("staged files after rollback: %v, %v", files, err)
+	}
+}
+
 func TestStatusRejectsInvalidArchive(t *testing.T) {
 	svc := newTestService(t)
 	t.Run("truncated archive", func(t *testing.T) {

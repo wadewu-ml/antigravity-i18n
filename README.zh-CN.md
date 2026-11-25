@@ -1,10 +1,10 @@
 # <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
 
-为 Windows 版 Google Antigravity 提供九种界面语言包，翻译设置、对话区按钮、菜单和退出提示。还可以在输入框旁查看上下文余量和模型的输出速度。设置生效后即可关闭本工具。
+为 Windows 版 Google Antigravity 提供九种界面语言包，翻译设置、对话区按钮、菜单和退出提示。还可以在输入框旁查看会话指标和模型额度，或在模型菜单中用滑块调节思考强度。设置生效后即可关闭本工具。
 
 [下载 Windows x64 版](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [发布记录](https://github.com/wadewu-ml/antigravity-i18n/releases)
 
-适配 **Antigravity App 2.35.1**。
+适配 **Antigravity App 2.35.1**。单个便携 EXE 内含全部九种语言包。
 
 **简体中文** · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
@@ -20,7 +20,7 @@
 
 退出提示中的「强制退出并重试」会中断进行中的会话，未保存的编辑可能丢失。
 
-如需使用滑块，在工具的「会话指标」下方开启「思考强度滑块」，点击「应用更改」，再打开 Antigravity 的模型选择菜单。当前模型支持直接选择思考强度时，「查看用量」上方会出现滑块，拖动可预览档位，松开即应用。
+如需使用滑块，在工具的「会话指标」下方开启「思考强度滑块」，点击「应用更改」，再打开 Antigravity 的模型选择菜单。两项功能可分别开启，也支持官方英文界面。当前模型支持直接选择思考强度时，「查看用量」上方会出现滑块，拖动可预览档位，松开即应用。
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已选简体中文，并已打开「会话指标」开关"></a>
 
@@ -50,6 +50,7 @@
 | 列出语言代码 | `.\antigravity-i18n.exe locales` |
 | 应用简体中文 | `.\antigravity-i18n.exe apply --locale zh-CN` |
 | 使用官方英文并开启指标 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 使用官方英文并开启思考强度滑块 | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | 查看当前设置 | `.\antigravity-i18n.exe status` |
 | 还原官方版本 | `.\antigravity-i18n.exe restore` |
 | 查看全部参数 | `.\antigravity-i18n.exe --help` |

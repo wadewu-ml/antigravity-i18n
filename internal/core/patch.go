@@ -263,7 +263,7 @@ func patchPreload(source string, engineFragment string) string {
 // guarantee where a given file lands inside the archive, so the injected
 // preload can sit well past any fixed offset. The whole archive is streamed
 // with an overlap so a marker split across a chunk boundary is still found.
-func detectPatchInArchive(path string) (bool, error) {
+func detectPatchInArchive(f *os.File) (bool, error) {
 	const chunkSize = 1 << 20
 	longest := 0
 	for _, m := range patchMarkers {
@@ -272,18 +272,16 @@ func detectPatchInArchive(path string) (bool, error) {
 		}
 	}
 
-	f, err := os.Open(path)
-	if err != nil {
+	if _, err := f.Seek(0, io.SeekStart); err != nil {
 		return false, err
 	}
-	defer f.Close()
 
 	buf := make([]byte, chunkSize+longest)
 	carry := 0
 	for {
 		n, err := f.Read(buf[carry:])
 		if err != nil && err != io.EOF {
-			return false, fmt.Errorf("reading %s: %w", path, err)
+			return false, fmt.Errorf("reading %s: %w", f.Name(), err)
 		}
 		if n > 0 {
 			window := buf[:carry+n]

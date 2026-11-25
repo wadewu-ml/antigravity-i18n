@@ -29,18 +29,11 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	expectedIdentity, err := readArchiveIdentity(p.AsarPath)
+	installed, err := readArchiveState(p.AsarPath, opts.SessionMetrics == nil || opts.EffortSlider == nil)
 	if err != nil {
 		return nil, err
 	}
-	currentPatched, err := detectPatchInArchive(p.AsarPath)
-	if err != nil {
-		return nil, err
-	}
-	var features archiveFeatures
-	if currentPatched && (opts.SessionMetrics == nil || opts.EffortSlider == nil) {
-		_, _, features, _ = readArchiveLocale(p.AsarPath)
-	}
+	features := installed.features
 	if opts.SessionMetrics != nil {
 		features.sessionMetrics = *opts.SessionMetrics
 	}
@@ -52,7 +45,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	var patch patchFragments
 	if english {
 		if features == (archiveFeatures{}) {
-			restored, err := s.restoreOfficial(p, opts, currentPatched, expectedIdentity, initialHash)
+			restored, err := s.restoreOfficial(p, opts, installed.patched, installed.identity, initialHash)
 			if err != nil {
 				return nil, err
 			}
@@ -102,7 +95,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	}
 
 	txn := &fileTxn{}
-	if err := s.ensureCleanBackup(p, currentPatched, expectedIdentity, initialHash, txn); err != nil {
+	if err := s.ensureCleanBackup(p, installed.patched, installed.identity, initialHash, txn); err != nil {
 		return nil, txn.failWithRollback("preparing the clean backup", err)
 	}
 	s.progress("正在准备干净备份", p.CleanBackupPath)
@@ -120,38 +113,15 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 		// including the native menus and secondary windows.
 		source = p.CleanBackupPath
 	}
-	staged, err := buildPatchedArchive(source, locale, patch)
+	staged, err := buildPatchedArchive(source, p.ResourcesDir, locale, patch)
 	if err != nil {
 		return nil, txn.failWithRollback("building the patched archive", err)
 	}
 	defer os.Remove(staged)
 
-	// Verify the staged archive in full before it replaces the live one.
-	arc, err := ReadArchive(staged)
-	if err != nil {
-		return nil, txn.failWithRollback("verifying the patched archive", err)
-	}
-	if patched := detectPatchState(staged); patched == nil || !*patched {
-		return nil, txn.failWithRollback("verifying the patched archive",
-			fmt.Errorf("patch markers were not found in the archive"))
-	}
-	if !SameRelease(expectedIdentity, arc.Identity()) {
-		return nil, txn.failWithRollback("verifying the patched archive",
-			fmt.Errorf("application identity changed in the patched archive"))
-	}
 	s.progress("正在校验补丁内容", "")
-	if code, _, installed, ok := readArchiveLocale(staged); !ok || code != locale.Language || installed != features {
-		return nil, txn.failWithRollback("verifying the patched archive",
-			fmt.Errorf("the patched archive does not declare the requested locale and features"))
-	}
-	for _, rel := range []string{"dist/main.js", "dist/menu.js", "dist/preload.js"} {
-		data, err := arc.ReadFile(rel)
-		if err != nil {
-			return nil, txn.failWithRollback("verifying the patched archive", err)
-		}
-		if err := checkJavaScriptSyntax(rel, string(data)); err != nil {
-			return nil, txn.failWithRollback("verifying the patched archive", err)
-		}
+	if err := verifyPatchedArchive(staged, installed.identity, locale.Language, features); err != nil {
+		return nil, txn.failWithRollback("verifying the patched archive", err)
 	}
 
 	packedHash, err := hashArchive(staged)
@@ -160,7 +130,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	}
 	s.progress("正在写回 app.asar", p.AsarPath)
 
-	if err := atomicReplaceFile(staged, p.AsarPath, func(candidate string) error {
+	if err := commitStagedFile(staged, p.AsarPath, func(candidate string) error {
 		running, err := s.appRunning(p)
 		if err != nil {
 			return err
@@ -193,17 +163,35 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	return result, nil
 }
 
-// readArchiveIdentity verifies the Antigravity identity in package.json.
-func readArchiveIdentity(asarPath string) (*Identity, error) {
-	arc, err := ReadArchive(asarPath)
+func verifyPatchedArchive(path string, identity *Identity, language string, features archiveFeatures) error {
+	arc, file, err := openArchive(path)
 	if err != nil {
-		return nil, fmt.Errorf("could not read Antigravity archive %s: %w", asarPath, err)
+		return err
 	}
-	id := arc.Identity()
-	if id == nil || id.Name != "antigravity" {
-		return nil, fmt.Errorf("could not verify Antigravity archive identity: %s", asarPath)
+	defer file.Close()
+	patched, err := detectPatchInArchive(file)
+	if err != nil {
+		return err
 	}
-	return id, nil
+	if !patched {
+		return fmt.Errorf("patch markers were not found in the archive")
+	}
+	if id := arc.readIdentity(file); id == nil || !SameRelease(identity, id) {
+		return fmt.Errorf("application identity changed in the patched archive")
+	}
+	if code, _, installed := readArchiveLocale(arc, file); code != language || installed != features {
+		return fmt.Errorf("the patched archive does not declare the requested locale and features")
+	}
+	for _, rel := range []string{"dist/main.js", "dist/menu.js", "dist/preload.js"} {
+		data, err := arc.readFile(file, rel, arc.payloadSize)
+		if err != nil {
+			return err
+		}
+		if err := checkJavaScriptSyntax(rel, string(data)); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 type patchFragments struct {
@@ -229,19 +217,20 @@ func (s *LocaleStore) buildLocalizationFragments(locale *Locale) (patchFragments
 	return patchFragments{main: main, menu: menu, preload: preload, windowPreload: preload}, nil
 }
 
-// buildPatchedArchive produces a patched copy of the archive in a temporary
-// directory and returns its path.
-func buildPatchedArchive(srcPath string, locale *Locale, patch patchFragments) (string, error) {
-	arc, err := ReadArchive(srcPath)
+// buildPatchedArchive stages the patched copy beside the destination, ready for
+// verification and an in-place commit.
+func buildPatchedArchive(srcPath, stageDir string, locale *Locale, patch patchFragments) (string, error) {
+	arc, file, err := openArchive(srcPath)
 	if err != nil {
 		return "", err
 	}
+	defer file.Close()
 
-	main, err := arc.ReadFile("dist/main.js")
+	main, err := arc.readFile(file, "dist/main.js", arc.payloadSize)
 	if err != nil {
 		return "", err
 	}
-	preload, err := arc.ReadFile("dist/preload.js")
+	preload, err := arc.readFile(file, "dist/preload.js", arc.payloadSize)
 	if err != nil {
 		return "", err
 	}
@@ -261,14 +250,14 @@ func buildPatchedArchive(srcPath string, locale *Locale, patch patchFragments) (
 		{Path: "dist/preload.js", Data: []byte(newPreload)},
 	}
 	if locale.Language != EnglishLocale {
-		extra, err := buildLocalizedWindowPatches(arc, patch)
+		extra, err := buildLocalizedWindowPatches(arc, file, patch)
 		if err != nil {
 			return "", err
 		}
 		patches = append(patches, extra...)
 	}
 
-	tmp, err := os.CreateTemp("", "antigravity-i18n-patched-*.asar")
+	tmp, err := os.CreateTemp(stageDir, ".antigravity-i18n-stage-*.asar")
 	if err != nil {
 		return "", err
 	}
@@ -278,7 +267,7 @@ func buildPatchedArchive(srcPath string, locale *Locale, patch patchFragments) (
 		return "", err
 	}
 
-	err = WritePatched(srcPath, staged, patches)
+	err = arc.writePatched(file, staged, patches)
 	if err != nil {
 		os.Remove(staged)
 		return "", err
@@ -286,8 +275,8 @@ func buildPatchedArchive(srcPath string, locale *Locale, patch patchFragments) (
 	return staged, nil
 }
 
-func buildLocalizedWindowPatches(arc *Archive, patch patchFragments) ([]Patch, error) {
-	menu, err := arc.ReadFile("dist/menu.js")
+func buildLocalizedWindowPatches(arc *Archive, file *os.File, patch patchFragments) ([]Patch, error) {
+	menu, err := arc.readFile(file, "dist/menu.js", arc.payloadSize)
 	if err != nil {
 		return nil, err
 	}
@@ -302,13 +291,13 @@ func buildLocalizedWindowPatches(arc *Archive, patch patchFragments) ([]Patch, e
 		if arc.lookup(rel) == nil {
 			continue
 		}
-		source, err := arc.ReadFile(rel)
+		source, err := arc.readFile(file, rel, arc.payloadSize)
 		if err != nil {
 			return nil, err
 		}
 		if rel == "dist/remote/sshPromptPreload.js" {
 			const promptPath = "dist/remote/sshPrompts.js"
-			prompt, err := arc.ReadFile(promptPath)
+			prompt, err := arc.readFile(file, promptPath, arc.payloadSize)
 			if err != nil {
 				return nil, err
 			}
@@ -353,16 +342,12 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	expectedIdentity, err := readArchiveIdentity(p.AsarPath)
-	if err != nil {
-		return nil, err
-	}
-	currentPatched, err := detectPatchInArchive(p.AsarPath)
+	installed, err := readArchiveState(p.AsarPath, false)
 	if err != nil {
 		return nil, err
 	}
 
-	return s.restoreOfficial(p, opts, currentPatched, expectedIdentity, initialHash)
+	return s.restoreOfficial(p, opts, installed.patched, installed.identity, initialHash)
 }
 
 func (s *Service) restoreOfficial(p *paths, opts Options, currentPatched bool, expectedIdentity *Identity, initialHash string) (*RestoreResult, error) {

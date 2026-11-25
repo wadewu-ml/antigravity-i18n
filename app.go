@@ -74,15 +74,23 @@ func (a *App) GetVersion() string { return core.Version }
 
 // GetStatus reports the localization state of the selected installation.
 func (a *App) GetStatus() (*core.Status, error) {
-	st, err := a.svc.GetStatus(a.currentDir())
+	if dir := a.currentDir(); dir != "" {
+		return a.svc.GetStatus(dir)
+	}
+	return a.detectInitialStatus()
+}
+
+func (a *App) detectInitialStatus() (*core.Status, error) {
+	st, err := a.svc.GetStatus("")
 	if err != nil {
 		return nil, err
 	}
-	if st != nil && st.AppDir != "" {
-		a.mu.Lock()
+	a.mu.Lock()
+	// A directory chosen while detection was in flight takes precedence.
+	if a.appDir == "" {
 		a.appDir = st.AppDir
-		a.mu.Unlock()
 	}
+	a.mu.Unlock()
 	return st, nil
 }
 
