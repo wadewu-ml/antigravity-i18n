@@ -15,18 +15,31 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
+const guiWindowClass = "WadeWu.AntigravityI18n.MainWindow"
+
 // runWails opens the application window. The frontend is plain static files
 // served from an embedded filesystem, so no Node toolchain is needed at build
 // time and the binary stays a single self-contained executable.
 func runWails(svc *core.Service) {
+	initialDir, restarting := os.LookupEnv(selfupdate.RestartDirEnv)
+	_ = os.Unsetenv(selfupdate.RestartDirEnv)
+	release, err := enterGUI(restarting)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "error:", err)
+		os.Exit(1)
+	}
+	if release == nil {
+		return // The existing window handled this launch.
+	}
+	defer release()
+
 	distFS, err := fs.Sub(frontendFS, "frontend/dist")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "error:", err)
 		os.Exit(1)
 	}
 
-	app := NewApp(svc, os.Getenv(selfupdate.RestartDirEnv))
-	_ = os.Unsetenv(selfupdate.RestartDirEnv)
+	app := NewApp(svc, initialDir)
 	if err := wails.Run(&options.App{
 		Title:     "Antigravity 多语言工具",
 		Width:     760,
@@ -44,6 +57,7 @@ func runWails(svc *core.Service) {
 			app,
 		},
 		Windows: &windows.Options{
+			WindowClassName:      guiWindowClass,
 			WebviewIsTransparent: false,
 			WindowIsTranslucent:  false,
 			DisableWindowIcon:    false,
