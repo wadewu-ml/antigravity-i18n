@@ -24,59 +24,101 @@ function agMountEffortSliders(labels) {
         }
         return null;
     }
+    function findElement(node, match, depth = 6) {
+        if (!node || depth < 0 || typeof node !== 'object') return null;
+        if (Array.isArray(node)) {
+            for (const child of node) {
+                const found = findElement(child, match, depth - 1);
+                if (found) return found;
+            }
+            return null;
+        }
+        if (match(node)) return node;
+        return findElement(node.props?.children, match, depth - 1);
+    }
+    function effortOption(item) {
+        return findElement(item?.props?.children,
+            el => el.props?.['data-testid'] === 'model-selector-effort-option', 2)?.props ?? null;
+    }
+    function findOptionGroup(node, depth = 6) {
+        if (!node || depth < 0 || typeof node !== 'object') return null;
+        if (Array.isArray(node)) {
+            for (const child of node) {
+                const found = findOptionGroup(child, depth - 1);
+                if (found) return found;
+            }
+            if (node.filter(item => effortOption(item)).length > 1) return {radio: null, rows: node};
+            return null;
+        }
+        const children = node.props?.children;
+        if (Array.isArray(children)) {
+            for (const child of children) {
+                const found = findOptionGroup(child, depth - 1);
+                if (found) return found;
+            }
+            if (children.filter(item => effortOption(item)).length > 1) {
+                return {radio: typeof node.props?.value === 'string' ? node.props : null, rows: children};
+            }
+            return null;
+        }
+        return findOptionGroup(children, depth - 1);
+    }
     function selection(panel) {
-        for (const marker of panel.querySelectorAll(groupSelector)) {
-            const key = Object.keys(marker).find(k => k.startsWith('__reactFiber$'));
-            if (!key) continue;
-            // Both alternates can have a return path to the same root after
-            // React reuses children. Walk down the committed tree to read
-            // today's choices and callbacks, including on a reused menu.
-            const path = [];
-            let top = marker[key];
-            while (top.return) { path.push(top); top = top.return; }
-            let current = top.stateNode?.current;
-            for (let i = path.length - 1; i >= 0 && current; i--) {
-                let child = current.child;
-                while (child && child !== path[i] && child !== path[i].alternate) child = child.sibling;
-                path[i] = current = child;
-            }
-            if (!current) continue;
-            for (const fiber of path) {
-                const pair = fiber.memoizedProps?.children;
-                if (!Array.isArray(pair)) continue;
-                const trigger = pair[0]?.props;
-                const model = trigger?.children?.[0]?.props;
-                if (model?.['data-testid'] !== 'model-selector-effort-group' ||
-                    model['data-model-base'] !== marker.dataset.modelBase) continue;
-                // The menu item's layout wrappers reuse the label as a child.
-                // Only the native submenu trigger declares the selection state.
-                if (typeof trigger.selected !== 'boolean') continue;
-                if (!trigger.selected || trigger.disabled) break;
-                const choices = pair[1]?.props?.children?.[1];
-                const radio = choices?.props;
-                const rows = radio?.children ?? choices;
-                if (!Array.isArray(rows)) return null;
-                const levels = [];
-                for (const item of rows) {
-                    const p = item?.props;
-                    const label = p?.children?.props;
-                    // Some choices require a second context-window selection.
-                    // Leave those models to the native menu.
-                    if (label?.['data-testid'] !== 'model-selector-effort-option' ||
-                        typeof label.children !== 'string') return null;
-                    if (p.disabled) continue;
-                    const id = label['data-effort'];
-                    levels.push({id, label: labels[label.children] || label.children,
-                        active: radio ? radio.value === id : p.selected});
+        try {
+            for (const marker of panel.querySelectorAll(groupSelector)) {
+                const key = Object.keys(marker).find(k => k.startsWith('__reactFiber$'));
+                if (!key) continue;
+                // Both alternates can have a return path to the same root after
+                // React reuses children. Walk down the committed tree to read
+                // today's choices and callbacks, including on a reused menu.
+                const path = [];
+                let top = marker[key];
+                while (top?.return) { path.push(top); top = top.return; }
+                let current = top?.stateNode?.current;
+                for (let i = path.length - 1; i >= 0 && current; i--) {
+                    let child = current.child;
+                    while (child && child !== path[i] && child !== path[i].alternate) child = child.sibling;
+                    path[i] = current = child;
                 }
-                const index = levels.findIndex(level => level.active);
-                if (index >= 0 && levels.length > 1) {
-                    const model = modelSelection(path, levels[index].id);
-                    if (model && levels.every(level => model.options.has(level.id)))
-                        return {base: marker.dataset.modelBase, levels, index, model};
+                if (!current) continue;
+                for (const fiber of path) {
+                    const pair = fiber.memoizedProps?.children;
+                    if (!Array.isArray(pair)) continue;
+                    // The menu item's layout wrappers reuse the label as a child.
+                    // Only the native submenu trigger declares the selection state.
+                    const triggerEl = pair.find(child => typeof child?.props?.selected === 'boolean' &&
+                        findElement(child.props.children, el =>
+                            el.props?.['data-testid'] === 'model-selector-effort-group' &&
+                            el.props['data-model-base'] === marker.dataset.modelBase, 4));
+                    if (!triggerEl) continue;
+                    const trigger = triggerEl.props;
+                    if (!trigger.selected || trigger.disabled) break;
+                    const group = findOptionGroup(pair.filter(child => child !== triggerEl));
+                    if (!group) return null;
+                    const {radio, rows} = group;
+                    const levels = [];
+                    for (const item of rows) {
+                        const p = item?.props;
+                        const label = effortOption(item);
+                        // Some choices require a second context-window selection.
+                        // Leave those models to the native menu.
+                        if (!label || typeof label.children !== 'string') return null;
+                        if (p?.disabled) continue;
+                        const id = label['data-effort'];
+                        levels.push({id, label: labels[label.children] || label.children,
+                            active: radio ? radio.value === id : Boolean(p?.selected)});
+                    }
+                    const index = levels.findIndex(level => level.active);
+                    if (index >= 0 && levels.length > 1) {
+                        const model = modelSelection(path, levels[index].id);
+                        if (model && levels.every(level => model.options.has(level.id)))
+                            return {base: marker.dataset.modelBase, levels, index, model};
+                    }
+                    return null;
                 }
-                return null;
             }
+        } catch {
+            return null;
         }
         return null;
     }
@@ -257,8 +299,28 @@ function agMountEffortSliders(labels) {
                 preview();
             }
         }
+        let syncQueued = false;
+        function scheduleSync() {
+            if (syncQueued) return;
+            syncQueued = true;
+            queueMicrotask(() => {
+                syncQueued = false;
+                if (!panel.isConnected) {
+                    stopDrag();
+                    observer.disconnect();
+                    host?.remove();
+                    delete panel[installed];
+                    return;
+                }
+                sync();
+            });
+        }
+        const observer = new MutationObserver(records => {
+            if (host && records.every(record => record.target === host || host.contains(record.target))) return;
+            scheduleSync();
+        });
         sync();
-        new MutationObserver(sync).observe(panel, {childList:true, subtree:true, characterData:true,
+        observer.observe(panel, {childList:true, subtree:true, characterData:true,
             attributes:true, attributeFilter:['aria-disabled','disabled','data-model-base','class']});
     }
     document.querySelectorAll(panelSelector).forEach(mount);

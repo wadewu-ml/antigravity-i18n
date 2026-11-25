@@ -36,11 +36,11 @@ Chaque panneau utilise le dernier appel au modèle pour lequel sa session dispos
 
 ## Restaurer ou réappliquer
 
-Pour retrouver l’interface anglaise d’origine et retirer l’indicateur, quittez Antigravity, cliquez sur « Restaurer la version officielle » dans l’outil et confirmez avec « Restaurer ». L’outil sauvegarde le fichier d’origine à la première application des réglages. Conservez `resources/app.asar.clean-backup` dans le dossier d’installation d’Antigravity pour la restauration.
+Pour retrouver l’interface anglaise d’origine et retirer l’indicateur ainsi que le curseur, quittez Antigravity, ouvrez le menu en haut à droite de la fenêtre, cliquez sur « Restaurer la version officielle » (还原官方版本) et confirmez avec « Restaurer ». L’outil sauvegarde le fichier d’origine à la première application des réglages. Conservez `resources/app.asar.clean-backup` dans le dossier d’installation d’Antigravity pour la restauration.
 
 Si la traduction ou l’indicateur disparaît après une mise à jour d’Antigravity, vérifiez la version prise en charge en haut de cette page, puis sélectionnez et appliquez à nouveau vos réglages. Pour réappliquer les réglages déjà actifs, cliquez sur « Réappliquer ».
 
-Pour mettre à jour l’outil, cliquez sur le bouton de recherche de mises à jour (检查更新) en haut à droite de la fenêtre. L’outil consulte alors GitHub. Confirmez le téléchargement pour relancer la nouvelle version depuis le même fichier EXE. Réappliquez vos réglages pour utiliser les nouvelles traductions dans Antigravity.
+Pour mettre à jour l’outil, ouvrez le menu en haut à droite de la fenêtre et cliquez sur la recherche de mises à jour (检查更新). L’outil consulte alors GitHub. Confirmez le téléchargement pour relancer la nouvelle version depuis le même fichier EXE. Réappliquez vos réglages pour utiliser les nouvelles traductions dans Antigravity.
 
 ## Commandes PowerShell
 

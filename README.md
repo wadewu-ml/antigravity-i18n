@@ -16,7 +16,7 @@ The packs cover Simplified Chinese, Traditional Chinese, Japanese, Korean, Germa
 
 1. Open `antigravity-i18n.exe`. If the installation folder is wrong, use the button beside the path to select the folder containing `Antigravity.exe`.
 2. Choose your language. To see session metrics, turn on the switch below the language list. You can also use it with English.
-3. Save your work, quit Antigravity, and click the green button at the bottom right to apply your settings. Antigravity will reopen.
+3. Save your work, quit Antigravity, and click Apply changes (应用更改) at the bottom right. Antigravity will reopen.
 
 If prompted to quit, save your work first. Forcing Antigravity to close interrupts active sessions and can discard unsaved edits.
 
@@ -36,11 +36,11 @@ In split views, side chats, and subagent panels, each panel shows the latest mod
 
 ## Restore or reapply
 
-To return to the original English interface and remove the indicator, quit Antigravity, click the red restore link at the bottom left of the tool, then confirm. The first time you apply settings, the tool saves the original file in the Antigravity installation folder. Keep `resources/app.asar.clean-backup` there for restoration.
+To return to the original English interface and remove the indicator and effort slider, quit Antigravity, open the menu at the top right of the tool, click Restore official version (还原官方版本), then confirm. The first time you apply settings, the tool saves the original file in the Antigravity installation folder. Keep `resources/app.asar.clean-backup` there for restoration.
 
-If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click the green button again.
+If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click Reapply (重新应用).
 
-To update the tool, click Check for updates (检查更新) at the top right of the window. It checks GitHub when you click. Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
+To update the tool, open the menu at the top right of the window and click Check for updates (检查更新). It checks GitHub when you click. Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
 
 ## PowerShell commands
 
