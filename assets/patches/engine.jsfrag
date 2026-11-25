@@ -622,8 +622,6 @@ function translateTextNode(node) {
         agWriteText(node, source, next);
     }
 }
-/* EFFORT_SLIDER */
-
 function translateAttributes(root) {
     if (root.nodeType !== Node.ELEMENT_NODE) {
         return;
@@ -635,7 +633,6 @@ function translateAttributes(root) {
     if (element.matches('script, style') || element.closest(agContentSelector) || agHasInlineSlotAncestor(element, true)) {
         return;
     }
-    if (element.getAttribute('data-testid') === 'model-selector-panel') agScheduleEffortSlider();
     let outputs = agAttributeState.get(element);
     for (const attr of agAttributeNames) {
         const current = element.getAttribute(attr);

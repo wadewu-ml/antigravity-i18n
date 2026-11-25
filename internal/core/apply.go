@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// ApplyLocale installs the selected localization and session metrics.
+// ApplyLocale installs the selected language and optional features.
 func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	s.clearNotes()
 
@@ -37,18 +37,27 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	var sessionMetrics bool
+	var features archiveFeatures
+	if currentPatched && (opts.SessionMetrics == nil || opts.EffortSlider == nil) {
+		_, _, features, _ = readArchiveLocale(p.AsarPath)
+	}
 	if opts.SessionMetrics != nil {
-		sessionMetrics = *opts.SessionMetrics
-	} else if currentPatched {
-		_, _, sessionMetrics, _ = readArchiveLocale(p.AsarPath)
+		features.sessionMetrics = *opts.SessionMetrics
+	}
+	if opts.EffortSlider != nil {
+		features.effortSlider = *opts.EffortSlider
 	}
 	english := CanonicalLocale(localeCode) == EnglishLocale
 	var locale *Locale
 	var patch patchFragments
 	if english {
-		if !sessionMetrics {
-			return nil, fmt.Errorf("use restore for official English with session metrics disabled")
+		if features == (archiveFeatures{}) {
+			restored, err := s.restoreOfficial(p, opts, currentPatched, expectedIdentity, initialHash)
+			if err != nil {
+				return nil, err
+			}
+			return &ApplyResult{Locale: EnglishLocale, LocaleName: "English", BackupPath: restored.BackupPath,
+				CleanBackup: p.CleanBackupPath, WasRunning: restored.WasRunning, Forced: restored.Forced, Relaunched: restored.Relaunched}, nil
 		}
 		locale = &Locale{Language: EnglishLocale, Name: "English", HTMLLang: "en"}
 		empty := blockSentinels[0][0] + "\n" + blockSentinels[0][1]
@@ -63,7 +72,12 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 			return nil, err
 		}
 	}
-	if sessionMetrics {
+	if features.effortSlider {
+		if err := s.store.addEffortSlider(&patch, locale); err != nil {
+			return nil, err
+		}
+	}
+	if features.sessionMetrics {
 		if err := s.store.addSessionMetrics(&patch, locale); err != nil {
 			return nil, err
 		}
@@ -126,7 +140,7 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 			fmt.Errorf("application identity changed in the patched archive"))
 	}
 	s.progress("正在校验补丁内容", "")
-	if code, _, metrics, ok := readArchiveLocale(staged); !ok || code != locale.Language || metrics != sessionMetrics {
+	if code, _, installed, ok := readArchiveLocale(staged); !ok || code != locale.Language || installed != features {
 		return nil, txn.failWithRollback("verifying the patched archive",
 			fmt.Errorf("the patched archive does not declare the requested locale and features"))
 	}
@@ -348,6 +362,10 @@ func (s *Service) RestoreOfficial(opts Options) (*RestoreResult, error) {
 		return nil, err
 	}
 
+	return s.restoreOfficial(p, opts, currentPatched, expectedIdentity, initialHash)
+}
+
+func (s *Service) restoreOfficial(p *paths, opts Options, currentPatched bool, expectedIdentity *Identity, initialHash string) (*RestoreResult, error) {
 	if currentPatched {
 		s.progress("正在定位干净备份", p.CleanBackupPath)
 	}

@@ -74,6 +74,7 @@ export namespace core {
 	    CurrentLanguage: string;
 	    LocaleName: string;
 	    SessionMetrics: boolean;
+	    EffortSlider: boolean;
 	    HasCleanBackup: boolean;
 	    CleanBackupStatus: string;
 	    LastPatchedAt?: string;
@@ -94,6 +95,7 @@ export namespace core {
 	        this.CurrentLanguage = source["CurrentLanguage"];
 	        this.LocaleName = source["LocaleName"];
 	        this.SessionMetrics = source["SessionMetrics"];
+	        this.EffortSlider = source["EffortSlider"];
 	        this.HasCleanBackup = source["HasCleanBackup"];
 	        this.CleanBackupStatus = source["CleanBackupStatus"];
 	        this.LastPatchedAt = source["LastPatchedAt"];

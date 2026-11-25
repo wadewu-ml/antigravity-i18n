@@ -106,7 +106,6 @@ func TestTranslationInBrowser(t *testing.T) {
 	store := newTestService(t).store
 	for _, example := range []struct{ code, fixture string }{
 		{DefaultLocale, "testdata/engine.html"},
-		{DefaultLocale, "testdata/effort-slider.html"},
 		{"de", "testdata/engine-repeat.html"},
 	} {
 		t.Run(example.code, func(t *testing.T) {
@@ -122,6 +121,23 @@ func TestTranslationInBrowser(t *testing.T) {
 			runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+engine+"</script>", 1))
 		})
 	}
+}
+
+func TestEffortSliderInBrowser(t *testing.T) {
+	store := newTestService(t).store
+	loc, err := store.LoadLocale(DefaultLocale)
+	if err != nil {
+		t.Fatal(err)
+	}
+	patch, err := store.buildLocalizationFragments(loc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := store.addEffortSlider(&patch, loc); err != nil {
+		t.Fatal(err)
+	}
+	html := readTestFile(t, "testdata/effort-slider.html")
+	runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+patch.preload+"</script>", 1))
 }
 
 func TestApplyShutdownInBrowser(t *testing.T) {

@@ -36,6 +36,8 @@
   var elLocaleChips = document.getElementById('localeChips');
   var elLocaleNote = document.getElementById('localeNote');
   var elSessionMetrics = document.getElementById('sessionMetrics');
+  var elEffortSlider = document.getElementById('effortSlider');
+  var elEffortSliderDetail = document.getElementById('effortSliderDetail');
   var elSessionMetricsDetail = document.getElementById('sessionMetricsDetail');
   var elBtnToggleLogs = document.getElementById('btnToggleLogs');
   var elLogDrawer = document.getElementById('logDrawer');
@@ -103,7 +105,7 @@
   }
 
   function isCustomized(st) {
-    return !!(st && (st.SessionMetrics || st.CurrentLanguage && st.CurrentLanguage !== 'en'));
+    return !!(st && (st.SessionMetrics || st.EffortSlider || st.CurrentLanguage && st.CurrentLanguage !== 'en'));
   }
 
   function setStatus(st, selectInstalled) {
@@ -111,6 +113,7 @@
     if (selectInstalled || !selectedLocale) {
       selectedLocale = st.CurrentLanguage;
       elSessionMetrics.checked = Boolean(st.SessionMetrics);
+      elEffortSlider.checked = Boolean(st.EffortSlider);
     }
     renderStatus(st);
     renderChips();
@@ -151,7 +154,10 @@
     elStatusLabel.textContent = '当前语言：' + currentName;
     if (isCustomized(st)) {
       elStatusPill.classList.add('success');
-      elStatusDesc.textContent = st.SessionMetrics ? '会话指标已开启。' : '';
+      var enabled = [];
+      if (st.SessionMetrics) enabled.push('会话指标');
+      if (st.EffortSlider) enabled.push('思考强度滑块');
+      elStatusDesc.textContent = enabled.length ? enabled.join('、') + '已开启。' : '';
       elBtnSecondaryAction.classList.remove('hidden');
       elBtnSecondaryAction.textContent = '打开 Antigravity';
       elBtnRestore.classList.remove('hidden');
@@ -176,7 +182,7 @@
     var languageChanged = currentStatus && selectedLocale && currentStatus.CurrentLanguage !== selectedLocale;
     var pending = languageChanged && locales.find(function (loc) { return loc.code === selectedLocale; });
     elPendingLanguage.textContent = pending ? '将切换为 ' + pending.name : '';
-    elSessionMetrics.disabled = isOperating || !currentStatus;
+    elEffortSlider.disabled = elSessionMetrics.disabled = isOperating || !currentStatus;
     elBtnPrimaryAction.title = currentStatus ? '应用后会重启 Antigravity' : '';
     if (!currentStatus) {
       elBtnPrimaryAction.textContent = '重新检测';
@@ -184,10 +190,14 @@
       return;
     }
     var metricsChanged = Boolean(currentStatus.SessionMetrics) !== elSessionMetrics.checked;
-    var hasChanges = languageChanged || metricsChanged;
+    var sliderChanged = Boolean(currentStatus.EffortSlider) !== elEffortSlider.checked;
+    var hasChanges = languageChanged || metricsChanged || sliderChanged;
     var canReapply = !hasChanges && isCustomized(currentStatus);
     elBtnPrimaryAction.textContent = canReapply ? '重新应用' : '应用更改';
     elBtnPrimaryAction.disabled = isOperating || (!hasChanges && !canReapply);
+    elEffortSliderDetail.textContent = sliderChanged
+      ? (elEffortSlider.checked ? '应用后开启' : '应用后关闭')
+      : '在模型菜单的「查看用量」上方，拖动滑块调节当前模型的思考强度。';
     elSessionMetricsDetail.textContent = metricsChanged
       ? (elSessionMetrics.checked ? '应用后开启' : '应用后关闭')
       : '在 Antigravity 的模型选择器旁显示上下文用量。';
@@ -246,11 +256,12 @@
     var code = selectedLocale || 'zh-CN';
 
     var metrics = elSessionMetrics.checked;
-    if (code === 'en' && !metrics) {
+    var slider = elEffortSlider.checked;
+    if (code === 'en' && !metrics && !slider) {
       doRestore(false);
       return;
     }
-    runApply(app, code, metrics, false);
+    runApply(app, code, metrics, slider, false);
   }
 
   function showOperationError(title, err, retry) {
@@ -265,16 +276,17 @@
     showMessage(title, msg, true);
   }
 
-  function runApply(app, code, metrics, force) {
+  function runApply(app, code, metrics, slider, force) {
     setOperatingState(true, '正在应用更改', '正在准备补丁...');
-    appendLog('[操作] 应用 ' + code + ' · 会话指标' + (metrics ? '开启' : '关闭') + (force ? ' · 强制退出' : ''));
+    appendLog('[操作] 应用 ' + code + ' · 会话指标' + (metrics ? '开启' : '关闭') +
+      ' · 思考强度滑块' + (slider ? '开启' : '关闭') + (force ? ' · 强制退出' : ''));
 
-    app.ApplyCustomization(code, metrics, true, force).then(function (res) {
+    app.ApplyCustomization(code, metrics, slider, true, force).then(function (res) {
       var name = res && res.LocaleName ? res.LocaleName : code;
       appendLog('[完成] 已应用 ' + name);
       if (!res || !res.Relaunched) showMessage('已应用', '请手动打开 Antigravity。');
     }).catch(function (err) {
-      showOperationError('应用失败', err, force ? null : function () { runApply(app, code, metrics, true); });
+      showOperationError('应用失败', err, force ? null : function () { runApply(app, code, metrics, slider, true); });
     }).then(function () {
       setOperatingState(false);
       return refreshStatus();
@@ -292,6 +304,7 @@
     app.RestoreLocale(true, force).then(function (res) {
       selectedLocale = 'en';
       elSessionMetrics.checked = false;
+      elEffortSlider.checked = false;
       appendLog('[完成] 已还原为官方英文');
       if (res && !res.AlreadyEnglish && !res.Relaunched) showMessage('已还原', '请手动打开 Antigravity。');
     }).catch(function (err) {
@@ -350,6 +363,7 @@
     elRestoreConfirmModal.showModal();
   });
   elSessionMetrics.addEventListener('change', renderPrimaryLabel);
+  elEffortSlider.addEventListener('change', renderPrimaryLabel);
   document.getElementById('btnCancelRestore').addEventListener('click', function () {
     elRestoreConfirmModal.close();
   });

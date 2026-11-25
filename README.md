@@ -20,7 +20,7 @@ The packs cover Simplified Chinese, Traditional Chinese, Japanese, Korean, Germa
 
 If prompted to quit, save your work first. Forcing Antigravity to close interrupts active sessions and can discard unsaved edits.
 
-After applying a language pack, open the model picker. For models with selectable thinking effort, drag the slider above View Usage and release it to apply the level.
+To enable the optional slider, turn on the switch below Session metrics in the setup tool and apply your changes. Then open the model picker. For models with selectable thinking effort, drag the slider above View Usage and release it to apply the level.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Settings window with Simplified Chinese selected and session metrics enabled"></a>
 

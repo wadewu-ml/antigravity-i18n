@@ -20,7 +20,7 @@ Os idiomas disponíveis são chinês simplificado, chinês tradicional, japonês
 
 Se a ferramenta pedir que você encerre o Antigravity, a opção “Forçar encerramento e tentar novamente” força o encerramento e tenta de novo. Isso interrompe as sessões em andamento e pode descartar alterações que ainda não foram salvas.
 
-Depois de aplicar um pacote de idioma, abra o seletor de modelos. Se o modelo permitir ajustar o esforço de raciocínio, um controle deslizante aparecerá acima da opção de uso. Arraste e solte para aplicar o nível escolhido.
+Para ativar o controle deslizante, ligue o interruptor abaixo das métricas da sessão na ferramenta. Aplique as alterações e abra o seletor de modelos. Se o modelo permitir ajustar o esforço de raciocínio, um controle deslizante aparecerá acima da opção de uso. Arraste e solte para aplicar o nível escolhido.
 
 <a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Janela de configurações com chinês simplificado selecionado e métricas da sessão ativadas"></a>
 

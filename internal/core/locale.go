@@ -765,12 +765,35 @@ func (s *LocaleStore) buildPreloadFragment(loc *Locale) (string, error) {
 	}
 	// Replace once: the template may legitimately contain the placeholder text
 	// inside its own comments, and replacing all of them would corrupt those.
-	engine := strings.Replace(string(s.engineFragment), "/* EFFORT_SLIDER */", string(s.effortSlider), 1)
-	out, n := replaceFirst(engine, localeDataPlaceholder, string(data))
+	out, n := replaceFirst(string(s.engineFragment), localeDataPlaceholder, string(data))
 	if n == 0 {
 		return "", fmt.Errorf("the translation engine template has no %s", localeDataPlaceholder)
 	}
 	return out, nil
+}
+
+const effortSliderMarker = "function agMountEffortSliders("
+
+func (s *LocaleStore) addEffortSlider(patch *patchFragments, loc *Locale) error {
+	labels := make(map[string]string)
+	for _, key := range []string{"Thinking effort", "View Usage", "Minimal", "Low", "Medium", "High", "Extra High", "Max"} {
+		label := loc.Text[key]
+		if label == "" {
+			label = key
+		}
+		labels[key] = label
+	}
+	data, err := json.Marshal(labels)
+	if err != nil {
+		return err
+	}
+	view, n := replaceFirst(string(s.effortSlider), "EFFORT_LABELS_PLACEHOLDER", string(data))
+	if n == 0 {
+		return fmt.Errorf("the effort slider template has no labels placeholder")
+	}
+	end := blockSentinels[0][1]
+	patch.preload = strings.Replace(patch.preload, end, view+"\n"+end, 1)
+	return nil
 }
 
 func (s *LocaleStore) buildMenuFragment(loc *Locale) (string, error) {

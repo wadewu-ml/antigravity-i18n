@@ -58,13 +58,23 @@
       </div>
       <div class="chips" id="localeChips"></div>
 
-      <div class="feature-setting">
-        <div class="feature-copy">
-          <label class="section-title" for="sessionMetrics">会话指标</label>
-          <p class="setting-detail" id="sessionMetricsDetail">在 Antigravity 的模型选择器旁显示上下文用量。</p>
+      <div class="features">
+        <div class="feature-setting">
+          <div class="feature-copy">
+            <label class="section-title" for="sessionMetrics">会话指标</label>
+            <p class="setting-detail" id="sessionMetricsDetail">在 Antigravity 的模型选择器旁显示上下文用量。</p>
+          </div>
+          <input class="setting-switch" type="checkbox" role="switch" id="sessionMetrics"
+            aria-describedby="sessionMetricsDetail" disabled>
         </div>
-        <input class="setting-switch" type="checkbox" role="switch" id="sessionMetrics"
-          aria-describedby="sessionMetricsDetail" disabled>
+        <div class="feature-setting">
+          <div class="feature-copy">
+            <label class="section-title" for="effortSlider">思考强度滑块</label>
+            <p class="setting-detail" id="effortSliderDetail">在模型菜单的「查看用量」上方，拖动滑块调节当前模型的思考强度。</p>
+          </div>
+          <input class="setting-switch" type="checkbox" role="switch" id="effortSlider"
+            aria-describedby="effortSliderDetail" disabled>
+        </div>
       </div>
 
       <div class="action-row" id="actionRow">
@@ -116,7 +126,7 @@
 
   <dialog class="modal-box" id="restoreConfirmModal" aria-labelledby="restoreTitle" aria-describedby="restoreBody">
     <h3 id="restoreTitle">还原官方版本？</h3>
-    <p class="modal-desc" id="restoreBody">Antigravity 将恢复官方英文界面，会话指标将关闭。</p>
+    <p class="modal-desc" id="restoreBody">Antigravity 将恢复官方英文界面，会话指标和思考强度滑块将关闭。</p>
     <div class="modal-actions">
       <button class="btn btn-ghost" id="btnCancelRestore" autofocus>取消</button>
       <button class="btn btn-primary" id="btnConfirmRestore">还原</button>

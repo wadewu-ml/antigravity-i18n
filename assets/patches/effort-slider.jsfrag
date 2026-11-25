@@ -61,8 +61,8 @@ function agMountEffortSliders(labels) {
     }
 
     const installed = Symbol.for('antigravity-i18n.effort-slider');
-    for (const panel of document.querySelectorAll(panelSelector)) {
-        if (panel[installed]) continue;
+    function mount(panel) {
+        if (panel[installed]) return;
         panel[installed] = true;
         let host, slider, value, state;
         function preview() {
@@ -138,23 +138,23 @@ function agMountEffortSliders(labels) {
         new MutationObserver(sync).observe(panel, {childList:true, subtree:true, characterData:true,
             attributes:true, attributeFilter:['aria-disabled','disabled','data-model-base','class']});
     }
+    document.querySelectorAll(panelSelector).forEach(mount);
+    new MutationObserver(records => {
+        for (const record of records) {
+            for (const node of record.addedNodes) {
+                if (node.nodeType !== 1) continue;
+                if (node.matches(panelSelector)) mount(node);
+                else node.querySelectorAll(panelSelector).forEach(mount);
+            }
+        }
+    }).observe(document, {childList:true, subtree:true});
 }
 
-let agEffortQueued = false;
-function agScheduleEffortSlider() {
-    if (agEffortQueued) return;
-    agEffortQueued = true;
-    queueMicrotask(() => {
-        agEffortQueued = false;
-        const labels = {};
-        for (const key of ['Thinking effort','View Usage','Minimal','Low','Medium','High','Extra High','Max']) {
-            labels[key] = agLookup(key) || key;
-        }
-        if (typeof require === 'function') {
-            const bridge = require('electron').contextBridge;
-            bridge?.executeInMainWorld?.({func:agMountEffortSliders,args:[labels]});
-        } else {
-            agMountEffortSliders(labels);
-        }
-    });
-}
+(function installEffortSlider() {
+    const labels = EFFORT_LABELS_PLACEHOLDER;
+    if (typeof require === 'function') {
+        require('electron').contextBridge?.executeInMainWorld?.({func:agMountEffortSliders,args:[labels]});
+    } else {
+        agMountEffortSliders(labels);
+    }
+})();
