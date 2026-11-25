@@ -1,73 +1,112 @@
-# <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
+<div align="center">
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n 图标">
+  <h1>antigravity-i18n</h1>
+  <p>为 Windows 版 Google Antigravity 提供九种界面语言包、会话指标与模型额度面板，以及思考强度滑块。</p>
+  <p>
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>下载 Windows x64 版</strong></a>
+    ·
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">发布记录</a>
+    ·
+    已验证适配 <strong>Antigravity App 2.35.1</strong>
+  </p>
+  <p>
+    <strong>简体中文</strong> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+  </p>
+</div>
 
-为 Windows 版 Google Antigravity 提供九种界面语言包，翻译设置、对话区按钮、菜单和退出提示。还可以在输入框旁查看会话指标和模型额度，或在模型菜单中用滑块调节思考强度。设置生效后即可关闭本工具。
-
-[下载 Windows x64 版](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [发布记录](https://github.com/wadewu-ml/antigravity-i18n/releases)
-
-适配 **Antigravity App 2.35.1**。单个便携 EXE 内含全部九种语言包。
-
-**简体中文** · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
-
-<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="简体中文界面，顶部是中文菜单，输入框里可以看到模型选择器和指标圆环"></a>
-
-## 切换界面语言
-
-可选简体中文、繁体中文、日语、韩语、德语、西班牙语、法语、巴西葡萄牙语和俄语。
-
-1. 双击 `antigravity-i18n.exe`。如果工具没找到正确的安装目录，点「更改位置」，选择包含 `Antigravity.exe` 的文件夹。
-2. 在「界面语言」中选好语言，按需打开「会话指标」。想保留英文界面并查看指标，语言选 **English** 即可。
-3. 保存工作并退出 Antigravity，再点「应用更改」。Antigravity 会按新设置重新打开。
-
-退出提示中的「强制退出并重试」会中断进行中的会话，未保存的编辑可能丢失。
-
-如需使用滑块，在工具的「会话指标」下方开启「思考强度滑块」，点击「应用更改」，再打开 Antigravity 的模型选择菜单。两项功能可分别开启，也支持官方英文界面。当前模型支持直接选择思考强度时，「查看用量」上方会出现滑块，拖动可预览档位，松开即应用。
-
-<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="工具中已选简体中文，并已打开「会话指标」开关"></a>
-
-<p>
-  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="模型菜单中的思考强度滑块，当前为「高」"></a>
-  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="模型菜单中的紫色思考强度滑块，当前为「极高」"></a>
+<p align="center">
+  <a href="./docs/images/language-settings.webp">
+    <img src="./docs/images/language-settings.webp" width="560" alt="antigravity-i18n 设置窗口，显示 Antigravity v2.35.1、已选简体中文，并同时开启会话指标与思考强度滑块">
+  </a>
 </p>
 
-## 查看会话指标
+## 功能一览
 
-将鼠标移到模型选择器右侧的圆环上，就能查看各模型组在不同周期的剩余额度。将鼠标停在百分比上可查看本地重置时间。新对话发出第一条消息前也能查额度。有了模型调用记录后，圆环会显示上下文估算用量，详情将已用比例、已用 token 数和总容量列在同一行，还可查看输出速度、缓存命中率和首个 token 的等待时间。单击圆环可固定详情，再点一次收起。
+- **单文件内置 9 种界面语言** — 翻译设置、对话区控件、模型菜单、原生菜单与退出提示，支持简体中文、繁体中文、日语、韩语、德语、西班牙语、法语、巴西葡萄牙语和俄语，不改动用户输入与对话内容。
+- **可选会话指标与模型额度** — 在模型选择器右侧增加圆环，悬停即可查看模型剩余额度、本地重置时间、上下文已用、平均输出速度、缓存命中率与首 token 延迟。
+- **可选思考强度滑块** — 在模型选择菜单中为支持调节的模型增加胶囊滑块，拖动即可切换思考强度。
+- **独立组合，逐字节还原** — 两项开关可分别开启，也支持搭配官方英文界面；应用后即可关闭本工具，随时可一键还原官方版本。
 
-<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="模型选择器右侧的圆环上方展开了会话指标，显示上下文用量、余量和输出速度"></a>
+## 快速上手
 
-[查看首次模型调用前的额度面板](./docs/images/session-quota-before-first-call.webp)
+### 应用设置
 
-指标取自本机的会话记录。分屏、侧问和子 Agent 面板各自显示对应会话最近一次有数据的模型调用。输出量包含模型记录的思考 token。`—` 表示这一项暂时没有数据。
+1. 双击运行 `antigravity-i18n.exe`。若未自动识别到正确目录，点 **更改位置** 选择包含 `Antigravity.exe` 的文件夹。
+2. 在 **界面语言** 中选择目标语言（若只想保留英文界面并开启可选功能，选 **English** 即可）。
+3. 按需开启语言列表下方的 **会话指标** 与 **思考强度滑块**。
+4. 保存工作并退出 Antigravity，点击右下角 **应用更改**。Antigravity 会按新设置重新打开（也可点击 **打开 Antigravity** 启动），之后即可关闭本工具。
 
-## 还原与更新
+> [!WARNING]
+> 若提示 Antigravity 仍在运行，请先保存工作后正常退出。使用 **强制退出并重试** 会中断进行中的会话，可能导致未保存的编辑丢失。
 
-要恢复官方英文界面，先退出 Antigravity，打开窗口右上角的「更多操作」菜单，点「还原官方版本」，再点「还原」。会话指标和思考强度滑块也会随之关闭。首次应用时工具会自动备份原文件，请保留安装目录下的 `resources/app.asar.clean-backup`。
+### 重新应用与还原
 
-如果 Antigravity 更新后翻译或指标消失，可先对照本页顶部的适配版本，再选择语言和指标并应用。要再次应用已经生效的设置，点「重新应用」。
+- **重新应用当前设置** — 点击右下角 **重新应用**。
+- **还原官方版本** — 先退出 Antigravity，打开右上角菜单（`···`），点击 **还原官方版本** 并确认。界面将恢复官方英文，同时移除指标圆环和思考强度滑块。
 
-打开工具时会自动检查更新，距上次成功检查满 24 小时后再查。右上角「···」出现蓝点时，点开菜单，选择「发现新版本」即可查看更新说明。在「关于」里可以关闭自动检查，也可以随时从菜单手动检查。点「更新并重启」后，新版会从原来的 EXE 路径打开。需要把新译文应用到 Antigravity 时，再点「重新应用」。
+> [!IMPORTANT]
+> 首次应用时，工具会在 Antigravity 安装目录自动备份原文件至 `resources/app.asar.clean-backup`。如需日后还原，请保留该文件。
+
+## 可选功能详解
+
+### 会话指标与模型额度
+
+- **发送首条消息前即可查额度** — 将鼠标移到模型选择器右侧的圆环上，即可查看各模型组在不同周期（如每周、5 小时）的剩余额度；停在百分比上可查看本地重置时间。
+- **产生模型调用后显示实时指标** — 对话记录到模型调用后，圆环会反映上下文估算占比，面板上方同步显示 **上下文已用**（已用 token / 总容量与占比）、**平均输出速度**（含模型记录的思考 token）、**缓存命中率** 与 **首 token 延迟**。单击圆环可固定或收起面板。
+- **多面板独立统计** — 分屏、侧问和子 Agent 面板各自读取本机对应会话最近一次有数据的模型调用。缺失项显示为 `—`。
+
+<p align="center">
+  <a href="./docs/images/session-quota-before-first-call.webp">
+    <img src="./docs/images/session-quota-before-first-call.webp" width="440" alt="模型选择器右侧圆环上方展开的会话指标与模型剩余额度面板">
+  </a>
+</p>
+
+### 思考强度滑块
+
+在工具中开启 **思考强度滑块** 并应用更改。打开 Antigravity 模型选择菜单，支持调节思考强度的模型会在 **查看用量** 上方显示滑块——拖动档位预览，松开即生效。
+
+<p align="center">
+  <a href="./docs/images/thinking-effort-high.webp">
+    <img src="./docs/images/thinking-effort-high.webp" height="340" alt="模型菜单中的思考强度滑块，当前为高">
+  </a>
+  &nbsp;&nbsp;
+  <a href="./docs/images/thinking-effort-max.webp">
+    <img src="./docs/images/thinking-effort-max.webp" height="340" alt="模型菜单中的思考强度滑块，当前为极高">
+  </a>
+</p>
+
+## 更新说明
+
+- **Antigravity 更新后** — 若翻译或增强组件失效，请先核对本页顶部的适配版本，再重新打开工具应用设置即可。
+- **工具自动检查更新** — 启动时每 24 小时检查一次 GitHub 发布；右上角菜单（`···`）出现蓝点表示有新版本，点开可查看更新说明并就地下载重启。可在 **关于** 中关闭自动检查，或随时点击 **检查更新** 手动检查。工具更新完成后，点击 **重新应用** 即可将新译文写入 Antigravity。
 
 ## 命令行用法
 
-在 `antigravity-i18n.exe` 所在目录打开 PowerShell。
+在 `antigravity-i18n.exe` 所在目录打开 PowerShell：
 
 | 操作 | 命令 |
 | --- | --- |
 | 列出语言代码 | `.\antigravity-i18n.exe locales` |
 | 应用简体中文 | `.\antigravity-i18n.exe apply --locale zh-CN` |
-| 使用官方英文并开启指标 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
-| 使用官方英文并开启思考强度滑块 | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
+| 官方英文 + 会话指标 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 官方英文 + 思考强度滑块 | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | 查看当前设置 | `.\antigravity-i18n.exe status` |
 | 还原官方版本 | `.\antigravity-i18n.exe restore` |
 | 查看全部参数 | `.\antigravity-i18n.exe --help` |
 
 ## 从源码构建
 
-在 Windows 上安装 PowerShell 7、Go 1.26.3 或更新版本，以及 Wails v2 CLI。在仓库根目录运行 `.\build.ps1 -Target gui`，产物位于 `build/bin/antigravity-i18n.exe`。
+需要 Windows、PowerShell 7、Go 1.26.3+ 及 Wails v2 CLI：
 
-## 启动问题
+```powershell
+.\build.ps1 -Target gui
+```
 
-如果启动工具时提示缺少 WebView2，请安装 [Microsoft Edge WebView2 运行时](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)。
+产物位于 `build/bin/antigravity-i18n.exe`。
+
+## 常见问题
+
+- **启动时提示缺少 WebView2** — 请安装 [Microsoft Edge WebView2 运行时](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) 后重新运行 `antigravity-i18n.exe`。
 
 ## 免责声明
 

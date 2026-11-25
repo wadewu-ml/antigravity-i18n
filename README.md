@@ -1,75 +1,115 @@
-# <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
+<div align="center">
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n icon">
+  <h1>antigravity-i18n</h1>
+  <p>Localization packs, session metrics & model quotas, and a thinking-effort slider for Google Antigravity on Windows.</p>
+  <p>
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Download for Windows x64</strong></a>
+    ·
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">Releases</a>
+    ·
+    Tested with <strong>Antigravity App 2.35.1</strong>
+  </p>
+  <p>
+    <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+  </p>
+</div>
 
-Nine language packs translate settings, chat controls, menus, and quit prompts in the Google Antigravity desktop app for Windows. Optional controls show session metrics and model quotas by the chat input and add a thinking-effort slider to the model picker. Once your settings are applied, you can close the tool.
-
-[Download for Windows x64](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Releases](https://github.com/wadewu-ml/antigravity-i18n/releases)
-
-Tested with **Antigravity App 2.35.1**. The portable EXE includes all nine language packs.
-
-[简体中文](./README.zh-CN.md) · **English** · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
-
-<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="Antigravity in Simplified Chinese, with translated menus and the metrics ring beside the model selector"></a>
-
-## Change the interface language
-
-The packs cover Simplified Chinese, Traditional Chinese, Japanese, Korean, German, Spanish, French, Brazilian Portuguese, and Russian. The setup tool uses Simplified Chinese.
-
-1. Open `antigravity-i18n.exe`. To select another installation, click Change location (更改位置) and choose the folder containing `Antigravity.exe`.
-2. Choose your language. To see session metrics, turn on the switch below the language list. You can also use it with English.
-3. Save your work, quit Antigravity, and click Apply changes (应用更改) at the bottom right. Antigravity will reopen.
-
-If prompted to quit, save your work first. Forcing Antigravity to close interrupts active sessions and can discard unsaved edits.
-
-To use the thinking-effort slider, turn on the second switch (思考强度滑块) and apply your changes. The two switches work independently and can be used with the built-in English interface. For models with selectable thinking effort, drag the slider above View Usage and release it to apply the level.
-
-<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Settings window with Simplified Chinese selected and session metrics enabled"></a>
-
-Click Reapply (重新应用) at the bottom right to apply the current settings again.
-
-<p>
-  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="Model picker with thinking effort at High"></a>
-  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="Model picker with thinking effort at Max"></a>
+<p align="center">
+  <a href="./docs/images/language-settings.webp">
+    <img src="./docs/images/language-settings.webp" width="560" alt="antigravity-i18n setup window showing Antigravity v2.35.1, Simplified Chinese selected, and both Session metrics and Thinking-effort slider enabled">
+  </a>
 </p>
 
-## Read session metrics
+## Features
 
-Hover over the ring beside the model selector to see each model group’s remaining quota by period. Hover over a percentage for the local reset time. You can check quota before sending your first message. Once the chat records a model call, the ring shows estimated context use and the panel shows tokens used and total capacity, output speed, cache hit rate, and time to first token. Click the ring to pin or dismiss the panel.
+- **9 interface languages in one portable EXE** — Translates settings, chat controls, model menus, native menus, and quit prompts into Simplified Chinese, Traditional Chinese, Japanese, Korean, German, Spanish, French, Brazilian Portuguese, and Russian without touching your chats or input.
+- **Optional session metrics & model quotas** — Adds a ring beside the model selector to inspect remaining model quotas, local reset times, context used, average output speed, cache hit rate, and time to first token.
+- **Optional thinking-effort slider** — Adds an inline capsule slider inside the model picker for models with selectable thinking effort.
+- **Independent & reversible** — Both optional switches work independently and with the built-in English UI. Once applied, you can close the tool and restore the official version byte-for-byte at any time.
 
-<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="The open panel above the ring shows context usage, remaining tokens, and output speed in Simplified Chinese"></a>
+## Quick start
 
-[Quota panel before the first model call](./docs/images/session-quota-before-first-call.webp)
+> [!NOTE]
+> The setup tool UI is currently in Simplified Chinese. Original labels are included in parentheses below to match the screenshot above.
 
-In split views, side chats, and subagent panels, each panel shows the latest model call with data in its own local session record. The output count includes any thinking tokens the model reports. A dash (`—`) means that a value is unavailable.
+### Apply settings
 
-## Restore or reapply
+1. Run `antigravity-i18n.exe`. If the detected installation path is wrong, click **Change location** (`更改位置`) and select the folder containing `Antigravity.exe`.
+2. Pick an interface language under **Interface language** (`界面语言`), or select **English** to keep the original UI while using the optional switches.
+3. Toggle **Session metrics** (`会话指标`) and/or **Thinking-effort slider** (`思考强度滑块`) below the language list.
+4. Save your work, quit Antigravity, and click **Apply changes** (`应用更改`) at the bottom right. Antigravity will reopen with your settings (or click **Open Antigravity** / `打开 Antigravity`), and you can close the tool.
 
-To return to the original English interface and remove the indicator and effort slider, quit Antigravity, open the menu at the top right of the tool, click Restore official version (还原官方版本), then confirm. The first time you apply settings, the tool saves the original file in the Antigravity installation folder. Keep `resources/app.asar.clean-backup` there for restoration.
+> [!WARNING]
+> If prompted that Antigravity is still running, save your work and quit normally. **Force quit and retry** (`强制退出并重试`) interrupts active sessions and can discard unsaved edits.
 
-If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click Reapply (重新应用).
+### Reapply or restore
 
-On startup, the tool checks GitHub for updates once every 24 hours. A blue dot on the top-right menu means a new version is available. Open the menu to see the version and release notes. You can turn off automatic checks in About (关于) and still check manually (检查更新). Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
+- **Reapply current settings** — Click **Reapply** (`重新应用`) at the bottom right.
+- **Restore official version** — Quit Antigravity, open the top-right menu (`···`), click **Restore official version** (`还原官方版本`), and confirm. This restores the original English UI and removes the metrics ring and effort slider.
 
-## PowerShell commands
+> [!IMPORTANT]
+> On first apply, the tool saves a clean backup at `resources/app.asar.clean-backup` inside the Antigravity installation folder. Keep that file so you can restore later.
 
-Open PowerShell in the folder containing `antigravity-i18n.exe`.
+## Optional controls
+
+### Session metrics & model quotas
+
+- **Quotas before the first message** — Hover over the ring beside the model selector to see remaining quota per model group and period (for example weekly and 5-hour windows). Hover over a percentage to see the local reset time.
+- **Live metrics after a model call** — Once a chat records a model call, the ring reflects estimated context usage and the upper section fills in **Context used** (tokens used, total capacity, and percentage), **Average output speed** (including reported thinking tokens), **Cache hit rate**, and **Time to first token**. Click the ring to pin or dismiss the panel.
+- **Per-panel tracking** — Split views, side chats, and subagent panels each read the latest model call with data from their own local session record. A dash (`—`) indicates a value is unavailable.
+
+<p align="center">
+  <a href="./docs/images/session-quota-before-first-call.webp">
+    <img src="./docs/images/session-quota-before-first-call.webp" width="440" alt="Session metrics and model quota remaining panel above the ring beside the model selector">
+  </a>
+</p>
+
+### Thinking-effort slider
+
+Turn on **Thinking-effort slider** (`思考强度滑块`) and apply your changes. In Antigravity's model picker, models with selectable thinking effort show an inline slider above **View Usage** — drag across detents to preview a level and release to apply it.
+
+<p align="center">
+  <a href="./docs/images/thinking-effort-high.webp">
+    <img src="./docs/images/thinking-effort-high.webp" height="340" alt="Model picker with thinking effort set to High">
+  </a>
+  &nbsp;&nbsp;
+  <a href="./docs/images/thinking-effort-max.webp">
+    <img src="./docs/images/thinking-effort-max.webp" height="340" alt="Model picker with thinking effort set to Max">
+  </a>
+</p>
+
+## Updates
+
+- **After an Antigravity update** — If translations or controls disappear, verify the tested version at the top of this page, then reopen the tool and apply your settings again.
+- **Tool auto-updates** — On startup, the tool checks GitHub once every 24 hours. A blue dot on the top-right menu (`···`) signals a new release; open the menu to read release notes and download and restart from the same EXE path. Automatic checks can be turned off in **About** (`关于`), and manual checks remain available via **Check for updates** (`检查更新`). After updating, click **Reapply** (`重新应用`) to push updated translations into Antigravity.
+
+## PowerShell CLI
+
+Run these commands from PowerShell in the folder containing `antigravity-i18n.exe`:
 
 | Task | Command |
 | --- | --- |
 | List language codes | `.\antigravity-i18n.exe locales` |
 | Apply Simplified Chinese | `.\antigravity-i18n.exe apply --locale zh-CN` |
-| Use built-in English with metrics | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
-| Use built-in English with the thinking-effort slider | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
-| Check current settings | `.\antigravity-i18n.exe status` |
-| Restore the official version | `.\antigravity-i18n.exe restore` |
-| See all options | `.\antigravity-i18n.exe --help` |
+| Keep English with session metrics | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| Keep English with thinking-effort slider | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
+| Check current status | `.\antigravity-i18n.exe status` |
+| Restore official version | `.\antigravity-i18n.exe restore` |
+| Show all options | `.\antigravity-i18n.exe --help` |
 
 ## Build from source
 
-On Windows, install PowerShell 7, Go 1.26.3 or later, and the Wails v2 CLI. Run `.\build.ps1 -Target gui` from the repository root to build `build/bin/antigravity-i18n.exe`.
+Requires Windows, PowerShell 7, Go 1.26.3+, and the Wails v2 CLI:
 
-## Startup troubleshooting
+```powershell
+.\build.ps1 -Target gui
+```
 
-If the tool asks for WebView2 at startup, install the [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download).
+The built executable is written to `build/bin/antigravity-i18n.exe`.
+
+## Troubleshooting
+
+- **Missing WebView2 prompt on startup** — Install the [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) and relaunch `antigravity-i18n.exe`.
 
 ## Disclaimer
 

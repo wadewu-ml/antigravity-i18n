@@ -1,75 +1,115 @@
-# <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
+<div align="center">
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n-Symbol">
+  <h1>antigravity-i18n</h1>
+  <p>Sprachpakete, Sitzungsmetriken & Modellkontingente sowie ein Regler für den Denkaufwand für Google Antigravity unter Windows.</p>
+  <p>
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Für Windows x64 herunterladen</strong></a>
+    ·
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">Versionen</a>
+    ·
+    Getestet mit <strong>Antigravity App 2.35.1</strong>
+  </p>
+  <p>
+    <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <strong>Deutsch</strong> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+  </p>
+</div>
 
-Neun Sprachpakete übersetzen Einstellungen, Bedienelemente im Chat, Menüs und Rückfragen beim Beenden von Google Antigravity für Windows. Auf Wunsch sehen Sie direkt am Eingabefeld, wie viel Kontext noch verfügbar ist und wie schnell das Modell geantwortet hat. Nach dem Anwenden können Sie das Tool schließen.
-
-[Für Windows x64 herunterladen](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [Versionen](https://github.com/wadewu-ml/antigravity-i18n/releases)
-
-Getestet mit **Antigravity App 2.35.1**. Die portable EXE enthält alle neun Sprachpakete.
-
-[简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · **Deutsch** · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
-
-<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="Antigravity mit Menüs auf vereinfachtem Chinesisch und dem Ring neben der Modellauswahl"></a>
-
-## Oberflächensprache ändern
-
-Zur Auswahl stehen vereinfachtes und traditionelles Chinesisch, Japanisch, Koreanisch, Deutsch, Spanisch, Französisch, brasilianisches Portugiesisch und Russisch. Das Tool selbst ist auf vereinfachtem Chinesisch beschriftet.
-
-1. Öffnen Sie `antigravity-i18n.exe`. Falls das Tool die Installation nicht findet oder den falschen Ordner anzeigt, klicken Sie auf „Speicherort ändern“ und wählen Sie den Ordner mit `Antigravity.exe`.
-2. Wählen Sie unter „Oberflächensprache“ eine Sprache. Mit „Sitzungsmetriken“ schalten Sie die Sitzungsmetriken ein. Für Metriken mit der englischen Originaloberfläche wählen Sie English.
-3. Speichern Sie Ihre Arbeit und beenden Sie Antigravity. Klicken Sie dann auf „Änderungen anwenden“, um die Einstellungen zu übernehmen. Antigravity öffnet sich mit den neuen Einstellungen.
-
-Mit „Beenden erzwingen und erneut versuchen“ können Sie bei einer entsprechenden Aufforderung das Beenden erzwingen und den Vorgang wiederholen. Laufende Sitzungen werden dabei unterbrochen und ungespeicherte Änderungen können verloren gehen.
-
-Um den Regler zu verwenden, aktivieren Sie im Tool den Schalter unter den Sitzungsmetriken. Beide Funktionen lassen sich unabhängig voneinander und auch mit der englischen Oberfläche verwenden. Wenden Sie die Änderungen an und öffnen Sie die Modellauswahl. Bei Modellen mit einstellbarem Denkaufwand erscheint über der Nutzungsanzeige ein Regler. Ziehen Sie ihn auf die gewünschte Stufe und lassen Sie ihn los.
-
-<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="Einstellungsfenster mit vereinfachtem Chinesisch als Sprache und aktivierten Sitzungsmetriken"></a>
-
-Über die Schaltfläche „重新应用“ (erneut anwenden) unten rechts lassen sich die aktuellen Einstellungen erneut anwenden.
-
-<p>
-  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="Modellauswahl mit dem Denkaufwand auf der Stufe Hoch"></a>
-  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="Modellauswahl mit dem Denkaufwand auf der höchsten Stufe"></a>
+<p align="center">
+  <a href="./docs/images/language-settings.webp">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Einstellungsfenster mit Antigravity v2.35.1, vereinfachtem Chinesisch sowie aktivierten Sitzungsmetriken und Denkaufwand-Regler">
+  </a>
 </p>
 
-## Sitzungsmetriken ablesen
+## Funktionen
 
-Bewegen Sie den Mauszeiger auf den Ring neben der Modellauswahl. Für jede Modellgruppe sehen Sie das verbleibende Kontingent je Zeitraum, auch schon vor der ersten Nachricht. Bewegen Sie den Mauszeiger auf einen Prozentwert, um die lokale Rücksetzzeit zu sehen. Nach dem ersten aufgezeichneten Modellaufruf zeigt der Ring die geschätzte Kontextauslastung. Im Detail sehen Sie außerdem die genutzten Token und die Gesamtkapazität, die Ausgabegeschwindigkeit, die Cache-Trefferquote und die Wartezeit bis zum ersten Token. Ein Klick hält die Details offen, ein weiterer schließt sie.
+- **9 Oberflächensprachen in einer portablen EXE** — Übersetzt Einstellungen, Chat-Bedienelemente, Modellmenüs, native Menüs und Rückfragen beim Beenden ins vereinfachte und traditionelle Chinesisch, Japanische, Koreanische, Deutsche, Spanische, Französische, brasilianische Portugiesisch und Russische, ohne Ihre Eingaben oder Unterhaltungen zu verändern.
+- **Optionale Sitzungsmetriken & Modellkontingente** — Ergänzt neben der Modellauswahl einen Ring für verbleibende Kontingente, lokale Rücksetzzeiten, Kontextbelegung, mittlere Ausgaberate, Cache-Trefferrate und Zeit bis zum ersten Token.
+- **Optionaler Regler für den Denkaufwand** — Fügt in der Modellauswahl einen Kapselregler für Modelle mit wählbarem Denkaufwand hinzu.
+- **Unabhängig & bytegenau wiederherstellbar** — Beide Schalter funktionieren unabhängig voneinander und auch mit der englischen Originaloberfläche. Nach dem Anwenden können Sie das Tool schließen und jederzeit die Originalversion wiederherstellen.
 
-<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="Das chinesische Metrikfenster über dem Ring zeigt Kontextnutzung, verbleibende Token und Ausgabegeschwindigkeit"></a>
+## Schnellstart
 
-[Kontingentanzeige vor dem ersten Modellaufruf](./docs/images/session-quota-before-first-call.webp)
+> [!NOTE]
+> Die Oberfläche des Einrichtungstools ist auf vereinfachtem Chinesisch beschriftet. Die Originalbeschriftungen stehen unten in Klammern, passend zum Screenshot oben.
 
-In geteilten Ansichten, Nebenunterhaltungen und Bereichen für Subagenten stammen die Werte jeweils aus dem letzten lokal aufgezeichneten Modellaufruf der betreffenden Sitzung, für den Daten vorliegen. Die Ausgabemenge umfasst auch die vom Modell gemeldeten Reasoning-Token. Ein `—` kennzeichnet einen fehlenden Wert.
+### Einstellungen anwenden
 
-## Wiederherstellen oder erneut anwenden
+1. Starten Sie `antigravity-i18n.exe`. Falls der erkannte Ordner nicht stimmt, klicken Sie auf **Speicherort ändern** (`更改位置`) und wählen Sie den Ordner mit `Antigravity.exe`.
+2. Wählen Sie eine **Oberflächensprache** (`界面语言`) – oder lassen Sie **English** ausgewählt, wenn Sie nur die Zusatzfunktionen nutzen möchten.
+3. Aktivieren Sie unterhalb der Sprachliste nach Bedarf **Sitzungsmetriken** (`会话指标`) und/oder **Regler für den Denkaufwand** (`思考强度滑块`).
+4. Speichern Sie Ihre Arbeit, beenden Sie Antigravity und klicken Sie unten rechts auf **Änderungen anwenden** (`应用更改`). Antigravity öffnet sich mit den neuen Einstellungen (oder über **Antigravity öffnen** / `打开 Antigravity`); danach können Sie das Tool schließen.
 
-Um zur englischen Originaloberfläche zurückzukehren und Anzeige sowie Regler zu entfernen, beenden Sie Antigravity, öffnen Sie oben rechts im Fenster das Menü, klicken Sie auf „Originalversion wiederherstellen“ (还原官方版本) und bestätigen Sie mit „Wiederherstellen“. Beim ersten Anwenden sichert das Tool die Originaldatei. Bewahren Sie `resources/app.asar.clean-backup` im Installationsordner von Antigravity auf.
+> [!WARNING]
+> Falls gemeldet wird, dass Antigravity noch läuft, speichern Sie Ihre Arbeit und beenden Sie die App regulär. **Beenden erzwingen und erneut versuchen** (`强制退出并重试`) unterbricht aktive Sitzungen und kann ungespeicherte Änderungen verwerfen.
 
-Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit „Erneut anwenden“ erneut anwenden.
+### Erneut anwenden oder wiederherstellen
 
-Beim Start sucht das Tool nach Updates, wenn die letzte erfolgreiche Prüfung mindestens 24 Stunden zurückliegt. Ein blauer Punkt am Menü oben rechts weist auf eine neue Version hin. Dort können Sie die Versionshinweise lesen. Die automatische Suche lässt sich unter „Info“ (关于) ausschalten. Die manuelle Updatesuche (检查更新) bleibt verfügbar. Nach Ihrer Bestätigung lädt das Tool die neue Version herunter und startet am bisherigen Speicherort der EXE-Datei neu. Wenden Sie die Einstellungen erneut an, um die neuen Übersetzungen in Antigravity zu übernehmen.
+- **Aktuelle Einstellungen erneut anwenden** — Klicken Sie unten rechts auf **Erneut anwenden** (`重新应用`).
+- **Originalversion wiederherstellen** — Beenden Sie Antigravity, öffnen Sie oben rechts das Menü (`···`), klicken Sie auf **Originalversion wiederherstellen** (`还原官方版本`) und bestätigen Sie. Dadurch wird die englische Originaloberfläche wiederhergestellt und Anzeige sowie Regler werden entfernt.
 
-## PowerShell-Befehle
+> [!IMPORTANT]
+> Beim ersten Anwenden sichert das Tool die Originaldatei unter `resources/app.asar.clean-backup` im Installationsordner von Antigravity. Bewahren Sie diese Datei für eine spätere Wiederherstellung auf.
 
-Öffnen Sie PowerShell im Ordner mit `antigravity-i18n.exe`.
+## Optionale Funktionen
+
+### Sitzungsmetriken & Modellkontingente
+
+- **Kontingente schon vor der ersten Nachricht** — Bewegen Sie den Mauszeiger auf den Ring neben der Modellauswahl, um das verbleibende Kontingent je Modellgruppe und Zeitraum (z. B. wöchentlich und 5-Stunden-Fenster) zu sehen. Über einem Prozentwert erscheint die lokale Rücksetzzeit.
+- **Live-Metriken nach dem ersten Modellaufruf** — Sobald ein Modellaufruf aufgezeichnet wurde, zeigt der Ring die geschätzte Kontextauslastung und der obere Bereich füllt **Kontextbelegung** (genutzte Token, Gesamtkapazität und Anteil), **Mittlere Ausgaberate** (inkl. gemeldeter Reasoning-Token), **Cache-Trefferrate** und **Zeit bis zum ersten Token**. Ein Klick fixiert oder schließt das Panel.
+- **Pro Bereich genau** — Geteilte Ansichten, Nebenunterhaltungen und Subagenten lesen jeweils den letzten lokal aufgezeichneten Modellaufruf mit Daten aus ihrer eigenen Sitzung. Ein `—` steht für einen nicht verfügbaren Wert.
+
+<p align="center">
+  <a href="./docs/images/session-quota-before-first-call.webp">
+    <img src="./docs/images/session-quota-before-first-call.webp" width="440" alt="Sitzungsmetrik- und Modellkontingent-Panel über dem Ring neben der Modellauswahl">
+  </a>
+</p>
+
+### Regler für den Denkaufwand
+
+Aktivieren Sie **Regler für den Denkaufwand** (`思考强度滑块`) und wenden Sie die Änderungen an. Bei Modellen mit einstellbarem Denkaufwand erscheint in der Modellauswahl über der Nutzungsanzeige ein Regler — ziehen Sie ihn auf die gewünschte Stufe und lassen Sie los.
+
+<p align="center">
+  <a href="./docs/images/thinking-effort-high.webp">
+    <img src="./docs/images/thinking-effort-high.webp" height="340" alt="Modellauswahl mit Denkaufwand auf Stufe Hoch">
+  </a>
+  &nbsp;&nbsp;
+  <a href="./docs/images/thinking-effort-max.webp">
+    <img src="./docs/images/thinking-effort-max.webp" height="340" alt="Modellauswahl mit Denkaufwand auf der höchsten Stufe">
+  </a>
+</p>
+
+## Updates
+
+- **Nach einem Antigravity-Update** — Falls Übersetzung oder Erweiterungen verschwinden, prüfen Sie oben die getestete Version und wenden Sie Ihre Einstellungen im Tool erneut an.
+- **Automatische Tool-Updates** — Beim Start sucht das Tool alle 24 Stunden auf GitHub nach Updates. Ein blauer Punkt am Menü oben rechts (`···`) zeigt eine neue Version an; dort können Sie die Hinweise lesen und das Update direkt am bisherigen EXE-Pfad laden und neu starten. Die automatische Suche lässt sich unter **Info** (`关于`) abschalten, die manuelle Suche (`检查更新`) bleibt verfügbar. Klicken Sie nach dem Update auf **Erneut anwenden** (`重新应用`), um neue Übersetzungen zu übernehmen.
+
+## PowerShell-CLI
+
+Öffnen Sie PowerShell im Ordner mit `antigravity-i18n.exe`:
 
 | Aufgabe | Befehl |
 | --- | --- |
 | Sprachcodes auflisten | `.\antigravity-i18n.exe locales` |
 | Deutsch anwenden | `.\antigravity-i18n.exe apply --locale de` |
-| Englisch mit Sitzungsmetriken verwenden | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
-| Englisch mit dem Regler für den Denkaufwand verwenden | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
-| Aktuelle Einstellungen anzeigen | `.\antigravity-i18n.exe status` |
+| Englisch + Sitzungsmetriken | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| Englisch + Regler für Denkaufwand | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
+| Aktuelle Einstellungen prüfen | `.\antigravity-i18n.exe status` |
 | Offizielle Version wiederherstellen | `.\antigravity-i18n.exe restore` |
 | Alle Optionen anzeigen | `.\antigravity-i18n.exe --help` |
 
 ## Aus dem Quellcode bauen
 
-Für den Windows-Build benötigen Sie PowerShell 7, Go 1.26.3 oder neuer und die Wails-v2-CLI. Führen Sie `.\build.ps1 -Target gui` im Repository-Stamm aus. Die Datei entsteht unter `build/bin/antigravity-i18n.exe`.
+Erfordert Windows, PowerShell 7, Go 1.26.3+ und die Wails-v2-CLI:
 
-## Probleme beim Start
+```powershell
+.\build.ps1 -Target gui
+```
 
-Falls das Tool beim Start nach WebView2 fragt, installieren Sie die [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download).
+Die fertige Datei liegt unter `build/bin/antigravity-i18n.exe`.
+
+## Fehlerbehebung
+
+- **WebView2-Hinweis beim Start** — Installieren Sie die [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) und starten Sie `antigravity-i18n.exe` erneut.
 
 ## Haftungsausschluss
 

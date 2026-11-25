@@ -1,75 +1,115 @@
-# <img src="./frontend/dist/appicon.png" width="32" height="32" alt=""> antigravity-i18n
+<div align="center">
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n アイコン">
+  <h1>antigravity-i18n</h1>
+  <p>Windows 版 Google Antigravity 向けの多言語パック、セッション指標・利用枠パネル、推論強度スライダー。</p>
+  <p>
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Windows x64 版をダウンロード</strong></a>
+    ·
+    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">リリース一覧</a>
+    ·
+    動作確認済み: <strong>Antigravity App 2.35.1</strong>
+  </p>
+  <p>
+    <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <strong>日本語</strong> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+  </p>
+</div>
 
-Windows 版 Google Antigravity の設定、チャットのボタン、メニュー、終了時の確認画面を、日本語を含む 9 言語に翻訳できます。チャットの入力欄には、コンテキストの残量やモデルの出力速度も表示できます。設定を適用したら、ツールは閉じてかまいません。
-
-[Windows x64 版をダウンロード](https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe) · [リリース一覧](https://github.com/wadewu-ml/antigravity-i18n/releases)
-
-対応を確認したバージョンは **Antigravity App 2.35.1** です。ポータブル版の EXE に全 9 言語のパックが含まれています。
-
-[简体中文](./README.zh-CN.md) · [English](./README.md) · [繁體中文](./README.zh-Hant.md) · **日本語** · [한국어](./README.ko.md) · [Deutsch](./README.de.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
-
-<a href="./docs/images/antigravity-zh-cn.png"><img src="./docs/images/translated-window.webp" width="680" alt="簡体字中国語のメニューと、入力欄のモデル選択ボタンの隣にあるリング"></a>
-
-## 表示言語を変更する
-
-言語パックは簡体字中国語、繁体字中国語、日本語、韓国語、ドイツ語、スペイン語、フランス語、ブラジルポルトガル語、ロシア語の 9 種類です。設定ツールの画面は簡体字中国語です。
-
-1. `antigravity-i18n.exe` を開きます。正しいインストール先が表示されない場合は「場所を変更」をクリックし、`Antigravity.exe` のあるフォルダーを選びます。
-2. 「表示言語」で表示言語を選びます。セッション指標を表示するには「セッション指標」をオンにします。元の英語表示のまま指標を使う場合は English を選びます。
-3. 作業を保存して Antigravity を終了し、「変更を適用」をクリックします。新しい設定で Antigravity が起動します。
-
-終了を求められたときに「強制終了して再試行」を選ぶと、Antigravity が強制終了して処理を再試行します。進行中のセッションは中断され、未保存の変更が失われることがあります。
-
-スライダーを使うには、設定ツールでセッション指標の下のスイッチをオンにし、変更を適用してからモデル選択メニューを開きます。セッション指標とスライダーは個別に有効にでき、標準の英語表示でも使えます。推論の強度を選べるモデルでは、使用量の項目の上にスライダーが表示されます。ドラッグで段階を確認し、離すと適用されます。
-
-<a href="./docs/images/language-settings.webp"><img src="./docs/images/language-settings.webp" width="640" alt="簡体字中国語が選択され、セッション指標が有効になっている設定画面"></a>
-
-右下の「重新应用」ボタンで、現在の設定を再適用できます。
-
-<p>
-  <a href="./docs/images/thinking-effort-high.webp"><img src="./docs/images/thinking-effort-high.webp" width="282" alt="モデル選択メニューで推論強度が「高」の状態"></a>
-  <a href="./docs/images/thinking-effort-max.webp"><img src="./docs/images/thinking-effort-max.webp" width="267" alt="モデル選択メニューで推論強度が最大の状態"></a>
+<p align="center">
+  <a href="./docs/images/language-settings.webp">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Antigravity v2.35.1、簡体字中国語、セッション指標および推論強度スライダーが有効な設定画面">
+  </a>
 </p>
 
-## セッション指標を見る
+## 主な機能
 
-モデル選択ボタンの横のリングにポインターを合わせると、モデルグループごとに各期間の残り利用枠を確認できます。割合にポインターを合わせると、次のリセット日時（現地時間）が表示されます。最初のメッセージを送る前から利用できます。モデル呼び出しが記録されると、リングはコンテキストの推定使用率を示し、詳細には使用済みトークン数と総容量、出力速度、キャッシュヒット率、最初のトークンまでの待ち時間が表示されます。クリックすると詳細が固定され、もう一度クリックすると閉じます。
+- **ポータブル EXE 1 つに 9 言語を収録** — 設定、チャットのボタン、モデル選択メニュー、ネイティブメニュー、終了確認画面を簡体字中国語、繁体字中国語、日本語、韓国語、ドイツ語、スペイン語、フランス語、ブラジルポルトガル語、ロシア語に翻訳します。入力内容や会話履歴は書き換えません。
+- **セッション指標と利用枠パネル（任意）** — モデル選択ボタンの横にリングを追加し、残り利用枠、現地時間のリセット時刻、コンテキスト使用量、平均出力速度、キャッシュヒット率、最初のトークンまでの時間を確認できます。
+- **推論強度スライダー（任意）** — 推論強度を選べるモデルの選択メニュー内にカプセル型スライダーを追加します。
+- **個別に有効化・バイト単位で復元** — 2 つのスイッチは個別に切り替えでき、標準の英語表示とも併用できます。適用後はツールを閉じても動作し、いつでも公式版へ復元できます。
 
-<a href="./docs/images/session-metrics-zh-cn.png"><img src="./docs/images/session-metrics-detail.webp" width="560" alt="リングの上に開いた簡体字中国語のパネルに、コンテキスト使用量、残りトークン数、出力速度が表示されている"></a>
+## クイックスタート
 
-[最初のモデル呼び出し前の利用枠パネル](./docs/images/session-quota-before-first-call.webp)
+> [!NOTE]
+> 設定ツールの画面は簡体字中国語です。上のスクリーンショットと照合できるよう、以下に元の簡体字中国語ラベルを併記しています。
 
-分割画面、サイドチャット、サブエージェントの各パネルには、それぞれのセッションでローカルに記録された直近のモデル呼び出しの値が表示されます。出力数にはモデルが記録した思考トークンも含まれます。値を取得できない項目は `—` で表示されます。
+### 設定を適用する
 
-## 元に戻す・再適用する
+1. `antigravity-i18n.exe` を開きます。インストール先が正しくない場合は **場所を変更**（`更改位置`）をクリックし、`Antigravity.exe` のあるフォルダーを選びます。
+2. **表示言語**（`界面语言`）で言語を選びます（標準の英語のまま拡張機能だけ使う場合は **English** を選択）。
+3. 必要に応じて言語一覧の下にある **セッション指標**（`会话指标`）や **推論強度スライダー**（`思考强度滑块`）をオンにします。
+4. 作業を保存して Antigravity を終了し、右下の **変更を適用**（`应用更改`）をクリックします。Antigravity が新しい設定で再起動します（**Antigravity を開く** / `打开 Antigravity` からも起動可能）。その後はツールを閉じてかまいません。
 
-元の英語表示に戻して指標やスライダーを削除するには、Antigravity を終了し、ウィンドウ右上のメニューから「公式版に戻す」（还原官方版本）をクリックして「復元」で確定します。ツールは初回適用時に元のファイルをバックアップします。復元用に、インストール先の `resources/app.asar.clean-backup` を保管してください。
+> [!WARNING]
+> Antigravity が起動中という案内が出た場合は、作業を保存して通常どおり終了してください。**強制終了して再試行**（`强制退出并重试`）を選ぶと進行中のセッションが中断され、未保存の変更が失われることがあります。
 
-Antigravity の更新後に翻訳や指標が消えた場合は、このページの冒頭で対応バージョンを確認してから言語と指標を選び直して適用します。すでに有効な設定を再適用するときは「再適用」をクリックします。
+### 再適用と復元
 
-起動時に更新を確認します。前回の確認に成功してから24時間以内は自動確認を省略します。右上のメニューに青い点が表示されたら、メニューから新しいバージョンの変更内容を確認できます。「このツールについて」（关于）で自動確認をオフにしても、メニューから手動で確認できます（检查更新）。ダウンロードを承認すると、元の EXE と同じ場所から新版が起動します。新しい翻訳を Antigravity に反映するには、設定を再適用してください。
+- **現在の設定を再適用** — 右下の **再適用**（`重新应用`）をクリックします。
+- **公式版に戻す** — Antigravity を終了し、右上のメニュー（`···`）から **公式版に戻す**（`还原官方版本`）をクリックして確定します。標準の英語表示に戻り、指標リングとスライダーも削除されます。
 
-## PowerShell のコマンド
+> [!IMPORTANT]
+> 初回適用時に、Antigravity インストール先へ元のファイルが `resources/app.asar.clean-backup` としてバックアップされます。復元用にこのファイルを残しておいてください。
 
-`antigravity-i18n.exe` のあるフォルダーで PowerShell を開きます。
+## 拡張機能の詳細
+
+### セッション指標とモデルの残り利用枠
+
+- **最初のメッセージ前から利用枠を確認** — モデル選択ボタン横のリングにポインターを合わせると、モデルグループごとの各期間（週間・5 時間など）の残り利用枠を確認できます。割合に合わせると現地時間のリセット日時が表示されます。
+- **モデル呼び出し後のリアルタイム指標** — モデル呼び出しが記録されるとリングがコンテキスト推定使用率を示し、パネル上部に **コンテキスト使用量**（使用済みトークン / 総容量・割合）、**平均出力速度**（思考トークンを含む）、**キャッシュヒット率**、**最初のトークンまでの時間** が表示されます。リングをクリックすると固定・閉じられます。
+- **パネルごとに正確に集計** — 分割画面、サイドチャット、サブエージェントの各パネルは、それぞれのセッションにローカル記録された直近のモデル呼び出しを表示します。取得できない項目は `—` で表示されます。
+
+<p align="center">
+  <a href="./docs/images/session-quota-before-first-call.webp">
+    <img src="./docs/images/session-quota-before-first-call.webp" width="440" alt="リングの上に開いたセッション指標とモデルの残り利用枠パネル">
+  </a>
+</p>
+
+### 推論強度スライダー
+
+設定ツールで **推論強度スライダー**（`思考强度滑块`）をオンにして変更を適用します。Antigravity のモデル選択メニューを開くと、推論強度を選べるモデルでは使用量の項目の上にスライダーが表示されます。ドラッグして段階を確認し、離すと適用されます。
+
+<p align="center">
+  <a href="./docs/images/thinking-effort-high.webp">
+    <img src="./docs/images/thinking-effort-high.webp" height="340" alt="推論強度が「高」のモデル選択メニュー">
+  </a>
+  &nbsp;&nbsp;
+  <a href="./docs/images/thinking-effort-max.webp">
+    <img src="./docs/images/thinking-effort-max.webp" height="340" alt="推論強度が最大のモデル選択メニュー">
+  </a>
+</p>
+
+## アップデート
+
+- **Antigravity の更新後** — 翻訳や拡張機能が消えた場合は、このページ上部の対応バージョンを確認のうえ、再度ツールから設定を適用してください。
+- **ツールの自動更新** — 起動時に 24 時間ごとに GitHub の更新を確認します。右上メニュー（`···`）に青い点が表示されたら、メニューから変更内容を確認して同じ EXE パスでそのままダウンロード・再起動できます。自動確認は **このツールについて**（`关于`）からオフにでき、手動確認（`检查更新`）も可能です。ツール更新後は **再適用**（`重新应用`）をクリックして新しい翻訳を Antigravity に反映してください。
+
+## PowerShell CLI
+
+`antigravity-i18n.exe` のあるフォルダーで PowerShell を開いて実行します：
 
 | 操作 | コマンド |
 | --- | --- |
 | 言語コードを一覧表示 | `.\antigravity-i18n.exe locales` |
 | 日本語を適用 | `.\antigravity-i18n.exe apply --locale ja` |
-| 公式英語で指標を表示 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
-| 標準の英語表示で推論強度スライダーを使う | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
+| 標準英語 + セッション指標 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
+| 標準英語 + 推論強度スライダー | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
 | 現在の設定を確認 | `.\antigravity-i18n.exe status` |
 | 公式版に復元 | `.\antigravity-i18n.exe restore` |
 | 全オプションを表示 | `.\antigravity-i18n.exe --help` |
 
 ## ソースからビルドする
 
-Windows でビルドするには、PowerShell 7、Go 1.26.3 以降、Wails v2 CLI が必要です。リポジトリのルートで `.\build.ps1 -Target gui` を実行すると `build/bin/antigravity-i18n.exe` が生成されます。
+Windows、PowerShell 7、Go 1.26.3 以降、Wails v2 CLI が必要です：
 
-## 起動時のトラブル
+```powershell
+.\build.ps1 -Target gui
+```
 
-ツールの起動時に WebView2 が必要と表示された場合は、[Microsoft Edge WebView2 ランタイム](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download)をインストールしてください。
+ビルドされた実行ファイルは `build/bin/antigravity-i18n.exe` に出力されます。
+
+## トラブルシューティング
+
+- **起動時に WebView2 が必要と表示される** — [Microsoft Edge WebView2 ランタイム](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) をインストールしてから `antigravity-i18n.exe` を再起動してください。
 
 ## 免責事項
 
