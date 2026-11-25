@@ -36,11 +36,11 @@ In geteilten Ansichten, Nebenunterhaltungen und Bereichen für Subagenten stamme
 
 ## Wiederherstellen oder erneut anwenden
 
-Um zur englischen Originaloberfläche zurückzukehren und die Anzeige zu entfernen, beenden Sie Antigravity, klicken Sie im Tool auf „Originalversion wiederherstellen“ und bestätigen Sie mit „Wiederherstellen“. Beim ersten Anwenden sichert das Tool die Originaldatei. Bewahren Sie `resources/app.asar.clean-backup` im Installationsordner von Antigravity auf.
+Um zur englischen Originaloberfläche zurückzukehren und Anzeige sowie Regler zu entfernen, beenden Sie Antigravity, öffnen Sie oben rechts im Fenster das Menü, klicken Sie auf „Originalversion wiederherstellen“ (还原官方版本) und bestätigen Sie mit „Wiederherstellen“. Beim ersten Anwenden sichert das Tool die Originaldatei. Bewahren Sie `resources/app.asar.clean-backup` im Installationsordner von Antigravity auf.
 
 Falls Übersetzung oder Anzeige nach einem Antigravity-Update verschwinden, vergleichen Sie Ihre Version mit der oben angegebenen unterstützten Version. Wählen Sie dann Sprache und Metriken erneut aus und wenden Sie die Einstellungen an. Bereits aktive Einstellungen können Sie mit „Erneut anwenden“ erneut anwenden.
 
-Über die Schaltfläche zur Updatesuche (检查更新) oben rechts im Fenster können Sie auf GitHub nach Updates suchen. Nach Ihrer Bestätigung lädt das Tool die neue Version herunter und startet am bisherigen Speicherort der EXE-Datei neu. Wenden Sie die Einstellungen erneut an, um die neuen Übersetzungen in Antigravity zu übernehmen.
+Öffnen Sie oben rechts im Fenster das Menü und klicken Sie auf die Updatesuche (检查更新), um auf GitHub nach Updates zu suchen. Nach Ihrer Bestätigung lädt das Tool die neue Version herunter und startet am bisherigen Speicherort der EXE-Datei neu. Wenden Sie die Einstellungen erneut an, um die neuen Übersetzungen in Antigravity zu übernehmen.
 
 ## PowerShell-Befehle
 

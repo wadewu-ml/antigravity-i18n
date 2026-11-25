@@ -98,5 +98,29 @@ verify(async () => {
     trigger.props.selected=false;
     model.className='inactive'; await settle();
     check('no slider for an inactive group',panel.querySelector('[data-ag-effort-slider]'),null);
+
+    // Extra layout wrappers or reordered submenu children should still resolve
+    // the effort options without relying on hardcoded child indices.
+    const wrappedChoices = el({
+        value:'medium', onValueChange:ctx.setSelectedModel,
+        children:choices.slice(0, 3).map(([id,label]) => el({
+            value:id,
+            children:[el({icon:true}), el({children:el({'data-testid':'model-selector-effort-option','data-effort':id,children:label})})]
+        }))
+    });
+    const wrappedTrigger = el({selected:true, children:[el({wrapper:true}), el({children:trigger.props.children})]});
+    const wrappedGroup = {memoizedProps:{children:[el({children:[el({}), el({}), el({children:wrappedChoices})]}), wrappedTrigger]}};
+    const wrappedLayout = {...layout, return:wrappedGroup};
+    const wrappedMarker = {return:wrappedLayout};
+    wrappedGroup.child=wrappedLayout; wrappedLayout.child=wrappedMarker; wrappedGroup.return=provider;
+    layout.alternate=wrappedLayout; group.alternate=wrappedGroup; model.__reactFiber$test.alternate=wrappedMarker;
+    ctx.selectedModel=models.get('medium');
+    provider.child=wrappedGroup;
+    model.className='wrapped-1'; model.className='wrapped-2'; model.className='wrapped-3';
+    await settle();
+    const wrappedHost = usage.parentElement.previousElementSibling;
+    check('wrapped React tree mounts slider',wrappedHost?.hasAttribute('data-ag-effort-slider'),true);
+    check('wrapped React tree reads level count',wrappedHost.shadowRoot.querySelector('input').max,'2');
+    check('wrapped React tree reads active level',wrappedHost.shadowRoot.querySelector('input').value,'1');
 });
 </script></body></html>

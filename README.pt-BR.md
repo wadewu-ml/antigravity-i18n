@@ -36,11 +36,11 @@ Na tela dividida, nos chats laterais e nos painéis de subagentes, cada painel u
 
 ## Restaurar ou reaplicar
 
-Para voltar à interface original em inglês e remover o indicador, encerre o Antigravity, clique em “Restaurar versão oficial” na ferramenta e confirme com “Restaurar”. A ferramenta cria uma cópia do arquivo original na primeira vez que você aplica as configurações. Mantenha `resources/app.asar.clean-backup` na pasta de instalação do Antigravity para poder restaurá-lo.
+Para voltar à interface original em inglês e remover o indicador e o controle deslizante, encerre o Antigravity, abra o menu no canto superior direito da janela, clique em “Restaurar versão oficial” (还原官方版本) e confirme com “Restaurar”. A ferramenta cria uma cópia do arquivo original na primeira vez que você aplica as configurações. Mantenha `resources/app.asar.clean-backup` na pasta de instalação do Antigravity para poder restaurá-lo.
 
 Se a tradução ou o indicador desaparecer após uma atualização do Antigravity, confira a versão compatível no início desta página e volte a selecionar e aplicar as configurações. Para reaplicar as configurações que já estão em uso, clique em “Reaplicar”.
 
-Para atualizar a ferramenta, clique no botão para verificar atualizações (检查更新) no canto superior direito da janela. A ferramenta consulta o GitHub quando você clica. Confirme o download para abrir a nova versão pelo mesmo caminho do EXE. Para usar as novas traduções no Antigravity, reaplique as configurações.
+Para atualizar a ferramenta, abra o menu no canto superior direito da janela e clique em verificar atualizações (检查更新). A ferramenta consulta o GitHub quando você clica. Confirme o download para abrir a nova versão pelo mesmo caminho do EXE. Para usar as novas traduções no Antigravity, reaplique as configurações.
 
 ## Comandos do PowerShell
 

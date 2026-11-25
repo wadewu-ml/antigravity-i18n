@@ -36,11 +36,11 @@ In split views, side chats, and subagent panels, each panel shows the latest mod
 
 ## Restore or reapply
 
-To return to the original English interface and remove the indicator, quit Antigravity, click the red restore link at the bottom left of the tool, then confirm. The first time you apply settings, the tool saves the original file in the Antigravity installation folder. Keep `resources/app.asar.clean-backup` there for restoration.
+To return to the original English interface and remove the indicator and effort slider, quit Antigravity, open the menu at the top right of the tool, click Restore official version (还原官方版本), then confirm. The first time you apply settings, the tool saves the original file in the Antigravity installation folder. Keep `resources/app.asar.clean-backup` there for restoration.
 
 If an Antigravity update removes the translation or indicator, check the supported version at the top of this page, then select and apply your settings again. To reapply settings that are already active, click the green button again.
 
-To update the tool, click Check for updates (检查更新) at the top right of the window. It checks GitHub when you click. Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
+To update the tool, open the menu at the top right of the window and click Check for updates (检查更新). It checks GitHub when you click. Confirm to download the new version and reopen the tool from the same EXE path. To apply the updated translations, click Reapply.
 
 ## PowerShell commands
 
