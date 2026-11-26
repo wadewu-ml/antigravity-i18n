@@ -4,12 +4,12 @@
   <p><em>反重力起飛，Regravity 讓它落地——回歸你的語言與掌控。</em></p>
   <p>專為 Windows 版 <strong>Google Antigravity</strong> 打造的可攜式增強工具：九種介面語言、會話指標與模型額度，以及思考強度滑桿。</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><img src="https://img.shields.io/badge/Download-v4.2.3_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下載 Windows x64 版 v4.2.3"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe"><img src="https://img.shields.io/badge/Download-v4.3.0_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下載 Windows x64 版 v4.3.0"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 版本記錄"></a>
     <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="已驗證適用 Antigravity App 2.35.1">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="MIT 授權條款"></a>
   </p>
-  <p><sub>目前的 Windows 執行檔 · <code>antigravity-i18n.exe</code></sub></p>
+  <p><sub>目前的 Windows 執行檔 · <code>regravity.exe</code></sub></p>
   <p>
     <sub>
       <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
@@ -41,7 +41,7 @@
 
 ### 套用設定
 
-1. 按兩下執行 `antigravity-i18n.exe`。若未自動找到正確安裝位置，點選 **更改位置**（`更改位置`）並選擇含有 `Antigravity.exe` 的資料夾。
+1. 按兩下執行 `regravity.exe`。若未自動找到正確安裝位置，點選 **更改位置**（`更改位置`）並選擇含有 `Antigravity.exe` 的資料夾。
 2. 在 **介面語言**（`界面语言`）中選擇目標語言（若僅想保留英文介面並開啟可選功能，選 **English** 即可）。
 3. 依需求開啟語言清單下方的 **會話指標**（`会话指标`）與 **思考強度滑桿**（`思考强度滑块`）。
 4. 儲存工作並結束 Antigravity，點選右下角 **套用變更**（`应用更改`）。Antigravity 會以新設定重新開啟（也可點選 **開啟 Antigravity** / `打开 Antigravity` 啟動），之後即可關閉本工具。
@@ -51,7 +51,7 @@
 
 ### 重新套用與還原
 
-- **重新套用** — 點選右下角 **重新套用**（`重新应用`）再次寫入目前設定。
+- **重新套用** — 更新工具後，點選 **重新套用**（`重新应用`）就能使用新譯文。
 - **還原官方版本** — 先結束 Antigravity，開啟右上角選單（`···`），點選 **還原官方版本**（`还原官方版本`）並確認，介面將恢復官方英文並移除指標圓環與滑桿。
 
 > [!IMPORTANT]
@@ -96,21 +96,21 @@
 - **Antigravity 更新後** — 若翻譯或增強元件消失，請先對照頂端已驗證的用戶端版本，再重新開啟工具套用設定即可。
 - **工具自動檢查更新** — 啟動時依上次檢查結果決定是否查詢 GitHub，成功後至少間隔 24 小時再查。右上角選單（`···`）出現藍點表示有新版本，點開可查看更新說明並就地下載重啟。可在 **關於**（`关于`）關閉自動檢查，或隨時手動點擊 **檢查更新**（`检查更新`）。工具更新後請點選 **重新套用**（`重新应用`）套用新譯文。
 
-首個 Regravity 正式版發布後，請從 [版本記錄](https://github.com/wadewu-ml/regravity/releases) 手動下載 `regravity.exe`——現有修補與自動更新設定會自動沿用。儲存庫更名後，`v4.2.3` 的內建檢查可能提示無法比較版本號，請直接從版本記錄查看更新。
+如果你使用 v4.2.3，請手動下載並執行 [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe)，原有設定會保留。
 
 ### 命令列用法
 
-在 `antigravity-i18n.exe` 所在目錄開啟 PowerShell：
+在 `regravity.exe` 所在目錄開啟 PowerShell：
 
 | 操作 | 指令 |
 | --- | --- |
-| 列出語言代碼 | `.\antigravity-i18n.exe locales` |
-| 套用繁體中文 | `.\antigravity-i18n.exe apply --locale zh-Hant` |
-| 官方英文 + 會話指標 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
-| 官方英文 + 思考強度滑桿 | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
-| 查看目前設定 | `.\antigravity-i18n.exe status` |
-| 還原官方版本 | `.\antigravity-i18n.exe restore` |
-| 查看所有選項 | `.\antigravity-i18n.exe --help` |
+| 列出語言代碼 | `.\regravity.exe locales` |
+| 套用繁體中文 | `.\regravity.exe apply --locale zh-Hant` |
+| 官方英文 + 會話指標 | `.\regravity.exe apply --locale en --session-metrics` |
+| 官方英文 + 思考強度滑桿 | `.\regravity.exe apply --locale en --effort-slider` |
+| 查看目前設定 | `.\regravity.exe status` |
+| 還原官方版本 | `.\regravity.exe restore` |
+| 查看所有選項 | `.\regravity.exe --help` |
 
 ### 從原始碼建置
 
@@ -124,7 +124,7 @@
 
 ## 常見問題
 
-- **啟動時提示缺少 WebView2** — 請安裝 [Microsoft Edge WebView2 執行階段](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) 後重新執行 `antigravity-i18n.exe`。
+- **啟動時提示缺少 WebView2** — 請安裝 [Microsoft Edge WebView2 執行階段](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) 後重新執行 `regravity.exe`。
 
 ---
 

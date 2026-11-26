@@ -4,12 +4,12 @@
   <p><em>Antigravity despega; Regravity lo trae de vuelta a tu idioma y bajo tu control.</em></p>
   <p>Complemento portátil para <strong>Google Antigravity</strong> en Windows — 9 idiomas de interfaz, métricas de sesión y cuotas de modelos, y control de nivel de razonamiento.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><img src="https://img.shields.io/badge/Download-v4.2.3_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Descargar v4.2.3 para Windows x64"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe"><img src="https://img.shields.io/badge/Download-v4.3.0_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Descargar v4.3.0 para Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Versiones en GitHub"></a>
     <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Probado con Antigravity App 2.35.1">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="Licencia MIT"></a>
   </p>
-  <p><sub>Archivo actual para Windows · <code>antigravity-i18n.exe</code></sub></p>
+  <p><sub>Archivo actual para Windows · <code>regravity.exe</code></sub></p>
   <p>
     <sub>
       <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <strong>Español</strong> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
@@ -41,7 +41,7 @@
 
 ### Aplicar ajustes
 
-1. Abre `antigravity-i18n.exe`. Si la ruta detectada no es correcta, pulsa **Cambiar ubicación** (`更改位置`) y selecciona la carpeta que contiene `Antigravity.exe`.
+1. Abre `regravity.exe`. Si la ruta detectada no es correcta, pulsa **Cambiar ubicación** (`更改位置`) y selecciona la carpeta que contiene `Antigravity.exe`.
 2. Elige un idioma en **Idioma de la interfaz** (`界面语言`), o deja **English** si solo quieres los controles opcionales.
 3. Activa **Métricas de sesión** (`会话指标`) y/o **Control de nivel de razonamiento** (`思考强度滑块`) debajo de la lista de idiomas.
 4. Guarda tu trabajo, cierra Antigravity y pulsa **Aplicar cambios** (`应用更改`) abajo a la derecha. Antigravity se reabrirá con tus ajustes (o ábrelo con **Abrir Antigravity** / `打开 Antigravity`), y podrás cerrar la herramienta.
@@ -51,7 +51,7 @@
 
 ### Volver a aplicar o restaurar
 
-- **Volver a aplicar** — Pulsa **Volver a aplicar** (`重新应用`) abajo a la derecha para reaplicar los ajustes activos.
+- **Volver a aplicar** — Tras actualizar la herramienta, pulsa **Volver a aplicar** (`重新应用`) para usar las nuevas traducciones.
 - **Restaurar la versión oficial** — Cierra Antigravity, abre el menú superior derecho (`···`), pulsa **Restaurar la versión oficial** (`还原官方版本`) y confirma.
 
 > [!IMPORTANT]
@@ -96,21 +96,21 @@ Activa **Control de nivel de razonamiento** (`思考强度滑块`) y aplica los 
 - **Tras actualizar Antigravity** — Si desaparecen la traducción o los controles, comprueba la versión compatible arriba y vuelve a aplicar tus ajustes.
 - **Actualizaciones automáticas** — Al abrirse, decide si consultar GitHub según el resultado anterior y espera al menos 24 horas tras una comprobación correcta. Un punto azul en el menú superior derecho (`···`) señala una nueva versión. Puedes desactivar la búsqueda automática en **Acerca de** (`关于`) o buscar manualmente (`检查更新`). Tras actualizar, pulsa **Volver a aplicar** (`重新应用`).
 
-Cuando salga la primera versión de Regravity, descarga `regravity.exe` manualmente desde [Versiones](https://github.com/wadewu-ml/regravity/releases); tus parches y preferencia de actualización se conservan automáticamente. Tras el cambio de nombre del repositorio, el comprobador integrado en `v4.2.3` puede mostrar un error de versión.
+Si usas la versión v4.2.3, descarga y ejecuta [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe) manualmente. Se conservarán tus ajustes.
 
 ### CLI de PowerShell
 
-Ejecuta desde PowerShell en la carpeta que contiene `antigravity-i18n.exe`:
+Ejecuta desde PowerShell en la carpeta que contiene `regravity.exe`:
 
 | Acción | Comando |
 | --- | --- |
-| Listar códigos de idioma | `.\antigravity-i18n.exe locales` |
-| Aplicar español | `.\antigravity-i18n.exe apply --locale es` |
-| Inglés oficial + métricas | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
-| Inglés oficial + control de razonamiento | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
-| Ver configuración actual | `.\antigravity-i18n.exe status` |
-| Restaurar versión oficial | `.\antigravity-i18n.exe restore` |
-| Ver todas las opciones | `.\antigravity-i18n.exe --help` |
+| Listar códigos de idioma | `.\regravity.exe locales` |
+| Aplicar español | `.\regravity.exe apply --locale es` |
+| Inglés oficial + métricas | `.\regravity.exe apply --locale en --session-metrics` |
+| Inglés oficial + control de razonamiento | `.\regravity.exe apply --locale en --effort-slider` |
+| Ver configuración actual | `.\regravity.exe status` |
+| Restaurar versión oficial | `.\regravity.exe restore` |
+| Ver todas las opciones | `.\regravity.exe --help` |
 
 ### Compilar desde el código fuente
 
@@ -124,7 +124,7 @@ Genera `build/bin/regravity.exe`.
 
 ## Solución de problemas
 
-- **Aviso de WebView2 faltante al iniciar** — Instala el [entorno de ejecución de Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) y vuelve a abrir `antigravity-i18n.exe`.
+- **Aviso de WebView2 faltante al iniciar** — Instala el [entorno de ejecución de Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) y vuelve a abrir `regravity.exe`.
 
 ---
 

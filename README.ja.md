@@ -4,12 +4,12 @@
   <p><em>Antigravity が飛び立つ先で、Regravity があなたの言語とコントロールを取り戻します。</em></p>
   <p>Windows 版 <strong>Google Antigravity</strong> 向けポータブル拡張ツール — 9 言語のローカライズ、セッション指標・利用枠パネル、推論強度スライダー。</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><img src="https://img.shields.io/badge/Download-v4.2.3_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Windows x64 版 v4.2.3 をダウンロード"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe"><img src="https://img.shields.io/badge/Download-v4.3.0_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Windows x64 版 v4.3.0 をダウンロード"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub リリース一覧"></a>
     <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Antigravity App 2.35.1 動作確認済み">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="MIT ライセンス"></a>
   </p>
-  <p><sub>現在配布中の Windows 実行ファイル · <code>antigravity-i18n.exe</code></sub></p>
+  <p><sub>現在配布中の Windows 実行ファイル · <code>regravity.exe</code></sub></p>
   <p>
     <sub>
       <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <strong>日本語</strong> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
@@ -41,7 +41,7 @@
 
 ### 設定を適用する
 
-1. `antigravity-i18n.exe` を開きます。インストール先が正しくない場合は **場所を変更**（`更改位置`）をクリックし、`Antigravity.exe` のあるフォルダーを選びます。
+1. `regravity.exe` を開きます。インストール先が正しくない場合は **場所を変更**（`更改位置`）をクリックし、`Antigravity.exe` のあるフォルダーを選びます。
 2. **表示言語**（`界面语言`）で言語を選びます（標準英語のまま拡張機能のみ使う場合は **English** を選択）。
 3. 必要に応じて言語一覧の下にある **セッション指標**（`会话指标`）や **推論強度スライダー**（`思考强度滑块`）をオンにします。
 4. 作業を保存して Antigravity を終了し、右下の **変更を適用**（`应用更改`）をクリックします。新しい設定で再起動したら（**Antigravity を開く** / `打开 Antigravity` からも起動可）、ツールは閉じてかまいません。
@@ -51,7 +51,7 @@
 
 ### 再適用と復元
 
-- **再適用** — 右下の **再適用**（`重新应用`）で現在の設定を再度適用できます。
+- **再適用** — ツールの更新後に **再適用**（`重新应用`）をクリックすると、新しい翻訳を使えます。
 - **公式版に戻す** — Antigravity を終了し、右上メニュー（`···`）から **公式版に戻す**（`还原官方版本`）をクリックして確定すると、標準の英語表示に戻り指標リングとスライダーも削除されます。
 
 > [!IMPORTANT]
@@ -96,21 +96,21 @@
 - **Antigravity の更新後** — 翻訳や拡張機能が消えた場合は、このページ上部の動作確認済みバージョンを確認のうえ、再度ツールから適用してください。
 - **ツールの自動更新** — 起動時に前回の結果をもとに GitHub への確認を判断し、成功後は最低 24 時間間隔を空けます。右上メニュー（`···`）の青い点から変更内容の確認とインプレース更新が可能。自動確認は **このツールについて**（`关于`）で切替でき、手動確認（`检查更新`）も利用できます。更新後は **再適用**（`重新应用`）で新しい翻訳を反映してください。
 
-Regravity 初回リリース時は [リリース一覧](https://github.com/wadewu-ml/regravity/releases) から `regravity.exe` を手動でダウンロードしてください。適用済みのパッチと自動更新設定はそのまま引き継がれます。リポジトリ名変更により `v4.2.3` の更新確認でバージョン比較エラーが出ることがあります。
+v4.2.3 をお使いの場合は、[`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe) を手動でダウンロードして実行してください。設定は引き継がれます。
 
 ### PowerShell CLI
 
-`antigravity-i18n.exe` のあるフォルダーで PowerShell を開いて実行します：
+`regravity.exe` のあるフォルダーで PowerShell を開いて実行します：
 
 | 操作 | コマンド |
 | --- | --- |
-| 言語コードを一覧表示 | `.\antigravity-i18n.exe locales` |
-| 日本語を適用 | `.\antigravity-i18n.exe apply --locale ja` |
-| 標準英語 + セッション指標 | `.\antigravity-i18n.exe apply --locale en --session-metrics` |
-| 標準英語 + 推論強度スライダー | `.\antigravity-i18n.exe apply --locale en --effort-slider` |
-| 現在の設定を確認 | `.\antigravity-i18n.exe status` |
-| 公式版に復元 | `.\antigravity-i18n.exe restore` |
-| 全オプションを表示 | `.\antigravity-i18n.exe --help` |
+| 言語コードを一覧表示 | `.\regravity.exe locales` |
+| 日本語を適用 | `.\regravity.exe apply --locale ja` |
+| 標準英語 + セッション指標 | `.\regravity.exe apply --locale en --session-metrics` |
+| 標準英語 + 推論強度スライダー | `.\regravity.exe apply --locale en --effort-slider` |
+| 現在の設定を確認 | `.\regravity.exe status` |
+| 公式版に復元 | `.\regravity.exe restore` |
+| 全オプションを表示 | `.\regravity.exe --help` |
 
 ### ソースからビルドする
 
@@ -124,7 +124,7 @@ Windows、PowerShell 7、Go 1.26.3 以降、Wails v2 CLI が必要です：
 
 ## トラブルシューティング
 
-- **起動時に WebView2 が必要と表示される** — [Microsoft Edge WebView2 ランタイム](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) をインストールしてから `antigravity-i18n.exe` を再起動してください。
+- **起動時に WebView2 が必要と表示される** — [Microsoft Edge WebView2 ランタイム](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) をインストールしてから `regravity.exe` を再起動してください。
 
 ---
 
