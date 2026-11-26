@@ -1,52 +1,58 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Ícone do Regravity">
+  <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Ícone do Regravity">
   <h1>Regravity</h1>
-  <p>Pacotes de idioma, métricas da sessão e cotas de modelos, e controle deslizante de esforço de raciocínio para Google Antigravity no Windows.</p>
+  <p><em>O Antigravity decola; o Regravity traz tudo de volta para o seu idioma e controle.</em></p>
+  <p>Utilitário portátil para <strong>Google Antigravity</strong> no Windows — 9 idiomas de interface, métricas da sessão &amp; cotas de modelos e controle de esforço de raciocínio.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>Baixar para Windows x64</strong></a>
-    ·
-    <a href="https://github.com/wadewu-ml/regravity/releases">Versões</a>
-    ·
-    Testado com <strong>Antigravity App 2.35.1</strong>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><img src="https://img.shields.io/badge/Download-v4.2.3_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Baixar v4.2.3 para Windows x64"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Versões no GitHub"></a>
+    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Testado com Antigravity App 2.35.1">
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="Licença MIT"></a>
   </p>
+  <p><sub>Executável atual para Windows · <code>antigravity-i18n.exe</code></sub></p>
   <p>
-    <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <strong>Português (Brasil)</strong> · <a href="./README.ru.md">Русский</a>
+    <sub>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <strong>Português (Brasil)</strong> · <a href="./README.ru.md">Русский</a>
+    </sub>
   </p>
-  <p>antigravity-i18n passou a se chamar Regravity. O download acima é da v4.2.3. Quando a primeira versão do Regravity for publicada, baixe <code>regravity.exe</code> manualmente. Os patches existentes e a preferência de atualização serão preservados. Após a mudança de nome do repositório, a v4.2.3 pode exibir um erro ao comparar versões. Consulte os lançamentos no link acima.</p>
 </div>
+
+<br>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="Janela de configurações com Antigravity v2.35.2, chinês simplificado selecionado e métricas da sessão e controle deslizante ativados">
+    <img src="./docs/images/language-settings.webp" width="580" alt="Janela de configurações com Antigravity v2.35.2, chinês simplificado selecionado e métricas da sessão e controle deslizante ativados">
   </a>
+  <br>
+  <sub>Janela de configuração da versão de desenvolvimento do Regravity com o Antigravity 2.35.2.</sub>
 </p>
 
-## Recursos
+## O que está incluído
 
-- **9 idiomas em um único EXE portátil** — Traduz configurações, controles do chat, menus de modelos, menus nativos e avisos de encerramento para chinês simplificado, chinês tradicional, japonês, coreano, alemão, espanhol, francês, português do Brasil e russo sem alterar suas mensagens ou entradas.
-- **Métricas da sessão e cotas (opcional)** — Adiciona um anel ao lado do seletor de modelo para consultar cotas restantes, horários locais de redefinição, contexto usado, velocidade média de saída, taxa de acertos do cache e tempo até o primeiro token.
-- **Controle de esforço de raciocínio (opcional)** — Adiciona um controle deslizante em cápsula no seletor de modelos para modelos compatíveis.
-- **Independente e reversível byte a byte** — Ambos os interruptores funcionam separadamente e também na interface original em inglês. Depois de aplicar, você pode fechar a ferramenta e restaurar a versão oficial com um backup íntegro da mesma versão do Antigravity.
+- **9 idiomas de interface, sem tocar nos seus chats** — Traduz configurações, controles do chat, menus de modelos, menus nativos e avisos de encerramento (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`) sem alterar suas mensagens ou entradas.
+- **Métricas da sessão e cotas** *(opcional)* — Adiciona um anel ao lado do seletor de modelo com cotas restantes, horários locais de redefinição, contexto usado, velocidade média de saída, taxa de cache e tempo até o primeiro token.
+- **Controle de esforço de raciocínio** *(opcional)* — Integra um controle deslizante em cápsula no seletor de modelos para modelos compatíveis.
+- **Modular e reversível byte a byte** — Ambos os interruptores funcionam separadamente e também com a interface original em inglês. Restaure a versão oficial a partir de um backup íntegro da mesma versão do Antigravity quando quiser.
 
 ## Início rápido
 
-> [!NOTE]
-> A interface da ferramenta está em chinês simplificado. Os rótulos originais aparecem entre parênteses abaixo para facilitar a referência com a captura acima.
+> [!TIP]
+> A interface da ferramenta está em chinês simplificado. Os rótulos originais aparecem entre parênteses para facilitar a referência com a captura acima.
 
 ### Aplicar configurações
 
 1. Abra `antigravity-i18n.exe`. Se a pasta detectada estiver incorreta, clique em **Alterar local** (`更改位置`) e selecione a pasta com `Antigravity.exe`.
 2. Escolha um idioma em **Idioma da interface** (`界面语言`) ou mantenha **English** se quiser apenas os recursos opcionais.
-3. Ative **Métricas da sessão** (`会话指标`) e/ou **Controle de esforço de raciocínio** (`思考强度滑块`) abaixo da lista de idiomas conforme desejar.
-4. Salve seu trabalho, feche o Antigravity e clique em **Aplicar alterações** (`应用更改`) no canto inferior direito. O Antigravity reabrirá com as novas configurações (ou clique em **Abrir Antigravity** / `打开 Antigravity`) e você poderá fechar a ferramenta.
+3. Ative **Métricas da sessão** (`会话指标`) e/ou **Controle de esforço de raciocínio** (`思考强度滑块`) abaixo da lista de idiomas.
+4. Salve seu trabalho, feche o Antigravity e clique em **Aplicar alterações** (`应用更改`) no canto inferior direito. O Antigravity reabrirá com as novas configurações (ou clique em **Abrir Antigravity** / `打开 Antigravity`), e você pode fechar a ferramenta.
 
 > [!WARNING]
-> Se aparecer o aviso de que o Antigravity ainda está aberto, salve seu trabalho e feche-o normalmente. Usar **Forçar encerramento e tentar novamente** (`强制退出并重试`) interrompe sessões ativas e pode descartar edições não salvas.
+> Se aparecer o aviso de que o Antigravity ainda está aberto, salve seu trabalho e feche-o normalmente. **Forçar encerramento e tentar novamente** (`强制退出并重试`) interrompe sessões ativas e pode descartar edições não salvas.
 
 ### Reaplicar ou restaurar
 
-- **Reaplicar configurações atuais** — Clique em **Reaplicar** (`重新应用`) no canto inferior direito.
-- **Restaurar versão oficial** — Feche o Antigravity, abra o menu no canto superior direito (`···`), clique em **Restaurar versão oficial** (`还原官方版本`) e confirme. Isso restaura o inglês original e remove o indicador e o controle deslizante.
+- **Reaplicar** — Clique em **Reaplicar** (`重新应用`) no canto inferior direito para reaplicar as configurações ativas.
+- **Restaurar versão oficial** — Feche o Antigravity, abra o menu no canto superior direito (`···`), clique em **Restaurar versão oficial** (`还原官方版本`) e confirme.
 
 > [!IMPORTANT]
 > Na primeira aplicação, a ferramenta salva um backup limpo em `resources/app.asar.clean-backup` na pasta de instalação do Antigravity. Mantenha esse arquivo para poder restaurar depois.
@@ -55,14 +61,16 @@
 
 ### Métricas da sessão e cotas de modelos
 
-- **Cotas antes da primeira mensagem** — Passe o ponteiro sobre o anel ao lado do seletor de modelo para ver a cota restante por grupo e período (como semanal e 5 horas). Passe sobre uma porcentagem para ver o horário local de redefinição.
-- **Métricas ao vivo após uma chamada** — Após a primeira chamada registrada, o anel mostra o uso estimado do contexto e a parte superior exibe **Contexto usado** (tokens usados, capacidade total e porcentagem), **Velocidade média de saída** (incluindo tokens de raciocínio informados), **Taxa de acertos do cache** e **Tempo até o primeiro token**. Clique no anel para fixar ou fechar o painel.
-- **Precisão por painel** — Tela dividida, chats laterais e painéis de subagentes leem a chamada mais recente com dados do registro local de sua própria sessão. Um `—` indica valor indisponível.
+- **Antes da primeira mensagem** — Passe o ponteiro sobre o anel ao lado do seletor de modelo para ver a cota restante por grupo e período (semanal, 5 horas etc.); passe sobre uma porcentagem para ver o horário local de redefinição.
+- **Após uma chamada ao modelo** — O anel indica o uso estimado do contexto e a parte superior exibe **Contexto usado** (tokens, capacidade total, proporção), **Velocidade média de saída** (incluindo tokens de raciocínio), **Taxa de acertos do cache** e **Tempo até o primeiro token**. Clique no anel para fixar ou fechar.
+- **Precisão por painel** — Tela dividida, chats laterais e subagentes leem a chamada mais recente com dados da própria sessão local. Um `—` indica valor indisponível.
 
 <p align="center">
   <a href="./docs/images/session-quota-before-first-call.webp">
-    <img src="./docs/images/session-quota-before-first-call.webp" width="440" alt="Painel de métricas da sessão e cota restante por modelo acima do anel ao lado do seletor de modelo">
+    <img src="./docs/images/session-quota-before-first-call.webp" width="420" alt="Painel de métricas da sessão e cota restante por modelo acima do anel ao lado do seletor de modelo">
   </a>
+  <br>
+  <sub>As cotas aparecem imediatamente; as métricas da sessão são preenchidas após a primeira chamada ao modelo.</sub>
 </p>
 
 ### Controle de esforço de raciocínio
@@ -77,14 +85,20 @@ Ative **Controle de esforço de raciocínio** (`思考强度滑块`) e aplique a
   <a href="./docs/images/thinking-effort-max.webp">
     <img src="./docs/images/thinking-effort-max.webp" height="340" alt="Seletor de modelos com esforço de raciocínio máximo">
   </a>
+  <br>
+  <sub>Nível padrão (Alto) e nível máximo em destaque diretamente no menu de modelos.</sub>
 </p>
 
-## Atualizações
+## Atualizações e CLI
+
+### Atualizações
 
 - **Após atualizar o Antigravity** — Se a tradução ou os controles desaparecerem, confira a versão compatível no topo desta página e aplique novamente as configurações.
-- **Atualizações automáticas da ferramenta** — Ao abrir, usa o resultado da última verificação para decidir se consulta o GitHub. Após uma verificação bem-sucedida, aguarda pelo menos 24 horas. Um ponto azul no menu superior direito (`···`) indica nova versão; abra o menu para ler as notas e confirmar o download e reinício pelo mesmo EXE. É possível desativar a verificação automática em **Sobre** (`关于`) ou verificar manualmente (`检查更新`). Depois de atualizar, clique em **Reaplicar** (`重新应用`) para enviar as novas traduções ao Antigravity.
+- **Atualizações automáticas** — Ao abrir, usa o resultado da verificação anterior para decidir se consulta o GitHub e aguarda ao menos 24 horas após um sucesso. Um ponto azul no menu superior direito (`···`) indica nova versão. Pode ser desativada em **Sobre** (`关于`), mantendo a verificação manual (`检查更新`). Depois de atualizar, clique em **Reaplicar** (`重新应用`).
 
-## CLI do PowerShell
+Quando a primeira versão do Regravity for publicada, baixe `regravity.exe` manualmente em [Versões](https://github.com/wadewu-ml/regravity/releases) — os patches existentes e a preferência de atualização são preservados. Após a mudança de nome do repositório, a verificação interna da `v4.2.3` pode relatar erro ao comparar versões.
+
+### CLI do PowerShell
 
 Abra o PowerShell na pasta que contém `antigravity-i18n.exe`:
 
@@ -98,7 +112,7 @@ Abra o PowerShell na pasta que contém `antigravity-i18n.exe`:
 | Restaurar versão oficial | `.\antigravity-i18n.exe restore` |
 | Ver todas as opções | `.\antigravity-i18n.exe --help` |
 
-## Compilar a partir do código-fonte
+### Compilar a partir do código-fonte
 
 Requer Windows, PowerShell 7, Go 1.26.3+ e a CLI do Wails v2:
 
@@ -106,11 +120,13 @@ Requer Windows, PowerShell 7, Go 1.26.3+ e a CLI do Wails v2:
 .\build.ps1 -Target gui
 ```
 
-O executável é salvo em `build/bin/regravity.exe`.
+Gera `build/bin/regravity.exe`.
 
 ## Solução de problemas
 
 - **Aviso de WebView2 ausente ao iniciar** — Instale o [Runtime do Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) e abra `antigravity-i18n.exe` novamente.
+
+---
 
 ## Isenção de responsabilidade
 

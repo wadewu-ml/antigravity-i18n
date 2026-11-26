@@ -1,37 +1,43 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Regravity 圖示">
+  <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity 圖示">
   <h1>Regravity</h1>
-  <p>為 Windows 版 Google Antigravity 提供九種介面語言套件、會話指標與模型額度面板，以及思考強度滑桿。</p>
+  <p><em>反重力起飛，Regravity 讓它落地——回歸你的語言與掌控。</em></p>
+  <p>專為 Windows 版 <strong>Google Antigravity</strong> 打造的可攜式增強工具：九種介面語言、會話指標與模型額度，以及思考強度滑桿。</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>下載 Windows x64 版</strong></a>
-    ·
-    <a href="https://github.com/wadewu-ml/regravity/releases">版本記錄</a>
-    ·
-    已驗證適用 <strong>Antigravity App 2.35.1</strong>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><img src="https://img.shields.io/badge/Download-v4.2.3_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下載 Windows x64 版 v4.2.3"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 版本記錄"></a>
+    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="已驗證適用 Antigravity App 2.35.1">
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="MIT 授權條款"></a>
   </p>
+  <p><sub>目前的 Windows 執行檔 · <code>antigravity-i18n.exe</code></sub></p>
   <p>
-    <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+    <sub>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+    </sub>
   </p>
-  <p>antigravity-i18n 已更名為 Regravity。上方提供 v4.2.3。首個 Regravity 版本發布後，請手動下載 <code>regravity.exe</code>。新版會沿用現有修補內容和自動更新設定。儲存庫更名後，v4.2.3 的內建檢查可能提示無法比較版本號，可從上方「版本記錄」查看更新。</p>
 </div>
+
+<br>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="Regravity 設定視窗，顯示 Antigravity v2.35.2、已選取簡體中文，並同時開啟會話指標與思考強度滑桿">
+    <img src="./docs/images/language-settings.webp" width="580" alt="Regravity 設定視窗，顯示 Antigravity v2.35.2、已選取簡體中文，並同時開啟會話指標與思考強度滑桿">
   </a>
+  <br>
+  <sub>Regravity 開發版設定視窗，圖中用戶端為 Antigravity 2.35.2。</sub>
 </p>
 
-## 功能一覽
+## 核心能力
 
-- **單檔內建 9 種介面語言** — 翻譯設定、對話區控制項、模型選單、原生選單與結束提示，支援簡體中文、繁體中文、日文、韓文、德文、西班牙文、法文、巴西葡萄牙文和俄文，不改動使用者輸入與對話內容。
-- **可選會話指標與模型額度** — 在模型選擇器右側新增圓環，懸停即可查看模型剩餘額度、本地重設時間、已用上下文、平均輸出速度、快取命中率與首個 token 延遲。
-- **可選思考強度滑桿** — 在模型選單中為支援調節的模型新增膠囊滑桿，拖曳即可切換思考強度。
-- **獨立組合，逐位元組還原** — 兩項開關可分別開啟，也支援搭配官方英文介面；套用後即可關閉本工具，保留與目前 Antigravity 版本相符的乾淨備份即可逐位元組還原。
+- **9 種介面語言，不碰對話內容** — 翻譯設定、對話區控制項、模型選單、原生選單與結束提示，內建簡中、繁中、日、韓、德、西、法、葡（巴）、俄 9 種語言套件，不改動使用者輸入與聊天紀錄。
+- **會話指標與模型額度** *（可選）* — 在模型選擇器右側新增圓環，懸停即看各模型群組剩餘額度、本地重設時間、已用上下文、平均輸出速度、快取命中率與首個 token 延遲。
+- **思考強度滑桿** *（可選）* — 在模型選單中為支援調節的模型嵌入膠囊滑桿，拖曳即切檔位。
+- **獨立組合，逐位元組還原** — 兩項增強開關可分別開啟，也相容官方英文介面；套用後無需常駐背景，保留與目前 Antigravity 版本相符的乾淨備份即可逐位元組還原。
 
 ## 快速上手
 
-> [!NOTE]
-> 設定工具介面目前為簡體中文，以下步驟在括號內附上對應的簡體中文按鈕標籤以對照上方截圖。
+> [!TIP]
+> 設定視窗目前為簡體中文，以下步驟在括號內附上對應的簡體中文按鈕標籤以對照上方截圖。
 
 ### 套用設定
 
@@ -45,29 +51,31 @@
 
 ### 重新套用與還原
 
-- **重新套用目前設定** — 點選右下角 **重新套用**（`重新应用`）。
-- **還原官方版本** — 先結束 Antigravity，開啟右上角選單（`···`），點選 **還原官方版本**（`还原官方版本`）並確認。介面將恢復官方英文，同時移除指標圓環與思考強度滑桿。
+- **重新套用** — 點選右下角 **重新套用**（`重新应用`）再次寫入目前設定。
+- **還原官方版本** — 先結束 Antigravity，開啟右上角選單（`···`），點選 **還原官方版本**（`还原官方版本`）並確認，介面將恢復官方英文並移除指標圓環與滑桿。
 
 > [!IMPORTANT]
 > 首次套用時，工具會在 Antigravity 安裝目錄自動備份原檔案至 `resources/app.asar.clean-backup`。如需日後還原，請保留該檔案。
 
-## 可選功能詳解
+## 可選功能
 
 ### 會話指標與模型額度
 
-- **送出第一則訊息前即可查額度** — 將游標移到模型選擇器右側的圓環上，即可查看各模型群組在不同週期（如每週、5 小時）的剩餘額度；停在百分比上可查看本地重設時間。
-- **產生模型呼叫後顯示即時指標** — 對話記錄到模型呼叫後，圓環會反映上下文估計比例，面板上方同步顯示 **已用上下文**（已用 token / 總容量與比例）、**平均輸出速度**（包含模型記錄的思考 token）、**快取命中率** 與 **首個 token 延遲**。點一下圓環可固定或收起面板。
-- **多面板獨立統計** — 分割畫面、側問和子代理面板各自讀取本機對應會話最近一次有資料的模型呼叫。無法取得的項目顯示為 `—`。
+- **送出第一則訊息前即可查額度** — 游標移至模型選擇器右側圓環上，即可查看各模型群組在不同週期（如每週、5 小時）的剩餘額度；停在百分比上可查看本地重設時間。
+- **產生模型呼叫後顯示即時指標** — 對話記錄到模型呼叫後，圓環反映估算上下文比例，面板上方自動填入 **已用上下文**（已用 token / 總容量與比例）、**平均輸出速度**（含模型記錄的思考 token）、**快取命中率** 與 **首個 token 延遲**。點一下圓環可固定或收起。
+- **多面板獨立統計** — 分割畫面、側問和子代理面板各自讀取對應會話最近一次有資料的本機紀錄，無法取得的項目顯示為 `—`。
 
 <p align="center">
   <a href="./docs/images/session-quota-before-first-call.webp">
-    <img src="./docs/images/session-quota-before-first-call.webp" width="440" alt="模型選擇器右側圓環上方展開的會話指標與模型剩餘額度面板">
+    <img src="./docs/images/session-quota-before-first-call.webp" width="420" alt="模型選擇器右側圓環上方展開的會話指標與模型剩餘額度面板">
   </a>
+  <br>
+  <sub>新對話即可直接查看各模型群組剩餘額度；產生首次呼叫後上方指標自動填入。</sub>
 </p>
 
 ### 思考強度滑桿
 
-在工具中開啟 **思考強度滑桿**（`思考强度滑块`）並套用變更。開啟 Antigravity 模型選單，支援調節思考強度的模型會在用量選項上方顯示滑桿——拖曳檔位預覽，放開即生效。
+開啟 **思考強度滑桿**（`思考强度滑块`）並套用變更後，開啟 Antigravity 模型選單，支援直接選擇思考強度的模型會在用量選項上方顯示滑桿——拖曳檔位預覽，放開即生效。
 
 <p align="center">
   <a href="./docs/images/thinking-effort-high.webp">
@@ -77,14 +85,20 @@
   <a href="./docs/images/thinking-effort-max.webp">
     <img src="./docs/images/thinking-effort-max.webp" height="340" alt="模型選單中的思考強度滑桿，目前為極高">
   </a>
+  <br>
+  <sub>常規檔位（高）與高亮最高檔位（極高），直接在模型選單中拖曳切換。</sub>
 </p>
 
-## 更新說明
+## 更新與命令列
 
-- **Antigravity 更新後** — 若翻譯或增強元件消失，請先對照本頁頂端的適用版本，再重新開啟工具套用設定即可。
-- **工具自動檢查更新** — 啟動時根據上次檢查結果決定是否查詢 GitHub。成功後至少間隔 24 小時再檢查。右上角選單（`···`）出現藍點表示有新版本，點開可查看更新說明並就地下載重啟。可在 **關於**（`关于`）關閉自動檢查，或隨時手動點擊 **檢查更新**（`检查更新`）。工具更新後，請再點一次 **重新套用**（`重新应用`）將新譯文套用到 Antigravity。
+### 更新說明
 
-## 命令列用法
+- **Antigravity 更新後** — 若翻譯或增強元件消失，請先對照頂端已驗證的用戶端版本，再重新開啟工具套用設定即可。
+- **工具自動檢查更新** — 啟動時依上次檢查結果決定是否查詢 GitHub，成功後至少間隔 24 小時再查。右上角選單（`···`）出現藍點表示有新版本，點開可查看更新說明並就地下載重啟。可在 **關於**（`关于`）關閉自動檢查，或隨時手動點擊 **檢查更新**（`检查更新`）。工具更新後請點選 **重新套用**（`重新应用`）套用新譯文。
+
+首個 Regravity 正式版發布後，請從 [版本記錄](https://github.com/wadewu-ml/regravity/releases) 手動下載 `regravity.exe`——現有修補與自動更新設定會自動沿用。儲存庫更名後，`v4.2.3` 的內建檢查可能提示無法比較版本號，請直接從版本記錄查看更新。
+
+### 命令列用法
 
 在 `antigravity-i18n.exe` 所在目錄開啟 PowerShell：
 
@@ -98,7 +112,7 @@
 | 還原官方版本 | `.\antigravity-i18n.exe restore` |
 | 查看所有選項 | `.\antigravity-i18n.exe --help` |
 
-## 從原始碼建置
+### 從原始碼建置
 
 需要 Windows、PowerShell 7、Go 1.26.3+ 及 Wails v2 CLI：
 
@@ -106,11 +120,13 @@
 .\build.ps1 -Target gui
 ```
 
-產物位於 `build/bin/regravity.exe`。
+產物輸出至 `build/bin/regravity.exe`。
 
 ## 常見問題
 
 - **啟動時提示缺少 WebView2** — 請安裝 [Microsoft Edge WebView2 執行階段](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) 後重新執行 `antigravity-i18n.exe`。
+
+---
 
 ## 免責聲明
 
