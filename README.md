@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a>
     </sub>
   </p>
 </div>
@@ -36,7 +36,9 @@
 ## Quick start
 
 > [!TIP]
-> The setup window is currently in Simplified Chinese. Original labels appear in parentheses below so you can match them directly against the screenshot above.
+> Chinese button labels in parentheses match the screenshot above.
+
+In the development build, choose the setup language at the top right. Turkish and Vietnamese are also available for Antigravity.
 
 ### Apply settings
 
@@ -133,4 +135,4 @@ Outputs `build/bin/regravity.exe`.
 2. Google Antigravity and related trademarks belong to their respective owners.
 3. This tool is provided for personal and educational use. Please ensure compliance with relevant software terms of service.
 
-[MIT License](./LICENSE)
+[MIT License](./LICENSE) · [Translation credits and licenses](./assets/patches/TRANSLATION-NOTICES.txt)

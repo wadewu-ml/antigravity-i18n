@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><!-- ENGINE --></head>
+<body>
+  <button id="settings">Settings</button>
+  <button id="more">More actions for Demo $&</button>
+  <input id="input" value="Settings">
+  <div class="text-sm text-muted-foreground mt-auto pt-4" id="terms">By using this app, you agree to its <a href="https://antigravity.google/terms">Terms of Service</a></div>
+  <script>
+    const originalLink = document.querySelector('#terms a');
+    verify(async () => {
+      await settle(150);
+      const lang = document.documentElement.lang;
+      const turkish = lang === 'tr';
+      check('localized document', ['tr', 'vi'].includes(lang), true);
+      check('settings', document.getElementById('settings').textContent, turkish ? 'Ayarlar' : 'Cài đặt');
+      check('dynamic label preserves project name', document.getElementById('more').textContent,
+        turkish ? 'Demo $& için diğer işlemler' : 'Thao tác khác cho Demo $&');
+      check('user input', document.getElementById('input').value, 'Settings');
+      check('link is preserved', document.querySelector('#terms a'), originalLink);
+      check('translated sentence around link', document.getElementById('terms').textContent.startsWith(
+        turkish ? 'Bu uygulamayı kullanarak' : 'Khi dùng ứng dụng này'), true);
+    });
+  </script>
+</body>
+</html>

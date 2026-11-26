@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <strong>한국어</strong> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <strong>한국어</strong> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a>
     </sub>
   </p>
 </div>
@@ -36,7 +36,9 @@
 ## 빠른 시작
 
 > [!TIP]
-> 설정 도구 화면은 중국어 간체로 표시됩니다. 위 스크린샷과 대조할 수 있도록 아래에 원래 중국어 간체 라벨을 함께 표기했습니다.
+> 괄호 안의 중국어 표기는 위 스크린샷의 버튼 이름입니다.
+
+개발 빌드에서는 오른쪽 위에서 설정 창의 언어를 선택할 수 있습니다. Antigravity에는 튀르키예어와 베트남어가 추가되었습니다.
 
 ### 설정 적용
 

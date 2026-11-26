@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <strong>简体中文</strong> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+      <strong>简体中文</strong> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a>
     </sub>
   </p>
 </div>
@@ -34,6 +34,8 @@
 - **独立组合，逐字节还原** — 两项增强开关可单独启用，也兼容官方英文界面；应用后无需常驻后台，保留与当前 Antigravity 版本匹配的干净备份即可逐字节还原。
 
 ## 快速上手
+
+开发版可在右上角选择设置窗口语言。Antigravity 新增土耳其语和越南语。
 
 ### 应用设置
 

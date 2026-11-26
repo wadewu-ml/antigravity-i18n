@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <strong>Deutsch</strong> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <strong>Deutsch</strong> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a>
     </sub>
   </p>
 </div>
@@ -36,7 +36,9 @@
 ## Schnellstart
 
 > [!TIP]
-> Die Oberfläche des Einrichtungstools ist auf vereinfachtem Chinesisch beschriftet. Die Originalbeschriftungen stehen in Klammern passend zum Screenshot oben.
+> Die chinesischen Beschriftungen in Klammern entsprechen dem Screenshot.
+
+In der Entwicklungsversion wählen Sie oben rechts die Sprache des Einrichtungstools. Für Antigravity stehen zusätzlich Türkisch und Vietnamesisch zur Verfügung.
 
 ### Einstellungen anwenden
 

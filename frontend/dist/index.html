@@ -16,12 +16,26 @@
           <span class="update-status" id="updateStatus" role="status"></span>
         </div>
       </div>
+      <select id="setupLanguage" class="btn-sm btn-ghost setup-language" aria-label="设置窗口语言">
+        <option value="en" lang="en">English</option>
+        <option value="de" lang="de">Deutsch</option>
+        <option value="es" lang="es">Español</option>
+        <option value="fr" lang="fr">Français</option>
+        <option value="ja" lang="ja">日本語</option>
+        <option value="ko" lang="ko">한국어</option>
+        <option value="pt-BR" lang="pt-BR">Português do Brasil</option>
+        <option value="ru" lang="ru">Русский</option>
+        <option value="tr" lang="tr">Türkçe</option>
+        <option value="vi" lang="vi">Tiếng Việt</option>
+        <option value="zh-CN" lang="zh-CN" selected>简体中文</option>
+        <option value="zh-Hant" lang="zh-Hant">繁體中文</option>
+      </select>
       <details class="more-actions" id="moreActions">
         <summary aria-label="更多操作" title="更多操作"><span aria-hidden="true"></span></summary>
         <div class="action-list">
-          <button id="btnCheckUpdate">检查更新</button>
-          <button id="btnAbout">关于</button>
-          <button class="restore-item hidden" id="btnRestore">还原官方版本</button>
+          <button id="btnCheckUpdate" data-en="Check for updates">检查更新</button>
+          <button id="btnAbout" data-en="About">关于</button>
+          <button class="restore-item hidden" id="btnRestore" data-en="Restore original">还原官方版本</button>
         </div>
       </details>
     </header>
@@ -30,48 +44,48 @@
       <div class="card-header-line">
         <div class="app-meta">
           <span class="app-name" id="appName">Antigravity</span>
-          <span class="app-version-badge" id="appVersion">检测中...</span>
+          <span class="app-version-badge" id="appVersion" data-en="Detecting…">检测中...</span>
           <div class="status-pill" id="statusPill">
             <span class="status-dot" id="statusDot"></span>
-            <span class="status-label" id="statusLabel">检测中...</span>
+            <span class="status-label" id="statusLabel" data-en="Detecting…">检测中...</span>
           </div>
         </div>
-        <button class="btn-sm btn-ghost" id="btnChangePath">更改位置</button>
+        <button class="btn-sm btn-ghost" id="btnChangePath" data-en="Change location">更改位置</button>
       </div>
 
-      <div class="path-display" id="appPathDisplay">正在检测安装位置…</div>
+      <div class="path-display" id="appPathDisplay" data-en="Looking for Antigravity…">正在检测安装位置…</div>
       <p class="status-desc" id="statusDesc" role="status"></p>
 
       <div class="progress-box hidden" id="progressBox">
         <div class="progress-main">
           <span class="spinner"></span>
           <div class="progress-text">
-            <span class="progress-stage" id="progressStage">正在准备...</span>
-            <span class="progress-detail" id="progressDetail">请稍候...</span>
+            <span class="progress-stage" id="progressStage" data-en="Preparing…">正在准备...</span>
+            <span class="progress-detail" id="progressDetail" data-en="Please wait…">请稍候...</span>
           </div>
         </div>
-        <button class="btn-xs btn-ghost hidden" id="btnCancelDownload">取消下载</button>
+        <button class="btn-xs btn-ghost hidden" id="btnCancelDownload" data-en="Cancel download">取消下载</button>
       </div>
     </section>
 
     <section class="locale-card">
       <div class="locale-header">
-        <h2 class="section-title" id="localeTitle">界面语言</h2>
-        <span class="section-note" id="localeNote">正在读取语言包...</span>
+        <h2 class="section-title" id="localeTitle" data-en="Antigravity language">界面语言</h2>
+        <span class="section-note" id="localeNote" data-en="Loading languages…">正在读取语言包...</span>
       </div>
       <div class="chips" id="localeChips" role="group" aria-labelledby="localeTitle"></div>
 
       <div class="features">
-        <label class="feature-setting" title="在模型选择器旁查看上下文用量和模型剩余额度。">
+        <label class="feature-setting" title="在模型选择器旁查看上下文用量和模型剩余额度。" data-en-title="Show context usage and remaining quota beside the model picker.">
           <span class="feature-symbol metrics-symbol" aria-hidden="true"></span>
-          <span>会话指标</span>
+          <span data-en="Session metrics">会话指标</span>
           <span class="setting-detail" id="sessionMetricsDetail"></span>
           <input class="setting-switch" type="checkbox" role="switch" id="sessionMetrics"
             aria-describedby="sessionMetricsDetail" disabled>
         </label>
-        <label class="feature-setting" title="在模型菜单中拖动滑块，调节当前模型的思考强度。">
+        <label class="feature-setting" title="在模型菜单中拖动滑块，调节当前模型的思考强度。" data-en-title="Adjust thinking effort in the model menu.">
           <span class="feature-symbol slider-symbol" aria-hidden="true"></span>
-          <span>思考强度滑块</span>
+          <span data-en="Thinking effort slider">思考强度滑块</span>
           <span class="setting-detail" id="effortSliderDetail"></span>
           <input class="setting-switch" type="checkbox" role="switch" id="effortSlider"
             aria-describedby="effortSliderDetail" disabled>
@@ -81,49 +95,49 @@
 
     <div class="action-row" id="actionRow">
       <span class="pending-language" id="pendingLanguage" role="status"></span>
-      <button class="btn btn-outline hidden" id="btnSecondaryAction">打开 Antigravity</button>
-      <button class="btn btn-primary" id="btnPrimaryAction">应用更改</button>
+      <button class="btn btn-outline hidden" id="btnSecondaryAction" data-en="Open Antigravity">打开 Antigravity</button>
+      <button class="btn btn-primary" id="btnPrimaryAction" data-en="Apply changes">应用更改</button>
     </div>
 
   </div>
 
   <dialog class="modal-box" id="aboutModal" aria-labelledby="aboutTitle">
     <h3 id="aboutTitle">Regravity <span class="version-tag" id="appVersionBadge"></span></h3>
-    <p class="modal-desc">
+    <p class="modal-desc" data-en="A portable tool for translating Google Antigravity and adding session metrics and a thinking effort slider.">
       为 Google Antigravity 桌面应用提供多语言本地化、会话指标与思考强度滑块的单文件工具，即开即用。
     </p>
     <ul class="about-features">
-      <li><b>按字节还原</b>：应用前保留一份干净的 app.asar，还原后与官方版本逐字节一致。</li>
-      <li><b>会话指标</b>：悬停在模型选择器旁的圆环上，查看上下文用量、模型剩余额度和重置时间。点击可固定详情。</li>
-      <li><b>思考强度滑块</b>：在模型选择菜单中拖动滑块调节当前模型的思考强度，松开即生效。</li>
-      <li><b>完整校验与回滚</b>：重算 offset 与 integrity，任何一步失败都会自动恢复原状。</li>
+      <li><b data-en="Restore the original">按字节还原</b><span data-en=" — Regravity keeps a clean backup so you can restore the original app exactly.">：应用前保留一份干净的 app.asar，还原后与官方版本逐字节一致。</span></li>
+      <li><b data-en="Session metrics">会话指标</b><span data-en=" — Hover over the ring beside the model picker to see context usage, remaining quota, and reset times. Click to pin the details.">：悬停在模型选择器旁的圆环上，查看上下文用量、模型剩余额度和重置时间。点击可固定详情。</span></li>
+      <li><b data-en="Thinking effort slider">思考强度滑块</b><span data-en=" — Drag the slider in the model menu and release it to set the thinking effort.">：在模型选择菜单中拖动滑块调节当前模型的思考强度，松开即生效。</span></li>
+      <li><b data-en="Verification and rollback">完整校验与回滚</b><span data-en=" — Regravity verifies the archive and rolls back if applying a change fails.">：重算 offset 与 integrity，任何一步失败都会自动恢复原状。</span></li>
     </ul>
-    <p class="modal-note">本工具为社区维护的非官方本地化工具，与 Antigravity 官方无关。</p>
+    <p class="modal-note" data-en="Regravity is a community project and is not affiliated with Antigravity.">本工具为社区维护的非官方本地化工具，与 Antigravity 官方无关。</p>
     <label class="feature-setting auto-update-setting">
-      <span>自动检查更新</span>
+      <span data-en="Check for updates automatically">自动检查更新</span>
       <input class="setting-switch" type="checkbox" role="switch" id="autoCheckUpdates" checked>
     </label>
     <div class="modal-actions">
-      <button class="text-link" id="btnOpenLogs" aria-haspopup="dialog">运行日志</button>
-      <button class="btn btn-primary" id="btnCloseAbout" autofocus>确定</button>
+      <button class="text-link" id="btnOpenLogs" aria-haspopup="dialog" data-en="Activity log">运行日志</button>
+      <button class="btn btn-primary" id="btnCloseAbout" autofocus data-en="OK">确定</button>
     </div>
   </dialog>
 
   <dialog class="modal-box" id="logModal" aria-labelledby="logTitle">
-    <h3 id="logTitle">运行日志</h3>
-    <pre class="log-content" id="logContent" tabindex="0">暂无操作日志。</pre>
+    <h3 id="logTitle" data-en="Activity log">运行日志</h3>
+    <pre class="log-content" id="logContent" tabindex="0" data-en="No activity yet.">暂无操作日志。</pre>
     <div class="modal-actions">
-      <button class="btn btn-ghost" id="btnCopyLogs">复制日志</button>
-      <button class="btn btn-primary" id="btnCloseLogs" autofocus>关闭</button>
+      <button class="btn btn-ghost" id="btnCopyLogs" data-en="Copy log">复制日志</button>
+      <button class="btn btn-primary" id="btnCloseLogs" autofocus data-en="Close">关闭</button>
     </div>
   </dialog>
 
   <dialog class="modal-box" id="restoreConfirmModal" aria-labelledby="restoreTitle" aria-describedby="restoreBody">
-    <h3 id="restoreTitle">还原官方版本？</h3>
-    <p class="modal-desc" id="restoreBody">Antigravity 将恢复官方英文界面，会话指标和思考强度滑块将关闭。</p>
+    <h3 id="restoreTitle" data-en="Restore the original app?">还原官方版本？</h3>
+    <p class="modal-desc" id="restoreBody" data-en="Antigravity will return to English. Session metrics and the thinking effort slider will turn off.">Antigravity 将恢复官方英文界面，会话指标和思考强度滑块将关闭。</p>
     <div class="modal-actions">
-      <button class="btn btn-ghost" id="btnCancelRestore" autofocus>取消</button>
-      <button class="btn btn-danger" id="btnConfirmRestore">还原</button>
+      <button class="btn btn-ghost" id="btnCancelRestore" autofocus data-en="Cancel">取消</button>
+      <button class="btn btn-danger" id="btnConfirmRestore" data-en="Restore">还原</button>
     </div>
   </dialog>
 
@@ -132,23 +146,24 @@
     <p class="modal-desc" id="updateSummary"></p>
     <p class="modal-desc update-notes" id="updateNotes"></p>
     <div class="modal-actions">
-      <button class="text-link" id="btnReleaseNotes">打开发布页</button>
-      <button class="btn btn-ghost" id="btnLater" autofocus>稍后</button>
-      <button class="btn btn-primary" id="btnInstallUpdate">更新并重启</button>
+      <button class="text-link" id="btnReleaseNotes" data-en="Open releases">打开发布页</button>
+      <button class="btn btn-ghost" id="btnLater" autofocus data-en="Later">稍后</button>
+      <button class="btn btn-primary" id="btnInstallUpdate" data-en="Update and restart">更新并重启</button>
     </div>
   </dialog>
 
   <dialog class="modal-box" id="msgModal" aria-labelledby="msgTitle" aria-describedby="msgBody">
-    <h3 id="msgTitle">提示</h3>
+    <h3 id="msgTitle" data-en="Notice">提示</h3>
     <p class="modal-desc" id="msgBody"></p>
     <div class="modal-actions">
-      <button class="text-link hidden" id="btnMsgLogs">查看运行日志</button>
-      <button class="text-link hidden" id="btnReleaseFallback">打开发布页</button>
-      <button class="btn btn-primary" id="btnMsgOk" autofocus>知道了</button>
-      <button class="btn btn-danger hidden" id="btnForceRetry">强制退出并重试</button>
+      <button class="text-link hidden" id="btnMsgLogs" data-en="View activity log">查看运行日志</button>
+      <button class="text-link hidden" id="btnReleaseFallback" data-en="Open releases">打开发布页</button>
+      <button class="btn btn-primary" id="btnMsgOk" autofocus data-en="OK">知道了</button>
+      <button class="btn btn-danger hidden" id="btnForceRetry" data-en="Force quit and retry">强制退出并重试</button>
     </div>
   </dialog>
 
+  <script src="setup-locales.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -223,7 +223,7 @@ type progressWriter struct {
 func (p *progressWriter) Write(b []byte) (int, error) {
 	p.received += int64(len(b))
 	if time.Since(p.last) >= 200*time.Millisecond || p.received == p.size {
-		p.report("正在下载更新", fmt.Sprintf("%.1f / %.1f MB（%.0f%%）", float64(p.received)/1e6, float64(p.size)/1e6, 100*float64(p.received)/float64(p.size)))
+		p.report("正在下载更新", fmt.Sprintf("%.1f / %.1f MB (%.0f%%)", float64(p.received)/1e6, float64(p.size)/1e6, 100*float64(p.received)/float64(p.size)))
 		p.last = time.Now()
 	}
 	return len(b), nil

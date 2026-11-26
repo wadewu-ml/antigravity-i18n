@@ -6,7 +6,38 @@
   "htmlLang": "zh-CN",
   "dir": "ltr",
   "allowSourceEqual": [
-    "Turbo"
+    "Antigravity",
+    "Atom One Dark",
+    "Atom One Light",
+    "Cascade ID",
+    "Chromium",
+    "Enterprise Gateway",
+    "Flash",
+    "Flash Lite",
+    "Gemini Enterprise",
+    "GitHub",
+    "Google Chat",
+    "Google Chrome",
+    "Google Docs",
+    "Google Drive",
+    "Google Sans",
+    "Google Sheets",
+    "Google Slides",
+    "Gruvbox Material",
+    "Inter",
+    "Linux",
+    "MCP",
+    "OAuth",
+    "One Dark Pro",
+    "One Light",
+    "Pro",
+    "Sidecar",
+    "Solarized Dark",
+    "Solarized Light",
+    "Tokyo Night",
+    "Turbo",
+    "UTC",
+    "Windows"
   ],
   "punctuation": {
     ":": "：",
@@ -204,7 +235,10 @@
       "pattern": "^You need (.+) AI Credits to send messages\\. To continue using (.+) now, purchase more AI Credits\\.$",
       "flags": "i",
       "template": "发送消息还需要 {1} AI 额度。要继续使用 {2}，请购买更多 AI 额度。",
-      "sample": "You need at least 100 AI Credits to send messages. To continue using Gemini 3.1 Pro now, purchase more AI Credits."
+      "sample": "You need at least 100 AI Credits to send messages. To continue using Gemini 3.1 Pro now, purchase more AI Credits.",
+      "replace": {
+        "1": "creditAmount"
+      }
     },
     {
       "id": "creditOveragesHint",
@@ -214,11 +248,32 @@
       "sample": "To continue using this model now, enable AI Credit overages."
     },
     {
+      "id": "modelUnavailableRetryDelayAttempt",
+      "pattern": "^Model unavailable, retrying in (\\d+)s \\(attempt (\\d+)/(\\d+)\\)$",
+      "sample": "Model unavailable, retrying in 5s (attempt 1/3)",
+      "template": "模型不可用，{1} 秒后重试（第 {2}/{3} 次）",
+      "flags": "i"
+    },
+    {
+      "id": "modelUnavailableRetryAttempt",
+      "pattern": "^Model unavailable, retrying \\(attempt (\\d+)/(\\d+)\\)$",
+      "sample": "Model unavailable, retrying (attempt 1/3)",
+      "template": "模型不可用，正在重试（第 {1}/{2} 次）",
+      "flags": "i"
+    },
+    {
+      "id": "modelUnavailableRetryDelay",
+      "pattern": "^Model unavailable, retrying in (\\d+)s$",
+      "sample": "Model unavailable, retrying in 5s",
+      "template": "模型不可用，{1} 秒后重试",
+      "flags": "i"
+    },
+    {
       "id": "modelUnavailableRetry",
-      "pattern": "^Model unavailable, retrying(?: in (\\d+)s)?( \\(attempt (\\d+)/(\\d+)\\))?$",
-      "flags": "i",
-      "template": "模型不可用，正在重试{1}{2}",
-      "sample": "Model unavailable, retrying in 5s (attempt 1/3)"
+      "pattern": "^Model unavailable, retrying$",
+      "sample": "Model unavailable, retrying",
+      "template": "模型不可用，正在重试",
+      "flags": "i"
     },
     {
       "id": "audioAttachments",
@@ -1134,6 +1189,13 @@
       {
         "pattern": "^on December (\\d+)$",
         "template": "12月{1}日"
+      }
+    ],
+    "creditAmount": [
+      {
+        "pattern": "^at least ([\\d.,]+)$",
+        "flags": "i",
+        "template": "至少 {1}"
       }
     ]
   },

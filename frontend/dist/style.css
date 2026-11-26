@@ -47,6 +47,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 .logo-badge { width: 38px; height: 38px; object-fit: contain; }
 .app-title { font-size: 22px; font-weight: 650; letter-spacing: -.6px; }
 .update-status, .version-tag { color: var(--secondary); font-size: 13px; font-weight: 450; }
+.setup-language { margin-left: auto; }
 .more-actions { position: relative; }
 .more-actions summary {
   display: grid; place-items: center;
@@ -67,7 +68,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 }
 .action-list {
   position: absolute; z-index: 1; top: calc(100% + 4px); right: 0;
-  display: grid; width: 156px; padding: 5px;
+  display: grid; min-width: 156px; width: max-content; max-width: calc(100vw - 40px); padding: 5px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
   box-shadow: 0 6px 24px rgb(0 0 0 / 10%);
 }
@@ -115,7 +116,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 .section-note, .setting-detail, .pending-language { font-size: 13px; color: var(--secondary); }
 .chips {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 3px;
   padding: 6px;
 }

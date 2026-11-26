@@ -27,7 +27,7 @@ export function OpenReleases():Promise<void>;
 
 export function RestoreLocale(arg1:boolean,arg2:boolean):Promise<core.RestoreResult>;
 
-export function SelectAppDir():Promise<string>;
+export function SelectAppDir(arg1:string):Promise<string>;
 
 export function SetAppDir(arg1:string):Promise<core.Status>;
 

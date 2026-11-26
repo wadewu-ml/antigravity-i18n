@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a>
     </sub>
   </p>
 </div>
@@ -36,7 +36,9 @@
 ## 快速上手
 
 > [!TIP]
-> 設定視窗目前為簡體中文，以下步驟在括號內附上對應的簡體中文按鈕標籤以對照上方截圖。
+> 括號內是上方截圖中的簡體中文按鈕名稱。
+
+開發版可在右上角選擇設定視窗語言。Antigravity 新增土耳其語和越南語。
 
 ### 套用設定
 

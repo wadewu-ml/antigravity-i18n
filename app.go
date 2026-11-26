@@ -100,12 +100,12 @@ func (a *App) GetLocales() ([]core.LocaleInfo, error) {
 }
 
 // SelectAppDir opens a native folder picker.
-func (a *App) SelectAppDir() (string, error) {
+func (a *App) SelectAppDir(title string) (string, error) {
 	if a.ctx == nil {
 		return "", errors.New("app context not initialized")
 	}
 	selected, err := wailsRuntime.OpenDirectoryDialog(a.ctx, wailsRuntime.OpenDialogOptions{
-		Title: "Select the Antigravity installation folder (the one holding Antigravity.exe)",
+		Title: title,
 	})
 	if err != nil {
 		return "", err

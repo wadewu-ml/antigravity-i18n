@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><!-- ENGINE --></head>
+<body>
+  <div id="retry">Model unavailable, retrying in 17s (attempt 2/9)</div>
+  <div id="attempt">Model unavailable, retrying (attempt 3/7)</div>
+  <div id="delay">Model unavailable, retrying in 13s</div>
+  <div id="plain">Model unavailable, retrying</div>
+  <div id="credits">You need at least 107 AI Credits to send messages. To continue using Demo $&amp; now, purchase more AI Credits.</div>
+  <script>
+    verify(async () => {
+      await settle(120);
+      const credits = document.getElementById('credits').textContent;
+      check('translated credit threshold', credits.includes('at least'), false);
+      check('credit amount and model preserved', credits.includes('107') && credits.includes('Demo $&'), true);
+      for (const [id, numbers] of Object.entries({retry: ['17', '2', '9'], attempt: ['3', '7'], delay: ['13'], plain: []})) {
+        const text = document.getElementById(id).textContent;
+        check(id + ' translation', /Model unavailable|attempt|retrying|\{\d\}/.test(text), false);
+        check(id + ' values', (text.match(/\d+/g) || []).sort().join(), numbers.sort().join());
+      }
+    });
+  </script>
+</body>
+</html>

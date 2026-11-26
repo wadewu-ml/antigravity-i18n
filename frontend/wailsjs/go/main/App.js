@@ -50,8 +50,8 @@ export function RestoreLocale(arg1, arg2) {
   return window['go']['main']['App']['RestoreLocale'](arg1, arg2);
 }
 
-export function SelectAppDir() {
-  return window['go']['main']['App']['SelectAppDir']();
+export function SelectAppDir(arg1) {
+  return window['go']['main']['App']['SelectAppDir'](arg1);
 }
 
 export function SetAppDir(arg1) {

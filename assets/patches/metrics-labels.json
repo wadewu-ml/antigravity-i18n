@@ -138,5 +138,33 @@
     "speed": "Средняя скорость вывода",
     "cache": "Доля попаданий в кеш",
     "firstToken": "Время до первого токена"
+  },
+  "tr": {
+    "quota": "Kalan model kotası",
+    "loadingQuota": "Kota yükleniyor…",
+    "quotaUnavailable": "Kota bilgisi alınamadı",
+    "resets": "Sıfırlanma",
+    "weekly": "Haftalık",
+    "daily": "Günlük",
+    "title": "Oturum ölçümleri",
+    "context": "Kullanılan bağlam",
+    "tokenUnit": "token",
+    "speed": "Ortalama çıktı hızı",
+    "cache": "Önbellek isabet oranı",
+    "firstToken": "İlk tokene kadar geçen süre"
+  },
+  "vi": {
+    "quota": "Hạn mức mô hình còn lại",
+    "loadingQuota": "Đang tải hạn mức…",
+    "quotaUnavailable": "Không có dữ liệu hạn mức",
+    "resets": "Đặt lại",
+    "weekly": "Hằng tuần",
+    "daily": "Hằng ngày",
+    "title": "Chỉ số phiên",
+    "context": "Ngữ cảnh đã dùng",
+    "tokenUnit": "token",
+    "speed": "Tốc độ đầu ra trung bình",
+    "cache": "Tỷ lệ trúng bộ nhớ đệm",
+    "firstToken": "Thời gian đến token đầu tiên"
   }
 }

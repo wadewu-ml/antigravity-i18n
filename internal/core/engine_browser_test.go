@@ -107,6 +107,8 @@ func TestTranslationInBrowser(t *testing.T) {
 	for _, example := range []struct{ code, fixture string }{
 		{DefaultLocale, "testdata/engine.html"},
 		{"de", "testdata/engine-repeat.html"},
+		{"tr", "testdata/engine-tr-vi.html"},
+		{"vi", "testdata/engine-tr-vi.html"},
 	} {
 		t.Run(example.code, func(t *testing.T) {
 			loc, err := store.LoadLocale(example.code)
@@ -119,6 +121,24 @@ func TestTranslationInBrowser(t *testing.T) {
 			}
 			html := readTestFile(t, example.fixture)
 			runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+engine+"</script>", 1))
+		})
+	}
+}
+
+func TestRetryMessageInEveryLanguage(t *testing.T) {
+	store := newTestService(t).store
+	for _, code := range store.ListLocales() {
+		t.Run(code, func(t *testing.T) {
+			loc, err := store.LoadLocale(code)
+			if err != nil {
+				t.Fatal(err)
+			}
+			script, err := store.buildPreloadFragment(loc)
+			if err != nil {
+				t.Fatal(err)
+			}
+			page := readTestFile(t, "testdata/retry-message.html")
+			runBrowserChecks(t, strings.Replace(page, "<!-- ENGINE -->", "<script>"+script+"</script>", 1))
 		})
 	}
 }
@@ -140,6 +160,10 @@ func TestEffortSliderInBrowser(t *testing.T) {
 	runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+patch.preload+"</script>", 1))
 }
 
+func TestSetupLanguageInBrowser(t *testing.T) {
+	runSetupBrowserChecks(t, "testdata/setup-language.js")
+}
+
 func TestApplyShutdownInBrowser(t *testing.T) {
 	runSetupBrowserChecks(t, "testdata/shutdown.js")
 }
@@ -159,6 +183,8 @@ func TestAutoUpdateInBrowser(t *testing.T) {
 func runSetupBrowserChecks(t *testing.T, script string, setup ...string) {
 	t.Helper()
 	html := readTestFile(t, "../../frontend/dist/index.html")
+	localeData := readTestFile(t, "../../frontend/dist/setup-locales.js")
+	html = strings.Replace(html, `<script src="setup-locales.js"></script>`, "<script>"+localeData+"</script>", 1)
 	app := readTestFile(t, "../../frontend/dist/app.js")
 	checks := strings.Join(setup, "\n") + "\n" + readTestFile(t, script)
 	scripts := "<script>" + checks + "</script><script>" + app + "</script>"
