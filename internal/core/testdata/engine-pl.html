@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><!-- ENGINE --></head><body>
+<script>
+verify(async () => {
+  const examples = [
+    ['0 tasks running', '0 zadań w toku'], ['1 task running', '1 zadanie w toku'],
+    ['2 tasks running', '2 zadania w toku'], ['5 tasks running', '5 zadań w toku'],
+    ['12 tasks running', '12 zadań w toku'], ['14 tasks running', '14 zadań w toku'],
+    ['21 tasks running', '21 zadań w toku'], ['22 tasks running', '22 zadania w toku'],
+    ['24 tasks running', '24 zadania w toku'], ['112 tasks running', '112 zadań w toku'],
+    ['1 cookie', '1 plik cookie'], ['2 cookies', '2 pliki cookie'], ['5 cookies', '5 plików cookie'],
+    ['Rules: 1,022 tokens', 'Reguły: 1,022 tokeny'], ['Rules: 1,012 tokens', 'Reguły: 1,012 tokenów'],
+    ['about 2 hours', 'około 2 godzin'], ['22 minutes', '22 minuty'],
+    ['You have used some of your weekly limit, it will fully refresh in 1 hour, 22 minutes.',
+      'Wykorzystano część limitu tygodniowego. Pełny limit będzie dostępny za 1 godzinę, 22 minuty.'],
+    ['You have used some of your weekly limit, it will fully refresh in 112 minutes.',
+      'Wykorzystano część limitu tygodniowego. Pełny limit będzie dostępny za 112 minut.']
+  ];
+  const controls = examples.map(([source]) => {
+    const button = document.createElement('button');
+    button.textContent = source;
+    document.body.append(button);
+    return button;
+  });
+  await settle(150);
+  examples.forEach(([source, expected], i) => check(source, controls[i].textContent, expected));
+});
+</script></body></html>

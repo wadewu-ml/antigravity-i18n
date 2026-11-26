@@ -5,19 +5,19 @@
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Tải bản ổn định mới nhất cho Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Các bản phát hành trên GitHub"></a>
-    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Đã kiểm tra với Antigravity 2.35.1">
+    <img src="https://img.shields.io/badge/Antigravity-2.35.2_tested-18181B?style=flat" alt="Đã kiểm tra với Antigravity 2.35.2">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="Giấy phép MIT"></a>
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <strong>Tiếng Việt</strong> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <strong>Tiếng Việt</strong> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
     </sub>
   </p>
 </div>
 
 ## Bắt đầu
 
-Bản thử nghiệm cục bộ đã có tiếng Việt, tiếng Thổ Nhĩ Kỳ, tiếng Ý và tiếng Ả Rập. Nút tải xuống ở đầu trang dẫn tới bản phát hành ổn định. Chọn ngôn ngữ cho cửa sổ cài đặt trong danh sách ở góc trên bên phải.
+Chọn ngôn ngữ cho cửa sổ cài đặt trong danh sách ở góc trên bên phải.
 
 1. Mở `regravity.exe`. Nếu công cụ nhận nhầm vị trí, nhấn **Change location** và chọn thư mục chứa `Antigravity.exe`.
 2. Trong **Antigravity language**, chọn **Tiếng Việt**. Bật **Session metrics** và **Thinking effort slider** nếu cần. Hai tính năng này cũng dùng được với giao diện tiếng Anh gốc.

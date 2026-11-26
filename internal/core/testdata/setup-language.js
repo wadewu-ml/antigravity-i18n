@@ -19,6 +19,7 @@ verify(async () => {
   const byId = id => document.getElementById(id);
   byId('localeChips').querySelectorAll('button')[1].click();
   byId('sessionMetrics').click();
+  byId('effortSlider').click();
   selectLanguage('en');
   check('English document', document.documentElement.lang, 'en');
   check('English action', byId('btnPrimaryAction').textContent, 'Apply changes');
@@ -37,10 +38,15 @@ verify(async () => {
     check('saved language', localStorage.getItem('setupLanguage'), option.value);
     check('pending selection survives', byId('pendingLanguage').textContent.includes('Tiếng Việt'), true);
     if (option.value !== 'zh-CN' && option.value !== 'en') {
+      for (const [id, key] of [['sessionMetrics', 'Session metrics'], ['effortSlider', 'Thinking effort slider']]) {
+        const control = byId(id);
+        check('localized switch ' + key, control.labels[0].querySelector('[data-en]').textContent, setupMessages[option.value][key]);
+        check('switch stays on ' + key, control.checked, true);
+      }
       check('translated action', byId('btnPrimaryAction').textContent, setupMessages[option.value]['Apply changes']);
     }
   }
-  check('all setup languages', byId('setupLanguage').options.length, 14);
+  check('all setup languages', byId('setupLanguage').options.length, 16);
   selectLanguage('zh-CN');
   check('Chinese document', document.documentElement.lang, 'zh-CN');
   check('Chinese action', byId('btnPrimaryAction').textContent, '应用更改');

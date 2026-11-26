@@ -2,16 +2,16 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity 圖示">
   <h1>Regravity</h1>
   <p><em>反重力起飛，Regravity 讓它落地——回歸你的語言與掌控。</em></p>
-  <p>專為 Windows 版 <strong>Google Antigravity</strong> 打造的可攜式增強工具：九種介面語言、會話指標與模型額度，以及思考強度滑桿。</p>
+  <p>專為 Windows 版 <strong>Google Antigravity</strong> 打造的可攜式增強工具：15 種介面語言、會話指標與模型額度，以及思考強度滑桿。</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下載最新版 Windows x64 Regravity"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 版本記錄"></a>
-    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="已驗證適用 Antigravity App 2.35.1">
+    <img src="https://img.shields.io/badge/Antigravity-2.35.2_tested-18181B?style=flat" alt="已驗證適用 Antigravity App 2.35.2">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="MIT 授權條款"></a>
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
     </sub>
   </p>
 </div>
@@ -28,7 +28,7 @@
 
 ## 核心能力
 
-- **9 種介面語言，不碰對話內容** — 翻譯設定、對話區控制項、模型選單、原生選單與結束提示，內建簡中、繁中、日、韓、德、西、法、葡（巴）、俄 9 種語言套件，不改動使用者輸入與聊天紀錄。
+- **15 種介面語言，不碰對話內容** — 翻譯設定、對話區控制項、模型選單、原生選單與結束提示，不改動使用者輸入與聊天紀錄。
 - **會話指標與模型額度** *（可選）* — 在模型選擇器右側新增圓環，懸停即看各模型群組剩餘額度、本地重設時間、已用上下文、平均輸出速度、快取命中率與首個 token 延遲。
 - **思考強度滑桿** *（可選）* — 在模型選單中為支援調節的模型嵌入膠囊滑桿，拖曳即切檔位。
 - **獨立組合，逐位元組還原** — 兩項增強開關可分別開啟，也相容官方英文介面；套用後無需常駐背景，保留與目前 Antigravity 版本相符的乾淨備份即可逐位元組還原。
@@ -38,7 +38,7 @@
 > [!TIP]
 > 括號內是上方截圖中的簡體中文按鈕名稱。
 
-開發版可在右上角選擇設定視窗語言。Antigravity 新增土耳其語、越南語、義大利語和阿拉伯語。
+在右上角可以選擇設定視窗的語言。
 
 ### 套用設定
 

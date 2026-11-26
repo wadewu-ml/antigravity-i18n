@@ -71,6 +71,30 @@
       const detailFor = (id) => document.getElementById(control(id).getAttribute('aria-describedby'));
       const values = (id) => [...detailFor(id).querySelectorAll('dd')].map(el => el.textContent);
       await settle(150);
+      const lang = document.documentElement.lang;
+      const localLabels = {
+        it: ['Metriche della sessione', 'Contesto utilizzato', 'Velocità media di generazione',
+          'Percentuale di riscontri nella cache', 'Tempo al primo token', 'Quota residua del modello',
+          'Settimanale', 'Prossimo ripristino'],
+        id: ['Metrik sesi', 'Penggunaan konteks', 'Kecepatan keluaran rata-rata', 'Rasio hit cache',
+          'Waktu hingga token pertama', 'Sisa kuota model', 'Mingguan', 'Waktu reset'],
+        pl: ['Statystyki sesji', 'Wykorzystanie kontekstu', 'Średnia prędkość generowania',
+          'Odsetek trafień w pamięci podręcznej', 'Czas do pierwszego tokena', 'Pozostały limit modelu',
+          'Tygodniowo', 'Odnowienie limitu']
+      }[lang];
+      if (localLabels) {
+        control('left').click();
+        await settle(300);
+        const detail = detailFor('left');
+        check('session title', detail.getAttribute('aria-label'), localLabels[0]);
+        check('metric names', [...detail.querySelectorAll('dt')].map(el => el.textContent).join('|'), localLabels.slice(1,5).join('|'));
+        const table = detail.querySelector('table');
+        check('localized quota', table.rows[0].cells[0].textContent, localLabels[5]);
+        check('localized period', table.rows[0].cells[1].textContent, localLabels[6]);
+        check('localized reset time', table.rows[1].cells[2].firstChild.title.startsWith(localLabels[7]), true);
+        check('model name retained', table.rows[2].cells[0].textContent, 'Claude / GPT');
+        return;
+      }
       if (document.documentElement.lang === 'ar') {
         control('left').dispatchEvent(new PointerEvent('pointerenter'));
         await settle(300);

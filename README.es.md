@@ -2,16 +2,16 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Icono de Regravity">
   <h1>Regravity</h1>
   <p><em>Antigravity despega; Regravity lo trae de vuelta a tu idioma y bajo tu control.</em></p>
-  <p>Complemento portátil para <strong>Google Antigravity</strong> en Windows — 9 idiomas de interfaz, métricas de sesión y cuotas de modelos, y control de nivel de razonamiento.</p>
+  <p>Complemento portátil para <strong>Google Antigravity</strong> en Windows — 15 idiomas de interfaz, métricas de sesión y cuotas de modelos, y control de nivel de razonamiento.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Descargar la última versión de Regravity para Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Versiones en GitHub"></a>
-    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Probado con Antigravity App 2.35.1">
+    <img src="https://img.shields.io/badge/Antigravity-2.35.2_tested-18181B?style=flat" alt="Probado con Antigravity App 2.35.2">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="Licencia MIT"></a>
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <strong>Español</strong> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <strong>Español</strong> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
     </sub>
   </p>
 </div>
@@ -28,7 +28,7 @@
 
 ## Qué incluye
 
-- **9 idiomas de interfaz, sin tocar tus chats** — Traduce ajustes, controles del chat, menús de modelos, menús nativos y avisos de salida (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`) sin alterar tus entradas ni conversaciones.
+- **15 idiomas de interfaz, sin tocar tus chats** — Traduce ajustes, controles del chat, menús de modelos, menús nativos y avisos de salida (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`) sin alterar tus entradas ni conversaciones.
 - **Métricas de sesión y cuotas** *(opcional)* — Añade un anillo junto al selector de modelo con cuotas restantes, horarios locales de restablecimiento, contexto utilizado, velocidad media de salida, aciertos de caché y tiempo hasta el primer token.
 - **Control de nivel de razonamiento** *(opcional)* — Integra un control deslizante tipo cápsula en el selector de modelos para modelos compatibles.
 - **Modular y reversible byte a byte** — Ambos interruptores funcionan por separado y también con la interfaz oficial en inglés. Restaura la versión oficial desde una copia limpia de la misma versión de Antigravity en cualquier momento.
@@ -38,7 +38,7 @@
 > [!TIP]
 > Las etiquetas chinas entre paréntesis corresponden a la captura.
 
-En la versión de desarrollo puedes elegir el idioma de la herramienta arriba a la derecha. Antigravity también admite turco, vietnamita, italiano y árabe.
+Puedes elegir el idioma de la herramienta arriba a la derecha.
 
 ### Aplicar ajustes
 

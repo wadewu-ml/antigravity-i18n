@@ -6,6 +6,7 @@
   "htmlLang": "fr",
   "dir": "ltr",
   "allowSourceEqual": [
+    "Minimal",
     "Accent",
     "Actions",
     "Agent",
@@ -2500,6 +2501,7 @@
     "This is a CitC workspace (Fig share)": "Ceci est un espace de travail CitC (partage Fig)",
     "Finalizing...": "Finalisation...",
     "Workspaces are not available for this project": "Les espaces de travail ne sont pas disponibles pour ce projet",
+    "Minimal": "Minimal",
     "Low": "Faible",
     "Medium": "Moyen",
     "High": "Élevé",

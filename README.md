@@ -2,16 +2,16 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity icon">
   <h1>Regravity</h1>
   <p><em>Antigravity takes off; Regravity brings it back to your language and control.</em></p>
-  <p>Portable Windows companion for <strong>Google Antigravity</strong> — 9 interface languages, session metrics &amp; model quotas, and a thinking-effort slider.</p>
+  <p>Portable Windows companion for <strong>Google Antigravity</strong> — 15 interface languages, session metrics &amp; model quotas, and a thinking-effort slider.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Download latest Regravity for Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub Releases"></a>
-    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Tested with Antigravity App 2.35.1">
+    <img src="https://img.shields.io/badge/Antigravity-2.35.2_tested-18181B?style=flat" alt="Tested with Antigravity App 2.35.2">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="MIT License"></a>
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
     </sub>
   </p>
 </div>
@@ -28,9 +28,9 @@
 
 ## What's inside
 
-- **9 interface languages, zero chat interference** — Translates settings, chat controls, model menus, native menus, and quit prompts into `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, and `ru` while leaving your prompts and conversations untouched.
+- **15 interface languages, zero chat interference** — Translates settings, chat controls, model menus, native menus, and quit prompts into `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl` while leaving your prompts and conversations untouched.
 - **Session metrics & model quotas** *(optional)* — Adds an unobtrusive ring beside the model selector for remaining quotas, local reset times, context usage, output speed, cache hit rate, and time to first token.
-- **Thinking-effort slider** *(optional)* — Embeds a capsule slider inside the model picker for models with selectable thinking effort.
+- **Thinking effort slider** *(optional)* — Embeds a capsule slider inside the model picker for models with selectable thinking effort.
 - **Modular & byte-for-byte reversible** — Both optional switches work independently and with the built-in English UI. Close the tool once applied, and restore the official build from a matching clean backup whenever you want.
 
 ## Quick start
@@ -38,13 +38,13 @@
 > [!TIP]
 > Chinese button labels in parentheses match the screenshot above.
 
-In the development build, choose the setup language at the top right. Turkish, Vietnamese, Italian, and Arabic are also available for Antigravity.
+Choose the setup language at the top right.
 
 ### Apply settings
 
 1. Run `regravity.exe`. If the detected folder is wrong, click **Change location** (`更改位置`) and select the folder containing `Antigravity.exe`.
-2. Choose a language under **Interface language** (`界面语言`), or keep **English** if you only want the optional controls.
-3. Enable **Session metrics** (`会话指标`) and/or **Thinking-effort slider** (`思考强度滑块`) below the language list.
+2. Choose a language under **Antigravity language** (`界面语言`), or keep **English** if you only want the optional controls.
+3. Enable **Session metrics** (`会话指标`) and/or **Thinking effort slider** (`思考强度滑块`) below the language list.
 4. Save your work, quit Antigravity, and click **Apply changes** (`应用更改`) at the bottom right. Antigravity reopens with your settings (or launch it via **Open Antigravity** / `打开 Antigravity`), and you can close the tool.
 
 > [!WARNING]
@@ -53,7 +53,7 @@ In the development build, choose the setup language at the top right. Turkish, V
 ### Reapply or restore
 
 - **Reapply** — After updating the tool, click **Reapply** (`重新应用`) to use the latest translations.
-- **Restore official version** — Quit Antigravity, open the top-right menu (`···`), click **Restore official version** (`还原官方版本`), and confirm to return to the original English build without the ring or slider.
+- **Restore original** — Quit Antigravity, open the top-right menu (`···`), click **Restore original** (`还原官方版本`), and confirm to return to the original English build without the ring or slider.
 
 > [!IMPORTANT]
 > On first apply, the tool saves an unmodified copy at `resources/app.asar.clean-backup` inside the Antigravity folder. Keep that file if you want to restore later.
@@ -76,7 +76,7 @@ In the development build, choose the setup language at the top right. Turkish, V
 
 ### Thinking-effort slider
 
-Enable **Thinking-effort slider** (`思考强度滑块`) and apply your changes. In Antigravity's model picker, supported models show an inline slider above **View Usage** — drag across detents to preview and release to apply.
+Enable **Thinking effort slider** (`思考强度滑块`) and apply your changes. In Antigravity's model picker, supported models show an inline slider above **View Usage** — drag across detents to preview and release to apply.
 
 <p align="center">
   <a href="./docs/images/thinking-effort-high.webp">

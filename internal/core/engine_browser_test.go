@@ -111,6 +111,8 @@ func TestTranslationInBrowser(t *testing.T) {
 		{"vi", "testdata/engine-tr-vi.html"},
 		{"ar", "testdata/engine-ar.html"},
 		{"it", "testdata/engine-it.html"},
+		{"id", "testdata/engine-id.html"},
+		{"pl", "testdata/engine-pl.html"},
 	} {
 		t.Run(example.code, func(t *testing.T) {
 			loc, err := store.LoadLocale(example.code)
@@ -147,7 +149,7 @@ func TestRetryMessageInEveryLanguage(t *testing.T) {
 
 func TestEffortSliderInBrowser(t *testing.T) {
 	store := newTestService(t).store
-	for _, code := range []string{DefaultLocale, "ar"} {
+	for _, code := range []string{DefaultLocale, "it", "ar", "id", "pl"} {
 		t.Run(code, func(t *testing.T) {
 			loc, err := store.LoadLocale(code)
 			if err != nil {

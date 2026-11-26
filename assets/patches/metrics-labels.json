@@ -194,5 +194,33 @@
     "speed": "متوسط سرعة الإخراج",
     "cache": "معدل إصابة ذاكرة التخزين المؤقت",
     "firstToken": "زمن ظهور أول رمز"
+  },
+  "id": {
+    "quota": "Sisa kuota model",
+    "loadingQuota": "Memuat kuota…",
+    "quotaUnavailable": "Kuota tidak tersedia",
+    "resets": "Waktu reset",
+    "weekly": "Mingguan",
+    "daily": "Harian",
+    "title": "Metrik sesi",
+    "context": "Penggunaan konteks",
+    "tokenUnit": "token",
+    "speed": "Kecepatan keluaran rata-rata",
+    "cache": "Rasio hit cache",
+    "firstToken": "Waktu hingga token pertama"
+  },
+  "pl": {
+    "quota": "Pozostały limit modelu",
+    "loadingQuota": "Wczytywanie limitu…",
+    "quotaUnavailable": "Limit niedostępny",
+    "resets": "Odnowienie limitu",
+    "weekly": "Tygodniowo",
+    "daily": "Dziennie",
+    "title": "Statystyki sesji",
+    "context": "Wykorzystanie kontekstu",
+    "tokenUnit": "tok.",
+    "speed": "Średnia prędkość generowania",
+    "cache": "Odsetek trafień w pamięci podręcznej",
+    "firstToken": "Czas do pierwszego tokena"
   }
 }

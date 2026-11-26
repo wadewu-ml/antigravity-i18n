@@ -2,16 +2,16 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Значок Regravity">
   <h1>Regravity</h1>
   <p><em>Antigravity взлетает — Regravity возвращает его на ваш язык и под ваш контроль.</em></p>
-  <p>Переносимая утилита для <strong>Google Antigravity</strong> под Windows — 9 языков интерфейса, показатели сессии и квоты моделей, а также ползунок уровня рассуждений.</p>
+  <p>Переносимая утилита для <strong>Google Antigravity</strong> под Windows — 15 языков интерфейса, показатели сессии и квоты моделей, а также ползунок уровня рассуждений.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Скачать последнюю версию Regravity для Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Выпуски на GitHub"></a>
-    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Проверено с Antigravity App 2.35.1">
+    <img src="https://img.shields.io/badge/Antigravity-2.35.2_tested-18181B?style=flat" alt="Проверено с Antigravity App 2.35.2">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="Лицензия MIT"></a>
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <strong>Русский</strong> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <strong>Русский</strong> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
     </sub>
   </p>
 </div>
@@ -28,7 +28,7 @@
 
 ## Что внутри
 
-- **9 языков интерфейса без вмешательства в чаты** — Переводит настройки, элементы управления чатом, меню моделей, системные меню и запросы выхода (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`), не затрагивая ваш ввод и переписку.
+- **15 языков интерфейса без вмешательства в чаты** — Переводит настройки, элементы управления чатом, меню моделей, системные меню и запросы выхода (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`), не затрагивая ваш ввод и переписку.
 - **Показатели сессии и квоты** *(по желанию)* — Добавляет кольцо рядом с переключателем модели для просмотра остатка квот, местного времени сброса, занятого контекста, средней скорости вывода, доли попаданий в кеш и времени до первого токена.
 - **Ползунок уровня рассуждений** *(по желанию)* — Встраивает капсульный ползунок прямо в меню выбора модели для поддерживаемых моделей.
 - **Модульно и обратимо побайтно** — Оба переключателя работают независимо и с исходным английским интерфейсом. Официальную версию можно восстановить в любой момент из чистой резервной копии той же версии Antigravity.
@@ -38,7 +38,7 @@
 > [!TIP]
 > Китайские подписи в скобках соответствуют снимку экрана.
 
-В тестовой сборке язык окна настройки можно выбрать в правом верхнем углу. Для Antigravity добавлены турецкий, вьетнамский, итальянский и арабский.
+Язык окна настройки можно выбрать в правом верхнем углу.
 
 ### Применение настроек
 

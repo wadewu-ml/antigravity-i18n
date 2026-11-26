@@ -5,19 +5,19 @@
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="تنزيل الإصدار المستقر لنظام Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="الإصدارات على GitHub"></a>
-    <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="تم اختباره مع Antigravity 2.35.1">
+    <img src="https://img.shields.io/badge/Antigravity-2.35.2_tested-18181B?style=flat" alt="تم اختباره مع Antigravity 2.35.2">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="ترخيص MIT"></a>
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <strong>العربية</strong>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <strong>العربية</strong> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
     </sub>
   </p>
 </div>
 
 ## بدء الاستخدام
 
-يدعم الإصدار التجريبي العربية. ينزّل الزر أعلى الصفحة الإصدار المستقر. اختر **العربية** من قائمة اللغات أعلى نافذة Regravity لتغيير لغة الأداة نفسها.
+اختر **العربية** من قائمة اللغات أعلى نافذة Regravity لتغيير لغة الأداة نفسها.
 
 1. افتح `regravity.exe`. إذا كان المسار غير صحيح، فاضغط **تغيير الموقع** واختر المجلد الذي يحتوي على `Antigravity.exe`.
 2. في قسم **لغة Antigravity** اختر **العربية**. يمكنك تفعيل مقاييس الجلسة وشريط مستوى الاستدلال عند الحاجة. تعمل الميزتان أيضًا مع الواجهة الإنجليزية.

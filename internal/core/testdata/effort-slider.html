@@ -48,6 +48,12 @@ verify(async () => {
     check('slider is above usage',host?.hasAttribute('data-ag-effort-slider'),true);
     const input = host.shadowRoot.querySelector('input');
     const arabic = document.documentElement.lang === 'ar';
+    const labels = {
+      'zh-CN':['思考强度','中','极高'], ar:['مستوى الاستدلال','متوسط','عالٍ جدًا'],
+      it:['Livello di ragionamento','Medio','Molto alto'],
+      id:['Tingkat penalaran','Sedang','Sangat tinggi'], pl:['Poziom rozumowania','Średni','Bardzo wysoki']
+    }[document.documentElement.lang];
+    check('localized slider title', host.shadowRoot.querySelector('label').textContent, labels[0]);
     if (arabic) check('effort increases from left to right', getComputedStyle(input).direction, 'ltr');
     input.focus();
     check('focus never outlines the full track',getComputedStyle(host.shadowRoot.querySelector('.track')).outlineStyle,'none');
@@ -60,10 +66,10 @@ verify(async () => {
     check('endpoint mark lines up with maximum',marks.lastElementChild.style.left,'100%');
     check('ordinary level covers the aurora',host.style.getPropertyValue('--reveal'),'0%');
     check('native selected level',input.value,'1');
-    check('localized accessible value',input.getAttribute('aria-valuetext'),arabic ? 'متوسط' : '中');
+    check('localized accessible value',input.getAttribute('aria-valuetext'),labels[1]);
     input.value='3'; input.dispatchEvent(new Event('input'));
     check('drag previews without switching',calls.length,0);
-    check('preview shows extra high',input.getAttribute('aria-valuetext'),arabic ? 'عالي جدًا' : '极高');
+    check('preview shows extra high',input.getAttribute('aria-valuetext'),labels[2]);
     check('drag previews the maximum track',host.hasAttribute('data-maximum'),true);
     check('final detent fully uncovers the aurora',host.style.getPropertyValue('--reveal'),'100%');
     input.dispatchEvent(new Event('change'));
