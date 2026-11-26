@@ -1,10 +1,11 @@
-# antigravity-i18n
+# Regravity
 
-This portable Windows tool localizes the Antigravity desktop interface and adds optional session metrics. The GUI and CLI share the service in `internal/core`.
+This portable Windows tool localizes the Antigravity desktop interface and adds optional session metrics and a thinking-effort slider. The GUI and CLI share the service in `internal/core`.
 
 ## Development
 
 - Scope shutdown and archive writes to the selected installation. Preserve the clean backup, installation lock, archive checks, and atomic replacement used by apply and restore. Keep forced shutdown an explicit choice.
+- Let automatic detection fill an unset installation path. If a status request finishes after the user selects another installation, keep the user's selection in both the Go backend and the GUI.
 - Describe and change translations according to the UI paths the patch actually reaches. Preserve user input and conversation content. Keep session metrics optional. Read the local session database in read-only mode inside Antigravity so users can close the setup tool after applying their settings.
 - Build the Windows executable with `.\build.ps1 -Target gui`. The script reads `VERSION` and embeds the window icon. Run the relevant Go tests for code changes. For an archive round trip using the real app, set `ANTIGRAVITY_ASAR` to a clean official archive and run `go test -count=1 ./...`. The test uses a copy.
 

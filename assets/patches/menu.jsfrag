@@ -1,9 +1,9 @@
-/* antigravity-i18n:begin */
+/* regravity:begin */
 /**
  * Native application menu translation. Locale neutral: the label map is
  * injected as MENU_DATA when the fragment is built.
  *
- * Delimited by antigravity-i18n:begin/end so a re-run replaces the whole block
+ * Delimited by regravity:begin/end so a re-run replaces the whole block
  * rather than appending another copy of this comment.
  */
 const agMenuLabels = new Map(Object.entries(MENU_DATA_PLACEHOLDER));
@@ -20,4 +20,4 @@ function translateMenu(menu) {
     };
     menu.items.forEach(visit);
 }
-/* antigravity-i18n:end */
+/* regravity:end */

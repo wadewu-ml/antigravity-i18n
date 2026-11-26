@@ -100,20 +100,13 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	}
 	s.progress("正在准备干净备份", p.CleanBackupPath)
 
-	backupPath := createUniqueBackupPath(p.ResourcesDir, fmt.Sprintf("app.asar.bak-%s", formatTimestamp()))
-	if err := copyFileExclusive(p.AsarPath, backupPath); err != nil {
-		return nil, txn.failWithRollback("creating a safety backup", err)
-	}
-	noteBackupAccumulation(s, p.ResourcesDir)
-	s.progress("已创建安全备份", backupPath)
-
 	source := p.AsarPath
 	if english {
 		// Start with the verified original to remove previous locale changes,
 		// including the native menus and secondary windows.
 		source = p.CleanBackupPath
 	}
-	staged, err := buildPatchedArchive(source, p.ResourcesDir, locale, patch)
+	staged, err := s.store.buildPatchedArchive(source, p.ResourcesDir, locale, patch)
 	if err != nil {
 		return nil, txn.failWithRollback("building the patched archive", err)
 	}
@@ -128,22 +121,37 @@ func (s *Service) ApplyLocale(opts Options) (*ApplyResult, error) {
 	if err != nil {
 		return nil, txn.failWithRollback("verifying the patched archive", err)
 	}
-	s.progress("正在写回 app.asar", p.AsarPath)
+	var backupPath string
+	if packedHash == initialHash {
+		if err := assertArchiveUnchanged(p.AsarPath, initialHash); err != nil {
+			return nil, txn.failWithRollback("checking the existing archive", err)
+		}
+		s.progress("设置已生效，无需写回", "")
+	} else {
+		backupPath = createUniqueBackupPath(p.ResourcesDir, fmt.Sprintf("app.asar.bak-%s", formatTimestamp()))
+		if err := copyFileExclusive(p.AsarPath, backupPath); err != nil {
+			return nil, txn.failWithRollback("creating a safety backup", err)
+		}
+		noteBackupAccumulation(s, p.ResourcesDir)
+		s.progress("已创建安全备份", backupPath)
 
-	if err := commitStagedFile(staged, p.AsarPath, func(candidate string) error {
-		running, err := s.appRunning(p)
-		if err != nil {
-			return err
+		s.progress("正在写回 app.asar", p.AsarPath)
+
+		if err := commitStagedFile(staged, p.AsarPath, func(candidate string) error {
+			running, err := s.appRunning(p)
+			if err != nil {
+				return err
+			}
+			if running {
+				return fmt.Errorf("Antigravity restarted during this operation. Close it and re-run")
+			}
+			if err := assertArchiveUnchanged(candidate, packedHash); err != nil {
+				return err
+			}
+			return assertArchiveUnchanged(p.AsarPath, initialHash)
+		}); err != nil {
+			return nil, txn.failWithRollback("installing the patched archive", err)
 		}
-		if running {
-			return fmt.Errorf("Antigravity restarted during this operation. Close it and re-run")
-		}
-		if err := assertArchiveUnchanged(candidate, packedHash); err != nil {
-			return err
-		}
-		return assertArchiveUnchanged(p.AsarPath, initialHash)
-	}); err != nil {
-		return nil, txn.failWithRollback("installing the patched archive", err)
 	}
 
 	writeState(p, locale.Language)
@@ -219,7 +227,7 @@ func (s *LocaleStore) buildLocalizationFragments(locale *Locale) (patchFragments
 
 // buildPatchedArchive stages the patched copy beside the destination, ready for
 // verification and an in-place commit.
-func buildPatchedArchive(srcPath, stageDir string, locale *Locale, patch patchFragments) (string, error) {
+func (s *LocaleStore) buildPatchedArchive(srcPath, stageDir string, locale *Locale, patch patchFragments) (string, error) {
 	arc, file, err := openArchive(srcPath)
 	if err != nil {
 		return "", err
@@ -250,14 +258,14 @@ func buildPatchedArchive(srcPath, stageDir string, locale *Locale, patch patchFr
 		{Path: "dist/preload.js", Data: []byte(newPreload)},
 	}
 	if locale.Language != EnglishLocale {
-		extra, err := buildLocalizedWindowPatches(arc, file, patch)
+		extra, err := s.buildLocalizedWindowPatches(arc, file, locale, patch)
 		if err != nil {
 			return "", err
 		}
 		patches = append(patches, extra...)
 	}
 
-	tmp, err := os.CreateTemp(stageDir, ".antigravity-i18n-stage-*.asar")
+	tmp, err := os.CreateTemp(stageDir, ".regravity-stage-*.asar")
 	if err != nil {
 		return "", err
 	}
@@ -275,7 +283,7 @@ func buildPatchedArchive(srcPath, stageDir string, locale *Locale, patch patchFr
 	return staged, nil
 }
 
-func buildLocalizedWindowPatches(arc *Archive, file *os.File, patch patchFragments) ([]Patch, error) {
+func (s *LocaleStore) buildLocalizedWindowPatches(arc *Archive, file *os.File, locale *Locale, patch patchFragments) ([]Patch, error) {
 	menu, err := arc.readFile(file, "dist/menu.js", arc.payloadSize)
 	if err != nil {
 		return nil, err
@@ -287,7 +295,11 @@ func buildLocalizedWindowPatches(arc *Archive, file *os.File, patch patchFragmen
 	patches := []Patch{{Path: "dist/menu.js", Data: []byte(newMenu)}}
 	// The IDE installer and SSH password prompt use separate windows and do
 	// not load the Hub preload. Older releases can omit either window.
-	for _, rel := range []string{"dist/ideInstall/wizardPreload.js", "dist/remote/sshPromptPreload.js"} {
+	for _, window := range []struct{ preload, page string }{
+		{"dist/ideInstall/wizardPreload.js", "dist/ideInstall/wizardHtml.js"},
+		{"dist/remote/sshPromptPreload.js", "dist/remote/sshPrompts.js"},
+	} {
+		rel := window.preload
 		if arc.lookup(rel) == nil {
 			continue
 		}
@@ -295,26 +307,45 @@ func buildLocalizedWindowPatches(arc *Archive, file *os.File, patch patchFragmen
 		if err != nil {
 			return nil, err
 		}
-		if rel == "dist/remote/sshPromptPreload.js" {
-			const promptPath = "dist/remote/sshPrompts.js"
-			prompt, err := arc.readFile(file, promptPath, arc.payloadSize)
+		fragment := patch.windowPreload
+		if arc.lookup(window.page) != nil {
+			page, err := arc.readFile(file, window.page, arc.payloadSize)
 			if err != nil {
 				return nil, err
 			}
-			// The message comes from the remote SSH process, so preserve it
-			// even when it happens to match a translated button label.
-			const original = `<div id="message"></div>`
-			const protected = `<div id="message" translate="no"></div>`
-			if !strings.Contains(string(prompt), original) && !strings.Contains(string(prompt), protected) {
-				return nil, fmt.Errorf("could not locate the SSH prompt message container in %s", promptPath)
+			// These windows render local HTML templates. Keep dynamic translation
+			// rules and restrict only the fixed dictionary to their page and bridge.
+			clean := splitAtInjectedBlock(string(source), &legacySpec{startMarkers: legacyEngineStartMarkers, endMarker: updaterAnchor})
+			sources := string(page) + "\n" + clean.head + clean.tail
+			windowLocale := *locale
+			windowLocale.Text = make(map[string]string)
+			for key, value := range locale.Text {
+				if strings.Contains(sources, key) {
+					windowLocale.Text[key] = value
+				}
 			}
-			promptSource := strings.ReplaceAll(string(prompt), original, protected)
-			if err := checkJavaScriptSyntax(promptPath, promptSource); err != nil {
+			fragment, err = s.buildPreloadFragment(&windowLocale)
+			if err != nil {
 				return nil, err
 			}
-			patches = append(patches, Patch{Path: promptPath, Data: []byte(promptSource)})
+			if rel == "dist/remote/sshPromptPreload.js" {
+				// The message comes from the remote SSH process, so preserve it
+				// even when it happens to match a translated button label.
+				const original = `<div id="message"></div>`
+				const protected = `<div id="message" translate="no"></div>`
+				if !strings.Contains(string(page), original) && !strings.Contains(string(page), protected) {
+					return nil, fmt.Errorf("could not locate the SSH prompt message container in %s", window.page)
+				}
+				promptSource := strings.ReplaceAll(string(page), original, protected)
+				if err := checkJavaScriptSyntax(window.page, promptSource); err != nil {
+					return nil, err
+				}
+				patches = append(patches, Patch{Path: window.page, Data: []byte(promptSource)})
+			}
+		} else if rel == "dist/remote/sshPromptPreload.js" {
+			return nil, fmt.Errorf("cannot locate the SSH prompt page %s", window.page)
 		}
-		patched := patchPreload(string(source), patch.windowPreload)
+		patched := patchPreload(string(source), fragment)
 		if err := checkJavaScriptSyntax(rel, patched); err != nil {
 			return nil, err
 		}

@@ -38,7 +38,7 @@
       3: {used: 3000, limit: 10000, speed: 33, cacheRate: 0, firstToken: 1},
       4: {used: 4000, limit: 10000, speed: 44, cacheRate: 0.25, firstToken: 2},
     };
-    let quotaCalls = 0;
+    let quotaCalls = 0, metricCalls = 0;
     let quotaReply = [{name: 'Gemini Models', buckets: [
       {name: '', window: 'weekly', fraction: 0.934, reset: null},
       {name: 'Five Hour Limit Remaining', window: '', fraction: 1, reset: '2026-11-25T12:00:00Z'},
@@ -48,11 +48,12 @@
     ]}];
     window.require = () => ({ ipcRenderer: {
       invoke: async (channel, id) => {
-        if (channel === 'antigravity-i18n:model-quota') {
+        if (channel === 'regravity:model-quota') {
           quotaCalls++;
           return quotaReply;
         }
-        check('requests use the metrics channel', channel, 'antigravity-i18n:session-metrics');
+        metricCalls++;
+        check('requests use the metrics channel', channel, 'regravity:session-metrics');
         return metricsByID[id[0]] ?? null;
       },
     } });
@@ -71,6 +72,21 @@
       const values = (id) => [...detailFor(id).querySelectorAll('dd')].map(el => el.textContent);
       await settle(150);
       check('one ring in each conversation pane', document.querySelectorAll('.ai18n-usage-control').length, 4);
+      const unrelated = document.body.appendChild(document.createElement('span'));
+      const calls = metricCalls;
+      let scans = 0;
+      const query = document.querySelectorAll.bind(document);
+      document.querySelectorAll = selector => {
+        if (selector.includes('.agy-composer-footer')) scans++;
+        return query(selector);
+      };
+      for (let i = 0; i < 8; i++) {
+        unrelated.hidden = !unrelated.hidden;
+        await settle(30);
+      }
+      document.querySelectorAll = query;
+      check('unrelated visibility changes do not scan the page', scans, 0);
+      check('unrelated visibility changes do not sample metrics', metricCalls, calls);
       check('left pane usage', progress('left'), '10%');
       check('right pane missing a context limit', values('right').slice(0, 2).join('|'), '≈2k tokens|22 tok/s');
       check('side question uses its own data', progress('side'), '30%');
@@ -120,7 +136,7 @@
       Object.assign(metricsByID[1], {speed: 19, used: 40681, limit: 512000});
       metricsByID[2].used = 999;
       document.querySelector('[data-testid="input-cancel-button"]').remove();
-      await settle(100);
+      await settle(4100);
       check('generation end refreshes speed', values('left')[1], '19 tok/s');
       check('large token counts use decimal thousands', values('left')[0], '≈7.9% · 40.7k / 512k tokens');
       check('hover exposes the full token counts', detail.querySelector('dd').title, '40,681 / 512,000 tokens');

@@ -12,12 +12,12 @@ import (
 
 // stateMarkerName is the file the tool writes to record which language it last
 // installed.
-const stateMarkerName = "antigravity-i18n-state.json"
+const stateMarkerName = "regravity-state.json"
 
 // legacyStateMarkerNames are markers written before the tool was renamed. They
 // are read as a fallback so an existing install does not lose its recorded
 // language, and removed once the current marker is in place.
-var legacyStateMarkerNames = []string{"polygravity-state.json", "antigravity-zh-state.json"}
+var legacyStateMarkerNames = []string{"antigravity-i18n-state.json", "polygravity-state.json", "antigravity-zh-state.json"}
 
 const (
 	antigravityExe         = "Antigravity.exe"

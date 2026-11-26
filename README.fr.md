@@ -1,22 +1,23 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Icône antigravity-i18n">
-  <h1>antigravity-i18n</h1>
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Icône Regravity">
+  <h1>Regravity</h1>
   <p>Packs de langue, métriques de session et quotas de modèles, et curseur d’effort de raisonnement pour Google Antigravity sous Windows.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Télécharger pour Windows x64</strong></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>Télécharger pour Windows x64</strong></a>
     ·
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">Versions</a>
+    <a href="https://github.com/wadewu-ml/regravity/releases">Versions</a>
     ·
     Testé avec <strong>Antigravity App 2.35.1</strong>
   </p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <strong>Français</strong> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
   </p>
+  <p>antigravity-i18n devient Regravity. Le téléchargement ci-dessus correspond à la v4.2.3. À la sortie de la première version de Regravity, téléchargez <code>regravity.exe</code> manuellement. Vos correctifs et votre préférence de mise à jour seront conservés. Depuis le changement de nom du dépôt, la v4.2.3 peut afficher une erreur de comparaison des versions. Consultez les publications via le lien ci-dessus.</p>
 </div>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="Fenêtre de configuration affichant Antigravity v2.35.1, le chinois simplifié sélectionné ainsi que les métriques de session et le curseur activés">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Fenêtre de configuration affichant Antigravity v2.35.2, le chinois simplifié sélectionné ainsi que les métriques de session et le curseur activés">
   </a>
 </p>
 
@@ -25,7 +26,7 @@
 - **9 langues dans un seul EXE portable** — Traduit les réglages, les commandes du chat, les menus de modèles, les menus natifs et les confirmations de fermeture en chinois simplifié, chinois traditionnel, japonais, coréen, allemand, espagnol, français, portugais du Brésil et russe sans modifier vos messages ni vos saisies.
 - **Métriques de session et quotas (facultatif)** — Ajoute un anneau près du sélecteur de modèle pour consulter les quotas restants, les heures locales de réinitialisation, le contexte utilisé, le débit moyen, le taux de réussite du cache et le délai avant le premier jeton.
 - **Curseur d’effort de raisonnement (facultatif)** — Ajoute un curseur capsule intégré dans le sélecteur de modèles pour les modèles compatibles.
-- **Indépendant et réversible à l’octet près** — Les deux interrupteurs fonctionnent indépendamment et avec l’interface anglaise d’origine. Une fois appliqués, vous pouvez fermer l’outil et restaurer la version officielle à tout moment.
+- **Indépendant et réversible à l’octet près** — Les deux interrupteurs fonctionnent indépendamment et avec l’interface anglaise d’origine. Une fois appliqués, vous pouvez fermer l’outil et restaurer la version officielle avec une sauvegarde intacte de la même version d’Antigravity.
 
 ## Démarrage rapide
 
@@ -81,7 +82,7 @@ Activez **Curseur d’effort de raisonnement** (`思考强度滑块`) et appliqu
 ## Mises à jour
 
 - **Après une mise à jour d’Antigravity** — Si la traduction ou les options disparaissent, vérifiez la version prise en charge en haut de cette page puis réappliquez vos réglages.
-- **Mises à jour automatiques de l’outil** — Au démarrage, l’outil vérifie GitHub toutes les 24 heures. Un point bleu sur le menu en haut à droite (`···`) signale une nouvelle version ; ouvrez le menu pour lire les notes et confirmer le téléchargement et le redémarrage depuis le même EXE. Vous pouvez désactiver la vérification automatique dans **À propos** (`关于`) ou vérifier manuellement (`检查更新`). Après la mise à jour, cliquez sur **Réappliquer** (`重新应用`) pour appliquer les nouvelles traductions.
+- **Mises à jour automatiques de l’outil** — Au démarrage, le résultat de la dernière vérification détermine si l’outil consulte GitHub. Après une vérification réussie, il attend au moins 24 heures. Un point bleu sur le menu en haut à droite (`···`) signale une nouvelle version ; ouvrez le menu pour lire les notes et confirmer le téléchargement et le redémarrage depuis le même EXE. Vous pouvez désactiver la vérification automatique dans **À propos** (`关于`) ou vérifier manuellement (`检查更新`). Après la mise à jour, cliquez sur **Réappliquer** (`重新应用`) pour appliquer les nouvelles traductions.
 
 ## CLI PowerShell
 
@@ -105,7 +106,7 @@ Nécessite Windows, PowerShell 7, Go 1.26.3+ et la CLI Wails v2 :
 .\build.ps1 -Target gui
 ```
 
-L’exécutable est généré dans `build/bin/antigravity-i18n.exe`.
+L’exécutable est généré dans `build/bin/regravity.exe`.
 
 ## Dépannage
 

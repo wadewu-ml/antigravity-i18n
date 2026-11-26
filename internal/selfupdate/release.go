@@ -19,9 +19,9 @@ import (
 )
 
 const (
-	Repository = "https://github.com/wadewu-ml/antigravity-i18n"
-	tagAPI     = "https://api.github.com/repos/wadewu-ml/antigravity-i18n/releases/tags/"
-	exeAsset   = "antigravity-i18n.exe"
+	Repository = "https://github.com/wadewu-ml/regravity"
+	tagAPI     = "https://api.github.com/repos/wadewu-ml/regravity/releases/tags/"
+	exeAsset   = "regravity.exe"
 	sumsAsset  = "SHA256SUMS.txt"
 )
 
@@ -77,7 +77,7 @@ func request(ctx context.Context, method, url string) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "antigravity-i18n")
+	req.Header.Set("User-Agent", "Regravity")
 	res, err := client.Do(req)
 	if err != nil {
 		return nil, err

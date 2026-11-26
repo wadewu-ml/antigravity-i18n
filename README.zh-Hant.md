@@ -1,22 +1,23 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n 圖示">
-  <h1>antigravity-i18n</h1>
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Regravity 圖示">
+  <h1>Regravity</h1>
   <p>為 Windows 版 Google Antigravity 提供九種介面語言套件、會話指標與模型額度面板，以及思考強度滑桿。</p>
   <p>
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>下載 Windows x64 版</strong></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>下載 Windows x64 版</strong></a>
     ·
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">版本記錄</a>
+    <a href="https://github.com/wadewu-ml/regravity/releases">版本記錄</a>
     ·
     已驗證適用 <strong>Antigravity App 2.35.1</strong>
   </p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
   </p>
+  <p>antigravity-i18n 已更名為 Regravity。上方提供 v4.2.3。首個 Regravity 版本發布後，請手動下載 <code>regravity.exe</code>。新版會沿用現有修補內容和自動更新設定。儲存庫更名後，v4.2.3 的內建檢查可能提示無法比較版本號，可從上方「版本記錄」查看更新。</p>
 </div>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="antigravity-i18n 設定視窗，顯示 Antigravity v2.35.1、已選取簡體中文，並同時開啟會話指標與思考強度滑桿">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Regravity 設定視窗，顯示 Antigravity v2.35.2、已選取簡體中文，並同時開啟會話指標與思考強度滑桿">
   </a>
 </p>
 
@@ -25,7 +26,7 @@
 - **單檔內建 9 種介面語言** — 翻譯設定、對話區控制項、模型選單、原生選單與結束提示，支援簡體中文、繁體中文、日文、韓文、德文、西班牙文、法文、巴西葡萄牙文和俄文，不改動使用者輸入與對話內容。
 - **可選會話指標與模型額度** — 在模型選擇器右側新增圓環，懸停即可查看模型剩餘額度、本地重設時間、已用上下文、平均輸出速度、快取命中率與首個 token 延遲。
 - **可選思考強度滑桿** — 在模型選單中為支援調節的模型新增膠囊滑桿，拖曳即可切換思考強度。
-- **獨立組合，逐位元組還原** — 兩項開關可分別開啟，也支援搭配官方英文介面；套用後即可關閉本工具，隨時可一鍵還原官方版本。
+- **獨立組合，逐位元組還原** — 兩項開關可分別開啟，也支援搭配官方英文介面；套用後即可關閉本工具，保留與目前 Antigravity 版本相符的乾淨備份即可逐位元組還原。
 
 ## 快速上手
 
@@ -81,7 +82,7 @@
 ## 更新說明
 
 - **Antigravity 更新後** — 若翻譯或增強元件消失，請先對照本頁頂端的適用版本，再重新開啟工具套用設定即可。
-- **工具自動檢查更新** — 開啟工具時每 24 小時自動檢查一次 GitHub 發布；右上角選單（`···`）出現藍點表示有新版本，點開可查看更新說明並就地下載重啟。可在 **關於**（`关于`）關閉自動檢查，或隨時手動點擊 **檢查更新**（`检查更新`）。工具更新後，請再點一次 **重新套用**（`重新应用`）將新譯文套用到 Antigravity。
+- **工具自動檢查更新** — 啟動時根據上次檢查結果決定是否查詢 GitHub。成功後至少間隔 24 小時再檢查。右上角選單（`···`）出現藍點表示有新版本，點開可查看更新說明並就地下載重啟。可在 **關於**（`关于`）關閉自動檢查，或隨時手動點擊 **檢查更新**（`检查更新`）。工具更新後，請再點一次 **重新套用**（`重新应用`）將新譯文套用到 Antigravity。
 
 ## 命令列用法
 
@@ -105,7 +106,7 @@
 .\build.ps1 -Target gui
 ```
 
-產物位於 `build/bin/antigravity-i18n.exe`。
+產物位於 `build/bin/regravity.exe`。
 
 ## 常見問題
 

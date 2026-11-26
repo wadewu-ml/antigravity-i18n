@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"antigravity-i18n/internal/core"
+	"regravity/internal/core"
 )
 
 // displayLocales lists the locale packs with coverage, for the CLI.

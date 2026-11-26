@@ -7,7 +7,8 @@ import (
 	"strings"
 )
 
-const sessionMetricsMarker = "/* antigravity-i18n:session-metrics */"
+const sessionMetricsMarker = "/* regravity:session-metrics */"
+const legacySessionMetricsMarker = "/* antigravity-i18n:session-metrics */"
 const metricsLocalePlaceholder = "METRICS_LOCALE_PLACEHOLDER"
 
 func (s *LocaleStore) addSessionMetrics(patch *patchFragments, loc *Locale) error {

@@ -1,3 +1,5 @@
+//go:build !cli
+
 package main
 
 import (
@@ -36,12 +38,16 @@ func enterGUI(restarting bool) (release func(), err error) {
 		if !errors.Is(err, windows.ERROR_ALREADY_EXISTS) {
 			return nil, fmt.Errorf("无法打开窗口锁：%w", err)
 		}
-		windows.CloseHandle(h)
 
 		hwnd, _, _ := findWindow.Call(uintptr(unsafe.Pointer(className)), 0)
 		if windows.IsWindowVisible(windows.HWND(hwnd)) {
 			var pid uint32
-			if _, err := windows.GetWindowThreadProcessId(windows.HWND(hwnd), &pid); err == nil && pid != updaterPID {
+			if _, err := windows.GetWindowThreadProcessId(windows.HWND(hwnd), &pid); err == nil {
+				if restarting && pid == updaterPID {
+					// Both processes retain the instance handle during the handoff.
+					return func() { windows.CloseHandle(h) }, nil
+				}
+				windows.CloseHandle(h)
 				// This newly launched process can activate the window on behalf of
 				// the user who just double-clicked it. Preserve maximised windows.
 				if minimised, _, _ := isIconic.Call(hwnd); minimised != 0 {
@@ -52,9 +58,8 @@ func enterGUI(restarting bool) (release func(), err error) {
 				return nil, nil
 			}
 		}
-		// The updater starts its replacement before quitting. Let it release
-		// the lock instead of activating the window that is about to close.
-		if !restarting && time.Now().After(deadline) {
+		windows.CloseHandle(h)
+		if time.Now().After(deadline) {
 			return nil, errors.New("已打开的工具窗口暂时没有响应。")
 		}
 		time.Sleep(50 * time.Millisecond)

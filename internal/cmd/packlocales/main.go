@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"antigravity-i18n/internal/core"
+	"regravity/internal/core"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-/* antigravity-i18n:begin */
+/* regravity:begin */
 // Native quit confirmation is owned by the main process, outside the DOM.
 (function installLocaleDialogs() {
     const labels = new Map(Object.entries(DIALOG_DATA_PLACEHOLDER));
@@ -27,4 +27,4 @@
         };
     }
 })();
-/* antigravity-i18n:end */
+/* regravity:end */

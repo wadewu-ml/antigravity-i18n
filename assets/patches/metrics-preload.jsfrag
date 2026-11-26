@@ -9,9 +9,10 @@
     const sideContent = ':is([data-testid="side-question-tab-content"], [data-media-drop-scope="subpane"])';
     const sideScope = ':is([data-testid="side-question-tab-content"], [data-testid="side-question-tab-composer"], [data-side-panel-composer], [data-media-drop-scope="subpane"])';
     const sideTab = ':is([data-active-tab-id^="side_question__"], [data-active-tab-id^="subagent_convo__"])';
-    const cancelButton = '[data-testid="input-cancel-button"]';
-    const scopeSelector = [footerSelector, modelSelector, mainView, sideView, sideScope, sideTab, cancelButton].join(', ');
+    const scopeSelector = [footerSelector, modelSelector, mainView, sideView, sideScope, sideTab, '[data-testid="conversation-header"], nav, header, [role="toolbar"]'].join(', ');
     const views = new Map();
+    const anchorVisibility = new Map();
+    let lastPath = '';
     const requests = new Map();
     const count = new Intl.NumberFormat(labels.language);
     const thousands = new Intl.NumberFormat(labels.language, { maximumFractionDigits: 1 });
@@ -236,7 +237,7 @@
             refreshQuota(++quotaEpoch);
         }
         async function refreshQuota(epoch) {
-            const groups = await ipcRenderer.invoke('antigravity-i18n:model-quota').catch(() => null);
+            const groups = await ipcRenderer.invoke('regravity:model-quota').catch(() => null);
             if (epoch !== quotaEpoch) return;
             renderQuota(quota, groups);
             position();
@@ -305,17 +306,40 @@
         });
     }
 
-    function requestMetrics(id) {
-        if (!requests.has(id)) {
-            requests.set(id, ipcRenderer.invoke('antigravity-i18n:session-metrics', id)
-                .catch(() => null).finally(() => requests.delete(id)));
+    const sampleInterval = 2000;
+
+    function sample(anchor, view) {
+        const id = view.id;
+        if (!id || document.hidden || view.pending) return;
+        let entry = requests.get(id);
+        if (!entry || (!entry.pending && Date.now() - entry.started >= sampleInterval)) {
+            entry = { started: Date.now(), pending: true };
+            entry.result = ipcRenderer.invoke('regravity:session-metrics', id)
+                .catch(() => null).finally(() => { entry.pending = false; });
+            requests.set(id, entry);
         }
-        return requests.get(id);
+        if (view.sample === entry) return;
+        view.sample = entry;
+        view.pending = true;
+        entry.result.then((metrics) => {
+            view.pending = false;
+            if (metrics && views.get(anchor) === view && view.button.isConnected) setMetrics(view, metrics);
+        });
     }
 
     function refresh() {
         if (document.hidden) return;
-        const footers = Array.from(document.querySelectorAll(footerSelector)).filter(visible);
+        lastPath = location.pathname;
+        anchorVisibility.clear();
+        const footers = [];
+        const sideViews = [];
+        for (const anchor of document.querySelectorAll(footerSelector + ', ' + sideView)) {
+            const shown = visible(anchor);
+            anchorVisibility.set(anchor, shown);
+            if (!shown) continue;
+            if (anchor.matches(footerSelector)) footers.push(anchor);
+            else sideViews.push(anchor);
+        }
         const onlyMainFooter = footers.filter((footer) => !footer.closest(sideScope + ', ' + sideView)).length === 1;
         const targets = new Map();
         for (const footer of footers) {
@@ -324,8 +348,8 @@
             if (slot) targets.set(footer, { id, slot });
         }
         // A read-only subagent pane can have a conversation without a composer.
-        for (const side of document.querySelectorAll(sideView)) {
-            if (!visible(side) || side.querySelector(footerSelector)) continue;
+        for (const side of sideViews) {
+            if (side.querySelector(footerSelector)) continue;
             const id = nodeId(side);
             const content = side.closest(sideContent);
             const hasComposer = content && footers.some((footer) => content.contains(footer) && targets.get(footer)?.id === id);
@@ -349,12 +373,11 @@
             if (before !== view.button && (view.button.parentElement !== slot.parent || view.button.nextElementSibling !== before)) {
                 slot.parent.insertBefore(view.button, before);
             }
-            if (!id || view.pending) continue;
-            view.pending = true;
-            requestMetrics(id).then((metrics) => {
-                view.pending = false;
-                if (metrics && views.get(anchor) === view && view.button.isConnected) setMetrics(view, metrics);
-            });
+            sample(anchor, view);
+        }
+        const activeIds = new Set(Array.from(targets.values(), target => target.id));
+        for (const id of requests.keys()) {
+            if (!activeIds.has(id)) requests.delete(id);
         }
     }
 
@@ -378,16 +401,21 @@
                 event.stopPropagation();
             }
         }, true);
-        const observer = new MutationObserver((changes) => {
+        const touchesControls = node => node.nodeType === 1 &&
+            (node.matches(scopeSelector) || node.querySelector(scopeSelector));
+        const observer = new MutationObserver(changes => {
             for (const change of changes) {
-                if (change.type === 'attributes' && change.target.closest('.ai18n-usage-control, .ai18n-usage-detail')) continue;
-                if (change.type === 'attributes' || [...change.addedNodes, ...change.removedNodes].some((node) =>
-                    node.nodeType === 1 && (node.matches(scopeSelector) || node.querySelector(scopeSelector)))) {
-                    scheduleRefresh();
-                    return;
+                if (change.type === 'attributes') {
+                    if (change.attributeName === 'hidden' && !touchesControls(change.target)) continue;
+                } else if (![...change.addedNodes, ...change.removedNodes].some(touchesControls) &&
+                    ![...change.removedNodes].some(node => node.matches?.('.ai18n-usage-control'))) {
+                    continue;
                 }
+                scheduleRefresh();
+                return;
             }
         });
+        window.addEventListener('resize', scheduleRefresh);
         observer.observe(document.body, {
             childList: true,
             subtree: true,
@@ -400,7 +428,15 @@
         });
         // Some model calls write their metadata after the stop button disappears.
         // The main process checks file timestamps before querying SQLite again.
-        setInterval(scheduleRefresh, 2000);
+        setInterval(() => {
+            if (document.hidden) return;
+            // CSS can hide a pane and history can change the active route without a DOM mutation.
+            if (location.pathname !== lastPath || [...anchorVisibility].some(([node, shown]) => visible(node) !== shown)) {
+                scheduleRefresh();
+                return;
+            }
+            for (const [anchor, view] of views) sample(anchor, view);
+        }, sampleInterval);
         scheduleRefresh();
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });

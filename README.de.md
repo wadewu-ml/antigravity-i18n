@@ -1,22 +1,23 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n-Symbol">
-  <h1>antigravity-i18n</h1>
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Regravity-Symbol">
+  <h1>Regravity</h1>
   <p>Sprachpakete, Sitzungsmetriken & Modellkontingente sowie ein Regler für den Denkaufwand für Google Antigravity unter Windows.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Für Windows x64 herunterladen</strong></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>Für Windows x64 herunterladen</strong></a>
     ·
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">Versionen</a>
+    <a href="https://github.com/wadewu-ml/regravity/releases">Versionen</a>
     ·
     Getestet mit <strong>Antigravity App 2.35.1</strong>
   </p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <strong>Deutsch</strong> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
   </p>
+  <p>antigravity-i18n heißt jetzt Regravity. Oben steht v4.2.3 zum Download. Laden Sie bei der ersten Regravity-Veröffentlichung <code>regravity.exe</code> manuell herunter. Vorhandene Patches und die Einstellung für automatische Updates werden übernommen. Seit der Umbenennung kann v4.2.3 beim Versionsvergleich einen Fehler melden. Die verfügbaren Versionen finden Sie über den Link oben.</p>
 </div>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="Einstellungsfenster mit Antigravity v2.35.1, vereinfachtem Chinesisch sowie aktivierten Sitzungsmetriken und Denkaufwand-Regler">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Einstellungsfenster mit Antigravity v2.35.2, vereinfachtem Chinesisch sowie aktivierten Sitzungsmetriken und Denkaufwand-Regler">
   </a>
 </p>
 
@@ -25,7 +26,7 @@
 - **9 Oberflächensprachen in einer portablen EXE** — Übersetzt Einstellungen, Chat-Bedienelemente, Modellmenüs, native Menüs und Rückfragen beim Beenden ins vereinfachte und traditionelle Chinesisch, Japanische, Koreanische, Deutsche, Spanische, Französische, brasilianische Portugiesisch und Russische, ohne Ihre Eingaben oder Unterhaltungen zu verändern.
 - **Optionale Sitzungsmetriken & Modellkontingente** — Ergänzt neben der Modellauswahl einen Ring für verbleibende Kontingente, lokale Rücksetzzeiten, Kontextbelegung, mittlere Ausgaberate, Cache-Trefferrate und Zeit bis zum ersten Token.
 - **Optionaler Regler für den Denkaufwand** — Fügt in der Modellauswahl einen Kapselregler für Modelle mit wählbarem Denkaufwand hinzu.
-- **Unabhängig & bytegenau wiederherstellbar** — Beide Schalter funktionieren unabhängig voneinander und auch mit der englischen Originaloberfläche. Nach dem Anwenden können Sie das Tool schließen und jederzeit die Originalversion wiederherstellen.
+- **Unabhängig & bytegenau wiederherstellbar** — Beide Schalter funktionieren unabhängig voneinander und auch mit der englischen Originaloberfläche. Nach dem Anwenden können Sie das Tool schließen und mit einer unveränderten Sicherung derselben Antigravity-Version die Originalversion wiederherstellen.
 
 ## Schnellstart
 
@@ -81,7 +82,7 @@ Aktivieren Sie **Regler für den Denkaufwand** (`思考强度滑块`) und wenden
 ## Updates
 
 - **Nach einem Antigravity-Update** — Falls Übersetzung oder Erweiterungen verschwinden, prüfen Sie oben die getestete Version und wenden Sie Ihre Einstellungen im Tool erneut an.
-- **Automatische Tool-Updates** — Beim Start sucht das Tool alle 24 Stunden auf GitHub nach Updates. Ein blauer Punkt am Menü oben rechts (`···`) zeigt eine neue Version an; dort können Sie die Hinweise lesen und das Update direkt am bisherigen EXE-Pfad laden und neu starten. Die automatische Suche lässt sich unter **Info** (`关于`) abschalten, die manuelle Suche (`检查更新`) bleibt verfügbar. Klicken Sie nach dem Update auf **Erneut anwenden** (`重新应用`), um neue Übersetzungen zu übernehmen.
+- **Automatische Tool-Updates** — Beim Start entscheidet das Ergebnis der letzten Prüfung, ob GitHub abgefragt wird. Nach erfolgreicher Prüfung vergehen mindestens 24 Stunden. Ein blauer Punkt am Menü oben rechts (`···`) zeigt eine neue Version an; dort können Sie die Hinweise lesen und das Update direkt am bisherigen EXE-Pfad laden und neu starten. Die automatische Suche lässt sich unter **Info** (`关于`) abschalten, die manuelle Suche (`检查更新`) bleibt verfügbar. Klicken Sie nach dem Update auf **Erneut anwenden** (`重新应用`), um neue Übersetzungen zu übernehmen.
 
 ## PowerShell-CLI
 
@@ -105,7 +106,7 @@ Erfordert Windows, PowerShell 7, Go 1.26.3+ und die Wails-v2-CLI:
 .\build.ps1 -Target gui
 ```
 
-Die fertige Datei liegt unter `build/bin/antigravity-i18n.exe`.
+Die fertige Datei liegt unter `build/bin/regravity.exe`.
 
 ## Fehlerbehebung
 

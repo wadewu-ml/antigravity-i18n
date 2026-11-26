@@ -16,7 +16,7 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-const archiveHolderEnv = "ANTIGRAVITY_I18N_TEST_ARCHIVE_HOLDER"
+const archiveHolderEnv = "REGRAVITY_TEST_ARCHIVE_HOLDER"
 
 func TestMain(m *testing.M) {
 	if os.Getenv(archiveHolderEnv) != "" {

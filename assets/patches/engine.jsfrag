@@ -1,4 +1,4 @@
-/* antigravity-i18n:begin */
+/* regravity:begin */
 /**
  * Locale-neutral DOM translation engine.
  *
@@ -8,7 +8,7 @@
  * built, so adding a language means adding a JSON file under assets/locales/
  * rather than editing this logic.
  *
- * The antigravity-i18n:begin/end sentinels delimit this whole block so a re-run
+ * The regravity:begin/end sentinels delimit this whole block so a re-run
  * replaces it exactly. Locating it by a code identifier instead would leave the
  * leading comment behind and grow the file on every run.
  */
@@ -739,4 +739,4 @@ if (document.readyState === 'loading') {
 else {
     installLocalePatch();
 }
-/* antigravity-i18n:end */
+/* regravity:end */

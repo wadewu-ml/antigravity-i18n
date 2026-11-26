@@ -1,7 +1,7 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "antigravity-i18n",
-  "outputfilename": "antigravity-i18n",
+  "name": "regravity",
+  "outputfilename": "regravity",
   "frontend:dir": "frontend",
   "frontend:install": "",
   "frontend:build": "",
@@ -11,10 +11,10 @@
     "name": "Wade"
   },
   "info": {
-    "companyName": "antigravity-i18n",
-    "productName": "antigravity-i18n",
+    "companyName": "Regravity",
+    "productName": "Regravity",
     "productVersion": "4.2.3",
     "copyright": "Copyright © 2026",
-    "comments": "Antigravity 界面翻译与会话指标工具"
+    "comments": "Localization, session metrics, and thinking-effort slider for Google Antigravity"
   }
 }

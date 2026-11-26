@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"antigravity-i18n/internal/core"
-	"antigravity-i18n/internal/selfupdate"
+	"regravity/internal/core"
+	"regravity/internal/selfupdate"
 	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
 

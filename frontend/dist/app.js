@@ -1,4 +1,4 @@
-// Frontend controller for antigravity-i18n.
+// Frontend controller for Regravity.
 //
 // Field naming follows what Wails actually puts on the wire: types declared
 // with json tags (LocaleInfo) arrive lower camel case, while plain structs

@@ -3,8 +3,10 @@ package selfupdate
 import (
 	"errors"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"testing"
+	"time"
 )
 
 func put(t *testing.T, path, data string) {
@@ -125,5 +127,47 @@ func TestRollbackPreservesOccupiedOriginalName(t *testing.T) {
 	})
 	if err == nil || contents(t, tx.backup(exe)) != "old" || contents(t, tx.staged(exe)) != "occupied" {
 		t.Fatalf("recovery backup: %v", err)
+	}
+}
+
+func TestUpdatedWindowHandoff(t *testing.T) {
+	if scenario := os.Getenv("REGRAVITY_TEST_HANDOFF"); scenario != "" {
+		switch scenario {
+		case "ready":
+			if err := signalReady(); err != nil {
+				t.Fatal(err)
+			}
+			time.Sleep(200 * time.Millisecond)
+		case "timeout":
+			time.Sleep(time.Minute)
+		}
+		return
+	}
+	for _, scenario := range []string{"ready", "exit", "timeout"} {
+		t.Run(scenario, func(t *testing.T) {
+			exe := filepath.Join(t.TempDir(), "app.exe")
+			put(t, exe, "old")
+			tx, err := newReceipt(exe, "4.2.3", "v4.3.0")
+			if err != nil {
+				t.Fatal(err)
+			}
+			put(t, tx.staged(exe), "new")
+			err = replaceAndStart(exe, tx, func() error {
+				cmd := exec.Command(os.Args[0], "-test.run=^TestUpdatedWindowHandoff$")
+				cmd.Env = append(os.Environ(), "REGRAVITY_TEST_HANDOFF="+scenario)
+				timeout := 5 * time.Second
+				if scenario == "timeout" {
+					timeout = 250 * time.Millisecond
+				}
+				return startAndWaitReady(cmd, tx.ID, timeout)
+			})
+			if scenario == "ready" {
+				if err != nil || contents(t, exe) != "new" {
+					t.Fatalf("handoff: %v", err)
+				}
+			} else if err == nil || contents(t, exe) != "old" {
+				t.Fatalf("failed child did not roll back: %v", err)
+			}
+		})
 	}
 }

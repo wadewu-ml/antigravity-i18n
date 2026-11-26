@@ -4,7 +4,7 @@ param(
     [string]$RendererUrl,
     [string]$BundlePath,
     [string]$Locale = 'zh-CN',
-    [string]$OutputDir = (Join-Path ([IO.Path]::GetTempPath()) 'antigravity-i18n-ui-audit')
+    [string]$OutputDir = (Join-Path ([IO.Path]::GetTempPath()) 'regravity-ui-audit')
 )
 
 # Read-only audit of the static UI resources shipped by a running Antigravity.

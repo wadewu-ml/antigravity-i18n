@@ -57,8 +57,8 @@ async function test() {
             return require(module);
         });
         const event = {local: true};
-        const handle = handlers.get('antigravity-i18n:session-metrics');
-        const quota = handlers.get('antigravity-i18n:model-quota');
+        const handle = handlers.get('regravity:session-metrics');
+        const quota = handlers.get('regravity:model-quota');
         let calls = 0;
         let reply;
         const session = { fetch(url, options) {

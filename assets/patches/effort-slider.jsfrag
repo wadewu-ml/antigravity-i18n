@@ -123,7 +123,7 @@ function agMountEffortSliders(labels) {
         return null;
     }
 
-    const installed = Symbol.for('antigravity-i18n.effort-slider');
+    const installed = Symbol.for('regravity.effort-slider');
     function mount(panel) {
         if (panel[installed]) return;
         panel[installed] = true;

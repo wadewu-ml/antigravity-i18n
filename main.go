@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"antigravity-i18n/internal/core"
+	"regravity/internal/core"
 )
 
 // One binary is both the windowed app and the command line tool. The locale

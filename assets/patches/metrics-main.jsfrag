@@ -116,7 +116,7 @@
         return metrics;
     }
 
-    ipcMain.handle('antigravity-i18n:session-metrics', async (event, id) => {
+    ipcMain.handle('regravity:session-metrics', async (event, id) => {
         if (typeof id !== 'string' || !idPattern.test(id) || !isLocalHubTopFrame(event)) return null;
         try {
             return await latestMetrics(id.toLowerCase());
@@ -129,7 +129,7 @@
     // Use the host's local session and certificate trust, just as the Hub does.
     // Keep only in-flight requests: the LS owns the account-aware quota cache.
     let pendingQuota;
-    ipcMain.handle('antigravity-i18n:model-quota', async (event) => {
+    ipcMain.handle('regravity:model-quota', async (event) => {
         if (!isLocalHubTopFrame(event)) return null;
         try {
             const host = require('./languageServer');

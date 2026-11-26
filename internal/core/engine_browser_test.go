@@ -213,7 +213,7 @@ func runBrowserChecks(t *testing.T, html string) {
 	cmd := exec.CommandContext(ctx, browser, "--headless=new", "--disable-gpu", "--no-sandbox",
 		"--disable-dev-shm-usage", "--no-first-run", "--no-default-browser-check",
 		"--user-data-dir="+filepath.Join(dir, "profile"),
-		"--virtual-time-budget=3000", "--dump-dom", pageURL)
+		"--virtual-time-budget=8000", "--dump-dom", pageURL)
 	hideWindow(cmd)
 	output, err := dumpBrowserDOM(ctx, cmd)
 	if err != nil {

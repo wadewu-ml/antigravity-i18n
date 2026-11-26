@@ -24,7 +24,7 @@ type receipt struct {
 	To   string
 }
 
-func receiptPath(exe string) string        { return exe + ".i18n-update.json" }
+func receiptPath(exe string) string        { return exe + ".regravity-update.json" }
 func (r receipt) staged(exe string) string { return exe + "." + r.ID + ".new.exe" }
 func (r receipt) backup(exe string) string { return exe + "." + r.ID + ".old.exe" }
 
@@ -34,7 +34,7 @@ func newReceipt(exe, current, target string) (receipt, error) {
 	r := receipt{ID: hex.EncodeToString(token[:]), From: versionTag(current), To: target}
 	// Publish the complete record at once so an interrupted write cannot
 	// leave an unreadable receipt that blocks every subsequent update.
-	f, err := os.CreateTemp(filepath.Dir(exe), ".i18n-receipt-*.tmp")
+	f, err := os.CreateTemp(filepath.Dir(exe), ".regravity-receipt-*.tmp")
 	if err != nil {
 		return r, fmt.Errorf("无法在工具所在目录创建更新记录：%w", err)
 	}
@@ -98,6 +98,9 @@ func cleanup(exe, current string) error {
 // WindowReady runs in the background only after the frontend displays its version.
 // The old process may still have the backup mapped while its window is closing.
 func WindowReady(current string) error {
+	if err := signalReady(); err != nil {
+		return err
+	}
 	exe, err := os.Executable()
 	if err != nil {
 		return err
@@ -132,14 +135,16 @@ func verifyVersion(ctx context.Context, exe, version string) error {
 	if err != nil {
 		return err
 	}
-	expected := "antigravity-i18n " + strings.TrimPrefix(version, "v")
+	expected := "regravity " + strings.TrimPrefix(version, "v")
 	if strings.TrimSpace(string(output)) != expected {
 		return fmt.Errorf("程序版本不符，预期 %s。", expected)
 	}
 	return nil
 }
 
-const RestartDirEnv = "ANTIGRAVITY_I18N_RESTART_APP_DIR"
+const readyEnv = "REGRAVITY_UPDATE_READY_EVENT"
+
+const RestartDirEnv = "REGRAVITY_RESTART_APP_DIR"
 
 func (r *Release) Install(ctx context.Context, current, appDir string, report func(string, string), beginSwap func() error) error {
 	exe, err := os.Executable()
@@ -175,11 +180,7 @@ func (r *Release) Install(ctx context.Context, current, appDir string, report fu
 		err = replaceAndStart(exe, tx, func() error {
 			cmd := exec.Command(exe)
 			cmd.Env = append(os.Environ(), RestartDirEnv+"="+appDir)
-			if err := cmd.Start(); err != nil {
-				return err
-			}
-			_ = cmd.Process.Release()
-			return nil
+			return startAndWaitReady(cmd, tx.ID, 30*time.Second)
 		})
 	}
 	if err != nil {

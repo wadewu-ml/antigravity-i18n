@@ -6,21 +6,20 @@ import (
 	"strconv"
 	"strings"
 
-	"antigravity-i18n/internal/core"
+	"regravity/internal/core"
 )
 
-const usage = `antigravity-i18n - localize the Antigravity desktop interface
+const usage = `regravity - localize and enhance the Antigravity desktop interface
 
 Usage:
-  antigravity-i18n [command] [options]
+  regravity [command] [options]
 
 Commands:
   apply      Install a language pack into Antigravity
   restore    Restore the official English version
   status     Report the current localization state
   locales    List the installed language packs
-  gui        Open the graphical interface (default when no command is given)
-
+` + guiHelp + `
 Shorthands:
   zh, cn, chinese      Same as: apply --locale zh-CN
   en, english, official  Same as: restore
@@ -39,7 +38,7 @@ Options:
 `
 
 // commandAliases fold the language-named shorthands the Node CLI shipped onto
-// the two generic verbs, so documented one-liners like "antigravity-i18n zh"
+// the two generic verbs, so documented one-liners like "regravity zh"
 // keep working after the rewrite. applyAliases name a locale of their own;
 // restoreAliases all mean the same thing and need no locale.
 var applyAliases = map[string]string{
@@ -91,7 +90,7 @@ func parseArgs(args []string) (*parsedArgs, error) {
 	rest := args[1:]
 
 	// -v and -h are recognized before any command name so that
-	// "antigravity-i18n -v" works without a subcommand; otherwise the flag is
+	// "regravity -v" works without a subcommand; otherwise the flag is
 	// mistaken for a command and reported as unknown.
 	switch cmd {
 	case "-v", "--version":
@@ -189,7 +188,11 @@ func parseArgs(args []string) (*parsedArgs, error) {
 	}
 
 	switch cmd {
-	case "apply", "restore", "status", "locales", "gui":
+	case "gui":
+		if guiHelp == "" {
+			return nil, errors.New("this CLI build has no GUI; use the Windows GUI build")
+		}
+	case "apply", "restore", "status", "locales":
 	default:
 		return nil, fmt.Errorf("unknown command %q", cmd)
 	}
@@ -213,7 +216,7 @@ func runCLI(svc *core.Service, args []string) int {
 
 	switch cmd {
 	case "version":
-		fmt.Println("antigravity-i18n " + core.Version)
+		fmt.Println("regravity " + core.Version)
 		return 0
 	case "help":
 		fmt.Print(usage)
@@ -266,7 +269,9 @@ func cliApply(svc *core.Service, opts core.Options, confirmed bool) int {
 		return fail(err.Error())
 	}
 	fmt.Printf("Successfully switched to %s (%s)\n", result.LocaleName, result.Locale)
-	fmt.Printf("  Backup saved at: %s\n", result.BackupPath)
+	if result.BackupPath != "" {
+		fmt.Printf("  Backup saved at: %s\n", result.BackupPath)
+	}
 	if opts.Restart {
 		if result.Relaunched {
 			fmt.Println("  Antigravity has been relaunched.")

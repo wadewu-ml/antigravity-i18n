@@ -11,6 +11,7 @@ import (
 var errInstallBusy = errors.New("another language operation is already running for this Antigravity installation")
 
 func lockInstallation(resourcesDir string) (func(), error) {
+	// Share the transaction lock with antigravity-i18n installations.
 	path := filepath.Join(resourcesDir, ".antigravity-i18n.lock")
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0o600)
 	if err != nil {
@@ -151,7 +152,7 @@ func atomicReplaceFile(tempPath, destPath string, verify func(staged string) err
 	}
 	// Stage inside the destination directory so the rename never crosses a
 	// filesystem boundary, where it would stop being atomic.
-	staged, err := os.CreateTemp(filepath.Dir(destPath), ".antigravity-i18n-stage-*.asar")
+	staged, err := os.CreateTemp(filepath.Dir(destPath), ".regravity-stage-*.asar")
 	if err != nil {
 		return err
 	}

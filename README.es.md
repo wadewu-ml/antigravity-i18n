@@ -1,22 +1,23 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Icono de antigravity-i18n">
-  <h1>antigravity-i18n</h1>
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Icono de Regravity">
+  <h1>Regravity</h1>
   <p>Paquetes de idioma, métricas de sesión y cuotas de modelos, y control deslizante de nivel de razonamiento para Google Antigravity en Windows.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Descargar para Windows x64</strong></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>Descargar para Windows x64</strong></a>
     ·
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">Versiones</a>
+    <a href="https://github.com/wadewu-ml/regravity/releases">Versiones</a>
     ·
     Probado con <strong>Antigravity App 2.35.1</strong>
   </p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <strong>Español</strong> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
   </p>
+  <p>antigravity-i18n ahora se llama Regravity. La descarga de arriba corresponde a la v4.2.3. Cuando se publique la primera versión de Regravity, descarga <code>regravity.exe</code> manualmente. Se conservarán los parches y la preferencia de actualización. Tras el cambio de nombre del repositorio, la v4.2.3 puede mostrar un error al comparar versiones. Consulta los lanzamientos en el enlace de arriba.</p>
 </div>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="Ventana de configuración con Antigravity v2.35.1, chino simplificado seleccionado y las opciones de métricas de sesión y control deslizante activadas">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Ventana de configuración con Antigravity v2.35.2, chino simplificado seleccionado y las opciones de métricas de sesión y control deslizante activadas">
   </a>
 </p>
 
@@ -25,7 +26,7 @@
 - **9 idiomas en un solo EXE portátil** — Traduce ajustes, controles del chat, menús de modelos, menús nativos y avisos de salida al chino simplificado, chino tradicional, japonés, coreano, alemán, español, francés, portugués de Brasil y ruso sin alterar tus entradas ni conversaciones.
 - **Métricas de sesión y cuotas (opcional)** — Añade un anillo junto al selector de modelo para consultar cuotas restantes, horarios locales de restablecimiento, contexto utilizado, velocidad media de salida, tasa de aciertos de caché y tiempo hasta el primer token.
 - **Control de nivel de razonamiento (opcional)** — Añade un control deslizante tipo cápsula en el selector de modelos para los modelos compatibles.
-- **Independiente y reversible byte a byte** — Ambos interruptores trabajan por separado y también con la interfaz oficial en inglés. Tras aplicar los cambios, puedes cerrar la herramienta y restaurar la versión oficial en cualquier momento.
+- **Independiente y reversible byte a byte** — Ambos interruptores trabajan por separado y también con la interfaz oficial en inglés. Tras aplicar los cambios, puedes cerrar la herramienta y restaurar la versión oficial con una copia limpia de la misma versión de Antigravity.
 
 ## Inicio rápido
 
@@ -81,7 +82,7 @@ Activa **Control de nivel de razonamiento** (`思考强度滑块`) y aplica los 
 ## Actualizaciones
 
 - **Tras actualizar Antigravity** — Si desaparecen la traducción o los controles, comprueba la versión compatible arriba y vuelve a aplicar tus ajustes desde la herramienta.
-- **Actualizaciones automáticas de la herramienta** — Al abrirse, comprueba GitHub una vez cada 24 horas. Un punto azul en el menú superior derecho (`···`) avisa de una nueva versión; abre el menú para leer las novedades y confirmar la descarga y reinicio desde la misma ruta del EXE. Puedes desactivar la búsqueda automática en **Acerca de** (`关于`) o buscar manualmente (`检查更新`). Tras actualizar, pulsa **Volver a aplicar** (`重新应用`) para aplicar las nuevas traducciones.
+- **Actualizaciones automáticas de la herramienta** — Al iniciarse, usa el resultado de la última comprobación para decidir si consulta GitHub. Tras una comprobación correcta, espera al menos 24 horas. Un punto azul en el menú superior derecho (`···`) avisa de una nueva versión; abre el menú para leer las novedades y confirmar la descarga y reinicio desde la misma ruta del EXE. Puedes desactivar la búsqueda automática en **Acerca de** (`关于`) o buscar manualmente (`检查更新`). Tras actualizar, pulsa **Volver a aplicar** (`重新应用`) para aplicar las nuevas traducciones.
 
 ## CLI de PowerShell
 
@@ -105,7 +106,7 @@ Requiere Windows, PowerShell 7, Go 1.26.3+ y la CLI de Wails v2:
 .\build.ps1 -Target gui
 ```
 
-El ejecutable compilado se guarda en `build/bin/antigravity-i18n.exe`.
+El ejecutable compilado se guarda en `build/bin/regravity.exe`.
 
 ## Solución de problemas
 

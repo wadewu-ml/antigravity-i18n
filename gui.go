@@ -1,13 +1,15 @@
+//go:build !cli
+
 package main
 
 import (
-	"errors"
 	"fmt"
 	"io/fs"
 	"os"
+	"path/filepath"
 
-	"antigravity-i18n/internal/core"
-	"antigravity-i18n/internal/selfupdate"
+	"regravity/internal/core"
+	"regravity/internal/selfupdate"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -15,7 +17,9 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
-const guiWindowClass = "WadeWu.AntigravityI18n.MainWindow"
+const guiHelp = "  gui        Open the graphical interface (default when no command is given)\n"
+
+const guiWindowClass = "WadeWu.Regravity.MainWindow"
 
 // runWails opens the application window. The frontend is plain static files
 // served from an embedded filesystem, so no Node toolchain is needed at build
@@ -39,9 +43,14 @@ func runWails(svc *core.Service) {
 		os.Exit(1)
 	}
 
+	profile, err := os.UserConfigDir()
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "error locating the settings directory:", err)
+		os.Exit(1)
+	}
 	app := NewApp(svc, initialDir)
 	if err := wails.Run(&options.App{
-		Title:     "Antigravity 多语言工具",
+		Title:     "Regravity",
 		Width:     760,
 		Height:    580,
 		MinWidth:  640,
@@ -57,6 +66,8 @@ func runWails(svc *core.Service) {
 			app,
 		},
 		Windows: &windows.Options{
+			// The previous Windows release stored update preferences in this profile.
+			WebviewUserDataPath:  filepath.Join(profile, "antigravity-i18n.exe"),
 			WindowClassName:      guiWindowClass,
 			WebviewIsTransparent: false,
 			WindowIsTranslucent:  false,
@@ -66,13 +77,4 @@ func runWails(svc *core.Service) {
 		fmt.Fprintln(os.Stderr, "error:", err)
 		os.Exit(1)
 	}
-}
-
-func formatAppError(err error) any {
-	var rollbackErr *core.RollbackError
-	if errors.Is(err, core.ErrAntigravityRunning) && !errors.As(err, &rollbackErr) {
-		// Wails passes the formatted value through the JavaScript Error constructor.
-		return "antigravity_running: " + err.Error()
-	}
-	return err.Error()
 }

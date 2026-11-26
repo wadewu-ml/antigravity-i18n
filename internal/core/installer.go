@@ -106,7 +106,8 @@ func readArchiveLocale(arc *Archive, file *os.File) (code, name string, features
 	if err != nil {
 		return "", "", archiveFeatures{}
 	}
-	features.sessionMetrics = bytes.Contains(preload, []byte(sessionMetricsMarker))
+	features.sessionMetrics = bytes.Contains(preload, []byte(sessionMetricsMarker)) ||
+		bytes.Contains(preload, []byte(legacySessionMetricsMarker))
 	features.effortSlider = bytes.Contains(preload, []byte(effortSliderMarker))
 	m := archiveLocaleRe.FindSubmatch(preload)
 	if m == nil {

@@ -18,15 +18,17 @@ var patchMarkers = []string{
 	"const zhCNText = new Map([",
 	"function translateMenu(menu)",
 	sessionMetricsMarker,
+	legacySessionMetricsMarker,
 	effortSliderMarker,
 }
 
 // blockSentinels wrap every injected block. Fragments carry them, so a re-run
 // can excise the previous block exactly instead of guessing its bounds. The
-// former polygravity and antigravity-zh pairs are still recognised, so installs
-// patched before either rename are replaced cleanly instead of accumulating a
-// second block.
+// former antigravity-i18n, polygravity and antigravity-zh pairs are still
+// recognised, so installs patched before any rename are replaced cleanly
+// instead of accumulating a second block.
 var blockSentinels = [][2]string{
+	{"/* regravity:begin */", "/* regravity:end */"},
 	{"/* antigravity-i18n:begin */", "/* antigravity-i18n:end */"},
 	{"/* polygravity:begin */", "/* polygravity:end */"},
 	{"/* antigravity-zh:begin */", "/* antigravity-zh:end */"},

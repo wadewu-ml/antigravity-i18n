@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"antigravity-i18n/internal/core"
+	"regravity/internal/core"
 )
 
 func TestInitialDetectionKeepsChosenInstallation(t *testing.T) {

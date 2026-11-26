@@ -1,22 +1,23 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n icon">
-  <h1>antigravity-i18n</h1>
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Regravity icon">
+  <h1>Regravity</h1>
   <p>Localization packs, session metrics & model quotas, and a thinking-effort slider for Google Antigravity on Windows.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Download for Windows x64</strong></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>Download for Windows x64</strong></a>
     ·
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">Releases</a>
+    <a href="https://github.com/wadewu-ml/regravity/releases">Releases</a>
     ·
     Tested with <strong>Antigravity App 2.35.1</strong>
   </p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
   </p>
+  <p>Regravity is the new name of antigravity-i18n. The download above is v4.2.3. When the first Regravity release appears, download <code>regravity.exe</code> manually. Your existing patches and update preference carry over. The v4.2.3 update checker can report a version error after the repository rename. Use the Releases link above.</p>
 </div>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="antigravity-i18n setup window showing Antigravity v2.35.1, Simplified Chinese selected, and both Session metrics and Thinking-effort slider enabled">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Regravity setup window showing Antigravity v2.35.2, Simplified Chinese selected, and both Session metrics and Thinking-effort slider enabled">
   </a>
 </p>
 
@@ -25,7 +26,7 @@
 - **9 interface languages in one portable EXE** — Translates settings, chat controls, model menus, native menus, and quit prompts into Simplified Chinese, Traditional Chinese, Japanese, Korean, German, Spanish, French, Brazilian Portuguese, and Russian without touching your chats or input.
 - **Optional session metrics & model quotas** — Adds a ring beside the model selector to inspect remaining model quotas, local reset times, context used, average output speed, cache hit rate, and time to first token.
 - **Optional thinking-effort slider** — Adds an inline capsule slider inside the model picker for models with selectable thinking effort.
-- **Independent & reversible** — Both optional switches work independently and with the built-in English UI. Once applied, you can close the tool and restore the official version byte-for-byte at any time.
+- **Independent & reversible** — Both optional switches work independently and with the built-in English UI. Once applied, you can close the tool and restore the official version byte-for-byte using a clean backup that matches the installed Antigravity version.
 
 ## Quick start
 
@@ -81,7 +82,7 @@ Turn on **Thinking-effort slider** (`思考强度滑块`) and apply your changes
 ## Updates
 
 - **After an Antigravity update** — If translations or controls disappear, verify the tested version at the top of this page, then reopen the tool and apply your settings again.
-- **Tool auto-updates** — On startup, the tool checks GitHub once every 24 hours. A blue dot on the top-right menu (`···`) signals a new release; open the menu to read release notes and download and restart from the same EXE path. Automatic checks can be turned off in **About** (`关于`), and manual checks remain available via **Check for updates** (`检查更新`). After updating, click **Reapply** (`重新应用`) to push updated translations into Antigravity.
+- **Tool auto-updates** — At startup, the tool uses the previous check result to decide whether to contact GitHub. After a successful check, it waits at least 24 hours. A blue dot on the top-right menu (`···`) signals a new release; open the menu to read release notes and download and restart from the same EXE path. Automatic checks can be turned off in **About** (`关于`), and manual checks remain available via **Check for updates** (`检查更新`). After updating, click **Reapply** (`重新应用`) to push updated translations into Antigravity.
 
 ## PowerShell CLI
 
@@ -105,7 +106,7 @@ Requires Windows, PowerShell 7, Go 1.26.3+, and the Wails v2 CLI:
 .\build.ps1 -Target gui
 ```
 
-The built executable is written to `build/bin/antigravity-i18n.exe`.
+The built executable is written to `build/bin/regravity.exe`.
 
 ## Troubleshooting
 

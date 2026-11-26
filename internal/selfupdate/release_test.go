@@ -37,7 +37,7 @@ func TestRateLimitDeadline(t *testing.T) {
 }
 
 func TestReleaseSelection(t *testing.T) {
-	const data = `{"tag_name":"v4.0.10","assets":[{"name":"antigravity-i18n.exe","size":16},{"name":"SHA256SUMS.txt","size":87}]}`
+	const data = `{"tag_name":"v4.0.10","assets":[{"name":"regravity.exe","size":16},{"name":"SHA256SUMS.txt","size":87}]}`
 	r, err := readRelease(strings.NewReader(data), "v4.0.10")
 	if err != nil || !r.Available || r.size != 16 {
 		t.Fatalf("release metadata: %+v, %v", r, err)

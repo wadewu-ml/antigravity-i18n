@@ -1,4 +1,4 @@
-module antigravity-i18n
+module regravity
 
 go 1.26.3
 

@@ -1,22 +1,23 @@
 <div align="center">
-  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="antigravity-i18n アイコン">
-  <h1>antigravity-i18n</h1>
+  <img src="./frontend/dist/appicon.png" width="64" height="64" alt="Regravity アイコン">
+  <h1>Regravity</h1>
   <p>Windows 版 Google Antigravity 向けの多言語パック、セッション指標・利用枠パネル、推論強度スライダー。</p>
   <p>
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases/latest/download/antigravity-i18n.exe"><strong>Windows x64 版をダウンロード</strong></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.2.3/antigravity-i18n.exe"><strong>Windows x64 版をダウンロード</strong></a>
     ·
-    <a href="https://github.com/wadewu-ml/antigravity-i18n/releases">リリース一覧</a>
+    <a href="https://github.com/wadewu-ml/regravity/releases">リリース一覧</a>
     ·
     動作確認済み: <strong>Antigravity App 2.35.1</strong>
   </p>
   <p>
     <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <strong>日本語</strong> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
   </p>
+  <p>antigravity-i18n は Regravity に名称を変更しました。上のリンクからは v4.2.3 をダウンロードできます。Regravity の初回リリース時は <code>regravity.exe</code> を手動でダウンロードしてください。適用済みのパッチと自動更新設定は引き継がれます。リポジトリ名の変更により、v4.2.3 の更新確認でバージョン比較エラーが出ることがあります。上のリリース一覧をご確認ください。</p>
 </div>
 
 <p align="center">
   <a href="./docs/images/language-settings.webp">
-    <img src="./docs/images/language-settings.webp" width="560" alt="Antigravity v2.35.1、簡体字中国語、セッション指標および推論強度スライダーが有効な設定画面">
+    <img src="./docs/images/language-settings.webp" width="560" alt="Antigravity v2.35.2、簡体字中国語、セッション指標および推論強度スライダーが有効な設定画面">
   </a>
 </p>
 
@@ -25,7 +26,7 @@
 - **ポータブル EXE 1 つに 9 言語を収録** — 設定、チャットのボタン、モデル選択メニュー、ネイティブメニュー、終了確認画面を簡体字中国語、繁体字中国語、日本語、韓国語、ドイツ語、スペイン語、フランス語、ブラジルポルトガル語、ロシア語に翻訳します。入力内容や会話履歴は書き換えません。
 - **セッション指標と利用枠パネル（任意）** — モデル選択ボタンの横にリングを追加し、残り利用枠、現地時間のリセット時刻、コンテキスト使用量、平均出力速度、キャッシュヒット率、最初のトークンまでの時間を確認できます。
 - **推論強度スライダー（任意）** — 推論強度を選べるモデルの選択メニュー内にカプセル型スライダーを追加します。
-- **個別に有効化・バイト単位で復元** — 2 つのスイッチは個別に切り替えでき、標準の英語表示とも併用できます。適用後はツールを閉じても動作し、いつでも公式版へ復元できます。
+- **個別に有効化・バイト単位で復元** — 2 つのスイッチは個別に切り替えでき、標準の英語表示とも併用できます。適用後はツールを閉じても動作し、インストール済みの Antigravity と同じバージョンの未変更のバックアップから公式版へ復元できます。
 
 ## クイックスタート
 
@@ -81,7 +82,7 @@
 ## アップデート
 
 - **Antigravity の更新後** — 翻訳や拡張機能が消えた場合は、このページ上部の対応バージョンを確認のうえ、再度ツールから設定を適用してください。
-- **ツールの自動更新** — 起動時に 24 時間ごとに GitHub の更新を確認します。右上メニュー（`···`）に青い点が表示されたら、メニューから変更内容を確認して同じ EXE パスでそのままダウンロード・再起動できます。自動確認は **このツールについて**（`关于`）からオフにでき、手動確認（`检查更新`）も可能です。ツール更新後は **再適用**（`重新应用`）をクリックして新しい翻訳を Antigravity に反映してください。
+- **ツールの自動更新** — 起動時に前回の確認結果を参照し、必要に応じて GitHub に問い合わせます。確認に成功すると、次の自動確認まで少なくとも 24 時間空けます。右上メニュー（`···`）に青い点が表示されたら、メニューから変更内容を確認して同じ EXE パスでそのままダウンロード・再起動できます。自動確認は **このツールについて**（`关于`）からオフにでき、手動確認（`检查更新`）も可能です。ツール更新後は **再適用**（`重新应用`）をクリックして新しい翻訳を Antigravity に反映してください。
 
 ## PowerShell CLI
 
@@ -105,7 +106,7 @@ Windows、PowerShell 7、Go 1.26.3 以降、Wails v2 CLI が必要です：
 .\build.ps1 -Target gui
 ```
 
-ビルドされた実行ファイルは `build/bin/antigravity-i18n.exe` に出力されます。
+ビルドされた実行ファイルは `build/bin/regravity.exe` に出力されます。
 
 ## トラブルシューティング
 

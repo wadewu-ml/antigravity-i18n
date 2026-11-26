@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"sync"
 
-	"antigravity-i18n/internal/core"
-	"antigravity-i18n/internal/selfupdate"
+	"regravity/internal/core"
+	"regravity/internal/selfupdate"
 
 	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -218,4 +218,13 @@ func (a *App) GetLogs() []string {
 	out := make([]string, len(a.logs))
 	copy(out, a.logs)
 	return out
+}
+
+func formatAppError(err error) any {
+	var rollbackErr *core.RollbackError
+	if errors.Is(err, core.ErrAntigravityRunning) && !errors.As(err, &rollbackErr) {
+		// Wails passes the formatted value through the JavaScript Error constructor.
+		return "antigravity_running: " + err.Error()
+	}
+	return err.Error()
 }

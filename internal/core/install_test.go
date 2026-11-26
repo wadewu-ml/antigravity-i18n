@@ -115,7 +115,7 @@ func TestApplySwitchAndRestore(t *testing.T) {
 					continue
 				}
 				preload, err := patched.ReadFile(rel)
-				if err != nil || strings.Count(string(preload), "/* antigravity-i18n:begin */") != 1 {
+				if err != nil || strings.Count(string(preload), "/* regravity:begin */") != 1 {
 					t.Fatalf("%s does not contain exactly one engine after switching: %v", rel, err)
 				}
 				if strings.Contains(string(preload), effortSliderMarker) != (rel == "dist/preload.js") {
@@ -134,7 +134,7 @@ func TestApplySwitchAndRestore(t *testing.T) {
 			first := fileHash(t, p.AsarPath)
 			opts.EffortSlider = nil
 			opts.SessionMetrics = nil
-			if _, err := svc.ApplyLocale(opts); err != nil || fileHash(t, p.AsarPath) != first {
+			if repeated, err := svc.ApplyLocale(opts); err != nil || repeated.BackupPath != "" || fileHash(t, p.AsarPath) != first {
 				t.Fatalf("re-applying the locale was not byte-stable: %v", err)
 			}
 			opts.Locale = EnglishLocale
@@ -299,7 +299,7 @@ func TestApplyRejectsModifiedStagingAndRollsBack(t *testing.T) {
 	writeOtherRelease(t, p.CleanBackupPath)
 	previousBackup := fileHash(t, p.CleanBackupPath)
 	svc := newTestService(t)
-	stagingPattern := filepath.Join(p.ResourcesDir, ".antigravity-i18n-stage-*.asar")
+	stagingPattern := filepath.Join(p.ResourcesDir, ".regravity-stage-*.asar")
 	svc.Progress = func(stage, _ string) {
 		if stage != "正在写回 app.asar" {
 			return
@@ -346,4 +346,26 @@ func TestStatusRejectsInvalidArchive(t *testing.T) {
 			t.Fatalf("reported status for another application: %+v", status)
 		}
 	})
+}
+
+func TestLegacyInstallationLock(t *testing.T) {
+	p := fixtureInstall(t, syntheticAsar)
+	file, err := os.OpenFile(filepath.Join(p.ResourcesDir, ".antigravity-i18n.lock"), os.O_CREATE|os.O_RDWR, 0600)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer file.Close()
+	unlock, err := tryLockFile(file)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer unlock()
+	svc := newTestService(t)
+	opts := Options{AppDir: p.AppDir}
+	if _, err := svc.ApplyLocale(opts); !errors.Is(err, errInstallBusy) {
+		t.Fatalf("apply during old operation: %v", err)
+	}
+	if _, err := svc.RestoreOfficial(opts); !errors.Is(err, errInstallBusy) {
+		t.Fatalf("restore during old operation: %v", err)
+	}
 }
