@@ -1,4 +1,4 @@
-Turkish and Vietnamese translations include entries adapted from:
+Arabic, Italian, Turkish and Vietnamese translations include entries adapted from:
 https://github.com/Violiate/Antigravity-i18n (df05497)
 
 MIT License

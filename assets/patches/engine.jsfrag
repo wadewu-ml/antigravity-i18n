@@ -463,6 +463,11 @@ function agFormat(template, match, rule) {
         }
         const mapName = rule.replace[groupIndex] || rule.replace[index];
         if (!mapName) {
+            // Keep paths, model names and numbers together inside an RTL sentence.
+            if (AG_LOCALE.dir === 'rtl' && rule.regex && captured) {
+                const start = /^[\s\dA-Za-z/\\]/.test(captured) ? '\u2066' : '\u2068';
+                return start + captured + '\u2069';
+            }
             return captured;
         }
         const valueRule = agValueRules[mapName];

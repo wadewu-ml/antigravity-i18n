@@ -71,6 +71,23 @@
       const detailFor = (id) => document.getElementById(control(id).getAttribute('aria-describedby'));
       const values = (id) => [...detailFor(id).querySelectorAll('dd')].map(el => el.textContent);
       await settle(150);
+      if (document.documentElement.lang === 'ar') {
+        control('left').dispatchEvent(new PointerEvent('pointerenter'));
+        await settle(300);
+        const table = detailFor('left').querySelector('table');
+        const row = table.rows[2];
+        const model = row.cells[0];
+        const balance = table.rows[1].cells[1].firstChild;
+        check('Arabic table direction', getComputedStyle(table).direction, 'rtl');
+        check('model column is on the right', model.getBoundingClientRect().left > row.cells[1].getBoundingClientRect().left, true);
+        check('mixed model label', model.textContent, 'Claude / GPT');
+        check('model name direction', getComputedStyle(model).direction, 'ltr');
+        check('isolated percentage', balance.tagName, 'BDI');
+        check('percentage direction', getComputedStyle(balance).direction, 'ltr');
+        check('percentage uses the Arabic number format', balance.textContent,
+          new Intl.NumberFormat('ar', {style:'percent', maximumFractionDigits:1}).format(0.934));
+        return;
+      }
       check('one ring in each conversation pane', document.querySelectorAll('.ai18n-usage-control').length, 4);
       const unrelated = document.body.appendChild(document.createElement('span'));
       const calls = metricCalls;

@@ -1,0 +1,10 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><!-- ENGINE --></head><body>
+<button id="settings">Settings</button><button id="model">Select model, current: Gemini 3.1 Pro</button>
+<script>
+verify(async () => {
+  await settle(120);
+  check('Italian settings', document.getElementById('settings').textContent, 'Impostazioni');
+  check('model selector', document.getElementById('model').textContent, 'Seleziona modello. Modello attuale: Gemini 3.1 Pro');
+});
+</script></body></html>

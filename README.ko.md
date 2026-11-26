@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <strong>한국어</strong> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <strong>한국어</strong> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a>
     </sub>
   </p>
 </div>
@@ -38,7 +38,7 @@
 > [!TIP]
 > 괄호 안의 중국어 표기는 위 스크린샷의 버튼 이름입니다.
 
-개발 빌드에서는 오른쪽 위에서 설정 창의 언어를 선택할 수 있습니다. Antigravity에는 튀르키예어와 베트남어가 추가되었습니다.
+개발 빌드에서는 오른쪽 위에서 설정 창의 언어를 선택할 수 있습니다. Antigravity에는 튀르키예어, 베트남어, 이탈리아어, 아랍어가 추가되었습니다.
 
 ### 설정 적용
 

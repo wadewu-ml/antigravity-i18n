@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><!-- ENGINE --></head><body>
+<button id="model">Select model, current: Gemini 3.1 Pro (High)</button>
+<button id="path">Show D:\ملفات\Agent-2\log.txt in folder</button>
+<input id="prompt" value="Show D:\ملفات\Agent-2\log.txt in folder">
+<script>
+verify(async () => {
+  await settle(150);
+  check('page direction', getComputedStyle(document.body).direction, 'rtl');
+  for (const [id, value] of [['model', 'Gemini 3.1 Pro (High)'], ['path', 'D:\\ملفات\\Agent-2\\log.txt']]) {
+    const text = document.getElementById(id).firstChild;
+    check('Arabic sentence ' + id, /[\u0600-\u06ff]/.test(text.data), true);
+    const index = text.data.indexOf('\u2066' + value + '\u2069');
+    check('isolated value ' + id, index >= 0, true);
+    function position(offset) {
+      const range = document.createRange();
+      range.setStart(text, offset);
+      range.setEnd(text, offset + 1);
+      return range.getBoundingClientRect().left;
+    }
+    check('visual order of ' + id, position(index + 1) < position(index + value.length), true);
+  }
+  check('user input unchanged', document.getElementById('prompt').value, 'Show D:\\ملفات\\Agent-2\\log.txt in folder');
+});
+</script></body></html>

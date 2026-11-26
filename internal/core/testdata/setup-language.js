@@ -31,6 +31,8 @@ verify(async () => {
   byId('btnCloseAbout').click();
   for (const option of byId('setupLanguage').options) {
     selectLanguage(option.value);
+    check('window direction', document.documentElement.dir, option.value === 'ar' ? 'rtl' : 'ltr');
+    if (option.value === 'ar') check('installation path direction', byId('appPathDisplay').dir, 'ltr');
     check('document language', document.documentElement.lang, option.value);
     check('saved language', localStorage.getItem('setupLanguage'), option.value);
     check('pending selection survives', byId('pendingLanguage').textContent.includes('Tiếng Việt'), true);
@@ -38,7 +40,7 @@ verify(async () => {
       check('translated action', byId('btnPrimaryAction').textContent, setupMessages[option.value]['Apply changes']);
     }
   }
-  check('all setup languages', byId('setupLanguage').options.length, 12);
+  check('all setup languages', byId('setupLanguage').options.length, 14);
   selectLanguage('zh-CN');
   check('Chinese document', document.documentElement.lang, 'zh-CN');
   check('Chinese action', byId('btnPrimaryAction').textContent, '应用更改');

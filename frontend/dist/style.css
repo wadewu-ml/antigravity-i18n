@@ -47,7 +47,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 .logo-badge { width: 38px; height: 38px; object-fit: contain; }
 .app-title { font-size: 22px; font-weight: 650; letter-spacing: -.6px; }
 .update-status, .version-tag { color: var(--secondary); font-size: 13px; font-weight: 450; }
-.setup-language { margin-left: auto; }
+.setup-language { margin-inline-start: auto; }
 .more-actions { position: relative; }
 .more-actions summary {
   display: grid; place-items: center;
@@ -67,13 +67,13 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
   box-shadow: -7px 0 currentColor, 7px 0 currentColor;
 }
 .action-list {
-  position: absolute; z-index: 1; top: calc(100% + 4px); right: 0;
+  position: absolute; z-index: 1; top: calc(100% + 4px); inset-inline-end: 0;
   display: grid; min-width: 156px; width: max-content; max-width: calc(100vw - 40px); padding: 5px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
   box-shadow: 0 6px 24px rgb(0 0 0 / 10%);
 }
 .action-list button {
-  padding: 7px 11px; text-align: left; border: 0; border-radius: 7px;
+  padding: 7px 11px; text-align: start; border: 0; border-radius: 7px;
   background: transparent; color: var(--ink);
 }
 .action-list button:hover:enabled, .action-list button:focus-visible { background: var(--canvas); }
@@ -177,7 +177,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
   content: ""; position: absolute; left: 13px; width: 4px; height: 8px;
   border: 1.5px solid; background: #ebedfb; border-radius: 3px;
 }
-.setting-detail { margin-left: auto; font-weight: 400; }
+.setting-detail { margin-inline-start: auto; font-weight: 400; }
 .setting-switch {
   appearance: none;
   flex: none;
@@ -189,7 +189,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
   cursor: pointer;
   transition: background-color .18s;
 }
-.setting-detail:not(:empty) + .setting-switch { margin-left: 0; }
+.setting-detail:not(:empty) + .setting-switch { margin-inline-start: 0; }
 .setting-switch::after {
   content: ""; position: absolute; top: 2px; left: 2px;
   width: 18px; height: 18px; border-radius: 50%;
@@ -199,7 +199,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 .setting-switch:checked::after { transform: translateX(14px); }
 
 .action-row { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); justify-content: flex-end; flex-wrap: wrap; }
-.pending-language { margin-right: auto; }
+.pending-language { margin-inline-end: auto; }
 .btn, .btn-sm, .btn-xs, .text-link {
   border: none; border-radius: 8px;
   padding: 6px 10px; background: transparent;
@@ -234,10 +234,10 @@ dialog::backdrop { background: rgb(30 30 35 / 24%); backdrop-filter: blur(4px); 
 .modal-box h3 { font-size: 19px; letter-spacing: -.3px; }
 .modal-box p, .about-features { margin-top: 10px; }
 .modal-desc, .about-features, .modal-note { color: var(--secondary); line-height: 1.6; }
-.about-features { padding-left: 20px; }
+.about-features { padding-inline-start: 20px; }
 .about-features li + li { margin-top: 6px; }
 .modal-actions { justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
-.modal-actions .text-link { margin-right: auto; }
+.modal-actions .text-link { margin-inline-end: auto; }
 
 @media (max-width: 680px) {
   .chips { grid-template-columns: repeat(4, minmax(0, 1fr)); }

@@ -109,6 +109,8 @@ func TestTranslationInBrowser(t *testing.T) {
 		{"de", "testdata/engine-repeat.html"},
 		{"tr", "testdata/engine-tr-vi.html"},
 		{"vi", "testdata/engine-tr-vi.html"},
+		{"ar", "testdata/engine-ar.html"},
+		{"it", "testdata/engine-it.html"},
 	} {
 		t.Run(example.code, func(t *testing.T) {
 			loc, err := store.LoadLocale(example.code)
@@ -145,19 +147,23 @@ func TestRetryMessageInEveryLanguage(t *testing.T) {
 
 func TestEffortSliderInBrowser(t *testing.T) {
 	store := newTestService(t).store
-	loc, err := store.LoadLocale(DefaultLocale)
-	if err != nil {
-		t.Fatal(err)
+	for _, code := range []string{DefaultLocale, "ar"} {
+		t.Run(code, func(t *testing.T) {
+			loc, err := store.LoadLocale(code)
+			if err != nil {
+				t.Fatal(err)
+			}
+			patch, err := store.buildLocalizationFragments(loc)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := store.addEffortSlider(&patch, loc); err != nil {
+				t.Fatal(err)
+			}
+			html := readTestFile(t, "testdata/effort-slider.html")
+			runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+patch.preload+"</script>", 1))
+		})
 	}
-	patch, err := store.buildLocalizationFragments(loc)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := store.addEffortSlider(&patch, loc); err != nil {
-		t.Fatal(err)
-	}
-	html := readTestFile(t, "testdata/effort-slider.html")
-	runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+patch.preload+"</script>", 1))
 }
 
 func TestSetupLanguageInBrowser(t *testing.T) {

@@ -10,20 +10,24 @@ import (
 
 func TestSessionMetricsInBrowser(t *testing.T) {
 	store := newTestService(t).store
-	loc, err := store.LoadLocale(DefaultLocale)
-	if err != nil {
-		t.Fatal(err)
+	for _, code := range []string{DefaultLocale, "ar"} {
+		t.Run(code, func(t *testing.T) {
+			loc, err := store.LoadLocale(code)
+			if err != nil {
+				t.Fatal(err)
+			}
+			preload, err := store.buildPreloadFragment(loc)
+			if err != nil {
+				t.Fatal(err)
+			}
+			patch := patchFragments{preload: preload}
+			if err := store.addSessionMetrics(&patch, loc); err != nil {
+				t.Fatal(err)
+			}
+			html := readTestFile(t, "testdata/metrics.html")
+			runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+patch.preload+"</script>", 1))
+		})
 	}
-	preload, err := store.buildPreloadFragment(loc)
-	if err != nil {
-		t.Fatal(err)
-	}
-	patch := patchFragments{preload: preload}
-	if err := store.addSessionMetrics(&patch, loc); err != nil {
-		t.Fatal(err)
-	}
-	html := readTestFile(t, "testdata/metrics.html")
-	runBrowserChecks(t, strings.Replace(html, "<!-- ENGINE -->", "<script>"+patch.preload+"</script>", 1))
 }
 
 func TestSessionMetricsSQLite(t *testing.T) {

@@ -166,5 +166,33 @@
     "speed": "Tốc độ đầu ra trung bình",
     "cache": "Tỷ lệ trúng bộ nhớ đệm",
     "firstToken": "Thời gian đến token đầu tiên"
+  },
+  "it": {
+    "quota": "Quota residua del modello",
+    "loadingQuota": "Caricamento quota…",
+    "quotaUnavailable": "Quota non disponibile",
+    "resets": "Prossimo ripristino",
+    "weekly": "Settimanale",
+    "daily": "Giornaliera",
+    "title": "Metriche della sessione",
+    "context": "Contesto utilizzato",
+    "tokenUnit": "token",
+    "speed": "Velocità media di generazione",
+    "cache": "Percentuale di riscontri nella cache",
+    "firstToken": "Tempo al primo token"
+  },
+  "ar": {
+    "quota": "حصة النموذج المتبقية",
+    "loadingQuota": "جارٍ تحميل الحصة…",
+    "quotaUnavailable": "بيانات الحصة غير متاحة",
+    "resets": "موعد إعادة الضبط",
+    "weekly": "أسبوعيًا",
+    "daily": "يوميًا",
+    "title": "مقاييس الجلسة",
+    "context": "السياق المستخدم",
+    "tokenUnit": "رمز",
+    "speed": "متوسط سرعة الإخراج",
+    "cache": "معدل إصابة ذاكرة التخزين المؤقت",
+    "firstToken": "زمن ظهور أول رمز"
   }
 }

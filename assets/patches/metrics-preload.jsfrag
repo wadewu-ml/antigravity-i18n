@@ -84,7 +84,7 @@
             '.ai18n-usage-meter[hidden] + dl { margin-top: 8px; }',
             '.ai18n-quota { margin-top: 12px; padding-top: 10px; border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent); }',
             '.ai18n-quota table { width: 100%; border-collapse: collapse; font: inherit; font-variant-numeric: tabular-nums; }',
-            '.ai18n-quota :is(th, td) { border: 0; padding: 4px 0 0 12px; text-align: end; font-weight: normal; }',
+            '.ai18n-quota :is(th, td) { border: 0; padding: 4px 0 0; padding-inline-start: 12px; text-align: end; font-weight: normal; }',
             '.ai18n-quota th:first-child { padding-inline-start: 0; text-align: start; }',
             '.ai18n-quota thead th { padding-top: 0; color: var(--vscode-descriptionForeground, inherit); }',
             '.ai18n-quota thead th:first-child { color: inherit; font-weight: 600; }',
@@ -147,13 +147,15 @@
             const row = body.insertRow();
             const name = document.createElement('th');
             name.scope = 'row';
+            name.dir = 'auto';
             name.textContent = group.name.replace(/^(gemini) models$/i, '$1')
                 .replace(/^claude and gpt models$/i, 'Claude / GPT');
             row.append(name);
             const cells = new Map(periods.map(period => [period, row.insertCell()]));
             for (const bucket of group.buckets) {
                 const cell = cells.get(quotaPeriod(bucket));
-                const balance = document.createElement('span');
+                const balance = document.createElement('bdi');
+                balance.dir = 'ltr';
                 balance.textContent = Number.isFinite(bucket.fraction) ? percent.format(bucket.fraction) : '—';
                 const timestamp = Date.parse(bucket.reset);
                 if (Number.isFinite(timestamp)) {
@@ -198,6 +200,7 @@
             const key = document.createElement('dt');
             key.textContent = label;
             const value = document.createElement('dd');
+            if (labels.language === 'ar') value.dir = 'ltr';
             (index === 0 ? contextList : list).append(key, value);
             return value;
         });

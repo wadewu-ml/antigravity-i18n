@@ -10,14 +10,14 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <strong>Türkçe</strong> · <a href="./README.vi.md">Tiếng Việt</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <strong>Türkçe</strong> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a>
     </sub>
   </p>
 </div>
 
 ## Başlarken
 
-Türkçe ve Vietnamca bu yerel test sürümüne eklendi. Üstteki indirme düğmesi son kararlı sürümü açar. Ayar penceresinin dilini sağ üstteki listeden seçin.
+Türkçe, Vietnamca, İtalyanca ve Arapça bu yerel test sürümüne eklendi. Üstteki indirme düğmesi son kararlı sürümü açar. Ayar penceresinin dilini sağ üstteki listeden seçin.
 
 1. `regravity.exe` dosyasını açın. Yanlış klasör seçildiyse **Change location** ile `Antigravity.exe` dosyasının bulunduğu klasörü seçin.
 2. **Antigravity language** altında **Türkçe** seçin. İsterseniz **Session metrics** ve **Thinking effort slider** seçeneklerini açın. Bu özellikleri orijinal İngilizce arayüzle de kullanabilirsiniz.

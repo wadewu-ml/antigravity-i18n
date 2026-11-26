@@ -223,6 +223,7 @@
 
   function renderSetupLanguage() {
     document.documentElement.lang = setupLanguage;
+    document.documentElement.dir = setupLanguage === 'ar' ? 'rtl' : 'ltr';
     if (elUpdateStatus.textContent) elUpdateStatus.textContent = t('已取消更新');
     languageSelect.value = setupLanguage;
     languageSelect.lang = setupLanguage;
@@ -333,6 +334,7 @@
     if (!st) return;
 
     elAppPathDisplay.textContent = st.AppDir || t('未检测到 Antigravity 安装位置');
+    elAppPathDisplay.dir = st.AppDir ? 'ltr' : 'auto';
     elAppPathDisplay.title = st.AppDir || '';
     elAppVersion.textContent = st.AppVersion ? 'v' + st.AppVersion : t('版本未知');
 
@@ -401,6 +403,7 @@
       chip.title = loc.englishName;
 
       var name = document.createElement('span');
+      name.dir = 'auto';
       name.textContent = loc.name;
       chip.appendChild(name);
       if (loc.coverage < 100) {
