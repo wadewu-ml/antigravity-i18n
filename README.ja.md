@@ -4,12 +4,11 @@
   <p><em>Antigravity が飛び立つ先で、Regravity があなたの言語とコントロールを取り戻します。</em></p>
   <p>Windows 版 <strong>Google Antigravity</strong> 向けポータブル拡張ツール — 9 言語のローカライズ、セッション指標・利用枠パネル、推論強度スライダー。</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe"><img src="https://img.shields.io/badge/Download-v4.3.0_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Windows x64 版 v4.3.0 をダウンロード"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="最新の Windows x64 版 Regravity をダウンロード"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub リリース一覧"></a>
     <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Antigravity App 2.35.1 動作確認済み">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="MIT ライセンス"></a>
   </p>
-  <p><sub>現在配布中の Windows 実行ファイル · <code>regravity.exe</code></sub></p>
   <p>
     <sub>
       <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <strong>日本語</strong> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
@@ -24,7 +23,7 @@
     <img src="./docs/images/language-settings.webp" width="580" alt="Antigravity v2.35.2、簡体字中国語、セッション指標および推論強度スライダーが有効な設定画面">
   </a>
   <br>
-  <sub>Regravity 開発版の設定画面。使用しているクライアントは Antigravity 2.35.2 です。</sub>
+  <sub>Regravity の設定画面。使用しているクライアントは Antigravity 2.35.2 です。</sub>
 </p>
 
 ## 主な機能
@@ -96,7 +95,7 @@
 - **Antigravity の更新後** — 翻訳や拡張機能が消えた場合は、このページ上部の動作確認済みバージョンを確認のうえ、再度ツールから適用してください。
 - **ツールの自動更新** — 起動時に前回の結果をもとに GitHub への確認を判断し、成功後は最低 24 時間間隔を空けます。右上メニュー（`···`）の青い点から変更内容の確認とインプレース更新が可能。自動確認は **このツールについて**（`关于`）で切替でき、手動確認（`检查更新`）も利用できます。更新後は **再適用**（`重新应用`）で新しい翻訳を反映してください。
 
-v4.2.3 をお使いの場合は、[`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe) を手動でダウンロードして実行してください。設定は引き継がれます。
+v4.2.3 以前をお使いの場合は、[`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe) を手動でダウンロードして実行してください。設定は引き継がれます。
 
 ### PowerShell CLI
 

@@ -4,12 +4,11 @@
   <p><em>O Antigravity decola; o Regravity traz tudo de volta para o seu idioma e controle.</em></p>
   <p>Utilitário portátil para <strong>Google Antigravity</strong> no Windows — 9 idiomas de interface, métricas da sessão &amp; cotas de modelos e controle de esforço de raciocínio.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe"><img src="https://img.shields.io/badge/Download-v4.3.0_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Baixar v4.3.0 para Windows x64"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Baixar a versão mais recente do Regravity para Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Versões no GitHub"></a>
     <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Testado com Antigravity App 2.35.1">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="Licença MIT"></a>
   </p>
-  <p><sub>Executável atual para Windows · <code>regravity.exe</code></sub></p>
   <p>
     <sub>
       <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <strong>Português (Brasil)</strong> · <a href="./README.ru.md">Русский</a>
@@ -24,7 +23,7 @@
     <img src="./docs/images/language-settings.webp" width="580" alt="Janela de configurações com Antigravity v2.35.2, chinês simplificado selecionado e métricas da sessão e controle deslizante ativados">
   </a>
   <br>
-  <sub>Janela de configuração da versão de desenvolvimento do Regravity com o Antigravity 2.35.2.</sub>
+  <sub>Janela de configuração do Regravity com o Antigravity 2.35.2.</sub>
 </p>
 
 ## O que está incluído
@@ -96,7 +95,7 @@ Ative **Controle de esforço de raciocínio** (`思考强度滑块`) e aplique a
 - **Após atualizar o Antigravity** — Se a tradução ou os controles desaparecerem, confira a versão compatível no topo desta página e aplique novamente as configurações.
 - **Atualizações automáticas** — Ao abrir, usa o resultado da verificação anterior para decidir se consulta o GitHub e aguarda ao menos 24 horas após um sucesso. Um ponto azul no menu superior direito (`···`) indica nova versão. Pode ser desativada em **Sobre** (`关于`), mantendo a verificação manual (`检查更新`). Depois de atualizar, clique em **Reaplicar** (`重新应用`).
 
-Se você usa a v4.2.3, baixe e execute [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe) manualmente. Suas configurações serão mantidas.
+Se você usa a v4.2.3 ou anterior, baixe e execute [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe) manualmente. Suas configurações serão mantidas.
 
 ### CLI do PowerShell
 

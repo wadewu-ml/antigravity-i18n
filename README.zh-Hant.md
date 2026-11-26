@@ -4,12 +4,11 @@
   <p><em>反重力起飛，Regravity 讓它落地——回歸你的語言與掌控。</em></p>
   <p>專為 Windows 版 <strong>Google Antigravity</strong> 打造的可攜式增強工具：九種介面語言、會話指標與模型額度，以及思考強度滑桿。</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe"><img src="https://img.shields.io/badge/Download-v4.3.0_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下載 Windows x64 版 v4.3.0"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下載最新版 Windows x64 Regravity"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 版本記錄"></a>
     <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="已驗證適用 Antigravity App 2.35.1">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="MIT 授權條款"></a>
   </p>
-  <p><sub>目前的 Windows 執行檔 · <code>regravity.exe</code></sub></p>
   <p>
     <sub>
       <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <strong>繁體中文</strong> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a>
@@ -24,7 +23,7 @@
     <img src="./docs/images/language-settings.webp" width="580" alt="Regravity 設定視窗，顯示 Antigravity v2.35.2、已選取簡體中文，並同時開啟會話指標與思考強度滑桿">
   </a>
   <br>
-  <sub>Regravity 開發版設定視窗，圖中用戶端為 Antigravity 2.35.2。</sub>
+  <sub>Regravity 設定視窗，圖中用戶端為 Antigravity 2.35.2。</sub>
 </p>
 
 ## 核心能力
@@ -96,7 +95,7 @@
 - **Antigravity 更新後** — 若翻譯或增強元件消失，請先對照頂端已驗證的用戶端版本，再重新開啟工具套用設定即可。
 - **工具自動檢查更新** — 啟動時依上次檢查結果決定是否查詢 GitHub，成功後至少間隔 24 小時再查。右上角選單（`···`）出現藍點表示有新版本，點開可查看更新說明並就地下載重啟。可在 **關於**（`关于`）關閉自動檢查，或隨時手動點擊 **檢查更新**（`检查更新`）。工具更新後請點選 **重新套用**（`重新应用`）套用新譯文。
 
-如果你使用 v4.2.3，請手動下載並執行 [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe)，原有設定會保留。
+如果你使用 v4.2.3 或更早版本，請手動下載並執行 [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe)，原有設定會保留。
 
 ### 命令列用法
 

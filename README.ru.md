@@ -4,12 +4,11 @@
   <p><em>Antigravity взлетает — Regravity возвращает его на ваш язык и под ваш контроль.</em></p>
   <p>Переносимая утилита для <strong>Google Antigravity</strong> под Windows — 9 языков интерфейса, показатели сессии и квоты моделей, а также ползунок уровня рассуждений.</p>
   <p>
-    <a href="https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe"><img src="https://img.shields.io/badge/Download-v4.3.0_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Скачать v4.3.0 для Windows x64"></a>
+    <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Скачать последнюю версию Regravity для Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Выпуски на GitHub"></a>
     <img src="https://img.shields.io/badge/Antigravity-2.35.1_tested-18181B?style=flat" alt="Проверено с Antigravity App 2.35.1">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-18181B?style=flat" alt="Лицензия MIT"></a>
   </p>
-  <p><sub>Текущий файл для Windows · <code>regravity.exe</code></sub></p>
   <p>
     <sub>
       <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <strong>Русский</strong>
@@ -24,7 +23,7 @@
     <img src="./docs/images/language-settings.webp" width="580" alt="Окно настроек с Antigravity v2.35.2, выбранным упрощённым китайским и включёнными показателями сессии и ползунком">
   </a>
   <br>
-  <sub>Окно настроек версии Regravity для разработки с клиентом Antigravity 2.35.2.</sub>
+  <sub>Окно настроек Regravity с клиентом Antigravity 2.35.2.</sub>
 </p>
 
 ## Что внутри
@@ -96,7 +95,7 @@
 - **После обновления Antigravity** — Если перевод или элементы пропали, сверьте поддерживаемую версию в начале страницы и снова примените настройки.
 - **Автообновление утилиты** — При запуске использует результат предыдущей проверки и после успешной проверки ждёт не менее 24 часов. Синяя точка в верхнем правом меню (`···`) сигнализирует о новой версии. Автопроверку можно отключить в разделе **О программе** (`关于`), ручная проверка (`检查更新`) остаётся доступной. После обновления нажмите **Применить повторно** (`重新应用`).
 
-Если вы используете v4.2.3, скачайте и запустите [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/download/v4.3.0/regravity.exe) вручную. Ваши настройки сохранятся.
+Если вы используете v4.2.3 или более раннюю версию, скачайте и запустите [`regravity.exe`](https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe) вручную. Ваши настройки сохранятся.
 
 ### PowerShell CLI
 
