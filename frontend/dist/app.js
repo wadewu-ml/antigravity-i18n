@@ -799,6 +799,7 @@
         app.GetVersion().then(function (v) {
           if (v) {
             elAppVersionBadge.textContent = 'v' + v;
+            document.getElementById('menuVersion').textContent = elAppVersionBadge.textContent;
             toolVersion = v;
             app.UpdateWindowReady();
             checkOnStartup();

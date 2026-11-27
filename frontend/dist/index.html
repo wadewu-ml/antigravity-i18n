@@ -38,7 +38,7 @@
         <summary aria-label="更多操作" title="更多操作"><span aria-hidden="true"></span></summary>
         <div class="action-list">
           <button id="btnCheckUpdate" data-en="Check for updates">检查更新</button>
-          <button id="btnAbout" data-en="About">关于</button>
+          <button id="btnAbout"><span data-en="About">关于</span> <bdi class="version-tag" id="menuVersion" dir="ltr"></bdi></button>
           <button class="restore-item hidden" id="btnRestore" data-en="Restore original">还原官方版本</button>
         </div>
       </details>
@@ -107,20 +107,22 @@
 
   <dialog class="modal-box" id="aboutModal" aria-labelledby="aboutTitle">
     <h3 id="aboutTitle">Regravity <span class="version-tag" id="appVersionBadge"></span></h3>
-    <p class="modal-desc" data-en="A portable tool for translating Google Antigravity and adding session metrics and a thinking effort slider.">
-      为 Google Antigravity 桌面应用提供多语言本地化、会话指标与思考强度滑块的单文件工具，即开即用。
-    </p>
-    <ul class="about-features">
-      <li><b data-en="Restore the original">按字节还原</b><span data-en=" — Regravity keeps a clean backup so you can restore the original app exactly.">：应用前保留一份干净的 app.asar，还原后与官方版本逐字节一致。</span></li>
-      <li><b data-en="Session metrics">会话指标</b><span data-en=" — Hover over the ring beside the model picker to see context usage, remaining quota, and reset times. Click to pin the details.">：悬停在模型选择器旁的圆环上，查看上下文用量、模型剩余额度和重置时间。点击可固定详情。</span></li>
-      <li><b data-en="Thinking effort slider">思考强度滑块</b><span data-en=" — Drag the slider in the model menu and release it to set the thinking effort.">：在模型选择菜单中拖动滑块调节当前模型的思考强度，松开即生效。</span></li>
-      <li><b data-en="Verification and rollback">完整校验与回滚</b><span data-en=" — Regravity verifies the archive and rolls back if applying a change fails.">：重算 offset 与 integrity，任何一步失败都会自动恢复原状。</span></li>
-    </ul>
-    <p class="modal-note" data-en="Regravity is a community project and is not affiliated with Antigravity.">本工具为社区维护的非官方本地化工具，与 Antigravity 官方无关。</p>
-    <label class="feature-setting auto-update-setting">
-      <span data-en="Check for updates automatically">自动检查更新</span>
-      <input class="setting-switch" type="checkbox" role="switch" id="autoCheckUpdates" checked>
-    </label>
+    <div class="about-body">
+      <p class="modal-desc" data-en="A portable tool for translating Google Antigravity and adding session metrics and a thinking effort slider.">
+        为 Google Antigravity 桌面应用提供多语言本地化、会话指标与思考强度滑块的单文件工具，即开即用。
+      </p>
+      <ul class="about-features">
+        <li><b data-en="Restore the original">按字节还原</b><span data-en=" — Regravity keeps a clean backup so you can restore the original app exactly.">：应用前保留一份干净的 app.asar，还原后与官方版本逐字节一致。</span></li>
+        <li><b data-en="Session metrics">会话指标</b><span data-en=" — Hover over the ring beside the model picker to see context usage, remaining quota, and reset times. Click to pin the details.">：悬停在模型选择器旁的圆环上，查看上下文用量、模型剩余额度和重置时间。点击可固定详情。</span></li>
+        <li><b data-en="Thinking effort slider">思考强度滑块</b><span data-en=" — Drag the slider in the model menu and release it to set the thinking effort.">：在模型选择菜单中拖动滑块调节当前模型的思考强度，松开即生效。</span></li>
+        <li><b data-en="Verification and rollback">完整校验与回滚</b><span data-en=" — Regravity verifies the archive and rolls back if applying a change fails.">：重算 offset 与 integrity，任何一步失败都会自动恢复原状。</span></li>
+      </ul>
+      <p class="modal-note" data-en="Regravity is a community project and is not affiliated with Antigravity.">本工具为社区维护的非官方本地化工具，与 Antigravity 官方无关。</p>
+      <label class="feature-setting auto-update-setting">
+        <span data-en="Check for updates automatically">自动检查更新</span>
+        <input class="setting-switch" type="checkbox" role="switch" id="autoCheckUpdates" checked>
+      </label>
+    </div>
     <div class="modal-actions">
       <button class="text-link" id="btnOpenLogs" aria-haspopup="dialog" data-en="Activity log">运行日志</button>
       <button class="btn btn-primary" id="btnCloseAbout" autofocus data-en="OK">确定</button>

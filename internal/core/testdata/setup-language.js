@@ -34,6 +34,7 @@ verify(async () => {
     selectLanguage(option.value);
     check('window direction', document.documentElement.dir, option.value === 'ar' ? 'rtl' : 'ltr');
     if (option.value === 'ar') check('installation path direction', byId('appPathDisplay').dir, 'ltr');
+    check('menu keeps the tool version', byId('btnAbout').querySelector('#menuVersion').textContent, 'vtest');
     check('document language', document.documentElement.lang, option.value);
     check('saved language', localStorage.getItem('setupLanguage'), option.value);
     check('pending selection survives', byId('pendingLanguage').textContent.includes('Tiếng Việt'), true);

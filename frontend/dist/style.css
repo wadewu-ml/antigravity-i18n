@@ -76,6 +76,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
   padding: 7px 11px; text-align: start; border: 0; border-radius: 7px;
   background: transparent; color: var(--ink);
 }
+#btnAbout { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .action-list button:hover:enabled, .action-list button:focus-visible { background: var(--canvas); }
 .restore-item { position: relative; margin-top: 8px; }
 .restore-item::before {
@@ -234,6 +235,14 @@ dialog::backdrop { background: rgb(30 30 35 / 24%); backdrop-filter: blur(4px); 
 .modal-box h3 { font-size: 19px; letter-spacing: -.3px; }
 .modal-box p, .about-features { margin-top: 10px; }
 .modal-desc, .about-features, .modal-note { color: var(--secondary); line-height: 1.6; }
+#aboutModal[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  padding-inline: 0;
+}
+#aboutModal > h3, #aboutModal > .modal-actions { margin-inline: 23px; }
+.about-body { overflow-y: auto; padding: 0 23px 5px; }
 .about-features { padding-inline-start: 20px; }
 .about-features li + li { margin-top: 6px; }
 .modal-actions { justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
