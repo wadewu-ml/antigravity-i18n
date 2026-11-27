@@ -72,22 +72,30 @@ type Release struct {
 	hasSums   bool
 }
 
-func request(ctx context.Context, method, url string) (*http.Response, error) {
+func sendRequest(ctx context.Context, c *http.Client, method, url string) (*http.Response, error) {
 	req, err := http.NewRequestWithContext(ctx, method, url, nil)
 	if err != nil {
 		return nil, err
 	}
 	req.Header.Set("User-Agent", "Regravity")
-	res, err := client.Do(req)
+	return c.Do(req)
+}
+
+func responseError(res *http.Response) error {
+	if res.StatusCode == http.StatusTooManyRequests || (res.StatusCode == http.StatusForbidden && (res.Header.Get("X-RateLimit-Remaining") == "0" || res.Header.Get("Retry-After") != "")) {
+		return &RateLimitError{RetryAt: rateLimitDeadline(res.Header, time.Now())}
+	}
+	return fmt.Errorf("更新请求失败（HTTP %d）", res.StatusCode)
+}
+
+func request(ctx context.Context, method, url string) (*http.Response, error) {
+	res, err := sendRequest(ctx, client, method, url)
 	if err != nil {
 		return nil, err
 	}
 	if res.StatusCode != http.StatusOK {
 		res.Body.Close()
-		if res.StatusCode == http.StatusTooManyRequests || (res.StatusCode == http.StatusForbidden && (res.Header.Get("X-RateLimit-Remaining") == "0" || res.Header.Get("Retry-After") != "")) {
-			return nil, &RateLimitError{RetryAt: rateLimitDeadline(res.Header, time.Now())}
-		}
-		return nil, fmt.Errorf("更新请求失败（HTTP %d）", res.StatusCode)
+		return nil, responseError(res)
 	}
 	return res, nil
 }
@@ -102,18 +110,38 @@ func get(ctx context.Context, url string) (io.ReadCloser, error) {
 
 func versionTag(version string) string { return "v" + strings.TrimPrefix(version, "v") }
 
+func latestReleaseTag(ctx context.Context) (string, error) {
+	// GitHub supplies the stable tag in the redirect. The HTML page it points
+	// to can time out even while the release API and downloads are reachable.
+	probe := *client
+	var redirectURL string
+	probe.CheckRedirect = func(req *http.Request, _ []*http.Request) error {
+		redirectURL = req.URL.String()
+		return http.ErrUseLastResponse
+	}
+	res, err := sendRequest(ctx, &probe, http.MethodHead, Repository+"/releases/latest")
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+	if res.StatusCode >= 400 {
+		return "", responseError(res)
+	}
+	tag, ok := strings.CutPrefix(redirectURL, Repository+"/releases/tag/")
+	if !ok || !semver.IsValid(tag) || semver.Prerelease(tag) != "" {
+		return "", errors.New("无法比较当前工具与正式发布的版本号。")
+	}
+	return tag, nil
+}
+
 func Check(ctx context.Context, current string) (*Release, error) {
 	ctx, cancel := context.WithTimeout(ctx, 20*time.Second)
 	defer cancel()
-	// GitHub's public latest-release link resolves to the stable tag without
-	// consuming an anonymous REST request.
-	page, err := request(ctx, http.MethodHead, Repository+"/releases/latest")
+	tag, err := latestReleaseTag(ctx)
 	if err != nil {
 		return nil, err
 	}
-	page.Body.Close()
-	tag, ok := strings.CutPrefix(page.Request.URL.String(), Repository+"/releases/tag/")
-	if !ok || !semver.IsValid(tag) || semver.Prerelease(tag) != "" || !semver.IsValid(versionTag(current)) {
+	if !semver.IsValid(versionTag(current)) {
 		return nil, errors.New("无法比较当前工具与正式发布的版本号。")
 	}
 	if semver.Compare(tag, versionTag(current)) <= 0 {

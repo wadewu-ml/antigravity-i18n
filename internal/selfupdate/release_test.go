@@ -55,20 +55,23 @@ func (f transportFunc) RoundTrip(req *http.Request) (*http.Response, error) { re
 
 func TestCheckPublicRelease(t *testing.T) {
 	const tag = "v4.0.10"
+	const tagURL = Repository + "/releases/tag/" + tag
 	const payload = "GUI package"
 	hash := fmt.Sprintf("%x", sha256.Sum256([]byte(payload)))
 	saved := client
 	t.Cleanup(func() { client = saved })
 	for _, tc := range []struct {
-		current, page                       string
+		current, location                   string
 		available, limited, badSum, wantErr bool
 	}{
-		{current: "4.0.10", page: tag},
-		{current: "4.1.0", page: tag},
-		{current: "4.0.9", page: tag, available: true},
-		{current: "4.0.9", page: tag, available: true, limited: true},
-		{current: "4.0.9", page: tag, limited: true, badSum: true, wantErr: true},
-		{current: "4.0.9", page: tag + "-beta.1", wantErr: true},
+		{current: "4.0.10", location: tagURL},
+		{current: "4.1.0", location: tagURL},
+		{current: "4.0.9", location: tagURL, available: true},
+		{current: "4.0.9", location: "/wadewu-ml/regravity/releases/tag/" + tag, available: true},
+		{current: "4.0.9", location: tagURL, available: true, limited: true},
+		{current: "4.0.9", location: tagURL, limited: true, badSum: true, wantErr: true},
+		{current: "4.0.9", location: tagURL + "-beta.1", wantErr: true},
+		{current: "4.0.9", location: "https://github.com/other/repo/releases/tag/" + tag, wantErr: true},
 	} {
 		apiCalls := 0
 		client = &http.Client{Transport: transportFunc(func(req *http.Request) (*http.Response, error) {
@@ -76,8 +79,10 @@ func TestCheckPublicRelease(t *testing.T) {
 			switch req.Method + " " + req.URL.String() {
 			case "HEAD " + Repository + "/releases/latest":
 				res.StatusCode = 302
-				res.Header.Set("Location", Repository+"/releases/tag/"+tc.page)
-			case "HEAD " + Repository + "/releases/tag/" + tc.page:
+				res.Header.Set("Location", tc.location)
+			case "HEAD " + tagURL:
+				t.Error("version discovery fetched the HTML release page")
+				res.StatusCode = http.StatusGatewayTimeout
 			case "GET " + tagAPI + tag:
 				apiCalls++
 				if tc.limited {
@@ -95,6 +100,9 @@ func TestCheckPublicRelease(t *testing.T) {
 			case "HEAD " + Repository + "/releases/download/" + tag + "/" + exeAsset:
 				res.ContentLength = int64(len(payload))
 			case "GET " + Repository + "/releases/download/" + tag + "/" + exeAsset:
+				res.StatusCode = http.StatusFound
+				res.Header.Set("Location", "https://release-assets.githubusercontent.com/test-package")
+			case "GET https://release-assets.githubusercontent.com/test-package":
 				res.Body = io.NopCloser(strings.NewReader(payload))
 			default:
 				t.Fatalf("unexpected update request: %s %s", req.Method, req.URL)
