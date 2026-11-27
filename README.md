@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity icon">
   <h1>Regravity</h1>
   <p><em>Antigravity takes off; Regravity brings it back to your language and control.</em></p>
-  <p>The portable Regravity app provides 18 translation packs for <strong>Google Antigravity</strong> on Windows, plus session metrics, model quotas, and a thinking-effort slider. The Regravity settings window supports 19 languages. Czech, Hungarian, and Bulgarian are available in the development build.</p>
+  <p>The portable Regravity app provides 18 translation packs for <strong>Google Antigravity</strong> on Windows, plus session metrics, model quotas, and a thinking-effort slider. The Regravity settings window supports 19 languages.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Download latest Regravity for Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub Releases"></a>

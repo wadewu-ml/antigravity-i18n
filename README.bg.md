@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Икона на Regravity">
   <h1>Regravity</h1>
-  <p>Преносим инструмент за Windows, който превежда Google Antigravity и добавя показатели за сесията и плъзгач за нивото на разсъждение. Версията в разработка предлага 18 пакета за превод и 19 езика за настройките, включително български.</p>
+  <p>Преносим инструмент за Windows, който превежда Google Antigravity и добавя показатели за сесията и плъзгач за нивото на разсъждение. Regravity предлага 18 пакета за превод и 19 езика за настройките, включително български.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Изтегляне на стабилната версия за Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Издания в GitHub"></a>
@@ -17,7 +17,7 @@
 
 ## Първи стъпки
 
-1. Стартирайте `regravity.exe` от версията в разработка. Изберете **Български** от горния списък, за да смените езика на настройките на Regravity.
+1. Стартирайте `regravity.exe`. Изберете **Български** от горния списък, за да смените езика на настройките на Regravity.
 2. В раздела **Език на Antigravity** изберете **Български**. По желание включете **Показатели за сесията** и **Плъзгач за нивото на разсъждение**. Ако пътят е грешен, натиснете **Промяна на местоположението** и посочете папката с `Antigravity.exe`.
 3. Запазете работата си, затворете Antigravity и натиснете **Прилагане на промените**. След като Antigravity се отвори отново, можете да затворите Regravity.
 

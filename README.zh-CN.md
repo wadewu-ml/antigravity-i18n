@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity 图标">
   <h1>Regravity</h1>
   <p><em>反重力起飞，Regravity 让它落地——回归你的语言与掌控。</em></p>
-  <p>便携工具 Regravity 为 Windows 版 <strong>Google Antigravity</strong> 提供 18 个翻译包，并支持会话指标、模型额度和思考强度滑块。Regravity 设置窗口支持 19 种语言。捷克语、匈牙利语和保加利亚语目前可在开发版中使用。</p>
+  <p>便携工具 Regravity 为 Windows 版 <strong>Google Antigravity</strong> 提供 18 个翻译包，并支持会话指标、模型额度和思考强度滑块。Regravity 设置窗口支持 19 种语言。</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下载最新版 Windows x64 Regravity"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 发布记录"></a>

@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Ikona Regravity">
   <h1>Regravity</h1>
-  <p>Přenosný nástroj pro Windows překládá Google Antigravity a přidává metriky relace a posuvník úrovně uvažování. Vývojová verze nabízí 18 překladových balíčků a 19 jazyků nastavení včetně češtiny.</p>
+  <p>Přenosný nástroj pro Windows překládá Google Antigravity a přidává metriky relace a posuvník úrovně uvažování. Regravity nabízí 18 překladových balíčků a 19 jazyků nastavení včetně češtiny.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Stáhnout stabilní verzi pro Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Vydání na GitHubu"></a>
@@ -17,7 +17,7 @@
 
 ## Začínáme
 
-1. Spusťte `regravity.exe` z vývojové verze a v horní nabídce vyberte **Čeština**. Tím změníte jazyk nastavení Regravity.
+1. Spusťte `regravity.exe` a v horní nabídce vyberte **Čeština**. Tím změníte jazyk nastavení Regravity.
 2. V části **Jazyk Antigravity** vyberte **Čeština**. Podle potřeby zapněte **Metriky relace** a **Posuvník úrovně uvažování**. Pokud cesta nesouhlasí, klikněte na **Změnit umístění** a vyberte složku s `Antigravity.exe`.
 3. Uložte práci, zavřete Antigravity a klikněte na **Použít změny**. Jakmile se Antigravity znovu spustí, můžete Regravity zavřít.
 

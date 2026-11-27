@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Значок Regravity">
   <h1>Regravity</h1>
   <p><em>Antigravity взлетает — Regravity возвращает его на ваш язык и под ваш контроль.</em></p>
-  <p>Портативная утилита Regravity предлагает 18 пакетов перевода для <strong>Google Antigravity</strong> под Windows, а также показатели сессии, квоты моделей и ползунок уровня рассуждений. Окно настроек Regravity доступно на 19 языках. Чешский, венгерский и болгарский доступны в версии для тестирования.</p>
+  <p>Портативная утилита Regravity предлагает 18 пакетов перевода для <strong>Google Antigravity</strong> под Windows, а также показатели сессии, квоты моделей и ползунок уровня рассуждений. Окно настроек Regravity доступно на 19 языках.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Скачать последнюю версию Regravity для Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Выпуски на GitHub"></a>

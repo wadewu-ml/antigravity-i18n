@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity-Symbol">
   <h1>Regravity</h1>
   <p><em>Antigravity hebt ab; Regravity holt es zurück in deine Sprache und unter deine Kontrolle.</em></p>
-  <p>Das portable Tool Regravity bietet 18 Sprachpakete für <strong>Google Antigravity</strong> unter Windows sowie Sitzungsmetriken, Modellkontingente und einen Regler für den Denkaufwand. Das Einstellungsfenster von Regravity ist in 19 Sprachen verfügbar. Tschechisch, Ungarisch und Bulgarisch sind in der Entwicklungsversion verfügbar.</p>
+  <p>Das portable Tool Regravity bietet 18 Sprachpakete für <strong>Google Antigravity</strong> unter Windows sowie Sitzungsmetriken, Modellkontingente und einen Regler für den Denkaufwand. Das Einstellungsfenster von Regravity ist in 19 Sprachen verfügbar.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Aktuelles Regravity für Windows x64 herunterladen"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub-Versionen"></a>

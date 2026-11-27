@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="A Regravity ikonja">
   <h1>Regravity</h1>
-  <p>Hordozható Windows-eszköz a Google Antigravity felületének lefordításához. A fejlesztői változat 18 fordítási csomagot kínál, a Regravity beállítóablakában pedig 19 nyelv érhető el, köztük a magyar.</p>
+  <p>Hordozható Windows-eszköz a Google Antigravity felületének lefordításához. A Regravity 18 fordítási csomagot kínál, a Regravity beállítóablakában pedig 19 nyelv érhető el, köztük a magyar.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="A stabil kiadás letöltése Windows x64 rendszerre"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Kiadások a GitHubon"></a>
@@ -17,7 +17,7 @@
 
 ## Első lépések
 
-1. Indítsa el a fejlesztői változat `regravity.exe` fájlját. A felső listában válassza a **Magyar** lehetőséget a beállítóablak nyelvének módosításához.
+1. Indítsa el a `regravity.exe` fájlt. A felső listában válassza a **Magyar** lehetőséget a beállítóablak nyelvének módosításához.
 2. Az Antigravity nyelvének beállításánál válassza a **Magyar** lehetőséget. Igény szerint kapcsolja be a **Munkamenet-mutatók** és a **Gondolkodási szint csúszkája** funkciót. Ha a program helye hibás, a **Hely módosítása** gombbal válassza ki az `Antigravity.exe` fájlt tartalmazó mappát.
 3. Mentse a munkáját, zárja be az Antigravityt, majd kattintson a **Módosítások alkalmazása** gombra. Az Antigravity újraindulása után bezárhatja a Regravityt.
 

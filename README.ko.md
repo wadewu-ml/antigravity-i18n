@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity 아이콘">
   <h1>Regravity</h1>
   <p><em>Antigravity가 날아오를 때, Regravity가 당신의 언어와 제어권을 되찾아 줍니다.</em></p>
-  <p>휴대용 도구인 Regravity는 Windows용 <strong>Google Antigravity</strong>에 번역 팩 18개와 세션 지표, 모델 한도, 추론 강도 슬라이더를 제공합니다. Regravity 설정 창은 19개 언어를 지원합니다. 체코어, 헝가리어, 불가리아어는 개발 버전에서 사용할 수 있습니다.</p>
+  <p>휴대용 도구인 Regravity는 Windows용 <strong>Google Antigravity</strong>에 번역 팩 18개와 세션 지표, 모델 한도, 추론 강도 슬라이더를 제공합니다. Regravity 설정 창은 19개 언어를 지원합니다.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="최신 Windows x64용 Regravity 다운로드"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 릴리스"></a>

@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Ikon Regravity">
   <h1>Regravity</h1>
-  <p>Alat portabel untuk Windows yang menerjemahkan Google Antigravity serta menambahkan metrik sesi dan penggeser tingkat penalaran. Tersedia 18 paket terjemahan untuk Antigravity. Jendela pengaturan Regravity mendukung 19 bahasa. Bahasa Ceko, Hungaria, dan Bulgaria tersedia dalam versi pengembangan.</p>
+  <p>Alat portabel untuk Windows yang menerjemahkan Google Antigravity serta menambahkan metrik sesi dan penggeser tingkat penalaran. Tersedia 18 paket terjemahan untuk Antigravity. Jendela pengaturan Regravity mendukung 19 bahasa.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Unduh rilis stabil untuk Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Rilis di GitHub"></a>

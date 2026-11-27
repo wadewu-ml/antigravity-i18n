@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="أيقونة Regravity">
   <h1>Regravity</h1>
-  <p>أداة محمولة لنظام Windows تترجم واجهة Google Antigravity وتعرض مقاييس الجلسة وحصص النماذج وتتيح ضبط مستوى الاستدلال. تتوفر لواجهة Antigravity 18 حزمة ترجمة، وتدعم نافذة إعدادات Regravity 19 لغة. تتوفر التشيكية والمجرية والبلغارية في النسخة التطويرية.</p>
+  <p>أداة محمولة لنظام Windows تترجم واجهة Google Antigravity وتعرض مقاييس الجلسة وحصص النماذج وتتيح ضبط مستوى الاستدلال. تتوفر لواجهة Antigravity 18 حزمة ترجمة، وتدعم نافذة إعدادات Regravity 19 لغة.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="تنزيل الإصدار المستقر لنظام Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="الإصدارات على GitHub"></a>

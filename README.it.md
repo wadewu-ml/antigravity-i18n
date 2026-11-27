@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Icona di Regravity">
   <h1>Regravity</h1>
-  <p>Strumento portatile per Windows che traduce Google Antigravity e aggiunge metriche della sessione, quote dei modelli e un cursore per il livello di ragionamento. Per Antigravity sono disponibili 18 pacchetti di traduzione. La finestra delle impostazioni di Regravity supporta 19 lingue. Il ceco, l’ungherese e il bulgaro sono disponibili nella versione di sviluppo.</p>
+  <p>Strumento portatile per Windows che traduce Google Antigravity e aggiunge metriche della sessione, quote dei modelli e un cursore per il livello di ragionamento. Per Antigravity sono disponibili 18 pacchetti di traduzione. La finestra delle impostazioni di Regravity supporta 19 lingue.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Scarica la versione stabile per Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Versioni su GitHub"></a>

@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity アイコン">
   <h1>Regravity</h1>
   <p><em>Antigravity が飛び立つ先で、Regravity があなたの言語とコントロールを取り戻します。</em></p>
-  <p>ポータブルツールの Regravity は Windows 版 <strong>Google Antigravity</strong> 向けに18種類の翻訳パックを提供します。セッション指標・利用枠パネルと推論強度スライダーも利用できます。Regravity の設定画面は19言語に対応しています。チェコ語・ハンガリー語・ブルガリア語は開発版で利用できます。</p>
+  <p>ポータブルツールの Regravity は Windows 版 <strong>Google Antigravity</strong> 向けに18種類の翻訳パックを提供します。セッション指標・利用枠パネルと推論強度スライダーも利用できます。Regravity の設定画面は19言語に対応しています。</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="最新の Windows x64 版 Regravity をダウンロード"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub リリース一覧"></a>
