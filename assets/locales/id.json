@@ -4337,7 +4337,68 @@
     "Describe your Remote Control issue...": "Jelaskan masalah kontrol jarak jauh Anda…",
     "Chief of Staff voice mode is active": "Mode suara Chief of Staff sedang aktif",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Perekaman suara tidak tersedia saat mikrofon Chief of Staff menyala",
-    "Project + Worktree": "Proyek + worktree"
+    "Project + Worktree": "Proyek + worktree",
+    "Ask anything": "Tanyakan apa saja",
+    "Conversation input": "Kolom percakapan",
+    "Unread message": "Pesan belum dibaca",
+    "Question waiting": "Pertanyaan menunggu jawaban",
+    "Subagent needs approval": "Subagen memerlukan persetujuan",
+    "Attached": "lampiran",
+    "Agents Options": "Opsi agen",
+    "Add reaction": "Tambahkan reaksi",
+    "Close details": "Tutup detail",
+    "Resize details panel": "Ubah ukuran panel detail",
+    "Close search": "Tutup pencarian",
+    "Load older": "Muat pesan yang lebih lama",
+    "Searching messages…": "Mencari dalam pesan…",
+    "No matches on this page.": "Tidak ada kecocokan di halaman ini.",
+    "Search settings": "Cari di pengaturan",
+    "Settings search results": "Hasil pencarian pengaturan",
+    "Mention suggestions": "Saran sebutan",
+    "Fork in Current Folder": "Buat cabang di folder saat ini",
+    "Fork in New Git Worktree": "Buat cabang di pohon kerja Git baru",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Membuat pohon kerja Git untuk repositori ini dengan salinan kerja tersendiri.",
+    "Creating git worktree for the forked conversation...": "Membuat pohon kerja Git untuk cabang percakapan…",
+    "Global (all projects)": "Global (semua proyek)",
+    "Org recommended": "Direkomendasikan organisasi",
+    "Org required": "Diwajibkan organisasi",
+    "Required by your organization": "Diwajibkan oleh organisasi Anda",
+    "Disabled by your organization": "Dinonaktifkan oleh organisasi Anda",
+    "Plugins are disabled by your organization.": "Organisasi Anda menonaktifkan plugin.",
+    "The plugin marketplace is disabled by your organization.": "Organisasi Anda menonaktifkan marketplace plugin.",
+    "Plugins are unavailable until your organization's policy loads.": "Plugin akan tersedia setelah kebijakan organisasi Anda dimuat.",
+    "Organization prepaid wallet is empty": "Saldo prabayar organisasi habis",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "Saldo Antigravity organisasi Anda habis. Pembuatan respons dijeda sampai administrator menambah saldo.",
+    "Paste .env entries": "Tempel entri .env",
+    "Enter value (hidden after saving; multiline supported)": "Masukkan nilai (disembunyikan setelah disimpan, mendukung beberapa baris)",
+    "Saved securely. Secret values are hidden after saving.": "Disimpan dengan aman. Nilai rahasia disembunyikan setelah disimpan.",
+    "Configuration saved.": "Konfigurasi disimpan.",
+    "Add your API key or configuration to use this plugin.": "Tambahkan kunci API atau konfigurasi untuk menggunakan plugin ini.",
+    "Couldn't load plugin configuration.": "Konfigurasi plugin gagal dimuat.",
+    "Cloud automation": "Otomatisasi cloud",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Kredensial otomatisasi cloud hampir kedaluwarsa. Perbarui agar eksekusi berlanjut.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Kredensial otomatisasi cloud telah kedaluwarsa. Berikan otorisasi kembali untuk melanjutkan eksekusi terjadwal.",
+    "Skipped command": "Perintah dilewati",
+    "Open conversation": "Buka percakapan",
+    "Hide from Sidebar": "Sembunyikan dari bilah samping",
+    "Reply in thread": "Balas di utas",
+    "Filter feed": "Filter umpan",
+    "Feeds": "Umpan aktivitas",
+    "Environment URL": "URL lingkungan",
+    "Platform Token": "Token platform",
+    "API key for Arize AX": "Kunci API untuk Arize AX",
+    "API key for Meshy 3D generation": "Kunci API untuk pembuatan 3D Meshy",
+    "Dynatrace API token": "Token API Dynatrace",
+    "Your Dynatrace environment URL": "URL lingkungan Dynatrace Anda",
+    "Restore split view": "Pulihkan tampilan terpisah",
+    "Arize API Key": "Kunci API untuk Arize AX",
+    "Meshy API Key": "Kunci API untuk pembuatan 3D Meshy",
+    "Reply in Thread": "Balas di utas",
+    "Needs you": "Diperlukan tindakan",
+    "Close search (Esc)": "Tutup pencarian (Esc)",
+    "Next (newer) match (Enter)": "Kecocokan berikutnya (Enter)",
+    "Previous (older) match (Shift+Enter)": "Kecocokan sebelumnya (Shift+Enter)",
+    "Loading…": "Memuat…"
   },
   "patterns": [
     {
@@ -5938,6 +5999,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Tidak ada pengaturan yang cocok dengan “{1}”.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

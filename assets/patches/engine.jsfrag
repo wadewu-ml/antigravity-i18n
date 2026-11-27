@@ -131,6 +131,7 @@ const agValueRules = Object.fromEntries(
 );
 
 const agAttributeNames = ['aria-label', 'title', 'placeholder', 'data-tooltip', 'alt'];
+const agFloatingComposerPreview = '[data-testid="aux-pane-floating-composer-trigger"] > span:first-child';
 const agContentSelector = [
     // Antigravity 2.15 uses its own file viewer and message containers rather
     // than Monaco or role=log for these surfaces. Their text is user content.
@@ -141,6 +142,7 @@ const agContentSelector = [
     // Side-question follow-ups are the user's own text, same as the main composer.
     '[data-testid="side-question-followup-user"]',
     '[data-testid="side-question-question"] > .truncate',
+    agFloatingComposerPreview,
     // Antigravity 2.29 renders spoken replies one word per <span> for live
     // highlighting. These are conversation content, even when a word or a
     // complete utterance happens to equal a UI label such as "Run".
@@ -641,11 +643,47 @@ function translateTextNode(node) {
         agWriteText(node, source, next);
     }
 }
+
+// The collapsed composer uses one text node for both its placeholder and the
+// user's draft. React can switch between them by changing only the class when
+// the draft itself is "Ask anything". Observe that class on this node alone.
+function translateFloatingComposerPreview(element) {
+    const node = element.firstChild;
+    if (node?.nodeType !== Node.TEXT_NODE) {
+        return;
+    }
+    const source = agSourceText(node);
+    if (element.classList.contains('opacity-60') && source === 'Ask anything') {
+        const output = agLookup(source);
+        if (output) {
+            agWriteText(node, source, output);
+        }
+    } else if (agTextState.delete(node) && node.nodeValue !== source) {
+        node.nodeValue = source;
+    }
+}
+
+const agFloatingComposerObserver = new MutationObserver((mutations) => {
+    for (const { target } of mutations) {
+        const element = target.nodeType === Node.TEXT_NODE ? target.parentElement : target;
+        if (element?.matches(agFloatingComposerPreview)) {
+            translateFloatingComposerPreview(element);
+        }
+    }
+});
+
 function translateAttributes(root) {
     if (root.nodeType !== Node.ELEMENT_NODE) {
         return;
     }
     const element = root;
+    if (element.matches(agFloatingComposerPreview)) {
+        agFloatingComposerObserver.observe(element, {
+            attributes: true, attributeFilter: ['class'], childList: true, characterData: true, subtree: true,
+        });
+        translateFloatingComposerPreview(element);
+        return;
+    }
     // Editors can expose UI labels, while conversation/file content may carry
     // user-supplied Markdown titles or image alt text. Preserve those too,
     // including when a nested node is inserted or its attributes change later.
@@ -660,9 +698,14 @@ function translateAttributes(root) {
         if (outputs?.get(attr) === current) {
             continue;
         }
-        const next = attr === 'aria-label' && element.matches(agModelTriggerSelector)
+        let next = attr === 'aria-label' && element.matches(agModelTriggerSelector)
             ? translateModelTriggerLabel(current)
             : translateString(current);
+        const splitViewSuffix = ' — restore split view';
+        if (attr === 'aria-label' && current?.endsWith(splitViewSuffix) &&
+            element.matches('[data-testid="aux-pane-floating-composer-status"]')) {
+            next = translateString(current.slice(0, -splitViewSuffix.length)) + ' — ' + translateString('Restore split view');
+        }
         if (next === current) {
             outputs?.delete(attr);
             continue;

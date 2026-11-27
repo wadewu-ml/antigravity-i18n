@@ -4351,7 +4351,68 @@
     "Describe your Remote Control issue...": "Descrivi il problema di controllo remoto…",
     "Chief of Staff voice mode is active": "La modalità vocale di Chief of Staff è attiva",
     "Voice recording is unavailable while the Chief of Staff mic is on": "La registrazione audio non è disponibile mentre il microfono di Chief of Staff è attivo",
-    "Project + Worktree": "Progetto + worktree"
+    "Project + Worktree": "Progetto + worktree",
+    "Ask anything": "Chiedi qualsiasi cosa",
+    "Conversation input": "Campo di immissione della conversazione",
+    "Unread message": "Messaggio non letto",
+    "Question waiting": "Domanda in attesa di risposta",
+    "Subagent needs approval": "Il sottoagente richiede un’approvazione",
+    "Attached": "allegati",
+    "Agents Options": "Opzioni agenti",
+    "Add reaction": "Aggiungi reazione",
+    "Close details": "Chiudi dettagli",
+    "Resize details panel": "Ridimensiona il pannello dei dettagli",
+    "Close search": "Chiudi ricerca",
+    "Load older": "Carica messaggi precedenti",
+    "Searching messages…": "Ricerca nei messaggi…",
+    "No matches on this page.": "Nessuna corrispondenza in questa pagina.",
+    "Search settings": "Cerca nelle impostazioni",
+    "Settings search results": "Risultati della ricerca nelle impostazioni",
+    "Mention suggestions": "Suggerimenti per le menzioni",
+    "Fork in Current Folder": "Dirama nella cartella corrente",
+    "Fork in New Git Worktree": "Dirama in un nuovo worktree Git",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Crea un worktree Git di questo repository con una copia di lavoro separata.",
+    "Creating git worktree for the forked conversation...": "Creazione del worktree Git per la conversazione diramata…",
+    "Global (all projects)": "Globale (tutti i progetti)",
+    "Org recommended": "Consigliato dall’organizzazione",
+    "Org required": "Richiesto dall’organizzazione",
+    "Required by your organization": "Richiesto dalla tua organizzazione",
+    "Disabled by your organization": "Disattivato dalla tua organizzazione",
+    "Plugins are disabled by your organization.": "La tua organizzazione ha disattivato i plugin.",
+    "The plugin marketplace is disabled by your organization.": "La tua organizzazione ha disattivato il marketplace dei plugin.",
+    "Plugins are unavailable until your organization's policy loads.": "I plugin saranno disponibili una volta caricato il criterio della tua organizzazione.",
+    "Organization prepaid wallet is empty": "Credito prepagato dell’organizzazione esaurito",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "La tua organizzazione ha esaurito i fondi Antigravity. La generazione riprenderà quando l’amministratore aggiungerà fondi.",
+    "Paste .env entries": "Incolla le voci .env",
+    "Enter value (hidden after saving; multiline supported)": "Inserisci il valore (nascosto dopo il salvataggio, anche su più righe)",
+    "Saved securely. Secret values are hidden after saving.": "Salvataggio sicuro. I valori segreti vengono nascosti dopo il salvataggio.",
+    "Configuration saved.": "Configurazione salvata.",
+    "Add your API key or configuration to use this plugin.": "Aggiungi la chiave API o la configurazione per usare questo plugin.",
+    "Couldn't load plugin configuration.": "Impossibile caricare la configurazione del plugin.",
+    "Cloud automation": "Automazione cloud",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Le credenziali dell’automazione cloud stanno per scadere. Rinnovale per continuare le esecuzioni.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Le credenziali dell’automazione cloud sono scadute. Autorizzala di nuovo per riprendere le esecuzioni pianificate.",
+    "Skipped command": "Comando saltato",
+    "Open conversation": "Apri conversazione",
+    "Hide from Sidebar": "Nascondi dalla barra laterale",
+    "Reply in thread": "Rispondi nella discussione",
+    "Filter feed": "Filtra feed",
+    "Feeds": "Feed attività",
+    "Environment URL": "URL dell’ambiente",
+    "Platform Token": "Token della piattaforma",
+    "API key for Arize AX": "Chiave API per Arize AX",
+    "API key for Meshy 3D generation": "Chiave API per la generazione 3D con Meshy",
+    "Dynatrace API token": "Token API Dynatrace",
+    "Your Dynatrace environment URL": "URL del tuo ambiente Dynatrace",
+    "Restore split view": "Ripristina vista divisa",
+    "Arize API Key": "Chiave API per Arize AX",
+    "Meshy API Key": "Chiave API per la generazione 3D con Meshy",
+    "Reply in Thread": "Rispondi nella discussione",
+    "Needs you": "Azione richiesta",
+    "Close search (Esc)": "Chiudi ricerca (Esc)",
+    "Next (newer) match (Enter)": "Corrispondenza successiva (Enter)",
+    "Previous (older) match (Shift+Enter)": "Corrispondenza precedente (Shift+Enter)",
+    "Loading…": "Caricamento in corso…"
   },
   "patterns": [
     {
@@ -6044,6 +6105,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Nessuna impostazione corrisponde a «{1}».",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

@@ -5499,7 +5499,68 @@
     "Describe your Remote Control issue...": "Mô tả sự cố điều khiển từ xa…",
     "Chief of Staff voice mode is active": "Chế độ giọng nói của Chief of Staff đang hoạt động",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Không thể ghi âm khi micrô của Chief of Staff đang bật",
-    "Project + Worktree": "Dự án + Worktree"
+    "Project + Worktree": "Dự án + Worktree",
+    "Ask anything": "Hãy hỏi bất cứ điều gì",
+    "Conversation input": "Ô nhập nội dung trò chuyện",
+    "Unread message": "Tin nhắn chưa đọc",
+    "Question waiting": "Câu hỏi đang chờ trả lời",
+    "Subagent needs approval": "Tác nhân phụ cần phê duyệt",
+    "Attached": "tệp đính kèm",
+    "Agents Options": "Tùy chọn tác nhân",
+    "Add reaction": "Thêm cảm xúc",
+    "Close details": "Đóng chi tiết",
+    "Resize details panel": "Đổi kích thước bảng chi tiết",
+    "Close search": "Đóng tìm kiếm",
+    "Load older": "Tải tin nhắn cũ hơn",
+    "Searching messages…": "Đang tìm trong tin nhắn…",
+    "No matches on this page.": "Không có kết quả phù hợp trên trang này.",
+    "Search settings": "Tìm trong phần cài đặt",
+    "Settings search results": "Kết quả tìm kiếm trong phần cài đặt",
+    "Mention suggestions": "Gợi ý đề cập",
+    "Fork in Current Folder": "Tạo nhánh trong thư mục hiện tại",
+    "Fork in New Git Worktree": "Tạo nhánh trong cây làm việc Git mới",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Tạo cây làm việc Git có bản sao làm việc riêng cho kho này.",
+    "Creating git worktree for the forked conversation...": "Đang tạo cây làm việc Git cho cuộc trò chuyện đã tách nhánh…",
+    "Global (all projects)": "Toàn cục (mọi dự án)",
+    "Org recommended": "Tổ chức đề xuất",
+    "Org required": "Tổ chức yêu cầu",
+    "Required by your organization": "Tổ chức của bạn yêu cầu",
+    "Disabled by your organization": "Tổ chức của bạn đã tắt",
+    "Plugins are disabled by your organization.": "Tổ chức của bạn đã tắt trình bổ trợ.",
+    "The plugin marketplace is disabled by your organization.": "Tổ chức của bạn đã tắt cửa hàng trình bổ trợ.",
+    "Plugins are unavailable until your organization's policy loads.": "Trình bổ trợ chỉ khả dụng sau khi chính sách của tổ chức được tải.",
+    "Organization prepaid wallet is empty": "Số dư trả trước của tổ chức đã hết",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "Tổ chức của bạn đã hết tiền trong Antigravity. Quá trình tạo nội dung sẽ tiếp tục khi quản trị viên nạp thêm tiền.",
+    "Paste .env entries": "Dán các mục .env",
+    "Enter value (hidden after saving; multiline supported)": "Nhập giá trị (ẩn sau khi lưu, hỗ trợ nhiều dòng)",
+    "Saved securely. Secret values are hidden after saving.": "Được lưu an toàn. Giá trị bí mật sẽ bị ẩn sau khi lưu.",
+    "Configuration saved.": "Đã lưu cấu hình.",
+    "Add your API key or configuration to use this plugin.": "Thêm khóa API hoặc cấu hình để dùng trình bổ trợ này.",
+    "Couldn't load plugin configuration.": "Không tải được cấu hình trình bổ trợ.",
+    "Cloud automation": "Tự động hóa trên đám mây",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Thông tin xác thực tự động hóa đám mây sắp hết hạn. Hãy gia hạn để tiếp tục chạy.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Thông tin xác thực tự động hóa đám mây đã hết hạn. Hãy cấp quyền lại để tiếp tục các lượt chạy theo lịch.",
+    "Skipped command": "Đã bỏ qua lệnh",
+    "Open conversation": "Mở cuộc trò chuyện",
+    "Hide from Sidebar": "Ẩn khỏi thanh bên",
+    "Reply in thread": "Trả lời trong luồng",
+    "Filter feed": "Lọc bảng tin",
+    "Feeds": "Bảng tin",
+    "Environment URL": "URL môi trường",
+    "Platform Token": "Mã thông báo nền tảng",
+    "API key for Arize AX": "Khóa API cho Arize AX",
+    "API key for Meshy 3D generation": "Khóa API để tạo mô hình 3D bằng Meshy",
+    "Dynatrace API token": "Mã thông báo API Dynatrace",
+    "Your Dynatrace environment URL": "URL môi trường Dynatrace của bạn",
+    "Restore split view": "Khôi phục chế độ xem chia đôi",
+    "Arize API Key": "Khóa API cho Arize AX",
+    "Meshy API Key": "Khóa API để tạo mô hình 3D bằng Meshy",
+    "Reply in Thread": "Trả lời trong luồng",
+    "Needs you": "Cần hành động",
+    "Close search (Esc)": "Đóng tìm kiếm (Esc)",
+    "Next (newer) match (Enter)": "Kết quả khớp tiếp theo (Enter)",
+    "Previous (older) match (Shift+Enter)": "Kết quả khớp trước đó (Shift+Enter)",
+    "Loading…": "Đang tải…"
   },
   "inlineMessages": [
     {
@@ -5920,6 +5981,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Không có chế độ cài đặt nào khớp với “{1}”.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

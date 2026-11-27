@@ -4280,7 +4280,68 @@
     "Describe your Remote Control issue...": "원격 제어 문제를 설명해 주세요…",
     "Chief of Staff voice mode is active": "Chief of Staff 음성 모드가 활성화되어 있습니다",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Chief of Staff의 마이크가 켜져 있는 동안에는 녹음할 수 없습니다",
-    "Project + Worktree": "프로젝트 + 워크트리"
+    "Project + Worktree": "프로젝트 + 워크트리",
+    "Ask anything": "무엇이든 물어보세요",
+    "Conversation input": "대화 입력창",
+    "Unread message": "읽지 않은 메시지",
+    "Question waiting": "답변을 기다리는 질문",
+    "Subagent needs approval": "하위 에이전트에 승인이 필요함",
+    "Attached": "개 첨부",
+    "Agents Options": "에이전트 옵션",
+    "Add reaction": "반응 추가",
+    "Close details": "세부정보 닫기",
+    "Resize details panel": "세부정보 패널 크기 조절",
+    "Close search": "검색 닫기",
+    "Load older": "이전 메시지 불러오기",
+    "Searching messages…": "메시지 검색 중…",
+    "No matches on this page.": "이 페이지에 일치하는 항목이 없습니다.",
+    "Search settings": "설정 검색",
+    "Settings search results": "설정 검색 결과",
+    "Mention suggestions": "멘션 제안",
+    "Fork in Current Folder": "현재 폴더에서 대화 분기",
+    "Fork in New Git Worktree": "새 Git 워크트리에서 대화 분기",
+    "Creates a git worktree of this repository, with a working copy of its own.": "이 저장소의 별도 작업 복사본을 갖는 Git 워크트리를 만듭니다.",
+    "Creating git worktree for the forked conversation...": "분기된 대화의 Git 워크트리 만드는 중…",
+    "Global (all projects)": "전역(모든 프로젝트)",
+    "Org recommended": "조직 권장",
+    "Org required": "조직 필수",
+    "Required by your organization": "조직에서 필수로 지정함",
+    "Disabled by your organization": "조직에서 사용 중지함",
+    "Plugins are disabled by your organization.": "조직에서 플러그인을 사용 중지했습니다.",
+    "The plugin marketplace is disabled by your organization.": "조직에서 플러그인 마켓플레이스를 사용 중지했습니다.",
+    "Plugins are unavailable until your organization's policy loads.": "조직 정책을 불러올 때까지 플러그인을 사용할 수 없습니다.",
+    "Organization prepaid wallet is empty": "조직의 선불 잔액이 소진됨",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "조직의 Antigravity 잔액을 모두 사용했습니다. 관리자가 잔액을 충전하면 생성이 재개됩니다.",
+    "Paste .env entries": ".env 항목 붙여넣기",
+    "Enter value (hidden after saving; multiline supported)": "값 입력(저장 후 숨김, 여러 줄 가능)",
+    "Saved securely. Secret values are hidden after saving.": "안전하게 저장되며, 보안 값은 저장 후 숨겨집니다.",
+    "Configuration saved.": "설정이 저장되었습니다.",
+    "Add your API key or configuration to use this plugin.": "이 플러그인을 사용하려면 API 키 또는 설정을 추가하세요.",
+    "Couldn't load plugin configuration.": "플러그인 설정을 불러올 수 없습니다.",
+    "Cloud automation": "클라우드 자동화",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "클라우드 자동화 인증 정보가 곧 만료됩니다. 실행을 계속하려면 갱신하세요.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "클라우드 자동화 인증 정보가 만료되었습니다. 예약 실행을 재개하려면 다시 승인하세요.",
+    "Skipped command": "명령 건너뜀",
+    "Open conversation": "대화 열기",
+    "Hide from Sidebar": "사이드바에서 숨기기",
+    "Reply in thread": "스레드에 답장",
+    "Filter feed": "피드 필터링",
+    "Feeds": "피드",
+    "Environment URL": "환경 URL",
+    "Platform Token": "플랫폼 토큰",
+    "API key for Arize AX": "Arize AX용 API 키",
+    "API key for Meshy 3D generation": "Meshy 3D 생성용 API 키",
+    "Dynatrace API token": "Dynatrace API 토큰",
+    "Your Dynatrace environment URL": "사용 중인 Dynatrace 환경 URL",
+    "Restore split view": "분할 보기 복원",
+    "Arize API Key": "Arize AX용 API 키",
+    "Meshy API Key": "Meshy 3D 생성용 API 키",
+    "Reply in Thread": "스레드에 답장",
+    "Needs you": "조치 필요",
+    "Close search (Esc)": "검색 닫기 (Esc)",
+    "Next (newer) match (Enter)": "다음 검색 결과 (Enter)",
+    "Previous (older) match (Shift+Enter)": "이전 검색 결과 (Shift+Enter)",
+    "Loading…": "불러오는 중…"
   },
   "patterns": [
     {
@@ -5881,6 +5942,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "“{1}”에 일치하는 설정이 없습니다.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

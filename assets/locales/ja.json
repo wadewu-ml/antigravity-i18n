@@ -4280,7 +4280,68 @@
     "Describe your Remote Control issue...": "リモート操作で発生した問題を説明してください…",
     "Chief of Staff voice mode is active": "Chief of Staff の音声モードを使用中です",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Chief of Staff のマイクがオンの間は録音できません",
-    "Project + Worktree": "プロジェクト + ワークツリー"
+    "Project + Worktree": "プロジェクト + ワークツリー",
+    "Ask anything": "何でも聞いてください",
+    "Conversation input": "会話の入力欄",
+    "Unread message": "未読メッセージ",
+    "Question waiting": "回答待ちの質問",
+    "Subagent needs approval": "サブエージェントが承認を待っています",
+    "Attached": "件添付",
+    "Agents Options": "エージェントのオプション",
+    "Add reaction": "リアクションを追加",
+    "Close details": "詳細を閉じる",
+    "Resize details panel": "詳細パネルのサイズを変更",
+    "Close search": "検索を閉じる",
+    "Load older": "古いメッセージを読み込む",
+    "Searching messages…": "メッセージを検索中…",
+    "No matches on this page.": "このページに一致する項目はありません。",
+    "Search settings": "設定を検索",
+    "Settings search results": "設定の検索結果",
+    "Mention suggestions": "メンションの候補",
+    "Fork in Current Folder": "現在のフォルダで会話を分岐",
+    "Fork in New Git Worktree": "新しい Git ワークツリーで会話を分岐",
+    "Creates a git worktree of this repository, with a working copy of its own.": "このリポジトリに独立した作業コピーを持つ Git ワークツリーを作成します。",
+    "Creating git worktree for the forked conversation...": "分岐した会話用の Git ワークツリーを作成中…",
+    "Global (all projects)": "グローバル（すべてのプロジェクト）",
+    "Org recommended": "組織の推奨",
+    "Org required": "組織の必須項目",
+    "Required by your organization": "所属組織が必須にしています",
+    "Disabled by your organization": "所属組織が無効にしています",
+    "Plugins are disabled by your organization.": "所属組織がプラグインを無効にしています。",
+    "The plugin marketplace is disabled by your organization.": "所属組織がプラグインマーケットプレイスを無効にしています。",
+    "Plugins are unavailable until your organization's policy loads.": "所属組織のポリシーが読み込まれるまでプラグインは利用できません。",
+    "Organization prepaid wallet is empty": "組織の前払い残高が不足しています",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "所属組織の Antigravity 残高を使い切りました。管理者が残高を追加するまで生成は一時停止されます。",
+    "Paste .env entries": ".env の項目を貼り付け",
+    "Enter value (hidden after saving; multiline supported)": "値を入力（保存後は非表示、複数行可）",
+    "Saved securely. Secret values are hidden after saving.": "安全に保存され、保存後はシークレットの値が非表示になります。",
+    "Configuration saved.": "設定を保存しました。",
+    "Add your API key or configuration to use this plugin.": "このプラグインを使うには API キーまたは設定を追加してください。",
+    "Couldn't load plugin configuration.": "プラグインの設定を読み込めませんでした。",
+    "Cloud automation": "クラウド自動化",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "クラウド自動化の認証情報は間もなく期限切れになります。実行を継続するには更新してください。",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "クラウド自動化の認証情報が期限切れになりました。スケジュール実行を再開するには再認可してください。",
+    "Skipped command": "コマンドをスキップしました",
+    "Open conversation": "会話を開く",
+    "Hide from Sidebar": "サイドバーに表示しない",
+    "Reply in thread": "スレッドで返信",
+    "Filter feed": "フィードを絞り込む",
+    "Feeds": "フィード",
+    "Environment URL": "環境 URL",
+    "Platform Token": "プラットフォームトークン",
+    "API key for Arize AX": "Arize AX 用の API キー",
+    "API key for Meshy 3D generation": "Meshy の 3D 生成用 API キー",
+    "Dynatrace API token": "Dynatrace API トークン",
+    "Your Dynatrace environment URL": "お使いの Dynatrace 環境の URL",
+    "Restore split view": "分割表示に戻す",
+    "Arize API Key": "Arize AX 用の API キー",
+    "Meshy API Key": "Meshy の 3D 生成用 API キー",
+    "Reply in Thread": "スレッドで返信",
+    "Needs you": "アクションが必要です",
+    "Close search (Esc)": "検索を閉じる (Esc)",
+    "Next (newer) match (Enter)": "次の一致 (Enter)",
+    "Previous (older) match (Shift+Enter)": "前の一致 (Shift+Enter)",
+    "Loading…": "読み込み中…"
   },
   "patterns": [
     {
@@ -5881,6 +5942,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "「{1}」に一致する設定はありません。",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

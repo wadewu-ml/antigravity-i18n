@@ -4371,7 +4371,68 @@
     "Describe your Remote Control issue...": "Beschreiben Sie das Problem mit der Fernsteuerung …",
     "Chief of Staff voice mode is active": "Der Sprachmodus von Chief of Staff ist aktiv",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Solange das Mikrofon von Chief of Staff eingeschaltet ist, sind keine Sprachaufnahmen möglich",
-    "Project + Worktree": "Projekt + Arbeitsbaum"
+    "Project + Worktree": "Projekt + Arbeitsbaum",
+    "Ask anything": "Frag, was du möchtest",
+    "Conversation input": "Unterhaltungseingabe",
+    "Unread message": "Ungelesene Nachricht",
+    "Question waiting": "Frage wartet auf Antwort",
+    "Subagent needs approval": "Subagent benötigt eine Genehmigung",
+    "Attached": "Anhänge",
+    "Agents Options": "Agentenoptionen",
+    "Add reaction": "Reaktion hinzufügen",
+    "Close details": "Details schließen",
+    "Resize details panel": "Größe des Detailbereichs ändern",
+    "Close search": "Suche schließen",
+    "Load older": "Ältere Nachrichten laden",
+    "Searching messages…": "Nachrichten werden durchsucht…",
+    "No matches on this page.": "Keine Treffer auf dieser Seite.",
+    "Search settings": "Einstellungen durchsuchen",
+    "Settings search results": "Suchergebnisse für Einstellungen",
+    "Mention suggestions": "Vorschläge für Erwähnungen",
+    "Fork in Current Folder": "Unterhaltung im aktuellen Ordner verzweigen",
+    "Fork in New Git Worktree": "Unterhaltung in neuem Git-Worktree verzweigen",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Erstellt einen Git-Worktree mit einer eigenen Arbeitskopie dieses Repositorys.",
+    "Creating git worktree for the forked conversation...": "Git-Worktree für die verzweigte Unterhaltung wird erstellt…",
+    "Global (all projects)": "Global (alle Projekte)",
+    "Org recommended": "Von der Organisation empfohlen",
+    "Org required": "Von der Organisation vorgeschrieben",
+    "Required by your organization": "Von deiner Organisation vorgeschrieben",
+    "Disabled by your organization": "Von deiner Organisation deaktiviert",
+    "Plugins are disabled by your organization.": "Deine Organisation hat Plugins deaktiviert.",
+    "The plugin marketplace is disabled by your organization.": "Deine Organisation hat den Plugin-Marktplatz deaktiviert.",
+    "Plugins are unavailable until your organization's policy loads.": "Plugins sind verfügbar, sobald die Richtlinie deiner Organisation geladen ist.",
+    "Organization prepaid wallet is empty": "Prepaid-Guthaben der Organisation aufgebraucht",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "Das Antigravity-Guthaben deiner Organisation ist aufgebraucht. Die Generierung wird fortgesetzt, wenn die Administration Guthaben hinzufügt.",
+    "Paste .env entries": "Einträge aus .env einfügen",
+    "Enter value (hidden after saving; multiline supported)": "Wert eingeben (nach dem Speichern ausgeblendet, mehrere Zeilen möglich)",
+    "Saved securely. Secret values are hidden after saving.": "Wird sicher gespeichert. Geheime Werte werden danach ausgeblendet.",
+    "Configuration saved.": "Konfiguration gespeichert.",
+    "Add your API key or configuration to use this plugin.": "Füge einen API-Schlüssel oder eine Konfiguration hinzu, um dieses Plugin zu verwenden.",
+    "Couldn't load plugin configuration.": "Plugin-Konfiguration konnte nicht geladen werden.",
+    "Cloud automation": "Cloud-Automatisierung",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Die Zugangsdaten der Cloud-Automatisierung laufen bald ab. Erneuere sie, damit die Ausführungen weiterlaufen.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Die Zugangsdaten der Cloud-Automatisierung sind abgelaufen. Autorisiere sie erneut, um geplante Ausführungen fortzusetzen.",
+    "Skipped command": "Befehl übersprungen",
+    "Open conversation": "Unterhaltung öffnen",
+    "Hide from Sidebar": "In der Seitenleiste ausblenden",
+    "Reply in thread": "Im Thread antworten",
+    "Filter feed": "Feed filtern",
+    "Feeds": "Aktivitätsfeeds",
+    "Environment URL": "URL der Umgebung",
+    "Platform Token": "Plattform-Token",
+    "API key for Arize AX": "API-Schlüssel für Arize AX",
+    "API key for Meshy 3D generation": "API-Schlüssel für die 3D-Generierung mit Meshy",
+    "Dynatrace API token": "API-Token für Dynatrace",
+    "Your Dynatrace environment URL": "URL deiner Dynatrace-Umgebung",
+    "Restore split view": "Geteilte Ansicht wiederherstellen",
+    "Arize API Key": "API-Schlüssel für Arize AX",
+    "Meshy API Key": "API-Schlüssel für die 3D-Generierung mit Meshy",
+    "Reply in Thread": "Im Thread antworten",
+    "Needs you": "Aktion erforderlich",
+    "Close search (Esc)": "Suche schließen (Esc)",
+    "Next (newer) match (Enter)": "Nächster Treffer (Enter)",
+    "Previous (older) match (Shift+Enter)": "Vorheriger Treffer (Shift+Enter)",
+    "Loading…": "Laden…"
   },
   "patterns": [
     {
@@ -6064,6 +6125,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Keine Einstellungen für „{1}“ gefunden.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

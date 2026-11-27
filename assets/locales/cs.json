@@ -4327,7 +4327,68 @@
     "Describe your Remote Control issue...": "Popište potíže se vzdáleným ovládáním…",
     "Chief of Staff voice mode is active": "Hlasový režim Chief of Staff je aktivní",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Dokud je mikrofon pro Chief of Staff zapnutý, není možné nahrávat hlas",
-    "Project + Worktree": "Projekt + pracovní strom"
+    "Project + Worktree": "Projekt + pracovní strom",
+    "Ask anything": "Zeptejte se na cokoli",
+    "Conversation input": "Vstup konverzace",
+    "Unread message": "Nepřečtená zpráva",
+    "Question waiting": "Otázka čeká na odpověď",
+    "Subagent needs approval": "Podřízený agent potřebuje schválení",
+    "Attached": "příloh",
+    "Agents Options": "Možnosti agentů",
+    "Add reaction": "Přidat reakci",
+    "Close details": "Zavřít podrobnosti",
+    "Resize details panel": "Změnit velikost panelu podrobností",
+    "Close search": "Zavřít vyhledávání",
+    "Load older": "Načíst starší zprávy",
+    "Searching messages…": "Prohledávání zpráv…",
+    "No matches on this page.": "Na této stránce nejsou žádné shody.",
+    "Search settings": "Vyhledat v nastavení",
+    "Settings search results": "Výsledky vyhledávání v nastavení",
+    "Mention suggestions": "Návrhy zmínek",
+    "Fork in Current Folder": "Rozvětvit v aktuální složce",
+    "Fork in New Git Worktree": "Rozvětvit v novém pracovním stromu Git",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Vytvoří pracovní strom Git tohoto repozitáře s vlastní pracovní kopií.",
+    "Creating git worktree for the forked conversation...": "Vytváření pracovního stromu Git pro rozvětvenou konverzaci…",
+    "Global (all projects)": "Globální (všechny projekty)",
+    "Org recommended": "Doporučeno organizací",
+    "Org required": "Vyžadováno organizací",
+    "Required by your organization": "Vyžaduje vaše organizace",
+    "Disabled by your organization": "Zakázáno vaší organizací",
+    "Plugins are disabled by your organization.": "Vaše organizace zakázala pluginy.",
+    "The plugin marketplace is disabled by your organization.": "Vaše organizace zakázala tržiště pluginů.",
+    "Plugins are unavailable until your organization's policy loads.": "Pluginy budou dostupné po načtení zásad vaší organizace.",
+    "Organization prepaid wallet is empty": "Předplacený kredit organizace je vyčerpán",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "Vaší organizaci došly prostředky v Antigravity. Generování se obnoví, až správce doplní kredit.",
+    "Paste .env entries": "Vložit položky .env",
+    "Enter value (hidden after saving; multiline supported)": "Zadejte hodnotu (po uložení se skryje, lze zadat více řádků)",
+    "Saved securely. Secret values are hidden after saving.": "Ukládá se bezpečně. Tajné hodnoty se po uložení skryjí.",
+    "Configuration saved.": "Konfigurace uložena.",
+    "Add your API key or configuration to use this plugin.": "Pro použití tohoto pluginu přidejte klíč API nebo konfiguraci.",
+    "Couldn't load plugin configuration.": "Konfiguraci pluginu se nepodařilo načíst.",
+    "Cloud automation": "Cloudová automatizace",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Platnost přihlašovacích údajů cloudové automatizace brzy vyprší. Obnovte je, aby běhy pokračovaly.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Platnost přihlašovacích údajů cloudové automatizace vypršela. Opětovným udělením oprávnění obnovíte plánované běhy.",
+    "Skipped command": "Příkaz byl přeskočen",
+    "Open conversation": "Otevřít konverzaci",
+    "Hide from Sidebar": "Skrýt na postranním panelu",
+    "Reply in thread": "Odpovědět ve vlákně",
+    "Filter feed": "Filtrovat kanál",
+    "Feeds": "Kanály",
+    "Environment URL": "URL prostředí",
+    "Platform Token": "Token platformy",
+    "API key for Arize AX": "Klíč API pro Arize AX",
+    "API key for Meshy 3D generation": "Klíč API pro generování 3D modelů v Meshy",
+    "Dynatrace API token": "Token API Dynatrace",
+    "Your Dynatrace environment URL": "URL vašeho prostředí Dynatrace",
+    "Restore split view": "Obnovit rozdělené zobrazení",
+    "Arize API Key": "Klíč API pro Arize AX",
+    "Meshy API Key": "Klíč API pro generování 3D modelů v Meshy",
+    "Reply in Thread": "Odpovědět ve vlákně",
+    "Needs you": "Vyžadována akce",
+    "Close search (Esc)": "Zavřít vyhledávání (Esc)",
+    "Next (newer) match (Enter)": "Další výskyt (Enter)",
+    "Previous (older) match (Shift+Enter)": "Předchozí výskyt (Shift+Enter)",
+    "Loading…": "Načítání…"
   },
   "patterns": [
     {
@@ -6089,6 +6150,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Žádná nastavení neodpovídají dotazu „{1}“.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

@@ -5494,7 +5494,68 @@
     "Describe your Remote Control issue...": "请描述遇到的远程控制问题…",
     "Chief of Staff voice mode is active": "Chief of Staff 的语音模式已开启",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Chief of Staff 正在使用麦克风，暂时无法录音",
-    "Project + Worktree": "项目 + 工作树"
+    "Project + Worktree": "项目 + 工作树",
+    "Ask anything": "有问题尽管问",
+    "Conversation input": "对话输入框",
+    "Unread message": "未读消息",
+    "Question waiting": "问题等待回答",
+    "Subagent needs approval": "子智能体需要批准",
+    "Attached": "项附件",
+    "Agents Options": "智能体选项",
+    "Add reaction": "添加回应",
+    "Close details": "关闭详情",
+    "Resize details panel": "调整详情面板大小",
+    "Close search": "关闭搜索",
+    "Load older": "加载更早的消息",
+    "Searching messages…": "正在搜索消息…",
+    "No matches on this page.": "此页没有匹配项。",
+    "Search settings": "搜索设置",
+    "Settings search results": "设置搜索结果",
+    "Mention suggestions": "提及建议",
+    "Fork in Current Folder": "在当前文件夹中分叉",
+    "Fork in New Git Worktree": "在新的 Git 工作树中分叉",
+    "Creates a git worktree of this repository, with a working copy of its own.": "为此仓库创建一个带独立工作副本的 Git 工作树。",
+    "Creating git worktree for the forked conversation...": "正在为分叉后的对话创建 Git 工作树…",
+    "Global (all projects)": "全局（所有项目）",
+    "Org recommended": "组织推荐",
+    "Org required": "组织要求",
+    "Required by your organization": "你的组织要求使用",
+    "Disabled by your organization": "已被你的组织禁用",
+    "Plugins are disabled by your organization.": "你的组织已禁用插件。",
+    "The plugin marketplace is disabled by your organization.": "你的组织已禁用插件市场。",
+    "Plugins are unavailable until your organization's policy loads.": "正在加载组织策略，暂时无法使用插件。",
+    "Organization prepaid wallet is empty": "组织预付余额已用完",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "你的组织已用完 Antigravity 余额。生成已暂停，管理员充值后才能继续。",
+    "Paste .env entries": "粘贴 .env 条目",
+    "Enter value (hidden after saving; multiline supported)": "输入值（保存后隐藏，支持多行）",
+    "Saved securely. Secret values are hidden after saving.": "安全保存。保存后会隐藏密钥值。",
+    "Configuration saved.": "已保存配置。",
+    "Add your API key or configuration to use this plugin.": "添加 API 密钥或配置信息后即可使用此插件。",
+    "Couldn't load plugin configuration.": "无法加载插件配置。",
+    "Cloud automation": "云端自动化",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "云端自动化凭据即将过期，请更新凭据以继续运行。",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "云端自动化凭据已过期，请重新授权以恢复定时运行。",
+    "Skipped command": "已跳过命令",
+    "Open conversation": "打开对话",
+    "Hide from Sidebar": "从侧边栏隐藏",
+    "Reply in thread": "在线程中回复",
+    "Filter feed": "筛选动态",
+    "Feeds": "动态",
+    "Environment URL": "环境 URL",
+    "Platform Token": "平台令牌",
+    "API key for Arize AX": "Arize AX 的 API 密钥",
+    "API key for Meshy 3D generation": "用于 Meshy 3D 生成的 API 密钥",
+    "Dynatrace API token": "Dynatrace API 令牌",
+    "Your Dynatrace environment URL": "你的 Dynatrace 环境 URL",
+    "Restore split view": "恢复分栏视图",
+    "Arize API Key": "Arize AX 的 API 密钥",
+    "Meshy API Key": "用于 Meshy 3D 生成的 API 密钥",
+    "Reply in Thread": "在线程中回复",
+    "Needs you": "需要操作",
+    "Close search (Esc)": "关闭搜索 (Esc)",
+    "Next (newer) match (Enter)": "下一个匹配项 (Enter)",
+    "Previous (older) match (Shift+Enter)": "上一个匹配项 (Shift+Enter)",
+    "Loading…": "加载中…"
   },
   "inlineMessages": [
     {
@@ -5915,6 +5976,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "没有与“{1}”匹配的设置。",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

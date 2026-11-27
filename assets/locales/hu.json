@@ -4316,7 +4316,68 @@
     "Describe your Remote Control issue...": "Írja le a távoli vezérlési problémát…",
     "Chief of Staff voice mode is active": "A Chief of Staff hangmódja aktív",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Nem lehet hangot rögzíteni, amíg a Chief of Staff mikrofonja be van kapcsolva",
-    "Project + Worktree": "Projekt + munkafa"
+    "Project + Worktree": "Projekt + munkafa",
+    "Ask anything": "Kérdezzen bármit",
+    "Conversation input": "Beszélgetés beviteli mezője",
+    "Unread message": "Olvasatlan üzenet",
+    "Question waiting": "Kérdés vár válaszra",
+    "Subagent needs approval": "A segédügynök jóváhagyásra vár",
+    "Attached": "melléklet",
+    "Agents Options": "Ügynökbeállítások",
+    "Add reaction": "Reakció hozzáadása",
+    "Close details": "Részletek bezárása",
+    "Resize details panel": "Részletek panel átméretezése",
+    "Close search": "Keresés bezárása",
+    "Load older": "Régebbi üzenetek betöltése",
+    "Searching messages…": "Keresés az üzenetekben…",
+    "No matches on this page.": "Ezen az oldalon nincs találat.",
+    "Search settings": "Keresés a beállításokban",
+    "Settings search results": "Találatok a beállításokban",
+    "Mention suggestions": "Említési javaslatok",
+    "Fork in Current Folder": "Elágazás az aktuális mappában",
+    "Fork in New Git Worktree": "Elágazás új Git-munkafában",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Külön munkapéldánnyal rendelkező Git-munkafát hoz létre ehhez a tárolóhoz.",
+    "Creating git worktree for the forked conversation...": "Git-munkafa létrehozása az elágaztatott beszélgetéshez…",
+    "Global (all projects)": "Globális (minden projekt)",
+    "Org recommended": "A szervezet ajánlja",
+    "Org required": "A szervezet előírja",
+    "Required by your organization": "A szervezete előírja",
+    "Disabled by your organization": "A szervezete letiltotta",
+    "Plugins are disabled by your organization.": "A szervezete letiltotta a beépülő modulokat.",
+    "The plugin marketplace is disabled by your organization.": "A szervezete letiltotta a bővítményáruházat.",
+    "Plugins are unavailable until your organization's policy loads.": "A bővítmények a szervezeti házirend betöltése után válnak elérhetővé.",
+    "Organization prepaid wallet is empty": "A szervezet előre fizetett egyenlege elfogyott",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "A szervezete Antigravity-egyenlege elfogyott. A generálás akkor folytatódik, ha a rendszergazda feltölti az egyenleget.",
+    "Paste .env entries": ".env-bejegyzések beillesztése",
+    "Enter value (hidden after saving; multiline supported)": "Adjon meg egy értéket (mentés után rejtett, több sor megadható)",
+    "Saved securely. Secret values are hidden after saving.": "Biztonságosan tároljuk. A titkos értékek mentés után rejtve maradnak.",
+    "Configuration saved.": "Konfiguráció mentve.",
+    "Add your API key or configuration to use this plugin.": "A bővítmény használatához adja meg az API-kulcsát vagy a konfigurációját.",
+    "Couldn't load plugin configuration.": "Nem sikerült betölteni a bővítmény konfigurációját.",
+    "Cloud automation": "Felhőautomatizálás",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "A felhőautomatizálás hitelesítő adatai hamarosan lejárnak. Újítsa meg őket a futtatások folytatásához.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "A felhőautomatizálás hitelesítő adatai lejártak. Engedélyezze újra az ütemezett futtatások folytatásához.",
+    "Skipped command": "Kihagyott parancs",
+    "Open conversation": "Beszélgetés megnyitása",
+    "Hide from Sidebar": "Elrejtés az oldalsávból",
+    "Reply in thread": "Válasz a szálban",
+    "Filter feed": "Hírfolyam szűrése",
+    "Feeds": "Hírfolyamok",
+    "Environment URL": "Környezet URL-címe",
+    "Platform Token": "Platformtoken",
+    "API key for Arize AX": "Arize AX API-kulcsa",
+    "API key for Meshy 3D generation": "API-kulcs a Meshy 3D-generáláshoz",
+    "Dynatrace API token": "Dynatrace API-token",
+    "Your Dynatrace environment URL": "A Dynatrace-környezet URL-címe",
+    "Restore split view": "Osztott nézet visszaállítása",
+    "Arize API Key": "Arize AX API-kulcsa",
+    "Meshy API Key": "API-kulcs a Meshy 3D-generáláshoz",
+    "Reply in Thread": "Válasz a szálban",
+    "Needs you": "Beavatkozás szükséges",
+    "Close search (Esc)": "Keresés bezárása (Esc)",
+    "Next (newer) match (Enter)": "Következő találat (Enter)",
+    "Previous (older) match (Shift+Enter)": "Előző találat (Shift+Enter)",
+    "Loading…": "Betöltés…"
   },
   "patterns": [
     {
@@ -5917,6 +5978,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Nincs a(z) „{1}” keresésnek megfelelő beállítás.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

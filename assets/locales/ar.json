@@ -4304,7 +4304,68 @@
     "Describe your Remote Control issue...": "صِف مشكلة التحكم عن بُعد…",
     "Chief of Staff voice mode is active": "الوضع الصوتي في Chief of Staff مفعّل",
     "Voice recording is unavailable while the Chief of Staff mic is on": "لا يمكن التسجيل الصوتي أثناء تشغيل ميكروفون Chief of Staff",
-    "Project + Worktree": "المشروع + شجرة العمل"
+    "Project + Worktree": "المشروع + شجرة العمل",
+    "Ask anything": "اسأل عن أي شيء",
+    "Conversation input": "إدخال المحادثة",
+    "Unread message": "رسالة غير مقروءة",
+    "Question waiting": "سؤال بانتظار الإجابة",
+    "Subagent needs approval": "الوكيل الفرعي بحاجة إلى موافقة",
+    "Attached": "مرفق",
+    "Agents Options": "خيارات الوكلاء",
+    "Add reaction": "إضافة تفاعل",
+    "Close details": "إغلاق التفاصيل",
+    "Resize details panel": "تغيير حجم لوحة التفاصيل",
+    "Close search": "إغلاق البحث",
+    "Load older": "تحميل الأقدم",
+    "Searching messages…": "جارٍ البحث في الرسائل…",
+    "No matches on this page.": "لا توجد نتائج مطابقة في هذه الصفحة.",
+    "Search settings": "البحث في الإعدادات",
+    "Settings search results": "نتائج البحث في الإعدادات",
+    "Mention suggestions": "اقتراحات الإشارة",
+    "Fork in Current Folder": "تفريع المحادثة في المجلد الحالي",
+    "Fork in New Git Worktree": "تفريع المحادثة في شجرة عمل Git جديدة",
+    "Creates a git worktree of this repository, with a working copy of its own.": "ينشئ شجرة عمل Git لهذا المستودع بنسخة عمل مستقلة.",
+    "Creating git worktree for the forked conversation...": "جارٍ إنشاء شجرة عمل Git للمحادثة المتفرعة…",
+    "Global (all projects)": "عام (كل المشاريع)",
+    "Org recommended": "موصى به من المؤسسة",
+    "Org required": "مطلوب من المؤسسة",
+    "Required by your organization": "مطلوب من مؤسستك",
+    "Disabled by your organization": "عطّلته مؤسستك",
+    "Plugins are disabled by your organization.": "عطّلت مؤسستك المكونات الإضافية.",
+    "The plugin marketplace is disabled by your organization.": "عطّلت مؤسستك متجر المكونات الإضافية.",
+    "Plugins are unavailable until your organization's policy loads.": "لن تتوفر المكونات الإضافية حتى يتم تحميل سياسة مؤسستك.",
+    "Organization prepaid wallet is empty": "نفد رصيد المحفظة المدفوعة مسبقًا للمؤسسة",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "نفد رصيد Antigravity لدى مؤسستك. سيتوقف التوليد حتى يضيف المشرف رصيدًا.",
+    "Paste .env entries": "لصق إدخالات ‎.env",
+    "Enter value (hidden after saving; multiline supported)": "أدخل القيمة (تُخفى بعد الحفظ؛ يدعم عدة أسطر)",
+    "Saved securely. Secret values are hidden after saving.": "يُحفظ بأمان. تُخفى القيم السرية بعد الحفظ.",
+    "Configuration saved.": "تم حفظ الإعدادات.",
+    "Add your API key or configuration to use this plugin.": "أضف مفتاح API أو إعداداتك لاستخدام هذا المكون الإضافي.",
+    "Couldn't load plugin configuration.": "تعذّر تحميل إعدادات المكون الإضافي.",
+    "Cloud automation": "أتمتة سحابية",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "ستنتهي صلاحية بيانات اعتماد الأتمتة السحابية قريبًا. جدّدها لمواصلة التشغيل.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "انتهت صلاحية بيانات اعتماد الأتمتة السحابية. أعِد التفويض لاستئناف عمليات التشغيل المجدولة.",
+    "Skipped command": "تم تخطي الأمر",
+    "Open conversation": "فتح المحادثة",
+    "Hide from Sidebar": "إخفاء من الشريط الجانبي",
+    "Reply in thread": "الرد في سلسلة المحادثة",
+    "Filter feed": "تصفية الموجز",
+    "Feeds": "الموجزات",
+    "Environment URL": "عنوان URL للبيئة",
+    "Platform Token": "رمز المنصة",
+    "API key for Arize AX": "مفتاح API لخدمة Arize AX",
+    "API key for Meshy 3D generation": "مفتاح API للإنشاء ثلاثي الأبعاد باستخدام Meshy",
+    "Dynatrace API token": "رمز API لخدمة Dynatrace",
+    "Your Dynatrace environment URL": "عنوان URL لبيئتك في Dynatrace",
+    "Restore split view": "استعادة العرض المقسّم",
+    "Arize API Key": "مفتاح API لخدمة Arize AX",
+    "Meshy API Key": "مفتاح API للإنشاء ثلاثي الأبعاد باستخدام Meshy",
+    "Reply in Thread": "الرد في سلسلة المحادثة",
+    "Needs you": "الإجراء مطلوب",
+    "Close search (Esc)": "إغلاق البحث (Esc)",
+    "Next (newer) match (Enter)": "المطابقة التالية (Enter)",
+    "Previous (older) match (Shift+Enter)": "المطابقة السابقة (Shift+Enter)",
+    "Loading…": "جارٍ التحميل…"
   },
   "patterns": [
     {
@@ -6035,6 +6096,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "لا توجد إعدادات تطابق «{1}».",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

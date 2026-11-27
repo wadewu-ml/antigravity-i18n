@@ -11,6 +11,13 @@
   <div data-testid="live-agent-turn" id="voice"><span>Run</span> <span>Open</span></div>
   <div data-testid="planner-response-text"><img id="attachment" alt="Open"></div>
   <div data-testid="side-question-question" style="display:flex"><span id="side-label">Help</span><span id="side-content" class="truncate">Open</span></div>
+  <div data-testid="aux-pane-floating-composer" data-mode="collapsed">
+    <button data-testid="aux-pane-floating-composer-status" id="floating-status" title="Unread message" aria-label="Unread message — restore split view">Unread message</button>
+    <button data-testid="aux-pane-floating-composer-trigger">
+      <span id="floating-preview" class="opacity-60">Ask anything</span>
+    </button>
+  </div>
+  <p id="settings-empty" data-testid="settings-search-empty"></p>
   <div id="editor" contenteditable="plaintext-only" aria-label="Open">Run</div>
   <div translate="no"><button id="remote" title="Open">Run</button></div>
   <input id="input" value="Run" placeholder="Open">
@@ -77,6 +84,8 @@
     byId('provider').append('Finish signing in to ', providerName, ' in your browser.');
     const query = document.createTextNode('Open');
     byId('no-sites').append('No sites match “', query, '”.');
+    const settingsQuery = document.createTextNode('Open');
+    byId('settings-empty').append('No settings match “', settingsQuery, '”');
     byId('cookie-error').append("Couldn't delete cookies for ", 'example.com', '. Try again.');
     byId('ssh-error').append("Couldn't connect to ", 'Run');
     byId('ssh-empty').append('No hosts in ', '~/.ssh/config', ' yet. Type one above.');
@@ -91,6 +100,8 @@
         control: '打开', fragment: 'Please Open the folder.', independent: '运行',
         tooltip: '后退', shortcut: 'Ctrl+[', permission: '配置全局允许和拒绝的资源权限。 了解更多.',
         knowledge: '知识工作', voice: 'Run Open', 'side-label': '帮助', 'side-content': 'Open',
+        'floating-preview': '有问题尽管问', 'floating-status': '未读消息',
+        'settings-empty': '没有与“Open”匹配的设置。',
         editor: 'Run', remote: 'Run', timer: '运行了 5秒',
         terms: '使用此应用即表示你同意其服务条款',
         project: '此项目为自动化创建。在此项目中工作时，也会包含全局权限。',
@@ -115,6 +126,9 @@
         'slash-name': 'goal', 'slash-description': '持续执行，直到指定目标完全达成。'
       })) check(id, text(id), expected);
       check('UI tooltip', byId('control').title, '运行');
+      check('floating status tooltip', byId('floating-status').title, '未读消息');
+      check('floating status label', byId('floating-status').getAttribute('aria-label'), '未读消息 — 恢复分栏视图');
+      check('settings search query unchanged', settingsQuery.nodeValue, 'Open');
       check('model selector label', byId('model-trigger').getAttribute('aria-label'), '选择模型，当前：Gemini 4 Neon 极高');
       check('active model selector label', byId('active-model-trigger').getAttribute('aria-label'), '选择模型，当前：Gemini 4 Neon 极高。适用于 /btw 侧问和本轮结束后发送的消息');
       check('active model selector tooltip', text('active-model-note'), '适用于 /btw 侧问和本轮结束后发送的消息');
@@ -169,6 +183,20 @@
       check('filtered slash menu description', slashDescription.textContent, '持续执行，直到指定目标完全达成。');
       check('original search highlight node', slashDescription.children[0] === highlight, true);
       check('filtered slash command name', text('slash-name'), 'goal');
+
+      const preview = byId('floating-preview');
+      preview.className = 'opacity-90';
+      await settle();
+      check('draft matching the placeholder', preview.textContent, 'Ask anything');
+      preview.firstChild.nodeValue = 'Open';
+      await settle();
+      check('edited draft matching an action', preview.textContent, 'Open');
+      preview.firstChild.nodeValue = 'Ask anything';
+      await settle();
+      check('edited draft matching the placeholder', preview.textContent, 'Ask anything');
+      preview.className = 'opacity-60';
+      await settle();
+      check('placeholder after clearing the draft', preview.textContent, '有问题尽管问');
 
       highlight.firstChild.nodeValue = 'workflow';
       await settle();

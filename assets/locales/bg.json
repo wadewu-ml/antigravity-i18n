@@ -4313,7 +4313,68 @@
     "Describe your Remote Control issue...": "Опишете проблема с дистанционното управление…",
     "Chief of Staff voice mode is active": "Гласовият режим на Chief of Staff е активен",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Записването на глас е недостъпно, докато микрофонът на Chief of Staff е включен",
-    "Project + Worktree": "Проект + работно дърво"
+    "Project + Worktree": "Проект + работно дърво",
+    "Ask anything": "Попитайте за всичко",
+    "Conversation input": "Поле за въвеждане в разговора",
+    "Unread message": "Непрочетено съобщение",
+    "Question waiting": "Въпрос в очакване на отговор",
+    "Subagent needs approval": "Подагентът се нуждае от одобрение",
+    "Attached": "прикачени",
+    "Agents Options": "Опции за агентите",
+    "Add reaction": "Добавяне на реакция",
+    "Close details": "Затваряне на подробностите",
+    "Resize details panel": "Преоразмеряване на панела с подробности",
+    "Close search": "Затваряне на търсенето",
+    "Load older": "Зареждане на по-стари съобщения",
+    "Searching messages…": "Търсене в съобщенията…",
+    "No matches on this page.": "Няма съвпадения на тази страница.",
+    "Search settings": "Търсене в настройките",
+    "Settings search results": "Резултати от търсенето в настройките",
+    "Mention suggestions": "Предложения за споменаване",
+    "Fork in Current Folder": "Разклоняване в текущата папка",
+    "Fork in New Git Worktree": "Разклоняване в ново работно дърво на Git",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Създава работно дърво на Git с отделно работно копие на това хранилище.",
+    "Creating git worktree for the forked conversation...": "Създаване на работно дърво на Git за разклонения разговор…",
+    "Global (all projects)": "Глобално (всички проекти)",
+    "Org recommended": "Препоръчано от организацията",
+    "Org required": "Изисква се от организацията",
+    "Required by your organization": "Изисква се от вашата организация",
+    "Disabled by your organization": "Деактивирано от вашата организация",
+    "Plugins are disabled by your organization.": "Вашата организация е деактивирала приставките.",
+    "The plugin marketplace is disabled by your organization.": "Вашата организация е деактивирала магазина за приставки.",
+    "Plugins are unavailable until your organization's policy loads.": "Приставките са недостъпни, докато не се заредят правилата на организацията ви.",
+    "Organization prepaid wallet is empty": "Предплатеният баланс на организацията е изчерпан",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "Средствата на организацията ви в Antigravity са изчерпани. Генерирането е спряно, докато администраторът добави средства.",
+    "Paste .env entries": "Поставяне на записи от .env",
+    "Enter value (hidden after saving; multiline supported)": "Въведете стойност (скрива се след запазване, поддържа няколко реда)",
+    "Saved securely. Secret values are hidden after saving.": "Запазва се защитено. Поверителните стойности се скриват след запазване.",
+    "Configuration saved.": "Конфигурацията е запазена.",
+    "Add your API key or configuration to use this plugin.": "Добавете API ключ или конфигурация, за да използвате тази приставка.",
+    "Couldn't load plugin configuration.": "Конфигурацията на приставката не можа да се зареди.",
+    "Cloud automation": "Автоматизация в облака",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Данните за достъп на облачната автоматизация скоро изтичат. Подновете ги, за да продължат изпълненията.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Данните за достъп на облачната автоматизация са изтекли. Разрешете достъпа отново, за да възобновите планираните изпълнения.",
+    "Skipped command": "Пропусната команда",
+    "Open conversation": "Отваряне на разговора",
+    "Hide from Sidebar": "Скриване от страничната лента",
+    "Reply in thread": "Отговор в нишката",
+    "Filter feed": "Филтриране на емисията",
+    "Feeds": "Емисии",
+    "Environment URL": "URL адрес на средата",
+    "Platform Token": "Токен за платформата",
+    "API key for Arize AX": "Ключ за API на Arize AX",
+    "API key for Meshy 3D generation": "Ключ за API за генериране на 3D модели с Meshy",
+    "Dynatrace API token": "Токен за API на Dynatrace",
+    "Your Dynatrace environment URL": "URL адрес на вашата среда в Dynatrace",
+    "Restore split view": "Възстановяване на разделения изглед",
+    "Arize API Key": "Ключ за API на Arize AX",
+    "Meshy API Key": "Ключ за API за генериране на 3D модели с Meshy",
+    "Reply in Thread": "Отговор в нишката",
+    "Needs you": "Изисква се действие",
+    "Close search (Esc)": "Затваряне на търсенето (Esc)",
+    "Next (newer) match (Enter)": "Следващо съвпадение (Enter)",
+    "Previous (older) match (Shift+Enter)": "Предишно съвпадение (Shift+Enter)",
+    "Loading…": "Зареждане…"
   },
   "patterns": [
     {
@@ -6025,6 +6086,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Няма настройки, отговарящи на „{1}“.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

@@ -5494,7 +5494,68 @@
     "Describe your Remote Control issue...": "Uzaktan kontrol sorununu açıklayın…",
     "Chief of Staff voice mode is active": "Chief of Staff ses modu etkin",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Chief of Staff mikrofonu açıkken ses kaydı kullanılamaz",
-    "Project + Worktree": "Proje + Çalışma Ağacı"
+    "Project + Worktree": "Proje + Çalışma Ağacı",
+    "Ask anything": "Dilediğinizi sorun",
+    "Conversation input": "Konuşma giriş alanı",
+    "Unread message": "Okunmamış mesaj",
+    "Question waiting": "Soru yanıt bekliyor",
+    "Subagent needs approval": "Alt aracı onay bekliyor",
+    "Attached": "ek",
+    "Agents Options": "Aracı seçenekleri",
+    "Add reaction": "Tepki ekle",
+    "Close details": "Ayrıntıları kapat",
+    "Resize details panel": "Ayrıntı panelini yeniden boyutlandır",
+    "Close search": "Aramayı kapat",
+    "Load older": "Eski mesajları yükle",
+    "Searching messages…": "Mesajlarda aranıyor…",
+    "No matches on this page.": "Bu sayfada eşleşme yok.",
+    "Search settings": "Ayarlarda ara",
+    "Settings search results": "Ayar araması sonuçları",
+    "Mention suggestions": "Bahsetme önerileri",
+    "Fork in Current Folder": "Geçerli klasörde çatalla",
+    "Fork in New Git Worktree": "Yeni Git çalışma ağacında çatalla",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Bu deponun ayrı bir çalışma kopyasıyla Git çalışma ağacı oluşturur.",
+    "Creating git worktree for the forked conversation...": "Çatallanan konuşma için Git çalışma ağacı oluşturuluyor…",
+    "Global (all projects)": "Genel (tüm projeler)",
+    "Org recommended": "Kuruluş önerisi",
+    "Org required": "Kuruluş zorunlu tutuyor",
+    "Required by your organization": "Kuruluşunuz zorunlu tutuyor",
+    "Disabled by your organization": "Kuruluşunuz devre dışı bıraktı",
+    "Plugins are disabled by your organization.": "Kuruluşunuz eklentileri devre dışı bıraktı.",
+    "The plugin marketplace is disabled by your organization.": "Kuruluşunuz eklenti mağazasını devre dışı bıraktı.",
+    "Plugins are unavailable until your organization's policy loads.": "Kuruluşunuzun ilkesi yüklenene kadar eklentiler kullanılamaz.",
+    "Organization prepaid wallet is empty": "Kuruluşun ön ödemeli bakiyesi tükendi",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "Kuruluşunuzun Antigravity bakiyesi tükendi. Yöneticiniz bakiye ekleyene kadar üretim duraklatıldı.",
+    "Paste .env entries": ".env girdilerini yapıştır",
+    "Enter value (hidden after saving; multiline supported)": "Değer girin (kaydedilince gizlenir, birden çok satır olabilir)",
+    "Saved securely. Secret values are hidden after saving.": "Güvenli biçimde saklanır. Gizli değerler kaydedilince gizlenir.",
+    "Configuration saved.": "Yapılandırma kaydedildi.",
+    "Add your API key or configuration to use this plugin.": "Bu eklentiyi kullanmak için API anahtarınızı veya yapılandırmanızı ekleyin.",
+    "Couldn't load plugin configuration.": "Eklenti yapılandırması yüklenemedi.",
+    "Cloud automation": "Bulut otomasyonu",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Bulut otomasyonu kimlik bilgilerinin süresi yakında dolacak. Çalıştırmaları sürdürmek için yenileyin.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Bulut otomasyonu kimlik bilgilerinin süresi doldu. Zamanlanmış çalıştırmaları sürdürmek için tekrar yetkilendirin.",
+    "Skipped command": "Komut atlandı",
+    "Open conversation": "Konuşmayı aç",
+    "Hide from Sidebar": "Kenar çubuğundan gizle",
+    "Reply in thread": "İleti dizisinde yanıtla",
+    "Filter feed": "Akışı filtrele",
+    "Feeds": "Akışlar",
+    "Environment URL": "Ortam URL’si",
+    "Platform Token": "Platform belirteci",
+    "API key for Arize AX": "Arize AX API anahtarı",
+    "API key for Meshy 3D generation": "Meshy 3B üretimi için API anahtarı",
+    "Dynatrace API token": "Dynatrace API belirteci",
+    "Your Dynatrace environment URL": "Dynatrace ortamınızın URL’si",
+    "Restore split view": "Bölünmüş görünümü geri yükle",
+    "Arize API Key": "Arize AX API anahtarı",
+    "Meshy API Key": "Meshy 3B üretimi için API anahtarı",
+    "Reply in Thread": "İleti dizisinde yanıtla",
+    "Needs you": "İşlem gerekli",
+    "Close search (Esc)": "Aramayı kapat (Esc)",
+    "Next (newer) match (Enter)": "Sonraki eşleşme (Enter)",
+    "Previous (older) match (Shift+Enter)": "Önceki eşleşme (Shift+Enter)",
+    "Loading…": "Yükleniyor…"
   },
   "inlineMessages": [
     {
@@ -5915,6 +5976,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "“{1}” ile eşleşen ayar yok.",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }

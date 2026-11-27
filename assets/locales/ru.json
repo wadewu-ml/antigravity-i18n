@@ -4306,7 +4306,68 @@
     "Describe your Remote Control issue...": "Опишите проблему с удалённым управлением…",
     "Chief of Staff voice mode is active": "Голосовой режим Chief of Staff активен",
     "Voice recording is unavailable while the Chief of Staff mic is on": "Запись голоса недоступна, пока включён микрофон Chief of Staff",
-    "Project + Worktree": "Проект + рабочее дерево"
+    "Project + Worktree": "Проект + рабочее дерево",
+    "Ask anything": "Спросите о чём угодно",
+    "Conversation input": "Поле ввода сообщения",
+    "Unread message": "Непрочитанное сообщение",
+    "Question waiting": "Вопрос ждёт ответа",
+    "Subagent needs approval": "Субагенту нужно одобрение",
+    "Attached": "влож.",
+    "Agents Options": "Параметры агентов",
+    "Add reaction": "Добавить реакцию",
+    "Close details": "Закрыть подробности",
+    "Resize details panel": "Изменить размер панели подробностей",
+    "Close search": "Закрыть поиск",
+    "Load older": "Загрузить более ранние сообщения",
+    "Searching messages…": "Поиск по сообщениям…",
+    "No matches on this page.": "На этой странице нет совпадений.",
+    "Search settings": "Поиск по настройкам",
+    "Settings search results": "Результаты поиска по настройкам",
+    "Mention suggestions": "Варианты упоминаний",
+    "Fork in Current Folder": "Разветвить в текущей папке",
+    "Fork in New Git Worktree": "Разветвить в новом рабочем дереве Git",
+    "Creates a git worktree of this repository, with a working copy of its own.": "Создаёт рабочее дерево Git для этого репозитория с отдельной рабочей копией.",
+    "Creating git worktree for the forked conversation...": "Создаётся рабочее дерево Git для ветки беседы…",
+    "Global (all projects)": "Глобально (все проекты)",
+    "Org recommended": "Рекомендовано организацией",
+    "Org required": "Требуется организацией",
+    "Required by your organization": "Требование вашей организации",
+    "Disabled by your organization": "Отключено вашей организацией",
+    "Plugins are disabled by your organization.": "Ваша организация отключила плагины.",
+    "The plugin marketplace is disabled by your organization.": "Ваша организация отключила каталог плагинов.",
+    "Plugins are unavailable until your organization's policy loads.": "Плагины станут доступны после загрузки политики организации.",
+    "Organization prepaid wallet is empty": "Предоплаченный баланс организации исчерпан",
+    "Your organization has run out of Antigravity funds. Prompt generation is paused until your administrator adds funds.": "У вашей организации закончились средства в Antigravity. Генерация приостановлена до пополнения баланса администратором.",
+    "Paste .env entries": "Вставить записи .env",
+    "Enter value (hidden after saving; multiline supported)": "Введите значение (скрывается после сохранения, можно в несколько строк)",
+    "Saved securely. Secret values are hidden after saving.": "Хранится безопасно. Секретные значения скрываются после сохранения.",
+    "Configuration saved.": "Конфигурация сохранена.",
+    "Add your API key or configuration to use this plugin.": "Чтобы использовать этот плагин, добавьте ключ API или настройки.",
+    "Couldn't load plugin configuration.": "Не удалось загрузить настройки плагина.",
+    "Cloud automation": "Облачная автоматизация",
+    "Cloud automation credentials expire soon — renew to keep runs going.": "Срок действия учётных данных облачной автоматизации скоро истечёт. Обновите их для продолжения запусков.",
+    "Cloud automation credentials expired — re-authorize to resume scheduled runs.": "Срок действия учётных данных облачной автоматизации истёк. Повторно предоставьте доступ, чтобы возобновить запланированные запуски.",
+    "Skipped command": "Команда пропущена",
+    "Open conversation": "Открыть беседу",
+    "Hide from Sidebar": "Скрыть с боковой панели",
+    "Reply in thread": "Ответить в ветке",
+    "Filter feed": "Фильтровать ленту",
+    "Feeds": "Ленты",
+    "Environment URL": "URL среды",
+    "Platform Token": "Токен платформы",
+    "API key for Arize AX": "Ключ API для Arize AX",
+    "API key for Meshy 3D generation": "Ключ API Meshy для генерации 3D",
+    "Dynatrace API token": "Токен API Dynatrace",
+    "Your Dynatrace environment URL": "URL вашей среды Dynatrace",
+    "Restore split view": "Вернуть раздельный вид",
+    "Arize API Key": "Ключ API для Arize AX",
+    "Meshy API Key": "Ключ API Meshy для генерации 3D",
+    "Reply in Thread": "Ответить в ветке",
+    "Needs you": "Требуется действие",
+    "Close search (Esc)": "Закрыть поиск (Esc)",
+    "Next (newer) match (Enter)": "Следующее совпадение (Enter)",
+    "Previous (older) match (Shift+Enter)": "Предыдущее совпадение (Shift+Enter)",
+    "Loading…": "Загрузка…"
   },
   "patterns": [
     {
@@ -6101,6 +6162,17 @@
         {
           "selector": "span.whitespace-nowrap:has(> button)",
           "text": "settings."
+        }
+      ]
+    },
+    {
+      "id": "settingsSearchNoMatches",
+      "selector": "p[data-testid=\"settings-search-empty\"]",
+      "source": "No settings match “{1}”",
+      "template": "Нет настроек, соответствующих запросу «{1}».",
+      "slots": [
+        {
+          "textIndex": 1
         }
       ]
     }
