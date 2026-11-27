@@ -6,6 +6,9 @@ window.go = {main: {App: {
   GetLocales: async () => [
     {code: 'en', name: 'English', coverage: 100},
     {code: 'vi', name: 'Tiếng Việt', coverage: 100},
+    {code: 'cs', name: 'Čeština', coverage: 100},
+    {code: 'hu', name: 'Magyar', coverage: 100},
+    {code: 'bg', name: 'Български', coverage: 100},
   ],
 }}};
 
@@ -47,7 +50,14 @@ verify(async () => {
       check('translated action', byId('btnPrimaryAction').textContent, setupMessages[option.value]['Apply changes']);
     }
   }
-  check('all setup languages', byId('setupLanguage').options.length, 16);
+  for (const [code, name] of [['cs', 'Čeština'], ['hu', 'Magyar'], ['bg', 'Български']]) {
+    selectLanguage(code);
+    const chip = [...byId('localeChips').querySelectorAll('button')].find(el => el.textContent === name);
+    chip.click();
+    check('pending Antigravity language ' + code, byId('pendingLanguage').textContent.includes(name), true);
+  }
+  [...byId('localeChips').querySelectorAll('button')].find(el => el.textContent === 'Tiếng Việt').click();
+  check('all setup languages', byId('setupLanguage').options.length, 19);
   selectLanguage('zh-CN');
   check('Chinese document', document.documentElement.lang, 'zh-CN');
   check('Chinese action', byId('btnPrimaryAction').textContent, '应用更改');

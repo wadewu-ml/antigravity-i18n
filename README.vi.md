@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Biểu tượng Regravity">
   <h1>Regravity</h1>
-  <p>Công cụ chạy trực tiếp trên Windows dành cho <strong>Google Antigravity</strong>. Dịch giao diện, xem chỉ số phiên và hạn mức mô hình, điều chỉnh mức suy luận. Antigravity có 15 gói dịch. Cửa sổ cài đặt Regravity hỗ trợ 16 ngôn ngữ.</p>
+  <p>Công cụ chạy trực tiếp trên Windows dành cho <strong>Google Antigravity</strong>. Dịch giao diện, xem chỉ số phiên và hạn mức mô hình, điều chỉnh mức suy luận. Antigravity có 18 gói dịch. Cửa sổ cài đặt Regravity hỗ trợ 19 ngôn ngữ. Tiếng Séc, tiếng Hungary và tiếng Bulgaria hiện có trong bản phát triển.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Tải bản ổn định mới nhất cho Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Các bản phát hành trên GitHub"></a>
@@ -10,7 +10,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <strong>Tiếng Việt</strong> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <strong>Tiếng Việt</strong> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a> · <a href="./README.cs.md">Čeština</a> · <a href="./README.hu.md">Magyar</a> · <a href="./README.bg.md">Български</a>
     </sub>
   </p>
 </div>

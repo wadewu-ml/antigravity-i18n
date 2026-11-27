@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><!-- ENGINE --></head><body>
+<script>
+verify(async () => {
+  const rows = [
+    ['1 task running', '1 spuštěná úloha', '1 futó feladat', '1 изпълняваща се задача'],
+    ['2 tasks running', '2 spuštěné úlohy', '2 futó feladat', '2 изпълняващи се задачи'],
+    ['5 tasks running', '5 spuštěných úloh', '5 futó feladat', '5 изпълняващи се задачи'],
+    ['22 tasks running', '22 spuštěných úloh', '22 futó feladat', '22 изпълняващи се задачи'],
+    ['1 cookie', '1 soubor cookie', '1 süti', '1 бисквитка'],
+    ['3 cookies', '3 soubory cookie', '3 süti', '3 бисквитки'],
+    ['12 cookies', '12 souborů cookie', '12 süti', '12 бисквитки'],
+    ['Rules: 1 token', 'Pravidla: 1 token', 'Szabályok: 1 token', 'Правила: 1 токен'],
+    ['Rules: 3 tokens', 'Pravidla: 3 tokeny', 'Szabályok: 3 token', 'Правила: 3 токена'],
+    ['Rules: 22 tokens', 'Pravidla: 22 tokenů', 'Szabályok: 22 token', 'Правила: 22 токена'],
+    ['Select model, current: Gemini Pro (High)', 'Vybrat model. Aktuální model: Gemini Pro (High)',
+      'Modellválasztás. Jelenlegi modell: Gemini Pro (High)', 'Избор на модел. Текущ модел: Gemini Pro (High)'],
+    ['22 minutes', '22 minut', '22 perc', '22 минути'],
+    ['You have used some of your weekly limit, it will fully refresh in 1 hour, 22 minutes.',
+      'Část týdenního limitu již byla vyčerpána. Celý limit se obnoví za 1 hodinu, 22 minut.',
+      'Már felhasználta a heti keret egy részét. A teljes keret megújulásáig hátralévő idő: 1 óra, 22 perc.',
+      'Използвали сте част от седмичния си лимит. Пълната квота ще се възстанови след 1 час, 22 минути.']
+  ];
+  const buttons = rows.map(([source]) => {
+    const button = document.createElement('button');
+    button.textContent = source;
+    document.body.append(button);
+    return button;
+  });
+  await settle(150);
+  const column = {cs: 1, hu: 2, bg: 3}[document.documentElement.lang];
+  rows.forEach((row, i) => check(row[0], buttons[i].textContent, row[column]));
+});
+</script></body></html>

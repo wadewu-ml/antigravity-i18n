@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity-Symbol">
   <h1>Regravity</h1>
   <p><em>Antigravity hebt ab; Regravity holt es zurück in deine Sprache und unter deine Kontrolle.</em></p>
-  <p>Das portable Tool Regravity bietet 15 Sprachpakete für <strong>Google Antigravity</strong> unter Windows sowie Sitzungsmetriken, Modellkontingente und einen Regler für den Denkaufwand. Das Einstellungsfenster von Regravity ist in 16 Sprachen verfügbar.</p>
+  <p>Das portable Tool Regravity bietet 18 Sprachpakete für <strong>Google Antigravity</strong> unter Windows sowie Sitzungsmetriken, Modellkontingente und einen Regler für den Denkaufwand. Das Einstellungsfenster von Regravity ist in 19 Sprachen verfügbar. Tschechisch, Ungarisch und Bulgarisch sind in der Entwicklungsversion verfügbar.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Aktuelles Regravity für Windows x64 herunterladen"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub-Versionen"></a>
@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <strong>Deutsch</strong> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.md">English</a> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <strong>Deutsch</strong> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a> · <a href="./README.cs.md">Čeština</a> · <a href="./README.hu.md">Magyar</a> · <a href="./README.bg.md">Български</a>
     </sub>
   </p>
 </div>
@@ -28,7 +28,7 @@
 
 ## Funktionsumfang
 
-- **15 Sprachpakete, ohne Eingriff in Chats** — Übersetzt Einstellungen, Chat-Bedienelemente, Modellmenüs, native Menüs und Rückfragen beim Beenden (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`), ohne Ihre Eingaben oder Unterhaltungen zu verändern.
+- **18 Sprachpakete, ohne Eingriff in Chats** — Übersetzt Einstellungen, Chat-Bedienelemente, Modellmenüs, native Menüs und Rückfragen beim Beenden (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`, `cs`, `hu`, `bg`), ohne Ihre Eingaben oder Unterhaltungen zu verändern.
 - **Sitzungsmetriken & Modellkontingente** *(optional)* — Ergänzt neben der Modellauswahl einen Ring für verbleibende Kontingente, lokale Rücksetzzeiten, Kontextbelegung, mittlere Ausgaberate, Cache-Trefferrate und Zeit bis zum ersten Token.
 - **Regler für den Denkaufwand** *(optional)* — Integriert einen Kapselregler in die Modellauswahl für Modelle mit wählbarem Denkaufwand.
 - **Modular & bytegenau umkehrbar** — Beide Schalter funktionieren unabhängig voneinander und auch mit der englischen Originaloberfläche. Mit einer unveränderten Sicherung derselben Antigravity-Version lässt sich jederzeit das Original wiederherstellen.

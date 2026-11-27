@@ -222,5 +222,47 @@
     "speed": "Średnia prędkość generowania",
     "cache": "Odsetek trafień w pamięci podręcznej",
     "firstToken": "Czas do pierwszego tokena"
+  },
+  "cs": {
+    "quota": "Zbývající kvóta modelu",
+    "loadingQuota": "Načítání kvóty…",
+    "quotaUnavailable": "Kvóta není dostupná",
+    "resets": "Obnovení kvóty",
+    "weekly": "Týdně",
+    "daily": "Denně",
+    "title": "Metriky relace",
+    "context": "Využití kontextu",
+    "tokenUnit": "tok.",
+    "speed": "Průměrná rychlost výstupu",
+    "cache": "Podíl zásahů do mezipaměti",
+    "firstToken": "Čas do prvního tokenu"
+  },
+  "hu": {
+    "quota": "Fennmaradó modellkeret",
+    "loadingQuota": "Keret betöltése…",
+    "quotaUnavailable": "A keret nem érhető el",
+    "resets": "Keret megújulása",
+    "weekly": "Heti",
+    "daily": "Napi",
+    "title": "Munkamenet-mutatók",
+    "context": "Felhasznált kontextus",
+    "tokenUnit": "token",
+    "speed": "Átlagos kimeneti sebesség",
+    "cache": "Gyorsítótár-találati arány",
+    "firstToken": "Az első tokenig eltelt idő"
+  },
+  "bg": {
+    "quota": "Оставаща квота на модела",
+    "loadingQuota": "Зареждане на квотата…",
+    "quotaUnavailable": "Квотата не е налична",
+    "resets": "Подновяване на квотата",
+    "weekly": "Седмично",
+    "daily": "Дневно",
+    "title": "Показатели за сесията",
+    "context": "Използван контекст",
+    "tokenUnit": "ток.",
+    "speed": "Средна скорост на генериране",
+    "cache": "Дял на попаденията в кеша",
+    "firstToken": "Време до първия токен"
   }
 }

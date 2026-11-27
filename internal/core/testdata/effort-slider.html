@@ -51,6 +51,9 @@ verify(async () => {
     const labels = {
       'zh-CN':['思考强度','中','极高'], ar:['مستوى الاستدلال','متوسط','عالٍ جدًا'],
       it:['Livello di ragionamento','Medio','Molto alto'],
+      cs:['Úroveň uvažování','Střední','Velmi vysoká'],
+      hu:['Gondolkodási szint','Közepes','Nagyon magas'],
+      bg:['Ниво на разсъждение','Средно','Много високо'],
       id:['Tingkat penalaran','Sedang','Sangat tinggi'], pl:['Poziom rozumowania','Średni','Bardzo wysoki']
     }[document.documentElement.lang];
     check('localized slider title', host.shadowRoot.querySelector('label').textContent, labels[0]);

@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity icon">
   <h1>Regravity</h1>
   <p><em>Antigravity takes off; Regravity brings it back to your language and control.</em></p>
-  <p>The portable Regravity app provides 15 translation packs for <strong>Google Antigravity</strong> on Windows, plus session metrics, model quotas, and a thinking-effort slider. The Regravity settings window supports 16 languages.</p>
+  <p>The portable Regravity app provides 18 translation packs for <strong>Google Antigravity</strong> on Windows, plus session metrics, model quotas, and a thinking-effort slider. The Regravity settings window supports 19 languages. Czech, Hungarian, and Bulgarian are available in the development build.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Download latest Regravity for Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub Releases"></a>
@@ -11,7 +11,7 @@
   </p>
   <p>
     <sub>
-      <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a>
+      <a href="./README.zh-CN.md">简体中文</a> · <strong>English</strong> · <a href="./README.zh-Hant.md">繁體中文</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.es.md">Español</a> · <a href="./README.fr.md">Français</a> · <a href="./README.pt-BR.md">Português (Brasil)</a> · <a href="./README.ru.md">Русский</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.vi.md">Tiếng Việt</a> · <a href="./README.it.md">Italiano</a> · <a href="./README.ar.md">العربية</a> · <a href="./README.id.md">Bahasa Indonesia</a> · <a href="./README.pl.md">Polski</a> · <a href="./README.cs.md">Čeština</a> · <a href="./README.hu.md">Magyar</a> · <a href="./README.bg.md">Български</a>
     </sub>
   </p>
 </div>
@@ -28,7 +28,7 @@
 
 ## What's inside
 
-- **15 translation packs, zero chat interference** — Translates settings, chat controls, model menus, native menus, and quit prompts into `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl` while leaving your prompts and conversations untouched.
+- **18 translation packs, zero chat interference** — Translates settings, chat controls, model menus, native menus, and quit prompts into `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`, `cs`, `hu`, `bg` while leaving your prompts and conversations untouched.
 - **Session metrics & model quotas** *(optional)* — Adds an unobtrusive ring beside the model selector for remaining quotas, local reset times, context usage, output speed, cache hit rate, and time to first token.
 - **Thinking effort slider** *(optional)* — Embeds a capsule slider inside the model picker for models with selectable thinking effort.
 - **Modular & byte-for-byte reversible** — Both optional switches work independently and with the built-in English UI. Close the tool once applied, and restore the official build from a matching clean backup whenever you want.

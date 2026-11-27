@@ -10,7 +10,7 @@ import (
 
 func TestSessionMetricsInBrowser(t *testing.T) {
 	store := newTestService(t).store
-	for _, code := range []string{DefaultLocale, "it", "ar", "id", "pl"} {
+	for _, code := range []string{DefaultLocale, "it", "ar", "id", "pl", "cs", "hu", "bg"} {
 		t.Run(code, func(t *testing.T) {
 			loc, err := store.LoadLocale(code)
 			if err != nil {

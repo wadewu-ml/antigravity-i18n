@@ -117,7 +117,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 .section-note, .setting-detail, .pending-language { font-size: 13px; color: var(--secondary); }
 .chips {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 3px;
   padding: 6px;
 }
@@ -127,6 +127,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
   justify-content: center;
   gap: 4px;
   min-height: 34px;
+  padding-inline: 2px;
   border: 0;
   border-radius: 9px;
   background: transparent;
@@ -139,7 +140,7 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 11px;
+  padding: 4px 7px;
   border-radius: 999px;
   background: #353538;
   color: white;
@@ -249,7 +250,7 @@ dialog::backdrop { background: rgb(30 30 35 / 24%); backdrop-filter: blur(4px); 
 .modal-actions .text-link { margin-inline-end: auto; }
 
 @media (max-width: 680px) {
-  .chips { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .chips { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .window-container { gap: 14px; padding: 16px 18px; }
 }
 @media (max-width: 520px) {
