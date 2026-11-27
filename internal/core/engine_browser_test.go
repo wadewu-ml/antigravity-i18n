@@ -181,6 +181,10 @@ func TestSetupLanguageInBrowser(t *testing.T) {
 	runSetupBrowserChecks(t, "testdata/setup-language.js")
 }
 
+func TestSetupLayoutInBrowser(t *testing.T) {
+	runSetupBrowserChecks(t, "testdata/setup-layout.js")
+}
+
 func TestApplyShutdownInBrowser(t *testing.T) {
 	runSetupBrowserChecks(t, "testdata/shutdown.js")
 }

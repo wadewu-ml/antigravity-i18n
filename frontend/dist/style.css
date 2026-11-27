@@ -260,6 +260,9 @@ dialog::backdrop { background: rgb(30 30 35 / 24%); backdrop-filter: blur(4px); 
   .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .app-header { flex-wrap: wrap; }
 }
+@media (max-height: 600px) {
+  .window-container { gap: 12px; padding-block: 14px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .setting-switch, .setting-switch::after { transition: none; }
   .spinner { animation: none; }
