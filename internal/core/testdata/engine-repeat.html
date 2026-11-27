@@ -5,23 +5,23 @@
   <script>
     verify(async () => {
       const label = document.createElement('button');
-      label.textContent = 'Quota';
-      label.title = 'Quota';
+      label.textContent = 'Test label';
+      label.title = 'Test label';
       document.body.append(label);
       await settle();
-      check('dynamic quota text', label.textContent, 'Quote');
-      check('dynamic quota title', label.title, 'Quote');
+      check('translated text is not translated again', label.textContent, 'Shared label');
+      check('translated title is not translated again', label.title, 'Shared label');
 
       label.firstChild.nodeValue = 'Run';
       label.title = 'Run';
       await settle();
       check('new text from the app', label.textContent, 'Ausführen');
       check('new attribute from the app', label.title, 'Ausführen');
-      label.firstChild.nodeValue = 'Quote';
-      label.title = 'Quote';
+      label.firstChild.nodeValue = 'Shared label';
+      label.title = 'Shared label';
       await settle();
-      check('literal English Quote text', label.textContent, 'Zitat');
-      check('literal English Quote title', label.title, 'Zitat');
+      check('the same text from the app still translates', label.textContent, 'Final label');
+      check('the same title from the app still translates', label.title, 'Final label');
     });
   </script>
 </body>

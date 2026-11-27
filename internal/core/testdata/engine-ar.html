@@ -2,6 +2,7 @@
 <html><head><meta charset="utf-8"><!-- ENGINE --></head><body>
 <button id="model">Select model, current: Gemini 3.1 Pro (High)</button>
 <button id="path">Show D:\ملفات\Agent-2\log.txt in folder</button>
+<div id="quota">You have used some of your weekly limit, it will fully refresh in 2 hours.</div>
 <input id="prompt" value="Show D:\ملفات\Agent-2\log.txt in folder">
 <script>
 verify(async () => {
@@ -20,6 +21,7 @@ verify(async () => {
     }
     check('visual order of ' + id, position(index + 1) < position(index + value.length), true);
   }
+  check('quota duration uses the dual after خلال', document.getElementById('quota').textContent.includes('خلال ساعتين'), true);
   check('user input unchanged', document.getElementById('prompt').value, 'Show D:\\ملفات\\Agent-2\\log.txt in folder');
 });
 </script></body></html>

@@ -1,0 +1,83 @@
+{
+  "antigravity_version": "2.35.2",
+  "scope": "16 non-Chinese desktop renderer dictionaries, static text section only",
+  "entries_per_language": 4250,
+  "status": {
+    "confirmed": "English meaning and Simplified Chinese UI context checked; original translation retained",
+    "corrected": "English meaning and Simplified Chinese UI context checked; translation edited with reason",
+    "reused": "Existing recorded semantic verdict matched the exact English key and unchanged localized value"
+  },
+  "target_sha256": "SHA-256 of UTF-8 bytes of the final translation string, without JSON quotes",
+  "lookup": "Match the english property to assets/locales/<locale>.json text. Each line is one independent JSON record.",
+  "language_counts": {
+    "ar": {
+      "reused": 4181,
+      "confirmed": 60,
+      "corrected": 9
+    },
+    "bg": {
+      "confirmed": 3587,
+      "corrected": 663
+    },
+    "cs": {
+      "confirmed": 3718,
+      "corrected": 532
+    },
+    "de": {
+      "confirmed": 3142,
+      "corrected": 1108
+    },
+    "es": {
+      "confirmed": 3496,
+      "corrected": 754
+    },
+    "fr": {
+      "confirmed": 3323,
+      "corrected": 927
+    },
+    "hu": {
+      "confirmed": 3611,
+      "corrected": 639
+    },
+    "id": {
+      "reused": 4111,
+      "confirmed": 111,
+      "corrected": 28
+    },
+    "it": {
+      "reused": 4052,
+      "confirmed": 187,
+      "corrected": 11
+    },
+    "ja": {
+      "confirmed": 3522,
+      "corrected": 728
+    },
+    "ko": {
+      "confirmed": 3485,
+      "corrected": 765
+    },
+    "pl": {
+      "reused": 4133,
+      "corrected": 15,
+      "confirmed": 102
+    },
+    "pt-BR": {
+      "confirmed": 3422,
+      "corrected": 828
+    },
+    "ru": {
+      "confirmed": 3060,
+      "corrected": 1190
+    },
+    "tr": {
+      "confirmed": 3370,
+      "corrected": 880
+    },
+    "vi": {
+      "confirmed": 3070,
+      "corrected": 1180
+    }
+  },
+  "total_entries": 68000
+}

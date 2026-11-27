@@ -1,5 +1,5 @@
 /* regravity:begin */
-// Native quit confirmation is owned by the main process, outside the DOM.
+// These dialogs are owned by the main process, outside the DOM.
 (function installLocaleDialogs() {
     const labels = new Map(Object.entries(DIALOG_DATA_PLACEHOLDER));
     const dialog = electron_1.dialog;
@@ -11,14 +11,21 @@
             // Preserve both (options) and (window, options) overloads.
             const index = args.length > 1 && args[1] && typeof args[1] === 'object' ? 1 : 0;
             const options = args[index];
-            // Only the app's known quit prompt is translated. Arbitrary app
-            // errors, paths and user-supplied dialog contents pass through.
-            if (options && options.title === 'Confirm Quit'
-                && options.message === 'Are you sure you want to quit?') {
+            let message;
+            if (options?.title === 'Confirm Quit' && options.message === 'Are you sure you want to quit?'
+                || options?.title === 'Check for Updates' && options.message === 'No updates available') {
+                message = translate(options.message);
+            } else if (options?.title === 'WSL distro not found' && options.detail === 'Antigravity opened on Windows instead.') {
+                const distro = /^The WSL distro "([\s\S]+)" is no longer installed\.$/.exec(options.message);
+                if (distro) {
+                    message = translate('The WSL distro "{1}" is no longer installed.').replace('{1}', () => distro[1]);
+                }
+            }
+            if (message !== undefined) {
                 args[index] = {
                     ...options,
                     title: translate(options.title),
-                    message: translate(options.message),
+                    message,
                     detail: translate(options.detail),
                     ...(Array.isArray(options.buttons) ? { buttons: options.buttons.map(translate) } : {}),
                 };

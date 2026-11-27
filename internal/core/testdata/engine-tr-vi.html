@@ -4,6 +4,7 @@
 <body>
   <button id="settings">Settings</button>
   <button id="more">More actions for Demo $&</button>
+  <div id="quota">Resets in &lt;1m</div>
   <input id="input" value="Settings">
   <div class="text-sm text-muted-foreground mt-auto pt-4" id="terms">By using this app, you agree to its <a href="https://antigravity.google/terms">Terms of Service</a></div>
   <script>
@@ -16,6 +17,8 @@
       check('settings', document.getElementById('settings').textContent, turkish ? 'Ayarlar' : 'Cài đặt');
       check('dynamic label preserves project name', document.getElementById('more').textContent,
         turkish ? 'Demo $& için diğer işlemler' : 'Thao tác khác cho Demo $&');
+      check('quota below a minute', document.getElementById('quota').textContent,
+        turkish ? '1 dakikadan az sonra sıfırlanır' : 'Hạn mức làm mới sau chưa đến 1 phút');
       check('user input', document.getElementById('input').value, 'Settings');
       check('link is preserved', document.querySelector('#terms a'), originalLink);
       check('translated sentence around link', document.getElementById('terms').textContent.startsWith(

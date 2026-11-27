@@ -180,7 +180,7 @@
     },
     "dialogs": {
       "type": "object",
-      "description": "Exact source labels in the native quit confirmation dialog. Used only in the main process; button order and behavior are preserved.",
+      "description": "Source labels in the native quit, update and WSL dialogs. Keep {1} in the WSL message template for the distribution name.",
       "additionalProperties": { "type": "string", "minLength": 1 }
     },
     "text": {

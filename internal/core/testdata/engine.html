@@ -45,6 +45,8 @@
     <span id="planner-model" data-testid="model-selector-orchestrator-model">Gemini 4 Neon Extra High</span>
   </div>
   <button id="model-trigger" data-testid="model-selector-trigger" aria-label="Select model, current: Gemini 4 Neon Extra High"><span>Gemini 4 Neon<span class="opacity-70"> Extra High</span></span></button>
+  <button id="active-model-trigger" data-testid="model-selector-trigger" data-model-label="Gemini 4 Neon Extra High" aria-label="Select model, current: Gemini 4 Neon Extra High. Applies to /btw and messages sent after this turn"><span>Gemini 4 Neon<span class="opacity-70"> Extra High</span></span></button>
+  <div role="tooltip"><div>Gemini 4 Neon</div><div id="active-model-note" class="opacity-70">Applies to /btw and messages sent after this turn</div></div>
   <button id="locked-model-trigger" data-testid="model-selector-trigger" aria-label="Model: Gemini 4 Neon Medium, Model cannot be changed while the agent is running"><span>Gemini 4 Neon<span class="opacity-70"> Medium</span></span></button>
   <p id="model-in-response" data-testid="planner-response-text">Gemini 4 Neon Extra High</p>
   <button id="new-action">New</button>
@@ -114,6 +116,9 @@
       })) check(id, text(id), expected);
       check('UI tooltip', byId('control').title, '运行');
       check('model selector label', byId('model-trigger').getAttribute('aria-label'), '选择模型，当前：Gemini 4 Neon 极高');
+      check('active model selector label', byId('active-model-trigger').getAttribute('aria-label'), '选择模型，当前：Gemini 4 Neon 极高。适用于 /btw 侧问和本轮结束后发送的消息');
+      check('active model selector tooltip', text('active-model-note'), '适用于 /btw 侧问和本轮结束后发送的消息');
+      check('raw model label', byId('active-model-trigger').dataset.modelLabel, 'Gemini 4 Neon Extra High');
       check('locked model selector label', byId('locked-model-trigger').getAttribute('aria-label'), '模型：Gemini 4 Neon 中 · 智能体运行期间无法切换模型');
       check('editor label', byId('editor').getAttribute('aria-label'), '打开');
       check('remote tooltip', byId('remote').title, 'Open');
@@ -140,6 +145,7 @@
       termsCopy.nodeValue = 'Unknown terms before ';
       byId('control').firstChild.nodeValue = 'Close';
       byId('planner-model').firstChild.nodeValue = 'Gemini 4 Hydrogen High';
+      byId('active-model-trigger').setAttribute('aria-label', 'Select model, current: Gemini 4 Hydrogen High. Applies to messages sent after this turn');
       byId('attachment').alt = 'Run';
       byId('voice').firstChild.firstChild.nodeValue = 'Open';
       query.nodeValue = 'Run $&';
@@ -155,6 +161,7 @@
       check('unmatched inline sentence', terms.textContent, 'Unknown terms before Terms of Service');
       check('updated UI label', text('control'), '关闭');
       check('updated planner model', text('planner-model'), 'Gemini 4 Hydrogen 高');
+      check('updated model selector note', byId('active-model-trigger').getAttribute('aria-label'), '选择模型，当前：Gemini 4 Hydrogen 高。适用于本轮结束后发送的消息');
       check('updated user attachment alt', byId('attachment').alt, 'Run');
       check('updated voice content', text('voice'), 'Open Open');
       check('updated site query', text('no-sites'), '没有与“Run $&”匹配的网站。');

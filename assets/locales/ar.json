@@ -12,7 +12,6 @@
     "Chromium",
     "Drive",
     "Enterprise Gateway",
-    "Fig share",
     "Flash",
     "Flash Lite",
     "Gemini Enterprise",
@@ -39,7 +38,6 @@
     "Tokyo Night",
     "Top P",
     "Turbo",
-    "URL:",
     "UTC",
     "Windows"
   ],
@@ -48,7 +46,13 @@
     "Are you sure you want to quit?": "هل أنت متأكد من أنك تريد الخروج؟",
     "There may be agents or background tasks running.": "قد يكون هناك وكلاء أو مهام خلفية قيد التشغيل.",
     "Cancel": "إلغاء",
-    "Quit": "خروج"
+    "Quit": "خروج",
+    "Check for Updates": "التحقق من وجود تحديثات",
+    "No updates available": "لا تتوفر تحديثات",
+    "WSL distro not found": "تعذّر العثور على توزيعة WSL",
+    "The WSL distro \"{1}\" is no longer installed.": "لم تعد توزيعة WSL «{1}» مثبتة.",
+    "Antigravity opened on Windows instead.": "فُتح Antigravity على Windows بدلاً من ذلك.",
+    "OK": "موافق"
   },
   "text": {
     "Run": "تشغيل",
@@ -976,7 +980,7 @@
     "Setup required": "يلزم الإعداد",
     "Loading added plugins...": "جارٍ تحميل المكونات الإضافية المضافة...",
     "Plugin Bundles Coming Soon": "حزم المكونات الإضافية قريبًا",
-    "Bundles will let you download a whole group of user-defined plugins at once, instead of installing them one at a time. They are not here yet.": "ستتيح لك الحزم تنزيل مجموعة كاملة من المكونات الإضافية التي يحددها المستخدم دفعة واحدة، بدلاً من تثبيتها واحدًا تلو الآخر. وهي غير متوفرة بعد.",
+    "Bundles will let you download a whole group of user-defined plugins at once, instead of installing them one at a time. They are not here yet.": "ستتيح لك الحزم تنزيل مجموعة كاملة من المكوّنات الإضافية التي يحدّدها المستخدم دفعةً واحدة، بدلًا من تثبيتها واحدًا تلو الآخر. هذه الميزة غير متاحة بعد.",
     "Stay Tuned": "ترقّب المزيد",
     "Path copied!": "تم نسخ المسار!",
     "Loading workspace customizations...": "جارٍ تحميل تخصيصات مساحة العمل...",
@@ -1002,7 +1006,7 @@
     "These servers need you to sign in before the agent can use their tools.": "تحتاج هذه الخوادم إلى تسجيل دخولك قبل أن يتمكن الوكيل من استخدام أدواتها.",
     "Configured servers": "الخوادم التي تم تكوينها",
     "Unnamed MCP Server": "خادم MCP بدون اسم",
-    "URL:": "URL:",
+    "URL:": "عنوان URL:",
     "Command:": "الأمر:",
     "Plugin is disabled": "تم تعطيل المكون الإضافي",
     "Not running": "لا يعمل",
@@ -1026,7 +1030,7 @@
     "Amend succeeded": "نجح التعديل",
     "Commit": "تثبيت (Commit)",
     "Commit staged changes": "تثبيت التغييرات المرحّلة (Commit)",
-    "Stage and commit all changes": "ترحيل وتثبيت جميع التغييرات (Commit)",
+    "Stage and commit all changes": "أضف جميع التغييرات إلى الفهرس ثم أنشئ إيداعًا بها",
     "Failed to Generate Commit Message": "فشل إنشاء رسالة التثبيت",
     "Commit succeeded": "نجح التثبيت",
     "Failed to Commit": "فشل التثبيت",
@@ -1315,7 +1319,7 @@
     "Working Directory:": "دليل العمل:",
     "Copy Command": "نسخ الأمر",
     "Compacting": "جارٍ ضغط السياق",
-    "Working": "يعمل",
+    "Working": "قيد العمل",
     "Recording": "جارٍ التسجيل",
     "Processing": "جارٍ المعالجة",
     "Stop": "إيقاف",
@@ -1937,7 +1941,7 @@
     "Select Environment (": "حدد البيئة (",
     "Select Default Branch": "حدد الفرع الافتراضي",
     "Configure Branches": "تكوين الفروع",
-    "Fig share": "Fig share",
+    "Fig share": "مساحة عمل Fig مشتركة",
     "JJ worktree": "شجرة عمل JJ",
     "Your quota for this model is running low.": "حصتك لهذا النموذج أوشكت على النفاد.",
     "Select Model": "تحديد النموذج",
@@ -1969,7 +1973,7 @@
     "CitC Clone": "استنساخ CitC",
     "Clone current workspace into a new independent workspace": "استنساخ مساحة العمل الحالية في مساحة عمل مستقلة جديدة",
     "Run in a new jj workspace or Fig share": "التشغيل في مساحة عمل jj جديدة أو مشاركة Fig",
-    "Run in a new git worktree": "تشغيل في شجرة عمل git جديدة",
+    "Run in a new git worktree": "التشغيل في شجرة عمل Git جديدة",
     "Creating environment...": "جارٍ إنشاء البيئة...",
     "Environment": "البيئة",
     "Add Context": "إضافة سياق",
@@ -2345,7 +2349,7 @@
     "Delete repository policy": "حذف سياسة المستودع",
     "A comma-separated list like repo-a, repo-b, or * for all.": "قائمة مفصولة بفواصل مثل repo-a, repo-b، أو * للكل.",
     "Contents": "المحتويات",
-    "Read access to code, refs, commits, and other repository contents.": "صلاحية قراءة التعليمات البرمجية والمراجع والالتزامات ومحتويات المستودع الأخرى.",
+    "Read access to code, refs, commits, and other repository contents.": "صلاحية قراءة الرمز البرمجي والمراجع والإيداعات وسائر محتويات المستودع.",
     "Read access": "صلاحية القراءة",
     "Toggle this on to enable read access on contents.": "قم بتفعيل هذا لتمكين صلاحية قراءة المحتويات.",
     "Issues": "المشكلات (Issues)",
@@ -2451,7 +2455,7 @@
     "Restore Conversation": "استعادة المحادثة",
     "Stop Execution": "وقف التنفيذ",
     "Archive Conversation": "أرشفة المحادثة",
-    "Worktrees are a git feature. This folder is shared as is.": "تعتبر أشجار العمل إحدى ميزات git. تتم مشاركة هذا المجلد كما هو.",
+    "Worktrees are a git feature. This folder is shared as is.": "أشجار العمل ميزة في Git. ستتم مشاركة هذا المجلد كما هو.",
     "This is a CitC workspace (Fig share)": "هذه مساحة عمل CitC (مشاركة Fig)",
     "Finalizing...": "جارٍ الإنهاء...",
     "Workspaces are not available for this project": "مساحات العمل غير متوفرة لهذا المشروع",
@@ -2614,7 +2618,7 @@
     "Agent finished": "انتهى الوكيل",
     "Agent Stopped": "توقف الوكيل",
     "Agent execution failed.": "فشل تنفيذ الوكيل.",
-    "No Model Selected": "لم يتم تحديد نموذج",
+    "No Model Selected": "لم يُحدَّد نموذج",
     "Select a model in the model selector": "حدد نموذجًا في محدد النماذج",
     "Select a model to send message": "حدد نموذجًا لإرسال الرسالة",
     "New models have been enabled for you!": "تم تمكين نماذج جديدة لك!",
@@ -2806,20 +2810,20 @@
     "Create Fork in New Workspace": "إنشاء تفريع في مساحة عمل جديدة",
     "Undo to Here": "التراجع إلى هنا",
     "Undo to this point": "التراجع إلى هذه النقطة",
-    "Undo restores your entire workspace to its state at this point.": "يؤدي التراجع إلى استعادة مساحة العمل بالكامل إلى حالتها عند هذه النقطة.",
-    "This undo action will not make any code changes.": "لن يؤدي إجراء التراجع هذا إلى إجراء أية تغييرات على التعليمات البرمجية.",
+    "Undo restores your entire workspace to its state at this point.": "يعيد التراجع مساحة عملك بالكامل إلى حالتها عند هذه النقطة.",
+    "This undo action will not make any code changes.": "لن يؤدي هذا التراجع إلى أي تغييرات في الرمز البرمجي.",
     "Cannot revert this message": "لا يمكن التراجع عن هذه الرسالة",
     "Cannot revert messages with artifact comments": "يتعذر التراجع عن الرسائل التي تتضمن تعليقات على المخرجات",
     "Cannot revert messages with file comments": "لا يمكن التراجع عن الرسائل التي تحتوي على تعليقات الملف",
     "Cannot revert messages with file diff comments": "لا يمكن التراجع عن الرسائل التي تحتوي على تعليقات على فروق الملف",
-    "Generating commit message...": "جارٍ إنشاء رسالة الالتزام...",
-    "Commit message cannot be empty": "لا يمكن أن تكون رسالة الالتزام فارغة",
+    "Generating commit message...": "جارٍ إنشاء رسالة الإيداع…",
+    "Commit message cannot be empty": "لا يمكن أن تكون رسالة الإيداع فارغة",
     "Describe your changes, or leave empty to auto-generate": "قم بوصف تغييراتك، أو اتركها فارغة للإنشاء التلقائي",
-    "Amend staged changes into the current commit": "تعديل الالتزام الحالي ليشمل التغييرات المرحّلة",
-    "Stage and amend all changes into the current commit": "ترحيل كافة التغييرات وتعديل الالتزام الحالي بها",
+    "Amend staged changes into the current commit": "عدّل الإيداع الحالي ليشمل التغييرات المُضافة إلى الفهرس",
+    "Stage and amend all changes into the current commit": "أضف جميع التغييرات إلى الفهرس وعدّل الإيداع الحالي ليشملها",
     "No changes to amend": "لا توجد تغييرات للتعديل",
-    "No commit to amend": "لا يوجد التزام لتعديله",
-    "No commits to push": "لا توجد التزامات لدفعها",
+    "No commit to amend": "لا يوجد إيداع لتعديله",
+    "No commits to push": "لا توجد إيداعات لدفعها",
     "No remote configured": "لم يتم تكوين أي مستودع بعيد",
     "Not on a branch": "ليس على فرع",
     "Resolve conflicts first": "حلّ التعارضات أولاً",
@@ -3109,8 +3113,8 @@
     "Worktrees are not available for this project": "أشجار العمل غير متوفرة لهذا المشروع",
     "Creating worktree for the forked conversation...": "إنشاء شجرة عمل للمحادثة المتشعبة...",
     "Create a JJ worktree": "إنشاء شجرة عمل JJ",
-    "Sync JJ Worktrees to Head": "مزامنة أشجار عمل JJ مع Head",
-    "Sync newly created JJ worktrees to head when starting a conversation.": "مزامنة أشجار عمل JJ المنشأة حديثًا مع head عند بدء محادثة.",
+    "Sync JJ Worktrees to Head": "مزامنة أشجار عمل JJ مع HEAD",
+    "Sync newly created JJ worktrees to head when starting a conversation.": "زامن أشجار عمل JJ الجديدة مع HEAD عند بدء محادثة.",
     "Use full VCS clones for Best of N": "استخدام عمليات استنساخ VCS كاملة لـ Best of N",
     "VCS used when creating a new workspace, including workspaces generated based off your initial prompt.": "نظام VCS المستخدم عند إنشاء مساحة عمل جديدة، بما في ذلك مساحات العمل التي تم إنشاؤها بناءً على مطالبتك الأولية.",
     "Keeps working in this workspace. Nothing is copied.": "يستمر في العمل في مساحة العمل هذه. لا يتم نسخ أي شيء.",
@@ -3322,7 +3326,7 @@
     "Pro": "Pro",
     "GitHub": "GitHub",
     "Linux": "Linux",
-    "MacOS": "ماك",
+    "MacOS": "macOS",
     "Windows": "Windows",
     "Chromium": "Chromium",
     "Loading apps...": "جارٍ تحميل التطبيقات...",
@@ -4057,13 +4061,13 @@
     "Press Ctrl+Enter to send, Enter for a new line.": "اضغط على Ctrl+Enter للإرسال، وEnter لإضافة سطر جديد.",
     "Press Enter to send, Shift+Enter for a new line.": "اضغط على Enter للإرسال، وShift+Enter لإضافة سطر جديد.",
     "Instead of queueing, try asking the agent to do something after the current task.": "بدلاً من الإضافة إلى قائمة الانتظار، جرّب أن تطلب من الوكيل تنفيذ شيء ما بعد المهمة الحالية.",
-    "Orchestrator Settings": "إعدادات المنسّق",
-    "Choose the models Orchestrator uses. A larger, smarter orchestrator model with a faster, cheaper executor gives high quality for fewer tokens.": "اختر النماذج التي يستخدمها المنسّق. يوفر نموذج منسّق أكبر وأكثر ذكاءً مع نموذج منفّذ أسرع وأرخص جودةً عاليةً مقابل عدد أقل من الرموز.",
-    "Orchestrator Model": "نموذج المنسّق",
-    "Plans the work, makes design decisions, and reviews the result. Pick a top-tier model. You can also pick one per conversation from the Orchestrator row in the model menu.": "يخطط للعمل ويتخذ قرارات التصميم ويراجع النتيجة. اختر نموذجًا من الفئة الأولى. يمكنك أيضًا اختيار نموذج لكل محادثة من صف المنسّق في قائمة النماذج.",
+    "Orchestrator Settings": "إعدادات Orchestrator",
+    "Choose the models Orchestrator uses. A larger, smarter orchestrator model with a faster, cheaper executor gives high quality for fewer tokens.": "اختر النماذج التي يستخدمها Orchestrator. يمنحك الجمع بين نموذج تنسيق أقوى ونموذج تنفيذ أسرع وأقل تكلفة نتائج عالية الجودة بعدد أقل من الرموز.",
+    "Orchestrator Model": "نموذج Orchestrator",
+    "Plans the work, makes design decisions, and reviews the result. Pick a top-tier model. You can also pick one per conversation from the Orchestrator row in the model menu.": "يخطط للعمل ويتخذ قرارات التصميم ويراجع النتيجة. اختر نموذجًا عالي الأداء. يمكنك أيضًا اختيار نموذج لكل محادثة من صف Orchestrator في قائمة النماذج.",
     "Executor Model": "نموذج المنفذ",
     "Carries out the plan: searches, edits, builds, and tests. Pick a faster, cheaper model.": "ينفذ الخطة: عمليات البحث والتحرير والإنشاء والاختبارات. اختر نموذجًا أسرع وأرخص.",
-    "The Orchestrator's own planner": "مخطط المنسّق الخاص به",
+    "The Orchestrator's own planner": "نموذج التخطيط الخاص بـ Orchestrator",
     "Offloads routine steps to a faster executor. Same quality, fewer tokens used.": "يوكل الخطوات الروتينية إلى منفّذ أسرع. الجودة نفسها، وعدد أقل من الرموز المستخدمة.",
     "Thinking effort": "مستوى الاستدلال",
     "Controls how much time and quota the model spends reasoning before responding. Higher effort improves accuracy on hard problems, at the cost of slower responses and higher quota use.": "يتحكم في مقدار الوقت والحصة اللذين يستهلكهما النموذج في الاستدلال قبل الاستجابة. يؤدي الجهد الأعلى إلى تحسين الدقة في المشكلات الصعبة، على حساب استجابات أبطأ واستهلاك أعلى للحصة.",
@@ -4161,9 +4165,9 @@
     "(Preview & Quota Heavy) Run a swarm: several agents working in parallel on one task, each in its own conversation, collaborating through a shared message board. Use when the work splits into pieces that can be done at the same time, or when a second pair of eyes should check the first pair's work.": "(معاينة واستهلاك مرتفع للحصة) شغّل سربًا: عدة وكلاء يعملون بالتوازي على مهمة واحدة، كلٌّ في محادثته الخاصة، ويتعاونون عبر لوحة رسائل مشتركة. يُستخدم عندما ينقسم العمل إلى أجزاء يمكن إنجازها في الوقت نفسه، أو عندما يلزم وجود طرف ثانٍ لمراجعة عمل الطرف الأول.",
     "For most deep reasoning and complex problems": "لمعظم حالات الاستدلال العميق والمشكلات المعقدة",
     "Model selection": "اختيار النموذج",
-    "Orchestrator model selection": "اختيار نموذج المنسّق",
+    "Orchestrator model selection": "اختيار نموذج Orchestrator",
     "Default (Gemini Pro)": "الافتراضي (Gemini Pro)",
-    "Default uses server-managed routing and Orchestrator quota. Custom pins specific models for orchestration and execution.": "يستخدم الخيار الافتراضي التوجيه المُدار عبر الخادم وحصة المنسّق. بينما يثبّت الخيار المخصص نماذج محددة للتنسيق والتنفيذ.",
+    "Default uses server-managed routing and Orchestrator quota. Custom pins specific models for orchestration and execution.": "في الوضع الافتراضي، يختار الخادم النماذج وتُستخدم حصة Orchestrator. في الوضع المخصص، يمكنك تثبيت نماذج محددة للتنسيق والتنفيذ.",
     "Model cannot be changed while the agent is running": "لا يمكن تغيير النموذج أثناء تشغيل الوكيل",
     "Permissions cannot be changed while the agent is running": "لا يمكن تغيير الأذونات أثناء تشغيل الوكيل",
     "Sends after agent finishes working.": "يُرسل بعد انتهاء الوكيل من العمل.",
@@ -4201,15 +4205,15 @@
     "Resolve conversation": "حل المحادثة",
     "Returned conversation to Inbox": "تم إرجاع المحادثة إلى البريد الوارد",
     "Conversation resolved": "تم حل المحادثة",
-    "Moved to Resolved.": "تم النقل إلى \"تم الحل\".",
+    "Moved to Resolved.": "نُقلت المحادثة إلى قسم «تم الحل».",
     "Inbox": "البريد الوارد",
     "Resolved": "تم الحل",
     "Resolve": "حل",
     "Inbox Mode": "وضع البريد الوارد",
-    "Working Section": "قسم قيد العمل",
-    "Keep running conversations in a separate Working section instead of in the Inbox.": "إبقاء المحادثات قيد التشغيل في قسم \"قيد العمل\" منفصل بدلاً من البريد الوارد.",
+    "Working Section": "قسم «قيد العمل»",
+    "Keep running conversations in a separate Working section instead of in the Inbox.": "اعرض المحادثات التي لا يزال الوكيل يعمل عليها في قسم «قيد العمل» بدلاً من البريد الوارد.",
     "Auto-Resolve": "الحل التلقائي",
-    "Move idle Inbox conversations to Resolved automatically after the selected time.": "انقل محادثات البريد الوارد الخاملة إلى \"تم الحل\" تلقائيًا بعد الوقت المحدد.",
+    "Move idle Inbox conversations to Resolved automatically after the selected time.": "انقل المحادثات غير النشطة من البريد الوارد إلى قسم «تم الحل» تلقائيًا بعد انقضاء المدة المحددة.",
     "Move Conversation": "نقل المحادثة",
     "Remove this conversation from its project?": "هل تريد إزالة هذه المحادثة من مشروعها؟",
     "Remove this conversation from its workspace?": "هل تريد إزالة هذه المحادثة من مساحة العمل الخاصة بها؟",
@@ -4267,7 +4271,40 @@
     "Manage hooks": "إدارة الخطافات",
     "Continue as a New Conversation": "المتابعة كمحادثة جديدة",
     "New agent": "وكيل جديد",
-    "Cloud conversation": "محادثة سحابية"
+    "Cloud conversation": "محادثة سحابية",
+    "Applies to /btw and messages sent after this turn": "يسري على أمر ‎/btw‎ وعلى الرسائل المُرسلة بعد انتهاء هذه الجولة",
+    "Applies to messages sent after this turn": "يسري على الرسائل المُرسلة بعد انتهاء هذه الجولة",
+    "Cannot revert a message sent while the agent was running": "لا يمكن الرجوع إلى رسالة أُرسلت أثناء تشغيل الوكيل",
+    "Cannot revert to a message that was cleared to save space": "لا يمكن الرجوع إلى رسالة مُسحت لتوفير مساحة",
+    "Cannot revert messages before or at the point where Best of N mode was triggered": "لا يمكن الرجوع إلى الرسالة التي فُعّل عندها وضع «الأفضل من N» أو إلى أي رسالة تسبقها",
+    "Confirming this undo action will make the following changes:": "سيؤدي تأكيد التراجع إلى تطبيق التغييرات التالية:",
+    "Failed to send queued message": "تعذّر إرسال الرسالة الموضوعة في قائمة الانتظار",
+    "Modify permissions for file and terminal tools.": "عدّل أذونات أدوات الملفات والوحدة الطرفية.",
+    "Permission": "إذن",
+    "Remote Permissions": "الأذونات عن بُعد",
+    "Failed to load plugins": "تعذّر تحميل المكوّنات الإضافية",
+    "Could not read MCP config file": "تعذّرت قراءة ملف إعدادات MCP",
+    "Failed to open MCP config file": "تعذّر فتح ملف إعدادات MCP",
+    "Failed to load your customizations. Please try again.": "تعذّر تحميل تخصيصاتك. يُرجى إعادة المحاولة.",
+    "Open Project Picker": "فتح قائمة اختيار المشروع",
+    "Project Folders": "مجلدات المشروع",
+    "Project Agent": "وكيل المشروع",
+    "Project General": "الإعدادات العامة للمشروع",
+    "Collapse All": "طيّ الكل",
+    "Expand All": "توسيع الكل",
+    "Required": "مطلوب",
+    "(tell the agent what to do instead)": "(أخبر الوكيل بما يجب فعله بدلاً من ذلك)",
+    "Microphone blocked in system settings.": "تم حظر الميكروفون في إعدادات النظام.",
+    "Microphone blocked in browser site settings.": "تم حظر الميكروفون في إعدادات الموقع في المتصفح.",
+    "Certificate details": "تفاصيل الشهادة",
+    "Certificate is not valid": "الشهادة غير صالحة",
+    "Connection is secure": "الاتصال آمن",
+    "Connection security information is not available for this page": "لا تتوفر معلومات عن أمان الاتصال بهذه الصفحة",
+    "Remote Control Issue": "مشكلة في التحكم عن بُعد",
+    "Describe your Remote Control issue...": "صِف مشكلة التحكم عن بُعد…",
+    "Chief of Staff voice mode is active": "الوضع الصوتي في Chief of Staff مفعّل",
+    "Voice recording is unavailable while the Chief of Staff mic is on": "لا يمكن التسجيل الصوتي أثناء تشغيل ميكروفون Chief of Staff",
+    "Project + Worktree": "المشروع + شجرة العمل"
   },
   "patterns": [
     {
@@ -4374,7 +4411,7 @@
       "pattern": "^Load older messages, showing (\\d+) of (\\d+)$",
       "flags": "i",
       "sample": "Load older messages, showing 20 of 100",
-      "template": "تحميل الرسائل الأقدم، مع عرض {1} من أصل {2}"
+      "template": "تحميل الرسائل الأقدم (يُعرض {1} من أصل {2})"
     },
     {
       "id": "tasksRunning",
@@ -4469,7 +4506,7 @@
       "id": "modelUnavailableRetryDelayAttempt",
       "pattern": "^Model unavailable, retrying in (\\d+)s \\(attempt (\\d+)/(\\d+)\\)$",
       "sample": "Model unavailable, retrying in 5s (attempt 1/3)",
-      "template": "النموذج غير متاح، تجري إعادة المحاولة خلال {1} (المحاولة {2} من {3})",
+      "template": "النموذج غير متاح، ستُعاد المحاولة خلال {1} ث (المحاولة {2} من {3})",
       "flags": "i"
     },
     {
@@ -4483,7 +4520,7 @@
       "id": "modelUnavailableRetryDelay",
       "pattern": "^Model unavailable, retrying in (\\d+)s$",
       "sample": "Model unavailable, retrying in 5s",
-      "template": "النموذج غير متاح، تجري إعادة المحاولة خلال {1} ث",
+      "template": "النموذج غير متاح، ستُعاد المحاولة خلال {1} ث",
       "flags": "i"
     },
     {
@@ -4918,7 +4955,7 @@
       "id": "permissionModesSandboxUnavailable",
       "pattern": "^(Default|Auto|Default and Auto|Auto and Default) (?:need|needs) the terminal sandbox, which isn't available on this host\\.$",
       "sample": "Default and Auto need the terminal sandbox, which isn't available on this host.",
-      "template": "يحتاج {1} إلى وضع حماية الوحدة الطرفية، وهو غير متاح على هذا المضيف.",
+      "template": "يتطلب استخدام {1} بيئة الحماية للوحدة الطرفية، وهي غير متاحة على هذا المضيف.",
       "replace": {
         "1": "sandboxPermissionModes"
       }
@@ -5244,7 +5281,7 @@
     {
       "id": "noVisibleRecentMessages",
       "pattern": "^No visible messages in last (\\d+) steps\\. Activate Load older messages to continue\\.$",
-      "template": "لا توجد رسائل مرئية في آخر {1} من الخطوات. حدّد تحميل الرسائل الأقدم للمتابعة.",
+      "template": "لا توجد رسائل معروضة في آخر {1} من الخطوات. للمتابعة، حدّد «تحميل الرسائل الأقدم».",
       "sample": "No visible messages in last 8 steps. Activate Load older messages to continue."
     },
     {
@@ -5302,19 +5339,19 @@
     "Checking for Updates...": "جارٍ التحقق من وجود تحديثات...",
     "Downloading Update...": "جارٍ تنزيل التحديث...",
     "Restart to Update": "إعادة التشغيل للتحديث",
-    "Docs": "المستندات",
+    "Docs": "الوثائق",
     "Toggle Developer Tools": "تبديل أدوات المطور",
     "Reload": "إعادة التحميل",
-    "Force Reload": "فرض إعادة التحميل",
+    "Force Reload": "إعادة التحميل إجباريًا",
     "Actual Size": "الحجم الفعلي",
     "Zoom In": "تكبير",
     "Zoom Out": "تصغير",
     "Toggle Full Screen": "تبديل وضع ملء الشاشة",
-    "Minimize": "تصغير",
+    "Minimize": "تصغير النافذة",
     "Close": "إغلاق",
     "Quit": "خروج",
     "Undo": "تراجع",
-    "Redo": "إعادة",
+    "Redo": "إعادة الإجراء",
     "Cut": "قص",
     "Copy": "نسخ",
     "Paste": "لصق",
@@ -5390,7 +5427,7 @@
       {
         "pattern": "\\b2 days?",
         "flags": "g",
-        "template": "يومان"
+        "template": "يومين"
       },
       {
         "pattern": "\\b([3-9]|10) days?",
@@ -5410,7 +5447,7 @@
       {
         "pattern": "\\b2 hours?",
         "flags": "g",
-        "template": "ساعتان"
+        "template": "ساعتين"
       },
       {
         "pattern": "\\b([3-9]|10) hours?",
@@ -5430,7 +5467,7 @@
       {
         "pattern": "\\b2 minutes?",
         "flags": "g",
-        "template": "دقيقتان"
+        "template": "دقيقتين"
       },
       {
         "pattern": "\\b([3-9]|10) minutes?",
@@ -5450,7 +5487,7 @@
       {
         "pattern": "\\b2 seconds?",
         "flags": "g",
-        "template": "ثانيتان"
+        "template": "ثانيتين"
       },
       {
         "pattern": "\\b([3-9]|10) seconds?",
@@ -5465,6 +5502,11 @@
     ],
     "compactDuration": [
       {
+        "pattern": "<1m",
+        "flags": "g",
+        "template": "أقل من دقيقة"
+      },
+      {
         "pattern": "(\\d+)d",
         "flags": "g",
         "template": "{1} ي"
@@ -5478,11 +5520,6 @@
         "pattern": "(\\d+)m",
         "flags": "g",
         "template": "{1} د"
-      },
-      {
-        "pattern": "<1m",
-        "flags": "g",
-        "template": "أقل من دقيقة"
       }
     ],
     "nextRunWhen": [
@@ -5608,7 +5645,7 @@
       "id": "modelsBusinessDocs",
       "selector": "div.text-secondary-foreground.py-2.px-3:has(>a[href=\"https://antigravity.google/docs/enterprise\"])",
       "source": "For Antigravity Business consumption options, see {1}.",
-      "template": "للاطلاع على خيارات استهلاك Antigravity Business، راجع {1}.",
+      "template": "للاطلاع على خيارات الاستخدام في Antigravity Business، راجع {1}.",
       "slots": [
         {
           "selector": "a",
@@ -5881,7 +5918,7 @@
       "id": "onboardingAgentControl",
       "selector": "span.flex.flex-col.gap-0\\.5 > span.text-secondary-foreground.leading-relaxed",
       "source": "{1}’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.",
-      "template": "{1} يوفّر وكلاء يساعدونك على إنجاز العمل بسرعة وكفاءة. تحقّق دائمًا من الإجراءات التي ينفّذها الوكيل.",
+      "template": "{1} يوفّر وكلاء قادرين على مساعدتك في إنجاز أعمال أكثر بسرعة وجودة أعلى. مع ذلك، تأكّد من مراجعة الإجراءات التي ينفّذها الوكيل.",
       "slots": [
         {
           "textIndex": 0
@@ -5960,7 +5997,7 @@
       "id": "sshEmptyHostConfig",
       "selector": "[data-testid=\"ssh-connect-dialog\"] p.px-2.text-sm.text-muted-foreground",
       "source": "No hosts in {1} yet. Type one above.",
-      "template": "لا يوجد مضيفون في {1} حتى الآن. اكتب واحدًا أعلاه.",
+      "template": "لا توجد مضيفات في {1} بعد. أدخل اسم مضيف في الحقل أعلاه.",
       "slots": [
         {
           "textIndex": 1

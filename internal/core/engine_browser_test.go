@@ -122,6 +122,12 @@ func TestTranslationInBrowser(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
+			if example.fixture == "testdata/engine-repeat.html" {
+				// Keep a translated value that is also a lookup key so the fixture
+				// still exercises the mutation guard when real translations change.
+				loc.Text["Test label"] = "Shared label"
+				loc.Text["Shared label"] = "Final label"
+			}
 			engine, err := store.buildPreloadFragment(loc)
 			if err != nil {
 				t.Fatal(err)

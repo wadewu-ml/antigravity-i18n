@@ -8,7 +8,9 @@ import (
 	"maps"
 	"os"
 	"reflect"
+	"regexp"
 	"slices"
+	"strings"
 	"testing"
 )
 
@@ -67,6 +69,7 @@ func TestLanguagePackParity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	markdownDestination := regexp.MustCompile(`\]\([^\s)]+\)`)
 	for _, code := range store.ListLocales() {
 		t.Run(code, func(t *testing.T) {
 			loc, err := store.LoadLocale(code)
@@ -98,6 +101,11 @@ func TestLanguagePackParity(t *testing.T) {
 			for source, translation := range loc.Text {
 				if source == translation && !allowed[source] {
 					t.Errorf("unreviewed English text %q", source)
+				}
+				for _, dest := range markdownDestination.FindAllString(source, -1) {
+					if !strings.Contains(translation, dest) {
+						t.Errorf("translated or missing Markdown destination %q in %q", dest, source)
+					}
 				}
 			}
 			// Languages may need additional rules for their own grammar.

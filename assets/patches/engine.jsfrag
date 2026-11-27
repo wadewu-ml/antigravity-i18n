@@ -593,6 +593,20 @@ function translateModelEffort(value) {
         (_, prefix, effort) => prefix + (agLookup(effort) || effort));
 }
 
+function translateModelTriggerLabel(value) {
+    if (typeof value !== 'string') {
+        return value;
+    }
+    // In 2.35.2 the enabled picker appends the same note used by its tooltip.
+    // Strip it before looking up the effort suffix and the existing label rule.
+    const note = value.match(/^(Select model, current: .+)\. (Applies to (?:\/btw and )?messages sent after this turn)$/);
+    if (note) {
+        const period = agValueMaps.period?.['.'] || '.';
+        return translateString(translateModelEffort(note[1])) + (period === '。' ? period : period + ' ') + translateString(note[2]);
+    }
+    return translateString(translateModelEffort(value));
+}
+
 function translateTextNode(node) {
     if (agInlineTextNodes.has(node) || agInlineSlots.has(node)) {
         return;
@@ -646,8 +660,9 @@ function translateAttributes(root) {
         if (outputs?.get(attr) === current) {
             continue;
         }
-        const source = attr === 'aria-label' && element.matches(agModelTriggerSelector) ? translateModelEffort(current) : current;
-        const next = translateString(source);
+        const next = attr === 'aria-label' && element.matches(agModelTriggerSelector)
+            ? translateModelTriggerLabel(current)
+            : translateString(current);
         if (next === current) {
             outputs?.delete(attr);
             continue;
