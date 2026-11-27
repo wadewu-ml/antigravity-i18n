@@ -101,11 +101,6 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 .danger .status-dot { background: var(--danger); }
 .path-display { margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: text; }
 .status-desc { margin-top: 8px; color: var(--secondary); overflow-wrap: anywhere; }
-.progress-box { margin-top: 10px; border-top: 1px solid var(--line); padding-top: 10px; }
-.progress-main, .progress-text { min-width: 0; }
-.progress-text { display: grid; }
-.progress-stage { font-weight: 600; }
-.progress-detail { color: var(--secondary); overflow-wrap: anywhere; }
 .spinner {
   width: 15px; height: 15px; flex: none; border: 2px solid var(--line);
   border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite;
@@ -202,6 +197,14 @@ button:disabled, input:disabled { cursor: default; opacity: .5; }
 
 .action-row { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); justify-content: flex-end; flex-wrap: wrap; }
 .pending-language { margin-inline-end: auto; }
+.action-row:has(> .progress-box:not(.hidden)) > :not(.progress-box) { display: none; }
+.progress-box { width: 100%; min-height: calc(1.4rem + 16px); }
+.progress-box > button { flex: none; }
+.progress-main, .progress-text { min-width: 0; }
+.progress-text { display: grid; line-height: 1.25; }
+.progress-text > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.progress-stage { font-weight: 600; }
+.progress-detail { color: var(--secondary); font-size: 13px; }
 .btn, .btn-sm, .btn-xs, .text-link {
   border: none; border-radius: 8px;
   padding: 6px 10px; background: transparent;

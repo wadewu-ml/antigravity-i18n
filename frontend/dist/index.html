@@ -62,17 +62,6 @@
 
       <div class="path-display" id="appPathDisplay" data-en="Looking for Antigravity…">正在检测安装位置…</div>
       <p class="status-desc" id="statusDesc" role="status"></p>
-
-      <div class="progress-box hidden" id="progressBox">
-        <div class="progress-main">
-          <span class="spinner"></span>
-          <div class="progress-text">
-            <span class="progress-stage" id="progressStage" data-en="Preparing…">正在准备...</span>
-            <span class="progress-detail" id="progressDetail" data-en="Please wait…">请稍候...</span>
-          </div>
-        </div>
-        <button class="btn-xs btn-ghost hidden" id="btnCancelDownload" data-en="Cancel download">取消下载</button>
-      </div>
     </section>
 
     <section class="locale-card">
@@ -104,6 +93,16 @@
       <span class="pending-language" id="pendingLanguage" role="status"></span>
       <button class="btn btn-outline hidden" id="btnSecondaryAction" data-en="Open Antigravity">打开 Antigravity</button>
       <button class="btn btn-primary" id="btnPrimaryAction" data-en="Apply changes">应用更改</button>
+      <div class="progress-box hidden" id="progressBox">
+        <div class="progress-main">
+          <span class="spinner" aria-hidden="true"></span>
+          <div class="progress-text">
+            <span class="progress-stage" id="progressStage" data-en="Preparing…">正在准备...</span>
+            <span class="progress-detail" id="progressDetail" data-en="Please wait…">请稍候...</span>
+          </div>
+        </div>
+        <button class="btn-xs btn-ghost hidden" id="btnCancelDownload" data-en="Cancel download">取消下载</button>
+      </div>
     </div>
 
   </div>

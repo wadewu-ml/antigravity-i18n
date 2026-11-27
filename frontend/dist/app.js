@@ -275,12 +275,17 @@
     elBtnMsgOk.focus();
   }
 
+  function setProgressDetail(detail) {
+    elProgressDetail.textContent = detail;
+    elProgressDetail.title = detail;
+  }
+
   function setOperatingState(operating, stage, detail) {
     isOperating = operating;
     if (operating) {
       elProgressBox.classList.remove('hidden');
       elProgressStage.textContent = stage || t('正在处理...');
-      elProgressDetail.textContent = detail || t('请稍候...');
+      setProgressDetail(detail || t('请稍候...'));
     } else {
       elProgressBox.classList.add('hidden');
     }
@@ -530,7 +535,7 @@
     setOperatingState(true, t('正在切换安装位置'), t('请选择 Antigravity 安装目录'));
     app.SelectAppDir(t('请选择 Antigravity 安装目录')).then(function (selected) {
       if (!selected) return null;
-      elProgressDetail.textContent = selected;
+      setProgressDetail(selected);
       return app.SetAppDir(selected).then(function (st) {
         // Invalidate any status request for the previously selected directory.
         statusRequest++;
@@ -783,7 +788,7 @@
         if (!data || !isOperating) return;
         if (data.stage === '正在重启工具') elCancelDownload.classList.add('hidden');
         if (data.stage) elProgressStage.textContent = t(data.stage);
-        if (data.detail) elProgressDetail.textContent = data.detail;
+        if (data.detail) setProgressDetail(data.detail);
         appendLog(t('[进度] ') + t(data.stage || '') + (data.detail ? ': ' + data.detail : ''));
       });
     }

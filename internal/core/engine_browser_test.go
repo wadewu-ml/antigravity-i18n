@@ -190,7 +190,7 @@ func TestStatusSelectionInBrowser(t *testing.T) {
 }
 
 func TestAutoUpdateInBrowser(t *testing.T) {
-	for _, scenario := range []string{"available", "cached", "disabled", "offline", "limited", "upgraded"} {
+	for _, scenario := range []string{"available", "installing", "cached", "disabled", "offline", "limited", "upgraded"} {
 		t.Run(scenario, func(t *testing.T) {
 			runSetupBrowserChecks(t, "testdata/auto-update.js", "const scenario = '"+scenario+"';")
 		})
@@ -200,12 +200,14 @@ func TestAutoUpdateInBrowser(t *testing.T) {
 func runSetupBrowserChecks(t *testing.T, script string, setup ...string) {
 	t.Helper()
 	html := readTestFile(t, "../../frontend/dist/index.html")
+	style := readTestFile(t, "../../frontend/dist/style.css")
+	html = strings.Replace(html, `<link rel="stylesheet" href="style.css">`, "<style>"+style+"</style>", 1)
 	localeData := readTestFile(t, "../../frontend/dist/setup-locales.js")
 	html = strings.Replace(html, `<script src="setup-locales.js"></script>`, "<script>"+localeData+"</script>", 1)
 	app := readTestFile(t, "../../frontend/dist/app.js")
 	checks := strings.Join(setup, "\n") + "\n" + readTestFile(t, script)
 	scripts := "<script>" + checks + "</script><script>" + app + "</script>"
-	runBrowserChecks(t, strings.Replace(html, `<script src="app.js"></script>`, scripts, 1))
+	runBrowserChecks(t, strings.Replace(html, `<script src="app.js"></script>`, scripts, 1), "--force-device-scale-factor=1", "--window-size=760,700")
 }
 
 func readTestFile(t *testing.T, path string) string {
@@ -234,7 +236,7 @@ function verify(run) {
 }
 </script>`
 
-func runBrowserChecks(t *testing.T, html string) {
+func runBrowserChecks(t *testing.T, html string, browserArgs ...string) {
 	t.Helper()
 	browser := engineTestBrowser(t)
 	dir := t.TempDir()
@@ -253,10 +255,12 @@ func runBrowserChecks(t *testing.T, html string) {
 	// Chrome in this kind of container prints the DOM and then stays up on a
 	// missing system bus, so the result is read from stdout instead of waiting
 	// for the process to exit. --no-sandbox is required for that container.
-	cmd := exec.CommandContext(ctx, browser, "--headless=new", "--disable-gpu", "--no-sandbox",
+	args := []string{"--headless=new", "--disable-gpu", "--no-sandbox",
 		"--disable-dev-shm-usage", "--no-first-run", "--no-default-browser-check",
-		"--user-data-dir="+filepath.Join(dir, "profile"),
-		"--virtual-time-budget=8000", "--dump-dom", pageURL)
+		"--user-data-dir=" + filepath.Join(dir, "profile"),
+		"--virtual-time-budget=8000", "--dump-dom"}
+	args = append(args, browserArgs...)
+	cmd := exec.CommandContext(ctx, browser, append(args, pageURL)...)
 	hideWindow(cmd)
 	output, err := dumpBrowserDOM(ctx, cmd)
 	if err != nil {

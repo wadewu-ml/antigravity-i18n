@@ -1,16 +1,25 @@
 const hour = 3600000;
 const start = Date.now();
 const cached = { current: '4.2.1', available: 'v4.2.2', nextCheck: start + 24 * hour };
-let calls = 0, installs = 0, finish;
+let calls = 0, installs = 0, finish, cancelInstall, onProgress;
+window.runtime = { EventsOn(event, handler) { if (event === 'progress') onProgress = handler; } };
 if (scenario === 'cached' || scenario === 'upgraded') localStorage.setItem('updateCheck', JSON.stringify(cached));
 if (scenario === 'disabled') localStorage.setItem('autoCheckUpdates', 'off');
 window.go = { main: { App: {
   GetVersion: async () => scenario === 'upgraded' ? '4.2.2' : '4.2.1',
   UpdateWindowReady() {},
-  GetStatus: async () => ({AppDir:'C:/Antigravity', AppVersion:'2.35.1', CurrentLanguage:'en'}),
-  GetLocales: async () => [{code:'en', name:'English', coverage:100}],
+  GetStatus: async () => scenario === 'installing'
+    ? {AppDir:'C:/Antigravity', AppVersion:'2.35.2', CurrentLanguage:'zh-CN', LocaleName:'简体中文', SessionMetrics:true, EffortSlider:true}
+    : {AppDir:'C:/Antigravity', AppVersion:'2.35.1', CurrentLanguage:'en'},
+  GetLocales: async () => scenario === 'installing'
+    ? Array.from(document.querySelectorAll('#setupLanguage option'), option => ({code:option.value, name:option.textContent, coverage:100}))
+    : [{code:'en', name:'English', coverage:100}],
   CheckForUpdate: () => { calls++; return new Promise(resolve => { finish = resolve; }); },
-  InstallUpdate: async () => { installs++; },
+  InstallUpdate: async () => {
+    installs++;
+    if (scenario === 'installing') await new Promise((_, reject) => { cancelInstall = () => reject('已取消更新。'); });
+  },
+  CancelUpdate: () => cancelInstall(),
 } } };
 
 verify(async () => {
@@ -21,6 +30,34 @@ verify(async () => {
   const toggle = () => byId('autoCheckUpdates').click();
   await settle(170);
 
+  if (scenario === 'installing') {
+    const root = document.documentElement;
+    const overflow = () => root.scrollHeight - root.clientHeight;
+    const visible = element => element.getClientRects().length > 0 && element.getBoundingClientRect().bottom <= root.clientHeight;
+    const actionsTop = byId('actionRow').getBoundingClientRect().top;
+    check(`setup fits before updating (${root.clientWidth}×${root.clientHeight})`, overflow(), 0);
+    finish({release:{available:true, version:'v4.2.2', notes:'Release notes'}});
+    await settle();
+    manual();
+    await settle();
+    byId('btnInstallUpdate').click();
+    await settle();
+    onProgress({stage:'正在下载更新', detail:'2.2 / 14.6 MB (15%)'});
+    check('one installation started', installs, 1);
+    check('download does not increase page height', overflow(), 0);
+    check('download uses the existing footer space', byId('actionRow').getBoundingClientRect().top, actionsTop);
+    check('download detail stays visible', visible(byId('progressDetail')), true);
+    check('cancel stays visible', visible(byId('btnCancelDownload')), true);
+    const longDetail = 'C:/Antigravity/' + 'long-file-name-'.repeat(20) + '.exe';
+    onProgress({stage:'正在下载更新', detail:longDetail});
+    check('long details do not enlarge the window content', overflow(), 0);
+    check('full progress details remain available', byId('progressDetail').title, longDetail);
+    byId('btnCancelDownload').click();
+    await settle();
+    check('setup fits after cancel', overflow(), 0);
+    check('normal primary action is visible again', visible(byId('btnPrimaryAction')), true);
+    return;
+  }
   if (scenario === 'cached' || scenario === 'upgraded') {
     check('fresh cache skips the network', calls, 0);
     check('badge belongs to this installed version', dot(), scenario === 'cached');
