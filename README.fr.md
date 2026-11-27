@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Icône Regravity">
   <h1>Regravity</h1>
   <p><em>Antigravity décolle ; Regravity le ramène dans votre langue et sous votre contrôle.</em></p>
-  <p>Compagnon portable Windows pour <strong>Google Antigravity</strong> — 15 langues d’interface, métriques de session &amp; quotas de modèles, et curseur d’effort de raisonnement.</p>
+  <p>L’outil portable Regravity propose 15 packs de traduction pour <strong>Google Antigravity</strong> sous Windows, ainsi que des métriques de session, les quotas des modèles et un curseur d’effort de raisonnement. La fenêtre de configuration de Regravity est disponible en 16 langues.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Télécharger la dernière version de Regravity pour Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Versions sur GitHub"></a>
@@ -28,7 +28,7 @@
 
 ## Ce que propose l’outil
 
-- **15 langues d’interface, sans toucher à vos chats** — Traduit réglages, commandes du chat, menus de modèles, menus natifs et confirmations de fermeture (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`) sans modifier vos messages ni vos saisies.
+- **15 packs de traduction, sans toucher à vos chats** — Traduit réglages, commandes du chat, menus de modèles, menus natifs et confirmations de fermeture (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`) sans modifier vos messages ni vos saisies.
 - **Métriques de session et quotas** *(facultatif)* — Ajoute un anneau près du sélecteur de modèle pour consulter quotas restants, heures locales de réinitialisation, contexte utilisé, débit moyen, taux de cache et délai avant le premier jeton.
 - **Curseur d’effort de raisonnement** *(facultatif)* — Intègre un curseur capsule dans le sélecteur de modèles pour les modèles compatibles.
 - **Modulaire et réversible à l’octet près** — Les deux interrupteurs fonctionnent indépendamment et avec l’interface anglaise d’origine. Restaurez la version officielle depuis une sauvegarde intacte de la même version d’Antigravity à tout moment.

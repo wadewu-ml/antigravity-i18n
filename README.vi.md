@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Biểu tượng Regravity">
   <h1>Regravity</h1>
-  <p>Công cụ chạy trực tiếp trên Windows dành cho <strong>Google Antigravity</strong>. Dịch giao diện, xem chỉ số phiên và hạn mức mô hình, điều chỉnh mức suy luận.</p>
+  <p>Công cụ chạy trực tiếp trên Windows dành cho <strong>Google Antigravity</strong>. Dịch giao diện, xem chỉ số phiên và hạn mức mô hình, điều chỉnh mức suy luận. Antigravity có 15 gói dịch. Cửa sổ cài đặt Regravity hỗ trợ 16 ngôn ngữ.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Tải bản ổn định mới nhất cho Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Các bản phát hành trên GitHub"></a>

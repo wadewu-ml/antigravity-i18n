@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Ikona Regravity">
   <h1>Regravity</h1>
-  <p>Przenośne narzędzie dla Windows do tłumaczenia Google Antigravity. Dodaje statystyki sesji i suwak poziomu rozumowania.</p>
+  <p>Przenośne narzędzie dla Windows do tłumaczenia Google Antigravity. Dodaje statystyki sesji i suwak poziomu rozumowania. Antigravity ma 15 pakietów tłumaczeń, a okno ustawień Regravity obsługuje 16 języków.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Pobierz wydanie stabilne dla Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Wydania na GitHubie"></a>

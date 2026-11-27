@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity 아이콘">
   <h1>Regravity</h1>
   <p><em>Antigravity가 날아오를 때, Regravity가 당신의 언어와 제어권을 되찾아 줍니다.</em></p>
-  <p>Windows용 <strong>Google Antigravity</strong> 휴대용 확장 도구 — 15개 인터페이스 언어, 세션 지표 및 모델 한도, 추론 강도 슬라이더.</p>
+  <p>휴대용 도구인 Regravity는 Windows용 <strong>Google Antigravity</strong>에 번역 팩 15개와 세션 지표, 모델 한도, 추론 강도 슬라이더를 제공합니다. Regravity 설정 창은 16개 언어를 지원합니다.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="최신 Windows x64용 Regravity 다운로드"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 릴리스"></a>
@@ -28,7 +28,7 @@
 
 ## 주요 기능
 
-- **15개 언어 지원, 대화 내용 비간섭** — 설정, 채팅 제어, 모델 메뉴, 기본 메뉴, 종료 안내를 `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`로 번역하며 입력이나 대화 내용은 변경하지 않습니다.
+- **번역 팩 15개, 대화 내용 비간섭** — 설정, 채팅 제어, 모델 메뉴, 기본 메뉴, 종료 안내를 `zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`로 번역하며 입력이나 대화 내용은 변경하지 않습니다.
 - **세션 지표 및 모델 한도** *(선택)* — 모델 선택기 옆 원형 표시기로 남은 한도, 현지 초기화 시각, 컨텍스트 사용량, 평균 출력 속도, 캐시 적중률, 첫 토큰 지연 시간을 확인합니다.
 - **추론 강도 슬라이더** *(선택)* — 추론 강도를 선택할 수 있는 모델의 선택 메뉴 안에 캡슐형 슬라이더를 추가합니다.
 - **독립 조합 및 바이트 단위 복원** — 두 스위치는 각각 켤 수 있고 기본 영어 UI와도 호환됩니다. 설치된 Antigravity와 같은 버전의 원본 백업으로 언제든 복원할 수 있습니다.

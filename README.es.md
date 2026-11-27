@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Icono de Regravity">
   <h1>Regravity</h1>
   <p><em>Antigravity despega; Regravity lo trae de vuelta a tu idioma y bajo tu control.</em></p>
-  <p>Complemento portátil para <strong>Google Antigravity</strong> en Windows — 15 idiomas de interfaz, métricas de sesión y cuotas de modelos, y control de nivel de razonamiento.</p>
+  <p>La herramienta portátil Regravity ofrece 15 paquetes de traducción para <strong>Google Antigravity</strong> en Windows, además de métricas de sesión, cuotas de modelos y un control del nivel de razonamiento. La ventana de ajustes de Regravity está disponible en 16 idiomas.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Descargar la última versión de Regravity para Windows x64"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="Versiones en GitHub"></a>
@@ -28,7 +28,7 @@
 
 ## Qué incluye
 
-- **15 idiomas de interfaz, sin tocar tus chats** — Traduce ajustes, controles del chat, menús de modelos, menús nativos y avisos de salida (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`) sin alterar tus entradas ni conversaciones.
+- **15 paquetes de traducción, sin tocar tus chats** — Traduce ajustes, controles del chat, menús de modelos, menús nativos y avisos de salida (`zh-CN`, `zh-Hant`, `ja`, `ko`, `de`, `es`, `fr`, `pt-BR`, `ru`, `tr`, `vi`, `it`, `ar`, `id`, `pl`) sin alterar tus entradas ni conversaciones.
 - **Métricas de sesión y cuotas** *(opcional)* — Añade un anillo junto al selector de modelo con cuotas restantes, horarios locales de restablecimiento, contexto utilizado, velocidad media de salida, aciertos de caché y tiempo hasta el primer token.
 - **Control de nivel de razonamiento** *(opcional)* — Integra un control deslizante tipo cápsula en el selector de modelos para modelos compatibles.
 - **Modular y reversible byte a byte** — Ambos interruptores funcionan por separado y también con la interfaz oficial en inglés. Restaura la versión oficial desde una copia limpia de la misma versión de Antigravity en cualquier momento.

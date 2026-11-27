@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity アイコン">
   <h1>Regravity</h1>
   <p><em>Antigravity が飛び立つ先で、Regravity があなたの言語とコントロールを取り戻します。</em></p>
-  <p>Windows 版 <strong>Google Antigravity</strong> 向けポータブル拡張ツール — 15 言語のローカライズ、セッション指標・利用枠パネル、推論強度スライダー。</p>
+  <p>ポータブルツールの Regravity は Windows 版 <strong>Google Antigravity</strong> 向けに15種類の翻訳パックを提供します。セッション指標・利用枠パネルと推論強度スライダーも利用できます。Regravity の設定画面は16言語に対応しています。</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="最新の Windows x64 版 Regravity をダウンロード"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub リリース一覧"></a>
@@ -28,7 +28,7 @@
 
 ## 主な機能
 
-- **15 言語収録・会話内容には干渉なし** — 設定、チャット操作、モデルメニュー、ネイティブメニュー、終了確認を `zh-CN` / `zh-Hant` / `ja` / `ko` / `de` / `es` / `fr` / `pt-BR` / `ru` / `tr` / `vi` / `it` / `ar` / `id` / `pl` に翻訳。入力内容や会話履歴は書き換えません。
+- **15種類の翻訳パック・会話内容には干渉なし** — 設定、チャット操作、モデルメニュー、ネイティブメニュー、終了確認を `zh-CN` / `zh-Hant` / `ja` / `ko` / `de` / `es` / `fr` / `pt-BR` / `ru` / `tr` / `vi` / `it` / `ar` / `id` / `pl` に翻訳。入力内容や会話履歴は書き換えません。
 - **セッション指標と残り利用枠** *（任意）* — モデル選択ボタン横にリングを追加し、残り利用枠、現地リセット時刻、コンテキスト使用量、平均出力速度、キャッシュヒット率、最初のトークンまでの時間を確認できます。
 - **推論強度スライダー** *（任意）* — 推論強度を選べるモデルの選択メニュー内にカプセル型スライダーを組み込みます。
 - **個別切替・バイト単位で復元** — 2 つの拡張スイッチは個別に切り替えでき、標準の英語表示とも併用可能。インストール済みの Antigravity と同じバージョンの未変更バックアップからいつでも復元できます。

@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity simgesi">
   <h1>Regravity</h1>
-  <p><strong>Google Antigravity</strong> için taşınabilir Windows aracı. Arayüzü çevirir, oturum ölçümlerini ve model kotalarını gösterir, düşünme düzeyini ayarlamanızı sağlar.</p>
+  <p><strong>Google Antigravity</strong> için taşınabilir Windows aracı. Arayüzü çevirir, oturum ölçümlerini ve model kotalarını gösterir, düşünme düzeyini ayarlamanızı sağlar. Antigravity için 15 çeviri paketi sunar. Regravity ayar penceresi 16 dili destekler.</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="Windows x64 için son kararlı sürümü indir"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub sürümleri"></a>

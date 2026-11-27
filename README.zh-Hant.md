@@ -2,7 +2,7 @@
   <img src="./frontend/dist/appicon.png" width="68" height="68" alt="Regravity 圖示">
   <h1>Regravity</h1>
   <p><em>反重力起飛，Regravity 讓它落地——回歸你的語言與掌控。</em></p>
-  <p>專為 Windows 版 <strong>Google Antigravity</strong> 打造的可攜式增強工具：15 種介面語言、會話指標與模型額度，以及思考強度滑桿。</p>
+  <p>可攜式工具 Regravity 為 Windows 版 <strong>Google Antigravity</strong> 提供 15 個翻譯套件，並提供會話指標、模型額度與思考強度滑桿。Regravity 設定視窗支援 16 種語言。</p>
   <p>
     <a href="https://github.com/wadewu-ml/regravity/releases/latest/download/regravity.exe"><img src="https://img.shields.io/badge/Download-Latest_(Windows_x64)-0F9D58?style=flat&logo=windows&logoColor=white" alt="下載最新版 Windows x64 Regravity"></a>
     <a href="https://github.com/wadewu-ml/regravity/releases"><img src="https://img.shields.io/badge/Releases-GitHub-18181B?style=flat&logo=github" alt="GitHub 版本記錄"></a>
@@ -28,7 +28,7 @@
 
 ## 核心能力
 
-- **15 種介面語言，不碰對話內容** — 翻譯設定、對話區控制項、模型選單、原生選單與結束提示，不改動使用者輸入與聊天紀錄。
+- **15 個翻譯套件，不碰對話內容** — 翻譯設定、對話區控制項、模型選單、原生選單與結束提示，不改動使用者輸入與聊天紀錄。
 - **會話指標與模型額度** *（可選）* — 在模型選擇器右側新增圓環，懸停即看各模型群組剩餘額度、本地重設時間、已用上下文、平均輸出速度、快取命中率與首個 token 延遲。
 - **思考強度滑桿** *（可選）* — 在模型選單中為支援調節的模型嵌入膠囊滑桿，拖曳即切檔位。
 - **獨立組合，逐位元組還原** — 兩項增強開關可分別開啟，也相容官方英文介面；套用後無需常駐背景，保留與目前 Antigravity 版本相符的乾淨備份即可逐位元組還原。
